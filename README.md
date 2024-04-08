@@ -1,3 +1,3 @@
 # Lovelace Background Animation
 
-It animates the background.
+A small Lovelace plugin that replaces the background with a animated one, various animations available. 
