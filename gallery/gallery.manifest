@@ -1,10 +1,10 @@
 [
   {
-    "name": "1-galaxy",
-    "metadata": {
-      "author": "Rahul",
-      "source": "https://codepen.io/stack-findover/pen/eYWPwPV"
-    },
+    "id": "1-galaxy-animation",
+    "name": "Galaxy Animated",
+    "description": "A slow moving animation of the galaxy with stars",
+    "author": "Rahul",
+    "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
     "parameters": {
       "background-image": "xxx"
     }
