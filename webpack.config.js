@@ -11,7 +11,7 @@ module.exports = {
   output: {
     filename: 'bg-animation.min.js',
     path: '\\\\storage\\docker\\services\\homeassistant\\config\\www\\lovelace-bg-animation\\dist',
-//  path: path.resolve(__dirname, 'dist'),
+    // path: path.resolve(__dirname, 'dist'),
   },
   optimization: {
     removeAvailableModules: false,

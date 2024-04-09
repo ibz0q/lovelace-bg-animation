@@ -1,103 +1,101 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 const pug = require('./libs/pug.min.js');
-var hassConfig, manifestCache, pluginUserConfig, galleryManifest, packageManifest;
+var hassConfig, manifestCache, userPluginConfig, galleryRootManifest, packageManifest, processedPackageManifest;
 
 class LovelaceBgAnimation extends HTMLElement {
   set hass(hass) {
     this.initialize()
   }
-  async getGalleryManifest() {
+  async fetchResource(url) {
+    try {
+      let response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch resource`);
+      }
+      return await response.text();
+    } catch (error) {
+      console.error(`Error fetching resource`);
+      return null;
+    }
+  }
+  async getGalleryRootManifest() {
     try {
       let url;
-      if (pluginUserConfig.gallery.type == "local") {
-        url = window.location.origin + pluginUserConfig.gallery.localPath + "/" + pluginUserConfig.gallery.manifestFileName
+      if (userPluginConfig.gallery.type == "local") {
+        url = window.location.origin + userPluginConfig.gallery.localPath + "/" + userPluginConfig.gallery.manifestFileName
       } else {
-        url = pluginUserConfig.gallery.remoteUrl + pluginUserConfig.gallery.manifestFileName
+        url = userPluginConfig.gallery.remoteUrl + userPluginConfig.gallery.manifestFileName
       }
-      let response = await fetch(url); // Fetching the file from the URL
+      let response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Failed to fetch gallery manifest`);
       }
-      return await response.json(); // Assuming the manifest is in JSON format, adjust as needed
+      return await response.json();
     } catch (error) {
       console.error('Failed to fetch gallery manifest:', error);
       return null;
     }
   }
-  async getPackageManifest(packageName) {
+  async getPackageManifest(packageManifestName) {
     try {
       let url;
-      if (pluginUserConfig.gallery.type == "local") {
-        url = window.location.origin + pluginUserConfig.gallery.localPath + "/" + packageName + "/" + "package.yaml"
+      if (userPluginConfig.gallery.type == "local") {
+        url = window.location.origin + userPluginConfig.gallery.localPath + "/" + packageManifestName + "/" + "package.yaml"
       } else {
-        url = pluginUserConfig.gallery.remoteUrl + "/" + packageName + "/" + "package.yaml"
+        url = userPluginConfig.gallery.remoteUrl + "/" + packageManifestName + "/" + "package.yaml"
       }
       let response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Failed to fetch package manifest: ' + packageName);
+        throw new Error('Failed to fetch package manifest: ' + packageManifestName);
       }
-      return await YAML.parse(await response.text());
+
+      return {
+        "packageName": packageManifestName,
+        "data": await YAML.parse(await response.text())
+      };
+
     } catch (error) {
-      console.error('Failed to fetch package manifest: ' + packageName, error);
+      console.error('Failed to fetch package manifest: ' + packageManifestName, error);
       return null;
     }
   }
-  async processPackageManifest(packageObject) {
+  async processPackageManifest(packageManifestObject) {
     try {
+      let environment = {}
+      if (userPluginConfig.gallery.type == "local") {
+        environment["assetPath"] = window.location.origin + userPluginConfig.gallery.localPath + "/" + packageManifestObject.packageName + "/" + "package.yaml"
+      } else {
+        environment["assetPath"] = userPluginConfig.gallery.remoteUrl + "/" + packageManifestObject.packageName + "/" + "package.yaml"
+      }
 
-      //   metadata:
-      //   name: Galaxy Animated
-      //   description: A slow moving animation of the galaxy with stars
-      //   author: Rahul
-      //   source: https://codepen.io/stack-findover/pen/eYWPwPV
+      if (packageManifestObject.data.remote_includes) {
+        for (const [index, include] of packageManifestObject.data.remote_includes.entries()) {
+          packageManifestObject.data.remote_includes[index]["__processed"] = {};
+          packageManifestObject.data.remote_includes[index]["__processed"] = await this.fetchResource((include[Object.keys(include)[0]]));
+        }
+      }
+      console.log(pug);
 
-// first remote includes
-// then complile
-// then template = includes, compile, params
+      if (packageManifestObject.data.compile) {
+        for (const [index, value] of packageManifestObject.data.compile.entries()) {
+          if (value.hasOwnProperty("pug")) {
+            console.log("Found pug")
+            packageManifestObject.data.compile[index]["__processed"] = pug.render(packageManifestObject.data.compile[index].pug);
+          }
 
-      if (packageObject.compile) {
-        packageObject.compile.forEach(function (item) {
+          if (value.hasOwnProperty("scss")) {
+            packageManifestObject.data.compile[index]["__processed"] = sass.compileString(packageManifestObject.data.compile[index].scss).css;
+          }
 
-          console.log(item.id); 
-          console.log(item.pug); 
-          console.log(item.scss); 
-
-
-        });
+        }
 
       } else {
         console.log("Compile does not exist in package.");
       }
 
-      // parameters:
-      //   background-image: xxx
+      return packageManifestObject;
 
-      // remote_includes: 
-      //   jquery: "url"
-
-      // compile:
-      //   - id: pug_1
-      //     pug: |
-      //       .container
-
-      //   - id: scss_1
-      //     scss: |
-      //       * {
-
-      // template: |
-      //   <style>
-      //     {{compile: scss_1}}
-      //   </style>
-      //   <body>
-      //       {{compile: pug_1}}
-      //   </body>
-
-      packageObject = await YAML.parse(await response.text());
-
-
-
-      // return {...packageObject, ...processedPackageObject};
     } catch (error) {
       console.error('Failed to process the package manifest: ', error);
       return null;
@@ -121,7 +119,7 @@ class LovelaceBgAnimation extends HTMLElement {
   checkIfContentInCache(packageUid) {
     try {
       const item = localStorage.getItem(packageUid);
-      return item !== null; // Returns true if the item exists in localStorage, false otherwise
+      return item !== null;
     } catch (error) {
       console.error('Error accessing localStorage:', error);
       return false;
@@ -130,17 +128,17 @@ class LovelaceBgAnimation extends HTMLElement {
 
   async initialize() {
 
-    if (typeof pluginUserConfig !== "object") {
+    if (typeof userPluginConfig !== "object") {
 
-      pluginUserConfig = this.getCurrentUserConfig();
+      userPluginConfig = this.getCurrentUserConfig();
 
+      galleryRootManifest = await this.getGalleryRootManifest();
 
-      galleryManifest = await this.getGalleryManifest();
       packageManifest = await this.getPackageManifest("1.galaxy-animation");
 
-      // let processedPackageManifest = await this.processPackageManifest(packageManifest);
+      processedPackageManifest = await this.processPackageManifest(packageManifest);
 
-      console.log(packageManifest);
+      console.log(processedPackageManifest);
 
     }
 

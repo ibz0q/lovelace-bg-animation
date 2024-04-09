@@ -8,7 +8,8 @@ parameters:
   background-image: xxx
 
 remote_includes: 
-  jquery: "url"
+    - jquery: "https://code.jquery.com/jquery-3.7.1.min.js"
+    - shart: "https://code.jquery.com/jquery-3.7.1.min.js"
 
 listeners:
   
