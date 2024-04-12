@@ -239,18 +239,23 @@ class LovelaceBgAnimation extends HTMLElement {
   initializeLovelaceVariables() {
     lovelaceUI.panelElement = document.querySelector("body > home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace")
     lovelaceUI.huiRootElement = lovelaceUI.panelElement.shadowRoot.querySelector("hui-root")
+    lovelaceUI.headerElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#header")
     lovelaceUI.viewElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#view")
     lovelaceUI.huiViewElement = lovelaceUI.viewElement.querySelector("hui-view")
     lovelaceUI.groundElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("div")
     lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement.lovelace
   }
 
-  initializeBackground() {
+  initializeElements() {
     let bgRootContainer = document.createElement("div");
     bgRootContainer.id = "bg-animation-container";
     bgRootContainer.style.cssText = userPluginConfig.style;
     lovelaceUI.groundElement.prepend(bgRootContainer);
     lovelaceUI.bgRootElement = bgRootContainer;
+
+    if(userPluginConfig.headerStyle !== undefined) {
+      lovelaceUI.headerElement.style.cssText = userPluginConfig.headerStyle;
+    }
   }
 
   removeDefaultBackground() {
@@ -282,7 +287,7 @@ class LovelaceBgAnimation extends HTMLElement {
       userPluginConfig = this.getCurrentUserConfig();
 
       this.initializeLovelaceVariables()
-      this.initializeBackground()
+      this.initializeElements()
       this.removeDefaultBackground()
       galleryRootManifest = await this.getGalleryRootManifest();
 

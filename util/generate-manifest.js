@@ -36,5 +36,7 @@ function readDirectory(dir) {
 
 readDirectory(galleryDir);
 
+manifest.sort((a, b) => a.id.localeCompare(b.id));
+
 fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
 console.log(`Generated manifest file: ${manifestFile}`);

@@ -60,6 +60,54 @@
     "source": "https://codepen.io/akm2/pen/RwQXLdP"
   },
   {
+    "id": "12.gradient-particles",
+    "version": "v1",
+    "name": "Gradient Particles",
+    "description": "animated-gradient-particle",
+    "author": "cssscript.com",
+    "source": "https://www.cssscript.com/demo/animated-gradient-particle/"
+  },
+  {
+    "id": "13.cyber-lights",
+    "version": "v1",
+    "name": "Cyber Lights",
+    "description": "Frosted type lights moving diagnolly",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/GLRdKP"
+  },
+  {
+    "id": "14.ribbons-two",
+    "version": "v1",
+    "name": "Ribbons Two",
+    "description": "It looks like Windows Vista",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/BYbjyg"
+  },
+  {
+    "id": "15.sound",
+    "version": "v1",
+    "name": "Sound",
+    "description": "Vibes",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/jOqeYWy"
+  },
+  {
+    "id": "16.veil",
+    "version": "v1",
+    "name": "Veil",
+    "description": "Slithers   of   color   veil   the   screen",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/jOqeYWy"
+  },
+  {
+    "id": "17.ribbons",
+    "version": "v1",
+    "name": "Ribbons",
+    "description": "So many layers of ribbons",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/BYbjyg"
+  },
+  {
     "id": "2.shooting-stars",
     "version": "v1",
     "name": "Shooting Stars",

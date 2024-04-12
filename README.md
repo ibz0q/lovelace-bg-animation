@@ -1,5 +1,7 @@
 # Lovelace Background Animation
 
+Current Release: Beta
+
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
 ## 🎀 Tribute to the artists 
@@ -32,6 +34,35 @@ This project is compromised of the works of various artists each either their ow
 For this reason, code belonging to this repo (bg-annimation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International.
 
 Code inside Gallery carries the Licenses and Copyrights of their authors respectively. 
+
+### Usage
+
+Minimal config
+
+```yaml
+type: custom:lovelace-bg-animation
+background:
+  - id: 13.ribbons-two
+```
+
+All config
+
+```yaml
+type: custom:lovelace-bg-animation
+delay: 20000
+redraw: 200000
+gallery:
+  type: local
+cache: false
+style: "css"
+sequence: random, shuffle, name_desc, name_asc, id_asc, id_desc,
+background:
+  - id: 13.ribbons-two
+    cache: false
+    style: "css"
+    parameters:
+      background-image: 222
+```
 
 ### The package.yaml 
 
