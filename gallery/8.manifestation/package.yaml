@@ -1,13 +1,12 @@
 version: v1
 metadata:
-    name: plasma background 
-    description: plasma background
+    name: Manifestation 
+    description: progression of ideas through willpower and motivation
     author: Matei Copot
-    source: https://codepen.io/towc/pen/WvLaKw
+    source: https://codepen.io/towc/pen/pevRJJ
 
 template: |
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5.1/dat.gui.min.js"></script>
 
     <canvas id=c></canvas>
 
@@ -20,164 +19,179 @@ template: |
     </style>
 
     <script>
-        // if you just don't want to read the code but still are interested in how it works, here's a guide for you: https://codepen.io/towc/blog/a-guide-to-wavy-waved-radial-waves/
+        var ctx = c.getContext( '2d' )
+            ,	w = c.width = window.innerWidth
+            ,	h = c.height = window.innerHeight
 
-        var w = c.width = window.innerWidth,
-                h = c.height = window.innerHeight,
-                ctx = c.getContext('2d'),
+            ,	goal = h
+            ,	her = w/2
 
-                opts = {
-
-                    rays: 30,
-                    maxRadius: Math.sqrt( w*w/4 + h*h/4 ),
-                    circleRadiusIncrementAcceleration: 2,
-                    radiantSpan: .4,
-                    rayAngularVelSpan: .005,
-                    rayAngularVelLineWidthMultiplier: 60,
-                    rayAngularAccWaveInputBaseIncrementer: .03,
-                    rayAngularAccWaveInputAddedIncrementer: .02,
-                    rayAngularAccWaveMultiplier: .0003,
-                    baseWaveInputIncrementer: .01,
-                    addedWaveInputIncrementer: .01,
-                    circleNumWaveIncrementerMultiplier: .1,
-                    
-                    cx: w / 2,
-                    cy: h / 2,
-                    tickHueMultiplier: 1,
-                    shadowBlur: 0,
-                    repaintAlpha: .2,
-                    apply: init
-                },
+            ,	opts = {
                 
-                rays = [],
-                tick = 0,
-                tickHueMultiplied,
-                gui = new dat.GUI;
+                thoughtsParWidth: 1/6,
+                problemsParSize: 1/1000,
+                problemBaseDifficulty: 10,
+                problemAddedDifficulty: 20,
+                problemSize: 1,
+                problemSpeed: 1.3,
+                
+                thoughtColor: 'hsl(hue,80%,50%)',
+                problemColor: '#333',
+                antiProblemColor: '#080808',
+                repaintColor: 'rgba(0,0,0,.08)',
+                
+                willpower: .2,
+                motivation: .99
+            }
+            ,	thoughts = []
+            ,	problems = []
+            ,	tick = 0;
 
         function init(){
-            
-            rays.length = 0;
-            for( var i = 0; i < opts.rays; ++i )
-                rays.push( new Ray );
-            
-            if( tick === 0 ){
-                
-                for( opt in opts ){
-                    
-                    if( isNaN( opts[ opt ] ) )
-                        gui.add( opts, opt );
-                    else
-                        gui.add( opts, opt, 0, opts[ opt ] * 3 )
-                }
-                gui.close();
-                
-                loop();
-            }
-        }
-
-        function loop(){
-            
-            window.requestAnimationFrame( loop );
-            
-        ++tick;
-            
-            ctx.globalCompositeOperation = 'source-over';
-            ctx.shadowBlur = 0;
-            ctx.fillStyle = 'rgba(0,0,0,alp)'.replace( 'alp', opts.repaintAlpha );
+            ctx.fillStyle = opts.antiProblemColor;
             ctx.fillRect( 0, 0, w, h );
-            ctx.shadowBlur = opts.shadowBlur;
-            ctx.globalCompositeOperation = 'lighter';
-            
-            tickHueMultiplied = opts.tickHueMultiplier * tick;
-            
-            rays.map( function( ray ){ ray.step(); } );
+            ctx.lineWidth = 1.2;
         }
 
-        function Ray(){
-            
-            this.circles = [ new Circle( 0 ) ];
-            this.rot = Math.random() * Math.PI * 2;
-            this.angularVel = Math.random() * opts.rayAngularVelSpan * ( Math.random() < .5 ? 1 : -1 );
-            this.angularAccWaveInput = Math.random() * Math.PI * 2;
-            this.angularAccWaveInputIncrementer = opts.rayAngularAccWaveInputBaseIncrementer + opts.rayAngularAccWaveInputAddedIncrementer * Math.random();
-            
-            var security = 100,
-                    count = 0;
-            
-            while( --security > 0 && this.circles[ count ].radius < opts.maxRadius )
-                this.circles.push( new Circle( ++count ) );
+        function Thought(){
+            this.reset();
         }
-        Ray.prototype.step = function(){
+        Thought.prototype.reset = function(){
+            this.field = ( 1 - Math.pow( Math.random(), .5 ) ) * her * ( Math.random() < .5 ? 1 : -1 ) + her;
+            this.progress = 0;
             
-            // this is just messy, but if you take your time to read it properly you'll understand it pretty easily
-            this.rot += 
-                this.angularVel += Math.sin( 
-                    this.angularAccWaveInput += 
-                        this.angularAccWaveInputIncrementer ) * opts.rayAngularAccWaveMultiplier;
+            this.progressSpeed = .1;
+        }
+        Thought.prototype.step = function(){
             
-            var rot = this.rot,
-                    x = opts.cx,
-                    y = opts.cy;
+            this.progressSpeed += opts.willpower;
+            this.progressSpeed *= opts.motivation;
             
-            ctx.lineWidth = Math.min( .00001 / Math.abs( this.angularVel ), 10 / opts.rayAngularVelLineWidthMultiplier ) * opts.rayAngularVelLineWidthMultiplier;
-
-            ctx.beginPath();
-            ctx.moveTo( x, y );
+            var newProgress = this.progress + this.progressSpeed
+                ,	newField = this.field
+                ,	hitting = 0;
             
-            for( var i = 0; i < this.circles.length; ++i ){
+            for( var i = 0; i < problems.length; ++i ){
+                var problem = problems[ i ];
                 
-                var circle = this.circles[ i ];
+                if( problem.existing && !( this.field < problem.field || this.field > problem.Field  ) ){
+                    
+                    if( this.progress < problem.area && newProgress > problem.area ){
+                        hitting = -1;
+                        newProgress = problem.area;
+                        newField = newField > her ? problem.field : problem.Field;
+                        problem.hit( -1 );
+                        i = problems.length;
+                    } else if( this.progress > problem.Area && newProgress < problem.Area ){
+                        hitting = 1;
+                        newProgress = problem.Area;
+                        newField = newField > her ? problem.Field : problem.field;
+                        problem.hit( 1 );
+                        i = problems.length;
+                    }
+                }
                 
-                circle.step();
+            }
                 
-                rot += circle.radiant;
-                
-                var x2 = opts.cx + Math.sin( rot ) * circle.radius,
-                        y2 = opts.cy + Math.cos( rot ) * circle.radius,
-                        
-                        mx = ( x + x2 ) / 2,
-                        my = ( y + y2 ) / 2;
-                
-                ctx.quadraticCurveTo( x, y, mx, my );
-                
-                x = x2;
-                y = y2;
+            if( hitting !== 0 ){
+                this.progressSpeed *= -1;
             }
             
-            ctx.strokeStyle = ctx.shadowColor = 'hsl(hue,80%,50%)'.replace( 'hue', ( ( ( rot + this.rot ) / 2 ) % ( Math.PI * 2 ) ) / Math.PI * 30 + tickHueMultiplied );
-            
+            ctx.strokeStyle = opts.thoughtColor.replace( 'hue', this.progress / goal * 360 + tick );
+            ctx.beginPath();
+            ctx.moveTo( this.field, this.progress );
+            this.field = newField;
+            this.progress = newProgress;
+            ctx.lineTo( this.field, this.progress );
             ctx.stroke();
+            
+            if( this.progress > goal )
+                this.reset();
+
+        }
+        function Problem(){
+            this.reset();
+        }
+        Problem.prototype.reset = function(){
+            
+            this.dir = Math.random() < .5 ? 1 : -1;
+            this.difficulty = opts.problemBaseDifficulty + opts.problemAddedDifficulty * Math.random() |0;
+            this.size = opts.problemSize;
+            
+            this.field = ( this.dir === -1 ) ? w : -this.difficulty;
+            this.area = Math.pow( Math.random(), .25 ) * ( h - opts.problemSize ) |0;
+            
+            this.fieldSpeed = this.dir * opts.problemSpeed;
+            
+            this.genCaps();
+            
+            this.existing = true;
+        }
+        Problem.prototype.genCaps = function(){
+            this.Field = this.field + this.difficulty;
+            this.Area = this.area + this.size;
+        }
+        Problem.prototype.drawRect = function(){
+            ctx.fillRect( this.field, this.area, this.difficulty, this.size );
+        }
+        Problem.prototype.hit = function( dir ){
+            
+            this.area -= dir;
+            
+            if( Math.random() < .1 )
+                this.reset();
+        }
+        Problem.prototype.step = function(){
+            
+            if( this.existing ){
+            
+            this.field += this.fieldSpeed;
+            
+            this.genCaps();
+            
+            this.drawRect();
+            
+            if( ( this.dir === -1 && this.Field <= 0 ) ||
+                    ( this.dir ===  1 && this.field >= w ) )
+                this.existing = false;
+                
+            } else if( Math.random() < .1 )
+                this.reset();
         }
 
-        function Circle( n ){
+        function anim(){
             
-            this.radius = opts.circleRadiusIncrementAcceleration * Math.pow( n, 2 );
-            this.waveInputIncrementer = ( opts.baseWaveInputIncrementer + opts.addedWaveInputIncrementer * Math.random() ) * ( Math.random() < .5 ? 1 : -1 ) * opts.circleNumWaveIncrementerMultiplier * n;
-            this.waveInput = Math.random() * Math.PI * 2;
-            this.radiant = Math.random() * opts.radiantSpan * ( Math.random() < .5 ? 1 : -1 );
-        }
-        Circle.prototype.step = function(){
+            window.requestAnimationFrame( anim );
             
-            this.waveInput += this.waveInputIncrementer;
-            this.radiant = Math.sin( this.waveInput ) * opts.radiantSpan;
+            tick += 1;
+            
+            if( Math.random() < .5 && thoughts.length < opts.thoughtsParWidth * w )
+                thoughts.push( new Thought );
+            
+            if( Math.random() < .5 && problems.length < opts.problemsParSize * w * h )
+                problems.push( new Problem );
+            
+            ctx.fillStyle = opts.repaintColor;
+            ctx.fillRect( 0, 0, w, h );
+            
+            thoughts.map( function( thought ){ thought.step(); } );
+            
+            ctx.fillStyle = opts.antiProblemColor;
+            problems.map( function( problem ){ problem.drawRect(); } );
+            
+            ctx.fillStyle = opts.problemColor;
+            problems.map( function( problem ){ problem.step(); } );
         }
+
         init();
+        anim();
 
         window.addEventListener( 'resize', function(){
-            
             w = c.width = window.innerWidth;
-            h = c.height = window.innerHeight;
+            goal = h = c.height = window.innerHeight;
             
-            opts.maxRadius = Math.sqrt( w*w/4 + h*h/4 );
-            opts.cx = w / 2;
-            opts.cy = h / 2;
-            
+            her = w/2;
+
             init();
-        });
-        c.addEventListener( 'click', function(e){
-            
-            opts.cx = e.clientX;
-            opts.cy = e.clientY;
-            
-        })
+        } );
     </script>
