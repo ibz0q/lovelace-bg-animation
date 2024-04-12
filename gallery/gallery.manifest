@@ -9,7 +9,23 @@
     "parameters": [
       {
         "id": "background-image",
-        "default": "https://i.ibb.co/87GbbFP/2799006.jpg"
+        "default": "xxx"
+      },
+      {
+        "id": "background-color",
+        "default": "xxx"
+      },
+      {
+        "id": "--property-name",
+        "default": "xxx"
+      },
+      {
+        "id": ":hover",
+        "default": "xxx"
+      },
+      {
+        "id": "--color-gradient(*)",
+        "default": "xxx"
       }
     ]
   },
@@ -40,5 +56,69 @@
         "default": "https://i.ibb.co/87GbbFP/2799006.jpg"
       }
     ]
+  },
+  {
+    "id": "3.spipa-circle",
+    "version": "v1",
+    "name": "Spipa circle",
+    "description": "A cool electro field circle",
+    "author": "Alex Andrix",
+    "source": "https://codepen.io/alexandrix/pen/oQOvYp"
+  },
+  {
+    "id": "4.colored-swipe",
+    "version": "v1",
+    "name": "Colored Swipe Transition",
+    "description": "Whole page colored swipes",
+    "author": "Andreas Wilcox",
+    "source": "https://codepen.io/SvDvorak/pen/bxoxde"
+  },
+  {
+    "id": "5.neon-hexagon",
+    "version": "v1",
+    "name": "Neon Hexagon",
+    "description": "Neon Hexagon Foming Particles",
+    "author": "Matei Copot",
+    "source": "https://codepen.io/towc/pen/mJzOWJ"
+  },
+  {
+    "id": "5.plasma",
+    "version": "v1",
+    "name": "Rainbow Particles",
+    "description": "rainbow particle horizon",
+    "author": "Matei Copot",
+    "source": "https://codepen.io/towc/pen/BQEGdz"
+  },
+  {
+    "id": "6.binary-spiral",
+    "version": "v1",
+    "name": "plasma background",
+    "description": "plasma background",
+    "author": "Matei Copot",
+    "source": "https://codepen.io/towc/pen/WvLaKw"
+  },
+  {
+    "id": "7.rainbowness",
+    "version": "v1",
+    "name": "plasma background",
+    "description": "plasma background",
+    "author": "Matei Copot",
+    "source": "https://codepen.io/towc/pen/WvLaKw"
+  },
+  {
+    "id": "8.manifestation",
+    "version": "v1",
+    "name": "plasma background",
+    "description": "plasma background",
+    "author": "Matei Copot",
+    "source": "https://codepen.io/towc/pen/WvLaKw"
+  },
+  {
+    "id": "9.rainbow-particles",
+    "version": "v1",
+    "name": "plasma background",
+    "description": "plasma background",
+    "author": "Matei Copot",
+    "source": "https://codepen.io/towc/pen/WvLaKw"
   }
 ]

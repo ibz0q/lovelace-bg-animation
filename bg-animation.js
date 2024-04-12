@@ -68,7 +68,7 @@ class LovelaceBgAnimation extends HTMLElement {
 
       let checkCachePackageManifest = this.retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
 
-      if (checkCachePackageManifest && userPluginConfig.background[packageManifestIndex].cache === true) {
+      if (checkCachePackageManifest && userPluginConfig.background[packageManifestIndex].cache === true && userPluginConfig.cache === true) {
 
         return checkCachePackageManifest;
 
@@ -102,16 +102,13 @@ class LovelaceBgAnimation extends HTMLElement {
     try {
 
       let packageManifestIndex = packageManifestObject.packageIndex;
-
       let packageManifestName = userPluginConfig.background[packageManifestObject.packageIndex].id;
-
       let packageCacheKey = btoa(packageManifestName + Object.entries(userPluginConfig.background[packageManifestIndex].parameters).map(([key, value]) => `${key}:${value}`).join(' '));
       let checkCachePackageManifest = this.retrieveCache("HASSanimatedBg_packageProcessed__" + packageCacheKey);
 
-      if (checkCachePackageManifest && userPluginConfig.background[packageManifestIndex].cache === true) {
+      if (checkCachePackageManifest && userPluginConfig.background[packageManifestIndex].cache === true && userPluginConfig.cache === true) {
         return checkCachePackageManifest;
       } else {
-
         let environment = {}
         if (userPluginConfig.gallery.type == "local") {
           environment["assetPath"] = window.location.origin + userPluginConfig.gallery.localPath + "/" + packageManifestObject.packageName + "/" + "package.yaml"
@@ -136,26 +133,24 @@ class LovelaceBgAnimation extends HTMLElement {
 
           }
 
-        } else {
-          console.error("Compile does not exist in package.");
         }
 
         if (packageManifestObject.data.template) {
 
           packageManifestObject.data.template__processed = packageManifestObject.data.template
-          const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):\s*([\w\s-]+)\}\}/g;
+
+          const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):(.*?)\}\}/g;
+
           packageManifestObject.data.template__processed = packageManifestObject.data.template__processed.replace(regex, function (match, type, key) {
 
+            key = key.trim();
             switch (type) {
               case 'compile':
                 return packageManifestObject.data.compile.find(item => item.id === key)?.__processed || '';
               case 'parameters':
               case 'parameter':
               case 'param':
-
-                let result = key in userPluginConfig.background[packageManifestIndex].parameters ? userPluginConfig.background[packageManifestIndex].parameters : packageManifestObject.data.parameters?.[key] || match;
-                return result
-
+                return userPluginConfig.background[packageManifestIndex].parameters[key] ? userPluginConfig.background[packageManifestIndex].parameters[key] : packageManifestObject.data.parameters.find(item => item.id == key)?.default || match;
               case 'metadata':
               case 'meta':
                 return packageManifestObject.data.metadata?.[key] || match;
@@ -168,6 +163,7 @@ class LovelaceBgAnimation extends HTMLElement {
                   return include?.__processed || match;
                 }
                 return match;
+
               default:
                 return match;
             }
@@ -197,9 +193,9 @@ class LovelaceBgAnimation extends HTMLElement {
         "manifestFileName": this.config.gallery.manifestFileName || "gallery.manifest",
         "remoteUrl": this.config.gallery.remoteUrl || "https://ibz0q.github.io/lovelace-bg-animation/gallery"
       },
-      "delay": this.config.delay || false,
-      "redraw": this.config.redraw || false,
-      "cache": this.config.cache || true,
+      "delay": this.config.delay || 0,
+      "redraw": this.config.redraw || 0,
+      "cache": this.config.cache !== undefined ? this.config.cache : true,
       "style": this.config.style || "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
       "background": this.config.background
         ? Object.keys(this.config.background).reduce((acc, key) => {
@@ -236,17 +232,31 @@ class LovelaceBgAnimation extends HTMLElement {
 
   initializeLovelaceVariables() {
     lovelaceUI.panelElement = document.querySelector("body > home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace")
-    lovelaceUI.huiElement = lovelaceUI.panelElement.shadowRoot.querySelector("hui-root")
-    lovelaceUI.mainElement = lovelaceUI.huiElement.shadowRoot.querySelector("div")
-    lovelaceUI.lovelaceObject = lovelaceUI.huiElement.lovelace
+    lovelaceUI.huiRootElement = lovelaceUI.panelElement.shadowRoot.querySelector("hui-root")
+    lovelaceUI.viewElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#view")
+    lovelaceUI.huiViewElement = lovelaceUI.viewElement.querySelector("hui-view")
+    lovelaceUI.groundElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("div")
+    lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement.lovelace
   }
 
   initializeBackground() {
+    console.log(lovelaceUI)
     let bgRootContainer = document.createElement("div");
     bgRootContainer.id = "bg-animation-container";
     bgRootContainer.style.cssText = userPluginConfig.style;
-    lovelaceUI.mainElement.prepend(bgRootContainer);
+    lovelaceUI.groundElement.prepend(bgRootContainer);
     lovelaceUI.bgRootElement = bgRootContainer;
+  }
+
+  removeDefaultBackground() {
+    let cssStyle;
+    cssStyle = window.getComputedStyle(lovelaceUI.huiViewElement);
+    if (cssStyle.background !== 'transparent') {
+      lovelaceUI.huiViewElement.style.background = 'transparent';
+    }
+    if (cssStyle.background !== 'transparent') {
+      lovelaceUI.viewElement.style.background = 'transparent';
+    }
   }
 
   writeBackgroundElement(packageObject) {
@@ -265,11 +275,9 @@ class LovelaceBgAnimation extends HTMLElement {
 
       userPluginConfig = this.getCurrentUserConfig();
 
-      console.log(userPluginConfig);
-
       this.initializeLovelaceVariables()
       this.initializeBackground()
-
+      this.removeDefaultBackground()
       galleryRootManifest = await this.getGalleryRootManifest();
 
       if (userPluginConfig.background) {
@@ -284,7 +292,6 @@ class LovelaceBgAnimation extends HTMLElement {
         }
 
         if (processedPackageManifest !== "undefined") {
-          console.log(processedPackageManifest);
           this.writeBackgroundElement(processedPackageManifest)
         }
 
