@@ -6,9 +6,10 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 ## 🎀 Tribute to the artists 
 
-Credit to the incredible talented artists who have shared their work on the web. This is a list of artists featured in this repo, please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
+The following artists are artists featured in this repo, shout out to their incredible pieces of work they've shared on the web. Please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
 
 - Matei Copot (6)
+- Ben Matthews (6)
 - Takeshi Kano (1)
 - Akimitsu Hamamuro (1)
 - alphardex (1)
