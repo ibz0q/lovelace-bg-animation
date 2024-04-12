@@ -44,6 +44,14 @@
     ]
   },
   {
+    "id": "10.css-dark-particles",
+    "version": "v1",
+    "name": "CSS Dark Particles",
+    "description": "CSS Dark Particles",
+    "author": "Takeshi Kano",
+    "source": "https://codepen.io/towc/pen/BQEGdz"
+  },
+  {
     "id": "2.shooting-stars",
     "version": "v1",
     "name": "Shooting Stars",
@@ -92,32 +100,32 @@
   {
     "id": "6.binary-spiral",
     "version": "v1",
-    "name": "plasma background",
-    "description": "plasma background",
+    "name": "Binary Spirals",
+    "description": "Binary Spirals",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/dXevxg"
   },
   {
     "id": "7.rainbowness",
     "version": "v1",
-    "name": "plasma background",
-    "description": "plasma background",
+    "name": "Rainbowness",
+    "description": "Rainbowness",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/WvLaKw"
+    "source": "https://codepen.io/towc/pen/EbQKmy"
   },
   {
     "id": "8.manifestation",
     "version": "v1",
-    "name": "plasma background",
-    "description": "plasma background",
+    "name": "Manifestation",
+    "description": "progression of ideas through willpower and motivation",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/WvLaKw"
+    "source": "https://codepen.io/towc/pen/pevRJJ"
   },
   {
     "id": "9.rainbow-particles",
     "version": "v1",
-    "name": "plasma background",
-    "description": "plasma background",
+    "name": "Particle Horizon",
+    "description": "rainbow particle horizon",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/BQEGdz"
   }

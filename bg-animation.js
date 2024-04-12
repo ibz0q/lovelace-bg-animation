@@ -79,6 +79,9 @@ class LovelaceBgAnimation extends HTMLElement {
         } else {
           url = userPluginConfig.gallery.remoteUrl + "/" + packageManifestName + "/" + "package.yaml"
         }
+
+        console.log(url);
+
         let response = await fetch(url);
         if (!response.ok) {
           throw new Error('Failed to fetch package manifest: ' + packageManifestName);
@@ -88,11 +91,15 @@ class LovelaceBgAnimation extends HTMLElement {
           "packageName": packageManifestName,
           "data": await YAML.parse(await response.text())
         };
-        this.storeCache("HASSanimatedBg_packageRaw__" + packageCacheKey, packageManifest);
+
+        if (userPluginConfig.background[packageManifestIndex].cache === true && userPluginConfig.cache === true) {
+          this.storeCache("HASSanimatedBg_packageRaw__" + packageCacheKey, packageManifest);
+        }
+
         return packageManifest;
       }
     } catch (error) {
-      console.error('Failed to fetch package manifest: ' + packageManifestName, error);
+      console.error('Failed to fetch package manifest: ' + packageManifestIndex, error);
       return null;
     }
   }
@@ -174,7 +181,10 @@ class LovelaceBgAnimation extends HTMLElement {
           console.error("Template does not exist in package, it is required.");
         }
 
-        this.storeCache("HASSanimatedBg_packageProcessed__" + packageCacheKey, packageManifestObject);
+        if (userPluginConfig.background[packageManifestIndex].cache === true && userPluginConfig.cache === true) {
+          this.storeCache("HASSanimatedBg_packageProcessed__" + packageCacheKey, packageManifestObject);
+        }
+
         return packageManifestObject;
 
       }
@@ -287,6 +297,8 @@ class LovelaceBgAnimation extends HTMLElement {
             console.error(`Background id ${background.id} does not exist in galleryRootManifest`);
             break;
           }
+          console.log(userPluginConfig)
+
           packageManifest = await this.getPackageManifest(index);
           processedPackageManifest = await this.processPackageManifest(packageManifest);
         }

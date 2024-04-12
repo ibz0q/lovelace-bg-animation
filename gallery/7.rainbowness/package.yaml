@@ -1,9 +1,9 @@
 version: v1
 metadata:
-    name: plasma background 
-    description: plasma background
+    name: Rainbowness 
+    description: Rainbowness
     author: Matei Copot
-    source: https://codepen.io/towc/pen/WvLaKw
+    source: https://codepen.io/towc/pen/EbQKmy
 
 template: |
 
@@ -123,4 +123,5 @@ template: |
         ctx.fillStyle = '#222';
         ctx.fillRect(0, 0, w, h);
         })
+
     </script>
