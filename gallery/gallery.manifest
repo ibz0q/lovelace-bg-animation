@@ -1,12 +1,44 @@
 [
   {
+    "id": "0.test",
+    "version": "v1",
+    "name": "Test",
+    "description": "Test desc",
+    "author": "Ibz",
+    "source": "https://codepen.io/stack-findover/pen/xxxx",
+    "parameters": [
+      {
+        "id": "background-image",
+        "default": "https://i.ibb.co/87GbbFP/2799006.jpg"
+      }
+    ]
+  },
+  {
     "id": "1.galaxy-animation",
+    "version": "v1",
     "name": "Galaxy Animated",
     "description": "A slow moving animation of the galaxy with stars",
     "author": "Rahul",
     "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
-    "parameters": {
-      "background-image": "xxx"
-    }
+    "parameters": [
+      {
+        "id": "background-image",
+        "default": "https://i.ibb.co/87GbbFP/2799006.jpg"
+      }
+    ]
+  },
+  {
+    "id": "2.shooting-stars",
+    "version": "v1",
+    "name": "Shooting Stars",
+    "description": "Random speed shooting stars",
+    "author": "alphardex",
+    "source": "https://codepen.io/alphardex/pen/RwrVoeL",
+    "parameters": [
+      {
+        "id": "background-image",
+        "default": "https://i.ibb.co/87GbbFP/2799006.jpg"
+      }
+    ]
   }
 ]

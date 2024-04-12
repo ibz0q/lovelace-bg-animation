@@ -23,6 +23,7 @@ function readDirectory(dir) {
       const packageName = path.basename(packageDir);
       manifest.push({
         id: packageName,
+        version: packageData.version,
         name: packageData.metadata.name,
         description: packageData.metadata.description,
         author: packageData.metadata.author,
