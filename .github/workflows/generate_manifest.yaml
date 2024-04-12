@@ -1,0 +1,40 @@
+name: Generated Gallery Manifest File
+
+on:
+  push:
+    paths:
+      - 'gallery/**'
+  pull_request:
+    paths:
+      - 'gallery/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install Dependencies
+      run: npm ci
+
+    - name: Run Script
+      run: node utils/generate-manifest.js 
+
+    - name: Commit and Push
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Generated gallery.manifest file"
+          git push
+        fi

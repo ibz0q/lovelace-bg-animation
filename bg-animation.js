@@ -63,9 +63,7 @@ class LovelaceBgAnimation extends HTMLElement {
     try {
 
       let packageManifestName = userPluginConfig.background[packageManifestIndex].id;
-
       let packageCacheKey = btoa(packageManifestName + Object.entries(userPluginConfig.background[packageManifestIndex].parameters).map(([key, value]) => `${key}:${value}`).join(' '));
-
       let checkCachePackageManifest = this.retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
 
       if (checkCachePackageManifest && userPluginConfig.background[packageManifestIndex].cache === true && userPluginConfig.cache === true) {
@@ -79,8 +77,6 @@ class LovelaceBgAnimation extends HTMLElement {
         } else {
           url = userPluginConfig.gallery.remoteUrl + "/" + packageManifestName + "/" + "package.yaml"
         }
-
-        console.log(url);
 
         let response = await fetch(url);
         if (!response.ok) {
@@ -211,7 +207,7 @@ class LovelaceBgAnimation extends HTMLElement {
         ? Object.keys(this.config.background).reduce((acc, key) => {
           acc[key] = {
             ...this.config.background[key],
-            style: this.config.background[key].style || 'min-width: 100vw; min-height: 100vh;',
+            style: this.config.background[key].style || 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
             cache: this.config.background[key].cache !== undefined ? this.config.background[key].cache : true,
             delay: this.config.background[key].delay || 50000
           };
@@ -250,7 +246,6 @@ class LovelaceBgAnimation extends HTMLElement {
   }
 
   initializeBackground() {
-    console.log(lovelaceUI)
     let bgRootContainer = document.createElement("div");
     bgRootContainer.id = "bg-animation-container";
     bgRootContainer.style.cssText = userPluginConfig.style;
@@ -274,6 +269,7 @@ class LovelaceBgAnimation extends HTMLElement {
     iframe.id = `background-iframe-${packageObject.packageIndex}`;
     iframe.className = appNameShort;
     iframe.frameborder = "0";
+    iframe.scrolling = "no"; // Add this line to prevent scrolling
     iframe.style.cssText = userPluginConfig.background[packageObject.packageIndex].style;
     iframe.srcdoc = packageObject.data.template__processed;
     lovelaceUI.bgRootElement.appendChild(iframe);
@@ -297,7 +293,6 @@ class LovelaceBgAnimation extends HTMLElement {
             console.error(`Background id ${background.id} does not exist in galleryRootManifest`);
             break;
           }
-          console.log(userPluginConfig)
 
           packageManifest = await this.getPackageManifest(index);
           processedPackageManifest = await this.processPackageManifest(packageManifest);
@@ -310,10 +305,6 @@ class LovelaceBgAnimation extends HTMLElement {
       }
 
     }
-
-
-
-
   }
 
   setConfig(config) {
