@@ -29,9 +29,7 @@ class LovelaceBgAnimation extends HTMLElement {
       let checkCacheGalleryManifest = this.retrieveCache("HASSanimatedBg_galleryRootManifest");
 
       if (checkCacheGalleryManifest && userPluginConfig.cache === true) {
-
         return checkCacheGalleryManifest;
-
       } else {
 
         let url;
@@ -47,7 +45,9 @@ class LovelaceBgAnimation extends HTMLElement {
 
         let responseJson = await response.json();
 
-        this.storeCache("HASSanimatedBg_galleryRootManifest", responseJson)
+        if (userPluginConfig.cache === true) {
+          this.storeCache("HASSanimatedBg_galleryRootManifest", responseJson)
+        }
 
         return responseJson
 
