@@ -23,8 +23,9 @@ class LovelaceBgAnimation extends HTMLElement {
         if (userPluginConfig.gallery.type == "local") {
           url = window.location.origin + userPluginConfig.gallery.localPath + "/" + userPluginConfig.gallery.manifestFileName
         } else {
-          url = userPluginConfig.gallery.remoteUrl + userPluginConfig.gallery.manifestFileName
+          url = userPluginConfig.gallery.remoteUrl + "/" + userPluginConfig.gallery.manifestFileName
         }
+console.log(url)
         let response = await fetch(url, { cache: "no-store" });
         if (!response.ok) {
           throw new Error(`Failed to fetch gallery manifest`);
@@ -62,6 +63,8 @@ class LovelaceBgAnimation extends HTMLElement {
         } else {
           url = userPluginConfig.gallery.remoteUrl + "/packages/" + packageManifestName + "/" + "package.yaml"
         }
+        console.log("url")
+        console.log(url)
 
         let response = await fetch(url, { cache: "no-store" });
         if (!response.ok) {
@@ -179,29 +182,29 @@ class LovelaceBgAnimation extends HTMLElement {
   getCurrentUserConfig() {
     userPluginConfig = {
       "gallery": {
-        "type": this.config.gallery.type || "remote",
-        "localPath": this.config.gallery.localPath || "/local/lovelace-bg-animation/gallery",
-        "manifestFileName": this.config.gallery.manifestFileName || "gallery.manifest",
-        "remoteUrl": this.config.gallery.remoteUrl || "https://ibz0q.github.io/lovelace-bg-animation/gallery"
+        "type": this.config.gallery?.type ?? "remote",
+        "localPath": this.config.gallery?.localPath ?? "/local/lovelace-bg-animation/gallery",
+        "manifestFileName": this.config.gallery?.manifestFileName ?? "gallery.manifest",
+        "remoteUrl": this.config.gallery?.remoteUrl ?? "https://ibz0q.github.io/lovelace-bg-animation/gallery"
       },
-      "delay": this.config.delay || 0,
-      "transition": this.config.transition || false,
+      "delay": this.config.delay ?? 0,
+      "transition": this.config.transition ?? false,
       "cache": this.config.cache !== undefined ? this.config.cache : true,
-      "style": this.config.style || "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
-      "header": this.config.header || { "transparent": true, "style": "" },
+      "style": this.config.style ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
+      "header": this.config.header ?? { "transparent": true, "style": "" },
       "background": this.config.background
         ? Object.keys(this.config.background).reduce((acc, key) => {
           acc[key] = {
             ...this.config.background[key],
-            style: this.config.background[key].style || 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-            cache: this.config.background[key].cache !== undefined ? this.config.background[key].cache : true,
-            delay: this.config.background[key].delay || 50000,
-            redraw: this.config.background[key].redraw || 0
+            style: this.config.background[key]?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
+            cache: this.config.background[key]?.cache !== undefined ? this.config.background[key].cache : true,
+            delay: this.config.background[key]?.delay ?? 50000,
+            redraw: this.config.background[key]?.redraw ?? 0
           };
           return acc;
         }, [])
         : false,
-      "sequence": this.config.sequence || "random"
+      "sequence": this.config.sequence ?? "random"
     }
   }
 
