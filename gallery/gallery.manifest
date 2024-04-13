@@ -108,7 +108,7 @@
     "description": "CSS Dark Particles",
     "author": "Takeshi Kano",
     "source": "https://codepen.io/towc/pen/BQEGdz",
-    "hash": "03c4cccad620ae987d2681065e37f56903b703b4"
+    "hash": "bac8e2bcfb1a99f5d334e339545b43f985f8545a"
   },
   {
     "id": "11.space",
@@ -171,7 +171,7 @@
     "description": "So many layers of ribbons",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-    "hash": "a86d6856da8d142389db5f214778a9645b8d5931"
+    "hash": "8e726f11299b4fb1949b1e77d22618d80e84b498"
   },
   {
     "id": "18.particle-cube",
@@ -185,11 +185,11 @@
   {
     "id": "19.trapped-particles",
     "version": "v1",
-    "name": "Noise Abstraction",
-    "description": "Noise Abstraction",
-    "author": "Akimitsu Hamamuro",
-    "source": "https://codepen.io/akm2/pen/AxGzJb",
-    "hash": "1eba7b841b06b61b513c0ce4a04e8f231ed69325"
+    "name": "Trapped particles",
+    "description": "Trapped particles with shocking connections",
+    "author": "Bas Groothedde",
+    "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
+    "hash": "c84f31e5a4cd0c415ab27a65c3bb21d6684b2380"
   },
   {
     "id": "20.manifold",
@@ -203,10 +203,55 @@
   {
     "id": "21.noise-abstraction",
     "version": "v1",
-    "name": "3D particle Cube",
-    "description": "Pure JS 3D particle Cube - 1000 particles",
+    "name": "Noise Abstraction",
+    "description": "Noise Abstraction",
+    "author": "Akimitsu Hamamuro",
+    "source": "https://codepen.io/akm2/pen/AxGzJb",
+    "hash": "71461bfbd3c265f22f53bf0a253bd35ec4c2c32e"
+  },
+  {
+    "id": "22.cloth-ribbons",
+    "version": "v1",
+    "name": "Cloth Ribbons",
+    "description": "It Colorful Cloth Ribbons",
+    "author": "Bas Groothedde",
+    "source": "https://codepen.io/ImagineProgramming/pen/BavevR",
+    "hash": "e8e10491ce5edf23d87e5b0d3cd5614f48efae64"
+  },
+  {
+    "id": "23.ribbons-four",
+    "version": "v1",
+    "name": "Ribbons Four",
+    "description": "It looks like Windows Vista",
     "author": "Ben Matthews",
-    "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
-    "hash": "36bc8a101b22353d3dcac8bd4d42ea41deed877c"
+    "source": "https://codepen.io/tsuhre/pen/MNVYdq",
+    "hash": "d4f41a1eacd8ba740cacb7a7733e052d1e479885"
+  },
+  {
+    "id": "24.trapped-gradient",
+    "version": "v1",
+    "name": "Trapped graident",
+    "description": "Trapped particles with gradient connections",
+    "author": "Bas Groothedde",
+    "source": "https://codepen.io/ImagineProgramming/pen/qdZWag",
+    "hash": "0a68ea96ab4dc62ffcb58316eee1935ee8c359f7"
+  },
+  {
+    "id": "25.galactic-swimmers",
+    "version": "v1",
+    "name": "Galactic Swimmers",
+    "description": "A sea of particles swimming in the galaxy",
+    "author": "Bas Groothedde",
+    "source": "https://codepen.io/ImagineProgramming/pen/KwVWmE",
+    "hash": "eb6a7c23b229ee1f745801d796b8a8aa9c38005f"
+  },
+  {
+    "id": "26.gpu-particles",
+    "version": "v1",
+    "name": "GPU Particles",
+    "description": "First Time GPGPU Particles",
+    "author": "Tim Severien",
+    "source": "https://codepen.io/timseverien/pen/rWdJZY",
+    "hash": "4f38a3aa0447eec0c03865288b703f341de445de"
   }
 ]
