@@ -81,7 +81,6 @@ const packagesDir = '../gallery/packages';
 const metadataFolder = path.join("../gallery/metadata");
 const manifest = [];
 let templateProcessed;
-
 async function readDirectory(dir) {    
     fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
@@ -105,11 +104,30 @@ async function readDirectory(dir) {
 
             // Write the metadata file inside the package folder
             const metadataFilePath = path.join(packageFolder, 'index.html');
-            fs.writeFileSync(metadataFilePath, ` <!DOCTYPE html>`+templateProcessed.data.template__processed, 'utf8');
+            
+            // Create a string of HTML comments with the metadata
+            let metadataComments = '';
+            if (packageData.metadata) {
+                for (const [key, value] of Object.entries(packageData.metadata)) {
+                    metadataComments += `<!-- ${key}: ${value} -->\n`;
+                }
+            }
+
+            fs.writeFileSync(metadataFilePath, `<!DOCTYPE html>\n${metadataComments}`+templateProcessed.data.template__processed, 'utf8');
             console.log(`Generated: ${packageName}`);
         }
     }
 }
+
+
+/// Snippet from package.yaml
+// version: v1
+// metadata:
+//     name: Colored Swipe Transition
+//     description: Whole page colored swipes
+//     author: Andreas Wilcox
+//     source: https://codepen.io/SvDvorak/pen/bxoxde
+
 
 readDirectory(packagesDir);
 
