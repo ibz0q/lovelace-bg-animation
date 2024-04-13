@@ -77,9 +77,9 @@ async function processPackageManifest(packageManifestObject) {
     }
 }
 
+const galleryDir = '../gallery/';
 const packagesDir = '../gallery/packages';
 const metadataFolder = path.join("../gallery/metadata");
-const manifest = [];
 let templateProcessed;
 async function readDirectory(dir) {    
     fs.rmSync(metadataFolder, { recursive: true, force: true });
@@ -103,7 +103,7 @@ async function readDirectory(dir) {
             fs.mkdirSync(packageFolder, { recursive: true });
 
             // Write the metadata file inside the package folder
-            const metadataFilePath = path.join(packageFolder, 'index.html');
+            const metadataFilePath = path.join(packageFolder, 'preview.html');
             
             // Create a string of HTML comments with the metadata
             let metadataComments = '';
@@ -118,6 +118,11 @@ async function readDirectory(dir) {
         }
     }
 }
+
+// Generate metadata.manifest file
+const metadataManifest = [];
+readDirectory(packagesDir);
+fs.writeFileSync(path.join(galleryDir, 'metadata.manifest'), JSON.stringify(metadataManifest), 'utf8');
 
 
 /// Snippet from package.yaml
