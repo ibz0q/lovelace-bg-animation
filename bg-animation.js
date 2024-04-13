@@ -10,19 +10,6 @@ class LovelaceBgAnimation extends HTMLElement {
     this.initialize()
   }
 
-  async fetchResource(url) {
-    try {
-      let response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch resource`);
-      }
-      return await response.text();
-    } catch (error) {
-      console.error(`Error fetching resource`);
-      return null;
-    }
-  }
-
   async getGalleryRootManifest() {
     try {
 
@@ -38,7 +25,7 @@ class LovelaceBgAnimation extends HTMLElement {
         } else {
           url = userPluginConfig.gallery.remoteUrl + userPluginConfig.gallery.manifestFileName
         }
-        let response = await fetch(url);
+        let response = await fetch(url, {cache: "no-store"});
         if (!response.ok) {
           throw new Error(`Failed to fetch gallery manifest`);
         }
@@ -78,7 +65,7 @@ class LovelaceBgAnimation extends HTMLElement {
           url = userPluginConfig.gallery.remoteUrl + "/" + packageManifestName + "/" + "package.yaml"
         }
 
-        let response = await fetch(url);
+        let response = await fetch(url, {cache: "no-store"});
         if (!response.ok) {
           throw new Error('Failed to fetch package manifest: ' + packageManifestName);
         }
@@ -122,7 +109,11 @@ class LovelaceBgAnimation extends HTMLElement {
         if (packageManifestObject.data.remote_includes) {
           for (const [index, include] of packageManifestObject.data.remote_includes.entries()) {
             packageManifestObject.data.remote_includes[index]["__processed"] = {};
-            packageManifestObject.data.remote_includes[index]["__processed"] = await this.fetchResource((include.url));
+            packageManifestObject.data.remote_includes[index]["__processed"] = await fetch(url, {cache: "no-store"});
+
+            if (!response.ok) {
+              console.error(`Failed to fetch resource`);
+            }
           }
         }
 
@@ -203,6 +194,7 @@ class LovelaceBgAnimation extends HTMLElement {
       "redraw": this.config.redraw || 0,
       "cache": this.config.cache !== undefined ? this.config.cache : true,
       "style": this.config.style || "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
+      "headerStyle": this.config.headerStyle || undefined,
       "background": this.config.background
         ? Object.keys(this.config.background).reduce((acc, key) => {
           acc[key] = {
@@ -239,7 +231,7 @@ class LovelaceBgAnimation extends HTMLElement {
   initializeLovelaceVariables() {
     lovelaceUI.panelElement = document.querySelector("body > home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace")
     lovelaceUI.huiRootElement = lovelaceUI.panelElement.shadowRoot.querySelector("hui-root")
-    lovelaceUI.headerElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#header")
+    lovelaceUI.headerElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("div > div.header")
     lovelaceUI.viewElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#view")
     lovelaceUI.huiViewElement = lovelaceUI.viewElement.querySelector("hui-view")
     lovelaceUI.groundElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("div")
@@ -252,13 +244,9 @@ class LovelaceBgAnimation extends HTMLElement {
     bgRootContainer.style.cssText = userPluginConfig.style;
     lovelaceUI.groundElement.prepend(bgRootContainer);
     lovelaceUI.bgRootElement = bgRootContainer;
-
-    if(userPluginConfig.headerStyle !== undefined) {
-      lovelaceUI.headerElement.style.cssText = userPluginConfig.headerStyle;
-    }
   }
 
-  removeDefaultBackground() {
+  changeDefaultBackground() {
     let cssStyle;
     cssStyle = window.getComputedStyle(lovelaceUI.huiViewElement);
     if (cssStyle.background !== 'transparent') {
@@ -267,6 +255,12 @@ class LovelaceBgAnimation extends HTMLElement {
     if (cssStyle.background !== 'transparent') {
       lovelaceUI.viewElement.style.background = 'transparent';
     }
+    console.log(lovelaceUI);
+    cssStyle = window.getComputedStyle(lovelaceUI.headerElement);
+    if (cssStyle.background !== 'transparent' && userPluginConfig.headerStyle !== undefined) {
+      console.log("header style", userPluginConfig.headerStyle)
+      lovelaceUI.headerElement.style.cssText = userPluginConfig.headerStyle;
+    }
   }
 
   writeBackgroundElement(packageObject) {
@@ -274,7 +268,6 @@ class LovelaceBgAnimation extends HTMLElement {
     iframe.id = `background-iframe-${packageObject.packageIndex}`;
     iframe.className = appNameShort;
     iframe.frameborder = "0";
-    iframe.scrolling = "no"; // Add this line to prevent scrolling
     iframe.style.cssText = userPluginConfig.background[packageObject.packageIndex].style;
     iframe.srcdoc = packageObject.data.template__processed;
     lovelaceUI.bgRootElement.appendChild(iframe);
@@ -288,7 +281,7 @@ class LovelaceBgAnimation extends HTMLElement {
 
       this.initializeLovelaceVariables()
       this.initializeElements()
-      this.removeDefaultBackground()
+      this.changeDefaultBackground()
       galleryRootManifest = await this.getGalleryRootManifest();
 
       if (userPluginConfig.background) {

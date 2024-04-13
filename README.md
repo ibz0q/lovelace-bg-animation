@@ -36,7 +36,7 @@ For this reason, code belonging to this repo (bg-annimation.js) uses CC BY-NC 4.
 
 Code inside Gallery carries the Licenses and Copyrights of their authors respectively. 
 
-### Usage
+## Usage
 
 Minimal config
 
@@ -64,6 +64,14 @@ background:
     parameters:
       background-image: 222
 ```
+
+### Offline only or test your own
+
+Offline was a design decision, by default the plugin connects to this repos Github page. You can override this by using the below.
+
+This will tell the plugin to load everything from Home Assistant only.
+
+It's also useful if you wish to test your own packages.
 
 ### The package.yaml 
 
