@@ -25,7 +25,6 @@ class LovelaceBgAnimation extends HTMLElement {
         } else {
           url = userPluginConfig.gallery.remoteUrl + "/" + userPluginConfig.gallery.manifestFileName
         }
-console.log(url)
         let response = await fetch(url, { cache: "no-store" });
         if (!response.ok) {
           throw new Error(`Failed to fetch gallery manifest`);
@@ -227,13 +226,13 @@ console.log(url)
   }
 
   initializeLovelaceVariables() {
-    lovelaceUI.panelElement = document.querySelector("body > home-assistant").shadowRoot.querySelector("home-assistant-main").shadowRoot.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace")
-    lovelaceUI.huiRootElement = lovelaceUI.panelElement.shadowRoot.querySelector("hui-root")
-    lovelaceUI.headerElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("div > div.header")
-    lovelaceUI.viewElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#view")
-    lovelaceUI.huiViewElement = lovelaceUI.viewElement.querySelector("hui-view")
-    lovelaceUI.groundElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("div")
-    lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement.lovelace
+    lovelaceUI.panelElement = document.querySelector("body > home-assistant")?.shadowRoot?.querySelector("home-assistant-main")?.shadowRoot?.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace");
+    lovelaceUI.huiRootElement = lovelaceUI.panelElement?.shadowRoot?.querySelector("hui-root");
+    lovelaceUI.headerElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div > div.header");
+    lovelaceUI.viewElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("#view");
+    lovelaceUI.huiViewElement = lovelaceUI.viewElement?.querySelector("hui-view");
+    lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
+    lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement?.lovelace;
   }
 
   initializePluginElements() {

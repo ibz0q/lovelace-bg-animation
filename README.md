@@ -24,7 +24,7 @@ Please directly tip the artists you found most inspiring.
 
 ## Project Motivation
 
-Nostalgia. there was a time when the web was full of abstract experiments showcasing what possible with canvas/JS or CSS3. I wanted to keep that alive and see those experiments on a Home Assistant dashboard.
+Nostalgia. a time when canvas/JS/CSS3 was new to the web I recall seeing countless of abstract experiments using these technologies. I wanted to preserve them and view them in a art type gallery on a Home Assistant dashboard, they make for great backgrounds!.
 
 Some of the experiments I have saved overtime in my bookmarks have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
 
