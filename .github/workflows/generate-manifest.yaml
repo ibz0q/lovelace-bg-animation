@@ -26,6 +26,12 @@ jobs:
       run: npm install
 
     - name: Run Script
+      run: ls 
+
+    - name: Run Script
+      run: ls -R
+
+    - name: Run Script
       run: node ./utils/generate-manifest.js 
 
     - name: Commit and Push
