@@ -34,8 +34,11 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Run Script
-      run: node ./util/generate-manifest.js 
+    - name: Create gallery.manifest
+      run: node ./util/create-manifest.js 
+
+    - name: Create metadata 
+      run: node ./util/create-metadata.js 
 
     - name: Commit and Push
       run: |
