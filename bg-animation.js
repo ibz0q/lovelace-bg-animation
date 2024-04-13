@@ -255,10 +255,8 @@ class LovelaceBgAnimation extends HTMLElement {
     if (cssStyle.background !== 'transparent') {
       lovelaceUI.viewElement.style.background = 'transparent';
     }
-    console.log(lovelaceUI);
     cssStyle = window.getComputedStyle(lovelaceUI.headerElement);
     if (cssStyle.background !== 'transparent' && userPluginConfig.headerStyle !== undefined) {
-      console.log("header style", userPluginConfig.headerStyle)
       lovelaceUI.headerElement.style.cssText = userPluginConfig.headerStyle;
     }
   }
@@ -268,6 +266,7 @@ class LovelaceBgAnimation extends HTMLElement {
     iframe.id = `background-iframe-${packageObject.packageIndex}`;
     iframe.className = appNameShort;
     iframe.frameborder = "0";
+    iframe.scrolling = "no";
     iframe.style.cssText = userPluginConfig.background[packageObject.packageIndex].style;
     iframe.srcdoc = packageObject.data.template__processed;
     lovelaceUI.bgRootElement.appendChild(iframe);
@@ -307,10 +306,10 @@ class LovelaceBgAnimation extends HTMLElement {
 
   setConfig(config) {
     this.config = config;
-    // if (this.content) {
-    //   delete this.content;
-    //   this.initialize()
-    // }
+    //  if (this.content) {
+    //    delete this.content;
+    //    this.initialize()
+    //  }
   }
   getCardSize() {
     return 0;

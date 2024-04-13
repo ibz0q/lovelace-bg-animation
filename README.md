@@ -49,20 +49,22 @@ background:
 All config
 
 ```yaml
-type: custom:lovelace-bg-animation
-delay: 20000
-redraw: 200000
-gallery:
-  type: local
-cache: false
-style: "css"
-sequence: random, shuffle, name_desc, name_asc, id_asc, id_desc,
-background:
-  - id: 13.ribbons-two
-    cache: false
-    style: "css"
-    parameters:
-      background-image: 222
+type: custom:lovelace-bg-animation 
+delay: 20000 # Delay in milliseconds between background changes
+redraw: 200000 # Time in milliseconds after which the background is redrawn
+headerStyle: | # CSS styles for the header
+gallery: 
+  type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
+cache: false # Background is cached by default, this option disables it globally
+style: "css" # Applies CSS to parent root container
+sequence: random, shuffle, name_desc, name_asc, id_asc, id_desc, # Specifies the order in which backgrounds are displayed
+
+background: 
+  - id: 13.ribbons-two # BG ID
+    cache: false # Background is cached by default, this option disables it
+    style: "css" # Applies CSS to the parent container
+    parameters: # Parameters can be passed into a background, depends if author has added support 
+      background-image: 222 
 ```
 
 ### Offline only or test your own

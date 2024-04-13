@@ -36,7 +36,11 @@ function readDirectory(dir) {
 
 readDirectory(galleryDir);
 
-manifest.sort((a, b) => a.id.localeCompare(b.id));
+manifest.sort((a, b) => {
+  const aIdNumber = parseInt(a.id.match(/\d+/g));
+  const bIdNumber = parseInt(b.id.match(/\d+/g));
+  return aIdNumber - bIdNumber;
+});
 
 fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
 console.log(`Generated manifest file: ${manifestFile}`);
