@@ -54,9 +54,7 @@ class LovelaceBgAnimation extends HTMLElement {
       let checkCachePackageManifest = this.retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
 
       if (checkCachePackageManifest && userPluginConfig.background[packageManifestIndex].cache === true && userPluginConfig.cache === true) {
-
         return checkCachePackageManifest;
-
       } else {
         let url;
         if (userPluginConfig.gallery.type == "local") {
@@ -132,11 +130,8 @@ class LovelaceBgAnimation extends HTMLElement {
         if (packageManifestObject.data.template) {
 
           packageManifestObject.data.template__processed = packageManifestObject.data.template
-
           const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):(.*?)\}\}/g;
-
           packageManifestObject.data.template__processed = packageManifestObject.data.template__processed.replace(regex, function (match, type, key) {
-
             key = key.trim();
             switch (type) {
               case 'compile':
@@ -157,7 +152,6 @@ class LovelaceBgAnimation extends HTMLElement {
                   return include?.__processed || match;
                 }
                 return match;
-
               default:
                 return match;
             }
@@ -183,7 +177,7 @@ class LovelaceBgAnimation extends HTMLElement {
   }
 
   getCurrentUserConfig() {
-    return {
+    userPluginConfig = {
       "gallery": {
         "type": this.config.gallery.type || "remote",
         "localPath": this.config.gallery.localPath || "/local/lovelace-bg-animation/gallery",
@@ -194,7 +188,7 @@ class LovelaceBgAnimation extends HTMLElement {
       "transition": this.config.transition || false,
       "cache": this.config.cache !== undefined ? this.config.cache : true,
       "style": this.config.style || "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
-      "headerStyle": this.config.headerStyle || undefined,
+      "header": this.config.header || { "transparent": true, "style": "" },
       "background": this.config.background
         ? Object.keys(this.config.background).reduce((acc, key) => {
           acc[key] = {
@@ -239,38 +233,49 @@ class LovelaceBgAnimation extends HTMLElement {
     lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement.lovelace
   }
 
-  initializeElements() {
+  initializePluginElements() {
     let bgRootContainer = document.createElement("div");
     bgRootContainer.id = "bg-animation-container";
     bgRootContainer.style.cssText = userPluginConfig.style;
     lovelaceUI.groundElement.prepend(bgRootContainer);
     lovelaceUI.bgRootElement = bgRootContainer;
-  }
-
-  changeDefaultStyles() {
-    let cssStyle;
-    cssStyle = window.getComputedStyle(lovelaceUI.huiViewElement);
-    if (cssStyle.background !== 'transparent') {
-      lovelaceUI.huiViewElement.style.background = 'transparent';
-    }
-    if (cssStyle.background !== 'transparent') {
-      lovelaceUI.viewElement.style.background = 'transparent';
-    }
-    cssStyle = window.getComputedStyle(lovelaceUI.headerElement);
-    if (cssStyle.background !== 'transparent' && userPluginConfig.headerStyle !== undefined) {
-      lovelaceUI.headerElement.style.cssText = userPluginConfig.headerStyle;
-    }
-  }
-
-  writeBackgroundElement(packageObject) {
-    if (lovelaceUI.iframeElement !== undefined) {
+    if (lovelaceUI.iframeElement == undefined) {
       lovelaceUI.iframeElement = document.createElement('iframe');
       lovelaceUI.iframeElement.id = `background-iframe`;
       lovelaceUI.iframeElement.frameborder = "0";
       lovelaceUI.iframeElement.scrolling = "no";
+      lovelaceUI.iframeElement.srcdoc = "<style>*{background:black;}</style>";
+      lovelaceUI.iframeElement.style.cssText = "opacity: 0;";
       lovelaceUI.iframeElement.className = appNameShort;
       lovelaceUI.bgRootElement.appendChild(lovelaceUI.iframeElement);
     }
+  }
+
+  changeDefaultLovelaceStyles() {
+    lovelaceUI.rootStyleElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#bg-animation-styles");
+    if (!lovelaceUI.rootStyleElement) {
+      lovelaceUI.rootStyleElement = document.createElement("style");
+      lovelaceUI.rootStyleElement.id = "bg-animation-styles";
+      lovelaceUI.huiRootElement.shadowRoot.prepend(lovelaceUI.rootStyleElement);
+    }
+
+    let cssStyle = `
+    #view > hui-view, #view {
+      background: transparent !important;
+    }`;
+
+    if (userPluginConfig.header.transparent == true) {
+        cssStyle += `
+      .header {
+        background: transparent !important;
+        `+ userPluginConfig.header.style !== undefined ? userPluginConfig.header.style : '' +`
+      }`;
+    }
+    
+    lovelaceUI.rootStyleElement.innerHTML = cssStyle;
+  }
+
+  processBackgroundFrame(packageObject) {
     lovelaceUI.iframeElement.style.cssText = userPluginConfig.background[packageObject.packageIndex].style;
     lovelaceUI.iframeElement.srcdoc = packageObject.data.template__processed;
   }
@@ -279,22 +284,27 @@ class LovelaceBgAnimation extends HTMLElement {
 
     if (typeof userPluginConfig == "undefined") {
 
-      userPluginConfig = this.getCurrentUserConfig();
-
+      this.getCurrentUserConfig();
       this.initializeLovelaceVariables()
-      this.initializeElements()
-      this.changeDefaultStyles()
+      this.changeDefaultLovelaceStyles()
+      this.initializePluginElements()
+
       galleryRootManifest = await this.getGalleryRootManifest();
 
       if (userPluginConfig.background) {
 
         for (const [index, background] of userPluginConfig.background.entries()) {
+          if (!galleryRootManifest.some(manifest => manifest.id === background.id)) {
+            console.error(`Background id ${background.id} does not exist in galleryRootManifest`);
+            break;
+          }
+
           packageManifest = await this.getPackageManifest(index);
           processedPackageManifest = await this.processPackageManifest(packageManifest);
         }
 
         if (processedPackageManifest !== "undefined") {
-          this.writeBackgroundElement(processedPackageManifest)
+          this.processBackgroundFrame(processedPackageManifest)
         }
 
       }

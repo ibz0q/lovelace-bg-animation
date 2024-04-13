@@ -53,16 +53,18 @@ All config
 ```yaml
 type: custom:lovelace-bg-animation 
 delay: 20000 # Delay in milliseconds between background changes
-headerStyle: | # CSS styles for the header
-  background: transparent;
+header: # CSS styles for the header
+  transparent: true
+  style: | # CSS can be applied to the Lovelace header
+      background: transparent;
 gallery: 
   type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
 cache: false # Speeds up rendering time, this option disables it globally
-style: "css" # Applies CSS to parent root container
+style: | # Applies CSS to parent root container
+    color:white;
 sequence: random, shuffle, name_desc, name_asc, id_asc, id_desc, # Specifies the order in which backgrounds are displayed
-
 background: 
-  - id: 13.ribbons-two # BG ID
+  - id: 13.ribbons-two # Background ID (Found inside gallery/packages/[foldername])
     cache: false # Speeds up rendering time considerably, this option disables it globally
     style: "css" # Applies CSS to the parent container
     redraw: 200000 # Time in milliseconds after which the background is redrawn
@@ -104,3 +106,14 @@ I accept contributions. Because Javascript is allowed, you must be a reputable u
 Security is the primary requirement, any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant by nature has a large attack surface. Third party unaudited code presents a big risk.
 
 We will take steps to minimize risk. 
+
+### Features TODO
+
+- Show controls
+- Fix iframe writes (Done)
+- Add Autoplay
+- Add redraw
+- Iframe transitions 
+- postMessage 
+- Generate metadata 
+- Nice UI Editor
