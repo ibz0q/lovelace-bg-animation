@@ -24,6 +24,7 @@ template: |
     </style>
         <div id="controls"></div>
         <script>
+
             let walkingSpeed = .5;
             let noiseSpeed = .4*walkingSpeed;
             let dirIncr = .01*walkingSpeed;
@@ -34,7 +35,7 @@ template: |
             let ribbonWidth = 200;
 
             let angleIncr = .01*walkingSpeed;
-            t
+
             let noiseScale = .02;
             let noiseHeight = 200;
 
@@ -140,5 +141,4 @@ template: |
             resizeCanvas(windowWidth, windowHeight); 
             init();
             }
-
         </script>

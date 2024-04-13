@@ -172,5 +172,41 @@
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/MNVYdq",
     "hash": "a86d6856da8d142389db5f214778a9645b8d5931"
+  },
+  {
+    "id": "18.particle-cube",
+    "version": "v1",
+    "name": "3D particle Cube",
+    "description": "Pure JS 3D particle Cube - 1000 particles",
+    "author": "Bas Groothedde",
+    "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
+    "hash": "91068a531cd73b0fc1ab6f82921f546d291c4fba"
+  },
+  {
+    "id": "19.trapped-particles",
+    "version": "v1",
+    "name": "Noise Abstraction",
+    "description": "Noise Abstraction",
+    "author": "Akimitsu Hamamuro",
+    "source": "https://codepen.io/akm2/pen/AxGzJb",
+    "hash": "1eba7b841b06b61b513c0ce4a04e8f231ed69325"
+  },
+  {
+    "id": "20.manifold",
+    "version": "v1",
+    "name": "Manifold",
+    "description": "Enter into the fold",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/PozModJ",
+    "hash": "66e49b10f453bdfe36fcab83fee6ea22b4c4a978"
+  },
+  {
+    "id": "21.noise-abstraction",
+    "version": "v1",
+    "name": "3D particle Cube",
+    "description": "Pure JS 3D particle Cube - 1000 particles",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
+    "hash": "36bc8a101b22353d3dcac8bd4d42ea41deed877c"
   }
 ]

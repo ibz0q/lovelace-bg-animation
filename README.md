@@ -8,11 +8,12 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 The repo features the following artists with incredible works they've shared on the web. Please support them. In order featured works in this repo.
 
+ - Ben Matthews (6)
  - Matei Copot (6)
- - Ben Matthews (5)
+ - Akimitsu Hamamuro (2)
+ - Bas Groothedde (2)
  - Rahul (1)
  - Takeshi Kano (1)
- - Akimitsu Hamamuro (1)
  - cssscript.com (1)
  - alphardex (1)
  - Alex Andrix (1)
@@ -24,7 +25,7 @@ Please directly tip the artists you found most inspiring.
 
 ## Project Motivation
 
-Nostalgia. a time when canvas/JS/CSS3 was new to the web I recall seeing countless of abstract experiments using these technologies. I wanted to preserve them and view them in a art type gallery on a Home Assistant dashboard, they make for great backgrounds!.
+Mostly Nostalgia. a time when canvas/JS/CSS3 was new to the web I recall seeing countless of abstract experiments using these technologies. I wanted to preserve them and view them in a art type gallery on a Home Assistant dashboard, they make for great backgrounds!
 
 Some of the experiments I have saved overtime in my bookmarks have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
 

@@ -6,6 +6,12 @@ const crypto = require('crypto');
 
 process.chdir(__dirname);
 
+const galleryDir = '../gallery/';
+const galleryManifest = '../gallery/gallery.manifest';
+const packagesDir = '../gallery/packages';
+const metadataFolder = path.join("../gallery/metadata");
+const metadataManifest = [];
+
 function getSHA1(filePath) {
     const hashSum = crypto.createHash('sha1');
   
@@ -95,18 +101,11 @@ async function processPackageManifest(packageManifestObject) {
     }
 }
 
-const galleryDir = '../gallery/';
-const galleryManifest = '../gallery/gallery.manifest';
-const packagesDir = '../gallery/packages';
-const metadataFolder = path.join("../gallery/metadata");
-let templateProcessed;
-const metadataManifest = [];
-
 async function readDirectory(dir) {    
     fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
-    const files = fs.readdirSync(dir);
 
+    const files = fs.readdirSync(dir);
     const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8'))); 
 
     for (const file of files) {
@@ -118,22 +117,21 @@ async function readDirectory(dir) {
             const packageData = YAML.parse((fs.readFileSync(filePath, 'utf8')));
             const packageDir = path.dirname(filePath);
             const packageName = path.basename(packageDir);
+            const packageFolder = path.join(metadataFolder, packageName);
+            const metadataFilePath = path.join(packageFolder, 'preview.html');
 
             folderHash = getSHA1(packageDir);
             const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
 
-            if (manifestEntry && manifestEntry.hash === folderHash) {
+            if ((manifestEntry && manifestEntry.hash === folderHash)) {
                 console.log(`Hash is the same for ${packageName}, skipping.`);
-                break;
+                // break;
             }
             
             console.log(`Generating.. ${packageName}`);
             templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName});
 
-            const packageFolder = path.join(metadataFolder, packageName);
             fs.mkdirSync(packageFolder, { recursive: true });
-
-            const metadataFilePath = path.join(packageFolder, 'preview.html');
             
             let metadataComments = '';
             if (packageData.metadata) {
@@ -147,14 +145,6 @@ async function readDirectory(dir) {
         }
     }
 }
-
-/// Snippet from package.yaml
-// version: v1
-// metadata:
-//     name: Colored Swipe Transition
-//     description: Whole page colored swipes
-//     author: Andreas Wilcox
-//     source: https://codepen.io/SvDvorak/pen/bxoxde
 
 
 readDirectory(packagesDir);
