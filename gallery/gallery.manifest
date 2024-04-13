@@ -1,41 +1,12 @@
 [
   {
-    "id": "0.test",
-    "version": "v1",
-    "name": "Test",
-    "description": "Test desc",
-    "author": "Ibz",
-    "source": "https://codepen.io/stack-findover/pen/xxxx",
-    "parameters": [
-      {
-        "id": "background-image",
-        "default": "xxx"
-      },
-      {
-        "id": "background-color",
-        "default": "xxx"
-      },
-      {
-        "id": "--property-name",
-        "default": "xxx"
-      },
-      {
-        "id": ":hover",
-        "default": "xxx"
-      },
-      {
-        "id": "--color-gradient(*)",
-        "default": "xxx"
-      }
-    ]
-  },
-  {
     "id": "1.galaxy-animation",
     "version": "v1",
     "name": "Galaxy Animated",
     "description": "A slow moving animation of the galaxy with stars",
     "author": "Rahul",
     "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
+    "hash": "b712f7c8d1ba4fdfdd54f9c1f7eb8b2cb487537e",
     "parameters": [
       {
         "id": "background-image",
@@ -50,6 +21,7 @@
     "description": "Random speed shooting stars",
     "author": "alphardex",
     "source": "https://codepen.io/alphardex/pen/RwrVoeL",
+    "hash": "5cd4880eb9a9d68bab9f3f0124393e35f94fd5a3",
     "parameters": [
       {
         "id": "background-image",
@@ -63,7 +35,8 @@
     "name": "Spipa circle",
     "description": "A cool electro field circle",
     "author": "Alex Andrix",
-    "source": "https://codepen.io/alexandrix/pen/oQOvYp"
+    "source": "https://codepen.io/alexandrix/pen/oQOvYp",
+    "hash": "93d11dad2386c8d44604f731a5c2ea74a6c800d4"
   },
   {
     "id": "4.colored-swipe",
@@ -71,7 +44,8 @@
     "name": "Colored Swipe Transition",
     "description": "Whole page colored swipes",
     "author": "Andreas Wilcox",
-    "source": "https://codepen.io/SvDvorak/pen/bxoxde"
+    "source": "https://codepen.io/SvDvorak/pen/bxoxde",
+    "hash": "9cec2f9cda78dce58913d654fb40ae0a133f8443"
   },
   {
     "id": "5.neon-hexagon",
@@ -79,7 +53,8 @@
     "name": "Neon Hexagon",
     "description": "Neon Hexagon Foming Particles",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/mJzOWJ"
+    "source": "https://codepen.io/towc/pen/mJzOWJ",
+    "hash": "548ba1f1b9fbd73e21264eeb492aba04fca5df38"
   },
   {
     "id": "5.plasma",
@@ -87,7 +62,8 @@
     "name": "Rainbow Particles",
     "description": "rainbow particle horizon",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/WvLaKw"
+    "source": "https://codepen.io/towc/pen/WvLaKw",
+    "hash": "bbbd37c9a12d43d0519302eaee6feeeb3f039147"
   },
   {
     "id": "6.binary-spiral",
@@ -95,7 +71,8 @@
     "name": "Binary Spirals",
     "description": "Binary Spirals",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/dXevxg"
+    "source": "https://codepen.io/towc/pen/dXevxg",
+    "hash": "6c2c41adb0f8acd6e64708aed280cff8d52fa810"
   },
   {
     "id": "7.rainbowness",
@@ -103,7 +80,8 @@
     "name": "Rainbowness",
     "description": "Rainbowness",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/EbQKmy"
+    "source": "https://codepen.io/towc/pen/EbQKmy",
+    "hash": "56374780b316dbd4d62a67894e736a6216c9d2b1"
   },
   {
     "id": "8.manifestation",
@@ -111,7 +89,8 @@
     "name": "Manifestation",
     "description": "progression of ideas through willpower and motivation",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/pevRJJ"
+    "source": "https://codepen.io/towc/pen/pevRJJ",
+    "hash": "1865e0a2337c569cf8f6e95f9d20cca7a9edbba6"
   },
   {
     "id": "9.rainbow-particles",
@@ -119,7 +98,8 @@
     "name": "Particle Horizon",
     "description": "rainbow particle horizon",
     "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/BQEGdz"
+    "source": "https://codepen.io/towc/pen/BQEGdz",
+    "hash": "bdaf679889aa63123513ad9fa3a33f0247b84164"
   },
   {
     "id": "10.css-dark-particles",
@@ -127,7 +107,8 @@
     "name": "CSS Dark Particles",
     "description": "CSS Dark Particles",
     "author": "Takeshi Kano",
-    "source": "https://codepen.io/towc/pen/BQEGdz"
+    "source": "https://codepen.io/towc/pen/BQEGdz",
+    "hash": "03c4cccad620ae987d2681065e37f56903b703b4"
   },
   {
     "id": "11.space",
@@ -135,7 +116,8 @@
     "name": "Space",
     "description": "The final frontier",
     "author": "Akimitsu Hamamuro",
-    "source": "https://codepen.io/akm2/pen/RwQXLdP"
+    "source": "https://codepen.io/akm2/pen/RwQXLdP",
+    "hash": "43a916d2b06cea7d6747906f71980fc1a6620432"
   },
   {
     "id": "12.gradient-particles",
@@ -143,7 +125,8 @@
     "name": "Gradient Particles",
     "description": "animated-gradient-particle",
     "author": "cssscript.com",
-    "source": "https://www.cssscript.com/demo/animated-gradient-particle/"
+    "source": "https://www.cssscript.com/demo/animated-gradient-particle/",
+    "hash": "85adf83369e00cd6069fd613e952b0709bf26807"
   },
   {
     "id": "13.cyber-lights",
@@ -151,7 +134,8 @@
     "name": "Cyber Lights",
     "description": "Frosted type lights moving diagnolly",
     "author": "Ben Matthews",
-    "source": "https://codepen.io/tsuhre/pen/GLRdKP"
+    "source": "https://codepen.io/tsuhre/pen/GLRdKP",
+    "hash": "b9b03df0295050cac5168e254ce3ba1d32f04abb"
   },
   {
     "id": "14.ribbons-two",
@@ -159,7 +143,8 @@
     "name": "Ribbons Two",
     "description": "It looks like Windows Vista",
     "author": "Ben Matthews",
-    "source": "https://codepen.io/tsuhre/pen/BYbjyg"
+    "source": "https://codepen.io/tsuhre/pen/BYbjyg",
+    "hash": "2d4f4107dd5a8fe43ebdcb8b2388e3424d967c13"
   },
   {
     "id": "15.sound",
@@ -167,7 +152,8 @@
     "name": "Sound",
     "description": "Vibes",
     "author": "Ben Matthews",
-    "source": "https://codepen.io/tsuhre/pen/jOqeYWy"
+    "source": "https://codepen.io/tsuhre/pen/jOqeYWy",
+    "hash": "9f6534d1f2f842e75e7d40f9f0ac591eae3b6ee6"
   },
   {
     "id": "16.veil",
@@ -175,7 +161,8 @@
     "name": "Veil",
     "description": "Slithers   of   color   veil   the   screen",
     "author": "Ben Matthews",
-    "source": "https://codepen.io/tsuhre/pen/QmLVax"
+    "source": "https://codepen.io/tsuhre/pen/QmLVax",
+    "hash": "4677aacd1b262d03b7b2c405907fcbfc1a8381a8"
   },
   {
     "id": "17.ribbons",
@@ -183,6 +170,7 @@
     "name": "Ribbons",
     "description": "So many layers of ribbons",
     "author": "Ben Matthews",
-    "source": "https://codepen.io/tsuhre/pen/MNVYdq"
+    "source": "https://codepen.io/tsuhre/pen/MNVYdq",
+    "hash": "a86d6856da8d142389db5f214778a9645b8d5931"
   }
 ]

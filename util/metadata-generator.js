@@ -2,6 +2,7 @@ const sass = require('sass');
 const fs = require('fs');
 const path = require('path');
 const YAML = require('yaml');
+const crypto = require('crypto');
 
 process.chdir(__dirname);
 
@@ -81,6 +82,8 @@ const galleryDir = '../gallery/';
 const packagesDir = '../gallery/packages';
 const metadataFolder = path.join("../gallery/metadata");
 let templateProcessed;
+const metadataManifest = [];
+
 async function readDirectory(dir) {    
     fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
@@ -92,6 +95,8 @@ async function readDirectory(dir) {
             readDirectory(filePath);
         } else if (file === 'package.yaml') {
             const packageData = YAML.parse((fs.readFileSync(filePath, 'utf8')));
+
+            console.log(sha1Hash)
             const packageDir = path.dirname(filePath);
             const packageName = path.basename(packageDir);
 
@@ -118,12 +123,6 @@ async function readDirectory(dir) {
         }
     }
 }
-
-// Generate metadata.manifest file
-const metadataManifest = [];
-readDirectory(packagesDir);
-fs.writeFileSync(path.join(galleryDir, 'metadata.manifest'), JSON.stringify(metadataManifest), 'utf8');
-
 
 /// Snippet from package.yaml
 // version: v1
