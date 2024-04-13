@@ -289,11 +289,6 @@ class LovelaceBgAnimation extends HTMLElement {
       if (userPluginConfig.background) {
 
         for (const [index, background] of userPluginConfig.background.entries()) {
-          if (!galleryRootManifest.some(manifest => manifest.id === background.id)) {
-            console.error(`Background id ${background.id} does not exist in galleryRootManifest`);
-            break;
-          }
-
           packageManifest = await this.getPackageManifest(index);
           processedPackageManifest = await this.processPackageManifest(packageManifest);
         }

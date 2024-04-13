@@ -6,7 +6,7 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 ## 🎀 Tribute to the artists 
 
-The repo features the following artists, shout out to them for their incredible pieces of work they've shared on the web. Please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
+The repo features the following artists and awesome incredible works they've shared on the web. Please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
 
  - Matei Copot (6)
  - Ben Matthews (5)
@@ -24,9 +24,9 @@ Please directly tip the artists you found most inspiring.
 
 ## Project Motivation
 
-Nostalgia. there was a time when the web was full of abstract experiments showcasing what possible with canvas/JS or CSS. I wanted to keep that alive and see those experiments on a Home Assistant dashboard.
+Nostalgia. there was a time when the web was full of abstract experiments showcasing what possible with canvas/JS or CSS3. I wanted to keep that alive and see those experiments on a Home Assistant dashboard.
 
-Known as digital oblivion. Some of the experiments I have saved overtime in my bookmarks have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
+Some of the experiments I have saved overtime in my bookmarks have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
 
 I have tried my best to find references and credit the artists who's original work has been lost to digital oblivion, archive.org links provided if they are available - This is not always the case.
 
@@ -70,13 +70,16 @@ background:
       background-image: 222 
 ```
 
-### Offline only or test your own
+### Offline mode
 
-Offline was a design decision, by default the plugin connects to this repos Github page. You can override this by using the below.
+Offline mode was a core design feature, by default the plugin connects to this repos Github page. You can override this by using the below.
 
-This will tell the plugin to load everything from Home Assistant only.
+```yaml
+gallery: 
+  type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
+```
 
-It's also useful if you wish to test your own packages.
+This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.
 
 ### The package.yaml 
 
