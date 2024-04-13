@@ -34,12 +34,12 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Create gallery.manifest
-      run: node ./util/create-manifest.js 
-
     - name: Create metadata 
       run: node ./util/create-metadata.js 
 
+    - name: Create gallery.manifest
+      run: node ./util/create-manifest.js
+      
     - name: Commit and Push
       run: |
         git config --local user.email "action@github.com"
