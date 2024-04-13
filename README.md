@@ -8,13 +8,16 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 The following artists are artists featured in this repo, shout out to their incredible pieces of work they've shared on the web. Please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
 
-- Matei Copot (6)
-- Ben Matthews (6)
-- Takeshi Kano (1)
-- Akimitsu Hamamuro (1)
-- alphardex (1)
-- Alex Andrix (1)
-- Rahul (1)
+ - Matei Copot (6)
+ - Ben Matthews (5)
+ - Ibz (1)
+ - Rahul (1)
+ - Takeshi Kano (1)
+ - Akimitsu Hamamuro (1)
+ - cssscript.com (1)
+ - alphardex (1)
+ - Alex Andrix (1)
+ - Andreas Wilcox (1)
 
 ### Donations and Tips
 
