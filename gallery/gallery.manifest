@@ -1,5 +1,36 @@
 [
   {
+    "id": "0.test",
+    "version": "v1",
+    "name": "Test",
+    "description": "Test desc",
+    "author": "Ibz",
+    "source": "https://codepen.io/stack-findover/pen/xxxx",
+    "hash": "e765dbd8ee95c0474be6da392958ed05b852c4e9",
+    "parameters": [
+      {
+        "id": "background-image",
+        "default": "xxx"
+      },
+      {
+        "id": "background-color",
+        "default": "xxx"
+      },
+      {
+        "id": "--property-name",
+        "default": "xxx"
+      },
+      {
+        "id": ":hover",
+        "default": "xxx"
+      },
+      {
+        "id": "--color-gradient(*)",
+        "default": "xxx"
+      }
+    ]
+  },
+  {
     "id": "1.galaxy-animation",
     "version": "v1",
     "name": "Galaxy Animated",

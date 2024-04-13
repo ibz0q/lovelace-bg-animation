@@ -6,6 +6,24 @@ const crypto = require('crypto');
 
 process.chdir(__dirname);
 
+function getSHA1(filePath) {
+    const hashSum = crypto.createHash('sha1');
+  
+    fs.readdirSync(filePath).forEach(file => {
+      const fileFullPath = path.join(filePath, file);
+      const stats = fs.statSync(fileFullPath);
+  
+      if (stats.isFile()) {
+        const fileBuffer = fs.readFileSync(fileFullPath);
+        hashSum.update(crypto.createHash('sha1').update(fileBuffer).digest('hex'));
+      } else if (stats.isDirectory()) {
+        hashSum.update(getSHA1(fileFullPath));
+      }
+    });
+  
+    return hashSum.digest('hex');
+  }
+
 async function processPackageManifest(packageManifestObject) {
     try {
 
@@ -41,7 +59,6 @@ async function processPackageManifest(packageManifestObject) {
             const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):(.*?)\}\}/g;
             packageManifestObject.data.template__processed = packageManifestObject.data.template__processed.replace(regex, function (match, type, key) {
                 key = key.trim();
-                console.log(key)
                 switch (type) {
                     case 'compile':
                         return packageManifestObject.data.compile.find(item => item.id === key)?.__processed || '';
@@ -79,6 +96,7 @@ async function processPackageManifest(packageManifestObject) {
 }
 
 const galleryDir = '../gallery/';
+const galleryManifest = '../gallery/gallery.manifest';
 const packagesDir = '../gallery/packages';
 const metadataFolder = path.join("../gallery/metadata");
 let templateProcessed;
@@ -88,6 +106,9 @@ async function readDirectory(dir) {
     fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
     const files = fs.readdirSync(dir);
+
+    const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8'))); 
+
     for (const file of files) {
         const filePath = path.join(dir, file);
         const stats = fs.statSync(filePath);
@@ -95,22 +116,25 @@ async function readDirectory(dir) {
             readDirectory(filePath);
         } else if (file === 'package.yaml') {
             const packageData = YAML.parse((fs.readFileSync(filePath, 'utf8')));
-
-            console.log(sha1Hash)
             const packageDir = path.dirname(filePath);
             const packageName = path.basename(packageDir);
 
+            folderHash = getSHA1(packageDir);
+            const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
+
+            if (manifestEntry && manifestEntry.hash === folderHash) {
+                console.log(`Hash is the same for ${packageName}, skipping.`);
+                // break;
+            }
+            
             console.log(`Generating.. ${packageName}`);
             templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName});
 
-            // Create a new folder for the package
             const packageFolder = path.join(metadataFolder, packageName);
             fs.mkdirSync(packageFolder, { recursive: true });
 
-            // Write the metadata file inside the package folder
             const metadataFilePath = path.join(packageFolder, 'preview.html');
             
-            // Create a string of HTML comments with the metadata
             let metadataComments = '';
             if (packageData.metadata) {
                 for (const [key, value] of Object.entries(packageData.metadata)) {

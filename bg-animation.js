@@ -260,18 +260,19 @@ class LovelaceBgAnimation extends HTMLElement {
     }
 
     let cssStyle = `
-    #view > hui-view, #view {
-      background: transparent !important;
-    }`;
+        #view > hui-view, #view {
+          background: transparent !important;
+        }`;
 
     if (userPluginConfig.header.transparent == true) {
-        cssStyle += `
-      .header {
-        background: transparent !important;
-        `+ userPluginConfig.header.style !== undefined ? userPluginConfig.header.style : '' +`
-      }`;
+      cssStyle += `
+
+        .header {
+          background: transparent !important;
+          ${userPluginConfig.header.style !== undefined ? userPluginConfig.header.style : ''}
+        }`;
     }
-    
+
     lovelaceUI.rootStyleElement.innerHTML = cssStyle;
   }
 
