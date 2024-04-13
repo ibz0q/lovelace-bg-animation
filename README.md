@@ -6,11 +6,10 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 ## 🎀 Tribute to the artists 
 
-The following artists are artists featured in this repo, shout out to their incredible pieces of work they've shared on the web. Please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
+The repo features the following artists, shout out to them for their incredible pieces of work they've shared on the web. Please support them in anyway you can as without their work this project is made pointless. In order of Gallery items.
 
  - Matei Copot (6)
  - Ben Matthews (5)
- - Ibz (1)
  - Rahul (1)
  - Takeshi Kano (1)
  - Akimitsu Hamamuro (1)
@@ -54,18 +53,19 @@ All config
 ```yaml
 type: custom:lovelace-bg-animation 
 delay: 20000 # Delay in milliseconds between background changes
-redraw: 200000 # Time in milliseconds after which the background is redrawn
 headerStyle: | # CSS styles for the header
+  background: transparent;
 gallery: 
   type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
-cache: false # Background is cached by default, this option disables it globally
+cache: false # Speeds up rendering time, this option disables it globally
 style: "css" # Applies CSS to parent root container
 sequence: random, shuffle, name_desc, name_asc, id_asc, id_desc, # Specifies the order in which backgrounds are displayed
 
 background: 
   - id: 13.ribbons-two # BG ID
-    cache: false # Background is cached by default, this option disables it
+    cache: false # Speeds up rendering time considerably, this option disables it globally
     style: "css" # Applies CSS to the parent container
+    redraw: 200000 # Time in milliseconds after which the background is redrawn
     parameters: # Parameters can be passed into a background, depends if author has added support 
       background-image: 222 
 ```

@@ -4,8 +4,8 @@ const YAML = require('yaml');
 
 process.chdir(__dirname);
 
-const galleryDir = '../gallery';
-const manifestFile = path.join(galleryDir, 'gallery.manifest');
+const galleryDir = '../gallery/packages';
+const manifestFile = path.join("../gallery/", 'gallery.manifest');
 
 const manifest = [];
 

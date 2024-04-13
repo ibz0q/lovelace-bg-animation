@@ -4,7 +4,7 @@ const YAML = require('yaml');
 
 process.chdir(__dirname);
 
-const galleryDir = '../gallery';
+const galleryDir = '../gallery/packages';
 
 const authors = {};
 
