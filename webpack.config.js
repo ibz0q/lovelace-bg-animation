@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './bg-animation.js',
+  entry: './frontend//bg-animation.js',
   watch: true,
   mode: 'development',
   watchOptions: {

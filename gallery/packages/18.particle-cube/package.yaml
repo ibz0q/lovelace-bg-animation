@@ -5,42 +5,30 @@ metadata:
     author: Bas Groothedde 
     source: https://codepen.io/ImagineProgramming/pen/dXVvYb
 
+helpers:
+  insert_baseurl: true
+
 template: |
-
-        <!--
-        Scroll to zoom, or use options
-        
-        Read description for notes on possible
-        issues.
-        -->
-        <canvas id="animation"></canvas>
-
+    <!DOCTYPE html>
+    <html>
+    <head>
         <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/codepen-utilities.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
-
-            <style>
-
-            /**
-            Scroll to zoom, or use options
-
-            Read description for notes on possible
-            issues.
-            */
+        <style>
             body, html {
-            margin: 0;
-            padding: 0;
+                margin: 0;
+                padding: 0;
             }
 
             body canvas {
-            display: block;
-            background: #000000;
+                display: block;
+                background: #000000;
             }
-
         </style>
+    </head>
+    <body>
+        <canvas id="animation"></canvas>
 
         <script>
-
-
         /**
         Scroll to zoom, or use options
         
@@ -52,7 +40,6 @@ template: |
         var canvas = document.getElementById("animation"),
             context = canvas.getContext("2d"),
             width, height, resize,
-            stats = new Stats(),
             imageData1,
             imageData2,
             generatePoints,
@@ -89,14 +76,6 @@ template: |
             }
             }
         }
-        
-        stats.setMode(0); // FPS mode
-
-        // Place the statistics at the bottom right.
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.right = '5px';
-        stats.domElement.style.bottom = '5px';
-        document.body.appendChild(stats.domElement);
         
         resize = function() {
             // resize the canvas
@@ -153,8 +132,6 @@ template: |
             px, py, sy, sx, lx, ly, sl;
         
         +(function render() {
-            stats.begin();
-
             context.fillStyle = 'rgba(0, 0, 0, 0.6)';
             context.fillRect(0, 0, width, height);
             imageData1.data.set(imageData2.data);
@@ -192,9 +169,8 @@ template: |
                 }
             }
             }
-
+ 
             context.putImageData(d, 0, 0);
-            stats.end();
             
             // for some reason, if I don't do this, GC doesn't come along and clean my stuff up...
             // thus: memory leak, at 2.5g Chrome tells my tab to commit suicide.
@@ -205,3 +181,5 @@ template: |
         });
 
         </script>
+    </body>
+    </html>

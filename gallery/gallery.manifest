@@ -1,5 +1,20 @@
 [
   {
+    "id": "0,test",
+    "version": "v1",
+    "name": "Test package",
+    "description": "A test package",
+    "author": "You",
+    "source": "https://github.com/ibz0q/lovelace-bg-animation",
+    "hash": "66fa5546fa13fa6a1c2bd0ce4f2cba27100442ff",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
     "id": "1.galaxy-animation",
     "version": "v1",
     "name": "Galaxy Animated",

@@ -14,21 +14,21 @@ const metadataManifest = [];
 
 function getSHA1(filePath) {
     const hashSum = crypto.createHash('sha1');
-  
+
     fs.readdirSync(filePath).forEach(file => {
-      const fileFullPath = path.join(filePath, file);
-      const stats = fs.statSync(fileFullPath);
-  
-      if (stats.isFile()) {
-        const fileBuffer = fs.readFileSync(fileFullPath);
-        hashSum.update(crypto.createHash('sha1').update(fileBuffer).digest('hex'));
-      } else if (stats.isDirectory()) {
-        hashSum.update(getSHA1(fileFullPath));
-      }
+        const fileFullPath = path.join(filePath, file);
+        const stats = fs.statSync(fileFullPath);
+
+        if (stats.isFile()) {
+            const fileBuffer = fs.readFileSync(fileFullPath);
+            hashSum.update(crypto.createHash('sha1').update(fileBuffer).digest('hex'));
+        } else if (stats.isDirectory()) {
+            hashSum.update(getSHA1(fileFullPath));
+        }
     });
-  
+
     return hashSum.digest('hex');
-  }
+}
 
 async function processPackageManifest(packageManifestObject) {
     try {
@@ -39,18 +39,12 @@ async function processPackageManifest(packageManifestObject) {
         if (packageManifestObject.data.remote_includes) {
             for (const [index, include] of packageManifestObject.data.remote_includes.entries()) {
                 packageManifestObject.data.remote_includes[index]["__processed"] = {};
-                packageManifestObject.data.remote_includes[index]["__processed"] = await fetch(url, { cache: "no-store" });
-
-                if (!response.ok) {
-                    console.error(`Failed to fetch resource: ` + url);
-                }
+                packageManifestObject.data.remote_includes[index]["__processed"] = await fetch(include.url, { cache: "no-store" });
             }
         }
 
         if (packageManifestObject.data.compile) {
-
             for (const [index, value] of packageManifestObject.data.compile.entries()) {
-
                 if (value.hasOwnProperty("scss")) {
                     packageManifestObject.data.compile[index]["__processed"] = sass.compileString(packageManifestObject.data.compile[index].scss).css;
                 }
@@ -59,6 +53,17 @@ async function processPackageManifest(packageManifestObject) {
 
         }
 
+        if (typeof window !== 'undefined') {
+            if (packageManifestObject.data?.helpers?.insert_baseurl == true) {
+              let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
+              if (packageManifestObject.data.template.includes('<head>')) {
+                packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
+              } else if (packageManifestObject.data.template.includes('<html>')) {
+                packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
+              }
+            }
+          }
+  
         if (packageManifestObject.data.template) {
 
             packageManifestObject.data.template__processed = packageManifestObject.data.template
@@ -101,12 +106,12 @@ async function processPackageManifest(packageManifestObject) {
     }
 }
 
-async function readDirectory(dir) {    
+async function readDirectory(dir) {
     fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
 
     const files = fs.readdirSync(dir);
-    const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8'))); 
+    const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8')));
 
     for (const file of files) {
         const filePath = path.join(dir, file);
@@ -127,12 +132,12 @@ async function readDirectory(dir) {
                 console.log(`Hash is the same for ${packageName}, skipping.`);
                 // break;
             }
-            
+
             console.log(`Generating.. ${packageName}`);
-            templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName});
+            templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName });
 
             fs.mkdirSync(packageFolder, { recursive: true });
-            
+
             let metadataComments = '';
             if (packageData.metadata) {
                 for (const [key, value] of Object.entries(packageData.metadata)) {
@@ -140,7 +145,7 @@ async function readDirectory(dir) {
                 }
             }
 
-            fs.writeFileSync(metadataFilePath, `<!DOCTYPE html>\n${metadataComments}`+templateProcessed.data.template__processed, 'utf8');
+            fs.writeFileSync(metadataFilePath, `<!DOCTYPE html>\n${metadataComments}` + templateProcessed.data.template__processed, 'utf8');
             console.log(`Generated: ${packageName}`);
         }
     }

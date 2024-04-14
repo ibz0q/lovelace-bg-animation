@@ -1,0 +1,47 @@
+version: v1
+metadata:
+  name: Test package
+  description: A test package
+  author: You
+  source: https://github.com/ibz0q/lovelace-bg-animation
+
+ # Define parameters for the package, these are used to allow customization by the user
+parameters:
+  - id: color
+    default: "#000000"
+
+# Can be used to fetch an asset from a remote URL and stored inside a variable
+remote_includes: 
+  - id: threejs_1
+    url: https://raw.githubusercontent.com/akm2/simplex-noise.js/master/simplex-noise.js
+
+helpers:
+  # Inserts a valid base URL tag into document, needed if you are loading assets for local folder e.g. 1.packagename/file.jpg
+  # Evals depends on the environment (Previews omit this)
+  insert_baseurl: true 
+
+# Define the SCSS to be compiled onload (useful to randomize the color of the background for example)
+compile: 
+  - id: scss_1
+    scss: |
+      $bgcolor: lightblue;
+      $textcolor: darkblue;
+      $fontsize: 18px;
+
+      body {
+        background-color: $bgcolor;
+        color: $textcolor;
+        font-size: $fontsize;
+      }
+
+template: |
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <style>{{compile: scss_1}}</style>
+  </head>
+  <body>
+    <h1>Hello World, parameter color is: {{parameter: color}}</h1>
+    <script>{{remote_includes: threejs_1}}</script>
+  </body>
+  </html>

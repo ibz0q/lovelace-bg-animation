@@ -5,10 +5,6 @@ metadata:
     author: alphardex
     source: https://codepen.io/alphardex/pen/RwrVoeL
 
-parameters:
-    - id: background-image
-      default: https://i.ibb.co/87GbbFP/2799006.jpg
-
 compile:
     - id: scss_1
       scss: |
@@ -129,7 +125,14 @@ compile:
 
 template: |
 
-    <style>{{compile: scss_1}}</style>
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <style>
+      {{compile: scss_1}}
+    </style>
+  </head>
+  <body>
     <div class="stars">
     <div class="star"></div>
     <div class="star"></div>
@@ -182,3 +185,6 @@ template: |
     <div class="star"></div>
     <div class="star"></div>
     </div>
+
+  </body>
+  </html>

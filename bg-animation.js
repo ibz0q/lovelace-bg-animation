@@ -1,8 +1,13 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
-var appName = "BG Animation", appNameShort = "lovelace-bg-animation"
-var hassConfig, lovelaceUI = {}, userPluginConfig, galleryRootManifest, packageManifest, processedPackageManifest, debugPrefix = `${appName} DEBUG: `
+var hassConfig,
+  lovelaceUI = {},
+  userPluginConfig,
+  galleryRootManifest,
+  packageManifest,
+  processedPackageManifest,
+  applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "installFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }
 
 class LovelaceBgAnimation extends HTMLElement {
   set hass(hass) {
@@ -20,11 +25,13 @@ class LovelaceBgAnimation extends HTMLElement {
       } else {
 
         let url;
+
         if (userPluginConfig.gallery.type == "local") {
-          url = window.location.origin + userPluginConfig.gallery.localPath + "/" + userPluginConfig.gallery.manifestFileName
+          url = window.location.origin + userPluginConfig.gallery.localRootPath + "/gallery/" + userPluginConfig.gallery.manifestFileName
         } else {
-          url = userPluginConfig.gallery.remoteUrl + "/" + userPluginConfig.gallery.manifestFileName
+          url = userPluginConfig.gallery.remoteRootUrl + "/gallery/" + userPluginConfig.gallery.manifestFileName
         }
+
         let response = await fetch(url, { cache: "no-store" });
         if (!response.ok) {
           throw new Error(`Failed to fetch gallery manifest`);
@@ -58,12 +65,10 @@ class LovelaceBgAnimation extends HTMLElement {
       } else {
         let url;
         if (userPluginConfig.gallery.type == "local") {
-          url = window.location.origin + userPluginConfig.gallery.localPath + "/packages/" + packageManifestName + "/" + "package.yaml"
+          url = window.location.origin + userPluginConfig.gallery.localRootPath + "/gallery/packages/" + packageManifestName + "/" + "package.yaml"
         } else {
-          url = userPluginConfig.gallery.remoteUrl + "/packages/" + packageManifestName + "/" + "package.yaml"
+          url = userPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestName + "/" + "package.yaml"
         }
-        console.log("url")
-        console.log(url)
 
         let response = await fetch(url, { cache: "no-store" });
         if (!response.ok) {
@@ -101,32 +106,35 @@ class LovelaceBgAnimation extends HTMLElement {
       } else {
         let environment = {}
         if (userPluginConfig.gallery.type == "local") {
-          environment["assetPath"] = window.location.origin + userPluginConfig.gallery.localPath + "/packages/" + packageManifestObject.packageName + "/" + "package.yaml"
+          environment["basePath"] = window.location.origin + userPluginConfig.gallery.localRootPath + "/gallery/packages/" + packageManifestObject.packageName + "/"
         } else {
-          environment["assetPath"] = userPluginConfig.gallery.remoteUrl + "/packages/" + packageManifestObject.packageName + "/" + "package.yaml"
+          environment["basePath"] = userPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestObject.packageName + "/"
         }
 
         if (packageManifestObject.data.remote_includes) {
           for (const [index, include] of packageManifestObject.data.remote_includes.entries()) {
             packageManifestObject.data.remote_includes[index]["__processed"] = {};
-            packageManifestObject.data.remote_includes[index]["__processed"] = await fetch(url, { cache: "no-store" });
-
-            if (!response.ok) {
-              console.error(`Failed to fetch resource: ` + url);
-            }
+            packageManifestObject.data.remote_includes[index]["__processed"] = await fetch(include.url, { cache: "no-store" });
           }
         }
 
         if (packageManifestObject.data.compile) {
-
           for (const [index, value] of packageManifestObject.data.compile.entries()) {
-
             if (value.hasOwnProperty("scss")) {
               packageManifestObject.data.compile[index]["__processed"] = sass.compileString(packageManifestObject.data.compile[index].scss).css;
             }
-
           }
+        }
 
+        if (typeof window !== 'undefined') {
+          if (packageManifestObject.data?.helpers?.insert_baseurl == true) {
+            let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
+            if (packageManifestObject.data.template.includes('<head>')) {
+              packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
+            } else if (packageManifestObject.data.template.includes('<html>')) {
+              packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
+            }
+          }
         }
 
         if (packageManifestObject.data.template) {
@@ -182,9 +190,9 @@ class LovelaceBgAnimation extends HTMLElement {
     userPluginConfig = {
       "gallery": {
         "type": this.config.gallery?.type ?? "remote",
-        "localPath": this.config.gallery?.localPath ?? "/local/lovelace-bg-animation/gallery",
+        "localRootPath": this.config.gallery?.localRootPath ?? "/local/lovelace-bg-animation",
         "manifestFileName": this.config.gallery?.manifestFileName ?? "gallery.manifest",
-        "remoteUrl": this.config.gallery?.remoteUrl ?? "https://ibz0q.github.io/lovelace-bg-animation/gallery"
+        "remoteRootUrl": this.config.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"
       },
       "delay": this.config.delay ?? 0,
       "transition": this.config.transition ?? false,
@@ -224,8 +232,26 @@ class LovelaceBgAnimation extends HTMLElement {
       console.error('Error storing data in localStorage:', error);
     }
   }
+  opportunisticallyDetermineInstallPath() {
+    try {
+      const scriptTags = document.querySelectorAll('script[src]');
+      const firstTag = Array.from(scriptTags).find(script =>
+        script.src.includes('lovelace-bg-animation') ||
+        applicationIdentifiers.scriptName.some(name => script.src.includes(name))
+      );
+      console.log("print");
+      console.log(firstTag[0]);
+      if (firstTag[0]) {
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Error in opportunisticallyDetermineInstallPath:', error);
+      return null;
+    }
+  }
 
-  initializeLovelaceVariables() {
+  initializeRuntimeVariables() {
     lovelaceUI.panelElement = document.querySelector("body > home-assistant")?.shadowRoot?.querySelector("home-assistant-main")?.shadowRoot?.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace");
     lovelaceUI.huiRootElement = lovelaceUI.panelElement?.shadowRoot?.querySelector("hui-root");
     lovelaceUI.headerElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div > div.header");
@@ -233,6 +259,21 @@ class LovelaceBgAnimation extends HTMLElement {
     lovelaceUI.huiViewElement = lovelaceUI.viewElement?.querySelector("hui-view");
     lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
     lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement?.lovelace;
+    lovelaceUI.installDirectory = (() => {
+      if (this.config.gallery?.localRootPath) {
+        console.log("went with user define")
+        return this.config.gallery.localRootPath;
+      } else if (this.opportunisticallyDetermineInstallPath() === true) {
+        console.log("went opportunisticallyDetermineInstallPath")
+
+        return this.opportunisticallyDetermineInstallPath();
+      } else {
+        console.log("went with default")
+
+        return userPluginConfig.gallery.localRootPath;
+      }
+    })();
+    console.log(lovelaceUI)
   }
 
   initializePluginElements() {
@@ -248,7 +289,7 @@ class LovelaceBgAnimation extends HTMLElement {
       lovelaceUI.iframeElement.scrolling = "no";
       lovelaceUI.iframeElement.srcdoc = "<style>*{background:black;}</style>";
       lovelaceUI.iframeElement.style.cssText = "opacity: 0;";
-      lovelaceUI.iframeElement.className = appNameShort;
+      lovelaceUI.iframeElement.className = applicationIdentifiers.appNameShort;
       lovelaceUI.bgRootElement.appendChild(lovelaceUI.iframeElement);
     }
   }
@@ -288,7 +329,7 @@ class LovelaceBgAnimation extends HTMLElement {
     if (typeof userPluginConfig == "undefined") {
 
       this.getCurrentUserConfig();
-      this.initializeLovelaceVariables()
+      this.initializeRuntimeVariables()
       this.changeDefaultLovelaceStyles()
       this.initializePluginElements()
 

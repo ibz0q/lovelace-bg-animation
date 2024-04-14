@@ -1,0 +1,524 @@
+version: v1
+metadata:
+  name: Coalesce 10 - Phosphorescence 4
+  description: ""
+  author: Unknown
+  source: https://codepen.io/shubniggurath/pen/maJmvy
+parameters:
+  - id: color
+    default: "#000000"
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en" >
+
+  <head>
+    <meta charset="UTF-8">
+    <title>CodePen - Coalesce 10 - Phosphorescence 4</title>
+    <style>body {
+    margin: 0;
+    padding: 0;
+  }
+
+
+  #container {
+    position: fixed;
+    touch-action: none;
+  }</style>
+
+
+  </head>
+
+  <body>
+
+
+  <script id="vertexShaderParticle" type="x-shader/x-vertex">
+      uniform vec2 u_resolution;
+      uniform vec2 u_mouse;
+      uniform float u_time;
+      uniform sampler2D u_noise;
+      attribute vec2 reference;
+      uniform sampler2D texturePosition;
+      uniform bool u_clicked;
+      varying float v_op;
+    
+    
+      void main() {
+        vec3 position = texture2D(texturePosition, reference).xyz;
+        position *= 3.;
+        // position -= 10.;
+
+        vec3 transformed = vec3( position );
+        
+        vec4 mvpos = modelViewMatrix * vec4( transformed, 1.0 );
+
+        // gl_PointSize = 30.0 * (1.0 / (mvpos.z * mvpos.z));
+        // gl_PointSize = 3.;
+        gl_PointSize = clamp(3. - length(position) * .01, 0., 4.);
+        v_op = 1. / length(position) * 8.;
+        // gl_PointSize = 2.;
+        gl_Position = projectionMatrix * mvpos;
+      }
+  </script>
+
+  <script id="fragmentShaderParticle" type="x-shader/x-fragment">
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform float u_time;
+    uniform sampler2D u_noise;
+    uniform bool u_clicked;
+      varying float v_op;
+
+    vec2 hash2(vec2 p)
+    {
+      vec2 o = texture2D( u_noise, (p+0.5)/256.0, -100.0 ).xy;
+      return o;
+    }
+
+    void main() {
+      // vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+      vec2 uv = gl_PointCoord.xy - .5;
+      
+      vec3 particlecolour = vec3(.5, .53, .53) * 1.8;
+      vec3 outercolour = vec3(1.);
+      
+      if(u_clicked) {
+        particlecolour = vec3(.05, .15, .2) * .5;
+        outercolour = vec3(0.);
+      }
+      
+      float l = length(uv);
+      vec3 colour = mix(outercolour, particlecolour, smoothstep(.9, -.1, l));
+      colour = mix(mix(outercolour, vec3(2., 0.5, 0.), smoothstep(.9, -.1, l)), colour, smoothstep(3., 0.15, v_op));
+
+      gl_FragColor = vec4(colour, clamp(v_op*2., 0., 1.));
+    }
+  </script>
+
+  <script id="fragmentShaderVelocity" type="x-shader/x-fragment">
+    uniform vec2 u_resolution;
+    uniform vec2 u_mouse;
+    uniform float u_time;
+    uniform float u_mousex;
+      varying float v_op;
+    
+    // otaviogood's noise from https://www.shadertoy.com/view/ld2SzK
+    const float nudge = 0.739513;	// size of perpendicular vector
+    float normalizer = 1.0 / sqrt(1.0 + nudge*nudge);	// pythagorean theorem on that perpendicular to maintain scale
+    float SpiralNoiseC(vec3 p)
+    {
+        float n = 0.0;	// noise amount
+        float iter = 1.0;
+        for (int i = 0; i < 8; i++)
+        {
+            // add sin and cos scaled inverse with the frequency
+            n += -abs(sin(p.y*iter) + cos(p.x*iter)) / iter;	// abs for a ridged look
+            // rotate by adding perpendicular and scaling down
+            p.xy += vec2(p.y, -p.x) * nudge;
+            p.xy *= normalizer;
+            // rotate on other axis
+            p.xz += vec2(p.z, -p.x) * nudge;
+            p.xz *= normalizer;
+            // increase the frequency
+            iter *= 1.733733;
+        }
+        return n;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / resolution.xy;
+      vec3 position = texture2D(v_samplerPosition, uv).xyz;
+      vec3 velocity = texture2D(v_samplerVelocity, uv).xyz;
+      vec3 acceleration = vec3(0.);
+      
+      float l = clamp(length(position), 1., 100.);
+      vec3 spherical = vec3(1./l * l, atan(position.y, position.x), acos(position.z / l));
+      float n = SpiralNoiseC(vec3(l, sin(spherical.yz * 3. + u_time * 15.)));
+      spherical.xy += n*.5;
+      spherical.x += 1. / length(position) * .5;
+      spherical.x += smoothstep(5., 20., length(position));
+      
+      acceleration.x = spherical.x * sin(spherical.z) * cos(spherical.y);
+      acceleration.y = spherical.x * sin(spherical.z) * sin(spherical.y);
+      acceleration.z = spherical.x * cos(spherical.z);
+      
+      gl_FragColor = vec4(velocity * .95 + acceleration * .2, 1.0);
+      // gl_FragColor = vec4(-.1);
+    }
+  </script>
+
+  <script id="fragmentShaderPosition" type="x-shader/x-fragment">
+    uniform float delta;
+    uniform float u_time;
+    uniform sampler2D v_samplerPosition_orig;
+    uniform sampler2D u_noise;
+
+    vec3 hash3(vec2 p)
+    {
+      vec3 o = texture2D( u_noise, (p+0.5)/256.0, -100.0 ).xyz;
+      return o;
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / resolution.xy;
+      vec3 position_original = texture2D(v_samplerPosition_orig, uv).xyz;
+      vec3 position = texture2D(v_samplerPosition, uv).xyz;
+      vec3 velocity = texture2D(v_samplerVelocity, uv).xyz;
+      // velocity -= .5;
+      // velocity *= 3.;
+      // velocity = velocity * 2. - 1.;
+      
+      vec3 pos = position + velocity * delta;
+      
+      // This just adds a little touch more randomness to the motion.
+      // This is incredibly subtle but has the effect of making the particles
+      // look more "separate" in motion
+      vec3 hash = hash3(position_original.xy * position_original.zx * 20.);
+      // pos *= 1. + (hash - .5) * .0005;
+      // pos += (hash - .5) * .001;
+
+      
+
+      
+  //     vec2 p = vec2(atan(pos.y, pos.x), length(pos.xy));
+
+  //     p.x -= velocity.x * .001 + .0001;
+      
+  //     pos.x = cos(p.x) * p.y;
+
+  //     pos.y = sin(p.x) * p.y;
+      
+  //     pos.z += .005;
+      
+      if(length(pos) > 20.) {
+        pos = position_original;
+      }
+
+      gl_FragColor = vec4(pos, 1.0);
+    }
+  </script>
+
+
+
+  <div id="container" touch-action="none"></div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/107/three.min.js'></script>
+  <script
+  src='https://codepen.io/shubniggurath/pen/BgwPgy/2294630344abf93923fbffbeb7916689.js'></script>
+
+  <script
+  src='https://codepen.io/shubniggurath/pen/dybGKpP/61f7965c363fe2b4f112d0aa48494e31.js'></script>
+
+  <script
+  src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/ccapture.js'></script><script  src="./script.js"></script><script>const
+  texturesize = 2048;
+
+  const particles = texturesize * texturesize;
+
+
+  const GPUComputationRenderer = THREE.GPUComputationRenderer;
+
+
+  let container;
+
+  let camera, scene, renderer, controls;
+
+  let cloud_obj;
+
+  let uniforms;
+
+  let gpuComputationRenderer,dataPos,dataVel,textureArraySize = texturesize *
+  texturesize * 4.;
+
+
+  let textureVelocity, texturePosition;
+
+
+  const particleVert =
+  document.getElementById('vertexShaderParticle').textContent;
+
+  const particleFrag =
+  document.getElementById('fragmentShaderParticle').textContent;
+
+  const velocityFrag =
+  document.getElementById('fragmentShaderVelocity').textContent;
+
+  const positionFrag =
+  document.getElementById('fragmentShaderPosition').textContent;
+
+
+  let loader = new THREE.TextureLoader();
+
+  let texture;
+
+  loader.setCrossOrigin("anonymous");
+
+  loader.load(
+
+  'https://s3-us-west-2.amazonaws.com/s.cdpn.io/982762/noise.png',
+
+  function do_something_with_texture(tex) {
+    texture = tex;
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.minFilter = THREE.LinearFilter;
+    init();
+    animate();
+  });
+
+
+
+  function init() {
+    container = document.getElementById('container');
+
+    camera = new THREE.PerspectiveCamera(45, 1, 0.001, Math.pow(2, 16));
+    camera.position.x = -10;
+    camera.position.y = -10;
+    camera.position.z = -30.;
+
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
+
+    // create out particles
+    // ----------------------------
+    let vertices = new Float32Array(particles * 3).fill(0);
+    let references = new Float32Array(particles * 2);
+
+    for (let i = 0; i < references.length; i += 2) {
+      let index = i / 2;
+
+      references[i] = index % texturesize / texturesize;
+      references[i + 1] = Math.floor(index / texturesize) / texturesize;
+    }
+
+    let geometry = new THREE.BufferGeometry();
+    geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    geometry.addAttribute('reference', new THREE.BufferAttribute(references, 2));
+
+    // Create our particle material
+    // ----------------------------
+    uniforms = {
+      u_time: { type: "f", value: 1.0 },
+      u_resolution: { type: "v2", value: new THREE.Vector2() },
+      u_noise: { type: "t", value: texture },
+      u_mouse: { type: "v2", value: new THREE.Vector2() },
+      u_texturePosition: { value: null },
+      u_clicked: { type: 'b', value: true } };
+
+    let particleMaterial = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      vertexShader: particleVert,
+      fragmentShader: particleFrag,
+      side: THREE.DoubleSide,
+      transparent: true });
+
+    particleMaterial.transparent = true;
+    particleMaterial.blending = THREE.MultiplyBlending;
+    particleMaterial.depthTest = false;
+    particleMaterial.extensions.derivatives = true;
+
+    // Create the particle cloud object
+    // ----------------------------
+    cloud_obj = new THREE.Points(geometry, particleMaterial);
+    scene.background = new THREE.Color(0x000000);
+    cloud_obj.material.blending = THREE.AdditiveBlending;
+
+    // Create the renderer and controls and add them to the scene
+    // ----------------------------
+    renderer = new THREE.WebGLRenderer();
+    renderer.setPixelRatio(6);
+
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    window.controls = controls;
+
+    container.appendChild(renderer.domElement);
+
+    // Finally, add everything to stage
+    // ----------------------------
+    scene.add(cloud_obj);
+
+    // Add the computational renderer and populate it with data
+    // ----------------------------
+    gpuComputationRenderer = new GPUComputationRenderer(texturesize, texturesize, renderer);
+    dataPos_orig = gpuComputationRenderer.createTexture();
+    dataPos = gpuComputationRenderer.createTexture();
+    dataVel = gpuComputationRenderer.createTexture();
+
+    for (let i = 0; i < textureArraySize; i += 4) {
+      let radius = 1;
+      let phi = Math.random() * Math.PI * 2.;
+      let costheta = Math.random() * 2. - 1.;
+      let u = Math.random();
+
+      let theta = Math.acos(costheta);
+      let r = radius * Math.cbrt(u);
+
+      let x = r * Math.sin(theta) * Math.cos(phi);
+      let y = r * Math.sin(theta) * Math.sin(phi);
+      let z = r * Math.cos(theta);
+
+      dataPos.image.data[i] = x;
+      dataPos.image.data[i + 1] = y;
+      dataPos.image.data[i + 2] = z;
+      dataPos.image.data[i + 3] = 1;
+
+      dataPos_orig.image.data[i] = x;
+      dataPos_orig.image.data[i + 1] = y;
+      dataPos_orig.image.data[i + 2] = z;
+      dataPos_orig.image.data[i + 3] = 1;
+
+      dataVel.image.data[i] = x * 3.;
+      dataVel.image.data[i + 1] = y * 3.;
+      dataVel.image.data[i + 2] = z * 3.;
+      dataVel.image.data[i + 3] = 1;
+    }
+
+    textureVelocity = gpuComputationRenderer.addVariable('v_samplerVelocity', velocityFrag, dataVel);
+    texturePosition = gpuComputationRenderer.addVariable('v_samplerPosition', positionFrag, dataPos);
+
+    texturePosition.material.uniforms.delta = { value: 0 };
+    texturePosition.material.uniforms.v_samplerPosition_orig = { type: "t", value: dataPos_orig };
+    textureVelocity.material.uniforms.u_time = { value: -1000 };
+    textureVelocity.material.uniforms.u_mousex = { value: 0 };
+    texturePosition.material.uniforms.u_time = { value: 0 };
+
+    gpuComputationRenderer.
+    setVariableDependencies(textureVelocity, [textureVelocity, texturePosition]);
+    gpuComputationRenderer.
+    setVariableDependencies(texturePosition, [textureVelocity, texturePosition]);
+
+    texturePosition.wrapS = THREE.RepeatWrapping;
+    texturePosition.wrapT = THREE.RepeatWrapping;
+    textureVelocity.wrapS = THREE.RepeatWrapping;
+    textureVelocity.wrapT = THREE.RepeatWrapping;
+
+    const gpuComputationRendererError = gpuComputationRenderer.init();
+    if (gpuComputationRendererError) {
+      console.error('ERROR', gpuComputationRendererError);
+    }
+
+    // Add event listeners for resize and mouse move
+    // ----------------------------
+    onWindowResize();
+    window.addEventListener('resize', onWindowResize, false);
+    document.addEventListener('pointermove', pointerMove);
+    // document.addEventListener('click', onClick);
+
+    // initialise the video renderer
+    // toggleCapture();
+  }
+
+
+  function onWindowResize(event) {
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+    uniforms.u_resolution.value.x = renderer.domElement.width;
+    uniforms.u_resolution.value.y = renderer.domElement.height;
+  }
+
+
+  function pointerMove(event) {
+    let ratio = window.innerHeight / window.innerWidth;
+    textureVelocity.material.uniforms.u_mousex.value = event.pageX;
+    uniforms.u_mouse.value.x = (event.pageX - window.innerWidth / 2) / window.innerWidth / ratio;
+    uniforms.u_mouse.value.y = (event.pageY - window.innerHeight / 2) / window.innerHeight * -1;
+
+    event.preventDefault();
+  }
+
+
+  function onClick() {
+    // return;
+    let newval = !uniforms.u_clicked.value;
+    uniforms.u_clicked.value = newval;
+    console.log(cloud_obj.material.blending);
+    if (newval === false) {
+      scene.background = new THREE.Color(0xffffff);
+      cloud_obj.material.blending = THREE.MultiplyBlending;
+    } else {
+      scene.background = new THREE.Color(0x000000);
+      cloud_obj.material.blending = THREE.AdditiveBlending;
+    }
+  }
+
+
+  function animate(delta) {
+    requestAnimationFrame(animate);
+    render(delta);
+  }
+
+
+
+
+  let capturer = new CCapture({
+    verbose: true,
+    framerate: 30,
+    // motionBlurFrames: 4,
+    quality: 90,
+    format: 'webm',
+    workersPath: 'js/' });
+
+  let capturing = false;
+
+
+  isCapturing = function (val) {
+    if (val === false && window.capturing === true) {
+      capturer.stop();
+      capturer.save();
+      // renderer.setPixelRatio( window.devicePixelRatio );
+    } else if (val === true && window.capturing === false) {
+      capturer.start();
+      controls.enabled = false;
+      // renderer.setPixelRatio( 1 );
+    }
+    capturing = val;
+  };
+
+  toggleCapture = function () {
+    isCapturing(!capturing);
+  };
+
+  let b = document.querySelector('button');
+
+  if (b) b.addEventListener('click', e => toggleCapture());
+
+
+  window.addEventListener('keyup', function (e) {if (e.keyCode == 68)
+  toggleCapture();});
+
+
+  let then = 0;
+
+  function render(delta) {
+
+    let now = Date.now() / 1000;
+    let _delta = now - then;
+    then = now;
+
+    gpuComputationRenderer.compute();
+
+    texturePosition.material.uniforms.delta.value = Math.min(_delta, 0.5);
+    textureVelocity.material.uniforms.u_time.value += .0005;
+    texturePosition.material.uniforms.u_time.value += _delta;
+
+    uniforms.u_time.value += _delta;
+    uniforms.u_texturePosition.value = gpuComputationRenderer.getCurrentRenderTarget(texturePosition).texture;
+
+    window.pos = gpuComputationRenderer.getCurrentRenderTarget(texturePosition);
+
+    renderer.render(scene, camera);
+
+    if (capturing) {
+      capturer.capture(renderer.domElement);
+    }
+  }</script>
+
+
+  </body>
+
+  </html>

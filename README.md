@@ -39,6 +39,11 @@ For this reason, code belonging to this repo (bg-annimation.js) uses CC BY-NC 4.
 
 Code inside Gallery carries the Licenses and Copyrights of their authors respectively. 
 
+## Install
+
+You can install this plugin using HACS and manually. 
+
+
 ## Usage
 
 Minimal config

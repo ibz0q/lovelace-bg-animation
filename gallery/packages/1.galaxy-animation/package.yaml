@@ -9,22 +9,10 @@ parameters:
   - id: background-image
     default: https://i.ibb.co/87GbbFP/2799006.jpg
 
-compile:
-  - id: scss_1
-    scss: |
-      $bgcolor: lightblue;
-      $textcolor: darkblue;
-      $fontsize: 18px;
-
-      /* Use the variables */
-      body {
-        background-color: $bgcolor;
-        color: $textcolor;
-        font-size: $fontsize;
-      }
-
 template: |
-
+  <!DOCTYPE html>
+  <html>
+  <head>
     <style>
 
     .bg {
@@ -116,10 +104,16 @@ template: |
     .star-field .layer:nth-child(3) {
         animation: sf-fly-by-3 5s linear infinite;
     }
+    
     </style>
-    <div class="bg"></div>
+  </head>
+  <body>
 
+    <div class="bg"></div>
     <div class="star-field">
     <div class="layer"></div>
     <div class="layer"></div>
     <div class="layer"></div>
+
+  </body>
+  </html>
