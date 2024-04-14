@@ -1,3 +1,5 @@
+# This is a example package.yaml file, it is used to define the package and its contents
+
 version: v1
 metadata:
   name: Test package
