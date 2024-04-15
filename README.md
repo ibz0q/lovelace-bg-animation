@@ -48,26 +48,30 @@ You can install this plugin using HACS and manually.
 
 Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
-
+* = Optional
 ```yaml
 bg-animation: # Root configuration object
-  duration: 5000 # Duration of the animation in milliseconds
-  redraw: 200000 # Time in milliseconds after which the animation should be redrawn
-  style: | # CSS can be applied to the Lovelace header
+  duration: 5000 # * Duration of the animation in milliseconds
+  redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
+  style: | # * CSS can be applied to the root container above the Iframe
       background: transparent;
-  gallery: 
+  gallery: # *
     type: local # Type of gallery, "local" | "remote" 
-  header:
+  header: # *
     transparent: true # If true, the header of the page will be transparent
-  cache: false # If false, nothing will not be cached
-  sort: random # The order in which images will be displayed. 'random" | "reverse" | "id_asc" | "id_desc"
+  cache: false # * If false, nothing will not be cached. Default is true
+  sort: random # * Order bgs will be displayed. 'random" | "reverse" | "id_asc" | "id_desc". Default is the order you specify
   background: 
     global: # Global background settings, if no view is specified, will be applied to all views
-      - id: 11.space # Identifier for a background
+      - id: 11.space # ID for a background (Folder name of /gallery/package/ID)
+        style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
         parameters: 
           background-image: black # Example of a parameter thats passed onto a background
-    view: # View-specific background settings e.g. http://homeassistant/lovelace/home
+    view: # View-specific background settings e.g. http://homeassistant/lovelace/home - "home"
       home: # Settings for the 'home' view
+        - id: 11.space # Identifier for a background
+        - id: 15.sound # Identifier for another background
+      home: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: 11.space # Identifier for a background
         - id: 15.sound # Identifier for another background
 ```
@@ -77,7 +81,7 @@ bg-animation: # Root configuration object
 Offline mode was a core design feature, by default the plugin connects to this repos Github page. You can override this by using the below.
 
 ```yaml
-gallery: 
+bg-animation: # Root configuration object
   type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
 ```
 
