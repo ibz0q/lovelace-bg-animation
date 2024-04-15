@@ -1,12 +1,12 @@
 [
   {
-    "id": "0,test",
+    "id": "0.test",
     "version": "v1",
     "name": "Test package",
     "description": "A test package",
     "author": "You",
     "source": "https://github.com/ibz0q/lovelace-bg-animation",
-    "hash": "66fa5546fa13fa6a1c2bd0ce4f2cba27100442ff",
+    "hash": "9a836b42165c1167fa9fa1ff44110bc8785b740a",
     "parameters": [
       {
         "id": "color",
@@ -21,7 +21,7 @@
     "description": "A slow moving animation of the galaxy with stars",
     "author": "Rahul",
     "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
-    "hash": "b712f7c8d1ba4fdfdd54f9c1f7eb8b2cb487537e",
+    "hash": "8074e855b97f23066a9e8f442cd94a80256d6b90",
     "parameters": [
       {
         "id": "background-image",
@@ -36,13 +36,7 @@
     "description": "Random speed shooting stars",
     "author": "alphardex",
     "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-    "hash": "5cd4880eb9a9d68bab9f3f0124393e35f94fd5a3",
-    "parameters": [
-      {
-        "id": "background-image",
-        "default": "https://i.ibb.co/87GbbFP/2799006.jpg"
-      }
-    ]
+    "hash": "a1ef61987a00534dc344b35c1d85620082acf1f6"
   },
   {
     "id": "3.spipa-circle",
@@ -195,7 +189,7 @@
     "description": "Pure JS 3D particle Cube - 1000 particles",
     "author": "Bas Groothedde",
     "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
-    "hash": "91068a531cd73b0fc1ab6f82921f546d291c4fba"
+    "hash": "8bf4f7259abb49531b852a14c64d5165ee53e1a4"
   },
   {
     "id": "19.trapped-particles",
