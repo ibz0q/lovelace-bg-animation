@@ -81,11 +81,16 @@ bg-animation: # Root configuration object
 
 ### Offline mode
 
-Offline mode was a core design feature, by default the plugin connects to this repos Github page. You can override this by using the below.
+Offline mode is a core feature, but by default the plugin connects to this repos Github page. 
+
+You can override this by using the below.
 
 ```yaml
-bg-animation: # Root configuration object
-  type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
+bg-animation: # * Root configuration object
+  type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
+  localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local/www for some reason
+  remoteRootPath: "" # * Specify your own remote path like the one in this repo
+  manifestFileName: "" # * Change the name of the manifest
 ```
 
 This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.
