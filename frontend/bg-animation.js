@@ -6,6 +6,7 @@ var lovelaceUI = {},
   galleryRootManifest,
   domObserver = {},
   currentPlaylistIndex = 0,
+  nextPlaylistIndex = 0,
   applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {};
 
 function sortArray(array, method) {
@@ -337,13 +338,36 @@ function getCurrentViewPath() {
   return window.location.pathname.split('/')[2];
 }
 
-async function startPlaylistInterval() {
+async function startPlaylistInterval(currentPlaylist) {
+  console.log(currentPlaylist)
+  console.log(currentPlaylistIndex)
+  let duration = currentPlaylist[currentPlaylistIndex]?.duration ? currentPlaylist[currentPlaylistIndex].duration : rootPluginConfig.duration;
+  let packageManifest = await getPackageManifest(currentPlaylist[currentPlaylistIndex]);
+  let processedPackageManifest = await processPackageManifest(currentPlaylist[currentPlaylistIndex], packageManifest);
+  processBackgroundFrame(currentPlaylist[currentPlaylistIndex], processedPackageManifest);
+  nextPlaylistIndex = (currentPlaylistIndex + 1) % currentPlaylist.length;
+  if (nextPlaylistIndex == currentPlaylistIndex) {
+    console.log("Playlist only has one item, skipping interval.")
+    return;
+  }
+
+  if (window.__global_minterval) {
+    clearTimeout(window.__global_minterval);
+  }
+
+  currentPlaylistIndex = nextPlaylistIndex;
+
+  window.__global_minterval = setTimeout(() => {
+    startPlaylistInterval(currentPlaylist)
+  }, duration);
+
+}
+
+async function setupPlaylist() {
   let viewPath = getCurrentViewPath();
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
-    console.log(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background["global"])
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
     let allIdsExist = true;
-
     currentPlaylist.forEach(slide => {
       if (!galleryRootManifest.some(manifest => manifest.id === slide.id)) {
         console.error(`Slide id ${slide.id} does not exist in the manifest.`);
@@ -356,21 +380,8 @@ async function startPlaylistInterval() {
       return;
     }
 
-    let duration = currentPlaylist[currentPlaylistIndex].duration ? currentPlaylist[currentPlaylistIndex].duration : rootPluginConfig.duration;
-    let packageManifest = await getPackageManifest(currentPlaylist[currentPlaylistIndex]);
-    let processedPackageManifest = await processPackageManifest(currentPlaylist[currentPlaylistIndex], packageManifest);
-    processBackgroundFrame(currentPlaylist[currentPlaylistIndex], processedPackageManifest);
-    currentPlaylistIndex = (currentPlaylistIndex + 1) % currentPlaylist.length;
-    console.log("Current slide index: ", currentPlaylistIndex);
-
-    if (window.__global_minterval) {
-      clearTimeout(window.__global_minterval);
-    }
-
-    window.__global_minterval = setTimeout(() => {
-      startPlaylistInterval()
-    }, duration);
-
+    currentPlaylistIndex = 0;
+    startPlaylistInterval(currentPlaylist);
   } else {
     console.error("No backgrounds found in the user config.")
   }
@@ -381,7 +392,8 @@ async function initializeObservers() {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
         console.log("Observed change in view")
-        startPlaylistInterval()
+        console.log(getCurrentViewPath())
+        setupPlaylist()
       }
     });
   });
@@ -399,10 +411,8 @@ if (rootPluginConfig == undefined) {
   initializePluginElements()
   await getGalleryRootManifest();
 }
-
-console.log("initialize");
 await initializeObservers();
-await startPlaylistInterval();
+await setupPlaylist();
 
 class LovelaceBgAnimation extends HTMLElement {
   constructor() {
@@ -455,6 +465,44 @@ class LovelaceBgAnimation extends HTMLElement {
             <link rel="stylesheet" href="${lovelaceUI.pluginInstallPath}/frontend/css/card.css">
             <style>
               ${this.styles}
+              .media-player {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+              }
+              
+              .control-button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 20px;
+                margin-right: 10px; 
+              }
+              
+              .control-button:last-child {
+                margin-right: 0; 
+              }
+              .media-name-container {
+                flex-grow: 1;
+                text-align: center;
+                overflow: hidden;
+                white-space: nowrap; 
+              }
+              .media-ticker {
+                display: inline-block;
+                font-family: 'Chivo Mono', sans-serif;
+                padding-left: 100%;
+                animation: ticker 40s steps(150) infinite; 
+                text-transform: capitalize;
+              }
+              @keyframes ticker {
+                0% { transform: translate3d(0, 0, 0); }
+                100% { transform: translate3d(-100%, 0, 0); }
+              }
+              span.soft {
+                opacity: 0.4; /* Make the text 70% opaque, or 30% lighter */
+              }
             </style>
             <ha-card>
               <div class="card-content">

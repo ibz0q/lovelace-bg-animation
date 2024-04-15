@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: Early Development
+Current Release: **Development**
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
@@ -48,7 +48,8 @@ You can install this plugin using HACS and manually.
 
 Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
-* = Optional
+` * = Optional `
+
 ```yaml
 bg-animation: # Root configuration object
   duration: 5000 # * Duration of the animation in milliseconds
