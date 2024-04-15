@@ -2,3 +2,4 @@ dist/
 node_modules/
 0.test/
 import/
+output/

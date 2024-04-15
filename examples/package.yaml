@@ -18,8 +18,9 @@ remote_includes:
     url: https://raw.githubusercontent.com/akm2/simplex-noise.js/master/simplex-noise.js
 
 helpers:
-  # Inserts a valid base URL tag into document, needed if you are loading assets for local folder e.g. 1.packagename/file.jpg
-  # Evals depends on the environment (Previews omit this)
+  # Inserts a valid base URL tag into document, needed if you are loading assets from the local folder e.g. /1.packagename/image.jpg
+  # Useful if you are developing and submitting a 'offline first' package
+  # Only evals depends on the environment (Previews omit this)
   insert_baseurl: true 
 
 # Define the SCSS to be compiled onload (useful to randomize the color of the background for example)

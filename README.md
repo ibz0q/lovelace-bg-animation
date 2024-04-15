@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: Beta
+Current Release: Early Development
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
@@ -46,36 +46,30 @@ You can install this plugin using HACS and manually.
 
 ## Usage
 
-Minimal config
+Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
+
 
 ```yaml
-type: custom:lovelace-bg-animation
-background:
-  - id: 13.ribbons-two
-```
-
-All config
-
-```yaml
-type: custom:lovelace-bg-animation 
-delay: 20000 # Delay in milliseconds between background changes
-header: # CSS styles for the header
-  transparent: true
+bg-animation: # Root configuration object
+  duration: 5000 # Duration of the animation in milliseconds
+  redraw: 200000 # Time in milliseconds after which the animation should be redrawn
   style: | # CSS can be applied to the Lovelace header
       background: transparent;
-gallery: 
-  type: local # Specifies the type of gallery, 'local' means the gallery is hosted on the same server
-cache: false # Speeds up rendering time, this option disables it globally
-style: | # Applies CSS to parent root container
-    color:white;
-sequence: random, shuffle, name_desc, name_asc, id_asc, id_desc, # Specifies the order in which backgrounds are displayed
-background: 
-  - id: 13.ribbons-two # Background ID (Found inside gallery/packages/[foldername])
-    cache: false # Speeds up rendering time considerably, this option disables it globally
-    style: "css" # Applies CSS to the parent container
-    redraw: 200000 # Time in milliseconds after which the background is redrawn
-    parameters: # Parameters can be passed into a background, depends if author has added support 
-      background-image: 222 
+  gallery: 
+    type: local # Type of gallery, "local" | "remote" 
+  header:
+    transparent: true # If true, the header of the page will be transparent
+  cache: false # If false, nothing will not be cached
+  sort: random # The order in which images will be displayed. 'random" | "reverse" | "id_asc" | "id_desc"
+  background: 
+    global: # Global background settings, if no view is specified, will be applied to all views
+      - id: 11.space # Identifier for a background
+        parameters: 
+          background-image: black # Example of a parameter thats passed onto a background
+    view: # View-specific background settings e.g. http://homeassistant/lovelace/home
+      home: # Settings for the 'home' view
+        - id: 11.space # Identifier for a background
+        - id: 15.sound # Identifier for another background
 ```
 
 ### Offline mode
@@ -115,11 +109,17 @@ We will take steps to minimize risk.
 
 ### Features TODO
 
-- Show controls
+- Media controls
 - Fix iframe writes (Done)
 - Add Autoplay
-- Add redraw
+- Add redraw 
+- Add duration (Done)
 - Iframe transitions 
 - postMessage 
 - Generate metadata 
+  - Video/Picture Preview
+  - HTML
 - Nice UI Editor
+- Add oppurtunistic sanity check for path (Done)
+- Add BaseURL (Done)
+- Allow for multi instance (Done)
