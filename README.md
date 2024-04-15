@@ -23,11 +23,11 @@ The repo features the following artists with incredible works they've shared on 
 
 Please directly tip the artists you found most inspiring.
 
-## Project Motivation
+## Motivation
 
-Mostly Nostalgia. a time when canvas/JS/CSS3 was new to the web I recall seeing countless of abstract experiments using these technologies. I wanted to preserve them and view them in a art type gallery on a Home Assistant dashboard, they make for great backgrounds!
+Mostly nostalgia reasons. When Canvas/JS/CSS3 was new to the web I remember the awe of abstract web experiments. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard, they make great backgrounds!
 
-Some of the experiments I have saved overtime in my bookmarks have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
+Some of the experiments I have saved in my bookmarks overtime have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
 
 I have tried my best to find references and credit the artists who's original work has been lost to digital oblivion, archive.org links provided if they are available - This is not always the case.
 
@@ -88,15 +88,11 @@ bg-animation: # Root configuration object
 
 This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.
 
-### The package.yaml 
+### Adding your own packages 
 
-Everything is self contained inside package.yaml. Instead of embedding plain HTML files I wanted structure and provide a basic templating ability. 
+Everything is self contained inside package.yaml. Instead of embedding plain HTML files I wanted structure and provide a basic templating and user customizability. This ruled out plain HTML files.
 
-It allows for better offline support for those who use Home Assistant offline only. 
-
-Raw HTML/CSS/JS code can als be generated this way.
-
-### Submitting to gallery
+Although you may see some packages.yaml contain remote scripts like three.js or Stats.js. Please try to inline or locally save assets as some browsers demonstrate a flash upon loading. This can be prevented using those methods and I am in the process of inling the rest of these.
 
 I accept contributions. Because Javascript is allowed, you must be a reputable user on Github. Submissions need to also be attached to an issue that contains the following info:
 

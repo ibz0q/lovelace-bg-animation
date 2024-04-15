@@ -339,12 +339,13 @@ function getCurrentViewPath() {
 }
 
 async function startPlaylistInterval(currentPlaylist) {
-  console.log(currentPlaylist)
-  console.log(currentPlaylistIndex)
   let duration = currentPlaylist[currentPlaylistIndex]?.duration ? currentPlaylist[currentPlaylistIndex].duration : rootPluginConfig.duration;
   let packageManifest = await getPackageManifest(currentPlaylist[currentPlaylistIndex]);
   let processedPackageManifest = await processPackageManifest(currentPlaylist[currentPlaylistIndex], packageManifest);
   processBackgroundFrame(currentPlaylist[currentPlaylistIndex], processedPackageManifest);
+
+  document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylist[currentPlaylistIndex], "packageManifest": processedPackageManifest } } }));
+
   nextPlaylistIndex = (currentPlaylistIndex + 1) % currentPlaylist.length;
   if (nextPlaylistIndex == currentPlaylistIndex) {
     console.log("Playlist only has one item, skipping interval.")
@@ -366,7 +367,11 @@ async function startPlaylistInterval(currentPlaylist) {
 async function setupPlaylist() {
   let viewPath = getCurrentViewPath();
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
+
+    //Check if the view has a background defined, if not use the global one
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
+
+    //Check if all package ID's exist in the manifest
     let allIdsExist = true;
     currentPlaylist.forEach(slide => {
       if (!galleryRootManifest.some(manifest => manifest.id === slide.id)) {
@@ -374,16 +379,45 @@ async function setupPlaylist() {
         allIdsExist = false
       }
     });
-
     if (!allIdsExist) {
       console.error("Some package ID's do not exist, unable to continue.");
       return;
     }
 
+    //Set the current index to 0
     currentPlaylistIndex = 0;
+
+    if (window.__global_minterval) {
+      clearTimeout(window.__global_minterval);
+    }
+
     startPlaylistInterval(currentPlaylist);
+
   } else {
     console.error("No backgrounds found in the user config.")
+  }
+}
+
+async function cardMediaControls(control) {
+  let currentPlaylist = rootPluginConfig.background.view[getCurrentViewPath()] ? rootPluginConfig.background.view[getCurrentViewPath()] : rootPluginConfig.background.global;
+  switch (control) {
+    case 'back':
+      currentPlaylistIndex = currentPlaylistIndex - 1 < 0 ? currentPlaylist.length - 1 : currentPlaylistIndex - 1;
+      break;
+    case 'forward':
+      currentPlaylistIndex = (currentPlaylistIndex + 1) % currentPlaylist.length;
+      break;
+    case 'play':
+      startPlaylistInterval(currentPlaylist);
+      break;
+    case 'pause':
+      if (window.__global_minterval) {
+        clearTimeout(window.__global_minterval);
+      }
+      break;
+    default:
+      console.error("Invalid control button.");
+      break;
   }
 }
 
@@ -453,10 +487,6 @@ class LovelaceBgAnimation extends HTMLElement {
     }
   }
 
-  instanceMediaControls() {
-    console.log("hi");
-  }
-
   set hass(hass) {
     if (rootPluginConfig !== undefined) {
       if (!this.content) {
@@ -471,7 +501,6 @@ class LovelaceBgAnimation extends HTMLElement {
                 justify-content: space-between;
                 width: 100%;
               }
-              
               .control-button {
                 background: none;
                 border: none;
@@ -479,7 +508,6 @@ class LovelaceBgAnimation extends HTMLElement {
                 font-size: 20px;
                 margin-right: 10px; 
               }
-              
               .control-button:last-child {
                 margin-right: 0; 
               }
@@ -493,7 +521,7 @@ class LovelaceBgAnimation extends HTMLElement {
                 display: inline-block;
                 font-family: 'Chivo Mono', sans-serif;
                 padding-left: 100%;
-                animation: ticker 40s steps(150) infinite; 
+                animation: ticker 20s steps(150) infinite; 
                 text-transform: capitalize;
               }
               @keyframes ticker {
@@ -507,20 +535,20 @@ class LovelaceBgAnimation extends HTMLElement {
             <ha-card>
               <div class="card-content">
                 <div class="media-player">
-                  <button class="control-button back-button">
+                  <button class="control-button" id="back-button">
                     <i class="fas fa-backward"></i>
                   </button>
-                  <button class="control-button play-pause-button" onclick="window.hi()">
+                  <button class="control-button" id="play-pause-button">
                     <i class="fas fa-play"></i>
                   </button>
                   <div class="media-name-container">
                     <div class="media-ticker">
-                      <span class="name"><span class="soft">Playing:</span> Space, The final frontier.</span> 
-                      <span class="description"><span class="soft">Description:</span> These are the voyages of the starship Enterprise. Its continuing mission: to explore strange new worlds; to seek out new life and new civilizations; to boldly go where no one has gone before!</span> 
-                      <span class="author"><span class="soft">Author:</span> Akimitsu Hamamuro.</span>  
+                      <span class="name"></span> 
+                      <span class="description"></span> 
+                      <span class="author"></span>  
                     </div>
                   </div>
-                  <button class="control-button forward-button">
+                  <button class="control-button" id="forward-button">
                     <i class="fas fa-forward"></i>
                   </button>
                 </div>
@@ -529,7 +557,23 @@ class LovelaceBgAnimation extends HTMLElement {
       `;
 
         this.content = this.querySelector("div");
-        console.log("set inner hass called");
+        this.content.querySelectorAll('.control-button').forEach(button => {
+          button.addEventListener('click', () => {
+            cardMediaControls(button.id);
+          });
+        });
+
+        document.addEventListener('mediaUpdate', (e) => {
+          let packageConfig = e.detail.message.packageConfig;
+          let packageManifest = e.detail.message.packageManifest;
+          let mediaName = packageManifest.metadata?.name ?? packageConfig.id;
+          let mediaDescription = packageManifest.metadata?.description ?? "No description available.";
+          let mediaAuthor = packageManifest.metadata?.author ?? "Unknown";
+          this.content.querySelector('.name').innerHTML = `<span class="soft">Playing:</span>: ${mediaName}`;
+          this.content.querySelector('.description').innerHTML = `<span class="soft">Description:</span> ${mediaDescription}`;
+          this.content.querySelector('.author').innerHTML = `<span class="soft">Author:</span> ${mediaAuthor}`;
+        });
+
       }
     }
   }
