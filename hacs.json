@@ -1,5 +1,5 @@
 {
     "name": "Lovelace Live Background Animation",
-    "filename": "/frontend/bg-animation.min.js",
+    "filename": "frontend/bg-animation.min.js",
     "render_readme": true
   }

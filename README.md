@@ -71,11 +71,11 @@ bg-animation: # Root configuration object
         style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
         parameters: 
           background-image: black # Example of a parameter thats passed onto a background
-    view: # View-specific background settings e.g. http://homeassistant/lovelace/home - "home"
-      home: # Settings for the 'home' view
+    view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
+      lights: # Settings for the 'lights' view
         - id: 11.space # Identifier for a background
         - id: 15.sound # Identifier for another background
-      home: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
+      gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: 11.space # Identifier for a background
         - id: 15.sound # Identifier for another background
 ```
