@@ -56,7 +56,7 @@ Config needs to be placed inside Lovelaces config file, you can do this inside t
 bg-animation: # Root configuration object
   duration: 5000 # * Duration of the animation in milliseconds
   redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
-  style: | # * CSS can be applied to the root container above the Iframe
+  style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
       background: transparent;
   gallery: # *
     type: local # Type of gallery, "local" | "remote" 
@@ -119,15 +119,15 @@ We will take steps to minimize risk.
 
 - Media controls
 - Fix iframe writes (Done)
-- Add Autoplay
 - Add redraw 
 - Add duration (Done)
+- Add overlay div
 - Iframe transitions 
 - postMessage 
-- Generate metadata 
+- Auto generate metadata 
   - Video/Picture Preview
   - HTML
-- Nice UI Editor
-- Add oppurtunistic sanity check for path (Done)
+- Card UI editor 
+- Add opportunistic sanity check for path (Done)
 - Add BaseURL (Done)
 - Allow for multi instance (Done)

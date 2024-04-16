@@ -5,8 +5,9 @@ var lovelaceUI = {},
   rootPluginConfig,
   galleryRootManifest,
   domObserver = {},
-  currentPlaylistIndex = 0,
-  nextPlaylistIndex = 0,
+  processedPackageManifests = {},
+  uiWriteDelay,
+  playlistIndexes = { "global": { "current": 0, "next": 0 }, "view": { "current": 0, "next": 0 } },
   applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {};
 
 function sortArray(array, method) {
@@ -71,9 +72,8 @@ async function getGalleryRootManifest() {
 async function getPackageManifest(packageConfig) {
   try {
     let packageManifestId = packageConfig.id;
-    let packageCacheKey = btoa(packageManifestId + Object.entries(packageConfig.parameters).map(([key, value]) => `${key}:${value}`).join(' '));
+    let packageCacheKey = btoa(packageManifestId + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
-
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
       return checkCachePackageManifest;
     } else {
@@ -83,8 +83,8 @@ async function getPackageManifest(packageConfig) {
       } else {
         url = rootPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestId + "/" + "package.yaml"
       }
-
       let response = await fetch(url, { cache: "no-store" });
+
       if (!response.ok) {
         throw new Error('Failed to fetch package manifest: ' + packageManifestId);
       }
@@ -93,7 +93,6 @@ async function getPackageManifest(packageConfig) {
       if (packageConfig.cache === true && rootPluginConfig.cache === true) {
         storeCache("HASSanimatedBg_packageRaw__" + packageCacheKey, packageManifest);
       }
-
       return packageManifest;
     }
   } catch (error) {
@@ -105,9 +104,8 @@ async function getPackageManifest(packageConfig) {
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
     let packageManifestName = packageConfig.id;
-    let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters).map(([key, value]) => `${key}:${value}`).join(' '));
+    let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageProcessed__" + packageCacheKey);
-
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
       return checkCachePackageManifest;
     } else {
@@ -219,25 +217,21 @@ function opportunisticallyDetermineLocalInstallPath() {
       }
       let src = memoryCache.scriptTags.src.replace(window.location.origin, '');
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
-      let itemsToRemove = ['/dist/', '/dist', 'dist'];
-      memoryCache.installPath = itemsToRemove.reduce((acc, item) => acc.replace(item, ''), src);
+      memoryCache.installPath = ['/dist/', '/dist', 'dist'].reduce((acc, item) => acc.replace(item, ''), src);
     }
     return memoryCache.installPath;
   } catch (error) {
-    console.error('Error in opportunisticallyDetermineLocalInstallPath:', error);
     return null;
   }
 }
-
 function initializeRuntimeVariables() {
-  lovelaceUI.panelElement = document.querySelector("body > home-assistant")?.shadowRoot?.querySelector("home-assistant-main")?.shadowRoot?.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace");
-  lovelaceUI.huiRootElement = lovelaceUI.panelElement?.shadowRoot?.querySelector("hui-root");
-  lovelaceUI.headerElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div > div.header");
-  lovelaceUI.viewElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("#view");
-  lovelaceUI.huiViewElement = lovelaceUI.viewElement?.querySelector("hui-view");
-  lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
-  lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement?.lovelace;
-  rootPluginConfig = lovelaceUI.lovelaceObject.config["bg-animation"]
+
+  if (!lovelaceUI?.lovelaceObject?.config["bg-animation"]) {
+    console.error("No bg-animation config found in lovelace configuration.")
+    return false;
+  }
+
+  rootPluginConfig = lovelaceUI?.lovelaceObject?.config["bg-animation"]
   rootPluginConfig = {
     "gallery": {
       "type": rootPluginConfig.gallery?.type ?? "remote",
@@ -288,12 +282,33 @@ function initializeRuntimeVariables() {
   })();
 }
 
-function initializePluginElements() {
-  let bgRootContainer = document.createElement("div");
-  bgRootContainer.id = "bg-animation-container";
-  bgRootContainer.style.cssText = rootPluginConfig.style;
-  lovelaceUI.groundElement.prepend(bgRootContainer);
-  lovelaceUI.bgRootElement = bgRootContainer;
+function initializeLovelaceVariables() {
+  try {
+    lovelaceUI = {}
+    lovelaceUI.haMainElement = document.querySelector("body > home-assistant")?.shadowRoot?.querySelector("home-assistant-main")?.shadowRoot;
+    lovelaceUI.panelElement = lovelaceUI.haMainElement?.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace")?.shadowRoot;
+    lovelaceUI.huiRootElement = lovelaceUI.panelElement?.querySelector("hui-root");
+    lovelaceUI.headerElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div > div.header");
+    lovelaceUI.viewElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("#view");
+    lovelaceUI.huiViewElement = lovelaceUI.viewElement?.querySelector("hui-view");
+    lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
+    lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement?.lovelace;
+    if (!lovelaceUI.lovelaceObject) {
+      return false;
+    }
+    return true;
+
+  } catch (error) {
+    console.error('Error in initializeRuntimeVariables:', error);
+    return false;
+  }
+}
+
+function initializeBackgroundElements() {
+  lovelaceUI.bgRootElement = document.createElement("div");
+  lovelaceUI.bgRootElement.id = "bg-animation-container";
+  lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.style;
+  lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
   if (lovelaceUI.iframeElement == undefined) {
     lovelaceUI.iframeElement = document.createElement('iframe');
     lovelaceUI.iframeElement.id = `background-iframe`;
@@ -338,16 +353,25 @@ function getCurrentViewPath() {
   return window.location.pathname.split('/')[2];
 }
 
+function getPlaylistIndex() {
+  return playlistIndexes[rootPluginConfig?.background?.view[getCurrentViewPath()] ? "view" : "global"];
+}
+
 async function startPlaylistInterval(currentPlaylist) {
-  let duration = currentPlaylist[currentPlaylistIndex]?.duration ? currentPlaylist[currentPlaylistIndex].duration : rootPluginConfig.duration;
-  let packageManifest = await getPackageManifest(currentPlaylist[currentPlaylistIndex]);
-  let processedPackageManifest = await processPackageManifest(currentPlaylist[currentPlaylistIndex], packageManifest);
-  processBackgroundFrame(currentPlaylist[currentPlaylistIndex], processedPackageManifest);
+  let playlistIndex = getPlaylistIndex();
+  let currentPlaylistTrack = currentPlaylist[playlistIndex.next]
+  let duration = currentPlaylistTrack?.duration ? currentPlaylistTrack.duration : rootPluginConfig.duration;
+  let packageManifest = await getPackageManifest(currentPlaylistTrack);
+  let processedPackageManifest = await processPackageManifest(currentPlaylistTrack, packageManifest);
+  processedPackageManifests[currentPlaylistTrack.id] = processedPackageManifest;
+  processBackgroundFrame(currentPlaylistTrack, processedPackageManifest);
 
-  document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylist[currentPlaylistIndex], "packageManifest": processedPackageManifest } } }));
+  document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylistTrack, "packageManifest": processedPackageManifest } } }));
 
-  nextPlaylistIndex = (currentPlaylistIndex + 1) % currentPlaylist.length;
-  if (nextPlaylistIndex == currentPlaylistIndex) {
+  playlistIndex.current = playlistIndex.next;
+  playlistIndex.next = (playlistIndex.next + 1) % currentPlaylist.length;
+
+  if (playlistIndex.current == playlistIndex.next) {
     console.log("Playlist only has one item, skipping interval.")
     return;
   }
@@ -356,11 +380,9 @@ async function startPlaylistInterval(currentPlaylist) {
     clearTimeout(window.__global_minterval);
   }
 
-  currentPlaylistIndex = nextPlaylistIndex;
-
   window.__global_minterval = setTimeout(() => {
     startPlaylistInterval(currentPlaylist)
-  }, duration);
+  }, duration)
 
 }
 
@@ -368,10 +390,7 @@ async function setupPlaylist() {
   let viewPath = getCurrentViewPath();
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
 
-    //Check if the view has a background defined, if not use the global one
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
-
-    //Check if all package ID's exist in the manifest
     let allIdsExist = true;
     currentPlaylist.forEach(slide => {
       if (!galleryRootManifest.some(manifest => manifest.id === slide.id)) {
@@ -384,9 +403,6 @@ async function setupPlaylist() {
       return;
     }
 
-    //Set the current index to 0
-    currentPlaylistIndex = 0;
-
     if (window.__global_minterval) {
       clearTimeout(window.__global_minterval);
     }
@@ -398,60 +414,110 @@ async function setupPlaylist() {
   }
 }
 
-async function cardMediaControls(control) {
-  let currentPlaylist = rootPluginConfig.background.view[getCurrentViewPath()] ? rootPluginConfig.background.view[getCurrentViewPath()] : rootPluginConfig.background.global;
-  switch (control) {
-    case 'back':
-      currentPlaylistIndex = currentPlaylistIndex - 1 < 0 ? currentPlaylist.length - 1 : currentPlaylistIndex - 1;
-      break;
-    case 'forward':
-      currentPlaylistIndex = (currentPlaylistIndex + 1) % currentPlaylist.length;
-      break;
-    case 'play':
-      startPlaylistInterval(currentPlaylist);
-      break;
-    case 'pause':
-      if (window.__global_minterval) {
-        clearTimeout(window.__global_minterval);
-      }
-      break;
-    default:
-      console.error("Invalid control button.");
-      break;
-  }
-}
-
 async function initializeObservers() {
-  domObserver.viewElement = new MutationObserver((mutations) => {
+  if (domObserver.haMainElement) {
+    domObserver.haMainElement.disconnect();
+  }
+
+  domObserver.haMainElement = new MutationObserver((mutations) => {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
-        console.log("Observed change in view")
-        console.log(getCurrentViewPath())
-        setupPlaylist()
+        uiWriteDelay = setTimeout(() => {
+          initialize();
+        }, 200);
       }
     });
   });
-  domObserver.viewElement.observe(lovelaceUI.viewElement, {
-    characterData: false,
+
+  domObserver.haMainElement.observe(lovelaceUI.haMainElement, {
+    characterData: true,
     childList: true,
-    subtree: false,
-    characterDataOldValue: false
+    subtree: true,
+    characterDataOldValue: true
   });
+
+  if (domObserver.viewElement) {
+    domObserver.viewElement.disconnect();
+  }
+
+  domObserver.viewElement = new MutationObserver((mutations) => {
+    for (let mutation of mutations) {
+      if (mutation.removedNodes) {
+        mutation.removedNodes.forEach(async (removedNode) => {
+          console.log("viewElement observer")
+          await getGalleryRootManifest();
+          await setupPlaylist();
+
+          if (removedNode === lovelaceUI.viewElement) {
+            console.log('lovelaceUI.viewElement has been removed');
+            observer.disconnect();
+          }
+
+        });
+      }
+    }
+
+  });
+
+  domObserver.viewElement.observe(lovelaceUI.viewElement, {
+    characterData: true,
+    childList: true,
+    subtree: true,
+    characterDataOldValue: true
+  });
+
+  if (domObserver.panelElement) {
+    domObserver.panelElement.disconnect();
+  }
+
+  domObserver.panelElement = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.removedNodes.length > 0) {
+        if (mutation.removedNodes[0].nodeName.toLowerCase() == "hui-editor") {
+          uiWriteDelay = setTimeout(() => {
+            initialize();
+          }, 200);
+        }
+      }
+    });
+  });
+
+  domObserver.panelElement.observe(lovelaceUI.panelElement, {
+    characterData: true,
+    childList: true,
+    subtree: true,
+    characterDataOldValue: true
+  });
+
+  if (domObserver.huiRootElement) {
+    domObserver.huiRootElement.disconnect();
+  }
 }
 
-if (rootPluginConfig == undefined) {
-  initializeRuntimeVariables()
-  changeDefaultLovelaceStyles()
-  initializePluginElements()
-  await getGalleryRootManifest();
-}
-await initializeObservers();
-await setupPlaylist();
+async function initialize() {
+  let initializeLovelaceVars = initializeLovelaceVariables()
+  if (initializeLovelaceVars == true) {
+    await initializeObservers();
+  } else {
+    console.log("Failed to initialize lovelace variables from this view.")
+  }
+
+  if (initializeLovelaceVars == true && lovelaceUI.lovelaceObject.config["bg-animation"]) {
+    initializeRuntimeVariables();
+    changeDefaultLovelaceStyles()
+    initializeBackgroundElements()
+    await getGalleryRootManifest();
+    await setupPlaylist();
+  }
+};
+
+initialize();
 
 class LovelaceBgAnimation extends HTMLElement {
   constructor() {
     super();
-    this.styles = `
+    if (rootPluginConfig !== undefined) {
+      this.styles = `
       @import url('${lovelaceUI.pluginInstallPath}/frontend/css/fontawesome.min.css');
       @import url('${lovelaceUI.pluginInstallPath}/frontend/css/regular.min.css');
       @import url('${lovelaceUI.pluginInstallPath}/frontend/css/solid.min.css');
@@ -468,6 +534,7 @@ class LovelaceBgAnimation extends HTMLElement {
         src: local('Chivo Mono'), url('${lovelaceUI.pluginInstallPath}/frontend/webfonts/ChivoMono-Italic[wght].woff') format('woff');
     }
       `;
+    }
   }
 
   static get properties() {
@@ -486,69 +553,53 @@ class LovelaceBgAnimation extends HTMLElement {
       document.head.appendChild(newStyleElement);
     }
   }
+  getCardConfig() {
+    return {
+      "ticker": {
+        "labels": this.config.labels ?? {
+          "name": {
+            show: true,
+            style: false,
+            name: "Name"
+          },
+          "description": {
+            show: true,
+            style: false,
+            name: "Name"
+          },
+          "author": {
+            show: true,
+            style: false,
+            name: "Author"
+          }
+        },
+        "show": this.config.show ?? true,
+        "style": this.config.style ?? false,
+      }
+    }
+  }
 
   set hass(hass) {
     if (rootPluginConfig !== undefined) {
       if (!this.content) {
-        console.log(lovelaceUI.lovelaceObject)
         this.innerHTML = `
-            <link rel="stylesheet" href="${lovelaceUI.pluginInstallPath}/frontend/css/card.css">
             <style>
               ${this.styles}
-              .media-player {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                width: 100%;
-              }
-              .control-button {
-                background: none;
-                border: none;
-                cursor: pointer;
-                font-size: 20px;
-                margin-right: 10px; 
-              }
-              .control-button:last-child {
-                margin-right: 0; 
-              }
-              .media-name-container {
-                flex-grow: 1;
-                text-align: center;
-                overflow: hidden;
-                white-space: nowrap; 
-              }
-              .media-ticker {
-                display: inline-block;
-                font-family: 'Chivo Mono', sans-serif;
-                padding-left: 100%;
-                animation: ticker 20s steps(150) infinite; 
-                text-transform: capitalize;
-              }
-              @keyframes ticker {
-                0% { transform: translate3d(0, 0, 0); }
-                100% { transform: translate3d(-100%, 0, 0); }
-              }
-              span.soft {
-                opacity: 0.4; /* Make the text 70% opaque, or 30% lighter */
-              }
             </style>
+            <link rel="stylesheet" href="${lovelaceUI.pluginInstallPath}/frontend/css/card.css">
             <ha-card>
               <div class="card-content">
                 <div class="media-player">
-                  <button class="control-button" id="back-button">
+                  <button class="control-button" id="back">
                     <i class="fas fa-backward"></i>
                   </button>
-                  <button class="control-button" id="play-pause-button">
+                  <button class="control-button" id="toggle">
                     <i class="fas fa-play"></i>
                   </button>
                   <div class="media-name-container">
-                    <div class="media-ticker">
-                      <span class="name"></span> 
-                      <span class="description"></span> 
-                      <span class="author"></span>  
-                    </div>
+                    Unknown
                   </div>
-                  <button class="control-button" id="forward-button">
+                  <button class="control-button" id="forward">
                     <i class="fas fa-forward"></i>
                   </button>
                 </div>
@@ -559,25 +610,60 @@ class LovelaceBgAnimation extends HTMLElement {
         this.content = this.querySelector("div");
         this.content.querySelectorAll('.control-button').forEach(button => {
           button.addEventListener('click', () => {
-            cardMediaControls(button.id);
+            let currentViewPath = getCurrentViewPath();
+            let playlistIndex = getPlaylistIndex();
+            let currentPlaylist = rootPluginConfig?.background?.view[currentViewPath] ? rootPluginConfig?.background?.view[currentViewPath] : rootPluginConfig?.background?.global
+
+            if (currentPlaylist.length == 1) {
+              console.log("Playlist only has one item, skipping interval.")
+              return;
+
+            }
+            switch (button.id) {
+              case 'back':
+                playlistIndex.next = playlistIndex.current - 1 < 0 ? currentPlaylist.length - 1 : playlistIndex.current - 1;
+                startPlaylistInterval(currentPlaylist)
+                break;
+              case 'toggle':
+                if (window.__global_minterval) {
+                  clearTimeout(window.__global_minterval);
+                }
+                break;
+              case 'forward':
+                playlistIndex.next = (playlistIndex.current + 1) % currentPlaylist.length;
+                startPlaylistInterval(currentPlaylist)
+                break;
+              default:
+                break;
+            }
+
           });
         });
 
         document.addEventListener('mediaUpdate', (e) => {
           let packageConfig = e.detail.message.packageConfig;
           let packageManifest = e.detail.message.packageManifest;
-          let mediaName = packageManifest.metadata?.name ?? packageConfig.id;
-          let mediaDescription = packageManifest.metadata?.description ?? "No description available.";
-          let mediaAuthor = packageManifest.metadata?.author ?? "Unknown";
-          this.content.querySelector('.name').innerHTML = `<span class="soft">Playing:</span>: ${mediaName}`;
-          this.content.querySelector('.description').innerHTML = `<span class="soft">Description:</span> ${mediaDescription}`;
-          this.content.querySelector('.author').innerHTML = `<span class="soft">Author:</span> ${mediaAuthor}`;
+          let cardConfig = this.getCardConfig();
+
+          let mediaInfo = `
+          <div class="media-ticker">
+            ${cardConfig.ticker.labels.name.show ? `<span class="soft" ${cardConfig.ticker.labels.name.style ? 'style="' + cardConfig.ticker.labels.name.style + '"' : ''}>${cardConfig.ticker.labels.name.name}:</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
+            ${cardConfig.ticker.labels.description.show ? `<span class="soft" ${cardConfig.ticker.labels.description.style ? 'style="' + cardConfig.ticker.labels.description.style + '"' : ''}>${cardConfig.ticker.labels.description.name}:</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
+            ${cardConfig.ticker.labels.author.show ? `<span class="soft" ${cardConfig.ticker.labels.author.style ? 'style="' + cardConfig.ticker.labels.author.style + '"' : ''}>${cardConfig.ticker.labels.author.name}:</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}
+            <i class="toggle-button fa ${window.__global_minterval ? 'fa-pause' : 'fa-play'}"></i>
+          </div>
+        `;
+
+          this.content.querySelector('.media-name-container').innerHTML = mediaInfo;
+          var tickerSelector = this.content.querySelector('.media-ticker');
+          var tickerLength = tickerSelector.offsetWidth;
+          var timeTaken = tickerLength / 60;
+          tickerSelector.style.animationDuration = timeTaken + "s";
         });
 
       }
     }
   }
-
   setConfig(config) {
     this.config = config;
   }
