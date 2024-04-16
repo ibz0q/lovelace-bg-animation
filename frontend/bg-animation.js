@@ -239,6 +239,10 @@ function initializeRuntimeVariables() {
       "manifestFileName": rootPluginConfig.gallery?.manifestFileName ?? "gallery.manifest",
       "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"
     },
+    "overlay": {
+      "show": rootPluginConfig.overlay?.show ?? true,
+      "style": rootPluginConfig.overlay?.style ?? "",
+    },
     "duration": rootPluginConfig.duration ?? 50000,
     "transition": rootPluginConfig.transition ?? false,
     "cache": rootPluginConfig.cache !== undefined ? rootPluginConfig.cache : true,
@@ -309,6 +313,7 @@ function initializeBackgroundElements() {
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.style;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
+
   if (lovelaceUI.iframeElement == undefined) {
     lovelaceUI.iframeElement = document.createElement('iframe');
     lovelaceUI.iframeElement.id = `background-iframe`;
@@ -319,6 +324,10 @@ function initializeBackgroundElements() {
     lovelaceUI.iframeElement.className = applicationIdentifiers.appNameShort;
     lovelaceUI.bgRootElement.appendChild(lovelaceUI.iframeElement);
   }
+  if (rootPluginConfig.overlay?.show) {
+    lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="bg-overlay" ${rootPluginConfig.overlay.style ? `style="${rootPluginConfig.overlay.style}"` : ''}></div>`);
+  }
+
 }
 
 function changeDefaultLovelaceStyles() {
@@ -459,6 +468,7 @@ async function initializeObservers() {
 
   });
 
+
   domObserver.viewElement.observe(lovelaceUI.viewElement, {
     characterData: true,
     childList: true,
@@ -492,6 +502,21 @@ async function initializeObservers() {
   if (domObserver.huiRootElement) {
     domObserver.huiRootElement.disconnect();
   }
+
+  domObserver.huiRootElement = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      if (mutation.addedNodes.length > 0) {
+        console.log("panelElement huiRootElement")
+      }
+    });
+  });
+
+  domObserver.huiRootElement.observe(lovelaceUI.huiRootElement, {
+    characterData: true,
+    childList: true,
+    subtree: true,
+    characterDataOldValue: true
+  });
 }
 
 async function initialize() {

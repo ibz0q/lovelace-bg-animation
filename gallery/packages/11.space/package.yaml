@@ -10,7 +10,7 @@ template: |
     <style>
             * { margin:0; padding:0; } 
             body { background-color: hsl(256, 100%, 5%); font: 30px sans-serif; }
-            canvas { position: absolute; }
+            canvas { position: absolute;  height: 100% !important; width: 100% !important; }
 
     </style>
         <canvas id='c'></canvas>

@@ -12,12 +12,12 @@ The repo features the following artists with incredible works they've shared on 
  - Matei Copot (6)
  - Bas Groothedde (5)
  - Akimitsu Hamamuro (2)
- - You (1)
  - Rahul (1)
  - Takeshi Kano (1)
  - cssscript.com (1)
  - alphardex (1)
  - Tim Severien (1)
+ - DanDog (1)
  - Alex Andrix (1)
  - Andreas Wilcox (1)
 
@@ -117,7 +117,7 @@ We will take steps to minimize risk.
 ### Features TODO
 
 - Add redraw 
-- Add overlay div 
+- Add overlay div (Done)
 - Iframe transitions 
 - Media controls (Done)
 - Fix iframe writes (Done)
