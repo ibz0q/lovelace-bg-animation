@@ -2,6 +2,8 @@
 
 Current Release: **Development**
 
+![alt text](image.png)
+
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
 ## 🎀 Tribute to the artists 
