@@ -45,7 +45,6 @@ Code inside Gallery carries the Licenses and Copyrights of their authors respect
 
 You can install this plugin using HACS and manually. 
 
-
 ## Usage
 
 Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
@@ -117,17 +116,16 @@ We will take steps to minimize risk.
 
 ### Features TODO
 
-- Media controls
-- Fix iframe writes (Done)
 - Add redraw 
-- Add duration (Done)
-- Add overlay div
+- Add overlay div 
 - Iframe transitions 
-- postMessage 
+- Media controls (Done)
+- Fix iframe writes (Done)
+- Add duration (Done)
 - Auto generate metadata 
   - Video/Picture Preview
   - HTML
-- Card UI editor 
 - Add opportunistic sanity check for path (Done)
 - Add BaseURL (Done)
 - Allow for multi instance (Done)
+- postMessage 
