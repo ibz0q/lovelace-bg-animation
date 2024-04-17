@@ -1,52 +1,36 @@
-name: Generate Manifest and Deploy to Pages
+name: Generate and Deploy
 
 on:
   push:
-    paths:
-      - 'gallery/**'
-  pull_request:
-    paths:
-      - 'gallery/**'
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install Dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-    - name: Create metadata 
-      run: node ./util/create-metadata.js 
+      - name: Generate Manifest
+        run: node create-readme-metadata.js
 
-    - name: Create gallery.manifest
-      run: node ./util/create-manifest.js
-      
-    - name: Commit and Push
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Generated gallery.manifest file" || echo "No changes to commit"
-        git push
+      - name: Commit and Push
+        run: |
+          git checkout -b generated-branch-$(date +'%Y%m%d%H%M%S')
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Generated gallery.manifest file" || echo "No changes to commit"
+          git push origin HEAD
 
   deploy:
     needs: build
@@ -56,14 +40,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
+
       - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/github-script@v5
         with:
-          # Upload entire repository
+          script: |
+            github.repos.createPagesSite({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: website
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: './'
