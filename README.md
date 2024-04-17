@@ -2,7 +2,7 @@
 
 Current Release: **Development**
 
-[![Video/Image Demo](docs/image.png)](docs/demo.webm)
+![[![Video/Image Demo](docs/image.png)](https://i.imgur.com/9JHwDRS.mp4)
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
