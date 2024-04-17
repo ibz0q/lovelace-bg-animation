@@ -10,5 +10,10 @@ module.exports = {
   output: {
     filename: 'bg-animation.min.js',
     path: path.resolve(__dirname, 'dist'),
-  }
+  },
+  optimization: {
+    removeAvailableModules: false,
+    removeEmptyChunks: false,
+    splitChunks: false,
+  },
 };
