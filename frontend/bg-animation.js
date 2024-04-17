@@ -313,6 +313,10 @@ function initializeLovelaceVariables() {
 }
 
 function initializeBackgroundElements() {
+  if (document.querySelector("#bg-animation-container")) {
+    document.querySelector("#bg-animation-container").remove();
+  }
+
   lovelaceUI.bgRootElement = document.createElement("div");
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.style;
@@ -457,12 +461,10 @@ async function initializeObservers() {
     for (let mutation of mutations) {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
-          console.log("viewElement observer")
           await getGalleryRootManifest();
           await setupPlaylist();
 
           if (removedNode === lovelaceUI.viewElement) {
-            console.log('lovelaceUI.viewElement has been removed');
             observer.disconnect();
           }
 
@@ -471,7 +473,6 @@ async function initializeObservers() {
     }
 
   });
-
 
   domObserver.viewElement.observe(lovelaceUI.viewElement, {
     characterData: true,
@@ -594,7 +595,7 @@ class LovelaceBgAnimation extends HTMLElement {
           "description": {
             show: true,
             style: false,
-            name: "Name"
+            name: " / "
           },
           "author": {
             show: true,
@@ -602,6 +603,7 @@ class LovelaceBgAnimation extends HTMLElement {
             name: "Author"
           }
         },
+        "speed": this.config.speed ?? 60,
         "show": this.config.show ?? true,
         "style": this.config.style ?? false,
       }
@@ -676,17 +678,16 @@ class LovelaceBgAnimation extends HTMLElement {
 
           let mediaInfo = `
           <div class="media-ticker">
-            ${cardConfig.ticker.labels.name.show ? `<span class="soft" ${cardConfig.ticker.labels.name.style ? 'style="' + cardConfig.ticker.labels.name.style + '"' : ''}>${cardConfig.ticker.labels.name.name}:</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
-            ${cardConfig.ticker.labels.description.show ? `<span class="soft" ${cardConfig.ticker.labels.description.style ? 'style="' + cardConfig.ticker.labels.description.style + '"' : ''}>${cardConfig.ticker.labels.description.name}:</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
-            ${cardConfig.ticker.labels.author.show ? `<span class="soft" ${cardConfig.ticker.labels.author.style ? 'style="' + cardConfig.ticker.labels.author.style + '"' : ''}>${cardConfig.ticker.labels.author.name}:</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}
-            <i class="toggle-button fa ${window.__global_minterval ? 'fa-pause' : 'fa-play'}"></i>
+          ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
+          ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
+          ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}            <i class="toggle-button fa ${window.__global_minterval ? 'fa-pause' : 'fa-play'}"></i>
           </div>
         `;
 
           this.content.querySelector('.media-name-container').innerHTML = mediaInfo;
           var tickerSelector = this.content.querySelector('.media-ticker');
           var tickerLength = tickerSelector.offsetWidth;
-          var timeTaken = tickerLength / 60;
+          var timeTaken = tickerLength / cardConfig?.ticker?.speed ?? 60;
           tickerSelector.style.animationDuration = timeTaken + "s";
         });
 

@@ -24,6 +24,7 @@ The repo features the following artists with incredible works they've shared on 
  - DanDog (1)
  - Alex Andrix (1)
  - Andreas Wilcox (1)
+
 ### Donations and Tips
 
 Please directly tip the artists you found most inspiring.
@@ -46,7 +47,31 @@ Code inside Gallery carries the Licenses and Copyrights of their authors respect
 
 ## Install
 
-You can install this plugin using HACS and manually. 
+You can install this plugin two ways: 
+
+### Option A: HACS (only supports remote loading)
+
+Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace and click "Add". 
+
+Click the Explore & Download Repositories button and search for "Live Background Animations" open and click Download.
+
+### Option B: Manual (supports local & remote loading)
+
+Download the latest release zip. Extract the contents the folder into www of Home Assistant: homeassistant\config\www\lovelace-background-animation
+
+Files should be placed so they exist like this:
+
+homeassistant\config\www\lovelace-background-animation\
+homeassistant\config\www\lovelace-background-animation\package.json
+homeassistant\config\www\lovelace-background-animation\dist\
+homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
+
+Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/frontend/bg-animation.min.js -> Javascript Module and click Create.
+
+---
+
+That's it, if you have a vallid configuration (see below). You should see a background animation immediately.
+
 
 ## Usage
 
@@ -55,8 +80,8 @@ Config needs to be placed inside Lovelaces config file, you can do this inside t
 ` * = Optional `
 
 ```yaml
-bg-animation: # Root configuration object
-  duration: 5000 # * Duration of the animation in milliseconds
+bg-animation: 
+  duration: 5000 # * Duration of the animation in milliseconds (global)
   redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
   style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
       background: transparent;
@@ -81,21 +106,23 @@ bg-animation: # Root configuration object
         - id: 15.sound # Identifier for another background
 ```
 
-### Offline mode
+### Offline support
 
-Offline mode is a core feature, but by default the plugin connects to this repos Github page. 
+Although offline mode was a core feature. Backgrounds (packages) also need to load resources locally, and by default the plugin connects to this repos Github page. 
 
 You can override this by using the below.
 
 ```yaml
-bg-animation: # * Root configuration object
+bg-animation: 
   type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
   localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local for some reason
   remoteRootPath: "" # * Specify your own remote path like the one in this repo
   manifestFileName: "" # * Change the name of the manifest
 ```
 
-This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.
+This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.  
+
+**HACS Note:** HACS has a limitation which restricts developers ability to ship bundled files. If you choose to go with HACS and want offline support you will need to copy gallery folders into the HACS install space (/www/community/lovelace-bg-animation/*), it seems there is no way to bundle extra files currently and this is unlikely to change.
 
 ### Adding your own packages 
 
@@ -103,7 +130,9 @@ Everything is self contained inside package.yaml. Instead of embedding plain HTM
 
 Although you may see some packages.yaml contain remote scripts like three.js or Stats.js. Please try to inline or locally save assets as some browsers demonstrate a flash upon loading. This can be prevented using those methods and I am in the process of inling the rest of these.
 
-I accept contributions. Because Javascript is allowed, you must be a reputable user on Github. Submissions need to also be attached to an issue that contains the following info:
+## Contributions
+
+PRs need to be attached to an issue that contains the following info:
 
 - Image Preview
 - name: description: author: source: 
@@ -113,9 +142,7 @@ I accept contributions. Because Javascript is allowed, you must be a reputable u
 - Have you audited the code yourself?
 - Is it safe?
 
-Security is the primary requirement, any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant by nature has a large attack surface. Third party unaudited code presents a big risk.
-
-We will take steps to minimize risk. 
+Because Javascript is allowed, you must be a reputable user on Github. Security is the primary requirement, any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant has quite a big attack surface. We will take steps to minimize risk. 
 
 ### Features TODO
 

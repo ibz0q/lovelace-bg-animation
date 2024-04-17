@@ -4,7 +4,7 @@ const YAML = require('yaml');
 process.chdir(__dirname);
 
 const galleryDir = '../gallery/packages';
-const documentationPath = '../examples/DOCUMENTATION.md';
+const documentationPath = '../docs/DOCUMENTATION.md';
 
 const authors = {};
 const packages = [];
@@ -27,7 +27,7 @@ function readDirectory(dir) {
       authors[author] = (authors[author] || 0) + 1;
       // Get the directory name containing the package.yaml file
       const packageName = path.basename(path.dirname(filePath));
-      packages.push(`      - id: ${packageName}`);
+      packages.push(`      # Author: ${packageData.metadata.author}\n      # ${packageData.metadata.description}\n      - id: ${packageName} \n`);
     }
   }
 }
