@@ -237,7 +237,7 @@ function initializeRuntimeVariables() {
       "type": rootPluginConfig.gallery?.type ?? "remote",
       "localRootPath": rootPluginConfig.gallery?.localRootPath ?? "/local/lovelace-bg-animation",
       "manifestFileName": rootPluginConfig.gallery?.manifestFileName ?? "gallery.manifest",
-      "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io"
+      "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"
     },
     "overlay": {
       "show": rootPluginConfig.overlay?.show ?? true,

@@ -90,7 +90,7 @@ You can override this by using the below.
 ```yaml
 bg-animation: # * Root configuration object
   type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
-  localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local/www for some reason
+  localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local for some reason
   remoteRootPath: "" # * Specify your own remote path like the one in this repo
   manifestFileName: "" # * Change the name of the manifest
 ```

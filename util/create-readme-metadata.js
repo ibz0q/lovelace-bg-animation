@@ -4,8 +4,10 @@ const YAML = require('yaml');
 process.chdir(__dirname);
 
 const galleryDir = '../gallery/packages';
+const documentationPath = '../examples/DOCUMENTATION.md';
 
 const authors = {};
+const packages = [];
 
 const ignoreDirs = ['0.test'];
 
@@ -23,6 +25,9 @@ function readDirectory(dir) {
       const packageData = YAML.parse(fs.readFileSync(filePath, 'utf8'));
       const author = packageData.metadata.author;
       authors[author] = (authors[author] || 0) + 1;
+      // Get the directory name containing the package.yaml file
+      const packageName = path.basename(path.dirname(filePath));
+      packages.push(`      - id: ${packageName}`);
     }
   }
 }
@@ -45,3 +50,17 @@ readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, readmeContent, 'utf8');
+// Check if the DOCS.MD file exists
+if (!fs.existsSync(documentationPath)) {
+  // If it doesn't exist, create it with the initial content
+  fs.writeFileSync(documentationPath, '### Documentation\n\nAll current packages\n\n```yaml\n\n```', 'utf8');
+}
+
+// Write the package names to the DOCS.MD file
+let documentationContent = fs.readFileSync(documentationPath, 'utf8');
+regex = /(### Documentation\n\nAll current packages\n\n```yaml\n)([\s\S]*?)(\n```)/;
+documentationContent = documentationContent.replace(regex, `$1${packages.join('\n')}$3`);
+
+console.log(documentationContent)
+
+fs.writeFileSync(documentationPath, documentationContent, 'utf8');
