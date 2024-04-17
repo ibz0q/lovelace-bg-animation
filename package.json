@@ -8,7 +8,7 @@
   "name": "lovelace-bg-animation",
   "description": "A small Lovelace plugin that replaces the background with a animated one, various animations available.",
   "version": "1.0.1",
-  "main": "bg-animation.js",
+  "main": "frontend/bg-animation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production"

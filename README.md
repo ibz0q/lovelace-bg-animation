@@ -40,7 +40,7 @@ I have tried my best to find references and credit the artists who's original wo
 
 This project is compromised of the works of various artists each either their own licensing terms, none of this projects license are imposed. Copyrights are preserved respectively. 
 
-For this reason, code belonging to this repo (bg-annimation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International.
+For this reason, code belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International.
 
 Code inside Gallery carries the Licenses and Copyrights of their authors respectively. 
 
@@ -132,4 +132,6 @@ We will take steps to minimize risk.
 - Add BaseURL (Done)
 - Allow for multi instance (Done)
 - postMessage 
-- Default gallery to use all, if nothing is specified.
+- Default gallery to use all, if nothing is specified. (Removed)
+- Add a video background 
+- Serialize data passthrough

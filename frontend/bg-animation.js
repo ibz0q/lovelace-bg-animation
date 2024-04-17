@@ -45,7 +45,7 @@ async function getGalleryRootManifest() {
 
       let url;
       if (rootPluginConfig.gallery.type == "local") {
-        url = window.location.origin + lovelaceUI.pluginInstallPath + "/gallery/" + rootPluginConfig.gallery.manifestFileName
+        url = window.location.origin + lovelaceUI.pluginAssetPath + "/gallery/" + rootPluginConfig.gallery.manifestFileName
       } else {
         url = rootPluginConfig.gallery.remoteRootUrl + "/gallery/" + rootPluginConfig.gallery.manifestFileName
       }
@@ -79,7 +79,7 @@ async function getPackageManifest(packageConfig) {
     } else {
       let url;
       if (rootPluginConfig.gallery.type == "local") {
-        url = window.location.origin + lovelaceUI.pluginInstallPath + "/gallery/packages/" + packageManifestId + "/" + "package.yaml"
+        url = window.location.origin + lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageManifestId + "/" + "package.yaml"
       } else {
         url = rootPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestId + "/" + "package.yaml"
       }
@@ -111,7 +111,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
     } else {
       let environment = {}
       if (rootPluginConfig.gallery.type == "local") {
-        environment["basePath"] = window.location.origin + lovelaceUI.pluginInstallPath + "/gallery/packages/" + packageManifestName + "/"
+        environment["basePath"] = window.location.origin + lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageManifestName + "/"
       } else {
         environment["basePath"] = rootPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestName + "/"
       }
@@ -237,7 +237,7 @@ function initializeRuntimeVariables() {
       "type": rootPluginConfig.gallery?.type ?? "remote",
       "localRootPath": rootPluginConfig.gallery?.localRootPath ?? "/local/lovelace-bg-animation",
       "manifestFileName": rootPluginConfig.gallery?.manifestFileName ?? "gallery.manifest",
-      "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"
+      "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io"
     },
     "overlay": {
       "show": rootPluginConfig.overlay?.show ?? true,
@@ -275,13 +275,17 @@ function initializeRuntimeVariables() {
     "sort": ["random", "reverse", "id_asc", "id_desc"].includes(rootPluginConfig?.sort) ? rootPluginConfig.sort : "random"
   }
 
-  lovelaceUI.pluginInstallPath = (() => {
-    if (rootPluginConfig.gallery?.localRootPath) {
-      return rootPluginConfig.gallery.localRootPath;
-    } else if (opportunisticallyDetermineLocalInstallPath()) {
-      return opportunisticallyDetermineLocalInstallPath();
-    } else {
-      return rootPluginConfig.gallery.localRootPath;
+  lovelaceUI.pluginAssetPath = (() => {
+    if (rootPluginConfig.gallery?.type == "local") {
+      if (rootPluginConfig.gallery?.localRootPath) {
+        return rootPluginConfig.gallery.localRootPath;
+      } else if (opportunisticallyDetermineLocalInstallPath()) {
+        return opportunisticallyDetermineLocalInstallPath();
+      } else {
+        return rootPluginConfig.gallery.localRootPath;
+      }
+    } else{
+      return rootPluginConfig.gallery.remoteRootUrl;
     }
   })();
 }
@@ -543,20 +547,20 @@ class LovelaceBgAnimation extends HTMLElement {
     super();
     if (rootPluginConfig !== undefined) {
       this.styles = `
-      @import url('${lovelaceUI.pluginInstallPath}/frontend/css/fontawesome.min.css');
-      @import url('${lovelaceUI.pluginInstallPath}/frontend/css/regular.min.css');
-      @import url('${lovelaceUI.pluginInstallPath}/frontend/css/solid.min.css');
+      @import url('${lovelaceUI.pluginAssetPath}/frontend/css/fontawesome.min.css');
+      @import url('${lovelaceUI.pluginAssetPath}/frontend/css/regular.min.css');
+      @import url('${lovelaceUI.pluginAssetPath}/frontend/css/solid.min.css');
       @font-face {
         font-family: 'Chivo Mono';
         font-style: normal;
         font-weight: 500;
-        src: local('Chivo Mono'), url('${lovelaceUI.pluginInstallPath}/frontend/webfonts/ChivoMono[wght].woff') format('woff');
+        src: local('Chivo Mono'), url('${lovelaceUI.pluginAssetPath}/frontend/webfonts/ChivoMono[wght].woff') format('woff');
     }
     @font-face {
         font-family: 'Chivo Mono';
         font-style: italic;
         font-weight: 500;
-        src: local('Chivo Mono'), url('${lovelaceUI.pluginInstallPath}/frontend/webfonts/ChivoMono-Italic[wght].woff') format('woff');
+        src: local('Chivo Mono'), url('${lovelaceUI.pluginAssetPath}/frontend/webfonts/ChivoMono-Italic[wght].woff') format('woff');
     }
       `;
     }
@@ -611,7 +615,7 @@ class LovelaceBgAnimation extends HTMLElement {
             <style>
               ${this.styles}
             </style>
-            <link rel="stylesheet" href="${lovelaceUI.pluginInstallPath}/frontend/css/card.css">
+            <link rel="stylesheet" href="${lovelaceUI.pluginAssetPath}/frontend/css/card.css">
             <ha-card>
               <div class="card-content">
                 <div class="media-player">
