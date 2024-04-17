@@ -40,7 +40,8 @@ async function getGalleryRootManifest() {
   try {
     let checkCacheGalleryManifest = retrieveCache("HASSanimatedBg_galleryRootManifest");
     if (checkCacheGalleryManifest && rootPluginConfig.cache === true) {
-      return checkCacheGalleryManifest;
+      galleryRootManifest = checkCacheGalleryManifest
+      return true;
     } else {
 
       let url;
@@ -59,7 +60,6 @@ async function getGalleryRootManifest() {
       if (rootPluginConfig.cache === true) {
         storeCache("HASSanimatedBg_galleryRootManifest", responseJson)
       }
-
       galleryRootManifest = responseJson
     }
 
@@ -153,7 +153,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
             case 'parameters':
             case 'parameter':
             case 'param':
-             return (packageConfig.parameters && packageConfig.parameters[key]) ? packageConfig.parameters[key] : packageManifest.parameters.find(item => item.id == key)?.default || match;
+              return (packageConfig.parameters && packageConfig.parameters[key]) ? packageConfig.parameters[key] : packageManifest.parameters.find(item => item.id == key)?.default || match;
             case 'metadata':
             case 'meta':
               return packageManifest.metadata?.[key] || match;
@@ -525,12 +525,15 @@ async function initializeObservers() {
 }
 
 async function initialize() {
+  console.log("Initializing start.")
+
   let initializeLovelaceVars = initializeLovelaceVariables()
   if (initializeLovelaceVars == true) {
     await initializeObservers();
   } else {
     console.log("Failed to initialize lovelace variables from this view.")
   }
+  console.log("Initializing middle.")
 
   if (initializeLovelaceVars == true && lovelaceUI.lovelaceObject.config["bg-animation"]) {
     initializeRuntimeVariables();
