@@ -123,10 +123,14 @@ bg-animation:
     view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
       lights: # Settings for the 'lights' view
         - id: 11.space # Identifier for a background
+          duration: 40000 
         - id: 15.sound # Identifier for another background
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: 11.space # Identifier for a background
+          duration: 40000
         - id: 15.sound # Identifier for another background
+          duration: 40000 
+
 ```
 
 ### Offline support
@@ -137,10 +141,11 @@ You can override this by using the below.
 
 ```yaml
 bg-animation: 
-  type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
-  localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local for some reason
-  remoteRootPath: "" # * Specify your own remote path like the one in this repo
-  manifestFileName: "" # * Change the name of the manifest
+  gallery:
+    type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
+    localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local for some reason
+    remoteRootPath: "" # * Specify your own remote path like the one in this repo
+    manifestFileName: "" # * Change the name of the manifest
 ```
 
 This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.  
