@@ -1,5 +1,5 @@
 {
     "name": "Animated Live Backgrounds",
-    "filename": "frontend/bg-animation.min.js",
+    "filename": "dist/bg-animation.min.js",
     "render_readme": true
   }
