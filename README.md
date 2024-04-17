@@ -83,6 +83,23 @@ That's it, if you have a vallid configuration (see below). You should see a back
 
 Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
+### Minimal Configuration (To get started)
+
+```yaml
+bg-animation:
+  duration: 60000
+  header: # Sets the header transparent (Optional)
+    transparent: true
+  background:
+    global: # Add and remove as required
+      - id: 11.space
+      - id: 13.cyber-lights
+      - id: 15.sound
+      - id: 7.rainbowness
+      - id: 27.tron
+      - id: 7.rainbowness
+```
+### Full configuration options
 ` * = Optional `
 
 ```yaml
