@@ -23,14 +23,13 @@ jobs:
       - name: Generate Manifest
         run: node create-readme-metadata.js
 
-      - name: Commit and Push
+      - name: Push changes
         run: |
-          git checkout -b generated-branch-$(date +'%Y%m%d%H%M%S')
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Generated gallery.manifest file" || echo "No changes to commit"
-          git push origin HEAD
+          git push origin "${GITHUB_REF#refs/heads/}"
 
   deploy:
     needs: build
