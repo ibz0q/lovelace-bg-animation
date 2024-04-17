@@ -55,22 +55,24 @@ Code inside Gallery carries the Licenses and Copyrights of their authors respect
 
 You can install this plugin two ways: 
 
-### Option A: HACS (only supports remote loading)
+### Option 1: HACS (only supports remote loading)
 
 Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace and click "Add". 
 
 Click the Explore & Download Repositories button and search for "Live Background Animations" open and click Download.
 
-### Option B: Manual (supports local & remote loading)
+### Option 2: Manual (supports local & remote loading)
 
 Download the latest release zip. Extract the contents the folder into www of Home Assistant: homeassistant\config\www\lovelace-background-animation
 
-Files should be placed so they exist like this:
-
+***Files should be placed so they exist like this:***
+```
 homeassistant\config\www\lovelace-background-animation\
 homeassistant\config\www\lovelace-background-animation\package.json
 homeassistant\config\www\lovelace-background-animation\dist\
 homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
+```
+etc.
 
 Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/frontend/bg-animation.min.js -> Javascript Module and click Create.
 
@@ -87,7 +89,7 @@ Config needs to be placed inside Lovelaces config file, you can do this inside t
 
 ```yaml
 bg-animation:
-  duration: 60000
+  duration: 60000 # Global duration of each bg
   header: # Sets the header transparent (Optional)
     transparent: true
   background:
@@ -135,7 +137,7 @@ bg-animation:
 
 ### Offline support
 
-Although offline mode was a core feature. Backgrounds (packages) also need to load resources locally, and by default the plugin connects to this repos Github page. 
+Offline mode was a core feature, however backgrounds (packages) too need to load resources locally for this to work. So the plugin by default is remote (connects to this repos Github page https://ibz0q.github.io/lovelace-bg-animation to download resources).
 
 You can override this by using the below.
 
@@ -148,9 +150,9 @@ bg-animation:
     manifestFileName: "" # * Change the name of the manifest
 ```
 
-This will tell the plugin to load everything from Home Assistant only. It's also useful if you wish to develop and test your own packages too.  
+This will tell the plugin to load everything locally. It's also useful if you wish to develop and test your own packages.  
 
-**HACS Note:** HACS has a limitation which restricts developers ability to ship bundled files. If you choose to go with HACS and want offline support you will need to copy gallery folders into the HACS install space (/www/community/lovelace-bg-animation/*), it seems there is no way to bundle extra files currently and this is unlikely to change.
+**HACS Note:** There's a limitation which restricts HACS developers ability to ship bundled files. If you choose to go with HACS and want offline support you will need to copy gallery folders into the HACS install space (/www/community/lovelace-bg-animation/*), 
 
 ### Adding your own packages 
 
