@@ -2,7 +2,11 @@
 
 Current Release: **Development**
 
+<p align="center">
+
 ![Video/Image Demo](https://i.imgur.com/PLlO4cA.gif)
+
+</p>
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
