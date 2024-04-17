@@ -8,6 +8,8 @@ Current Release: **Development**
 
 </p>
 
+**Higher quality video: https://i.imgur.com/f3hLlRu.mp4**
+
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
 ## 🎀 Tributes 
