@@ -256,7 +256,7 @@ function initializeRuntimeVariables() {
             style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
             cache: item?.cache !== undefined ? item.cache : true,
             duration: item?.duration ?? false,
-            redraw: item?.redraw ?? 0
+            redraw: item?.redraw ?? 0,
           }))
           : false,
       "view": rootPluginConfig.background.view
@@ -270,7 +270,7 @@ function initializeRuntimeVariables() {
           }));
           return acc;
         }, {})
-        : false
+        : false,
     },
     "sort": ["random", "reverse", "id_asc", "id_desc"].includes(rootPluginConfig?.sort) ? rootPluginConfig.sort : "random"
   }

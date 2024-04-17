@@ -6,9 +6,11 @@ Current Release: **Development**
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
-## 🎀 Tribute to the artists 
+## 🎀 Tributes 
 
-The repo features the following artists with incredible works they've shared on the web. Please support them. In order featured works in this repo.
+The repo features the following artists with incredible works they've shared on the web. In order featured works in this repo.
+
+#### Artists featured
 
  - Ben Matthews (7)
  - Matei Copot (6)
@@ -22,7 +24,6 @@ The repo features the following artists with incredible works they've shared on 
  - DanDog (1)
  - Alex Andrix (1)
  - Andreas Wilcox (1)
-
 ### Donations and Tips
 
 Please directly tip the artists you found most inspiring.
@@ -131,3 +132,4 @@ We will take steps to minimize risk.
 - Add BaseURL (Done)
 - Allow for multi instance (Done)
 - postMessage 
+- Default gallery to use all, if nothing is specified.

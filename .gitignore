@@ -4,3 +4,5 @@ import/
 output/
 .vscode/
 .vscode
+frontend/bg-animation.min.js
+/frontend/bg-animation.min.js
