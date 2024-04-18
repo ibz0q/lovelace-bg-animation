@@ -217,7 +217,7 @@ function opportunisticallyDetermineLocalInstallPath() {
       }
       let src = memoryCache.scriptTags.src.replace(window.location.origin, '');
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
-      memoryCache.installPath = ['/dist/', '/dist', 'dist'].reduce((acc, item) => acc.replace(item, ''), src);
+      memoryCache.installPath = ['/dist/'].reduce((acc, item) => acc.replace(item, '/dist'), src);
     }
     return memoryCache.installPath;
   } catch (error) {
@@ -235,7 +235,7 @@ function initializeRuntimeVariables() {
   rootPluginConfig = {
     "gallery": {
       "type": rootPluginConfig.gallery?.type ?? "remote",
-      "localRootPath": rootPluginConfig.gallery?.localRootPath ?? "/local/lovelace-bg-animation",
+      "localRootPath": rootPluginConfig.gallery?.localRootPath ?? "/local/lovelace-bg-animation/dist",
       "manifestFileName": rootPluginConfig.gallery?.manifestFileName ?? "gallery.manifest",
       "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"
     },

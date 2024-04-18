@@ -99,7 +99,6 @@ bg-animation:
       - id: 15.sound
       - id: 7.rainbowness
       - id: 27.tron
-      - id: 7.rainbowness
 ```
 ### Full configuration options
 ` * = Optional `

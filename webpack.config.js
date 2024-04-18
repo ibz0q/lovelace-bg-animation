@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './frontend//bg-animation.js',
@@ -16,4 +17,13 @@ module.exports = {
     removeEmptyChunks: false,
     splitChunks: false,
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        { from: './frontend/css', to: './frontend/css' },
+        { from: './frontend/webfonts', to: './frontend/webfonts' },
+        { from: './gallery', to: 'gallery' },
+      ],
+    }),
+  ],
 };
