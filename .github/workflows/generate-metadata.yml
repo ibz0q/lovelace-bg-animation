@@ -3,7 +3,7 @@ name: Generate Metadata
 on: 
   push:
     paths:
-      - 'gallery/**'
+      - 'gallery/packages/**'
   workflow_dispatch:
 
 jobs:
@@ -35,5 +35,5 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit -m "Webpack build from GitHub Actions" || exit 0
+          git commit -m "Generate Metadata Action" || exit 0
           git push

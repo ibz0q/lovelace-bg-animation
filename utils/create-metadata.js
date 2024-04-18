@@ -55,15 +55,15 @@ async function processPackageManifest(packageManifestObject) {
 
         if (typeof window !== 'undefined') {
             if (packageManifestObject.data?.helpers?.insert_baseurl == true) {
-              let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
-              if (packageManifestObject.data.template.includes('<head>')) {
-                packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
-              } else if (packageManifestObject.data.template.includes('<html>')) {
-                packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
-              }
+                let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
+                if (packageManifestObject.data.template.includes('<head>')) {
+                    packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
+                } else if (packageManifestObject.data.template.includes('<html>')) {
+                    packageManifestObject.data.template = packageManifestObject.data.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
+                }
             }
-          }
-  
+        }
+
         if (packageManifestObject.data.template) {
 
             packageManifestObject.data.template__processed = packageManifestObject.data.template
@@ -107,7 +107,11 @@ async function processPackageManifest(packageManifestObject) {
 }
 
 async function readDirectory(dir) {
-    fs.rmSync(metadataFolder, { recursive: true, force: true });
+    if (process.env.GITHUB_ACTIONS !== 'true') {
+        fs.rmSync(metadataFolder, { recursive: true, force: true });
+        console.log("Script is being run inside a GitHub Action and will not delete the metadata folder.")
+    }
+
     fs.mkdirSync(metadataFolder, { recursive: true });
 
     const files = fs.readdirSync(dir);
@@ -131,6 +135,7 @@ async function readDirectory(dir) {
             if ((manifestEntry && manifestEntry.hash === folderHash)) {
                 console.log(`Hash is the same for ${packageName}, skipping.`);
                 if (process.env.GITHUB_ACTIONS === 'true') {
+                    console.log("Script is being run inside a GitHub Action, skipping...");
                     break;
                 }
             }
