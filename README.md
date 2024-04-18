@@ -182,18 +182,19 @@ Because Javascript is allowed, you must be a reputable user on Github. Security 
 ### Features TODO
 
 - Add redraw 
-- Add overlay div (Done)
 - Iframe transitions 
-- Media controls (Done)
-- Fix iframe writes (Done)
-- Add duration (Done)
 - Auto generate metadata 
   - Video/Picture Preview
   - HTML
-- Add opportunistic sanity check for path (Done)
-- Add BaseURL (Done)
-- Allow for multi instance (Done)
 - postMessage 
 - Default gallery to use all, if nothing is specified. (Removed)
 - Add a video background 
 - Serialize data passthrough
+- Submit to HACS once beta version is mature
+- Add overlay div (Done)
+- Media controls (Done)
+- Fix iframe writes (Done)
+- Add duration (Done)
+- Add opportunistic sanity check for path (Done)
+- Add BaseURL (Done)
+- Allow for multi instance (Done)
