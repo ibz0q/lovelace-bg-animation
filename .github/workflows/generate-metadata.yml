@@ -1,4 +1,4 @@
-name: Generate and Deploy
+name: Generate Metadata
 
 on: 
   push:
@@ -22,7 +22,7 @@ jobs:
         run: npm install
 
       - name: Generate Manifest
-        run: node ./utils/create-readme-metadata.js
+        run: node ./utils/create-manifest.js
 
       - name: Update documentation with package metadata
         run: node ./utils/create-docs.js
