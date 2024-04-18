@@ -8,7 +8,6 @@ on:
       - 'webpack.config.js'
   workflow_dispatch:
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,6 +24,9 @@ jobs:
 
     - name: Install Dependencies
       run: npm install
+
+    - name: Clear Dist Folder
+      run: rm -rf ./dist/*W
 
     - name: Build
       run: npm run build
