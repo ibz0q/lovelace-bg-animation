@@ -55,13 +55,13 @@ Code inside Gallery carries the Licenses and Copyrights of their authors respect
 
 You can install this plugin two ways: 
 
-### Option 1: HACS (only supports remote loading)
+### Option 1: HACS 
 
 Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace and click "Add". 
 
 Click the Explore & Download Repositories button and search for "Live Background Animations" open and click Download.
 
-### Option 2: Manual (supports local & remote loading)
+### Option 2: Manual 
 
 Download the latest release zip. Extract the contents the folder into www of Home Assistant: homeassistant\config\www\lovelace-background-animation
 
@@ -71,8 +71,8 @@ homeassistant\config\www\lovelace-background-animation\
 homeassistant\config\www\lovelace-background-animation\package.json
 homeassistant\config\www\lovelace-background-animation\dist\
 homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
+...
 ```
-etc.
 
 Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/frontend/bg-animation.min.js -> Javascript Module and click Create.
 
@@ -151,8 +151,6 @@ bg-animation:
 ```
 
 This will tell the plugin to load everything locally. It's also useful if you wish to develop and test your own packages.  
-
-**HACS Note:** There's a limitation which restricts HACS developers ability to ship bundled files. If you choose to go with HACS and want offline support you will need to copy gallery folders into the HACS install space (/www/community/lovelace-bg-animation/*), 
 
 ### Adding your own packages 
 

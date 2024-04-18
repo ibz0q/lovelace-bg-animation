@@ -361,7 +361,7 @@ function changeDefaultLovelaceStyles() {
   lovelaceUI.rootStyleElement.innerHTML = cssStyle;
 }
 
-function processBackgroundFrame(packageConfig, packageManifest) {
+async function processBackgroundFrame(packageConfig, packageManifest) {
   lovelaceUI.iframeElement.style.cssText = packageConfig.style;
   lovelaceUI.iframeElement.srcdoc = packageManifest.template__processed;
 }
@@ -680,11 +680,11 @@ class LovelaceBgAnimation extends HTMLElement {
           let cardConfig = this.getCardConfig();
 
           let mediaInfo = `
-          <div class="media-ticker">
-          ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
-          ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
-          ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}            <i class="toggle-button fa ${window.__global_minterval ? 'fa-pause' : 'fa-play'}"></i>
-          </div>
+            <div class="media-ticker">
+            ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
+            ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
+            ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}            <i class="toggle-button fa ${window.__global_minterval ? 'fa-pause' : 'fa-play'}"></i>
+            </div>
         `;
 
           this.content.querySelector('.media-name-container').innerHTML = mediaInfo;
