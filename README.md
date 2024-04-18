@@ -139,7 +139,7 @@ The plugin also comes with a card:
 type: custom:lovelace-bg-animation
 ```
 
-![alt text](docs\card.png)
+![alt text](docs/card.png)
 
 
 ### Offline support
