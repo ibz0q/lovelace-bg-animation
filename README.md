@@ -68,13 +68,12 @@ Download the latest release zip. Extract the contents the folder into www of Hom
 ***Files should be placed so they exist like this:***
 ```
 homeassistant\config\www\lovelace-background-animation\
-homeassistant\config\www\lovelace-background-animation\package.json
 homeassistant\config\www\lovelace-background-animation\dist\
 homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
 ...
 ```
 
-Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/frontend/bg-animation.min.js -> Javascript Module and click Create.
+Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/dist/bg-animation.min.js -> Javascript Module and click Create.
 
 ---
 
