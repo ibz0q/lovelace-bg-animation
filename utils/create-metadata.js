@@ -130,7 +130,9 @@ async function readDirectory(dir) {
 
             if ((manifestEntry && manifestEntry.hash === folderHash)) {
                 console.log(`Hash is the same for ${packageName}, skipping.`);
-                // break;
+                if (process.env.GITHUB_ACTIONS === 'true') {
+                    break;
+                }
             }
 
             console.log(`Generating.. ${packageName}`);
