@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: v1.0.7-beta
+Current Release: v1.0.8-beta
 
 <p align="center">
 
@@ -132,6 +132,15 @@ bg-animation:
           duration: 40000 
 
 ```
+
+The plugin also comes with a card: 
+
+```YAML
+type: custom:lovelace-bg-animation
+```
+
+![alt text](docs\card.png)
+
 
 ### Offline support
 
