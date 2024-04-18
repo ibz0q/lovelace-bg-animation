@@ -2,7 +2,7 @@ const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: './frontend//bg-animation.js',
+  entry: './frontend/bg-animation.js',
   mode: 'production',
   watchOptions: {
     aggregateTimeout: 200,
@@ -22,7 +22,7 @@ module.exports = {
       patterns: [
         { from: './frontend/css', to: './frontend/css' },
         { from: './frontend/webfonts', to: './frontend/webfonts' },
-        { from: './gallery', to: 'gallery' },
+        { from: './gallery/packages', to: './gallery/packages' },
       ],
     }),
   ],
