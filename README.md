@@ -188,11 +188,11 @@ Because Javascript is allowed, you must be a reputable user on Github. Security 
   - HTML
 - postMessage 
 - Default gallery to use all, if nothing is specified. (Removed)
-- Add a video background 
-- Serialize data passthrough
+- Add video background package 
+- Serialized data passthrough to Iframe
 - Submit to HACS once beta version is mature
 - Add overlay div (Done)
-- Media controls (Done)
+- Media controls (Lovelace Card) (Done)
 - Fix iframe writes (Done)
 - Add duration (Done)
 - Add opportunistic sanity check for path (Done)
