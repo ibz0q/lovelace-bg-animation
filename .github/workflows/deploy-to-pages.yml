@@ -1,13 +1,14 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
-on:
-  # Runs on pushes targeting the default branch
+on: 
   push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+    paths:
+      - 'frontend/**'
+      - 'gallery/**'
+      - 'webpack.config.js'
   workflow_dispatch:
+
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:

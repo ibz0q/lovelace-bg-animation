@@ -1,9 +1,9 @@
 name: Generate and Deploy
 
-on:
+on: 
   push:
-    branches:
-      - main
+    paths:
+      - 'gallery/**'
   workflow_dispatch:
 
 jobs:
@@ -22,12 +22,18 @@ jobs:
         run: npm install
 
       - name: Generate Manifest
-        run: node create-readme-metadata.js
+        run: node ./utils/create-readme-metadata.js
 
-      - name: Push changes
+      - name: Update documentation with package metadata
+        run: node ./utils/create-docs.js
+
+      - name: Generate Metadata
+        run: node ./utils/create-metadata.js
+
+      - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Generated gallery.manifest file" || echo "No changes to commit"
-          git push origin "${GITHUB_REF#refs/heads/}"
+          git add -A
+          git commit -m "Webpack build from GitHub Actions" || exit 0
+          git push
