@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: **Development**
+Current Release: v1.0.7-beta
 
 <p align="center">
 
