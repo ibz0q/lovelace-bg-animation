@@ -215,7 +215,7 @@ function opportunisticallyDetermineLocalInstallPath() {
           applicationIdentifiers.scriptName.some(name => script.src.includes(name))
         );
       }
-      let src = memoryCache.scriptTags.src.replace(window.location.origin, '');
+      let src = memoryCache.scriptTags.src.replace(window.location.origin, '').split('?')[0];
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
       memoryCache.installPath = ['/dist/'].reduce((acc, item) => acc.replace(item, '/dist'), src);
     }
@@ -277,8 +277,8 @@ function initializeRuntimeVariables() {
 
   lovelaceUI.pluginAssetPath = (() => {
     if (rootPluginConfig.gallery?.type == "local") {
-      if (rootPluginConfig.gallery?.localRootPath) {
-        return rootPluginConfig.gallery.localRootPath;
+      if (lovelaceUI?.lovelaceObject?.config["bg-animation"].localRootPath) {
+        return lovelaceUI?.lovelaceObject?.config["bg-animation"].localRootPath;
       } else if (opportunisticallyDetermineLocalInstallPath()) {
         return opportunisticallyDetermineLocalInstallPath();
       } else {
