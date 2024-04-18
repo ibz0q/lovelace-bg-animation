@@ -4,13 +4,16 @@ on:
   push:
     paths:
       - 'frontend/**'
+      - 'gallery/**'
+      - 'webpack.config.js'
   workflow_dispatch:
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-odify this pi
+
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v2
