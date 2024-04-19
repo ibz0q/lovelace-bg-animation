@@ -10,6 +10,25 @@ const ignoreDirs = ['0.test'];
 let count = 1;
 let availableBgs = "";
 
+function supportsOfflineMode(obj) {
+  let hasUrl = false;
+
+  function searchObject(obj) {
+    for (let key in obj) {
+      if (typeof obj[key] === 'object' && obj[key] !== null && key !== 'metadata') {
+        searchObject(obj[key]);
+      } else if (typeof obj[key] === 'string') {
+        if (obj[key].includes('http://') || obj[key].includes('https://')) {
+          hasUrl = true;
+        }
+      }
+    }
+  }
+
+  searchObject(obj);
+  return hasUrl;
+}
+
 function readDirectory(dir) {
   const files = fs.readdirSync(dir);
   files.reverse();
@@ -35,12 +54,12 @@ function readDirectory(dir) {
 ###  ${packageName} 
 ${packageData.metadata.name} - ${packageData.metadata.description}
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
 *Author: ${packageData.metadata.author}*
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
 
-Place this inside your config: 
+***Works offline?*** **${supportsOfflineMode(packageData) ? "No. (external dependencies, needs inlining)" : "Yes."}**
       
 \`\`\`yaml
 - id: ${packageName}

@@ -33,10 +33,6 @@ async function takeScreenshot(filePath) {
 
   try {
     await page.goto(`https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`, { waitUntil: 'networkidle0' });
-
-    if (response.status() === 404) {
-      throw new Error('Page not found (404)');
-    }
   
     console.log(`Loaded: https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`);
 
