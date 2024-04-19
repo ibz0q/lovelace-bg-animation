@@ -42,7 +42,7 @@ jobs:
         working-directory: ./utils
 
       - name: Generate Image Metadata
-        run: node ./utils/create-imagepreviews.js
+        run: node ./utils/create-imagepreview.js
 
       - name: Delete node_modules
         run: |
