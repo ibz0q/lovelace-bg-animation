@@ -32,13 +32,13 @@ async function takeScreenshot(filePath) {
   // Go to the URL of the preview.html file
   await page.goto(`https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`);
 
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(6000);
 
   // Take a screenshot and save it in the same folder as preview.html
   await page.screenshot({ path: path.join(path.dirname(filePath), 'screenshot.png') });
 
-  console.log("Done: ", packageName)
   await browser.close();
+  console.log("Done: ", packageName)
 }
 
 async function processPaths(paths) {
@@ -52,3 +52,5 @@ async function processPaths(paths) {
 collectPaths(metadataFolder)
   .then(processPaths)
   .catch(console.error);
+
+console.log("We done the ting.")

@@ -27,7 +27,23 @@ function readDirectory(dir) {
       authors[author] = (authors[author] || 0) + 1;
       // Get the directory name containing the package.yaml file
       const packageName = path.basename(path.dirname(filePath));
-      packages.push(`      # Author: ${packageData.metadata.author}\n      # ${packageData.metadata.description}\n      - id: ${packageName} \n`);
+
+      let content = `
+
+###  ${packageName} 
+${packageData.metadata.name} (${packageData.metadata.description}) by ${packageData.metadata.author}
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
+
+Place this inside your config: 
+      
+\`\`\`yaml
+- id: ${packageName}
+\`\`\`
+
+
+`
+      packages.push(content);
     }
   }
 }
@@ -53,13 +69,25 @@ fs.writeFileSync(readmePath, readmeContent, 'utf8');
 // Check if the DOCS.MD file exists
 if (!fs.existsSync(documentationPath)) {
   // If it doesn't exist, create it with the initial content
-  fs.writeFileSync(documentationPath, '### Documentation\n\nAll current packages\n\n```yaml\n\n```', 'utf8');
+  
+  let content = `
+  
+### Documentation
+
+This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
+
+## Available backgrounds
+
+`;
+
+
+  fs.writeFileSync(documentationPath, content, 'utf8');
 }
 
 // Write the package names to the DOCS.MD file
 let documentationContent = fs.readFileSync(documentationPath, 'utf8');
-regex = /(### Documentation\n\nAll current packages\n\n```yaml\n)([\s\S]*?)(\n```)/;
-documentationContent = documentationContent.replace(regex, `$1${packages.join('\n')}$3`);
+regex = /(## Available backgrounds\n)([\s\S]*)/;
+documentationContent = documentationContent.replace(regex, `$1${packages.join('\n')}`);
 
 console.log(documentationContent)
 
