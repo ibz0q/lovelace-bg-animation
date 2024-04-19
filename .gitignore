@@ -10,3 +10,5 @@ frontend/bg-animation.min.js
 *output/*
 *output*
 output/
+*.mp4
+screenshot.png

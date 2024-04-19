@@ -45,9 +45,9 @@ I have tried my best to find references and credit the artists who's original wo
 
 ### License 
 
-This project is compromised of the works of artists each either their own licensing, none of this projects license are imposed. Copyrights are preserved respectively. A lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">CodePen</a>. 
+This project is compromised of the works of artists each either their own licensing, none of this projects license are imposed. Copyrights are preserved respectively. A lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a>. For this reason, code belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International to prevent commercial infringement of any license that is not as permissive. 
 
-For this reason, code belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International to prevent commercial infringement of any license that is not as permissive. In short, the original works belong to their owners and this project cannot be used for commercial purposes incase any license prevents this (Currently none).
+In short, the original works belong to their creators and this project cannot be used for commercial purposes incase any license prevents this (Currently none).
 
 ## Install
 

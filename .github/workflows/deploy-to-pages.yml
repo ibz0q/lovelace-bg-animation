@@ -8,7 +8,10 @@ on:
       - 'gallery/**'
       - 'webpack.config.js'
   workflow_dispatch:
-
+  workflow_run:
+    workflows: ["Generate Metadata"]
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -28,6 +31,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Generate Manifest
+        run: node ./utils/create-imagepreviews.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
