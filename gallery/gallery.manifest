@@ -369,7 +369,142 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-    "hash": "2aff5a5ec04e785eb7b093c53fd62229f0dcee5b",
+    "hash": "6161fba8e956d5104b2ef6d440b97562ed064600",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "37.coalesce-10phosphorescence-4",
+    "version": "v1",
+    "name": "Coalesce 10 - Phosphorescence 4",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/maJmvy",
+    "hash": "c7fda5a5355e510e0fd165532e0cd7f4e203132c",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "38.coalesce-11phosphorescence-5",
+    "version": "v1",
+    "name": "Coalesce 11 - Phosphorescence 5",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/bOdLeG",
+    "hash": "e518aa9f470d2396ab56c18eb8ed5cf582f3f54e",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "39.coalesce-12",
+    "version": "v1",
+    "name": "Coalesce 12",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/gZPxeX",
+    "hash": "809aa41f9b775e350b63bf5d240b25684fcf03cf",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "40.coalesce-12phosphorescence-6",
+    "version": "v1",
+    "name": "Coalesce 12 - Phosphorescence 6",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/qLdPMQ",
+    "hash": "e802d62a7b956cd4f4b0da467df1bcbd988aea48",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "41.coalesce-14",
+    "version": "v1",
+    "name": "Coalesce 14",
+    "description": "GPGPU particles using texture caches for position and velocity. For this one, I'm using a radial curl noise and a whole bunch of spherical coordinate transformations to herd the particles around in ways that feel pleasant. 1.04 million particles in motion.\n\nIf you want to change it to 2.08 million particles in motion just edit the first line of JS from 1024 to 2048.\n\n- Click and drag to rotate.\n- Scroll wheel to zoom.\n- Right-click and drag to pan.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/QzKEKe",
+    "hash": "ab12f8a018b56b956390fbf697131646980679ce",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "42.coalesce-17sol-3",
+    "version": "v1",
+    "name": "Coalesce 17 - Sol 3",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/KJzwyK",
+    "hash": "7d25f5078e0ee9c9a101b010bfe682d0955582f1",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "43.coalesce-22",
+    "version": "v1",
+    "name": "Coalesce 22",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/RdpmGJ",
+    "hash": "1e1393ea02fce7e6258ab00f346c175a2167cce6",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "44.coalesce-4",
+    "version": "v1",
+    "name": "Coalesce 4",
+    "description": "GPGPU particles using texture caches for position and velocity. For this one, I'm using a more traditional gradient noise function for the velocity of the particles, and then looping them around once their distance gets to a certain lengthm creating the spherical system you see here.\n\nClick and drag to rotate.\nScroll wheel to zoom.\nRight-click and drag to pan.",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/pLpMXM",
+    "hash": "26807cf9eef00e7296eca0abe4c945fd843f3d49",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "45.coalesce-9phosphorescence-3",
+    "version": "v1",
+    "name": "Coalesce 9 - Phosphorescence 3",
+    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
+    "author": "Liam Egan",
+    "source": "https://codepen.io/shubniggurath/pen/REPprj",
+    "hash": "b011203c83c5109790c3b8920ca7684230ba0863",
     "parameters": [
       {
         "id": "color",
