@@ -42,9 +42,9 @@ async function takeScreenshot(filePath) {
 }
 
 async function processPaths(paths) {
-  // Process paths in batches of 10
-  for (let i = 0; i < paths.length; i += 15) {
-    const batch = paths.slice(i, i + 15);
+  // Process paths in batches of 20
+  for (let i = 0; i < paths.length; i += 20) {
+    const batch = paths.slice(i, i + 20);
     await Promise.all(batch.map(takeScreenshot));
   }
 }
