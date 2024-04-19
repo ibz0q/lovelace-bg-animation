@@ -4,7 +4,24 @@
 
 This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
 
-## Available backgrounds (51 total)
+## Available backgrounds (52 total)
+
+
+
+###  g 
+Galaxy Animated - A slow moving animation of the galaxy with stars
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/g/screenshot.png)
+*Author: Rahul*
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/g/preview.html)
+
+Place this inside your config: 
+      
+```yaml
+- id: g
+```
+
 
 
 
