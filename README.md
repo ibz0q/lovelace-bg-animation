@@ -22,7 +22,6 @@ The repo features the following artists with incredible works they've shared on 
  - Matei Copot (6)
  - Alex Andrix (5)
  - Bas Groothedde (5)
- - Rahul (2)
  - Akimitsu Hamamuro (2)
  - Ana Tudor (1)
  - MenSeb (1)
@@ -34,6 +33,7 @@ The repo features the following artists with incredible works they've shared on 
  - alphardex (1)
  - cssscript.com (1)
  - Takeshi Kano (1)
+ - Rahul (1)
 #### Donations and Tips
 
 Please directly tip the artists you found most inspiring.
