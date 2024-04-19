@@ -30,6 +30,7 @@ The repo features the following artists with incredible works they've shared on 
  - Alex Andrix (1)
  - Andreas Wilcox (1)
 
+#### Donations and Tips
 
 Please directly tip the artists you found most inspiring.
 
