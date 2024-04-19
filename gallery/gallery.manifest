@@ -120,7 +120,7 @@
     "description": "animated-gradient-particle",
     "author": "cssscript.com",
     "source": "https://www.cssscript.com/demo/animated-gradient-particle/",
-    "hash": "aae6c38b02f32aadad04d1375e6c03ac2befe1d7"
+    "hash": "91861cfd474d9659140f7e53e2ca1cf1940ee910"
   },
   {
     "id": "13.cyber-lights",
@@ -303,7 +303,7 @@
     ]
   },
   {
-    "id": "33.canvas-bokeh-generation",
+    "id": "33.canvas-bokeh",
     "version": "v1",
     "name": "Canvas Bokeh Generation",
     "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
@@ -348,13 +348,13 @@
     ]
   },
   {
-    "id": "36.canvas-starfield",
+    "id": "36.starfield",
     "version": "v1",
-    "name": "Canvas Starfield",
-    "description": "",
+    "name": "Starfield",
+    "description": "Engage",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-    "hash": "2aff5a5ec04e785eb7b093c53fd62229f0dcee5b",
+    "hash": "8ba9c3cbd6a28ae22b428e066d8a0142854aeb9b",
     "parameters": [
       {
         "id": "color",
@@ -489,7 +489,7 @@
     "description": "Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.",
     "author": "MenSeb",
     "source": "https://codepen.io/MenSeb/pen/yWJgeE",
-    "hash": "267fd2d0c04df3c4a963a778a9f7f487f5ab08c7",
+    "hash": "e51d9fd10c292391ca8d51a3529a41b31ca5b0ce",
     "parameters": [
       {
         "id": "color",
@@ -498,7 +498,7 @@
     ]
   },
   {
-    "id": "56.azimuthal-viscosity-3",
+    "id": "56.azimuthal-viscosity",
     "version": "v1",
     "name": "Azimuthal Viscosity 3",
     "description": "",

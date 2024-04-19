@@ -163,18 +163,18 @@ Place this inside your config:
 
 
 
-###  56.azimuthal-viscosity-3 
+###  56.azimuthal-viscosity 
 Azimuthal Viscosity 3 - 
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity-3/screenshot.png)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity/screenshot.png)
 *Author: Alex Andrix*
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity-3/preview.html)
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity/preview.html)
 
 Place this inside your config: 
       
 ```yaml
-- id: 56.azimuthal-viscosity-3
+- id: 56.azimuthal-viscosity
 ```
 
 
@@ -390,18 +390,18 @@ Place this inside your config:
 
 
 
-###  36.canvas-starfield 
-Canvas Starfield - 
+###  36.starfield 
+Starfield - Engage
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.canvas-starfield/screenshot.png)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.starfield/screenshot.png)
 *Author: Jack Rugile*
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.canvas-starfield/preview.html)
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.starfield/preview.html)
 
 Place this inside your config: 
       
 ```yaml
-- id: 36.canvas-starfield
+- id: 36.starfield
 ```
 
 
@@ -441,18 +441,18 @@ Place this inside your config:
 
 
 
-###  33.canvas-bokeh-generation 
+###  33.canvas-bokeh 
 Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography, but it's a start.
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh-generation/screenshot.png)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh/screenshot.png)
 *Author: Jack Rugile*
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh-generation/preview.html)
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh/preview.html)
 
 Place this inside your config: 
       
 ```yaml
-- id: 33.canvas-bokeh-generation
+- id: 33.canvas-bokeh
 ```
 
 
