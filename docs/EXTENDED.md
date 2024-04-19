@@ -1,14 +1,19 @@
+
+  
 ### Documentation
 
-This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.
+This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
 
 ## Available backgrounds
+
 
 
 ###  1.galaxy-animation 
 Galaxy Animated - A slow moving animation of the galaxy with stars by Rahul
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/1.galaxy-animation/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/1.galaxy-animation/preview.html)
 
 Place this inside your config: 
       
@@ -19,11 +24,12 @@ Place this inside your config:
 
 
 
-
 ###  10.css-dark-particles 
 CSS Dark Particles - CSS Dark Particles by Takeshi Kano
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/10.css-dark-particles/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/10.css-dark-particles/preview.html)
 
 Place this inside your config: 
       
@@ -34,11 +40,12 @@ Place this inside your config:
 
 
 
-
 ###  11.space 
 Space - The final frontier by Akimitsu Hamamuro
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/11.space/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/11.space/preview.html)
 
 Place this inside your config: 
       
@@ -49,11 +56,12 @@ Place this inside your config:
 
 
 
-
 ###  12.gradient-particles 
 Gradient Particles - animated-gradient-particle by cssscript.com
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/12.gradient-particles/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/12.gradient-particles/preview.html)
 
 Place this inside your config: 
       
@@ -64,11 +72,12 @@ Place this inside your config:
 
 
 
-
 ###  13.cyber-lights 
 Cyber Lights - Frosted type lights moving diagnolly by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/13.cyber-lights/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/13.cyber-lights/preview.html)
 
 Place this inside your config: 
       
@@ -79,11 +88,12 @@ Place this inside your config:
 
 
 
-
 ###  14.ribbons-two 
 Ribbons Two - It looks like Windows Vista by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/14.ribbons-two/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/14.ribbons-two/preview.html)
 
 Place this inside your config: 
       
@@ -94,11 +104,12 @@ Place this inside your config:
 
 
 
-
 ###  15.sound 
 Sound - Vibes by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/15.sound/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/15.sound/preview.html)
 
 Place this inside your config: 
       
@@ -109,11 +120,12 @@ Place this inside your config:
 
 
 
-
 ###  16.veil 
 Veil - Slithers   of   color   veil   the   screen by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/16.veil/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/16.veil/preview.html)
 
 Place this inside your config: 
       
@@ -124,11 +136,12 @@ Place this inside your config:
 
 
 
-
 ###  17.ribbons 
 Ribbons - So many layers of ribbons by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/17.ribbons/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/17.ribbons/preview.html)
 
 Place this inside your config: 
       
@@ -139,11 +152,12 @@ Place this inside your config:
 
 
 
-
 ###  18.particle-cube 
 3D particle Cube - Pure JS 3D particle Cube - 1000 particles by Bas Groothedde
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/18.particle-cube/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/18.particle-cube/preview.html)
 
 Place this inside your config: 
       
@@ -154,11 +168,12 @@ Place this inside your config:
 
 
 
-
 ###  19.trapped-particles 
 Trapped particles - Trapped particles with shocking connections by Bas Groothedde
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/19.trapped-particles/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/19.trapped-particles/preview.html)
 
 Place this inside your config: 
       
@@ -169,11 +184,12 @@ Place this inside your config:
 
 
 
-
 ###  2.shooting-stars 
 Shooting Stars - Random speed shooting stars by alphardex
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/2.shooting-stars/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/2.shooting-stars/preview.html)
 
 Place this inside your config: 
       
@@ -184,11 +200,12 @@ Place this inside your config:
 
 
 
-
 ###  20.manifold 
 Manifold - Enter into the fold by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/20.manifold/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/20.manifold/preview.html)
 
 Place this inside your config: 
       
@@ -199,11 +216,12 @@ Place this inside your config:
 
 
 
-
 ###  21.noise-abstraction 
 Noise Abstraction - Noise Abstraction by Akimitsu Hamamuro
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/21.noise-abstraction/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/21.noise-abstraction/preview.html)
 
 Place this inside your config: 
       
@@ -214,11 +232,12 @@ Place this inside your config:
 
 
 
-
 ###  22.cloth-ribbons 
 Cloth Ribbons - It Colorful Cloth Ribbons by Bas Groothedde
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/22.cloth-ribbons/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/22.cloth-ribbons/preview.html)
 
 Place this inside your config: 
       
@@ -229,11 +248,12 @@ Place this inside your config:
 
 
 
-
 ###  23.ribbons-four 
 Ribbons Four - It looks like Windows Vista by Ben Matthews
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/23.ribbons-four/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/23.ribbons-four/preview.html)
 
 Place this inside your config: 
       
@@ -244,11 +264,12 @@ Place this inside your config:
 
 
 
-
 ###  24.trapped-gradient 
 Trapped graident - Trapped particles with gradient connections by Bas Groothedde
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/24.trapped-gradient/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/24.trapped-gradient/preview.html)
 
 Place this inside your config: 
       
@@ -259,11 +280,12 @@ Place this inside your config:
 
 
 
-
 ###  25.galactic-swimmers 
 Galactic Swimmers - A sea of particles swimming in the galaxy by Bas Groothedde
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/25.galactic-swimmers/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/25.galactic-swimmers/preview.html)
 
 Place this inside your config: 
       
@@ -274,11 +296,12 @@ Place this inside your config:
 
 
 
-
 ###  26.gpu-particles 
 GPU Particles - First Time GPGPU Particles by Tim Severien
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/26.gpu-particles/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/26.gpu-particles/preview.html)
 
 Place this inside your config: 
       
@@ -289,11 +312,12 @@ Place this inside your config:
 
 
 
-
 ###  27.tron 
 Tron - LightCycles in Tron by DanDog
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/27.tron/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/27.tron/preview.html)
 
 Place this inside your config: 
       
@@ -304,11 +328,12 @@ Place this inside your config:
 
 
 
-
 ###  28.black-sand-flow-field-v2 
 Black Sand Flow Field v2 -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/28.black-sand-flow-field-v2/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/28.black-sand-flow-field-v2/preview.html)
 
 Place this inside your config: 
       
@@ -319,11 +344,12 @@ Place this inside your config:
 
 
 
-
 ###  3.spipa-circle 
 Spipa circle - A cool electro field circle by Alex Andrix
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/3.spipa-circle/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/3.spipa-circle/preview.html)
 
 Place this inside your config: 
       
@@ -334,11 +360,12 @@ Place this inside your config:
 
 
 
-
 ###  30.black-sand-flow-field-v2 
 Black Sand Flow Field v2 -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/30.black-sand-flow-field-v2/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/30.black-sand-flow-field-v2/preview.html)
 
 Place this inside your config: 
       
@@ -349,11 +376,12 @@ Place this inside your config:
 
 
 
-
 ###  31.blooming-flower 
 Blooming Flower -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/31.blooming-flower/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/31.blooming-flower/preview.html)
 
 Place this inside your config: 
       
@@ -364,11 +392,12 @@ Place this inside your config:
 
 
 
-
 ###  32.canvas-blending-gradient-circles 
 Canvas Blending Gradient Circles -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/32.canvas-blending-gradient-circles/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/32.canvas-blending-gradient-circles/preview.html)
 
 Place this inside your config: 
       
@@ -379,11 +408,12 @@ Place this inside your config:
 
 
 
-
 ###  33.canvas-bokeh-generation 
 Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography, but it's a start. by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh-generation/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh-generation/preview.html)
 
 Place this inside your config: 
       
@@ -394,11 +424,12 @@ Place this inside your config:
 
 
 
-
 ###  34.canvas-color-teams 
 Canvas Color Teams -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/34.canvas-color-teams/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/34.canvas-color-teams/preview.html)
 
 Place this inside your config: 
       
@@ -409,11 +440,12 @@ Place this inside your config:
 
 
 
-
 ###  35.canvas-light-explosion 
 Canvas Light Explosion - Click to clear and change hue. by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/35.canvas-light-explosion/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/35.canvas-light-explosion/preview.html)
 
 Place this inside your config: 
       
@@ -424,18 +456,18 @@ Place this inside your config:
 
 
 
-
 ###  36.canvas-starfield 
 Canvas Starfield -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.canvas-starfield/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.canvas-starfield/preview.html)
 
 Place this inside your config: 
       
 ```yaml
 - id: 36.canvas-starfield
 ```
-
 
 
 
@@ -448,12 +480,13 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/37.coalesce-10phosphorescence-4/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/37.coalesce-10phosphorescence-4/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 37.coalesce-10phosphorescence-4
 ```
-
 
 
 
@@ -466,12 +499,13 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/38.coalesce-11phosphorescence-5/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/38.coalesce-11phosphorescence-5/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 38.coalesce-11phosphorescence-5
 ```
-
 
 
 
@@ -484,6 +518,8 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/39.coalesce-12/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/39.coalesce-12/preview.html)
+
 Place this inside your config: 
       
 ```yaml
@@ -493,18 +529,18 @@ Place this inside your config:
 
 
 
-
 ###  4.colored-swipe 
 Colored Swipe Transition - Whole page colored swipes by Andreas Wilcox
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/4.colored-swipe/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/4.colored-swipe/preview.html)
 
 Place this inside your config: 
       
 ```yaml
 - id: 4.colored-swipe
 ```
-
 
 
 
@@ -517,12 +553,13 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/40.coalesce-12phosphorescence-6/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/40.coalesce-12phosphorescence-6/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 40.coalesce-12phosphorescence-6
 ```
-
 
 
 
@@ -541,12 +578,13 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/41.coalesce-14/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/41.coalesce-14/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 41.coalesce-14
 ```
-
 
 
 
@@ -559,12 +597,13 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/42.coalesce-17sol-3/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/42.coalesce-17sol-3/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 42.coalesce-17sol-3
 ```
-
 
 
 
@@ -577,12 +616,13 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/43.coalesce-22/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/43.coalesce-22/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 43.coalesce-22
 ```
-
 
 
 
@@ -596,12 +636,13 @@ Right-click and drag to pan. by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/44.coalesce-4/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/44.coalesce-4/preview.html)
+
 Place this inside your config: 
       
 ```yaml
 - id: 44.coalesce-4
 ```
-
 
 
 
@@ -614,6 +655,8 @@ https://codepen.io/collection/XEEaEa/ by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/45.coalesce-9phosphorescence-3/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/45.coalesce-9phosphorescence-3/preview.html)
+
 Place this inside your config: 
       
 ```yaml
@@ -623,11 +666,12 @@ Place this inside your config:
 
 
 
-
 ###  46.codevember-05-simplex-vector-flow-field 
 #Codevember 05 Simplex Vector Flow Field - Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/46.codevember-05-simplex-vector-flow-field/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/46.codevember-05-simplex-vector-flow-field/preview.html)
 
 Place this inside your config: 
       
@@ -638,18 +682,18 @@ Place this inside your config:
 
 
 
-
 ###  47.color-trails 
 Color Trails -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/47.color-trails/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/47.color-trails/preview.html)
 
 Place this inside your config: 
       
 ```yaml
 - id: 47.color-trails
 ```
-
 
 
 
@@ -661,6 +705,8 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/48.colorful-wanderers/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/48.colorful-wanderers/preview.html)
+
 Place this inside your config: 
       
 ```yaml
@@ -670,11 +716,12 @@ Place this inside your config:
 
 
 
-
 ###  49.curved-lines 
 Curved Lines - `#GrayScale_HintOfRainbow_CurvedLinesWeekend` by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/49.curved-lines/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/49.curved-lines/preview.html)
 
 Place this inside your config: 
       
@@ -685,11 +732,12 @@ Place this inside your config:
 
 
 
-
 ###  5.neon-hexagon 
 Neon Hexagon - Neon Hexagon Foming Particles by Matei Copot
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/5.neon-hexagon/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/5.neon-hexagon/preview.html)
 
 Place this inside your config: 
       
@@ -700,11 +748,12 @@ Place this inside your config:
 
 
 
-
 ###  5.plasma 
 Rainbow Particles - rainbow particle horizon by Matei Copot
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/5.plasma/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/5.plasma/preview.html)
 
 Place this inside your config: 
       
@@ -715,11 +764,12 @@ Place this inside your config:
 
 
 
-
 ###  50.line-loop-animation-2d-canvas-v2 
 Line Loop Animation 2D Canvas v2 -  by Jack Rugile
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop-animation-2d-canvas-v2/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop-animation-2d-canvas-v2/preview.html)
 
 Place this inside your config: 
       
@@ -730,11 +780,12 @@ Place this inside your config:
 
 
 
-
 ###  51.pen-export-jORzwZq 
  -  by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.pen-export-jORzwZq/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.pen-export-jORzwZq/preview.html)
 
 Place this inside your config: 
       
@@ -745,18 +796,18 @@ Place this inside your config:
 
 
 
-
 ###  52.polyhedron-galaxy 
 Polyhedron galaxy - Practicing with ThreeJS by Júlia Erő
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/52.polyhedron-galaxy/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/52.polyhedron-galaxy/preview.html)
 
 Place this inside your config: 
       
 ```yaml
 - id: 52.polyhedron-galaxy
 ```
-
 
 
 
@@ -770,6 +821,8 @@ Forked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/gi
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/53.stars/screenshot.png)
 
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/53.stars/preview.html)
+
 Place this inside your config: 
       
 ```yaml
@@ -779,11 +832,12 @@ Place this inside your config:
 
 
 
-
 ###  54.stars-galaxy 
 Stars Galaxy - Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated. by MenSeb
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/54.stars-galaxy/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/54.stars-galaxy/preview.html)
 
 Place this inside your config: 
       
@@ -794,11 +848,12 @@ Place this inside your config:
 
 
 
-
 ###  55.undulationswtc-gl 
 Undulations - wtc-gl -  by Liam Egan
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/55.undulationswtc-gl/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/55.undulationswtc-gl/preview.html)
 
 Place this inside your config: 
       
@@ -809,11 +864,12 @@ Place this inside your config:
 
 
 
-
 ###  6.binary-spiral 
 Binary Spirals - Binary Spirals by Matei Copot
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/6.binary-spiral/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/6.binary-spiral/preview.html)
 
 Place this inside your config: 
       
@@ -824,11 +880,12 @@ Place this inside your config:
 
 
 
-
 ###  7.rainbowness 
 Rainbowness - Rainbowness by Matei Copot
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/7.rainbowness/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/7.rainbowness/preview.html)
 
 Place this inside your config: 
       
@@ -839,11 +896,12 @@ Place this inside your config:
 
 
 
-
 ###  8.manifestation 
 Manifestation - progression of ideas through willpower and motivation by Matei Copot
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/8.manifestation/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/8.manifestation/preview.html)
 
 Place this inside your config: 
       
@@ -854,11 +912,12 @@ Place this inside your config:
 
 
 
-
 ###  9.rainbow-particles 
 Particle Horizon - rainbow particle horizon by Matei Copot
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/9.rainbow-particles/screenshot.png)
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/9.rainbow-particles/preview.html)
 
 Place this inside your config: 
       
