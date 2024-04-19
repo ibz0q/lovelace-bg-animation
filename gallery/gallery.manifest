@@ -135,7 +135,11 @@
     "description": "animated-gradient-particle",
     "author": "cssscript.com",
     "source": "https://www.cssscript.com/demo/animated-gradient-particle/",
+<<<<<<< HEAD
     "hash": "b25b5cdbc89c8a9ffd174ec937f2ad159b7fcb53"
+=======
+    "hash": "91861cfd474d9659140f7e53e2ca1cf1940ee910"
+>>>>>>> 91013c149ff572ea929a2fba12835bee34a62e10
   },
   {
     "id": "13.cyber-lights",
