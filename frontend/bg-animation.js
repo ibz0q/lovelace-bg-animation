@@ -432,6 +432,7 @@ async function setupPlaylist() {
 }
 
 async function initializeObservers() {
+  console.log("Obs called")
   if (domObserver.haMainElement) {
     domObserver.haMainElement.disconnect();
   }
@@ -440,6 +441,7 @@ async function initializeObservers() {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
         uiWriteDelay = setTimeout(() => {
+          console.log("haMainElement observer")
           initialize();
         }, 200);
       }
@@ -461,8 +463,9 @@ async function initializeObservers() {
     for (let mutation of mutations) {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
-          await getGalleryRootManifest();
-          await setupPlaylist();
+          console.log("viewElement observer")
+          // await getGalleryRootManifest();
+          // await setupPlaylist();
 
           if (removedNode === lovelaceUI.viewElement) {
             observer.disconnect();
