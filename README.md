@@ -4,11 +4,10 @@ Current Release: v1.0.8-beta
 
 <p align="center">
 
-![Video/Image Demo](https://i.imgur.com/PLlO4cA.gif)
-
+[<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-**Higher quality video: https://i.imgur.com/f3hLlRu.mp4**
+**View all backgrounds here [docs/EXTENDED.md](docs/EXTENDED.md)**
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 

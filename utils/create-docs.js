@@ -4,7 +4,7 @@ const YAML = require('yaml');
 process.chdir(__dirname);
 
 const galleryDir = '../gallery/packages';
-const documentationPath = '../docs/DOCUMENTATION.md';
+const documentationPath = '../docs/EXTENDED.md';
 
 const authors = {};
 const packages = [];
@@ -66,7 +66,7 @@ readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, readmeContent, 'utf8');
-// Check if the DOCS.MD file exists
+// Check if the EXTENDED.MD file exists
 if (!fs.existsSync(documentationPath)) {
   // If it doesn't exist, create it with the initial content
   
@@ -84,7 +84,7 @@ This file is generated through an Github Action automation, if any of the image 
   fs.writeFileSync(documentationPath, content, 'utf8');
 }
 
-// Write the package names to the DOCS.MD file
+// Write the package names to the EXTENDED.MD file
 let documentationContent = fs.readFileSync(documentationPath, 'utf8');
 regex = /(## Available backgrounds\n)([\s\S]*)/;
 documentationContent = documentationContent.replace(regex, `$1${packages.join('\n')}`);
