@@ -21,6 +21,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
       - name: Generate Manifest
         run: node ./utils/create-manifest.js
 
