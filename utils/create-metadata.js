@@ -152,6 +152,7 @@ async function readDirectory(dir) {
                 }
             }
             templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
+            templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
             fs.writeFileSync(metadataFilePath, `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed, 'utf8');
             console.log(`Generated: ${packageName}`);
         }

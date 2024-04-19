@@ -27,7 +27,7 @@ template: >
 
   <head>
     <meta charset="UTF-8">
-    <title>CodePen - Stars</title>
+    <title>Stars</title>
     <style>
   button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-block}progress,sub,sup{vertical-align:baseline}html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
   menu,article,aside,details,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em
@@ -55,7 +55,7 @@ template: >
 
   <canvas id="canvas"></canvas>
 
-    <script  src="./script.js"></script><script>"use strict";
+    <script>"use strict";
 
   var canvas = document.getElementById('canvas'),
   	ctx = canvas.getContext('2d'),

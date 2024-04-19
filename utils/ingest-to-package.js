@@ -7,7 +7,7 @@ process.chdir(__dirname);
 
 const inputDir = './import';
 const outputDir = './output';
-let i = 30;
+let i = 56;
 
 (async () => {
     const packages = fs.readdirSync(inputDir);
@@ -135,7 +135,6 @@ let i = 30;
 
         fs.writeFileSync(path.join(outputPackageDir, 'package.yaml'), YAML.stringify(yamlTemplate), 'utf-8');
         console.log("Wrote package.yaml")
- break;
  
     }
 

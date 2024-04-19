@@ -1,12 +1,27 @@
 [
   {
+    "id": "0.test",
+    "version": "v1",
+    "name": "Test package",
+    "description": "A test package",
+    "author": "You",
+    "source": "https://github.com/ibz0q/lovelace-bg-animation",
+    "hash": "9a836b42165c1167fa9fa1ff44110bc8785b740a",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
     "id": "1.galaxy-animation",
     "version": "v1",
     "name": "Galaxy Animated",
     "description": "A slow moving animation of the galaxy with stars",
     "author": "Rahul",
     "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
-    "hash": "25f95b94eaf344b30ca6eda003e7e96793e74b7c",
+    "hash": "8074e855b97f23066a9e8f442cd94a80256d6b90",
     "parameters": [
       {
         "id": "background-image",
@@ -21,7 +36,7 @@
     "description": "Random speed shooting stars",
     "author": "alphardex",
     "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-    "hash": "eb7134e010b614dea8939c5d06a63672a54dea0e"
+    "hash": "a1ef61987a00534dc344b35c1d85620082acf1f6"
   },
   {
     "id": "3.spipa-circle",
@@ -30,7 +45,7 @@
     "description": "A cool electro field circle",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/oQOvYp",
-    "hash": "5f2308110efbeb0fb628984422792b7a906a43eb"
+    "hash": "93d11dad2386c8d44604f731a5c2ea74a6c800d4"
   },
   {
     "id": "4.colored-swipe",
@@ -39,7 +54,7 @@
     "description": "Whole page colored swipes",
     "author": "Andreas Wilcox",
     "source": "https://codepen.io/SvDvorak/pen/bxoxde",
-    "hash": "44b29412dbf61ca1a9a26fad89ac28758b0dda6e"
+    "hash": "9cec2f9cda78dce58913d654fb40ae0a133f8443"
   },
   {
     "id": "5.neon-hexagon",
@@ -48,7 +63,7 @@
     "description": "Neon Hexagon Foming Particles",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/mJzOWJ",
-    "hash": "790adca755c0cf5763b7bb1749f3c83a371e33c8"
+    "hash": "548ba1f1b9fbd73e21264eeb492aba04fca5df38"
   },
   {
     "id": "5.plasma",
@@ -57,7 +72,7 @@
     "description": "rainbow particle horizon",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/WvLaKw",
-    "hash": "5d1e59574aefdceabe63194da8e343ec551ca6cf"
+    "hash": "bbbd37c9a12d43d0519302eaee6feeeb3f039147"
   },
   {
     "id": "6.binary-spiral",
@@ -66,7 +81,7 @@
     "description": "Binary Spirals",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/dXevxg",
-    "hash": "059a06fd8f478e49b126c43f0990695aad94d4f6"
+    "hash": "6c2c41adb0f8acd6e64708aed280cff8d52fa810"
   },
   {
     "id": "7.rainbowness",
@@ -75,7 +90,7 @@
     "description": "Rainbowness",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/EbQKmy",
-    "hash": "cace36e3795c85faf5cccff8421b8d053f427562"
+    "hash": "56374780b316dbd4d62a67894e736a6216c9d2b1"
   },
   {
     "id": "8.manifestation",
@@ -84,7 +99,7 @@
     "description": "progression of ideas through willpower and motivation",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/pevRJJ",
-    "hash": "537a9f4b39254385f383129667315e3f8ae116aa"
+    "hash": "1865e0a2337c569cf8f6e95f9d20cca7a9edbba6"
   },
   {
     "id": "9.rainbow-particles",
@@ -93,7 +108,7 @@
     "description": "rainbow particle horizon",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/BQEGdz",
-    "hash": "9697daf3c90f7251a3145b85a9496bbf09313c64"
+    "hash": "bdaf679889aa63123513ad9fa3a33f0247b84164"
   },
   {
     "id": "10.css-dark-particles",
@@ -102,7 +117,7 @@
     "description": "CSS Dark Particles",
     "author": "Takeshi Kano",
     "source": "https://codepen.io/towc/pen/BQEGdz",
-    "hash": "3ba82896f04dfbaf21fef9631f1404a8b843e34d"
+    "hash": "bac8e2bcfb1a99f5d334e339545b43f985f8545a"
   },
   {
     "id": "11.space",
@@ -111,7 +126,7 @@
     "description": "The final frontier",
     "author": "Akimitsu Hamamuro",
     "source": "https://codepen.io/akm2/pen/RwQXLdP",
-    "hash": "96b759f78e11dc2b05af2a8efa858c450ec984ca"
+    "hash": "9f4ed5f6443d1e2ec667a1c82d22f4dbc9e05e61"
   },
   {
     "id": "12.gradient-particles",
@@ -120,7 +135,7 @@
     "description": "animated-gradient-particle",
     "author": "cssscript.com",
     "source": "https://www.cssscript.com/demo/animated-gradient-particle/",
-    "hash": "aae6c38b02f32aadad04d1375e6c03ac2befe1d7"
+    "hash": "85adf83369e00cd6069fd613e952b0709bf26807"
   },
   {
     "id": "13.cyber-lights",
@@ -129,7 +144,7 @@
     "description": "Frosted type lights moving diagnolly",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/GLRdKP",
-    "hash": "a47beb1705b4ca1a0738f1b16d1ce4cd79e016d7"
+    "hash": "b9b03df0295050cac5168e254ce3ba1d32f04abb"
   },
   {
     "id": "14.ribbons-two",
@@ -138,7 +153,7 @@
     "description": "It looks like Windows Vista",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/BYbjyg",
-    "hash": "218291ea8e7f3dc769da5703a2fc4c16c822c24d"
+    "hash": "2d4f4107dd5a8fe43ebdcb8b2388e3424d967c13"
   },
   {
     "id": "15.sound",
@@ -147,7 +162,7 @@
     "description": "Vibes",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/jOqeYWy",
-    "hash": "1f0b079c69bbc833ed5819291964e39217ff15c0"
+    "hash": "9f6534d1f2f842e75e7d40f9f0ac591eae3b6ee6"
   },
   {
     "id": "16.veil",
@@ -156,7 +171,7 @@
     "description": "Slithers   of   color   veil   the   screen",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/QmLVax",
-    "hash": "077253a601d40b3dbc61bb763500fb78fc081867"
+    "hash": "4677aacd1b262d03b7b2c405907fcbfc1a8381a8"
   },
   {
     "id": "17.ribbons",
@@ -165,7 +180,7 @@
     "description": "So many layers of ribbons",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-    "hash": "60b0ef1f7ba165b3a6df1b58bb20ba9e914254e9"
+    "hash": "8e726f11299b4fb1949b1e77d22618d80e84b498"
   },
   {
     "id": "18.particle-cube",
@@ -174,7 +189,7 @@
     "description": "Pure JS 3D particle Cube - 1000 particles",
     "author": "Bas Groothedde",
     "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
-    "hash": "96d273553b0eba774ad1bc0d10ac7e465f62c796"
+    "hash": "8bf4f7259abb49531b852a14c64d5165ee53e1a4"
   },
   {
     "id": "19.trapped-particles",
@@ -183,7 +198,7 @@
     "description": "Trapped particles with shocking connections",
     "author": "Bas Groothedde",
     "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
-    "hash": "1fd0010a96fa867bc75df1572e78cdd95afa3c1c"
+    "hash": "c84f31e5a4cd0c415ab27a65c3bb21d6684b2380"
   },
   {
     "id": "20.manifold",
@@ -192,7 +207,7 @@
     "description": "Enter into the fold",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/PozModJ",
-    "hash": "0130203cb8ef61d4cd110c4192b9e79aec0d5012"
+    "hash": "66e49b10f453bdfe36fcab83fee6ea22b4c4a978"
   },
   {
     "id": "21.noise-abstraction",
@@ -201,7 +216,7 @@
     "description": "Noise Abstraction",
     "author": "Akimitsu Hamamuro",
     "source": "https://codepen.io/akm2/pen/AxGzJb",
-    "hash": "9fbc3cf622ac7d45141c3abdc91bbef2d9c9bb85"
+    "hash": "71461bfbd3c265f22f53bf0a253bd35ec4c2c32e"
   },
   {
     "id": "22.cloth-ribbons",
@@ -210,7 +225,7 @@
     "description": "It Colorful Cloth Ribbons",
     "author": "Bas Groothedde",
     "source": "https://codepen.io/ImagineProgramming/pen/BavevR",
-    "hash": "6a0d71bad1ad11776b6b2d2b61c4e25f77374d07"
+    "hash": "e8e10491ce5edf23d87e5b0d3cd5614f48efae64"
   },
   {
     "id": "23.ribbons-four",
@@ -219,7 +234,7 @@
     "description": "It looks like Windows Vista",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-    "hash": "e24c01477c6f46c869f96cfcf1d08f1677e16a94"
+    "hash": "d4f41a1eacd8ba740cacb7a7733e052d1e479885"
   },
   {
     "id": "24.trapped-gradient",
@@ -228,7 +243,7 @@
     "description": "Trapped particles with gradient connections",
     "author": "Bas Groothedde",
     "source": "https://codepen.io/ImagineProgramming/pen/qdZWag",
-    "hash": "5f2530e4d5a25eb3380ba0bd0ab56490b1efb17b"
+    "hash": "0a68ea96ab4dc62ffcb58316eee1935ee8c359f7"
   },
   {
     "id": "25.galactic-swimmers",
@@ -237,7 +252,7 @@
     "description": "A sea of particles swimming in the galaxy",
     "author": "Bas Groothedde",
     "source": "https://codepen.io/ImagineProgramming/pen/KwVWmE",
-    "hash": "647e204083e97ab422d85193b36ea33af9f1dd07"
+    "hash": "eb6a7c23b229ee1f745801d796b8a8aa9c38005f"
   },
   {
     "id": "26.gpu-particles",
@@ -246,7 +261,7 @@
     "description": "First Time GPGPU Particles",
     "author": "Tim Severien",
     "source": "https://codepen.io/timseverien/pen/rWdJZY",
-    "hash": "f70456c6a2e7bf59950de7736a74504083f51ce9"
+    "hash": "4f38a3aa0447eec0c03865288b703f341de445de"
   },
   {
     "id": "27.tron",
@@ -255,7 +270,7 @@
     "description": "LightCycles in Tron",
     "author": "DanDog",
     "source": "https://codepen.io/timseverien/pen/rWdJZY",
-    "hash": "48adbcd1bfb4d2185dd18c9b2b64c1c2d2c28c79"
+    "hash": "a25c0440b5d4b18b0d04524d738f3122ea231b5c"
   },
   {
     "id": "28.black-sand-flow-field-v2",
@@ -264,22 +279,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-    "hash": "79ec4d3f66f4221223f578a3326dca26708a6e28",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "30.black-sand-flow-field-v2",
-    "version": "v1",
-    "name": "Black Sand Flow Field v2",
-    "description": "",
-    "author": "Jack Rugile",
-    "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-    "hash": "79ec4d3f66f4221223f578a3326dca26708a6e28",
+    "hash": "b06eea9b01b33e066106d859578158e8e0c22a2e",
     "parameters": [
       {
         "id": "color",
@@ -294,7 +294,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/qPrGbo",
-    "hash": "a8298b382ae2bc7cdcee8056dd37a539eff9338f",
+    "hash": "5f78457629f1b9f7837098a53403fbfb2b30f15c",
     "parameters": [
       {
         "id": "color",
@@ -309,7 +309,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/pomzqE",
-    "hash": "2e4461c15e8015579f7a1ffa2202b620a2945be2",
+    "hash": "58c97bb806ce35297ba1b230f10cf1efa2a7abc6",
     "parameters": [
       {
         "id": "color",
@@ -324,7 +324,7 @@
     "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/nYzapO",
-    "hash": "debd5a3163e4e4918a25e5d7440acb2f4ea2261a",
+    "hash": "d142596098b328807c8277bac44e0632da74ddd3",
     "parameters": [
       {
         "id": "color",
@@ -339,7 +339,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/DdyGPB",
-    "hash": "d454c83e242ad93662e65feaafc9a27e07ffcf52",
+    "hash": "2f5861d7db74e8ce232fd9cbdfe85d9d01942894",
     "parameters": [
       {
         "id": "color",
@@ -354,7 +354,7 @@
     "description": "Click to clear and change hue.",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/Xdaavx",
-    "hash": "e86cd40fc7c90f2c483eacce624268438f9ecd85",
+    "hash": "22978b5453be64f1067d42a41f5becd1a19ea44d",
     "parameters": [
       {
         "id": "color",
@@ -369,142 +369,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-    "hash": "9c2d6434fae724a52031871cf1dafba84bbfac8e",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "37.coalesce-10phosphorescence-4",
-    "version": "v1",
-    "name": "Coalesce 10 - Phosphorescence 4",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/maJmvy",
-    "hash": "c7fda5a5355e510e0fd165532e0cd7f4e203132c",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "38.coalesce-11phosphorescence-5",
-    "version": "v1",
-    "name": "Coalesce 11 - Phosphorescence 5",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/bOdLeG",
-    "hash": "e518aa9f470d2396ab56c18eb8ed5cf582f3f54e",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "39.coalesce-12",
-    "version": "v1",
-    "name": "Coalesce 12",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/gZPxeX",
-    "hash": "809aa41f9b775e350b63bf5d240b25684fcf03cf",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "40.coalesce-12phosphorescence-6",
-    "version": "v1",
-    "name": "Coalesce 12 - Phosphorescence 6",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/qLdPMQ",
-    "hash": "e802d62a7b956cd4f4b0da467df1bcbd988aea48",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "41.coalesce-14",
-    "version": "v1",
-    "name": "Coalesce 14",
-    "description": "GPGPU particles using texture caches for position and velocity. For this one, I'm using a radial curl noise and a whole bunch of spherical coordinate transformations to herd the particles around in ways that feel pleasant. 1.04 million particles in motion.\n\nIf you want to change it to 2.08 million particles in motion just edit the first line of JS from 1024 to 2048.\n\n- Click and drag to rotate.\n- Scroll wheel to zoom.\n- Right-click and drag to pan.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/QzKEKe",
-    "hash": "ab12f8a018b56b956390fbf697131646980679ce",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "42.coalesce-17sol-3",
-    "version": "v1",
-    "name": "Coalesce 17 - Sol 3",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/KJzwyK",
-    "hash": "7d25f5078e0ee9c9a101b010bfe682d0955582f1",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "43.coalesce-22",
-    "version": "v1",
-    "name": "Coalesce 22",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/RdpmGJ",
-    "hash": "1e1393ea02fce7e6258ab00f346c175a2167cce6",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "44.coalesce-4",
-    "version": "v1",
-    "name": "Coalesce 4",
-    "description": "GPGPU particles using texture caches for position and velocity. For this one, I'm using a more traditional gradient noise function for the velocity of the particles, and then looping them around once their distance gets to a certain lengthm creating the spherical system you see here.\n\nClick and drag to rotate.\nScroll wheel to zoom.\nRight-click and drag to pan.",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/pLpMXM",
-    "hash": "26807cf9eef00e7296eca0abe4c945fd843f3d49",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
-  },
-  {
-    "id": "45.coalesce-9phosphorescence-3",
-    "version": "v1",
-    "name": "Coalesce 9 - Phosphorescence 3",
-    "description": "GPGPU particles using texture caches for position and velocity.\n\nFor more of these experiments, please see:\nhttps://codepen.io/collection/XEEaEa/",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/REPprj",
-    "hash": "b011203c83c5109790c3b8920ca7684230ba0863",
+    "hash": "2aff5a5ec04e785eb7b093c53fd62229f0dcee5b",
     "parameters": [
       {
         "id": "color",
@@ -519,7 +384,7 @@
     "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/zodPjd",
-    "hash": "39e09f38994d16ce4d976762d0aaca2aa831de85",
+    "hash": "0fc1e30c6b3a2219bf8767f12c10785c1b629b0f",
     "parameters": [
       {
         "id": "color",
@@ -534,7 +399,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/GprWyw",
-    "hash": "b493ee72adc9d12f993948c0f03953549c5b931e",
+    "hash": "80dcf0590daa5279fc4db4715fb769bf0c51d085",
     "parameters": [
       {
         "id": "color",
@@ -549,7 +414,7 @@
     "description": "\n\nForked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/xbRqGz",
-    "hash": "ea676a4cf4c3d862dbd6363fed1bfb4a14098a4e",
+    "hash": "c24aa3ef994e919a94a2a8b57cfede27ecb74d4d",
     "parameters": [
       {
         "id": "color",
@@ -564,7 +429,7 @@
     "description": "`#GrayScale_HintOfRainbow_CurvedLinesWeekend`",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/zGwqbq",
-    "hash": "2c14c30530d43cbbe4a6675929b44c0f86f955cc",
+    "hash": "c9c5a277a90eea0a2dd34cfb7a5e5c723cbb48cd",
     "parameters": [
       {
         "id": "color",
@@ -573,13 +438,13 @@
     ]
   },
   {
-    "id": "50.line-loop-animation-2d-canvas-v2",
+    "id": "50.line-loop",
     "version": "v1",
-    "name": "Line Loop Animation 2D Canvas v2",
-    "description": "",
+    "name": "Line Loop",
+    "description": "Side lines",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/rNvPvod",
-    "hash": "b444fdf16f6fb9c5348e05b4d97d704b1133076b",
+    "hash": "36bacb6e76ac8c01f6424db5774e2f3ab51ec3e3",
     "parameters": [
       {
         "id": "color",
@@ -588,13 +453,13 @@
     ]
   },
   {
-    "id": "51.pen-export-jORzwZq",
+    "id": "51.wormhole",
     "version": "v1",
-    "name": "",
-    "description": "",
+    "name": "Wormhole",
+    "description": "Warp 1",
     "author": "Liam Egan",
     "source": "https://codepen.io/shubniggurath/pen/jORzwZq",
-    "hash": "3317ddfede881bff2d704a90782d3d0ea6d1bf0f",
+    "hash": "71d7ef0581be470c8cb64470c79e7739abec31e1",
     "parameters": [
       {
         "id": "color",
@@ -609,7 +474,7 @@
     "description": "Practicing with ThreeJS",
     "author": "Júlia Erő",
     "source": "https://codepen.io/planktone/pen/EPXMGj",
-    "hash": "18af29f3de62e2bf8b152bee0d8f3bd2a9a4a5f4",
+    "hash": "b00835e66ece73598a211ee3e5c9bc695c06ec97",
     "parameters": [
       {
         "id": "color",
@@ -624,7 +489,7 @@
     "description": "I'm getting super laggy performance on Firefox even with a low (50-100) number of particles and bad flickering on Chrome. Any ideas what it could be?\n\nEdit: I mean. That flickering is totally intentional. Because they're stars. And stars appear to flicker.\n\nForked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/giana/pen/qbWNYy/).",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/BjBGoM",
-    "hash": "df7b5bdb9a67c27f1534f9980149d925fed090ca",
+    "hash": "4a9795be9acc2e8342ae43c1186802084edb4167",
     "parameters": [
       {
         "id": "color",
@@ -639,7 +504,7 @@
     "description": "Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.",
     "author": "MenSeb",
     "source": "https://codepen.io/MenSeb/pen/yWJgeE",
-    "hash": "e45d0be07ee6a8af784369903079d53563c31707",
+    "hash": "267fd2d0c04df3c4a963a778a9f7f487f5ab08c7",
     "parameters": [
       {
         "id": "color",
@@ -648,13 +513,88 @@
     ]
   },
   {
-    "id": "55.undulationswtc-gl",
+    "id": "56.azimuthal-viscosity-3",
     "version": "v1",
-    "name": "Undulations - wtc-gl",
+    "name": "Azimuthal Viscosity 3",
     "description": "",
-    "author": "Liam Egan",
-    "source": "https://codepen.io/shubniggurath/pen/ExeGdma",
-    "hash": "fc91e34a487fdd18822f0dcb4fdd50671b91ecc5",
+    "author": "Alex Andrix",
+    "source": "https://codepen.io/alexandrix/pen/ZVewby",
+    "hash": "8360d998f57362d438aa441d788eeca844bb2084",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "57.browniandrix-noise",
+    "version": "v1",
+    "name": "Browniandrix noise",
+    "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
+    "author": "Alex Andrix",
+    "source": "https://codepen.io/alexandrix/pen/jdGBjW",
+    "hash": "9af132969068d41fafefcc582d34ada1464687c4",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "58.browniandrix-noise-l3",
+    "version": "v1",
+    "name": "Browniandrix noise L3",
+    "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
+    "author": "Alex Andrix",
+    "source": "https://codepen.io/alexandrix/pen/VRaGKq",
+    "hash": "ba5d26227e217304eae9041ec4418f4f4a85557f",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "59.dimension-two-and-a-half",
+    "version": "v1",
+    "name": "Dimension of Two and a Half",
+    "description": "Vanishing point attractors",
+    "author": "Alex Andrix",
+    "source": "https://codepen.io/alexandrix/pen/OrpdNJ",
+    "hash": "176a9976530456adc03883256e99e5259894ca53",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "60.digital-frontier",
+    "version": "v1",
+    "name": "The Digital Frontier",
+    "description": "It's too trippy, dial me out",
+    "author": "Ben Matthews",
+    "source": "https://codepen.io/tsuhre/pen/YzjEBoG",
+    "hash": "25ba6b503bf6da311ebcf0f777f2aa45edd83084",
+    "parameters": [
+      {
+        "id": "color",
+        "default": "#000000"
+      }
+    ]
+  },
+  {
+    "id": "61.cube",
+    "version": "v1",
+    "name": "Pure CSS cube",
+    "description": "[Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288).\n\n---\n\nIf the work I've been putting out since early 2012 has helped you in any way or you just like it and you wish me to be able to continue putting out stuff, please consider one of the following:\n\n* being a cool cat 😼🎩 and becoming a patron on Patreon (you'll also get to see some cool stuff you won't see done with CSS/ SVG elsewhere)\n\n[![become a patron button](https://assets.codepen.io/2017/btn_patreon.png)](https://www.patreon.com/anatudor)\n\n* making a one time donation via Ko-fi\n\n[![ko-fi](https://assets.codepen.io/2017/btn_kofi.svg)](https://ko-fi.com/anatudor)\n\n* making a weekly anonymous donation via Liberapay \n\n[![Liberapay](https://assets.codepen.io/2017/btn_liberapay.svg)](https://liberapay.com/anatudor/)\n\n* getting me something off my Amazon WishList \n\n[🎁 🇺🇸](https://www.amazon.com/gp/registry/wishlist/2Y3C4722GXH0I/) / [🎁 🇬🇧](https://www.amazon.co.uk/gp/registry/wishlist/2I25W7U0KADSR/)\n\n* or at least sharing this to show the world what can be done with CSS these days\n\nThank you!\n\n---\n\nDedicated to the memory of someone dear who passed away in January 2019. Missing you every day.",
+    "author": "Ana Tudor",
+    "source": "https://codepen.io/thebabydino/pen/OJvYZrx",
+    "hash": "05408f67d1acdd14441f88428d7a0d163be62f0f",
     "parameters": [
       {
         "id": "color",

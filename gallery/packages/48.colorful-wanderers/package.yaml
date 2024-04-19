@@ -20,7 +20,7 @@ template: >
 
   <head>
     <meta charset="UTF-8">
-    <title>CodePen - Colorful Wanderers</title>
+    <title>Colorful Wanderers</title>
     <style>body {
     background: #000;
     margin: 0;
@@ -36,7 +36,7 @@ template: >
 
   <canvas id="canvas"></canvas>
 
-    <script  src="./script.js"></script><script>var canvas = document.getElementById('canvas');
+    <script>var canvas = document.getElementById('canvas');
   var ctx = canvas.getContext('2d');
 
 
