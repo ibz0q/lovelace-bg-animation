@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
 
-## Available backgrounds (56 total)
+## Available backgrounds (51 total)
 
 
 
@@ -59,6 +59,68 @@ Place this inside your config:
 
 
 
+###  61.cube 
+Pure CSS cube - [Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288).
+
+---
+
+If the work I've been putting out since early 2012 has helped you in any way or you just like it and you wish me to be able to continue putting out stuff, please consider one of the following:
+
+* being a cool cat 😼🎩 and becoming a patron on Patreon (you'll also get to see some cool stuff you won't see done with CSS/ SVG elsewhere)
+
+[![become a patron button](https://assets.codepen.io/2017/btn_patreon.png)](https://www.patreon.com/anatudor)
+
+* making a one time donation via Ko-fi
+
+[![ko-fi](https://assets.codepen.io/2017/btn_kofi.svg)](https://ko-fi.com/anatudor)
+
+* making a weekly anonymous donation via Liberapay 
+
+[![Liberapay](https://assets.codepen.io/2017/btn_liberapay.svg)](https://liberapay.com/anatudor/)
+
+* getting me something off my Amazon WishList 
+
+[🎁 🇺🇸](https://www.amazon.com/gp/registry/wishlist/2Y3C4722GXH0I/) / [🎁 🇬🇧](https://www.amazon.co.uk/gp/registry/wishlist/2I25W7U0KADSR/)
+
+* or at least sharing this to show the world what can be done with CSS these days
+
+Thank you!
+
+---
+
+Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/61.cube/screenshot.png)
+*Author: Ana Tudor*
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/61.cube/preview.html)
+
+Place this inside your config: 
+      
+```yaml
+- id: 61.cube
+```
+
+
+
+
+###  60.digital-frontier 
+The Digital Frontier - It's too trippy, dial me out
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/60.digital-frontier/screenshot.png)
+*Author: Ben Matthews*
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/60.digital-frontier/preview.html)
+
+Place this inside your config: 
+      
+```yaml
+- id: 60.digital-frontier
+```
+
+
+
+
 ###  6.binary-spiral 
 Binary Spirals - Binary Spirals
 
@@ -76,18 +138,71 @@ Place this inside your config:
 
 
 
-###  55.undulationswtc-gl 
-Undulations - wtc-gl - 
+###  59.dimension-two-and-a-half 
+Dimension of Two and a Half - Vanishing point attractors
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/55.undulationswtc-gl/screenshot.png)
-*Author: Liam Egan*
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/59.dimension-two-and-a-half/screenshot.png)
+*Author: Alex Andrix*
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/55.undulationswtc-gl/preview.html)
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/59.dimension-two-and-a-half/preview.html)
 
 Place this inside your config: 
       
 ```yaml
-- id: 55.undulationswtc-gl
+- id: 59.dimension-two-and-a-half
+```
+
+
+
+
+###  58.browniandrix-noise-l3 
+Browniandrix noise L3 - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
+Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/58.browniandrix-noise-l3/screenshot.png)
+*Author: Alex Andrix*
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/58.browniandrix-noise-l3/preview.html)
+
+Place this inside your config: 
+      
+```yaml
+- id: 58.browniandrix-noise-l3
+```
+
+
+
+
+###  57.browniandrix-noise 
+Browniandrix noise - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
+Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/57.browniandrix-noise/screenshot.png)
+*Author: Alex Andrix*
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/57.browniandrix-noise/preview.html)
+
+Place this inside your config: 
+      
+```yaml
+- id: 57.browniandrix-noise
+```
+
+
+
+
+###  56.azimuthal-viscosity-3 
+Azimuthal Viscosity 3 - 
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity-3/screenshot.png)
+*Author: Alex Andrix*
+
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity-3/preview.html)
+
+Place this inside your config: 
+      
+```yaml
+- id: 56.azimuthal-viscosity-3
 ```
 
 
@@ -148,35 +263,35 @@ Place this inside your config:
 
 
 
-###  51.pen-export-jORzwZq 
- - 
+###  51.wormhole 
+Wormhole - Warp 1
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.pen-export-jORzwZq/screenshot.png)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.wormhole/screenshot.png)
 *Author: Liam Egan*
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.pen-export-jORzwZq/preview.html)
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.wormhole/preview.html)
 
 Place this inside your config: 
       
 ```yaml
-- id: 51.pen-export-jORzwZq
+- id: 51.wormhole
 ```
 
 
 
 
-###  50.line-loop-animation-2d-canvas-v2 
-Line Loop Animation 2D Canvas v2 - 
+###  50.line-loop 
+Line Loop - Side lines
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop-animation-2d-canvas-v2/screenshot.png)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop/screenshot.png)
 *Author: Jack Rugile*
 
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop-animation-2d-canvas-v2/preview.html)
+Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop/preview.html)
 
 Place this inside your config: 
       
 ```yaml
-- id: 50.line-loop-animation-2d-canvas-v2
+- id: 50.line-loop
 ```
 
 
@@ -286,133 +401,6 @@ Place this inside your config:
 
 
 
-###  45.coalesce-9phosphorescence-3 
-Coalesce 9 - Phosphorescence 3 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/45.coalesce-9phosphorescence-3/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/45.coalesce-9phosphorescence-3/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 45.coalesce-9phosphorescence-3
-```
-
-
-
-
-###  44.coalesce-4 
-Coalesce 4 - GPGPU particles using texture caches for position and velocity. For this one, I'm using a more traditional gradient noise function for the velocity of the particles, and then looping them around once their distance gets to a certain lengthm creating the spherical system you see here.
-
-Click and drag to rotate.
-Scroll wheel to zoom.
-Right-click and drag to pan.
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/44.coalesce-4/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/44.coalesce-4/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 44.coalesce-4
-```
-
-
-
-
-###  43.coalesce-22 
-Coalesce 22 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/43.coalesce-22/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/43.coalesce-22/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 43.coalesce-22
-```
-
-
-
-
-###  42.coalesce-17sol-3 
-Coalesce 17 - Sol 3 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/42.coalesce-17sol-3/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/42.coalesce-17sol-3/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 42.coalesce-17sol-3
-```
-
-
-
-
-###  41.coalesce-14 
-Coalesce 14 - GPGPU particles using texture caches for position and velocity. For this one, I'm using a radial curl noise and a whole bunch of spherical coordinate transformations to herd the particles around in ways that feel pleasant. 1.04 million particles in motion.
-
-If you want to change it to 2.08 million particles in motion just edit the first line of JS from 1024 to 2048.
-
-- Click and drag to rotate.
-- Scroll wheel to zoom.
-- Right-click and drag to pan.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/41.coalesce-14/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/41.coalesce-14/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 41.coalesce-14
-```
-
-
-
-
-###  40.coalesce-12phosphorescence-6 
-Coalesce 12 - Phosphorescence 6 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/40.coalesce-12phosphorescence-6/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/40.coalesce-12phosphorescence-6/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 40.coalesce-12phosphorescence-6
-```
-
-
-
-
 ###  4.colored-swipe 
 Colored Swipe Transition - Whole page colored swipes
 
@@ -425,66 +413,6 @@ Place this inside your config:
       
 ```yaml
 - id: 4.colored-swipe
-```
-
-
-
-
-###  39.coalesce-12 
-Coalesce 12 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/39.coalesce-12/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/39.coalesce-12/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 39.coalesce-12
-```
-
-
-
-
-###  38.coalesce-11phosphorescence-5 
-Coalesce 11 - Phosphorescence 5 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/38.coalesce-11phosphorescence-5/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/38.coalesce-11phosphorescence-5/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 38.coalesce-11phosphorescence-5
-```
-
-
-
-
-###  37.coalesce-10phosphorescence-4 
-Coalesce 10 - Phosphorescence 4 - GPGPU particles using texture caches for position and velocity.
-
-For more of these experiments, please see:
-https://codepen.io/collection/XEEaEa/
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/37.coalesce-10phosphorescence-4/screenshot.png)
-*Author: Liam Egan*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/37.coalesce-10phosphorescence-4/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 37.coalesce-10phosphorescence-4
 ```
 
 
@@ -587,23 +515,6 @@ Place this inside your config:
       
 ```yaml
 - id: 31.blooming-flower
-```
-
-
-
-
-###  30.black-sand-flow-field-v2 
-Black Sand Flow Field v2 - 
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/30.black-sand-flow-field-v2/screenshot.png)
-*Author: Jack Rugile*
-
-Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/30.black-sand-flow-field-v2/preview.html)
-
-Place this inside your config: 
-      
-```yaml
-- id: 30.black-sand-flow-field-v2
 ```
 
 
