@@ -57,11 +57,12 @@ const html = sortedAuthors
   .map(([author, count]) => ` - ${author} (${count})`)
   .join('\n');
 
+  console.log(html);
 const readmePath = path.join(__dirname, '../README.md');
 let readmeContent = fs.readFileSync(readmePath, 'utf8');
 
 // Replace the section below #### Artists with the new html using regex pattern matching
-let regex = /(#### Artists featured)([\s\S]*?)(### Donations and Tips)/;
+let regex = /(#### Artists featured)([\s\S]*?)(#### Donations and Tips)/;
 readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 
 // Write the updated content back to the README.md file
@@ -88,7 +89,5 @@ This file is generated through an Github Action automation, if any of the image 
 let documentationContent = fs.readFileSync(documentationPath, 'utf8');
 regex = /(## Available backgrounds\n)([\s\S]*)/;
 documentationContent = documentationContent.replace(regex, `$1${packages.join('\n')}`);
-
-console.log(documentationContent)
 
 fs.writeFileSync(documentationPath, documentationContent, 'utf8');
