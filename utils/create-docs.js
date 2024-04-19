@@ -51,11 +51,11 @@ function readDirectory(dir) {
 
       availableBgs += `
 
-###  ${packageName} 
+##  ${packageName} 
 ${packageData.metadata.name} - ${packageData.metadata.description}
 
-*Author: ${packageData.metadata.author}*
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
+*Author: ${packageData.metadata.author}*
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
 
