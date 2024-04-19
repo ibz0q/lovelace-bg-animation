@@ -17,16 +17,17 @@ The repo features the following artists with incredible works they've shared on 
 
 #### Artists featured
 
- - Jack Rugile (14)
- - Liam Egan (11)
- - Ben Matthews (7)
+ - Jack Rugile (13)
+ - Ben Matthews (8)
  - Matei Copot (6)
+ - Alex Andrix (5)
  - Bas Groothedde (5)
  - Akimitsu Hamamuro (2)
+ - Ana Tudor (1)
  - MenSeb (1)
  - Júlia Erő (1)
+ - Liam Egan (1)
  - Andreas Wilcox (1)
- - Alex Andrix (1)
  - DanDog (1)
  - Tim Severien (1)
  - alphardex (1)
