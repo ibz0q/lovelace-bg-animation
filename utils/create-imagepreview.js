@@ -24,13 +24,27 @@ async function collectPaths(dir) {
 }
 
 async function takeScreenshot(filePath) {
+  console.log("Processing: ", filePath)
   const packageName = path.basename(path.dirname(filePath));
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
 
   console.log("Taking screenshot for", packageName)
 
-  await page.goto(`https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`);
+  try {
+    await page.goto(`https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`, { waitUntil: 'networkidle0' });
+    throw new Error("Not implemented yet");
+    console.log(`Loaded: https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`);
+
+  } catch (error) {
+    let absolutePath = path.resolve(filePath);
+
+    console.log(`Failed to navigate to page for ${packageName}: ${error.message}`);
+    console.log(`Attempting to load local file: ${absolutePath}`);
+
+    await page.goto("file://"+absolutePath);
+
+  }
 
   await page.waitForTimeout(7000);
 
