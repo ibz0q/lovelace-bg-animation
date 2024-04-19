@@ -5,24 +5,15 @@ process.chdir(__dirname);
 
 const galleryDir = '../gallery/packages';
 const documentationPath = '../docs/EXTENDED.md';
-
 const authors = {};
-const packages = [];
-
 const ignoreDirs = ['0.test'];
-
-let extendedContent = `
-  
-### Documentation
-
-This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
-
-## Available backgrounds
-
-`;
+let count = 1;
+let availableBgs = "";
 
 function readDirectory(dir) {
   const files = fs.readdirSync(dir);
+  files.reverse();
+
   for (const file of files) {
     if (ignoreDirs.includes(file)) {
       continue;
@@ -32,18 +23,22 @@ function readDirectory(dir) {
     if (stats.isDirectory()) {
       readDirectory(filePath);
     } else if (file === 'package.yaml') {
+      count++;
 
       const packageData = YAML.parse(fs.readFileSync(filePath, 'utf8'));
       const author = packageData.metadata.author;
       authors[author] = (authors[author] || 0) + 1;
       const packageName = path.basename(path.dirname(filePath));
 
-      extendedContent += `
+      availableBgs += `
 
 ###  ${packageName} 
-${packageData.metadata.name} - ${packageData.metadata.description} by ${packageData.metadata.author}
+${packageData.metadata.name} - ${packageData.metadata.description}
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
+*Author: ${packageData.metadata.author}*
+
+
 
 Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
 
@@ -60,6 +55,17 @@ Place this inside your config:
 }
 
 readDirectory(galleryDir);
+
+let extendedContent = `
+  
+### Documentation
+
+This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
+
+## Available backgrounds (${count} total)
+
+`;
+
 
 // Readme.md
 const sortedAuthors = Object.entries(authors)
@@ -86,4 +92,4 @@ if (!fs.existsSync(documentationPath)) {
   fs.writeFileSync(documentationPath, content, 'utf8');
 }
 
-fs.writeFileSync(documentationPath, extendedContent, 'utf8');
+fs.writeFileSync(documentationPath, extendedContent + availableBgs, 'utf8');
