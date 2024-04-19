@@ -91,3 +91,5 @@ if (!fs.existsSync(documentationPath)) {
 }
 
 fs.writeFileSync(documentationPath, extendedContent + availableBgs, 'utf8');
+console.log(extendedContent + availableBgs);
+console.log("Documentation updated successfully");
