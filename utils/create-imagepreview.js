@@ -1,6 +1,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+process.chdir(__dirname);
 
 const metadataFolder = '../gallery/metadata'; // Replace with your actual metadata folder path
 
