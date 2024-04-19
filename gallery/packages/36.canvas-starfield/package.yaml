@@ -22,7 +22,8 @@ template: >
 
   </style>
 
-  <style>body {
+  <style>
+  body {
     background: #000;
     overflow: hidden;
   }

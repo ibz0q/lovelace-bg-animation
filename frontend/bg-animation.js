@@ -190,19 +190,19 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
 function retrieveCache(cacheKey) {
   try {
-    const item = localStorage.getItem(cacheKey);
+    const item = sessionStorage.getItem(cacheKey);
     return item ? JSON.parse(item) : null;
   } catch (error) {
-    console.error('Error accessing localStorage:', error);
+    console.error('Error accessing sessionStorage:', error);
     return null;
   }
 }
 
 function storeCache(cacheKey, data) {
   try {
-    localStorage.setItem(cacheKey, JSON.stringify(data));
+    sessionStorage.setItem(cacheKey, JSON.stringify(data));
   } catch (error) {
-    console.error('Error storing data in localStorage:', error);
+    console.error('Error storing data in sessionStorage:', error);
   }
 }
 

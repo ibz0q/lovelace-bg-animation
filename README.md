@@ -17,19 +17,22 @@ The repo features the following artists with incredible works they've shared on 
 
 #### Artists featured
 
+ - Jack Rugile (14)
+ - Liam Egan (11)
  - Ben Matthews (7)
  - Matei Copot (6)
  - Bas Groothedde (5)
  - Akimitsu Hamamuro (2)
- - Rahul (1)
- - Takeshi Kano (1)
- - cssscript.com (1)
- - alphardex (1)
- - Tim Severien (1)
- - DanDog (1)
- - Alex Andrix (1)
+ - MenSeb (1)
+ - Júlia Erő (1)
  - Andreas Wilcox (1)
-
+ - Alex Andrix (1)
+ - DanDog (1)
+ - Tim Severien (1)
+ - alphardex (1)
+ - cssscript.com (1)
+ - Takeshi Kano (1)
+ - Rahul (1)
 #### Donations and Tips
 
 Please directly tip the artists you found most inspiring.

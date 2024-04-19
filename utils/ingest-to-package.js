@@ -135,7 +135,8 @@ let i = 30;
 
         fs.writeFileSync(path.join(outputPackageDir, 'package.yaml'), YAML.stringify(yamlTemplate), 'utf-8');
         console.log("Wrote package.yaml")
-
+ break;
+ 
     }
 
 })();
