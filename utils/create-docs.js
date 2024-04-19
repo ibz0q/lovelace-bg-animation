@@ -38,8 +38,6 @@ ${packageData.metadata.name} - ${packageData.metadata.description}
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
 *Author: ${packageData.metadata.author}*
 
-
-
 Live Preview: [preview.html](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
 
 Place this inside your config: 
