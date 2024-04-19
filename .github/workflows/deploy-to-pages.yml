@@ -32,8 +32,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate Manifest
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./utils
+
+      - name: Generate Image Metadata
         run: node ./utils/create-imagepreviews.js
+
+      - name: Delete node_modules
+        run: |
+          echo "Deleting all node_modules folders..."
+          find . -name "node_modules" -type d -prune -exec rm -rf {} +
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
