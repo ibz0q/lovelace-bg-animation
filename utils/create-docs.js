@@ -83,6 +83,9 @@ readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, readmeContent, 'utf8');
 
+console.log(readmeContent);
+
+console.log("README.md updated successfully");
 
 // Check if the EXTENDED.MD file exists
 if (!fs.existsSync(documentationPath)) {
