@@ -29,12 +29,11 @@ async function takeScreenshot(filePath) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
 
   console.log("Taking screenshot for", packageName)
-  // Go to the URL of the preview.html file
+
   await page.goto(`https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html`);
 
-  await page.waitForTimeout(6000);
+  await page.waitForTimeout(7000);
 
-  // Take a screenshot and save it in the same folder as preview.html
   await page.screenshot({ path: path.join(path.dirname(filePath), 'screenshot.png') });
 
   await browser.close();
@@ -42,9 +41,9 @@ async function takeScreenshot(filePath) {
 }
 
 async function processPaths(paths) {
-  // Process paths in batches of 20
-  for (let i = 0; i < paths.length; i += 20) {
-    const batch = paths.slice(i, i + 20);
+  // Process paths in batches of 10
+  for (let i = 0; i < paths.length; i += 10) {
+    const batch = paths.slice(i, i + 10);
     await Promise.all(batch.map(takeScreenshot));
   }
 }
