@@ -130,20 +130,21 @@ async function processPackageManifest(packageConfig, packageManifest) {
           }
         }
       }
+      packageManifest.template__processed = packageManifest.template
 
       if (typeof window !== 'undefined') {
-        if (packageManifest?.helpers?.insert_baseurl == true) {
+        if (packageManifest?.helpers?.insert_baseurl == true) {          
+          console.log("Inserting baseurl")
           let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
           if (packageManifest.template.includes('<head>')) {
-            packageManifest.template = packageManifest.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
+            packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
           } else if (packageManifest.template.includes('<html>')) {
-            packageManifest.template = packageManifest.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
+            packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
           }
         }
       }
 
       if (packageManifest.template) {
-        packageManifest.template__processed = packageManifest.template
         const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):(.*?)\}\}/g;
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
@@ -217,7 +218,9 @@ function opportunisticallyDetermineLocalInstallPath() {
       }
       let src = memoryCache.scriptTags.src.replace(window.location.origin, '').split('?')[0];
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
-      memoryCache.installPath = ['/dist/'].reduce((acc, item) => acc.replace(item, '/dist'), src);
+      memoryCache.installPath = src.replace('/dist/', '/dist').replace(/\/$/, '');
+      console.log(memoryCache.installPath)
+
     }
     return memoryCache.installPath;
   } catch (error) {

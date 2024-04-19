@@ -23,6 +23,7 @@ module.exports = {
         { from: './frontend/css', to: './frontend/css' },
         { from: './frontend/webfonts', to: './frontend/webfonts' },
         { from: './gallery/packages', to: './gallery/packages' },
+        { from: './gallery/gallery.manifest', to: './gallery/gallery.manifest' },
       ],
     }),
   ],
