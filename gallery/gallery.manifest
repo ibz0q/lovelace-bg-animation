@@ -576,10 +576,10 @@
     "id": "61.cube",
     "version": "v1",
     "name": "Pure CSS cube",
-    "description": "[Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288).\n\n---\n\nIf the work I've been putting out since early 2012 has helped you in any way or you just like it and you wish me to be able to continue putting out stuff, please consider one of the following:\n\n* being a cool cat 😼🎩 and becoming a patron on Patreon (you'll also get to see some cool stuff you won't see done with CSS/ SVG elsewhere)\n\n[![become a patron button](https://assets.codepen.io/2017/btn_patreon.png)](https://www.patreon.com/anatudor)\n\n* making a one time donation via Ko-fi\n\n[![ko-fi](https://assets.codepen.io/2017/btn_kofi.svg)](https://ko-fi.com/anatudor)\n\n* making a weekly anonymous donation via Liberapay \n\n[![Liberapay](https://assets.codepen.io/2017/btn_liberapay.svg)](https://liberapay.com/anatudor/)\n\n* getting me something off my Amazon WishList \n\n[🎁 🇺🇸](https://www.amazon.com/gp/registry/wishlist/2Y3C4722GXH0I/) / [🎁 🇬🇧](https://www.amazon.co.uk/gp/registry/wishlist/2I25W7U0KADSR/)\n\n* or at least sharing this to show the world what can be done with CSS these days\n\nThank you!\n\n---\n\nDedicated to the memory of someone dear who passed away in January 2019. Missing you every day.",
+    "description": "[Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288). Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.",
     "author": "Ana Tudor",
     "source": "https://codepen.io/thebabydino/pen/OJvYZrx",
-    "hash": "05408f67d1acdd14441f88428d7a0d163be62f0f",
+    "hash": "976a2885578ec5e4fade283e28ab7a2f1b5417fa",
     "parameters": [
       {
         "id": "color",
