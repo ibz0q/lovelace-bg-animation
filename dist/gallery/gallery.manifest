@@ -586,20 +586,5 @@
         "default": "#000000"
       }
     ]
-  },
-  {
-    "id": "g",
-    "version": "v1",
-    "name": "Galaxy Animated",
-    "description": "A slow moving animation of the galaxy with stars",
-    "author": "Rahul",
-    "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
-    "hash": "c45b28b10d1399f2076a00ad57390fcde9fe6cbd",
-    "parameters": [
-      {
-        "id": "background-image",
-        "default": "./2799006.jpg"
-      }
-    ]
   }
 ]
