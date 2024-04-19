@@ -10,7 +10,6 @@ async function run(i) {
   });
   const page = await context.newPage({ viewport: { width: 1920, height: 1080 } });
   await page.goto('https://currentmillis.com/');
-
   await page.waitForTimeout(1000);
   console.log("Browser start video")
 

@@ -52,5 +52,3 @@ async function processPaths(paths) {
 collectPaths(metadataFolder)
   .then(processPaths)
   .catch(console.error);
-
-console.log("We done the ting.")

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- name: Blooming Flower -->
+<!-- description:  -->
+<!-- author: Jack Rugile -->
+<!-- source: https://codepen.io/jackrugile/pen/qPrGbo -->
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Blooming Flower</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><style>
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+</style>
+<style>body {
+  background: #000;
+  overflow: hidden;
+}
+
+canvas {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}</style>
+
+</head>
+<body>
+
+<canvas></canvas>
+
+  <script  src="./script.js"></script><script>class Scene {
+
+  constructor() {
+    this.PI = Math.PI;
+    this.TAU = this.PI * 2;
+    this.GOLDEN = (Math.sqrt(5) + 1) / 2;
+    this.canvas = document.querySelector('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    this.dpr = window.devicePixelRatio;
+    this.reset();
+    window.addEventListener('resize', () => this.reset());
+    this.loop();
+  }
+
+  reset() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+    this.hwidth = this.width * 0.5;
+    this.hheight = this.height * 0.5;
+    this.canvas.width = this.width * this.dpr;
+    this.canvas.height = this.height * this.dpr;
+    this.ctx.scale(this.dpr, this.dpr);
+    this.ctx.translate(~~this.hwidth, ~~this.hheight);
+    this.ctx.globalCompositeOperation = 'lighter';
+    this.tick = 320;
+  }
+
+  loop() {
+    requestAnimationFrame(() => this.loop());
+    this.tick++;
+    this.ctx.clearRect(-this.hwidth, -this.hheight, this.width, this.height);
+    let count = 150;
+    let angle = this.tick * -0.001;
+    let amp = 0;
+    for (let i = 0; i < count; i++) {
+      angle += this.GOLDEN * this.TAU + Math.sin(this.tick * 0.03) * 0.001;
+      amp += (i - count / 2) * 0.01 + Math.cos(this.tick * 0.015) * 1;
+      let x = Math.cos(angle) * amp + Math.cos(this.tick * 0.0075) * (count - i) * 0.3;
+      let y = Math.sin(angle) * amp + Math.sin(this.tick * 0.0075) * (count - i) * 0.3;
+      let radius = 0.1 + i * 0.02;
+      let scale = 0.1 + amp * 0.1;
+      let hue = this.tick + angle / this.TAU * 0.4 + 60;
+      let saturation = 90;
+      let lightness = 60;
+      let alpha = 0.7 + Math.cos(this.tick * 0.03 + i) * 0.3;
+
+      this.ctx.save();
+      this.ctx.translate(x, y);
+      this.ctx.rotate(angle);
+      this.ctx.scale(scale, 1);
+      this.ctx.rotate(this.PI * 0.25);
+      this.ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+      this.ctx.fillRect(-radius, -radius, radius * 2, radius * 2);
+      this.ctx.restore();
+
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, radius * 12, 0, this.TAU);
+      this.ctx.fillStyle = `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha * 0.05})`;
+      this.ctx.fill();
+    }
+  }}
+
+
+
+let scene = new Scene();</script>
+
+</body>
+</html>

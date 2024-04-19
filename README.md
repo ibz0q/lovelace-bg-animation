@@ -178,13 +178,10 @@ Because Javascript is allowed, you must be a reputable user on Github. Security 
 ### Features TODO
 
 - Add redraw 
-- Iframe transitions 
-- Auto generate metadata 
-  - Video/Picture Preview
-  - HTML
+- Iframe transitions
 - postMessage 
-- Default gallery to use all, if nothing is specified. (Removed)
 - Add video background package 
+- Default gallery to use all, if nothing is specified. (Removed)
 - Serialized data passthrough to Iframe
 - Submit to HACS once beta version is mature
 - Add overlay div (Done)
@@ -194,3 +191,6 @@ Because Javascript is allowed, you must be a reputable user on Github. Security 
 - Add opportunistic sanity check for path (Done)
 - Add BaseURL (Done)
 - Allow for multi instance (Done)
+- Auto generate metadata (Done)
+  - Video/Picture Preview (Done)
+  - HTML (Done)

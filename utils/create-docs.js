@@ -31,7 +31,7 @@ function readDirectory(dir) {
       let content = `
 
 ###  ${packageName} 
-${packageData.metadata.name} (${packageData.metadata.description}) by ${packageData.metadata.author}
+${packageData.metadata.name} - ${packageData.metadata.description} by ${packageData.metadata.author}
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
 
