@@ -61,12 +61,10 @@ template: >
 
   const lineCount = 8;
 
-  const gap = height / (lineCount - 1);
+  const gap = height / (lineCount -1);
 
   let outside = width * 0.2;
 
-
-  // uncomment this to see what's happening outside of the canvas
 
   //outside = width * -0.2;
 
@@ -88,7 +86,7 @@ template: >
     // gives us a repeating gap over time
     // so each line just jumps back to it's previous position
     // giving the illusion of an endless repeat
-    const offset = Date.now() * -0.015 % gap;
+    const offset = Date.now() * -0.002 % gap;
 
     for (let i = 0; i < lineCount; i++) {
       const y = i * gap + offset;

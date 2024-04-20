@@ -75,7 +75,7 @@
     "description": "Rainbowness",
     "author": "Matei Copot",
     "source": "https://codepen.io/towc/pen/EbQKmy",
-    "hash": "cace36e3795c85faf5cccff8421b8d053f427562"
+    "hash": "0146a84fbb73429dbf732f820f4b01c22a4f3a21"
   },
   {
     "id": "9.rainbow-particles",
@@ -138,7 +138,7 @@
     "description": "Vibes",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/jOqeYWy",
-    "hash": "1f0b079c69bbc833ed5819291964e39217ff15c0"
+    "hash": "ca09875ea34c99c5073c1369d7516c8dad6ca60b"
   },
   {
     "id": "16.veil",
@@ -414,13 +414,13 @@
     ]
   },
   {
-    "id": "50.line-loop",
+    "id": "50.sidelined",
     "version": "v1",
     "name": "Line Loop",
     "description": "Side lines",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/rNvPvod",
-    "hash": "36bacb6e76ac8c01f6424db5774e2f3ab51ec3e3",
+    "hash": "7846341e415435119f37100fe3902abddf8d29a8",
     "parameters": [
       {
         "id": "color",
@@ -462,10 +462,10 @@
     "id": "53.stars",
     "version": "v1",
     "name": "Stars",
-    "description": "I'm getting super laggy performance on Firefox even with a low (50-100) number of particles and bad flickering on Chrome. Any ideas what it could be?\n\nEdit: I mean. That flickering is totally intentional. Because they're stars. And stars appear to flicker.\n\nForked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/giana/pen/qbWNYy/).",
+    "description": "The odd twinkle",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/BjBGoM",
-    "hash": "74f56f28605a54c637036bc214e1d6ae405d5fdc",
+    "hash": "5967bfb5db3c3e472cfd8fd0eeef5888cdc9dea0",
     "parameters": [
       {
         "id": "color",
