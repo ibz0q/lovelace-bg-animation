@@ -19,7 +19,13 @@ function supportsOfflineMode(obj) {
         searchObject(obj[key]);
       } else if (typeof obj[key] === 'string') {
         if (obj[key].includes('http://') || obj[key].includes('https://')) {
-          hasUrl = true;
+          // return using regex search for link and script tags with src and href attribute
+          let match = obj[key].match(/<link.*?href=["'](http:\/\/|https:\/\/).*?["'].*?>|<script.*?src=["'](http:\/\/|https:\/\/).*?["'].*?><\/script>/g);
+          if (match) {
+              console.log(match[0])
+              hasUrl = match[0];
+          }
+          
         }
       }
     }
@@ -48,10 +54,37 @@ function readDirectory(dir) {
       const author = packageData.metadata.author;
       authors[author] = (authors[author] || 0) + 1;
       const packageName = path.basename(path.dirname(filePath));
+      let offlineMode = supportsOfflineMode(packageData);
+      let offlineModeExpand;
+      if (supportsOfflineMode(packageData) == false) {
+        offlineModeExpand = "**Yes.**";
+      } else {
+        console.log(filePath)
+        console.log("offlineModeofflineMode")
+  
+        offlineModeExpand = `
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (${filePath}) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+\`\`\`HTML
+${offlineMode}
+\`\`\`
+
+---
+
+</details>
+
+
+<br />
+`
+      }
 
       availableBgs += `
 
-##  ${packageName} 
+###  > ${packageName} 
 ${packageData.metadata.name} - ${packageData.metadata.description}
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
@@ -59,8 +92,10 @@ ${packageData.metadata.name} - ${packageData.metadata.description}
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
 
-***Works offline?*** **${supportsOfflineMode(packageData) ? "No. (external dependencies, needs inlining)" : "Yes."}**
+***Works offline?*** ${offlineModeExpand}
       
+Put this inside your config:
+
 \`\`\`yaml
 - id: ${packageName}
 \`\`\`
@@ -75,9 +110,9 @@ readDirectory(galleryDir);
 
 let extendedContent = `
   
-### Documentation
+# Documentation
 
-This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
+This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
 ## Available backgrounds (${count} total)
 
@@ -102,7 +137,7 @@ readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, readmeContent, 'utf8');
 
-console.log(readmeContent);
+// console.log(readmeContent);
 
 console.log("README.md updated successfully");
 
@@ -113,5 +148,5 @@ if (!fs.existsSync(documentationPath)) {
 }
 
 fs.writeFileSync(documentationPath, extendedContent + availableBgs, 'utf8');
-console.log(extendedContent + availableBgs);
+// console.log(extendedContent + availableBgs);
 console.log("Documentation updated successfully");

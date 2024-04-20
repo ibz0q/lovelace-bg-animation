@@ -1,14 +1,14 @@
 
   
-### Documentation
+# Documentation
 
-This file is generated through an Github Action automation, if any of the image previews do not load. There is an issue with the action.  
+This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
 ## Available backgrounds (51 total)
 
 
 
-##  9.rainbow-particles 
+###  > 9.rainbow-particles 
 Particle Horizon - rainbow particle horizon
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/9.rainbow-particles/screenshot.png)
@@ -18,6 +18,8 @@ Particle Horizon - rainbow particle horizon
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 9.rainbow-particles
 ```
@@ -25,7 +27,7 @@ Particle Horizon - rainbow particle horizon
 
 
 
-##  8.manifestation 
+###  > 8.manifestation 
 Manifestation - progression of ideas through willpower and motivation
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/8.manifestation/screenshot.png)
@@ -35,6 +37,8 @@ Manifestation - progression of ideas through willpower and motivation
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 8.manifestation
 ```
@@ -42,7 +46,7 @@ Manifestation - progression of ideas through willpower and motivation
 
 
 
-##  7.rainbowness 
+###  > 7.rainbowness 
 Rainbowness - Rainbowness
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/7.rainbowness/screenshot.png)
@@ -52,6 +56,8 @@ Rainbowness - Rainbowness
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 7.rainbowness
 ```
@@ -59,7 +65,7 @@ Rainbowness - Rainbowness
 
 
 
-##  61.cube 
+###  > 61.cube 
 Pure CSS cube - [Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288). Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/61.cube/screenshot.png)
@@ -69,6 +75,8 @@ Pure CSS cube - [Inspiration](https://twitter.com/beesandbombs/status/1562937289
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 61.cube
 ```
@@ -76,7 +84,7 @@ Pure CSS cube - [Inspiration](https://twitter.com/beesandbombs/status/1562937289
 
 
 
-##  60.digital-frontier 
+###  > 60.digital-frontier 
 The Digital Frontier - It's too trippy, dial me out
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/60.digital-frontier/screenshot.png)
@@ -84,8 +92,10 @@ The Digital Frontier - It's too trippy, dial me out
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/60.digital-frontier/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 60.digital-frontier
 ```
@@ -93,7 +103,7 @@ The Digital Frontier - It's too trippy, dial me out
 
 
 
-##  6.binary-spiral 
+###  > 6.binary-spiral 
 Binary Spirals - Binary Spirals
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/6.binary-spiral/screenshot.png)
@@ -103,6 +113,8 @@ Binary Spirals - Binary Spirals
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 6.binary-spiral
 ```
@@ -110,7 +122,7 @@ Binary Spirals - Binary Spirals
 
 
 
-##  59.dimension-two-and-a-half 
+###  > 59.dimension-two-and-a-half 
 Dimension of Two and a Half - Vanishing point attractors
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/59.dimension-two-and-a-half/screenshot.png)
@@ -118,8 +130,10 @@ Dimension of Two and a Half - Vanishing point attractors
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/59.dimension-two-and-a-half/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 59.dimension-two-and-a-half
 ```
@@ -127,7 +141,7 @@ Dimension of Two and a Half - Vanishing point attractors
 
 
 
-##  58.browniandrix-noise-l3 
+###  > 58.browniandrix-noise-l3 
 Browniandrix noise L3 - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
 Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.
 
@@ -136,8 +150,10 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/58.browniandrix-noise-l3/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 58.browniandrix-noise-l3
 ```
@@ -145,7 +161,7 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 
 
-##  57.browniandrix-noise 
+###  > 57.browniandrix-noise 
 Browniandrix noise - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
 Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.
 
@@ -154,8 +170,10 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/57.browniandrix-noise/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 57.browniandrix-noise
 ```
@@ -163,7 +181,7 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 
 
-##  56.azimuthal-viscosity 
+###  > 56.azimuthal-viscosity 
 Azimuthal Viscosity 3 - 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity/screenshot.png)
@@ -171,8 +189,10 @@ Azimuthal Viscosity 3 -
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/56.azimuthal-viscosity/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 56.azimuthal-viscosity
 ```
@@ -180,7 +200,7 @@ Azimuthal Viscosity 3 -
 
 
 
-##  54.stars-galaxy 
+###  > 54.stars-galaxy 
 Stars Galaxy - Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/54.stars-galaxy/screenshot.png)
@@ -190,6 +210,8 @@ Stars Galaxy - Stars Galaxy made for CodePen challenge. This Pen was realized us
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 54.stars-galaxy
 ```
@@ -197,7 +219,7 @@ Stars Galaxy - Stars Galaxy made for CodePen challenge. This Pen was realized us
 
 
 
-##  53.stars 
+###  > 53.stars 
 Stars - I'm getting super laggy performance on Firefox even with a low (50-100) number of particles and bad flickering on Chrome. Any ideas what it could be?
 
 Edit: I mean. That flickering is totally intentional. Because they're stars. And stars appear to flicker.
@@ -211,6 +233,8 @@ Forked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/gi
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 53.stars
 ```
@@ -218,7 +242,7 @@ Forked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/gi
 
 
 
-##  52.polyhedron-galaxy 
+###  > 52.polyhedron-galaxy 
 Polyhedron galaxy - Practicing with ThreeJS
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/52.polyhedron-galaxy/screenshot.png)
@@ -226,8 +250,10 @@ Polyhedron galaxy - Practicing with ThreeJS
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/52.polyhedron-galaxy/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 52.polyhedron-galaxy
 ```
@@ -235,7 +261,7 @@ Polyhedron galaxy - Practicing with ThreeJS
 
 
 
-##  51.wormhole 
+###  > 51.wormhole 
 Wormhole - Warp 1
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.wormhole/screenshot.png)
@@ -243,8 +269,10 @@ Wormhole - Warp 1
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/51.wormhole/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 51.wormhole
 ```
@@ -252,7 +280,7 @@ Wormhole - Warp 1
 
 
 
-##  50.line-loop 
+###  > 50.line-loop 
 Line Loop - Side lines
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop/screenshot.png)
@@ -262,6 +290,8 @@ Line Loop - Side lines
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 50.line-loop
 ```
@@ -269,7 +299,7 @@ Line Loop - Side lines
 
 
 
-##  5.plasma 
+###  > 5.plasma 
 Rainbow Particles - rainbow particle horizon
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/5.plasma/screenshot.png)
@@ -279,6 +309,8 @@ Rainbow Particles - rainbow particle horizon
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 5.plasma
 ```
@@ -286,7 +318,7 @@ Rainbow Particles - rainbow particle horizon
 
 
 
-##  5.neon-hexagon 
+###  > 5.neon-hexagon 
 Neon Hexagon - Neon Hexagon Foming Particles
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/5.neon-hexagon/screenshot.png)
@@ -296,6 +328,8 @@ Neon Hexagon - Neon Hexagon Foming Particles
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 5.neon-hexagon
 ```
@@ -303,7 +337,7 @@ Neon Hexagon - Neon Hexagon Foming Particles
 
 
 
-##  49.curved-lines 
+###  > 49.curved-lines 
 Curved Lines - `#GrayScale_HintOfRainbow_CurvedLinesWeekend`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/49.curved-lines/screenshot.png)
@@ -313,6 +347,8 @@ Curved Lines - `#GrayScale_HintOfRainbow_CurvedLinesWeekend`
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 49.curved-lines
 ```
@@ -320,7 +356,7 @@ Curved Lines - `#GrayScale_HintOfRainbow_CurvedLinesWeekend`
 
 
 
-##  48.colorful-wanderers 
+###  > 48.colorful-wanderers 
 Colorful Wanderers - 
 
 Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).
@@ -332,6 +368,8 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 48.colorful-wanderers
 ```
@@ -339,7 +377,7 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 
 
-##  47.color-trails 
+###  > 47.color-trails 
 Color Trails - 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/47.color-trails/screenshot.png)
@@ -349,6 +387,8 @@ Color Trails -
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 47.color-trails
 ```
@@ -356,7 +396,7 @@ Color Trails -
 
 
 
-##  46.codevember-05-simplex-vector-flow-field 
+###  > 46.codevember-05-simplex-vector-flow-field 
 #Codevember 05 Simplex Vector Flow Field - Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/46.codevember-05-simplex-vector-flow-field/screenshot.png)
@@ -364,8 +404,10 @@ Color Trails -
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/46.codevember-05-simplex-vector-flow-field/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 46.codevember-05-simplex-vector-flow-field
 ```
@@ -373,7 +415,7 @@ Color Trails -
 
 
 
-##  4.colored-swipe 
+###  > 4.colored-swipe 
 Colored Swipe Transition - Whole page colored swipes
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/4.colored-swipe/screenshot.png)
@@ -381,8 +423,27 @@ Colored Swipe Transition - Whole page colored swipes
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/4.colored-swipe/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\4.colored-swipe\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 4.colored-swipe
 ```
@@ -390,7 +451,7 @@ Colored Swipe Transition - Whole page colored swipes
 
 
 
-##  36.starfield 
+###  > 36.starfield 
 Starfield - Engage
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/36.starfield/screenshot.png)
@@ -400,6 +461,8 @@ Starfield - Engage
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 36.starfield
 ```
@@ -407,7 +470,7 @@ Starfield - Engage
 
 
 
-##  35.canvas-light-explosion 
+###  > 35.canvas-light-explosion 
 Canvas Light Explosion - Click to clear and change hue.
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/35.canvas-light-explosion/screenshot.png)
@@ -417,6 +480,8 @@ Canvas Light Explosion - Click to clear and change hue.
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 35.canvas-light-explosion
 ```
@@ -424,7 +489,7 @@ Canvas Light Explosion - Click to clear and change hue.
 
 
 
-##  34.canvas-color-teams 
+###  > 34.canvas-color-teams 
 Canvas Color Teams - 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/34.canvas-color-teams/screenshot.png)
@@ -432,8 +497,10 @@ Canvas Color Teams -
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/34.canvas-color-teams/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 34.canvas-color-teams
 ```
@@ -441,7 +508,7 @@ Canvas Color Teams -
 
 
 
-##  33.canvas-bokeh 
+###  > 33.canvas-bokeh 
 Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography, but it's a start.
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/33.canvas-bokeh/screenshot.png)
@@ -451,6 +518,8 @@ Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 33.canvas-bokeh
 ```
@@ -458,7 +527,7 @@ Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography
 
 
 
-##  32.canvas-blending-gradient-circles 
+###  > 32.canvas-blending-gradient-circles 
 Canvas Blending Gradient Circles - 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/32.canvas-blending-gradient-circles/screenshot.png)
@@ -468,6 +537,8 @@ Canvas Blending Gradient Circles -
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 32.canvas-blending-gradient-circles
 ```
@@ -475,7 +546,7 @@ Canvas Blending Gradient Circles -
 
 
 
-##  31.blooming-flower 
+###  > 31.blooming-flower 
 Blooming Flower - 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/31.blooming-flower/screenshot.png)
@@ -485,6 +556,8 @@ Blooming Flower -
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 31.blooming-flower
 ```
@@ -492,7 +565,7 @@ Blooming Flower -
 
 
 
-##  3.spipa-circle 
+###  > 3.spipa-circle 
 Spipa circle - A cool electro field circle
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/3.spipa-circle/screenshot.png)
@@ -500,8 +573,27 @@ Spipa circle - A cool electro field circle
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/3.spipa-circle/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\3.spipa-circle\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 3.spipa-circle
 ```
@@ -509,7 +601,7 @@ Spipa circle - A cool electro field circle
 
 
 
-##  28.black-sand-flow-field-v2 
+###  > 28.black-sand-flow-field-v2 
 Black Sand Flow Field v2 - 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/28.black-sand-flow-field-v2/screenshot.png)
@@ -517,8 +609,10 @@ Black Sand Flow Field v2 -
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/28.black-sand-flow-field-v2/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 28.black-sand-flow-field-v2
 ```
@@ -526,7 +620,7 @@ Black Sand Flow Field v2 -
 
 
 
-##  27.tron 
+###  > 27.tron 
 Tron - LightCycles in Tron
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/27.tron/screenshot.png)
@@ -536,6 +630,8 @@ Tron - LightCycles in Tron
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 27.tron
 ```
@@ -543,7 +639,7 @@ Tron - LightCycles in Tron
 
 
 
-##  26.gpu-particles 
+###  > 26.gpu-particles 
 GPU Particles - First Time GPGPU Particles
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/26.gpu-particles/screenshot.png)
@@ -551,8 +647,27 @@ GPU Particles - First Time GPGPU Particles
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/26.gpu-particles/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\26.gpu-particles\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 26.gpu-particles
 ```
@@ -560,7 +675,7 @@ GPU Particles - First Time GPGPU Particles
 
 
 
-##  25.galactic-swimmers 
+###  > 25.galactic-swimmers 
 Galactic Swimmers - A sea of particles swimming in the galaxy
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/25.galactic-swimmers/screenshot.png)
@@ -570,6 +685,8 @@ Galactic Swimmers - A sea of particles swimming in the galaxy
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 25.galactic-swimmers
 ```
@@ -577,7 +694,7 @@ Galactic Swimmers - A sea of particles swimming in the galaxy
 
 
 
-##  24.trapped-gradient 
+###  > 24.trapped-gradient 
 Trapped graident - Trapped particles with gradient connections
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/24.trapped-gradient/screenshot.png)
@@ -585,8 +702,27 @@ Trapped graident - Trapped particles with gradient connections
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/24.trapped-gradient/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\24.trapped-gradient\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 24.trapped-gradient
 ```
@@ -594,7 +730,7 @@ Trapped graident - Trapped particles with gradient connections
 
 
 
-##  23.ribbons-four 
+###  > 23.ribbons-four 
 Ribbons Four - It looks like Windows Vista
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/23.ribbons-four/screenshot.png)
@@ -602,8 +738,27 @@ Ribbons Four - It looks like Windows Vista
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/23.ribbons-four/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\23.ribbons-four\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 23.ribbons-four
 ```
@@ -611,7 +766,7 @@ Ribbons Four - It looks like Windows Vista
 
 
 
-##  22.cloth-ribbons 
+###  > 22.cloth-ribbons 
 Cloth Ribbons - It Colorful Cloth Ribbons
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/22.cloth-ribbons/screenshot.png)
@@ -619,8 +774,27 @@ Cloth Ribbons - It Colorful Cloth Ribbons
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/22.cloth-ribbons/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\22.cloth-ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 22.cloth-ribbons
 ```
@@ -628,7 +802,7 @@ Cloth Ribbons - It Colorful Cloth Ribbons
 
 
 
-##  21.noise-abstraction 
+###  > 21.noise-abstraction 
 Noise Abstraction - Noise Abstraction
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/21.noise-abstraction/screenshot.png)
@@ -636,8 +810,27 @@ Noise Abstraction - Noise Abstraction
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/21.noise-abstraction/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\21.noise-abstraction\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://rawgit.com/akm2/simplex-noise.js/master/simplex-noise.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 21.noise-abstraction
 ```
@@ -645,7 +838,7 @@ Noise Abstraction - Noise Abstraction
 
 
 
-##  20.manifold 
+###  > 20.manifold 
 Manifold - Enter into the fold
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/20.manifold/screenshot.png)
@@ -653,8 +846,27 @@ Manifold - Enter into the fold
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/20.manifold/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\20.manifold\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 20.manifold
 ```
@@ -662,7 +874,7 @@ Manifold - Enter into the fold
 
 
 
-##  2.shooting-stars 
+###  > 2.shooting-stars 
 Shooting Stars - Random speed shooting stars
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/2.shooting-stars/screenshot.png)
@@ -672,6 +884,8 @@ Shooting Stars - Random speed shooting stars
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 2.shooting-stars
 ```
@@ -679,7 +893,7 @@ Shooting Stars - Random speed shooting stars
 
 
 
-##  19.trapped-particles 
+###  > 19.trapped-particles 
 Trapped particles - Trapped particles with shocking connections
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/19.trapped-particles/screenshot.png)
@@ -687,8 +901,27 @@ Trapped particles - Trapped particles with shocking connections
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/19.trapped-particles/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\19.trapped-particles\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 19.trapped-particles
 ```
@@ -696,7 +929,7 @@ Trapped particles - Trapped particles with shocking connections
 
 
 
-##  18.particle-cube 
+###  > 18.particle-cube 
 3D particle Cube - Pure JS 3D particle Cube - 1000 particles
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/18.particle-cube/screenshot.png)
@@ -704,8 +937,27 @@ Trapped particles - Trapped particles with shocking connections
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/18.particle-cube/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\18.particle-cube\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/codepen-utilities.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 18.particle-cube
 ```
@@ -713,7 +965,7 @@ Trapped particles - Trapped particles with shocking connections
 
 
 
-##  17.ribbons 
+###  > 17.ribbons 
 Ribbons - So many layers of ribbons
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/17.ribbons/screenshot.png)
@@ -721,8 +973,27 @@ Ribbons - So many layers of ribbons
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/17.ribbons/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\17.ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 17.ribbons
 ```
@@ -730,7 +1001,7 @@ Ribbons - So many layers of ribbons
 
 
 
-##  16.veil 
+###  > 16.veil 
 Veil - Slithers   of   color   veil   the   screen
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/16.veil/screenshot.png)
@@ -738,8 +1009,27 @@ Veil - Slithers   of   color   veil   the   screen
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/16.veil/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\16.veil\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 16.veil
 ```
@@ -747,7 +1037,7 @@ Veil - Slithers   of   color   veil   the   screen
 
 
 
-##  15.sound 
+###  > 15.sound 
 Sound - Vibes
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/15.sound/screenshot.png)
@@ -755,8 +1045,27 @@ Sound - Vibes
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/15.sound/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\15.sound\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 15.sound
 ```
@@ -764,7 +1073,7 @@ Sound - Vibes
 
 
 
-##  14.ribbons-two 
+###  > 14.ribbons-two 
 Ribbons Two - It looks like Windows Vista
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/14.ribbons-two/screenshot.png)
@@ -772,8 +1081,27 @@ Ribbons Two - It looks like Windows Vista
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/14.ribbons-two/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\14.ribbons-two\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 14.ribbons-two
 ```
@@ -781,7 +1109,7 @@ Ribbons Two - It looks like Windows Vista
 
 
 
-##  13.cyber-lights 
+###  > 13.cyber-lights 
 Cyber Lights - Frosted type lights moving diagnolly
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/13.cyber-lights/screenshot.png)
@@ -789,8 +1117,27 @@ Cyber Lights - Frosted type lights moving diagnolly
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/13.cyber-lights/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (..\gallery\packages\13.cyber-lights\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
       
+Put this inside your config:
+
 ```yaml
 - id: 13.cyber-lights
 ```
@@ -798,7 +1145,7 @@ Cyber Lights - Frosted type lights moving diagnolly
 
 
 
-##  12.gradient-particles 
+###  > 12.gradient-particles 
 Gradient Particles - animated-gradient-particle
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/12.gradient-particles/screenshot.png)
@@ -806,8 +1153,10 @@ Gradient Particles - animated-gradient-particle
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/12.gradient-particles/preview.html)
 
-***Works offline?*** **No. (external dependencies, needs inlining)**
+***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 12.gradient-particles
 ```
@@ -815,7 +1164,7 @@ Gradient Particles - animated-gradient-particle
 
 
 
-##  11.space 
+###  > 11.space 
 Space - The final frontier
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/11.space/screenshot.png)
@@ -825,6 +1174,8 @@ Space - The final frontier
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 11.space
 ```
@@ -832,7 +1183,7 @@ Space - The final frontier
 
 
 
-##  10.css-dark-particles 
+###  > 10.css-dark-particles 
 CSS Dark Particles - CSS Dark Particles
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/10.css-dark-particles/screenshot.png)
@@ -842,6 +1193,8 @@ CSS Dark Particles - CSS Dark Particles
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 10.css-dark-particles
 ```
@@ -849,7 +1202,7 @@ CSS Dark Particles - CSS Dark Particles
 
 
 
-##  1.galaxy-animation 
+###  > 1.galaxy-animation 
 Galaxy Animated - A slow moving animation of the galaxy with stars
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/1.galaxy-animation/screenshot.png)
@@ -859,6 +1212,8 @@ Galaxy Animated - A slow moving animation of the galaxy with stars
 
 ***Works offline?*** **Yes.**
       
+Put this inside your config:
+
 ```yaml
 - id: 1.galaxy-animation
 ```
