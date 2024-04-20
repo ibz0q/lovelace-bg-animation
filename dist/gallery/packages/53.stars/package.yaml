@@ -1,0 +1,188 @@
+version: v1
+metadata:
+  name: Stars
+  description: >-
+    I'm getting super laggy performance on Firefox even with a low (50-100)
+    number of particles and bad flickering on Chrome. Any ideas what it could
+    be?
+
+
+    Edit: I mean. That flickering is totally intentional. Because they're stars.
+    And stars appear to flicker.
+
+
+    Forked from [Giana](http://codepen.io/giana/)'s Pen
+    [Stars](http://codepen.io/giana/pen/qbWNYy/).
+  author: Jack Rugile
+  source: https://codepen.io/jackrugile/pen/BjBGoM
+parameters:
+  - id: color
+    default: "#000000"
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en" >
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Stars</title>
+    <style>
+  button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-block}progress,sub,sup{vertical-align:baseline}html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}
+  menu,article,aside,details,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em
+  0}figcaption,figure,main{display:block}figure{margin:1em
+  40px}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline
+  dotted}b,strong{font-weight:bolder}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{}button,select{text-transform:none}[type=submit],
+  [type=reset],button,html
+  [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText
+  dotted 1px}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em
+  .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}[hidden],template{display:none}/*#
+  sourceMappingURL=normalize.min.css.map */
+
+  </style>
+
+  <style>body {
+    background: #000;
+    overflow: hidden;
+  }</style>
+
+
+  </head>
+
+  <body>
+
+
+  <canvas id="canvas"></canvas>
+
+    <script>"use strict";
+
+  var canvas = document.getElementById('canvas'),
+  	ctx = canvas.getContext('2d'),
+  	w = canvas.width = window.innerWidth,
+  	h = canvas.height = window.innerHeight,
+  	hue = 217,
+  	stars = [],
+  	count = 0,
+  	maxStars = 1500;
+
+  // START CANVAS CACHED GRADIENT
+
+  var canvas2 = document.createElement('canvas');
+
+  var w2 = canvas2.width = 100;
+
+  var h2 = canvas2.height = 100;
+
+  var ctx2 = canvas2.getContext("2d");
+
+  // draw a big beefy gradient in the center of the dummy canvas
+
+  var gradientCache = ctx2.createRadialGradient(
+          w2 / 2,
+          h2 / 2,
+          0,
+          w2 / 2,
+          h2 / 2,
+          w2 / 2
+  );
+
+  gradientCache.addColorStop(0.025, '#fff');
+
+  gradientCache.addColorStop(0.1, 'hsl(' + hue + ', 61%, 33%)');
+
+  gradientCache.addColorStop(0.25, 'hsl(' + hue + ', 64%, 6%)');
+
+  gradientCache.addColorStop(1, 'transparent');
+
+  ctx2.fillStyle = gradientCache;
+
+  ctx2.beginPath();
+
+  ctx2.arc(w2 / 2, h2 / 2, w2 / 2, 0, Math.PI * 2);
+
+  ctx2.fill();
+
+  // END CANVAS CACHED GRADIENT
+
+
+  function random(min, max) {
+  	if (arguments.length < 2) {
+  		max = min;
+  		min = 0;
+  	}
+
+  	if (min > max) {
+  		var hold = max;
+  		max = min;
+  		min = hold;
+  	}
+
+  	return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+
+  function maxOrbit(x,y) {
+  	var max = Math.max(x,y),
+  		diameter = Math.round(Math.sqrt(max*max + max*max));
+  	return diameter/2;
+  }
+
+
+  var Star = function() {
+  	this.orbitRadius = random(maxOrbit(w,h));
+  	this.radius = random(60, this.orbitRadius) / 10;
+  	this.orbitX = w / 2;
+  	this.orbitY = h / 2;
+  	this.timePassed = random(0, maxStars);
+  	this.speed = random(this.orbitRadius) / 4000000;
+  	this.alpha = random(2, 10) / 10;
+
+  	count++;
+  	stars[count] = this;
+  }
+
+
+  Star.prototype.draw = function() {
+  	var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
+  		y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
+  		twinkle = random(500);
+
+  	if (twinkle === 1 && this.alpha > 0) {
+  		this.alpha -= 0.08;
+  	} else if (twinkle === 2 && this.alpha < 1) {
+  		this.alpha += 0.08;
+  	}
+  	
+  	ctx.globalAlpha = this.alpha;
+  	// draw the cached gradient canvas image
+  	ctx.drawImage( canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius );
+  	this.timePassed += this.speed;
+  }
+
+
+  for (var i = 0; i < maxStars; i++) {
+  	new Star();
+  }
+
+
+  function animation() {
+  	ctx.globalCompositeOperation = 'source-over';
+  	ctx.globalAlpha = 0.8;
+  	ctx.fillStyle = 'hsla(' + hue + ', 64%, 6%, 1)';
+  	ctx.fillRect(0, 0, w, h)
+
+  	ctx.globalCompositeOperation = 'lighter';
+  	for (var i = 1, l = stars.length; i < l; i++) {
+  		stars[i].draw();
+  	};  
+  	window.requestAnimationFrame(animation);
+  }
+
+
+  animation();</script>
+
+
+  </body>
+
+  </html>
