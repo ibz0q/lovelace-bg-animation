@@ -201,11 +201,7 @@ Put this inside your config:
 
 
 ###  > 53.stars 
-Stars - I'm getting super laggy performance on Firefox even with a low (50-100) number of particles and bad flickering on Chrome. Any ideas what it could be?
-
-Edit: I mean. That flickering is totally intentional. Because they're stars. And stars appear to flicker.
-
-Forked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/giana/pen/qbWNYy/).
+Stars - The odd twinkle
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/53.stars/screenshot.png)
 *Author: Jack Rugile*
@@ -261,20 +257,20 @@ Put this inside your config:
 
 
 
-###  > 50.line-loop 
+###  > 50.sidelined 
 Line Loop - Side lines
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop/screenshot.png)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.sidelined/screenshot.png)
 *Author: Jack Rugile*
 
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.line-loop/preview.html)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/50.sidelined/preview.html)
 
 ***Works offline?*** **Yes.**
       
 Put this inside your config:
 
 ```yaml
-- id: 50.line-loop
+- id: 50.sidelined
 ```
 
 
