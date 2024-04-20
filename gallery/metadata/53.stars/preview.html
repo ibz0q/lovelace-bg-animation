@@ -88,7 +88,7 @@ var Star = function() {
 	this.orbitX = w / 2;
 	this.orbitY = h / 2;
 	this.timePassed = random(0, maxStars);
-	this.speed = random(this.orbitRadius) / 30000;
+	this.speed = random(this.orbitRadius) / 4000000;
 	this.alpha = random(2, 10) / 10;
 
 	count++;
@@ -98,12 +98,12 @@ var Star = function() {
 Star.prototype.draw = function() {
 	var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
 		y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
-		twinkle = random(10);
+		twinkle = random(500);
 
 	if (twinkle === 1 && this.alpha > 0) {
-		this.alpha -= 0.05;
+		this.alpha -= 0.08;
 	} else if (twinkle === 2 && this.alpha < 1) {
-		this.alpha += 0.05;
+		this.alpha += 0.08;
 	}
 	
 	ctx.globalAlpha = this.alpha;

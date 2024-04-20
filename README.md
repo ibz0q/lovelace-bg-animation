@@ -58,13 +58,13 @@ You can install this plugin two ways:
 
 ### Option 1: HACS 
 
-Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace and click "Add". 
+Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". 
 
 Click the Explore & Download Repositories button and search for "Live Background Animations" open and click Download.
 
 ### Option 2: Manual 
 
-Download the latest release zip. Extract the contents the folder into www of Home Assistant: homeassistant\config\www\lovelace-background-animation
+Download the latest release zip. Extract the contents of dist into a folder inside www: homeassistant\config\www\lovelace-background-animation
 
 ***Files should be placed so they exist like this:***
 ```
@@ -194,6 +194,7 @@ PRs need to be attached to an issue that contains the following info:
 
 ### Features TODO
 
+- Slow down fast moving bgs (in progress)
 - Add redraw 
 - Iframe transitions
 - postMessage 
