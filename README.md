@@ -19,7 +19,7 @@ The repo features the following artists with incredible works they've shared on 
 
  - Jack Rugile (13)
  - Ben Matthews (8)
- - Matei Copot (6)
+ - Matei Copot (5)
  - Alex Andrix (5)
  - Bas Groothedde (5)
  - Akimitsu Hamamuro (2)

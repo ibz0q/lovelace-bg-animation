@@ -78,15 +78,6 @@
     "hash": "cace36e3795c85faf5cccff8421b8d053f427562"
   },
   {
-    "id": "8.manifestation",
-    "version": "v1",
-    "name": "Manifestation",
-    "description": "progression of ideas through willpower and motivation",
-    "author": "Matei Copot",
-    "source": "https://codepen.io/towc/pen/pevRJJ",
-    "hash": "537a9f4b39254385f383129667315e3f8ae116aa"
-  },
-  {
     "id": "9.rainbow-particles",
     "version": "v1",
     "name": "Particle Horizon",
@@ -111,7 +102,7 @@
     "description": "The final frontier",
     "author": "Akimitsu Hamamuro",
     "source": "https://codepen.io/akm2/pen/RwQXLdP",
-    "hash": "96b759f78e11dc2b05af2a8efa858c450ec984ca"
+    "hash": "74d836d7113e1aea837661dd08239dc50d0703f4"
   },
   {
     "id": "12.gradient-particles",
@@ -129,7 +120,7 @@
     "description": "Frosted type lights moving diagnolly",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/GLRdKP",
-    "hash": "a47beb1705b4ca1a0738f1b16d1ce4cd79e016d7"
+    "hash": "593301212e15e7ffcf8dcffb973a630e212944a8"
   },
   {
     "id": "14.ribbons-two",
@@ -255,7 +246,7 @@
     "description": "LightCycles in Tron",
     "author": "DanDog",
     "source": "https://codepen.io/timseverien/pen/rWdJZY",
-    "hash": "48adbcd1bfb4d2185dd18c9b2b64c1c2d2c28c79"
+    "hash": "9cebb4cc39058b5e4f95458395ebbee5b2a20bf4"
   },
   {
     "id": "28.black-sand-flow-field-v2",
@@ -294,7 +285,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/pomzqE",
-    "hash": "58c97bb806ce35297ba1b230f10cf1efa2a7abc6",
+    "hash": "09a1a275f0e9fd99e0fda7570985bdeef257d212",
     "parameters": [
       {
         "id": "color",
@@ -369,7 +360,7 @@
     "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/zodPjd",
-    "hash": "0fc1e30c6b3a2219bf8767f12c10785c1b629b0f",
+    "hash": "6742968fd9acb131f6551efdafc647ad071cf17d",
     "parameters": [
       {
         "id": "color",
@@ -474,7 +465,7 @@
     "description": "I'm getting super laggy performance on Firefox even with a low (50-100) number of particles and bad flickering on Chrome. Any ideas what it could be?\n\nEdit: I mean. That flickering is totally intentional. Because they're stars. And stars appear to flicker.\n\nForked from [Giana](http://codepen.io/giana/)'s Pen [Stars](http://codepen.io/giana/pen/qbWNYy/).",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/BjBGoM",
-    "hash": "4a9795be9acc2e8342ae43c1186802084edb4167",
+    "hash": "74f56f28605a54c637036bc214e1d6ae405d5fdc",
     "parameters": [
       {
         "id": "color",
