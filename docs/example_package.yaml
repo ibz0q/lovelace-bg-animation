@@ -6,6 +6,9 @@ metadata:
   description: A test package
   author: You
   source: https://github.com/ibz0q/lovelace-bg-animation
+  tags: 
+    - slow
+    - ambient
 
  # Define parameters for the package, these are used to allow customization by the user
 parameters:

@@ -7,7 +7,7 @@ var lovelaceUI = {},
   domObserver = {},
   processedPackageManifests = {},
   uiWriteDelay,
-  playlistIndexes = { "global": { "current": 0, "next": 0 }, "view": { "current": 0, "next": 0 } },
+  playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } },
   applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {};
 
 function sortArray(array, method) {
@@ -133,7 +133,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
       packageManifest.template__processed = packageManifest.template
 
       if (typeof window !== 'undefined') {
-        if (packageManifest?.helpers?.insert_baseurl == true) {          
+        if (packageManifest?.helpers?.insert_baseurl == true) {
           console.log("Inserting baseurl")
           let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
           if (packageManifest.template.includes('<head>')) {
@@ -404,6 +404,8 @@ async function startPlaylistInterval(currentPlaylist) {
     startPlaylistInterval(currentPlaylist)
   }, duration)
 
+  playlistIndex.timeout = true
+
 }
 
 async function setupPlaylist() {
@@ -665,9 +667,20 @@ class LovelaceBgAnimation extends HTMLElement {
                 startPlaylistInterval(currentPlaylist)
                 break;
               case 'toggle':
+                console.log("Toggle")
+
+                // console.log(playlistIndex)
+                // console.log(currentPlaylist)
+                // console.log(currentPlaylist[playlistIndex.current])
+                // console.log(processedPackageManifests[currentPlaylist[playlistIndex.current].id])
+
+                document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
+
                 if (window.__global_minterval) {
                   clearTimeout(window.__global_minterval);
+                  playlistIndex.timeout = false;
                 }
+
                 break;
               case 'forward':
                 playlistIndex.next = (playlistIndex.current + 1) % currentPlaylist.length;
@@ -684,14 +697,20 @@ class LovelaceBgAnimation extends HTMLElement {
           let packageConfig = e.detail.message.packageConfig;
           let packageManifest = e.detail.message.packageManifest;
           let cardConfig = this.getCardConfig();
+          let playlistIndex = getPlaylistIndex();
 
           let mediaInfo = `
             <div class="media-ticker">
             ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
             ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
-            ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}            <i class="toggle-button fa ${window.__global_minterval ? 'fa-pause' : 'fa-play'}"></i>
+            ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
             </div>
         `;
+
+          let toggleButton = this.content.querySelector('.media-player #toggle');
+          if (toggleButton) {
+            toggleButton.innerHTML = `<i class="toggle-button fa ${playlistIndex?.timeout == false ? 'fa-pause' : 'fa-play'}"></i>`;
+          }
 
           this.content.querySelector('.media-name-container').innerHTML = mediaInfo;
           var tickerSelector = this.content.querySelector('.media-ticker');
