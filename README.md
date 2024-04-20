@@ -1,13 +1,13 @@
 # Lovelace Background Animation
 
-Current Release: v1.0.8-beta
+Current Release: v1.0.9-beta
 
 <p align="center">
 
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-**View all backgrounds here [docs/EXTENDED.md](docs/EXTENDED.md)**
+**View all backgrounds here [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)**
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
@@ -78,7 +78,8 @@ Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add res
 
 ---
 
-That's it, if you have a vallid configuration (see below). You should see a background animation immediately.
+
+That's it, if you have a valid configuration (see below). You should see a background animation immediately.
 
 
 ## Usage
@@ -162,9 +163,19 @@ This will tell the plugin to load everything locally. It's also useful if you wi
 
 ### Adding your own packages 
 
-Everything is self contained inside package.yaml. Instead of embedding plain HTML files I wanted structure and provide a basic templating and user customizability. This ruled out plain HTML files.
+Everything can be self-contained inside package folder. Instead of using plain HTML files I wanted structure and provide a basic templating and user customizability for users. This ruled out plain HTML files. 
 
-Although you may see some packages.yaml contain remote scripts like three.js or Stats.js. Please try to inline or locally save assets as some browsers demonstrate a flash upon loading. This can be prevented using those methods and I am in the process of inling the rest of these.
+You may see some packages.yaml contain remote scripts like three.js or Stats.js. Please try to inline or locally save assets inside the package folder. If your package has a JS libraries, please load using a relative path and place the JS file inside the root of the package folder. 
+
+Ensure you use this in your package.yaml because it tells the transpiler to include a HTML baseURL tag which is calculated and placed into the background Iframe.
+
+```YAML
+helpers:
+  insert_baseurl: true
+```
+
+Include an SRI hash inside your JS tag so this can be validated. Why- Read security section in contributions.
+
 
 ## Contributions
 
@@ -178,13 +189,15 @@ PRs need to be attached to an issue that contains the following info:
 - Have you audited the code yourself?
 - Is it safe?
 
-Because Javascript is allowed, you must be a reputable user on Github. Security is the primary requirement, any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant has quite a big attack surface. We will take steps to minimize risk. 
+#### Security
+ Javascript is allowed and so you must be a reputable user on Github to submit to this repo. Any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant has quite a big attack surface. We will take steps to minimize risk. 
 
 ### Features TODO
 
 - Add redraw 
 - Iframe transitions
 - postMessage 
+- Add ability for Iframe/package to interact with Lovelace Card
 - Add video background package 
 - Default gallery to use all, if nothing is specified. (Removed)
 - Serialized data passthrough to Iframe
