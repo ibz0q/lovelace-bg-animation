@@ -116,13 +116,6 @@ async function processPackageManifest(packageConfig, packageManifest) {
         environment["basePath"] = rootPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestName + "/"
       }
 
-      if (packageManifest.remote_includes) {
-        for (const [index, include] of packageManifest.remote_includes.entries()) {
-          packageManifest.remote_includes[index]["__processed"] = {};
-          packageManifest.remote_includes[index]["__processed"] = await fetch(include.url, { cache: "no-store" });
-        }
-      }
-
       if (packageManifest.compile) {
         for (const [index, value] of packageManifest.compile.entries()) {
           if (value.hasOwnProperty("scss")) {
@@ -145,7 +138,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
       }
 
       if (packageManifest.template) {
-        const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):(.*?)\}\}/g;
+        const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env):(.*?)\}\}/g;
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
           switch (type) {
@@ -161,12 +154,6 @@ async function processPackageManifest(packageConfig, packageManifest) {
             case 'environment':
             case 'env':
               return environment[key] || match;
-            case 'remote_includes':
-              if (Array.isArray(packageManifest.remote_includes)) {
-                const include = packageManifest.remote_includes.find(item => item.id === key);
-                return include?.__processed || match;
-              }
-              return match;
             default:
               return match;
           }

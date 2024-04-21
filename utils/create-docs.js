@@ -110,11 +110,11 @@ readDirectory(galleryDir);
 
 let extendedContent = `
   
-# Documentation
+# Extended Documentation
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## Available backgrounds (${count} total)
+## All backgrounds (${count} total)
 
 `;
 

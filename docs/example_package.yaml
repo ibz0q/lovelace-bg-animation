@@ -15,11 +15,6 @@ parameters:
   - id: color
     default: "#000000"
 
-# Can be used to fetch an asset from a remote URL and stored inside a variable
-remote_includes: 
-  - id: threejs_1
-    url: https://raw.githubusercontent.com/akm2/simplex-noise.js/master/simplex-noise.js
-
 helpers:
   # Inserts a valid base URL tag into document, needed if you are loading assets from the local folder e.g. /1.packagename/image.jpg
   # Useful if you are developing and submitting a 'offline first' package
