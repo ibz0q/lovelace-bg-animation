@@ -21,7 +21,7 @@ template: |
         function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //-------------------------------------------
         const turnRatio = 0.005; //how much the lines turns
         const bc = '0, 255, 233'; //RGB line color
-        const speed = .06; //the line moving speed
+        const speed = .1; //the line moving speed
         const lineWidth = 5;
         const backgroundColor = 'rgb(0,0,0)';
         //-------------------------------------------
