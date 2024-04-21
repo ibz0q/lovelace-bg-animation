@@ -53,7 +53,7 @@ template: >
   	hue = 217,
   	stars = [],
   	count = 0,
-  	maxStars = 1500;
+  	maxStars = 1000;
 
   // START CANVAS CACHED GRADIENT
 
@@ -124,7 +124,7 @@ template: >
   	this.orbitX = w / 2;
   	this.orbitY = h / 2;
   	this.timePassed = random(0, maxStars);
-  	this.speed = random(this.orbitRadius) / 4000000;
+  	this.speed = random(this.orbitRadius) / 2500000;
   	this.alpha = random(2, 10) / 10;
 
   	count++;
@@ -135,7 +135,7 @@ template: >
   Star.prototype.draw = function() {
   	var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
   		y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
-  		twinkle = random(700);
+  		twinkle = random(500);
 
   	if (twinkle === 1 && this.alpha > 0) {
   		this.alpha -= 0.05;
