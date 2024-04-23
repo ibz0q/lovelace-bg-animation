@@ -34,7 +34,7 @@ template: |
             Math.sin(opts.propFn({ len, t }))**2,
             colorFn: ({ rad, excitement, t }) => 
             `hsl(${rad / Math.TAU * 360 + t}, ${excitement * 100}%, ${20 + excitement * 50}%)`,
-            timeStep: .001,
+            timeStep: .004,
             randomJig: 2,
         
             repaintColor: 'rgba(0,0,0,.1)'
