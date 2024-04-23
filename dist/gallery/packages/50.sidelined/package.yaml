@@ -55,11 +55,11 @@ template: >
     <script>const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
 
-  const width = 400;
+  const width = 800;
 
-  const height = 300;
+  const height = 600;
 
-  const lineCount = 8;
+  const lineCount = 3;
 
   const gap = height / (lineCount -1);
 
@@ -86,7 +86,7 @@ template: >
     // gives us a repeating gap over time
     // so each line just jumps back to it's previous position
     // giving the illusion of an endless repeat
-    const offset = Date.now() * -0.002 % gap;
+    const offset = Date.now() * -0.022 % gap;
 
     for (let i = 0; i < lineCount; i++) {
       const y = i * gap + offset;
