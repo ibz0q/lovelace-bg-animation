@@ -136,8 +136,9 @@ async function readDirectory(dir) {
                 console.log(`Hash is the same for ${packageName}, skipping.`);
                 if (process.env.GITHUB_ACTIONS === 'true') {
                     console.log("Script is being run inside a GitHub Action, skipping...");
-
+                    break;
                 }
+                // break;
             }
 
             console.log(`Generating.. ${packageName}`);

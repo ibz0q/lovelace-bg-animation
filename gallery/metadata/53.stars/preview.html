@@ -31,7 +31,7 @@ var canvas = document.getElementById('canvas'),
 	hue = 217,
 	stars = [],
 	count = 0,
-	maxStars = 1000;
+	maxStars = 1200;
 
 // START CANVAS CACHED GRADIENT
 var canvas2 = document.createElement('canvas');
@@ -94,12 +94,12 @@ var Star = function() {
 Star.prototype.draw = function() {
 	var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
 		y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
-		twinkle = random(500);
+		twinkle = random(200);
 
 	if (twinkle === 1 && this.alpha > 0) {
-		this.alpha -= 0.05;
+		this.alpha -= 0.03;
 	} else if (twinkle === 2 && this.alpha < 1) {
-		this.alpha += 0.05;
+		this.alpha += 0.03;
 	}
 	
 	ctx.globalAlpha = this.alpha;

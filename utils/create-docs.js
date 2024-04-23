@@ -37,7 +37,6 @@ function supportsOfflineMode(obj) {
 
 function readDirectory(dir) {
   const files = fs.readdirSync(dir);
-  files.reverse();
 
   for (const file of files) {
     if (ignoreDirs.includes(file)) {
