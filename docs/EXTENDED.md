@@ -97,7 +97,7 @@ Cyber Lights - Frosted type lights moving diagnolly
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/13.cyber-lights/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\13.cyber-lights\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
@@ -133,7 +133,7 @@ Ribbons Two - It looks like Windows Vista
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/14.ribbons-two/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\14.ribbons-two\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -169,7 +169,7 @@ Sound - Vibes
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/15.sound/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\15.sound\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
@@ -205,7 +205,7 @@ Veil - Slithers   of   color   veil   the   screen
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/16.veil/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\16.veil\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -241,7 +241,7 @@ Ribbons - So many layers of ribbons
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/17.ribbons/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\17.ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -277,7 +277,7 @@ Put this inside your config:
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/18.particle-cube/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\18.particle-cube\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/codepen-utilities.min.js"></script>
@@ -313,7 +313,7 @@ Trapped particles - Trapped particles with shocking connections
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/19.trapped-particles/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\19.trapped-particles\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
@@ -368,7 +368,7 @@ Manifold - Enter into the fold
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/20.manifold/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\20.manifold\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
@@ -404,7 +404,7 @@ Noise Abstraction - Noise Abstraction
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/21.noise-abstraction/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\21.noise-abstraction\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://rawgit.com/akm2/simplex-noise.js/master/simplex-noise.js"></script>
@@ -440,7 +440,7 @@ Cloth Ribbons - It Colorful Cloth Ribbons
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/22.cloth-ribbons/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\22.cloth-ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -476,7 +476,7 @@ Ribbons Four - It looks like Windows Vista
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/23.ribbons-four/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\23.ribbons-four\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -512,7 +512,7 @@ Trapped graident - Trapped particles with gradient connections
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/24.trapped-gradient/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\24.trapped-gradient\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
@@ -567,7 +567,7 @@ GPU Particles - First Time GPGPU Particles
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/26.gpu-particles/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\26.gpu-particles\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
@@ -641,7 +641,7 @@ Spipa circle - A cool electro field circle
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/3.spipa-circle/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\3.spipa-circle\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
@@ -791,7 +791,7 @@ Colored Swipe Transition - Whole page colored swipes
     <summary> No. (external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/4.colored-swipe/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (..\gallery\packages\4.colored-swipe\package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>

@@ -1067,8 +1067,8 @@ $.init = function () {
     transparent: true,
     //color: 0xff3333,
     opacity: 0.2,
-    color: new THREE.Color().setHSL(0, 1, 0.6)
-    //vertexColors: THREE.VertexColors
+    //color: new THREE.Color().setHSL(0, 1, 0.6)
+    vertexColors: THREE.VertexColors
   });
   $.points = new THREE.Points($.geometry, $.material);
   $.scene.add($.points);

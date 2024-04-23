@@ -37,7 +37,7 @@ b.appendChild( a );
 
 var goal,
 	followers = [],
-	count = 400,
+	count = 300,
 	md = 0,
 	mx = a.width / 2,
 	my = a.height / 2,
@@ -118,7 +118,7 @@ function loop() {
 	});
 	c.lineWidth = 1.1;
 	c.strokeStyle = 'hsla(0, 0%, 0%, 0.05)';
-	c.strokeStyle = 'hsla(' + ( hue + rand( -10, 10 ) ) + ', '+rand(50, 100)+'%, '+rand(30, 60)+'%, '+rand(0.01, 0.1)+')';
+	c.strokeStyle = 'hsla(' + ( hue + rand( -10, 10 ) ) + ', '+rand(50, 100)+'%, '+rand(05, 20)+'%, '+rand(0.01, 0.02)+')';
 	c.stroke();
 
 	tick++;
