@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (50 total)
+## All backgrounds (51 total)
 
 
 
@@ -1155,6 +1155,25 @@ Put this inside your config:
 
 ```yaml
 - id: 61.cube
+```
+
+
+
+
+###  > 62.neural 
+Neural - Neural Glow
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/62.neural/screenshot.png)
+*Author: Ksenia Kondrashova*
+
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/62.neural/preview.html)
+
+***Works offline?*** **Yes.**
+      
+Put this inside your config:
+
+```yaml
+- id: 62.neural
 ```
 
 

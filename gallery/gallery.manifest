@@ -577,5 +577,14 @@
         "default": "#000000"
       }
     ]
+  },
+  {
+    "id": "62.neural",
+    "version": "v1",
+    "name": "Neural",
+    "description": "Neural Glow",
+    "author": "Ksenia Kondrashova",
+    "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
+    "hash": "765e7afbadd46c7d9dabd0df881c30a4c8263fb1"
   }
 ]

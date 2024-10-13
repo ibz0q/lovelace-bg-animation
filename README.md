@@ -34,6 +34,7 @@ The repo features the following artists with incredible works they've shared on 
  - Júlia Erő (1)
  - MenSeb (1)
  - Ana Tudor (1)
+ - Ksenia Kondrashova (1)
 #### Donations and Tips
 
 Please directly tip the artists you found most inspiring.
