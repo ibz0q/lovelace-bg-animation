@@ -233,7 +233,7 @@ template: |
         float neuro_shape(vec2 uv, float t, float p) {
             vec2 sine_acc = vec2(0.);
             vec2 res = vec2(0.);
-            float scale =8.;
+            float scale =9.;
 
             for (int j = 0; j < 15; j++) {
                 uv = rotate(uv, 1.);
