@@ -1,39 +1,36 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
+/*
+
+TODO:
+- Fix transitions 
+- Remove any invalid Gallery package IDs from the playlist 
+- Update the view on change
+- Add stub config for media changer
+- Enable pausing completely on a track
+- Allow comms to iframe
+- Create a message broker
+- Add a video background package
+
+*/
+
 var lovelaceUI = {},
   rootPluginConfig,
   galleryRootManifest,
   domObserver = {},
   processedPackageManifests = {},
-  uiWriteDelay,
   playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } },
-  applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {};
+  applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {}, isDebug = 0, uiWriteDelay;
 
 function sortArray(array, method) {
-  switch (method) {
-    case 'random':
-      return (function (array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-      })(array);
-    case 'reverse':
-      return array.reverse();
-    case 'id_asc':
-      return (function (array) {
-        return array.sort((a, b) => a.id - b.id);
-      })(array);
-    case 'id_desc':
-      return (function (array) {
-        return array.sort((a, b) => b.id - a.id);
-      })(array);
-    default:
-      console.error('Invalid sorting method');
-      return array;
-  }
+  const methods = {
+    random: () => array.sort(() => Math.random() - 0.5),
+    reverse: () => array.reverse(),
+    id_asc: () => array.sort((a, b) => a.id - b.id),
+    id_desc: () => array.sort((a, b) => b.id - a.id),
+  };
+  return methods[method]?.() || console.error('Invalid sorting method') || array;
 }
 
 async function getGalleryRootManifest() {
@@ -206,7 +203,7 @@ function opportunisticallyDetermineLocalInstallPath() {
       let src = memoryCache.scriptTags.src.replace(window.location.origin, '').split('?')[0];
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
       memoryCache.installPath = src.replace('/dist/', '/dist').replace(/\/$/, '');
-      console.log(memoryCache.installPath)
+      isDebug ? console.log(memoryCache.installPath) : null;
 
     }
     return memoryCache.installPath;
@@ -398,7 +395,6 @@ async function startPlaylistInterval(currentPlaylist) {
 async function setupPlaylist() {
   let viewPath = getCurrentViewPath();
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
-
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
     let allIdsExist = true;
     currentPlaylist.forEach(slide => {
@@ -456,8 +452,8 @@ async function initializeObservers() {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
           console.log("viewElement observer")
-          // await getGalleryRootManifest();
-          // await setupPlaylist();
+          await getGalleryRootManifest();
+          await setupPlaylist();
 
           if (removedNode === lovelaceUI.viewElement) {
             observer.disconnect();
@@ -655,11 +651,6 @@ class LovelaceBgAnimation extends HTMLElement {
                 break;
               case 'toggle':
                 console.log("Toggle")
-
-                // console.log(playlistIndex)
-                // console.log(currentPlaylist)
-                // console.log(currentPlaylist[playlistIndex.current])
-                // console.log(processedPackageManifests[currentPlaylist[playlistIndex.current].id])
 
                 document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
 
