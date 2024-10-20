@@ -255,13 +255,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-    "hash": "ee2c0caff5f2677b2667562c721312033ad8fb4a",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "bc101b7c7880e096fd60deda45c2520d0734c25c"
   },
   {
     "id": "31.blooming-flower",
@@ -270,13 +264,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/qPrGbo",
-    "hash": "5f78457629f1b9f7837098a53403fbfb2b30f15c",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "c02017c4d6c76bdb5f2f1d6406802f7aa7d1d2db"
   },
   {
     "id": "32.canvas-blending-gradient-circles",
@@ -285,13 +273,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/pomzqE",
-    "hash": "09a1a275f0e9fd99e0fda7570985bdeef257d212",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "4d51e5bd2f37170e7249128de0f66223516e5aef"
   },
   {
     "id": "33.canvas-bokeh",
@@ -300,13 +282,7 @@
     "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/nYzapO",
-    "hash": "d142596098b328807c8277bac44e0632da74ddd3",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "b07452e0621275c564ac91b5d86dc9cbb3d0bf78"
   },
   {
     "id": "34.canvas-color-teams",
@@ -315,13 +291,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/DdyGPB",
-    "hash": "2f5861d7db74e8ce232fd9cbdfe85d9d01942894",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "9a7e04afcef38d707c249b1e837204af52b9b704"
   },
   {
     "id": "35.canvas-light-explosion",
@@ -330,13 +300,7 @@
     "description": "Click to clear and change hue.",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/Xdaavx",
-    "hash": "22978b5453be64f1067d42a41f5becd1a19ea44d",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "b843acf2a18b70486acbe140b6bdf5744fc5eb91"
   },
   {
     "id": "36.starfield",
@@ -345,13 +309,7 @@
     "description": "Engage",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-    "hash": "8ba9c3cbd6a28ae22b428e066d8a0142854aeb9b",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "b002db19c0a4d445a29f81e4f29235280eeec94f"
   },
   {
     "id": "46.codevember-05-simplex-vector-flow-field",
@@ -360,13 +318,7 @@
     "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/zodPjd",
-    "hash": "6742968fd9acb131f6551efdafc647ad071cf17d",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "9813f328c47af5a3d46fd7aff6fa469471be9c15"
   },
   {
     "id": "47.color-trails",
@@ -375,13 +327,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/GprWyw",
-    "hash": "f621af9e3c6bd23a8042dfdecc2104dd1e3c39ea",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "6299a1860de5f43bc0346fdfe85c12d21f894899"
   },
   {
     "id": "48.colorful-wanderers",
@@ -390,13 +336,7 @@
     "description": "\n\nForked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/xbRqGz",
-    "hash": "c24aa3ef994e919a94a2a8b57cfede27ecb74d4d",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "bd387172353d7444104820db5ef86d7575fb3ed9"
   },
   {
     "id": "49.curved-lines",
@@ -405,13 +345,7 @@
     "description": "`#GrayScale_HintOfRainbow_CurvedLinesWeekend`",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/zGwqbq",
-    "hash": "c9c5a277a90eea0a2dd34cfb7a5e5c723cbb48cd",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "eb3708cc29a15d4f0601244cccf132a4c133003c"
   },
   {
     "id": "50.sidelined",
@@ -420,13 +354,7 @@
     "description": "Side lines",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/rNvPvod",
-    "hash": "a4e8f7df4226b96a6ad7f780e1b8974949472b66",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "ceb11aa2db5f65c1ea90fd1d0cf6a164f9f5f579"
   },
   {
     "id": "51.wormhole",
@@ -435,13 +363,7 @@
     "description": "Warp 1",
     "author": "Liam Egan",
     "source": "https://codepen.io/shubniggurath/pen/jORzwZq",
-    "hash": "71d7ef0581be470c8cb64470c79e7739abec31e1",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "d9bd3affde7bcab79af3fb49670db02c01e6b7af"
   },
   {
     "id": "52.polyhedron-galaxy",
@@ -450,13 +372,7 @@
     "description": "Practicing with ThreeJS",
     "author": "Júlia Erő",
     "source": "https://codepen.io/planktone/pen/EPXMGj",
-    "hash": "b00835e66ece73598a211ee3e5c9bc695c06ec97",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "2a4048a6ef6ace1b104108ec973b719394006d08"
   },
   {
     "id": "53.stars",
@@ -465,13 +381,7 @@
     "description": "The odd twinkle",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/BjBGoM",
-    "hash": "df775a4aec340a7dc37d40441c596cdc0d760ce9",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "8fc7628770e084c05a2261413bd6963b22179870"
   },
   {
     "id": "54.stars-galaxy",
@@ -480,13 +390,7 @@
     "description": "Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.",
     "author": "MenSeb",
     "source": "https://codepen.io/MenSeb/pen/yWJgeE",
-    "hash": "e51d9fd10c292391ca8d51a3529a41b31ca5b0ce",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "ab180d28ac35e335e4a47d09e4e1fdb808bfd004"
   },
   {
     "id": "56.azimuthal-viscosity",
@@ -495,13 +399,7 @@
     "description": "",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/ZVewby",
-    "hash": "8360d998f57362d438aa441d788eeca844bb2084",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "9497a501280a696392b71bfd3a253446b388915d"
   },
   {
     "id": "57.browniandrix-noise",
@@ -510,13 +408,7 @@
     "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/jdGBjW",
-    "hash": "9af132969068d41fafefcc582d34ada1464687c4",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "21e3a5b052d37a8847e1ab28824d184d20af0ab9"
   },
   {
     "id": "58.browniandrix-noise-l3",
@@ -525,13 +417,7 @@
     "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/VRaGKq",
-    "hash": "ba5d26227e217304eae9041ec4418f4f4a85557f",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "959431f2e8a92d3aa1597729cf15e4b0dd44bc6e"
   },
   {
     "id": "59.dimension-two-and-a-half",
@@ -540,13 +426,7 @@
     "description": "Vanishing point attractors",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/OrpdNJ",
-    "hash": "176a9976530456adc03883256e99e5259894ca53",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "d0b9458946047dd5b1ab0ba97ab6acba5aa64e9a"
   },
   {
     "id": "60.digital-frontier",
@@ -555,13 +435,7 @@
     "description": "It's too trippy, dial me out",
     "author": "Ben Matthews",
     "source": "https://codepen.io/tsuhre/pen/YzjEBoG",
-    "hash": "25ba6b503bf6da311ebcf0f777f2aa45edd83084",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "2c3eb66d14236faf78acbebe2e2182305c089753"
   },
   {
     "id": "61.cube",
@@ -570,13 +444,7 @@
     "description": "[Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288). Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.",
     "author": "Ana Tudor",
     "source": "https://codepen.io/thebabydino/pen/OJvYZrx",
-    "hash": "976a2885578ec5e4fade283e28ab7a2f1b5417fa",
-    "parameters": [
-      {
-        "id": "color",
-        "default": "#000000"
-      }
-    ]
+    "hash": "e61f038cfdc1787e83a01d287af90cd6208aff9c"
   },
   {
     "id": "62.neural",
