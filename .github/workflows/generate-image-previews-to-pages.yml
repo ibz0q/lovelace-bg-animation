@@ -1,25 +1,29 @@
-name: Generate Metadata (Package preview files)
+name: Generate image previews and deploy to Pages
 
 on: 
-  push:
-    paths:
-      - 'gallery/packages/**'
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Generate Metadata"]
+    types:
+      - completed
 
 permissions:
   contents: read
   pages: write
   id-token: write
-    
+
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -30,23 +34,23 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./utils
+
       - name: Generate Metadata
         run: node ./utils/create-metadata.js
+        
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
+      - name: Generate Image Metadata
+        run: node ./utils/create-imagepreview.js
 
       - name: Delete node_modules
         run: |
           echo "Deleting all node_modules folders..."
           find . -name "node_modules" -type d -prune -exec rm -rf {} +
-
-      - name: Delete docs
-        run: |
-          echo "Deleting all docs folders..."
-          find . -name "docs" -type d -prune -exec rm -rf {} +
-
-      - name: Delete packages
-        run: |
-          echo "Deleting all packages folders..."
-          find . -name "packages" -type d -prune -exec rm -rf {} +
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
