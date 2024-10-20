@@ -1,4 +1,4 @@
-name: Generate Metadata
+name: Generate Metadata (Package preview files)
 
 on: 
   push:

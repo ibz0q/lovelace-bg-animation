@@ -1,4 +1,4 @@
-name: Generate Metadata
+name: Generate Metadata Partials (Readme, Manifest, Docs) 
 
 on: 
   push:
