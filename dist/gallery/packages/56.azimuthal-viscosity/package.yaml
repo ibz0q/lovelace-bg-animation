@@ -4,9 +4,7 @@ metadata:
   description: ""
   author: Alex Andrix
   source: https://codepen.io/alexandrix/pen/ZVewby
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

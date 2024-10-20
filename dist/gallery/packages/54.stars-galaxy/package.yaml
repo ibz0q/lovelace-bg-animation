@@ -5,9 +5,7 @@ metadata:
     using CSS with SASS. Stars are pseudo elements rotated and translated.
   author: MenSeb
   source: https://codepen.io/MenSeb/pen/yWJgeE
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 

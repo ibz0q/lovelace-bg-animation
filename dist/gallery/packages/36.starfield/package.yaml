@@ -4,9 +4,7 @@ metadata:
   description: "Engage"
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/Vwxvbw
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

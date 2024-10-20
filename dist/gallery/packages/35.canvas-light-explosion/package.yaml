@@ -4,9 +4,7 @@ metadata:
   description: Click to clear and change hue.
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/Xdaavx
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

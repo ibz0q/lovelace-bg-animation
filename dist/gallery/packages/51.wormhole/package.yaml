@@ -4,9 +4,7 @@ metadata:
   description: "Warp 1"
   author: Liam Egan
   source: https://codepen.io/shubniggurath/pen/jORzwZq
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >
