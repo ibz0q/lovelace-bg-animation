@@ -27,9 +27,6 @@ jobs:
       - name: Update documentation with package metadata
         run: node ./utils/create-docs.js
 
-      - name: Generate Metadata
-        run: node ./utils/create-metadata.js
-
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
