@@ -102,73 +102,93 @@ async function processPackageManifest(packageManifestObject) {
 
     } catch (error) {
         console.error('Failed to process the package manifest: ' + packageManifestObject, error);
-        return null;
+        return false;
     }
 }
 
 async function readDirectory(dir) {
-    fs.rmSync(metadataFolder, { recursive: true, force: true });
+    // fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
     const files = fs.readdirSync(dir);
     const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8')));
 
-    for (const file of files) {
-        const filePath = path.join(dir, file);
-        const stats = fs.statSync(filePath);
-        if (stats.isDirectory()) {
-            readDirectory(filePath);
-        } else if (file === 'package.yaml') {
-            const packageData = YAML.parse((fs.readFileSync(filePath, 'utf8')));
-            const packageDir = path.dirname(filePath);
-            const packageName = path.basename(packageDir);
-            const packageFolder = path.join(metadataFolder, packageName);
-            const metadataFilePath = path.join(packageFolder, 'preview.html');
+    try {
 
-            folderHash = getSHA1(packageDir);
-            console.log(`Folder hash is ${folderHash}`)
+        for (const file of files) {
+            const filePath = path.join(dir, file);
+            const stats = fs.statSync(filePath);
+            if (stats.isDirectory()) {
 
-            const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
-            console.log(`Manifest hash is ${manifestEntry.hash}`)
+                readDirectory(filePath);
 
-            if (!!fs.existsSync(packageFolder) && (manifestEntry.hash === folderHash)) {
-                console.log(`Hash is the same for ${packageName}, skipping.`);
-                break;
-            }
+            } else if (file === 'package.yaml') {
 
-            if (fs.existsSync(metadataFilePath)) {
-                console.log(`Folder exist for ${packageName}, skipping.`);
-                break;
-            }
-            
-            console.log(`Generating.. ${packageName}`);
-            templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName });
+                console.log(`\n===\n`)
 
-            fs.mkdirSync(packageFolder, { recursive: true });
-            fs.cpSync(packageDir, packageFolder, {
-                recursive: true,
-                preserveTimestamps: true,
-                filter: (src) => {
-                    const excludePatterns = ['package.yaml'];
-                    return !excludePatterns.some(pattern => {
-                        return typeof pattern === 'string' ? src.endsWith(pattern) : pattern.test(src);
-                    });
+                const packageData = YAML.parse((fs.readFileSync(filePath, 'utf8')));
+                const packageDir = path.dirname(filePath);
+                const packageName = path.basename(packageDir);
+                const packageFolder = path.join(metadataFolder, packageName);
+                const metadataFilePath = path.join(packageFolder, 'preview.html');
+                console.log(`Starting: ${packageName} \n`);
+
+                folderHash = getSHA1(packageDir);
+                console.log(`Folder hash is ${folderHash}`)
+
+                const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
+
+                console.log(`Manifest hash is ${manifestEntry.hash}`)
+                console.log(`Metadata status is ${fs.existsSync(metadataFilePath)} : ${metadataFilePath}`)
+
+                if (fs.existsSync(metadataFilePath) == true && (manifestEntry.hash === folderHash)) {
+                    console.log(`Hash is the same for ${packageName}, skipped.`);
+                    continue;
                 }
-            });
-            let metadataComments = '';
-            if (packageData.metadata) {
-                for (const [key, value] of Object.entries(packageData.metadata)) {
-                    metadataComments += `<!-- ${key}: ${value} -->\n`;
+
+                if (fs.existsSync(metadataFilePath)) {
+                    console.log(`Folder exist for ${packageName}, skipping.`);
+                    continue;
                 }
+
+                console.log(`Generating.. ${packageName}`);
+                templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName });
+
+                fs.mkdirSync(packageFolder, { recursive: true });
+                fs.cpSync(packageDir, packageFolder, {
+                    recursive: true,
+                    preserveTimestamps: true,
+                    filter: (src) => {
+                        const excludePatterns = ['package.yaml'];
+                        return !excludePatterns.some(pattern => {
+                            return typeof pattern === 'string' ? src.endsWith(pattern) : pattern.test(src);
+                        });
+                    }
+                });
+
+                let metadataComments = '';
+                if (packageData.metadata) {
+                    for (const [key, value] of Object.entries(packageData.metadata)) {
+                        metadataComments += `<!-- ${key}: ${value} -->\n`;
+                    }
+                }
+
+                templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
+                templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
+                let htmldata = `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed
+                fs.writeFileSync(metadataFilePath, htmldata.replace(/\n/g, '\r\n'), 'utf8');
+
+                console.log(`Generated: ${packageName} \n`);
+                console.log(`=== \n`);
+
             }
 
-            templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
-            templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
-            let htmldata = `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed 
-            fs.writeFileSync(metadataFilePath, htmldata.replace(/\n/g, '\r\n'), 'utf8');
-            console.log(`Generated: ${packageName}`);
         }
+
+    } catch(err) {
+        console.error("Something broke");
+        console.error(err);
     }
-}   
+}
 
 
 readDirectory(packagesDir);
