@@ -1,27 +1,13 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
-/*
-
-TODO:
-- Fix transitions 
-- Remove any invalid Gallery package IDs from the playlist 
-- Update the view on change
-- Add stub config for media changer
-- Enable pausing completely on a track
-- Allow comms to iframe
-- Create a message broker
-- Add a video background package
-
-*/
-
-var isDebug = false,
+var isDebug = true,
   lovelaceUI = {},
   rootPluginConfig,
   galleryRootManifest,
   domObserver = {},
   processedPackageManifests = {},
-  playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } },
+  playlistIndexes = {},
   applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {}, uiWriteDelay;
 
 function sortArray(array, method) {
@@ -32,6 +18,10 @@ function sortArray(array, method) {
     id_desc: () => array.sort((a, b) => b.id - a.id),
   };
   return methods[method]?.() || console.error('Invalid sorting method') || array;
+}
+
+async function setPlaylistIndexes() {
+  playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } }
 }
 
 async function getGalleryRootManifest() {
@@ -62,14 +52,14 @@ async function getGalleryRootManifest() {
     }
 
   } catch (error) {
-    isDebug ? console.error("sortArray: Failed to fetch gallery manifest:", error) : null;
+    isDebug ? console.error("getGalleryRootManifest: Failed to fetch gallery manifest:", error) : null;
     return null;
   }
 }
 
 async function getPackageManifest(packageConfig) {
   try {
-    isDebug ? console.log("sortArray: " + packageConfig) : null;
+    isDebug ? console.log("getPackageManifest: " + packageConfig) : null;
     let packageManifestId = packageConfig.id;
     let packageCacheKey = btoa(packageManifestId + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
@@ -95,13 +85,15 @@ async function getPackageManifest(packageConfig) {
       return packageManifest;
     }
   } catch (error) {
-    isDebug ? console.error("sortArray: Failed to fetch package manifest: " + packageManifestId, error) : null;
+    isDebug ? console.error("getPackageManifest: Failed to fetch package manifest: " + packageManifestId, error) : null;
     return null;
   }
 }
 
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
+    isDebug ? console.log("processPackageManifest: Called packagemani") : null;
+
     let packageManifestName = packageConfig.id;
     let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageProcessed__" + packageCacheKey);
@@ -126,7 +118,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
       if (typeof window !== 'undefined') {
         if (packageManifest?.helpers?.insert_baseurl == true) {
-          isDebug ? console.log("sortArray: Inserting baseurl") : null;
+          isDebug ? console.log("processPackageManifest: Inserting baseurl") : null;
           let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
           if (packageManifest.template.includes('<head>')) {
             packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
@@ -159,7 +151,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
         });
 
       } else {
-        isDebug ? console.error("sortArray: Template does not exist in package, it is required.") : null;
+        isDebug ? console.error("processPackageManifest: Template does not exist in package, it is required.") : null;
       }
 
       if (packageConfig.cache === true && rootPluginConfig.cache === true) {
@@ -170,7 +162,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
     }
 
   } catch (error) {
-    isDebug ? console.error("sortArray: Failed to process the package manifest: " + packageManifest, error) : null;
+    isDebug ? console.error("processPackageManifest: Failed to process the package manifest: " + packageManifest, error) : null;
     return null;
   }
 }
@@ -180,7 +172,7 @@ function retrieveCache(cacheKey) {
     const item = sessionStorage.getItem(cacheKey);
     return item ? JSON.parse(item) : null;
   } catch (error) {
-    isDebug ? console.error("sortArray: Error accessing sessionStorage:", error) : null;
+    isDebug ? console.error("retrieveCache: Error accessing sessionStorage:", error) : null;
     return null;
   }
 }
@@ -189,7 +181,7 @@ function storeCache(cacheKey, data) {
   try {
     sessionStorage.setItem(cacheKey, JSON.stringify(data));
   } catch (error) {
-    isDebug ? console.error("sortArray: Error storing data in sessionStorage:", error) : null;
+    isDebug ? console.error("storeCache: Error storing data in sessionStorage:", error) : null;
   }
 }
 
@@ -205,7 +197,7 @@ function opportunisticallyDetermineLocalInstallPath() {
       let src = memoryCache.scriptTags.src.replace(window.location.origin, '').split('?')[0];
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
       memoryCache.installPath = src.replace('/dist/', '/dist').replace(/\/$/, '');
-      isDebug ? console.log("sortArray: " + memoryCache.installPath) : null;
+      isDebug ? console.log("opportunisticallyDetermineLocalInstallPath: " + memoryCache.installPath) : null;
 
     }
     return memoryCache.installPath;
@@ -216,7 +208,7 @@ function opportunisticallyDetermineLocalInstallPath() {
 function initializeRuntimeVariables() {
 
   if (!lovelaceUI?.lovelaceObject?.config["bg-animation"]) {
-    console.error("No bg-animation config found in lovelace configuration.")
+    isDebug ? console.log("initializeRuntimeVariables: No bg-animation config found in lovelace configuration: ") : null;
     return false;
   }
 
@@ -290,26 +282,25 @@ function initializeLovelaceVariables() {
     lovelaceUI.huiViewElement = lovelaceUI.viewElement?.querySelector("hui-view");
     lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
     lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement?.lovelace;
-    if (!lovelaceUI.lovelaceObject) {
-      return false;
-    }
-    return true;
+    return !!lovelaceUI.lovelaceObject;
 
   } catch (error) {
-    isDebug ? console.error("sortArray: Error in initializeRuntimeVariables:", error) : null;
+    isDebug ? console.error("initializeLovelaceVariables: Error in initializeRuntimeVariables:", error) : null;
     return false;
   }
 }
 
 function initializeBackgroundElements() {
-  if (document.querySelector("#bg-animation-container")) {
-    document.querySelector("#bg-animation-container").remove();
+  isDebug ? console.log("initializeBackgroundElements: Called") : null;
+  if (lovelaceUI.groundElement.querySelector("#bg-animation-container")) {
+    lovelaceUI.groundElement.querySelector("#bg-animation-container").remove();
   }
 
   lovelaceUI.bgRootElement = document.createElement("div");
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.style;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
+  isDebug ? console.log("initializeBackgroundElements: Created elm") : null;
 
   if (lovelaceUI.iframeElement == undefined) {
     lovelaceUI.iframeElement = document.createElement('iframe');
@@ -324,7 +315,6 @@ function initializeBackgroundElements() {
   if (rootPluginConfig.overlay?.show) {
     lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="bg-overlay" ${rootPluginConfig.overlay.style ? `style="${rootPluginConfig.overlay.style}"` : ''}></div>`);
   }
-
 }
 
 function changeDefaultLovelaceStyles() {
@@ -351,8 +341,43 @@ function changeDefaultLovelaceStyles() {
 }
 
 async function processBackgroundFrame(packageConfig, packageManifest) {
-  lovelaceUI.iframeElement.style.cssText = packageConfig.style;
-  lovelaceUI.iframeElement.srcdoc = packageManifest.template__processed;
+
+  isDebug ? console.log("processBackgroundFrame: Called") : null;
+  const createIframe = async (id) => {
+    const iframeElement = document.createElement('iframe');
+    iframeElement.id = id;
+    iframeElement.srcdoc = "<style>*{background:black;}</style>";
+    iframeElement.className = applicationIdentifiers.appNameShort;
+    iframeElement.style.cssText = packageConfig.style;
+    iframeElement.srcdoc = packageManifest.template__processed;
+    lovelaceUI.bgRootElement.appendChild(iframeElement);
+    return iframeElement;
+  };
+
+  const loadIframeWithTimeout = (iframe, timeoutDuration) =>
+    new Promise(resolve => {
+      const timeoutId = setTimeout(() => resolve(true), timeoutDuration);
+      iframe.onload = iframe.onerror = () => {
+        clearTimeout(timeoutId);
+        resolve(true);
+      };
+    });
+
+  if (lovelaceUI.iframeElement === undefined) {
+    isDebug ? console.log("processBackgroundFrame: Creating new") : null;
+    lovelaceUI.iframeElement = await createIframe("background-iframe");
+
+  } else {
+    isDebug ? console.log("processBackgroundFrame: Swap") : null;
+    lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy");
+    const loadLazyIframe = await loadIframeWithTimeout(lovelaceUI.iframeElementLazy, 2000);
+    if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
+      isDebug ? console.log("processBackgroundFrame: Passed check") : null;
+      lovelaceUI.iframeElement.remove();
+      lovelaceUI.iframeElementLazy.id = "background-iframe";
+      lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
+    }
+  }
 }
 
 function getCurrentViewPath() {
@@ -364,7 +389,7 @@ function getPlaylistIndex() {
 }
 
 async function startPlaylistInterval(currentPlaylist) {
-  isDebug ? console.log("sortArray: startPlaylistInterval: Setup playlist Int") : null;
+  isDebug ? console.log("startPlaylistInterval: Setup playlist Int") : null;
   let playlistIndex = getPlaylistIndex();
   let currentPlaylistTrack = currentPlaylist[playlistIndex.next]
   let duration = currentPlaylistTrack?.duration ? currentPlaylistTrack.duration : rootPluginConfig.duration;
@@ -379,7 +404,7 @@ async function startPlaylistInterval(currentPlaylist) {
   playlistIndex.next = (playlistIndex.next + 1) % currentPlaylist.length;
 
   if (playlistIndex.current == playlistIndex.next) {
-    isDebug ? console.log("sortArray: startPlaylistInterval: Playlist only has one item, skipping interval.") : null;
+    isDebug ? console.log("startPlaylistInterval: Playlist only has one item, skipping interval.") : null;
     return;
   }
 
@@ -387,9 +412,11 @@ async function startPlaylistInterval(currentPlaylist) {
     clearTimeout(window.__global_minterval);
   }
 
-  window.__global_minterval = setTimeout(() => {
-    startPlaylistInterval(currentPlaylist)
-  }, duration)
+  if (duration !== 0) {
+    window.__global_minterval = setTimeout(() => {
+      startPlaylistInterval(currentPlaylist)
+    }, duration)
+  }
 
   playlistIndex.timeout = true
 
@@ -397,18 +424,20 @@ async function startPlaylistInterval(currentPlaylist) {
 
 async function setupPlaylist() {
   let viewPath = getCurrentViewPath();
-  isDebug ? console.log(`sortArray: setupPlaylist: Current viewpath ${viewPath}`) : null;
+  isDebug ? console.log(`setupPlaylist: setupPlaylist: Current viewpath ${viewPath}`) : null;
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
-    let allIdsExist = true;
-    currentPlaylist.forEach(slide => {
-      if (!galleryRootManifest.some(manifest => manifest.id === slide.id)) {
-        isDebug ? console.error(`sortArray: setupPlaylist: Slide id ${slide.id} does not exist in the manifest.`) : null;
-        allIdsExist = false
+
+    currentPlaylist = currentPlaylist.filter(track => {
+      let trackExists = galleryRootManifest.some(manifest => manifest.id === track.id);
+      if (!trackExists) {
+        isDebug ? console.log(`setupPlaylist: Track id ${track.id} does not exist in the manifest and has been removed.`) : null;
       }
+      return trackExists;
     });
-    if (!allIdsExist) {
-      isDebug ? console.error("sortArray: setupPlaylist: Some package ID's do not exist, unable to continue.") : null;
+
+    if (currentPlaylist.length === 0) {
+      isDebug ? console.error("setupPlaylist: No valid tracks found after filtering, unable to continue.") : null;
       return;
     }
 
@@ -419,12 +448,12 @@ async function setupPlaylist() {
     startPlaylistInterval(currentPlaylist);
 
   } else {
-    isDebug ? console.error("sortArray: setupPlaylist: No backgrounds found in the user config.") : null;
+    isDebug ? console.error("setupPlaylist: setupPlaylist: No backgrounds found in the user config.") : null;
   }
 }
 
 async function initializeObservers() {
-  isDebug ? console.log("Observer: called") : null;
+  isDebug ? console.log("initializeObservers: called") : null;
 
   if (domObserver.haMainElement) {
     domObserver.haMainElement.disconnect();
@@ -434,7 +463,7 @@ async function initializeObservers() {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
         uiWriteDelay = setTimeout(() => {
-          isDebug ? console.log("sortArray: Observer: haMainElement ") : null;
+          isDebug ? console.log("initializeObservers: haMainElement ") : null;
           initialize();
         }, 200);
       }
@@ -456,7 +485,7 @@ async function initializeObservers() {
     for (let mutation of mutations) {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
-          isDebug ? console.log("sortArray: Observer: viewElement") : null;
+          isDebug ? console.log("initializeObservers: viewElement") : null;
           await getGalleryRootManifest();
           await setupPlaylist();
 
@@ -486,7 +515,7 @@ async function initializeObservers() {
       if (mutation.removedNodes.length > 0) {
         if (mutation.removedNodes[0].nodeName.toLowerCase() == "hui-editor") {
           uiWriteDelay = setTimeout(() => {
-            isDebug ? console.log("sortArray: Observer: hui-editor") : null;
+            isDebug ? console.log("initializeObservers: hui-editor") : null;
             initialize();
           }, 200);
         }
@@ -508,7 +537,7 @@ async function initializeObservers() {
   domObserver.huiRootElement = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
-        isDebug ? console.log("sortArray: Observer: panelElement huiRootElement") : null;
+        isDebug ? console.log("initializeObservers: panelElement huiRootElement") : null;
       }
     });
   });
@@ -522,18 +551,19 @@ async function initializeObservers() {
 }
 
 async function initialize() {
-  isDebug ? console.log("Initializing start.") : null;
+  isDebug ? console.log("initialize: start.") : null;
   let initializeLovelaceVars = initializeLovelaceVariables()
   if (initializeLovelaceVars == true) {
     await initializeObservers();
   } else {
-    isDebug ? console.log("Failed to initialize lovelace variables from this view.") : null;
+    isDebug ? console.log("initialize: Failed to initialize lovelace variables from this view.") : null;
   }
-  isDebug ? console.log("Initializing middle") : null;
+  isDebug ? console.log("initialize: after") : null;
   if (initializeLovelaceVars == true && lovelaceUI.lovelaceObject.config["bg-animation"]) {
     initializeRuntimeVariables();
     changeDefaultLovelaceStyles()
     initializeBackgroundElements()
+    await setPlaylistIndexes();
     await getGalleryRootManifest();
     await setupPlaylist();
   }
@@ -611,31 +641,7 @@ class LovelaceBgAnimation extends HTMLElement {
   set hass(hass) {
     if (rootPluginConfig !== undefined) {
       if (!this.content) {
-        this.innerHTML = `
-            <style>
-              ${this.styles}
-            </style>
-            <link rel="stylesheet" href="${lovelaceUI.pluginAssetPath}/frontend/css/card.css">
-            <ha-card>
-              <div class="card-content">
-                <div class="media-player">
-                  <button class="control-button" id="back">
-                    <i class="fas fa-backward"></i>
-                  </button>
-                  <button class="control-button" id="toggle">
-                    <i class="fas fa-play"></i>
-                  </button>
-                  <div class="media-name-container">
-                    Unknown
-                  </div>
-                  <button class="control-button" id="forward">
-                    <i class="fas fa-forward"></i>
-                  </button>
-                </div>
-              </div>
-            </ha-card>
-      `;
-
+        this.innerHTML = `<style>${this.styles}</style><link rel="stylesheet" href="${lovelaceUI.pluginAssetPath}/frontend/css/card.css"><ha-card><div class="card-content"><div class="media-player"><button class="control-button" id="back"><i class="fas fa-backward"></i></button><button class="control-button" id="toggle"><i class="fas fa-play"></i></button><div class="media-name-container">Unknown</div><button class="control-button" id="forward"><i class="fas fa-forward"></i></button></div></div></ha-card>`;
         this.content = this.querySelector("div");
         this.content.querySelectorAll('.control-button').forEach(button => {
           button.addEventListener('click', () => {
@@ -644,7 +650,7 @@ class LovelaceBgAnimation extends HTMLElement {
             let currentPlaylist = rootPluginConfig?.background?.view[currentViewPath] ? rootPluginConfig?.background?.view[currentViewPath] : rootPluginConfig?.background?.global
 
             if (currentPlaylist.length == 1) {
-              isDebug ? console.log("sortArray: Playlist only has one item, skipping interval.") : null;
+              isDebug ? console.log("Card: Playlist only has one item, skipping interval.") : null;
               return;
 
             }
@@ -711,6 +717,10 @@ class LovelaceBgAnimation extends HTMLElement {
   getCardSize() {
     return 1;
   }
+  static getStubConfig() {
+    return { "type": "custom:lovelace-bg-animation" }
+  }
 }
-
 customElements.define('lovelace-bg-animation', LovelaceBgAnimation);
+window.customCards = window.customCards || [];
+window.customCards.push({ type: "lovelace-bg-animation", name: "Lovelace BG Animation", preview: true, documentationURL: "https://github.com/ibz0q/lovelace-bg-animation" });
