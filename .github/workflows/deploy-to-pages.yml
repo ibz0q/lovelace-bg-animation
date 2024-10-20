@@ -53,6 +53,21 @@ jobs:
           echo "Deleting all node_modules folders..."
           find . -name "node_modules" -type d -prune -exec rm -rf {} +
 
+      - name: Delete docs
+        run: |
+          echo "Deleting all docs folders..."
+          find . -name "docs" -type d -prune -exec rm -rf {} +
+
+      - name: Delete src
+        run: |
+          echo "Deleting all src folders..."
+          find . -name "src" -type d -prune -exec rm -rf {} +
+
+      - name: Delete dist
+        run: |
+          echo "Deleting all dist folders..."
+          find . -name "dist" -type d -prune -exec rm -rf {} +
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
