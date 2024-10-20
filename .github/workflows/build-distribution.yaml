@@ -3,7 +3,7 @@ name: Webpack Build
 on: 
   push:
     paths:
-      - 'frontend/**'
+      - 'src/**'
       - 'gallery/**'
       - 'webpack.config.js'
   workflow_dispatch:

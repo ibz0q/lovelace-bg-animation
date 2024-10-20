@@ -577,20 +577,20 @@ class LovelaceBgAnimation extends HTMLElement {
     super();
     if (rootPluginConfig !== undefined) {
       this.styles = `
-      @import url('${lovelaceUI.pluginAssetPath}/frontend/css/fontawesome.min.css');
-      @import url('${lovelaceUI.pluginAssetPath}/frontend/css/regular.min.css');
-      @import url('${lovelaceUI.pluginAssetPath}/frontend/css/solid.min.css');
+      @import url('${lovelaceUI.pluginAssetPath}/src/css/fontawesome.min.css');
+      @import url('${lovelaceUI.pluginAssetPath}/src/css/regular.min.css');
+      @import url('${lovelaceUI.pluginAssetPath}/src/css/solid.min.css');
       @font-face {
         font-family: 'Chivo Mono';
         font-style: normal;
         font-weight: 500;
-        src: local('Chivo Mono'), url('${lovelaceUI.pluginAssetPath}/frontend/webfonts/ChivoMono[wght].woff') format('woff');
+        src: local('Chivo Mono'), url('${lovelaceUI.pluginAssetPath}/src/webfonts/ChivoMono[wght].woff') format('woff');
     }
     @font-face {
         font-family: 'Chivo Mono';
         font-style: italic;
         font-weight: 500;
-        src: local('Chivo Mono'), url('${lovelaceUI.pluginAssetPath}/frontend/webfonts/ChivoMono-Italic[wght].woff') format('woff');
+        src: local('Chivo Mono'), url('${lovelaceUI.pluginAssetPath}/src/webfonts/ChivoMono-Italic[wght].woff') format('woff');
     }
       `;
     }
@@ -642,7 +642,7 @@ class LovelaceBgAnimation extends HTMLElement {
   set hass(hass) {
     if (rootPluginConfig !== undefined) {
       if (!this.content) {
-        this.innerHTML = `<style>${this.styles}</style><link rel="stylesheet" href="${lovelaceUI.pluginAssetPath}/frontend/css/card.css"><ha-card><div class="card-content"><div class="media-player"><button class="control-button" id="back"><i class="fas fa-backward"></i></button><button class="control-button" id="toggle"><i class="fas fa-play"></i></button><div class="media-name-container">Unknown</div><button class="control-button" id="forward"><i class="fas fa-forward"></i></button></div></div></ha-card>`;
+        this.innerHTML = `<style>${this.styles}</style><link rel="stylesheet" href="${lovelaceUI.pluginAssetPath}/src/css/card.css"><ha-card><div class="card-content"><div class="media-player"><button class="control-button" id="back"><i class="fas fa-backward"></i></button><button class="control-button" id="toggle"><i class="fas fa-play"></i></button><div class="media-name-container">Unknown</div><button class="control-button" id="forward"><i class="fas fa-forward"></i></button></div></div></ha-card>`;
         this.content = this.querySelector("div");
         this.content.querySelectorAll('.control-button').forEach(button => {
           button.addEventListener('click', () => {
