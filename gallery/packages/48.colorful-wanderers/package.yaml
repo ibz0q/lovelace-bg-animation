@@ -8,9 +8,7 @@ metadata:
     Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/xbRqGz
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

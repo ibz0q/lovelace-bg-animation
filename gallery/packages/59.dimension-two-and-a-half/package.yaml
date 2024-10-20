@@ -4,9 +4,7 @@ metadata:
   description: Vanishing point attractors
   author: Alex Andrix
   source: https://codepen.io/alexandrix/pen/OrpdNJ
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

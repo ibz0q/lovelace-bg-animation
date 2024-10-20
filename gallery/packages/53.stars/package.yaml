@@ -4,9 +4,7 @@ metadata:
   description: The odd twinkle
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/BjBGoM
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >
