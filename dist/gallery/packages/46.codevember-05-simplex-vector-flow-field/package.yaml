@@ -5,9 +5,7 @@ metadata:
     vector flow field: https://github.com/jwagner/simplex-noise.js"
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/zodPjd
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

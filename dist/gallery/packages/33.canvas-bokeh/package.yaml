@@ -4,9 +4,7 @@ metadata:
   description: Pretty heavy, and not exactly true to real photography, but it's a start.
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/nYzapO
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

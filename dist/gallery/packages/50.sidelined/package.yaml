@@ -4,9 +4,7 @@ metadata:
   description: "Side lines"
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/rNvPvod
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

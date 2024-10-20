@@ -4,9 +4,7 @@ metadata:
   description: "It's too trippy, dial me out"
   author: Ben Matthews
   source: https://codepen.io/tsuhre/pen/YzjEBoG
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >

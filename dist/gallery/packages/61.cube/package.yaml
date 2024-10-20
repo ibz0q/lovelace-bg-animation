@@ -7,9 +7,7 @@ metadata:
     Missing you every day.
   author: Ana Tudor
   source: https://codepen.io/thebabydino/pen/OJvYZrx
-parameters:
-  - id: color
-    default: "#000000"
+
 helpers:
   insert_baseurl: true
 template: >
