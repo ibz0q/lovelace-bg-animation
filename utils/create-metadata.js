@@ -107,7 +107,10 @@ async function processPackageManifest(packageManifestObject) {
 }
 
 async function readDirectory(dir) {
-    fs.rmSync(metadataFolder, { recursive: true, force: true });
+    if (process.env.GITHUB_ACTIONS !== 'true') {
+        fs.rmSync(metadataFolder, { recursive: true, force: true });
+        console.log("Script is being run inside a GitHub Action and will not delete the metadata folder.")
+    }
 
     fs.mkdirSync(metadataFolder, { recursive: true });
 

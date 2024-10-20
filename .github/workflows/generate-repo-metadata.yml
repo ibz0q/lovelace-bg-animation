@@ -1,4 +1,4 @@
-name: Generate Metadata Partials (Readme, Manifest, Docs) 
+name: Generate Metadata
 
 on: 
   push:
@@ -26,6 +26,9 @@ jobs:
 
       - name: Update documentation with package metadata
         run: node ./utils/create-docs.js
+
+      - name: Generate Metadata
+        run: node ./utils/create-metadata.js
 
       - name: Commit and Push
         run: |
