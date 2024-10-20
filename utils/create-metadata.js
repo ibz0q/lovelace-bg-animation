@@ -145,13 +145,22 @@ async function readDirectory(dir) {
             templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName });
 
             fs.mkdirSync(packageFolder, { recursive: true });
-
+            fs.cpSync(packageDir, packageFolder, {
+                recursive: true,
+                filter: (src) => {
+                    const excludePatterns = ['package.yaml'];
+                    return !excludePatterns.some(pattern => {
+                        return typeof pattern === 'string' ? src.endsWith(pattern) : pattern.test(src);
+                    });
+                }
+            });
             let metadataComments = '';
             if (packageData.metadata) {
                 for (const [key, value] of Object.entries(packageData.metadata)) {
                     metadataComments += `<!-- ${key}: ${value} -->\n`;
                 }
             }
+
             templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
             templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
             fs.writeFileSync(metadataFilePath, `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed, 'utf8');
