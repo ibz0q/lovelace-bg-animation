@@ -15,13 +15,14 @@ TODO:
 
 */
 
-var lovelaceUI = {},
+var isDebug = false,
+  lovelaceUI = {},
   rootPluginConfig,
   galleryRootManifest,
   domObserver = {},
   processedPackageManifests = {},
   playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } },
-  applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {}, isDebug = 0, uiWriteDelay;
+  applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {}, uiWriteDelay;
 
 function sortArray(array, method) {
   const methods = {
@@ -61,13 +62,14 @@ async function getGalleryRootManifest() {
     }
 
   } catch (error) {
-    console.error('Failed to fetch gallery manifest:', error);
+    isDebug ? console.error("sortArray: Failed to fetch gallery manifest:", error) : null;
     return null;
   }
 }
 
 async function getPackageManifest(packageConfig) {
   try {
+    isDebug ? console.log("sortArray: " + packageConfig) : null;
     let packageManifestId = packageConfig.id;
     let packageCacheKey = btoa(packageManifestId + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
@@ -93,7 +95,7 @@ async function getPackageManifest(packageConfig) {
       return packageManifest;
     }
   } catch (error) {
-    console.error('Failed to fetch package manifest: ' + packageManifestId, error);
+    isDebug ? console.error("sortArray: Failed to fetch package manifest: " + packageManifestId, error) : null;
     return null;
   }
 }
@@ -124,7 +126,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
       if (typeof window !== 'undefined') {
         if (packageManifest?.helpers?.insert_baseurl == true) {
-          console.log("Inserting baseurl")
+          isDebug ? console.log("sortArray: Inserting baseurl") : null;
           let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
           if (packageManifest.template.includes('<head>')) {
             packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
@@ -157,7 +159,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
         });
 
       } else {
-        console.error("Template does not exist in package, it is required.");
+        isDebug ? console.error("sortArray: Template does not exist in package, it is required.") : null;
       }
 
       if (packageConfig.cache === true && rootPluginConfig.cache === true) {
@@ -168,7 +170,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
     }
 
   } catch (error) {
-    console.error('Failed to process the package manifest: ' + packageManifest, error);
+    isDebug ? console.error("sortArray: Failed to process the package manifest: " + packageManifest, error) : null;
     return null;
   }
 }
@@ -178,7 +180,7 @@ function retrieveCache(cacheKey) {
     const item = sessionStorage.getItem(cacheKey);
     return item ? JSON.parse(item) : null;
   } catch (error) {
-    console.error('Error accessing sessionStorage:', error);
+    isDebug ? console.error("sortArray: Error accessing sessionStorage:", error) : null;
     return null;
   }
 }
@@ -187,7 +189,7 @@ function storeCache(cacheKey, data) {
   try {
     sessionStorage.setItem(cacheKey, JSON.stringify(data));
   } catch (error) {
-    console.error('Error storing data in sessionStorage:', error);
+    isDebug ? console.error("sortArray: Error storing data in sessionStorage:", error) : null;
   }
 }
 
@@ -203,7 +205,7 @@ function opportunisticallyDetermineLocalInstallPath() {
       let src = memoryCache.scriptTags.src.replace(window.location.origin, '').split('?')[0];
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
       memoryCache.installPath = src.replace('/dist/', '/dist').replace(/\/$/, '');
-      isDebug ? console.log(memoryCache.installPath) : null;
+      isDebug ? console.log("sortArray: " + memoryCache.installPath) : null;
 
     }
     return memoryCache.installPath;
@@ -294,7 +296,7 @@ function initializeLovelaceVariables() {
     return true;
 
   } catch (error) {
-    console.error('Error in initializeRuntimeVariables:', error);
+    isDebug ? console.error("sortArray: Error in initializeRuntimeVariables:", error) : null;
     return false;
   }
 }
@@ -362,6 +364,7 @@ function getPlaylistIndex() {
 }
 
 async function startPlaylistInterval(currentPlaylist) {
+  isDebug ? console.log("sortArray: startPlaylistInterval: Setup playlist Int") : null;
   let playlistIndex = getPlaylistIndex();
   let currentPlaylistTrack = currentPlaylist[playlistIndex.next]
   let duration = currentPlaylistTrack?.duration ? currentPlaylistTrack.duration : rootPluginConfig.duration;
@@ -376,7 +379,7 @@ async function startPlaylistInterval(currentPlaylist) {
   playlistIndex.next = (playlistIndex.next + 1) % currentPlaylist.length;
 
   if (playlistIndex.current == playlistIndex.next) {
-    console.log("Playlist only has one item, skipping interval.")
+    isDebug ? console.log("sortArray: startPlaylistInterval: Playlist only has one item, skipping interval.") : null;
     return;
   }
 
@@ -394,17 +397,18 @@ async function startPlaylistInterval(currentPlaylist) {
 
 async function setupPlaylist() {
   let viewPath = getCurrentViewPath();
+  isDebug ? console.log(`sortArray: setupPlaylist: Current viewpath ${viewPath}`) : null;
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
     let allIdsExist = true;
     currentPlaylist.forEach(slide => {
       if (!galleryRootManifest.some(manifest => manifest.id === slide.id)) {
-        console.error(`Slide id ${slide.id} does not exist in the manifest.`);
+        isDebug ? console.error(`sortArray: setupPlaylist: Slide id ${slide.id} does not exist in the manifest.`) : null;
         allIdsExist = false
       }
     });
     if (!allIdsExist) {
-      console.error("Some package ID's do not exist, unable to continue.");
+      isDebug ? console.error("sortArray: setupPlaylist: Some package ID's do not exist, unable to continue.") : null;
       return;
     }
 
@@ -415,12 +419,13 @@ async function setupPlaylist() {
     startPlaylistInterval(currentPlaylist);
 
   } else {
-    console.error("No backgrounds found in the user config.")
+    isDebug ? console.error("sortArray: setupPlaylist: No backgrounds found in the user config.") : null;
   }
 }
 
 async function initializeObservers() {
-  console.log("Obs called")
+  isDebug ? console.log("Observer: called") : null;
+
   if (domObserver.haMainElement) {
     domObserver.haMainElement.disconnect();
   }
@@ -429,7 +434,7 @@ async function initializeObservers() {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
         uiWriteDelay = setTimeout(() => {
-          console.log("haMainElement observer")
+          isDebug ? console.log("sortArray: Observer: haMainElement ") : null;
           initialize();
         }, 200);
       }
@@ -451,7 +456,7 @@ async function initializeObservers() {
     for (let mutation of mutations) {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
-          console.log("viewElement observer")
+          isDebug ? console.log("sortArray: Observer: viewElement") : null;
           await getGalleryRootManifest();
           await setupPlaylist();
 
@@ -481,6 +486,7 @@ async function initializeObservers() {
       if (mutation.removedNodes.length > 0) {
         if (mutation.removedNodes[0].nodeName.toLowerCase() == "hui-editor") {
           uiWriteDelay = setTimeout(() => {
+            isDebug ? console.log("sortArray: Observer: hui-editor") : null;
             initialize();
           }, 200);
         }
@@ -502,7 +508,7 @@ async function initializeObservers() {
   domObserver.huiRootElement = new MutationObserver(function (mutations) {
     mutations.forEach(function (mutation) {
       if (mutation.addedNodes.length > 0) {
-        console.log("panelElement huiRootElement")
+        isDebug ? console.log("sortArray: Observer: panelElement huiRootElement") : null;
       }
     });
   });
@@ -516,16 +522,14 @@ async function initializeObservers() {
 }
 
 async function initialize() {
-  console.log("Initializing start.")
-
+  isDebug ? console.log("Initializing start.") : null;
   let initializeLovelaceVars = initializeLovelaceVariables()
   if (initializeLovelaceVars == true) {
     await initializeObservers();
   } else {
-    console.log("Failed to initialize lovelace variables from this view.")
+    isDebug ? console.log("Failed to initialize lovelace variables from this view.") : null;
   }
-  console.log("Initializing middle.")
-
+  isDebug ? console.log("Initializing middle") : null;
   if (initializeLovelaceVars == true && lovelaceUI.lovelaceObject.config["bg-animation"]) {
     initializeRuntimeVariables();
     changeDefaultLovelaceStyles()
@@ -640,7 +644,7 @@ class LovelaceBgAnimation extends HTMLElement {
             let currentPlaylist = rootPluginConfig?.background?.view[currentViewPath] ? rootPluginConfig?.background?.view[currentViewPath] : rootPluginConfig?.background?.global
 
             if (currentPlaylist.length == 1) {
-              console.log("Playlist only has one item, skipping interval.")
+              isDebug ? console.log("sortArray: Playlist only has one item, skipping interval.") : null;
               return;
 
             }
@@ -650,7 +654,7 @@ class LovelaceBgAnimation extends HTMLElement {
                 startPlaylistInterval(currentPlaylist)
                 break;
               case 'toggle':
-                console.log("Toggle")
+                isDebug ? console.log("Toggle") : null;
 
                 document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
 
@@ -679,9 +683,9 @@ class LovelaceBgAnimation extends HTMLElement {
 
           let mediaInfo = `
             <div class="media-ticker">
-            ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
-            ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
-            ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
+              ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
+              ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
+              ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
             </div>
         `;
 

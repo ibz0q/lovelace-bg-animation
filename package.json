@@ -1,15 +1,15 @@
 {
   "devDependencies": {
-    "@playwright/test": "^1.43.1",
+    "@playwright/test": "^1.48.1",
     "copy-webpack-plugin": "^12.0.2",
     "jsdom": "^24.0.0",
-    "sass": "^1.75.0",
-    "webpack": "^5.91.0",
+    "sass": "^1.80.3",
+    "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   },
   "name": "lovelace-bg-animation",
   "description": "A small Lovelace plugin that replaces the background with a animated one, various animations available.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "frontend/bg-animation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,6 @@
   "dependencies": {
     "less": "^4.2.0",
     "scss": "^0.2.4",
-    "yaml": "^2.4.1"
+    "yaml": "^2.6.0"
   }
 }
