@@ -1,0 +1,17 @@
+version: v1
+metadata:
+  name: Howl's Moving Castle
+  description: >-
+    matrix-esque vertical dot-lines
+  author: Jared Stanley
+  source: https://codepen.io/jaredstanley/pen/xmwmQE
+helpers:
+  insert_baseurl: true
+template: |
+    <style>
+        body{
+            background-color: #0f0f0f;
+        }
+    </style>
+    <canvas id="c"></canvas>
+

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<!-- name: Shooting Stars -->
+<!-- description: Random speed shooting stars -->
+<!-- author: alphardex -->
+<!-- source: https://codepen.io/alphardex/pen/RwrVoeL -->
+
+
+<html>
+<head>
+  <style>
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+  overflow: hidden;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  transform: rotate(-45deg);
+}
+
+.star {
+  --star-color: var(--primary-color);
+  --star-tail-length: 6em;
+  --star-tail-height: 2px;
+  --star-width: calc(var(--star-tail-length) / 6);
+  --fall-duration: 9s;
+  --tail-fade-duration: var(--fall-duration);
+  position: absolute;
+  top: var(--top-offset);
+  left: 0;
+  width: var(--star-tail-length);
+  height: var(--star-tail-height);
+  color: var(--star-color);
+  background: linear-gradient(45deg, currentColor, transparent);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px currentColor);
+  transform: translate3d(104em, 0, 0);
+  animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+}
+@media screen and (max-width: 750px) {
+  .star {
+    animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+  }
+}
+.star:nth-child(1) {
+  --star-tail-length: 5.75em;
+  --top-offset: 96.44vh;
+  --fall-duration: 8.124s;
+  --fall-delay: 3.354s;
+}
+.star:nth-child(2) {
+  --star-tail-length: 7.47em;
+  --top-offset: 11.51vh;
+  --fall-duration: 9.452s;
+  --fall-delay: 7.878s;
+}
+.star:nth-child(3) {
+  --star-tail-length: 5.31em;
+  --top-offset: 23.47vh;
+  --fall-duration: 9.41s;
+  --fall-delay: 4.168s;
+}
+.star:nth-child(4) {
+  --star-tail-length: 5.6em;
+  --top-offset: 66.78vh;
+  --fall-duration: 11.382s;
+  --fall-delay: 4.264s;
+}
+.star:nth-child(5) {
+  --star-tail-length: 5.78em;
+  --top-offset: 94.76vh;
+  --fall-duration: 9.187s;
+  --fall-delay: 7.258s;
+}
+.star:nth-child(6) {
+  --star-tail-length: 5.87em;
+  --top-offset: 90.51vh;
+  --fall-duration: 9.319s;
+  --fall-delay: 3.226s;
+}
+.star:nth-child(7) {
+  --star-tail-length: 6.16em;
+  --top-offset: 86.73vh;
+  --fall-duration: 6.494s;
+  --fall-delay: 7.51s;
+}
+.star:nth-child(8) {
+  --star-tail-length: 5.18em;
+  --top-offset: 60.69vh;
+  --fall-duration: 11.587s;
+  --fall-delay: 7.824s;
+}
+.star:nth-child(9) {
+  --star-tail-length: 5.41em;
+  --top-offset: 54.4vh;
+  --fall-duration: 7.097s;
+  --fall-delay: 1.813s;
+}
+.star:nth-child(10) {
+  --star-tail-length: 6.1em;
+  --top-offset: 65.18vh;
+  --fall-duration: 8.014s;
+  --fall-delay: 4.763s;
+}
+.star:nth-child(11) {
+  --star-tail-length: 7.14em;
+  --top-offset: 33.42vh;
+  --fall-duration: 9.739s;
+  --fall-delay: 2.219s;
+}
+.star:nth-child(12) {
+  --star-tail-length: 7.33em;
+  --top-offset: 74.56vh;
+  --fall-duration: 9.443s;
+  --fall-delay: 4.158s;
+}
+.star:nth-child(13) {
+  --star-tail-length: 5.61em;
+  --top-offset: 8.56vh;
+  --fall-duration: 9.248s;
+  --fall-delay: 9.869s;
+}
+.star:nth-child(14) {
+  --star-tail-length: 6.05em;
+  --top-offset: 38.35vh;
+  --fall-duration: 11.873s;
+  --fall-delay: 3.938s;
+}
+.star:nth-child(15) {
+  --star-tail-length: 5.1em;
+  --top-offset: 68.3vh;
+  --fall-duration: 10.754s;
+  --fall-delay: 2.458s;
+}
+.star:nth-child(16) {
+  --star-tail-length: 6.65em;
+  --top-offset: 61.62vh;
+  --fall-duration: 9s;
+  --fall-delay: 2.239s;
+}
+.star:nth-child(17) {
+  --star-tail-length: 5.69em;
+  --top-offset: 76.26vh;
+  --fall-duration: 6.204s;
+  --fall-delay: 3.192s;
+}
+.star:nth-child(18) {
+  --star-tail-length: 6.43em;
+  --top-offset: 76.92vh;
+  --fall-duration: 9.907s;
+  --fall-delay: 9.969s;
+}
+.star:nth-child(19) {
+  --star-tail-length: 7.25em;
+  --top-offset: 47.56vh;
+  --fall-duration: 9.563s;
+  --fall-delay: 3.636s;
+}
+.star:nth-child(20) {
+  --star-tail-length: 5.9em;
+  --top-offset: 97.85vh;
+  --fall-duration: 6.39s;
+  --fall-delay: 0.665s;
+}
+.star:nth-child(21) {
+  --star-tail-length: 5.41em;
+  --top-offset: 64.15vh;
+  --fall-duration: 10.423s;
+  --fall-delay: 8.817s;
+}
+.star:nth-child(22) {
+  --star-tail-length: 6.98em;
+  --top-offset: 52.3vh;
+  --fall-duration: 9.447s;
+  --fall-delay: 7.018s;
+}
+.star:nth-child(23) {
+  --star-tail-length: 5.62em;
+  --top-offset: 12.82vh;
+  --fall-duration: 7.779s;
+  --fall-delay: 2.328s;
+}
+.star:nth-child(24) {
+  --star-tail-length: 6.79em;
+  --top-offset: 4.22vh;
+  --fall-duration: 8.72s;
+  --fall-delay: 8.336s;
+}
+.star:nth-child(25) {
+  --star-tail-length: 5.4em;
+  --top-offset: 71.29vh;
+  --fall-duration: 10.36s;
+  --fall-delay: 7.572s;
+}
+.star:nth-child(26) {
+  --star-tail-length: 5.75em;
+  --top-offset: 98.17vh;
+  --fall-duration: 6.37s;
+  --fall-delay: 8.009s;
+}
+.star:nth-child(27) {
+  --star-tail-length: 5.82em;
+  --top-offset: 93.72vh;
+  --fall-duration: 10.901s;
+  --fall-delay: 4.697s;
+}
+.star:nth-child(28) {
+  --star-tail-length: 6.38em;
+  --top-offset: 46.19vh;
+  --fall-duration: 7.933s;
+  --fall-delay: 3.601s;
+}
+.star:nth-child(29) {
+  --star-tail-length: 6.48em;
+  --top-offset: 91.56vh;
+  --fall-duration: 11.01s;
+  --fall-delay: 5.664s;
+}
+.star:nth-child(30) {
+  --star-tail-length: 6.39em;
+  --top-offset: 77.78vh;
+  --fall-duration: 9.504s;
+  --fall-delay: 2.311s;
+}
+.star:nth-child(31) {
+  --star-tail-length: 6.31em;
+  --top-offset: 98.57vh;
+  --fall-duration: 10.058s;
+  --fall-delay: 1.69s;
+}
+.star:nth-child(32) {
+  --star-tail-length: 6.99em;
+  --top-offset: 78.89vh;
+  --fall-duration: 11.851s;
+  --fall-delay: 4.661s;
+}
+.star:nth-child(33) {
+  --star-tail-length: 7.11em;
+  --top-offset: 0.93vh;
+  --fall-duration: 6.041s;
+  --fall-delay: 3.263s;
+}
+.star:nth-child(34) {
+  --star-tail-length: 6.11em;
+  --top-offset: 99.41vh;
+  --fall-duration: 8.713s;
+  --fall-delay: 0.97s;
+}
+.star:nth-child(35) {
+  --star-tail-length: 7.07em;
+  --top-offset: 79.83vh;
+  --fall-duration: 7.847s;
+  --fall-delay: 4.335s;
+}
+.star:nth-child(36) {
+  --star-tail-length: 7.09em;
+  --top-offset: 23.33vh;
+  --fall-duration: 8.383s;
+  --fall-delay: 2.159s;
+}
+.star:nth-child(37) {
+  --star-tail-length: 7.13em;
+  --top-offset: 72.72vh;
+  --fall-duration: 8.14s;
+  --fall-delay: 4.831s;
+}
+.star:nth-child(38) {
+  --star-tail-length: 5.73em;
+  --top-offset: 0.4vh;
+  --fall-duration: 10.993s;
+  --fall-delay: 5.332s;
+}
+.star:nth-child(39) {
+  --star-tail-length: 5.06em;
+  --top-offset: 15.73vh;
+  --fall-duration: 8.212s;
+  --fall-delay: 8.866s;
+}
+.star:nth-child(40) {
+  --star-tail-length: 5.13em;
+  --top-offset: 1.3vh;
+  --fall-duration: 6.797s;
+  --fall-delay: 3.41s;
+}
+.star:nth-child(41) {
+  --star-tail-length: 6.19em;
+  --top-offset: 50.63vh;
+  --fall-duration: 10.702s;
+  --fall-delay: 3.29s;
+}
+.star:nth-child(42) {
+  --star-tail-length: 5.79em;
+  --top-offset: 23.56vh;
+  --fall-duration: 11.645s;
+  --fall-delay: 0.114s;
+}
+.star:nth-child(43) {
+  --star-tail-length: 7.11em;
+  --top-offset: 43.29vh;
+  --fall-duration: 11.324s;
+  --fall-delay: 9.443s;
+}
+.star:nth-child(44) {
+  --star-tail-length: 7.39em;
+  --top-offset: 43.98vh;
+  --fall-duration: 9.34s;
+  --fall-delay: 2.006s;
+}
+.star:nth-child(45) {
+  --star-tail-length: 5.25em;
+  --top-offset: 31.14vh;
+  --fall-duration: 7.438s;
+  --fall-delay: 9.409s;
+}
+.star:nth-child(46) {
+  --star-tail-length: 6.79em;
+  --top-offset: 33.61vh;
+  --fall-duration: 9.708s;
+  --fall-delay: 1.96s;
+}
+.star:nth-child(47) {
+  --star-tail-length: 5em;
+  --top-offset: 63.03vh;
+  --fall-duration: 6.838s;
+  --fall-delay: 0.685s;
+}
+.star:nth-child(48) {
+  --star-tail-length: 6.34em;
+  --top-offset: 41.16vh;
+  --fall-duration: 10.89s;
+  --fall-delay: 8.125s;
+}
+.star:nth-child(49) {
+  --star-tail-length: 6.37em;
+  --top-offset: 91.84vh;
+  --fall-duration: 6.579s;
+  --fall-delay: 5.701s;
+}
+.star:nth-child(50) {
+  --star-tail-length: 6.15em;
+  --top-offset: 99.05vh;
+  --fall-duration: 6.161s;
+  --fall-delay: 0.388s;
+}
+.star::before, .star::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: calc(var(--star-width) / -2);
+  width: var(--star-width);
+  height: 100%;
+  background: linear-gradient(45deg, transparent, currentColor, transparent);
+  border-radius: inherit;
+  animation: blink 2s linear infinite;
+}
+.star::before {
+  transform: rotate(45deg);
+}
+.star::after {
+  transform: rotate(-45deg);
+}
+
+@keyframes fall {
+  to {
+    transform: translate3d(-30em, 0, 0);
+  }
+}
+@keyframes tail-fade {
+  0%, 50% {
+    width: var(--star-tail-length);
+    opacity: 1;
+  }
+  70%, 80% {
+    width: 0;
+    opacity: 0.4;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.6;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="stars">
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  <div class="star"></div>
+  </div>
+
+</body>
+</html>
