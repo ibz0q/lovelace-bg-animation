@@ -8,8 +8,8 @@
     "webpack-cli": "^5.1.4"
   },
   "name": "lovelace-bg-animation",
-  "description": "A small Lovelace plugin that replaces the background with a animated one, various animations available.",
-  "version": "1.0.2",
+  "description": "A Lovelace plugin that replaces the background with a animated one, various animations available.",
+  "version": "1.1.0",
   "main": "frontend/bg-animation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

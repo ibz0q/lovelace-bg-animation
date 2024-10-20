@@ -226,6 +226,7 @@ function initializeRuntimeVariables() {
     },
     "duration": rootPluginConfig.duration ?? 50000,
     "transition": rootPluginConfig.transition ?? false,
+    "loadTimeout": rootPluginConfig.loadTimeout ?? 2000,
     "cache": rootPluginConfig.cache !== undefined ? rootPluginConfig.cache : true,
     "style": rootPluginConfig.style ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
     "header": rootPluginConfig.header ?? { "transparent": true, "style": "" },
@@ -370,7 +371,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
   } else {
     isDebug ? console.log("processBackgroundFrame: Swap") : null;
     lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy");
-    const loadLazyIframe = await loadIframeWithTimeout(lovelaceUI.iframeElementLazy, 2000);
+    const loadLazyIframe = await loadIframeWithTimeout(lovelaceUI.iframeElementLazy, rootPluginConfig.loadTimeout);
     if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
       isDebug ? console.log("processBackgroundFrame: Passed check") : null;
       lovelaceUI.iframeElement.remove();
@@ -724,3 +725,20 @@ class LovelaceBgAnimation extends HTMLElement {
 customElements.define('lovelace-bg-animation', LovelaceBgAnimation);
 window.customCards = window.customCards || [];
 window.customCards.push({ type: "lovelace-bg-animation", name: "Lovelace BG Animation", preview: true, documentationURL: "https://github.com/ibz0q/lovelace-bg-animation" });
+
+
+
+/*
+
+TODO:
+- Fix transitions  - Done
+- Update the view on change - Done
+- Fix odd bug causing issues between view and pages - Done
+- Add stub config for media changer - Done
+- Fix repo , gen image issue - Done
+- Remove any invalid Gallery package IDs from the playlist - Done
+- Enable pausing completely on a track - Done
+
+- Allow comms to iframe
+- Add a video background package
+*/
