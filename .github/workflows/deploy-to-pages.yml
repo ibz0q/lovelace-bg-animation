@@ -33,13 +33,16 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: ./utils
 
-      - name: Install Playwright Browsers
-        run: npx playwright install
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./utils
 
       - name: Generate Metadata
         run: node ./utils/create-metadata.js
+        
+      - name: Install Playwright Browsers
+        run: npx playwright install
 
       - name: Generate Image Metadata
         run: node ./utils/create-imagepreview.js
