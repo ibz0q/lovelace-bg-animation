@@ -107,13 +107,8 @@ async function processPackageManifest(packageManifestObject) {
 }
 
 async function readDirectory(dir) {
-    if (process.env.GITHUB_ACTIONS == 'true') {
-        fs.rmSync(metadataFolder, { recursive: true, force: true });
-        console.log("Script is being run inside a GitHub Action and will not delete the metadata folder.")
-    }
-
+    fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
-
     const files = fs.readdirSync(dir);
     const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8')));
 
@@ -130,23 +125,28 @@ async function readDirectory(dir) {
             const metadataFilePath = path.join(packageFolder, 'preview.html');
 
             folderHash = getSHA1(packageDir);
-            const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
+            console.log(`Folder hash is ${folderHash}`)
 
-            if ((manifestEntry && manifestEntry.hash === folderHash)) {
+            const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
+            console.log(`Manifest hash is ${manifestEntry.hash}`)
+
+            if (!!fs.existsSync(packageFolder) && (manifestEntry.hash === folderHash)) {
                 console.log(`Hash is the same for ${packageName}, skipping.`);
-                if (process.env.GITHUB_ACTIONS === 'true') {
-                    console.log("Script is being run inside a GitHub Action, skipping...");
-                    break;
-                }
                 break;
             }
 
+            if (fs.existsSync(metadataFilePath)) {
+                console.log(`Folder exist for ${packageName}, skipping.`);
+                break;
+            }
+            
             console.log(`Generating.. ${packageName}`);
             templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName });
 
             fs.mkdirSync(packageFolder, { recursive: true });
             fs.cpSync(packageDir, packageFolder, {
                 recursive: true,
+                preserveTimestamps: true,
                 filter: (src) => {
                     const excludePatterns = ['package.yaml'];
                     return !excludePatterns.some(pattern => {
@@ -163,11 +163,12 @@ async function readDirectory(dir) {
 
             templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
             templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
-            fs.writeFileSync(metadataFilePath, `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed, 'utf8');
+            let htmldata = `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed 
+            fs.writeFileSync(metadataFilePath, htmldata.replace(/\n/g, '\r\n'), 'utf8');
             console.log(`Generated: ${packageName}`);
         }
     }
-}
+}   
 
 
 readDirectory(packagesDir);
