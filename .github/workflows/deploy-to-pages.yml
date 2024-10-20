@@ -39,6 +39,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
 
+      - name: Generate Metadata
+        run: node ./utils/create-metadata.js
+
       - name: Generate Image Metadata
         run: node ./utils/create-imagepreview.js
 
