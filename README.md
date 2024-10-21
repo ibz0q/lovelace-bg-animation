@@ -23,7 +23,6 @@ The repo features the following artists with incredible works they've shared on 
  - Alex Andrix (5)
  - Matei Copot (5)
  - Akimitsu Hamamuro (2)
- - yoichi kobayashi (2)
  - Rahul (1)
  - Takeshi Kano (1)
  - cssscript.com (1)
@@ -37,7 +36,9 @@ The repo features the following artists with incredible works they've shared on 
  - Ana Tudor (1)
  - Ksenia Kondrashova (1)
  - Jared Stanley (1)
+ - Nathan Gordon (1)
  - nskrgv (1)
+ - yoichi kobayashi (1)
 #### Donations and Tips
 
 Please directly tip the artists you found most inspiring.
