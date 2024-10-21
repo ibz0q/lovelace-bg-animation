@@ -85,13 +85,9 @@ template: |
       .cloud4 { bottom: 18%; left: -18%; width: 80%; }
       .cloud5 { bottom: 8%; left: 40%; width: 80%; }
 
-      .control-toggle { position: absolute; top: 0; left: 0; padding: 10px 20px; background: rgba(255,255,255,1); font-family: sans-serif; text-transform: uppercase; font-size: 10px; letter-spacing: 0.05em; opacity: 0.1; cursor: pointer; }
-      .control-toggle:hover { opacity: 1.0;}
-
       .load-gate { position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #fff; font-family: sans-serif; text-transform: uppercase; font-size: 10px; letter-spacing: 0.2em; padding: 20px; }
       </style>
-
-        
+      
 
       <body translate="no">
       <div class="container">
@@ -158,7 +154,6 @@ template: |
           
           
       </div>
-      <div class="control-toggle">Toggle mouse controls</div>
 
         <script src="./jquery.min.js"></script>
       <script src="./TweenMax.min.js"></script>
