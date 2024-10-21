@@ -1180,10 +1180,10 @@ Put this inside your config:
 
 
 ###  > animation.63.green-circuit 
-Fog of War - WebGL Fog
+Green Circuit - I'm in
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
-*Author: yoichi kobayashi*
+*Author: Jared Stanley*
 
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html)
 
@@ -1198,20 +1198,21 @@ Put this inside your config:
 
 
 
-###  > animation.64.howls-moving-castle-incomplete 
-Howl's Moving Castle - matrix-esque vertical dot-lines
+###  > animation.64.howls-moving-castle 
+Howl's Moving Castle - Howl's Moving Castle
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle-incomplete/screenshot.png)
-*Author: Jared Stanley*
 
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle-incomplete/preview.html)
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle/screenshot.png)
+*Author: Nathan Gordon*
+
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle/preview.html)
 
 ***Works offline?*** **Yes.**
       
 Put this inside your config:
 
 ```yaml
-- id: animation.64.howls-moving-castle-incomplete
+- id: animation.64.howls-moving-castle
 ```
 
 

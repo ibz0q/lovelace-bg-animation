@@ -1,9 +1,9 @@
 version: v1
 metadata:
-  name: Fog of War
+  name: Green Circuit
   description: >-
-    WebGL Fog
-  author: yoichi kobayashi
+    I'm in
+  author: Jared Stanley
   source: https://codepen.io/ykob/pen/YewoRz
 helpers:
   insert_baseurl: true
