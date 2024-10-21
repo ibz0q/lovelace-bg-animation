@@ -458,20 +458,20 @@
   {
     "id": "animation.63.green-circuit",
     "version": "v1",
-    "name": "Fog of War",
-    "description": "WebGL Fog",
-    "author": "yoichi kobayashi",
+    "name": "Green Circuit",
+    "description": "I'm in",
+    "author": "Jared Stanley",
     "source": "https://codepen.io/ykob/pen/YewoRz",
-    "hash": "00fb7c04186a7d4fe33ba37e9a3ac562af976e60"
+    "hash": "4b8159a10d528a0d456cbc3f21b4954b3589bf01"
   },
   {
-    "id": "animation.64.howls-moving-castle-incomplete",
+    "id": "animation.64.howls-moving-castle",
     "version": "v1",
     "name": "Howl's Moving Castle",
-    "description": "matrix-esque vertical dot-lines",
-    "author": "Jared Stanley",
-    "source": "https://codepen.io/jaredstanley/pen/xmwmQE",
-    "hash": "3d8825cb5ffc57b0e60e069889fdaea551bb181e"
+    "description": "Howl's Moving Castle\n",
+    "author": "Nathan Gordon",
+    "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
+    "hash": "267191b9ef32da414609acfd8cd842fff7c208ab"
   },
   {
     "id": "animation.65.cristal-lands",
