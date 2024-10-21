@@ -480,7 +480,7 @@
     "description": "Cristal Lands",
     "author": "nskrgv",
     "source": "https://codepen.io/nskrgv/pen/PQzpKb",
-    "hash": "89b9017427e31adba545415163921cc7802dfb7b"
+    "hash": "4bcc55c828a7fd9da99cd358e728d0f825822c93"
   },
   {
     "id": "animation.66.fog-of-war",
@@ -489,6 +489,6 @@
     "description": "WebGL Fog",
     "author": "yoichi kobayashi",
     "source": "https://codepen.io/ykob/pen/YewoRz",
-    "hash": "a296a579e5a189fb8e11b70b70d682f0249602f7"
+    "hash": "f9659a9674edb9ee1716016b8cea7e5888830b97"
   }
 ]

@@ -37,20 +37,6 @@ template: >
         font-family: "Homenaje", sans-serif;
         text-align: center;
       }
-      .p-summary h1 {
-        margin: 0 0 0.1em;
-        font-size: 18vh;
-        font-weight: 400;
-      }
-      .p-summary p {
-        margin: 0;
-        font-size: 3vh;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-      }
-      .p-summary a {
-        color: #fff;
-      }
     </style>
     </head>
 
@@ -210,7 +196,7 @@ template: >
 
                 vec4 texColor = texture2D(tex, vUv);
                 vec3 color = (texColor.rgb - vBlink * length(p) * 0.8) * vColor;
-                float opacity = texColor.a * 0.36;
+                float opacity = texColor.a * 0.15;
 
                 gl_FragColor = vec4(color, opacity);
               }
@@ -244,7 +230,7 @@ template: >
       camera.setFocalLength(24);
 
       const texsSrc = {
-        fog: 'https://ykob.github.io/sketch-threejs/img/sketch/fog/fog.png' };
+        fog: './fog.png' };
 
       const fog = new Fog();
 
@@ -278,7 +264,7 @@ template: >
 
           scene.add(fog.obj);
 
-          renderer.setClearColor(0x111111, 1.0);
+          renderer.setClearColor(0x101010, 1.0);
           camera.position.set(0, 0, 1000);
           camera.lookAt(new THREE.Vector3());
           clock.start();
