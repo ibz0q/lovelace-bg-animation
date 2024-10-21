@@ -3,6 +3,7 @@ import * as sass from 'sass';
 
 var isDebug = true,
   lovelaceUI = {},
+  viewPath,
   rootPluginConfig,
   galleryRootManifest,
   domObserver = {},
@@ -206,7 +207,6 @@ function opportunisticallyDetermineLocalInstallPath() {
   }
 }
 function initializeRuntimeVariables() {
-
   if (!lovelaceUI?.lovelaceObject?.config["bg-animation"]) {
     isDebug ? console.log("initializeRuntimeVariables: No bg-animation config found in lovelace configuration: ") : null;
     return false;
@@ -347,6 +347,8 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
   const createIframe = async (id) => {
     const iframeElement = document.createElement('iframe');
     iframeElement.id = id;
+    iframeElement.frameborder = "0";
+    iframeElement.scrolling = "no";
     iframeElement.srcdoc = "<style>*{background:black;}</style>";
     iframeElement.className = applicationIdentifiers.appNameShort;
     iframeElement.style.cssText = packageConfig.style;
@@ -367,7 +369,6 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
   if (lovelaceUI.iframeElement === undefined) {
     isDebug ? console.log("processBackgroundFrame: Creating new") : null;
     lovelaceUI.iframeElement = await createIframe("background-iframe");
-
   } else {
     isDebug ? console.log("processBackgroundFrame: Swap") : null;
     lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy");
@@ -375,8 +376,8 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
       isDebug ? console.log("processBackgroundFrame: Passed check") : null;
       lovelaceUI.iframeElement.remove();
-      lovelaceUI.iframeElementLazy.id = "background-iframe";
       lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
+      lovelaceUI.iframeElement.id = "background-iframe";
     }
   }
 }
@@ -424,8 +425,9 @@ async function startPlaylistInterval(currentPlaylist) {
 }
 
 async function setupPlaylist() {
-  let viewPath = getCurrentViewPath();
-  isDebug ? console.log(`setupPlaylist: setupPlaylist: Current viewpath ${viewPath}`) : null;
+  viewPath = getCurrentViewPath();
+  isDebug ? console.log(`setupPlaylist: Current viewpath ${viewPath}`) : null;
+
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
 
@@ -486,14 +488,13 @@ async function initializeObservers() {
     for (let mutation of mutations) {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
-          isDebug ? console.log("initializeObservers: viewElement") : null;
-          await getGalleryRootManifest();
-          await setupPlaylist();
-
+          if (rootPluginConfig?.background?.view[getCurrentViewPath()] || (rootPluginConfig?.background?.view[viewPath] && rootPluginConfig?.background?.global)) {
+            await getGalleryRootManifest();
+            await setupPlaylist();
+          }
           if (removedNode === lovelaceUI.viewElement) {
             observer.disconnect();
           }
-
         });
       }
     }
@@ -738,7 +739,8 @@ TODO:
 - Fix repo , gen image issue - Done
 - Remove any invalid Gallery package IDs from the playlist - Done
 - Enable pausing completely on a track - Done
-
+- Fix view ui change bug - Done
+ 
 - Allow comms to iframe
 - Add a video background package
 */
