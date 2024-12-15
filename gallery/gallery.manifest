@@ -490,5 +490,14 @@
     "author": "yoichi kobayashi",
     "source": "https://codepen.io/ykob/pen/YewoRz",
     "hash": "f9659a9674edb9ee1716016b8cea7e5888830b97"
+  },
+  {
+    "id": "animation.67.fly-particle",
+    "version": "v1",
+    "name": "Fog of War",
+    "description": "WebGL Fog",
+    "author": "yoichi kobayashi",
+    "source": "https://codepen.io/ykob/pen/YewoRz",
+    "hash": "76355bbaad7b1e294423e231263172c3203b76c2"
   }
 ]

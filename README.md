@@ -19,6 +19,7 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - Alex Andrix (5)
  - Matei Copot (5)
  - Akimitsu Hamamuro (2)
+ - yoichi kobayashi (2)
  - Rahul (1)
  - Takeshi Kano (1)
  - cssscript.com (1)
@@ -34,8 +35,6 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - Jared Stanley (1)
  - Nathan Gordon (1)
  - nskrgv (1)
- - yoichi kobayashi (1)
-
 ### Support
 
 Please directly tip the artists you found most inspiring.

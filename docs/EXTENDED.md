@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (55 total)
+## All backgrounds (56 total)
 
 
 
@@ -1251,6 +1251,25 @@ Put this inside your config:
 
 ```yaml
 - id: animation.66.fog-of-war
+```
+
+
+
+
+###  > animation.67.fly-particle 
+Fog of War - WebGL Fog
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/screenshot.png)
+*Author: yoichi kobayashi*
+
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/preview.html)
+
+***Works offline?*** **Yes.**
+      
+Put this inside your config:
+
+```yaml
+- id: animation.67.fly-particle
 ```
 
 
