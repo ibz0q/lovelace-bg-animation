@@ -130,7 +130,7 @@ const readmePath = path.join(__dirname, '../README.md');
 let readmeContent = fs.readFileSync(readmePath, 'utf8');
 
 // Replace the section below #### Artists with the new html using regex pattern matching
-let regex = /(#### Artists featured)([\s\S]*?)(#### Donations and Tips)/;
+let regex = /(Tributes \(Artists featured\))([\s\S]*?)(### Support)/;
 readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 
 // Write the updated content back to the README.md file

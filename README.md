@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: v1.0.10-beta
+Current Release: v1.0.0 (Public release)
 
 <p align="center">
 
@@ -11,11 +11,7 @@ Current Release: v1.0.10-beta
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
-## 🎀 Tributes 
-
-The repo features the following artists with incredible works they've shared on the web. In order featured works in this repo.
-
-#### Artists featured
+## 🎀 Tributes (Artists featured)
 
  - Jack Rugile (13)
  - Ben Matthews (8)
@@ -39,23 +35,20 @@ The repo features the following artists with incredible works they've shared on 
  - Nathan Gordon (1)
  - nskrgv (1)
  - yoichi kobayashi (1)
-#### Donations and Tips
+
+### Support
 
 Please directly tip the artists you found most inspiring.
 
 ## Motivation
 
-Mostly for nostalgia. I remember the awe of abstract web experiments when Canvas/JS/CSS3 was new. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard, they make great backgrounds!
+Mostly nostalgia. Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
 
-Some of the experiments I have saved in my bookmarks overtime have long been lost or forgotten because of the passage of time. Occasionally I would save these to disk. A number of experiments only exist here now because of this. 
-
-I have tried my best to find references and credit the artists who's original work has been lost to digital oblivion, archive.org links provided if they are available - This is not always the case.
+Over time some of the experiments I have saved in my bookmarks have long been lost to digital oblivion. Luckily some I would save to disk.  I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
 
 ### License 
 
-This project is compromised of the works of artists each either their own licensing, none of this projects license are imposed. Copyrights are preserved respectively. A lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a>. For this reason, code belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International to prevent commercial infringement of any license that is not as permissive. 
-
-In short, the original works belong to their creators and this project cannot be used for commercial purposes incase any license prevents this (Currently none).
+This project is compromised of the works of artists each either their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
 
 ## Install
 
@@ -87,9 +80,7 @@ Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add res
 
 ---
 
-
-That's it, if you have a valid configuration (see below). You should see a background animation immediately.
-
+Now add a valid configuration (see below). You should see a background animation immediately.
 
 ## Usage
 
@@ -185,7 +176,6 @@ helpers:
 
 Include an SRI hash inside your JS tag so this can be validated. Why- Read security section in contributions.
 
-
 ## Contributions
 
 PRs need to be attached to an issue that contains the following info:
@@ -198,10 +188,9 @@ PRs need to be attached to an issue that contains the following info:
 - Have you audited the code yourself?
 - Is it safe?
 
-#### Security
  Javascript is allowed and so you must be a reputable user on Github to submit to this repo. Any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant has quite a big attack surface. We will take steps to minimize risk. 
 
-### Features TODO
+### Features / TODO
 
 - Slow down fast moving bgs (in progress)
 - Add redraw 
