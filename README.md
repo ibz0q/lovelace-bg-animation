@@ -47,7 +47,7 @@ Over time some of the experiments I have saved in my bookmarks have long been lo
 
 ### License 
 
-This project is compromised of the works of artists each either their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
+This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
 
 ## Install
 
@@ -193,13 +193,13 @@ PRs need to be attached to an issue that contains the following info:
 
 - Slow down fast moving bgs (in progress)
 - Add redraw 
-- Iframe transitions
+- Iframe transitions (Removed)
 - postMessage 
-- Add ability for Iframe/package to interact with Lovelace Card
-- Add video background package 
+- Add ability for Iframe/package to interact with Lovelace Card (In progress)
+- Add video background package  
 - Default gallery to use all, if nothing is specified. (Removed)
 - Serialized data passthrough to Iframe
-- Submit to HACS once beta version is mature
+- Submit to HACS once beta version is mature (Done)
 - Add overlay div (Done)
 - Media controls (Lovelace Card) (Done)
 - Fix iframe writes (Done)
