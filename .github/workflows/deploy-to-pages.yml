@@ -44,6 +44,7 @@ jobs:
         
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+        working-directory: ./utils
 
       - name: Generate Image Metadata
         run: node ./utils/create-imagepreview.js
