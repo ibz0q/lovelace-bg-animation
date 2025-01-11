@@ -59,10 +59,20 @@ jobs:
           echo "Deleting all docs folders..."
           find . -name "docs" -type d -prune -exec rm -rf {} +
 
-      - name: Delete src
+      - name: Delete utils
         run: |
-          echo "Deleting all src folders..."
-          find . -name "src" -type d -prune -exec rm -rf {} +
+          echo "Deleting all utils folders..."
+          find . -name "utils" -type d -prune -exec rm -rf {} +
+
+      - name: Delete schema
+        run: |
+          echo "Deleting all schema folders..."
+          find . -name "schema" -type d -prune -exec rm -rf {} +
+
+      # - name: Delete src
+      #   run: |
+      #     echo "Deleting all src folders..."
+      #     find . -name "src" -type d -prune -exec rm -rf {} +
 
       - name: Delete dist
         run: |
