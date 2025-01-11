@@ -94,11 +94,15 @@ bg-animation:
     transparent: true
   background:
     global: # Add and remove as required
-      - id: 11.space
-      - id: 13.cyber-lights
-      - id: 15.sound
-      - id: 7.rainbowness
-      - id: 27.tron
+      - id: animation.11.space
+      - id: animation.65.cristal-lands
+      - id: animation.17.ribbons
+      - id: animation.64.howls-moving-castle
+      - id: animation.63.green-circuit
+      - id: animation.58.browniandrix-noise-l3
+      - id: animation.53.stars
+      - id: animation.50.sidelined
+      
 ```
 ### Full configuration options
 ` * = Optional `
