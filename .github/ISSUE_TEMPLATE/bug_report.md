@@ -10,7 +10,7 @@ assignees: ''
 **Describe the bug**
 
 Please provide: 
-- Lovelace-bg-animation configuration and/or Card YAML 
+- Configuration YAML 
 - Name of Home Assistant Theme name in use and 
 - Home Assistant version
 - A Screenshot (If possible)
