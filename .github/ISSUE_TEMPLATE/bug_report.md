@@ -9,7 +9,7 @@ assignees: ''
 
 **Describe the bug**
 
-Please provide: 
+And provide: 
 - Configuration YAML 
 - Name of Home Assistant Theme name in use 
 - Home Assistant version
