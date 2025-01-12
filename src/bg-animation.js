@@ -228,8 +228,12 @@ function initializeRuntimeVariables() {
     "transition": rootPluginConfig.transition ?? false,
     "loadTimeout": rootPluginConfig.loadTimeout ?? 2000,
     "cache": rootPluginConfig.cache !== undefined ? rootPluginConfig.cache : true,
-    "style": rootPluginConfig.style ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
-    "header": rootPluginConfig.header ?? { "transparent": true, "style": "" },
+    "parentStyle": rootPluginConfig.parentStyle ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
+    "transparencyStyle": rootPluginConfig.transparencyStyle ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
+    "header": {
+      "transparent": rootPluginConfig.header?.transparent ?? true,
+      "style": rootPluginConfig.header?.style ?? ".header {background: transparent !important;}",
+    },
     "background": {
       "global":
         rootPluginConfig.background.global
@@ -299,7 +303,7 @@ function initializeBackgroundElements() {
 
   lovelaceUI.bgRootElement = document.createElement("div");
   lovelaceUI.bgRootElement.id = "bg-animation-container";
-  lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.style;
+  lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.parentStyle;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
   isDebug ? console.log("initializeBackgroundElements: Created elm") : null;
 
@@ -325,22 +329,12 @@ function changeDefaultLovelaceStyles() {
     lovelaceUI.rootStyleElement.id = "bg-animation-styles";
     lovelaceUI.huiRootElement.shadowRoot.prepend(lovelaceUI.rootStyleElement);
   }
-  let cssStyle = `
-        #view > hui-view, #view {
-          background: transparent !important;
-        }`;
-
   if (rootPluginConfig.header.transparent == true) {
-    cssStyle += `
-        .header {
-          background: transparent !important;
-          ${rootPluginConfig.header.style !== undefined ? rootPluginConfig.header.style : ''}
-        }`;
+    rootPluginConfig.transparencyStyle += rootPluginConfig.header.style;
   }
-
-  lovelaceUI.rootStyleElement.innerHTML = cssStyle;
-}
-
+  lovelaceUI.rootStyleElement.innerHTML = rootPluginConfig.transparencyStyle;
+} 
+ 
 async function processBackgroundFrame(packageConfig, packageManifest) {
 
   isDebug ? console.log("processBackgroundFrame: Called") : null;
