@@ -228,8 +228,18 @@ function initializeRuntimeVariables() {
     "transition": rootPluginConfig.transition ?? false,
     "loadTimeout": rootPluginConfig.loadTimeout ?? 2000,
     "cache": rootPluginConfig.cache !== undefined ? rootPluginConfig.cache : true,
-    "style": rootPluginConfig.style ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
-    "header": rootPluginConfig.header ?? { "transparent": true, "style": "" },
+    "parentStyle": rootPluginConfig.parentStyle ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
+    "transparency": {
+      "header": {
+        "enable": rootPluginConfig.transparency.header?.enable ?? true,
+        "style": rootPluginConfig.transparency.header?.style ?? ".header {background: transparent !important;}",
+      },
+      "sidebar": {
+        "enable": rootPluginConfig.transparency.sidebar?.enable ?? false,
+        "style": rootPluginConfig.transparency.sidebar?.style ?? "ha-sidebar {background: transparent !important;}",
+      },
+      "background": rootPluginConfig.transparency.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
+    },
     "background": {
       "global":
         rootPluginConfig.background.global
@@ -279,6 +289,7 @@ function initializeLovelaceVariables() {
     lovelaceUI.panelElement = lovelaceUI.haMainElement?.querySelector("ha-drawer > partial-panel-resolver > ha-panel-lovelace")?.shadowRoot;
     lovelaceUI.huiRootElement = lovelaceUI.panelElement?.querySelector("hui-root");
     lovelaceUI.headerElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div > div.header");
+    lovelaceUI.sidebarElement = lovelaceUI.haMainElement?.querySelector("ha-sidebar");
     lovelaceUI.viewElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("#view");
     lovelaceUI.huiViewElement = lovelaceUI.viewElement?.querySelector("hui-view");
     lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
@@ -299,7 +310,7 @@ function initializeBackgroundElements() {
 
   lovelaceUI.bgRootElement = document.createElement("div");
   lovelaceUI.bgRootElement.id = "bg-animation-container";
-  lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.style;
+  lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.parentStyle;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
   isDebug ? console.log("initializeBackgroundElements: Created elm") : null;
 
@@ -319,27 +330,18 @@ function initializeBackgroundElements() {
 }
 
 function changeDefaultLovelaceStyles() {
-  lovelaceUI.rootStyleElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#bg-animation-styles");
+  lovelaceUI.rootStyleElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#bg-animation-styles-root");
   if (!lovelaceUI.rootStyleElement) {
     lovelaceUI.rootStyleElement = document.createElement("style");
-    lovelaceUI.rootStyleElement.id = "bg-animation-styles";
+    lovelaceUI.rootStyleElement.id = "bg-animation-styles-root";
     lovelaceUI.huiRootElement.shadowRoot.prepend(lovelaceUI.rootStyleElement);
   }
-  let cssStyle = `
-        #view > hui-view, #view {
-          background: transparent !important;
-        }`;
-
-  if (rootPluginConfig.header.transparent == true) {
-    cssStyle += `
-        .header {
-          background: transparent !important;
-          ${rootPluginConfig.header.style !== undefined ? rootPluginConfig.header.style : ''}
-        }`;
+  let cssText = rootPluginConfig.transparency.background;
+  if (rootPluginConfig.transparency.header.enable == true) {
+    cssText += rootPluginConfig.transparency.header.style;
   }
-
-  lovelaceUI.rootStyleElement.innerHTML = cssStyle;
-}
+  lovelaceUI.rootStyleElement.innerHTML = cssText;
+} 
 
 async function processBackgroundFrame(packageConfig, packageManifest) {
 
