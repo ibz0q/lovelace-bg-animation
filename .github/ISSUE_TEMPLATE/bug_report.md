@@ -11,7 +11,7 @@ assignees: ''
 
 Please provide: 
 - Configuration YAML 
-- Name of Home Assistant Theme name in use and 
+- Name of Home Assistant Theme name in use 
 - Home Assistant version
 - A Screenshot (If possible)
   
