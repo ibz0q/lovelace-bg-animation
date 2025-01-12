@@ -9,8 +9,12 @@ assignees: ''
 
 **Describe the bug**
 
-(Please provide: Screenshot, Home Assistant Theme name, Configuration YAML and or Card YAML)
-
+Please provide: 
+- Lovelace-bg-animation configuration and/or Card YAML 
+- Name of Home Assistant Theme name in use and 
+- Home Assistant version
+- A Screenshot (If possible)
+  
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
