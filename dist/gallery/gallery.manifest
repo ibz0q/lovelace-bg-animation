@@ -6,7 +6,7 @@
     "description": "A slow moving animation of the galaxy with stars",
     "author": "Rahul",
     "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
-    "hash": "d08974f17f4793fa858ff9809d1b05f2c7797919",
+    "hash": "26f74b4bec64d9522cf19169cc8156ba1ea6bbe4",
     "parameters": [
       {
         "id": "background-image",
@@ -15,13 +15,22 @@
     ]
   },
   {
+    "id": "generator.1.svg-wave",
+    "version": "v1",
+    "name": "Gradient Wave Generator",
+    "description": "SVG Gradient Wave Generator",
+    "author": "Fabio Ottaviani",
+    "source": "https://codepen.io/supah/pen/prVVOx",
+    "hash": "2870b79b65caf4424875478b1c1e0b2cf3e46cf2"
+  },
+  {
     "id": "animation.2.shooting-stars",
     "version": "v1",
     "name": "Shooting Stars",
     "description": "Random speed shooting stars",
     "author": "alphardex",
     "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-    "hash": "eb7134e010b614dea8939c5d06a63672a54dea0e"
+    "hash": "a1d6ee6f19e4f1ed769756ec810c1e1fb737ae86"
   },
   {
     "id": "animation.3.spipa-circle",
@@ -499,5 +508,32 @@
     "author": "yoichi kobayashi",
     "source": "https://codepen.io/ykob/pen/YewoRz",
     "hash": "76355bbaad7b1e294423e231263172c3203b76c2"
+  },
+  {
+    "id": "animation.68.rgb-wave",
+    "version": "v1",
+    "name": "RGB Wave",
+    "description": "RGB Wave",
+    "author": "Yuki",
+    "source": "https://codepen.io/Web_yuki1027/pen/yLgYpWM",
+    "hash": "bc1a68c7941d5df11aac52ff3c636a5e7a7a4a64"
+  },
+  {
+    "id": "animation.69.bit-ocean",
+    "version": "v1",
+    "name": "Bit Ocean",
+    "description": "Bit Ocean",
+    "author": "Griffin Moyer",
+    "source": "https://codepen.io/gmoyer/pen/OxaObd",
+    "hash": "459834af0a5528d43f72bb99bee8a89a0f950f55"
+  },
+  {
+    "id": "animation.70.blur",
+    "version": "v1",
+    "name": "Bit Ocean",
+    "description": "Bit Ocean",
+    "author": "Griffin Moyer",
+    "source": "https://codepen.io/gmoyer/pen/OxaObd",
+    "hash": "5419b87a0c61d53e89db6d074f56edfd3df38924"
   }
 ]
