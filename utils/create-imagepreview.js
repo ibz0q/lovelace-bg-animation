@@ -46,7 +46,7 @@ async function takeScreenshot(filePath) {
 
   }
 
-  await page.waitForTimeout(7000);
+  await page.waitForTimeout(8000);
 
   await page.screenshot({ path: path.join(path.dirname(filePath), 'screenshot.png') });
 
@@ -56,8 +56,8 @@ async function takeScreenshot(filePath) {
 
 async function processPaths(paths) {
   // Process paths in batches of 10
-  for (let i = 0; i < paths.length; i += 10) {
-    const batch = paths.slice(i, i + 10);
+  for (let i = 0; i < paths.length; i += 15) {
+    const batch = paths.slice(i, i + 15);
     await Promise.all(batch.map(takeScreenshot));
   }
 }
