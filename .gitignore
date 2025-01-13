@@ -10,3 +10,6 @@ output/
 output/
 *.mp4
 screenshot.png
+gallery/metadata
+gallery/metadata/
+gallery/metadata/*
