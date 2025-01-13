@@ -34,11 +34,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Dependencies
-        run: npm install
-
       - name: Install Dependencies in utils
-        run: npm install
+        run: npm ci --no-audit --no-fund
         working-directory: ./utils
 
       - name: Generate Metadata
@@ -90,7 +87,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-          name: "updated-artifact-${{ github.run_id }}"  # Unique name for the second upload
+          name: "updated-artifact-${{ github.run_id }}"  
 
       - name: Deploy to GitHub Pages
         id: deployment
