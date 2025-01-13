@@ -35,6 +35,9 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - Jared Stanley (1)
  - Nathan Gordon (1)
  - nskrgv (1)
+ - Yuki (1)
+ - Griffin Moyer (1)
+ - Fabio Ottaviani (1)
 ### Support
 
 Please directly tip the artists you found most inspiring.
