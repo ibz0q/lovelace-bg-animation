@@ -4,7 +4,7 @@ metadata:
     description: A slow moving animation of the galaxy with stars
     author: Rahul
     source: https://codepen.io/stack-findover/pen/eYWPwPV
-
+    interactive: false
 parameters:
     - id: background-image
       default: ./2799006.jpg
