@@ -4,6 +4,7 @@ metadata:
     description: Random speed shooting stars
     author: alphardex
     source: https://codepen.io/alphardex/pen/RwrVoeL
+    interactive: false
 
 compile:
     - id: scss_1

@@ -56,17 +56,15 @@ function readDirectory(dir) {
       let offlineMode = supportsOfflineMode(packageData);
       let offlineModeExpand;
       if (supportsOfflineMode(packageData) == false) {
-        offlineModeExpand = "**Yes.**";
+        offlineModeExpand = "**Yes**";
       } else {
-        console.log(filePath)
-        console.log("offlineModeofflineMode")
   
-        offlineModeExpand = `
+        offlineModeExpand = `No
 <details>
-    <summary> No. (external dependencies detected, need inlining)</summary>
+    <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (${filePath}) that need to be inlined for offline mode. Please help inline them inside the package manifest
+Found these dependencies in (${filePath}) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 \`\`\`HTML
 ${offlineMode}
@@ -83,24 +81,12 @@ ${offlineMode}
 
       availableBgs += `
 
-###  > ${packageName} 
-${packageData.metadata.name} - ${packageData.metadata.description}
+###  > ${packageName} (${packageData.metadata.name} - ${packageData.metadata.description})
+
+\`- id: ${packageName}\`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
-*Author: ${packageData.metadata.author}*
-
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html)
-
-***Works offline?*** ${offlineModeExpand}
-      
-Put this inside your config:
-
-\`\`\`yaml
-- id: ${packageName}
-\`\`\`
-
-
-`
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html) - *Author: ${packageData.metadata.author}* - Offline support? ${offlineModeExpand}`
     }
   }
 }
