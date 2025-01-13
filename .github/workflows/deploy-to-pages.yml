@@ -1,4 +1,3 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Generate previews and deploy to Pages
 
 on:
@@ -38,7 +37,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Dependencies
+      - name: Install Dependencies in utils
         run: npm install
         working-directory: ./utils
 
@@ -48,10 +47,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload artifact
+      - name: Upload initial artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+          name: "initial-artifact-${{ github.run_id }}"  # Unique name for the first upload
 
       - name: Deploy to GitHub Pages
         id: deployment-initialize
@@ -84,12 +84,12 @@ jobs:
           echo "Deleting all dist folders..."
           find . -name "dist" -type d -prune -exec rm -rf {} +
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
+      - name: Upload updated artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+          name: "updated-artifact-${{ github.run_id }}"  # Unique name for the second upload
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
