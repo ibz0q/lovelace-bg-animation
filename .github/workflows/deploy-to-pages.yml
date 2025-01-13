@@ -44,7 +44,17 @@ jobs:
 
       - name: Generate Metadata
         run: node ./utils/create-metadata.js
-        
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         working-directory: ./utils
@@ -62,20 +72,10 @@ jobs:
           echo "Deleting all docs folders..."
           find . -name "docs" -type d -prune -exec rm -rf {} +
 
-      - name: Delete utils
-        run: |
-          echo "Deleting all utils folders..."
-          find . -name "utils" -type d -prune -exec rm -rf {} +
-
       - name: Delete schema
         run: |
           echo "Deleting all schema folders..."
           find . -name "schema" -type d -prune -exec rm -rf {} +
-
-      # - name: Delete src
-      #   run: |
-      #     echo "Deleting all src folders..."
-      #     find . -name "src" -type d -prune -exec rm -rf {} +
 
       - name: Delete dist
         run: |
