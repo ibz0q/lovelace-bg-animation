@@ -35,9 +35,8 @@ jobs:
           node-version: '20'
 
       - name: Install Dependencies in utils
-        run: npm ci --no-audit --no-fund
+        run: npm install
         working-directory: ./utils
-
       - name: Generate Metadata
         run: node ./utils/create-metadata.js
 
