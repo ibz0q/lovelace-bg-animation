@@ -51,11 +51,13 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
-          name: "initial-artifact-${{ github.run_id }}"  # Unique name for the first upload
+          name: "initial-artifact-${{ github.run_id }}"  
 
       - name: Deploy to GitHub Pages
         id: deployment-initialize
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: "initial-artifact-${{ github.run_id }}" 
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -93,3 +95,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: "updated-artifact-${{ github.run_id }}" 
