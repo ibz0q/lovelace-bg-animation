@@ -1,7 +1,9 @@
 name: Generate Package Metadata
 
-on: 
+on:
   push:
+    branches:
+      - main
     paths:
       - 'gallery/packages/**'
   workflow_dispatch:

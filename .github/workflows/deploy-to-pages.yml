@@ -1,12 +1,15 @@
 # Simple workflow for deploying static content to GitHub Pages
 name: Generate previews and deploy to Pages
 
-on: 
+on:
   workflow_dispatch:
   workflow_run:
     workflows: ["Generate Metadata"]
     types:
       - completed
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
