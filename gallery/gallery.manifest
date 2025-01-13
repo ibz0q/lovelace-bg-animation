@@ -6,7 +6,7 @@
     "description": "A slow moving animation of the galaxy with stars",
     "author": "Rahul",
     "source": "https://codepen.io/stack-findover/pen/eYWPwPV",
-    "hash": "9c41176d455c5fb62755e07d9ceef100635093c4",
+    "hash": "26f74b4bec64d9522cf19169cc8156ba1ea6bbe4",
     "parameters": [
       {
         "id": "background-image",
@@ -526,5 +526,14 @@
     "author": "Griffin Moyer",
     "source": "https://codepen.io/gmoyer/pen/OxaObd",
     "hash": "459834af0a5528d43f72bb99bee8a89a0f950f55"
+  },
+  {
+    "id": "animation.70.blur",
+    "version": "v1",
+    "name": "Bit Ocean",
+    "description": "Bit Ocean",
+    "author": "Griffin Moyer",
+    "source": "https://codepen.io/gmoyer/pen/OxaObd",
+    "hash": "5419b87a0c61d53e89db6d074f56edfd3df38924"
   }
 ]
