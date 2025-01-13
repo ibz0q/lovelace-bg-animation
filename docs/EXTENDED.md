@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (56 total)
+## All backgrounds (59 total)
 
 
 
@@ -1275,6 +1275,78 @@ Put this inside your config:
 
 
 
+###  > animation.68.rgb-wave 
+RGB Wave - RGB Wave
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.68.rgb-wave/screenshot.png)
+*Author: Yuki*
+
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.68.rgb-wave/preview.html)
+
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (../gallery/packages/animation.68.rgb-wave/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js'></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
+      
+Put this inside your config:
+
+```yaml
+- id: animation.68.rgb-wave
+```
+
+
+
+
+###  > animation.69.bit-ocean 
+Bit Ocean - Bit Ocean
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.69.bit-ocean/screenshot.png)
+*Author: Griffin Moyer*
+
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.69.bit-ocean/preview.html)
+
+***Works offline?*** 
+<details>
+    <summary> No. (external dependencies detected, need inlining)</summary>
+    <br />
+
+Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.yaml) that need to be inlined for offline mode. Please help inline them inside the package manifest
+
+```HTML
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js'></script>
+```
+
+---
+
+</details>
+
+
+<br />
+
+      
+Put this inside your config:
+
+```yaml
+- id: animation.69.bit-ocean
+```
+
+
+
+
 ###  > animation.7.rainbowness 
 Rainbowness - Rainbowness
 
@@ -1308,6 +1380,25 @@ Put this inside your config:
 
 ```yaml
 - id: animation.9.rainbow-particles
+```
+
+
+
+
+###  > generator.1.svg-wave 
+Gradient Wave Generator - SVG Gradient Wave Generator
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/screenshot.png)
+*Author: Fabio Ottaviani*
+
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/preview.html)
+
+***Works offline?*** **Yes.**
+      
+Put this inside your config:
+
+```yaml
+- id: generator.1.svg-wave
 ```
 
 
