@@ -8,6 +8,14 @@ This file is generated through an Github Action, if any of the image previews do
 
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.1.galaxy-animation (Galaxy Animated - A slow moving animation of the galaxy with stars)
 
 `- id: animation.1.galaxy-animation`
@@ -15,6 +23,14 @@ This file is generated through an Github Action, if any of the image previews do
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.galaxy-animation/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.galaxy-animation/preview.html) - *Author: Rahul* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.10.css-dark-particles (CSS Dark Particles - CSS Dark Particles)
 
 `- id: animation.10.css-dark-particles`
@@ -22,6 +38,14 @@ This file is generated through an Github Action, if any of the image previews do
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.10.css-dark-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.10.css-dark-particles/preview.html) - *Author: Takeshi Kano* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.11.space (Space - The final frontier)
 
 `- id: animation.11.space`
@@ -29,6 +53,14 @@ This file is generated through an Github Action, if any of the image previews do
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.11.space/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.11.space/preview.html) - *Author: Akimitsu Hamamuro* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.12.gradient-particles (Gradient Particles - animated-gradient-particle)
 
 `- id: animation.12.gradient-particles`
@@ -36,6 +68,14 @@ This file is generated through an Github Action, if any of the image previews do
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.12.gradient-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.12.gradient-particles/preview.html) - *Author: cssscript.com* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.13.cyber-lights (Cyber Lights - Frosted type lights moving diagnolly)
 
 `- id: animation.13.cyber-lights`
@@ -60,6 +100,14 @@ Found these dependencies in (../gallery/packages/animation.13.cyber-lights/packa
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.14.ribbons-two (Ribbons Two - It looks like Windows Vista)
 
 `- id: animation.14.ribbons-two`
@@ -84,6 +132,14 @@ Found these dependencies in (../gallery/packages/animation.14.ribbons-two/packag
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.15.sound (Sound - Vibes)
 
 `- id: animation.15.sound`
@@ -108,6 +164,14 @@ Found these dependencies in (../gallery/packages/animation.15.sound/package.yaml
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.16.veil (Veil - Slithers   of   color   veil   the   screen)
 
 `- id: animation.16.veil`
@@ -132,6 +196,14 @@ Found these dependencies in (../gallery/packages/animation.16.veil/package.yaml)
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.17.ribbons (Ribbons - So many layers of ribbons)
 
 `- id: animation.17.ribbons`
@@ -156,6 +228,14 @@ Found these dependencies in (../gallery/packages/animation.17.ribbons/package.ya
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.18.particle-cube (3D particle Cube - Pure JS 3D particle Cube - 1000 particles)
 
 `- id: animation.18.particle-cube`
@@ -180,6 +260,14 @@ Found these dependencies in (../gallery/packages/animation.18.particle-cube/pack
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.19.trapped-particles (Trapped particles - Trapped particles with shocking connections)
 
 `- id: animation.19.trapped-particles`
@@ -204,6 +292,14 @@ Found these dependencies in (../gallery/packages/animation.19.trapped-particles/
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.2.shooting-stars (Shooting Stars - Random speed shooting stars)
 
 `- id: animation.2.shooting-stars`
@@ -211,6 +307,14 @@ Found these dependencies in (../gallery/packages/animation.19.trapped-particles/
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/preview.html) - *Author: alphardex* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.20.manifold (Manifold - Enter into the fold)
 
 `- id: animation.20.manifold`
@@ -235,6 +339,14 @@ Found these dependencies in (../gallery/packages/animation.20.manifold/package.y
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.21.noise-abstraction (Noise Abstraction - Noise Abstraction)
 
 `- id: animation.21.noise-abstraction`
@@ -259,6 +371,14 @@ Found these dependencies in (../gallery/packages/animation.21.noise-abstraction/
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.22.cloth-ribbons (Cloth Ribbons - It Colorful Cloth Ribbons)
 
 `- id: animation.22.cloth-ribbons`
@@ -283,6 +403,14 @@ Found these dependencies in (../gallery/packages/animation.22.cloth-ribbons/pack
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.23.ribbons-four (Ribbons Four - It looks like Windows Vista)
 
 `- id: animation.23.ribbons-four`
@@ -307,6 +435,14 @@ Found these dependencies in (../gallery/packages/animation.23.ribbons-four/packa
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.24.trapped-gradient (Trapped graident - Trapped particles with gradient connections)
 
 `- id: animation.24.trapped-gradient`
@@ -331,6 +467,14 @@ Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/p
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.25.galactic-swimmers (Galactic Swimmers - A sea of particles swimming in the galaxy)
 
 `- id: animation.25.galactic-swimmers`
@@ -338,6 +482,14 @@ Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/p
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.25.galactic-swimmers/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.25.galactic-swimmers/preview.html) - *Author: Bas Groothedde* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.26.gpu-particles (GPU Particles - First Time GPGPU Particles)
 
 `- id: animation.26.gpu-particles`
@@ -362,6 +514,14 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.27.tron (Tron - LightCycles in Tron)
 
 `- id: animation.27.tron`
@@ -369,6 +529,14 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.27.tron/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.27.tron/preview.html) - *Author: DanDog* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.28.black-sand-flow-field-v2 (Black Sand Flow Field v2 - )
 
 `- id: animation.28.black-sand-flow-field-v2`
@@ -376,6 +544,14 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.28.black-sand-flow-field-v2/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.28.black-sand-flow-field-v2/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.3.spipa-circle (Spipa circle - A cool electro field circle)
 
 `- id: animation.3.spipa-circle`
@@ -400,6 +576,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.31.blooming-flower (Blooming Flower - )
 
 `- id: animation.31.blooming-flower`
@@ -407,6 +591,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.31.blooming-flower/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.31.blooming-flower/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.32.canvas-blending-gradient-circles (Canvas Blending Gradient Circles - )
 
 `- id: animation.32.canvas-blending-gradient-circles`
@@ -414,6 +606,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.32.canvas-blending-gradient-circles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.32.canvas-blending-gradient-circles/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.33.canvas-bokeh (Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography, but it's a start.)
 
 `- id: animation.33.canvas-bokeh`
@@ -421,6 +621,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.33.canvas-bokeh/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.33.canvas-bokeh/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.34.canvas-color-teams (Canvas Color Teams - )
 
 `- id: animation.34.canvas-color-teams`
@@ -428,6 +636,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.34.canvas-color-teams/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.34.canvas-color-teams/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.35.canvas-light-explosion (Canvas Light Explosion - Click to clear and change hue.)
 
 `- id: animation.35.canvas-light-explosion`
@@ -435,6 +651,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.35.canvas-light-explosion/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.35.canvas-light-explosion/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.36.starfield (Starfield - Engage)
 
 `- id: animation.36.starfield`
@@ -442,6 +666,14 @@ Found these dependencies in (../gallery/packages/animation.3.spipa-circle/packag
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.36.starfield/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.36.starfield/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.4.colored-swipe (Colored Swipe Transition - Whole page colored swipes)
 
 `- id: animation.4.colored-swipe`
@@ -466,6 +698,14 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.46.codevember-05-simplex-vector-flow-field (#Codevember 05 Simplex Vector Flow Field - Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js)
 
 `- id: animation.46.codevember-05-simplex-vector-flow-field`
@@ -473,6 +713,14 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.46.codevember-05-simplex-vector-flow-field/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.46.codevember-05-simplex-vector-flow-field/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.47.color-trails (Color Trails - )
 
 `- id: animation.47.color-trails`
@@ -480,6 +728,14 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.47.color-trails/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.47.color-trails/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.48.colorful-wanderers (Colorful Wanderers - 
 
 Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).)
@@ -489,6 +745,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.48.colorful-wanderers/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.48.colorful-wanderers/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.49.curved-lines (Curved Lines - `#GrayScale_HintOfRainbow_CurvedLinesWeekend`)
 
 `- id: animation.49.curved-lines`
@@ -496,6 +760,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.49.curved-lines/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.49.curved-lines/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.5.neon-hexagon (Neon Hexagon - Neon Hexagon Foming Particles)
 
 `- id: animation.5.neon-hexagon`
@@ -503,6 +775,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.neon-hexagon/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.neon-hexagon/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.5.plasma (Rainbow Particles - rainbow particle horizon)
 
 `- id: animation.5.plasma`
@@ -510,6 +790,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.plasma/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.plasma/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.50.sidelined (Line Loop - Side lines)
 
 `- id: animation.50.sidelined`
@@ -517,6 +805,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.50.sidelined/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.50.sidelined/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.51.wormhole (Wormhole - Warp 1)
 
 `- id: animation.51.wormhole`
@@ -524,6 +820,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.51.wormhole/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.51.wormhole/preview.html) - *Author: Liam Egan* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.52.polyhedron-galaxy (Polyhedron galaxy - Practicing with ThreeJS)
 
 `- id: animation.52.polyhedron-galaxy`
@@ -531,6 +835,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.52.polyhedron-galaxy/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.52.polyhedron-galaxy/preview.html) - *Author: Júlia Erő* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.53.stars (Stars - The odd twinkle)
 
 `- id: animation.53.stars`
@@ -538,6 +850,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.53.stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.53.stars/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.54.stars-galaxy (Stars Galaxy - Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.)
 
 `- id: animation.54.stars-galaxy`
@@ -545,6 +865,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.54.stars-galaxy/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.54.stars-galaxy/preview.html) - *Author: MenSeb* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.56.azimuthal-viscosity (Azimuthal Viscosity 3 - )
 
 `- id: animation.56.azimuthal-viscosity`
@@ -552,6 +880,14 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.56.azimuthal-viscosity/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.56.azimuthal-viscosity/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.57.browniandrix-noise (Browniandrix noise - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
 Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.)
 
@@ -560,6 +896,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.57.browniandrix-noise/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.57.browniandrix-noise/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.58.browniandrix-noise-l3 (Browniandrix noise L3 - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
 Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.)
 
@@ -568,6 +912,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.58.browniandrix-noise-l3/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.58.browniandrix-noise-l3/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.59.dimension-two-and-a-half (Dimension of Two and a Half - Vanishing point attractors)
 
 `- id: animation.59.dimension-two-and-a-half`
@@ -575,6 +927,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.59.dimension-two-and-a-half/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.59.dimension-two-and-a-half/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.6.binary-spiral (Binary Spirals - Binary Spirals)
 
 `- id: animation.6.binary-spiral`
@@ -582,6 +942,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.6.binary-spiral/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.6.binary-spiral/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.60.digital-frontier (The Digital Frontier - It's too trippy, dial me out)
 
 `- id: animation.60.digital-frontier`
@@ -589,6 +957,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.60.digital-frontier/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.60.digital-frontier/preview.html) - *Author: Ben Matthews* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.61.cube (Pure CSS cube - [Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288). Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.)
 
 `- id: animation.61.cube`
@@ -596,6 +972,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.61.cube/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.61.cube/preview.html) - *Author: Ana Tudor* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.62.neural (Neural - Neural Glow)
 
 `- id: animation.62.neural`
@@ -603,6 +987,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.62.neural/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.62.neural/preview.html) - *Author: Ksenia Kondrashova* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.63.green-circuit (Green Circuit - I'm in)
 
 `- id: animation.63.green-circuit`
@@ -610,6 +1002,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.64.howls-moving-castle (Howl's Moving Castle - Howl's Moving Castle
 )
 
@@ -618,6 +1018,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle/preview.html) - *Author: Nathan Gordon* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.65.cristal-lands (Cristal Lands - Cristal Lands)
 
 `- id: animation.65.cristal-lands`
@@ -625,6 +1033,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.65.cristal-lands/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.65.cristal-lands/preview.html) - *Author: nskrgv* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.66.fog-of-war (Fog of War - WebGL Fog)
 
 `- id: animation.66.fog-of-war`
@@ -632,6 +1048,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.66.fog-of-war/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.66.fog-of-war/preview.html) - *Author: yoichi kobayashi* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.67.fly-particle (Fog of War - WebGL Fog)
 
 `- id: animation.67.fly-particle`
@@ -639,6 +1063,14 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/preview.html) - *Author: yoichi kobayashi* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.68.rgb-wave (RGB Wave - RGB Wave)
 
 `- id: animation.68.rgb-wave`
@@ -663,6 +1095,14 @@ Found these dependencies in (../gallery/packages/animation.68.rgb-wave/package.y
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.69.bit-ocean (Bit Ocean - Bit Ocean)
 
 `- id: animation.69.bit-ocean`
@@ -687,6 +1127,14 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 <br />
 
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.7.rainbowness (Rainbowness - Rainbowness)
 
 `- id: animation.7.rainbowness`
@@ -694,6 +1142,14 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.7.rainbowness/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.7.rainbowness/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.70.blur (Bit Ocean - Bit Ocean)
 
 `- id: animation.70.blur`
@@ -701,6 +1157,14 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: Griffin Moyer* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > animation.9.rainbow-particles (Particle Horizon - rainbow particle horizon)
 
 `- id: animation.9.rainbow-particles`
@@ -708,6 +1172,14 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.9.rainbow-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.9.rainbow-particles/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > generator.1.svg-wave (Gradient Wave Generator - SVG Gradient Wave Generator)
 
 `- id: generator.1.svg-wave`
