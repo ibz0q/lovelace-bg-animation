@@ -18,20 +18,20 @@ const angle = (x1, y1, x2, y2) => atan2(y2 - y1, x2 - x1);
 const lerp = (n1, n2, speed) => (1 - speed) * n1 + speed * n2;
 
 
-const circleCount = 150;
+// Settings
+const circleCount = 120;
 const circlePropCount = 8;
 const circlePropsLength = circleCount * circlePropCount;
-const baseSpeed = 0.01;
-const rangeSpeed = 0.01;
+const baseSpeed = 0.001;
+const rangeSpeed = 0.001;
 const baseTTL = 150;
-const rangeTTL = 200;
+const rangeTTL = 500;
 const baseRadius = 100;
-const rangeRadius = 200;
-const rangeHue = 60;
+const rangeRadius = 500;
+const rangeHue = 120;
 const xOff = 0.0015;
 const yOff = 0.0015;
 const zOff = 0.0015;
-const backgroundColor = 'hsla(0,0%,5%,0.2)';
 
 let container;
 let canvas;
@@ -132,18 +132,11 @@ function checkBounds(x, y, radius) {
 }
 
 function createCanvas() {
-  container = document.querySelector('.content--canvas');
+  container = document.querySelector('.canvas');
 	canvas = {
 		a: document.createElement('canvas'),
 		b: document.createElement('canvas')
 	};
-	canvas.b.style = `
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	`;
 	container.appendChild(canvas.b);
 	ctx = {
 		a: canvas.a.getContext('2d'),
@@ -167,14 +160,13 @@ function resize() {
 
 function render() {
   ctx.b.save();
-  ctx.b.filter = 'blur(50px)';
+  // ctx.b.filter = 'blur(50px)';
   ctx.b.drawImage(canvas.a, 0, 0);
   ctx.b.restore();
 }
 
 function draw() {
   ctx.a.clearRect(0, 0, canvas.a.width, canvas.a.height);
-  ctx.b.fillStyle = backgroundColor;
   ctx.b.fillRect(0, 0, canvas.b.width, canvas.b.height);
   updateCircles();
   render();

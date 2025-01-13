@@ -5,6 +5,11 @@ metadata:
     Bit Ocean
   author: Griffin Moyer
   source: https://codepen.io/gmoyer/pen/OxaObd
+
+parameters:
+  - id: opacity
+    default: "0.5"
+
 helpers:
   insert_baseurl: true
 template: >
@@ -27,7 +32,7 @@ template: >
                             color: #57585c;
                             color: var(--color-text);
                             background-color: #000;
-                            opacity:0.3;
+                            opacity:{{parameter: opacity}};
                             overflow: hidden;
                         }
                     p {
@@ -35,7 +40,7 @@ template: >
                     font-size: 18px;
                     line-height: 140%;
                     }
-
+ 
                     .canvas {
                     position: relative;
                     display: -webkit-box;

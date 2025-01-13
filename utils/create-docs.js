@@ -81,6 +81,14 @@ ${offlineMode}
 
       availableBgs += `
 
+|------------------|--------------------------|
+| **Resolution**   | 1920x1080                |
+| **FPS**          | 30                       |
+| **Format**       | CSS                      |
+| **Color Scheme** | Dark                     |
+| **Description**  | CSS-based dark particle animation with a futuristic look. |
+
+      
 ###  > ${packageName} (${packageData.metadata.name} - ${packageData.metadata.description})
 
 \`- id: ${packageName}\`
