@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: v1.0.2 (Public release)
+Current Release: v1.0.1
 
 <p align="center">
 
@@ -60,7 +60,7 @@ You can install this plugin two ways:
 
 Click this button which automatically downloads this plugin. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
 
-If the above button dos not work then:  
+If the above button does not work then:  
 
 Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". 
 

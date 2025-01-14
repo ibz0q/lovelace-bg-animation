@@ -2,6 +2,7 @@ import YAML from 'yaml'
 import * as sass from 'sass';
 
 var isDebug = true,
+  pluginVersion = VERSION || "dev",
   lovelaceUI = {},
   viewPath,
   rootPluginConfig,
@@ -60,7 +61,7 @@ async function getGalleryRootManifest() {
 
 async function getPackageManifest(packageConfig) {
   try {
-    isDebug ? console.log("getPackageManifest: " + packageConfig) : null;
+    isDebug ? console.log("getPackageManifest: " + packageConfig?.id) : null;
     let packageManifestId = packageConfig.id;
     let packageCacheKey = btoa(packageManifestId + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
@@ -341,7 +342,7 @@ function changeDefaultLovelaceStyles() {
     cssText += rootPluginConfig.transparency.header.style;
   }
   lovelaceUI.rootStyleElement.innerHTML = cssText;
-} 
+}
 
 async function processBackgroundFrame(packageConfig, packageManifest) {
 
@@ -428,7 +429,7 @@ async function startPlaylistInterval(currentPlaylist) {
 
 async function setupPlaylist() {
   viewPath = getCurrentViewPath();
-  isDebug ? console.log(`setupPlaylist: Current viewpath ${viewPath}`) : null;
+  isDebug ? console.log(`setupPlaylist: Current viewpath=${viewPath}`) : null;
 
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
@@ -555,7 +556,7 @@ async function initializeObservers() {
 }
 
 async function initialize() {
-  isDebug ? console.log("initialize: start.") : null;
+  isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
   let initializeLovelaceVars = initializeLovelaceVariables()
   if (initializeLovelaceVars == true) {
     await initializeObservers();

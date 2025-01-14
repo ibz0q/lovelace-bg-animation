@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const YAML = require('yaml');
+const { version } = require('../package.json');
+
 process.chdir(__dirname);
 
 const galleryDir = '../gallery/packages';
@@ -22,10 +24,10 @@ function supportsOfflineMode(obj) {
           // return using regex search for link and script tags with src and href attribute
           let match = obj[key].match(/<link.*?href=["'](http:\/\/|https:\/\/).*?["'].*?>|<script.*?src=["'](http:\/\/|https:\/\/).*?["'].*?><\/script>/g);
           if (match) {
-              console.log(match[0])
-              hasUrl = match[0];
+            console.log(match[0])
+            hasUrl = match[0];
           }
-          
+
         }
       }
     }
@@ -58,7 +60,7 @@ function readDirectory(dir) {
       if (supportsOfflineMode(packageData) == false) {
         offlineModeExpand = "**Yes**";
       } else {
-  
+
         offlineModeExpand = `No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
@@ -119,10 +121,13 @@ let readmeContent = fs.readFileSync(readmePath, 'utf8');
 let regex = /(Tributes \(Artists featured\))([\s\S]*?)(### Support)/;
 readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
 
+
+// Replace the version number with the one from package.json
+readmeContent = readmeContent.replace(/Current Release:\s*v[\d\.]+/g, `Current Release: v${version}`);
+
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, readmeContent, 'utf8');
 
-// console.log(readmeContent);
 
 console.log("README.md updated successfully");
 

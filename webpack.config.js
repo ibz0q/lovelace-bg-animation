@@ -1,5 +1,8 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
+const { version } = require('./package.json');
+// const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack'); 
 
 module.exports = {
   entry: './src/bg-animation.js',
@@ -26,6 +29,9 @@ module.exports = {
         { from: './gallery/gallery.manifest', to: './gallery/gallery.manifest' },
       ],
     }),
-  ],
+    new webpack.DefinePlugin({
+      VERSION : JSON.stringify(version)
+    })
+  ]
 };
 
