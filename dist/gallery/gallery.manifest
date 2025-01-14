@@ -534,6 +534,12 @@
     "description": "Bit Ocean",
     "author": "Griffin Moyer",
     "source": "https://codepen.io/gmoyer/pen/OxaObd",
-    "hash": "5419b87a0c61d53e89db6d074f56edfd3df38924"
+    "hash": "57dca276edff181e76233953767d67e47143096d",
+    "parameters": [
+      {
+        "id": "opacity",
+        "default": "0.5"
+      }
+    ]
   }
 ]
