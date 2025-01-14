@@ -7,17 +7,23 @@ assignees: ''
 
 ---
 
-**Describe the bug**
+Provide: 
 
-And provide: 
-- Configuration YAML 
-- Name of Home Assistant Theme name in use 
+- Version of plugin
+- Your configuration YAML 
+- Name Home Assistant Theme name in use 
 - Home Assistant version
 - A Screenshot (If possible)
-  
+- Browser (e.g. Chrome, Firefox, Fully Kiosk Browser (Include webview version))
+
+
+**Describe the bug**
+
+[]
+
+
 **Expected behavior**
-A clear and concise description of what you expected to happen.
 
-**Which browser are you using? Chrome, Firefox, Fully Kiosk Browser (Include webview version) etc
+[]
 
-## Bug reports that do not provide this structure will be closed without a response. 
+### Bug reports that do not provide this structure will be closed. 
