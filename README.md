@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: v1.0.0 (Public release)
+Current Release: v1.0.1.2 (Public release)
 
 <p align="center">
 
@@ -93,8 +93,9 @@ Config needs to be placed inside Lovelaces config file, you can do this inside t
 ```yaml
 bg-animation:
   duration: 60000 # Global duration of each bg
-  header: # Sets the header transparent (Optional)
-    transparent: true
+  transparency: # Sets the header transparent (Optional)
+    header:
+      enable: true
   background:
     global: # Add and remove as required
       - id: animation.11.space
@@ -118,8 +119,9 @@ bg-animation:
       background: transparent;
   gallery: # *
     type: local # Type of gallery, "local" | "remote" 
-  header: # *
-    transparent: true # If true, the header of the page will be transparent
+  transparency: # Sets the header transparent (Optional)
+    header:
+      enable: true
   cache: false # * If false, nothing will not be cached. Default is true
   sort: random # * Order bgs will be displayed. 'random" | "reverse" | "id_asc" | "id_desc". Default is the order you specify
   background: 

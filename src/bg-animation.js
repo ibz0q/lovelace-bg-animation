@@ -231,14 +231,14 @@ function initializeRuntimeVariables() {
     "parentStyle": rootPluginConfig.parentStyle ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
     "transparency": {
       "header": {
-        "enable": rootPluginConfig.transparency.header?.enable ?? true,
-        "style": rootPluginConfig.transparency.header?.style ?? ".header {background: transparent !important;}",
+        "enable": rootPluginConfig.transparency?.header?.enable ?? true,
+        "style": rootPluginConfig.transparency?.header?.style ?? ".header {background: transparent !important;}",
       },
       "sidebar": {
-        "enable": rootPluginConfig.transparency.sidebar?.enable ?? false,
-        "style": rootPluginConfig.transparency.sidebar?.style ?? "ha-sidebar {background: transparent !important;}",
+        "enable": rootPluginConfig.transparency?.sidebar?.enable ?? false,
+        "style": rootPluginConfig.transparency?.sidebar?.style ?? "ha-sidebar {background: transparent !important;}",
       },
-      "background": rootPluginConfig.transparency.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
+      "background": rootPluginConfig.transparency?.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
     },
     "background": {
       "global":
