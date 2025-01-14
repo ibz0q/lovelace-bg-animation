@@ -2,6 +2,8 @@
 
 Current Release: v1.0.1
 
+A small Lovelace plugin that replaces the background with an animated one, various animations available. 
+
 <p align="center">
 
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
@@ -9,7 +11,6 @@ Current Release: v1.0.1
 
 **View all backgrounds here [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)**
 
-A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
 ## 🎀 Tributes (Artists featured)
 
