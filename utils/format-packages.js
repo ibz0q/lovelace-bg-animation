@@ -15,13 +15,11 @@ async function processYAMLFile(filePath) {
         if (parsedYAML.template) {
             let templateContent = parsedYAML.template;
 
-            // Prettify HTML, CSS, and JS from the template content using async/await
-            const prettyHTML = await prettier.format(templateContent, { parser: 'html' });
-            const prettyCSS = await prettier.format(templateContent, { parser: 'css' });
-            const prettyJS = await prettier.format(templateContent, { parser: 'babel' });
+            // Prettify the mixed HTML, CSS, and JS content using Prettier
+            const prettyContent = await prettier.format(templateContent, { parser: 'html' });
 
-            // Replace the template content with formatted version (HTML, JS, CSS)
-            parsedYAML.template = `${prettyHTML}\n${prettyCSS}\n${prettyJS}`;
+            // Replace the template content with formatted version
+            parsedYAML.template = prettyContent;
 
             // Convert the updated YAML object back to string
             const updatedYAML = YAML.stringify(parsedYAML);
