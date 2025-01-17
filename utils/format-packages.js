@@ -16,7 +16,10 @@ async function processYAMLFile(filePath) {
             let templateContent = parsedYAML.template;
 
             // Prettify the mixed HTML, CSS, and JS content using Prettier
-            const prettyContent = await prettier.format(templateContent, { parser: 'html' });
+            const prettyContent = await prettier.format(templateContent, {
+                parser: 'html',
+                htmlWhitespaceSensitivity: 'ignore'
+            });
 
             // Replace the template content with formatted version
             parsedYAML.template = prettyContent;
