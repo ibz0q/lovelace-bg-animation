@@ -201,6 +201,8 @@ PRs need to be attached to an issue that contains the following info:
 
 ### Features / TODO
 
+- Provide a way to add libraries in a trusted manner
+  - Likely: Add packages via CDN into a common folder to be loaded by packages thus reducing overall size.
 - Slow down fast moving bgs (in progress)
 - Add redraw 
 - Iframe transitions (Removed)
