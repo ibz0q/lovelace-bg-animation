@@ -1,215 +1,224 @@
 version: v1
 metadata:
-    name: Noise Abstraction
-    description: Noise Abstraction
-    author: Akimitsu Hamamuro 
-    source: https://codepen.io/akm2/pen/AxGzJb
-
-template: |
-        <script src="https://rawgit.com/akm2/simplex-noise.js/master/simplex-noise.js"></script>
-
-        <canvas id='c'></canvas>
-            <style>
-
-            /**
-            Scroll to zoom, or use options
-
-            Read description for notes on possible
-            issues.
-            */
-            body, html {
-            margin: 0;
-            padding: 0;
-            }
-
-            body canvas {
-            display: block;
-            background: #000000;
-            }
-
-        </style>
-
-        <script>
-                            
-            /**
-            * requestAnimationFrame
-            */
-            window.requestAnimationFrame = (function(){
-                return  window.requestAnimationFrame       ||
-                        window.webkitRequestAnimationFrame ||
-                        window.mozRequestAnimationFrame    ||
-                        window.oRequestAnimationFrame      ||
-                        window.msRequestAnimationFrame     ||
-                        function (callback) {
-                            window.setTimeout(callback, 1000 / 60);
-                        };
-            })();
+  name: Noise Abstraction
+  description: Noise Abstraction
+  author: Akimitsu Hamamuro
+  source: https://codepen.io/akm2/pen/AxGzJb
+template: >
+  <script
+  src="https://rawgit.com/akm2/simplex-noise.js/master/simplex-noise.js"></script>
 
 
-            // Configs
+  <canvas id="c"></canvas>
 
-            var Configs = {
-                backgroundColor: '#000000',
-                particleNum: 1000,
-                step: 5,
-                base: 1000,
-                zInc: 0.001
-            };
+  <style>
+    /**
+      Scroll to zoom, or use options
 
+      Read description for notes on possible
+      issues.
+      */
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
 
-            // Vars
-
-            var canvas,
-                context,
-                screenWidth,
-                screenHeight,
-                centerX,
-                centerY,
-                particles = [],
-                hueBase = 0,
-                simplexNoise,
-                zoff = 0,
-                gui;
+    body canvas {
+      display: block;
+      background: #000000;
+    }
+  </style>
 
 
-            // Initialize
+  <script>
+    /**
+     * requestAnimationFrame
+     */
+    window.requestAnimationFrame = (function () {
+      return (
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function (callback) {
+          window.setTimeout(callback, 1000 / 60);
+        }
+      );
+    })();
 
-            function init() {
-                canvas = document.getElementById('c');
+    // Configs
 
-                window.addEventListener('resize', onWindowResize, false);
-                onWindowResize(null);
+    var Configs = {
+      backgroundColor: "#000000",
+      particleNum: 1000,
+      step: 5,
+      base: 1000,
+      zInc: 0.001,
+    };
 
-                for (var i = 0, len = Configs.particleNum; i < len; i++) {
-                    initParticle((particles[i] = new Particle()));
-                }
+    // Vars
 
-                simplexNoise = new SimplexNoise();
+    var canvas,
+      context,
+      screenWidth,
+      screenHeight,
+      centerX,
+      centerY,
+      particles = [],
+      hueBase = 0,
+      simplexNoise,
+      zoff = 0,
+      gui;
 
-                canvas.addEventListener('click', onCanvasClick, false);
+    // Initialize
 
-                update();
-            }
+    function init() {
+      canvas = document.getElementById("c");
 
+      window.addEventListener("resize", onWindowResize, false);
+      onWindowResize(null);
 
-            // Event listeners
+      for (var i = 0, len = Configs.particleNum; i < len; i++) {
+        initParticle((particles[i] = new Particle()));
+      }
 
-            function onWindowResize(e) {
-                screenWidth  = canvas.width  = window.innerWidth;
-                screenHeight = canvas.height = window.innerHeight;
+      simplexNoise = new SimplexNoise();
 
-                centerX = screenWidth / 2;
-                centerY = screenHeight / 2;
+      canvas.addEventListener("click", onCanvasClick, false);
 
-                context = canvas.getContext('2d');
-                context.lineWidth = 0.3;
-                context.lineCap = context.lineJoin = 'round';
-            }
+      update();
+    }
 
-            function onCanvasClick(e) {
-                context.save();
-                context.globalAlpha = 0.8;
-                context.fillStyle = Configs.backgroundColor;
-                context.fillRect(0, 0, screenWidth, screenHeight);
-                context.restore();
-                
-                simplexNoise = new SimplexNoise();
-            }
+    // Event listeners
 
+    function onWindowResize(e) {
+      screenWidth = canvas.width = window.innerWidth;
+      screenHeight = canvas.height = window.innerHeight;
 
-            // Functions
+      centerX = screenWidth / 2;
+      centerY = screenHeight / 2;
 
-            function getNoise(x, y, z) {
-                var octaves = 4,
-                    fallout = 0.5,
-                    amp = 1, f = 1, sum = 0,
-                    i;
+      context = canvas.getContext("2d");
+      context.lineWidth = 0.3;
+      context.lineCap = context.lineJoin = "round";
+    }
 
-                for (i = 0; i < octaves; ++i) {
-                    amp *= fallout;
-                    sum += amp * (simplexNoise.noise3D(x * f, y * f, z * f) + 1) * 0.5;
-                    f *= 2;
-                }
+    function onCanvasClick(e) {
+      context.save();
+      context.globalAlpha = 0.8;
+      context.fillStyle = Configs.backgroundColor;
+      context.fillRect(0, 0, screenWidth, screenHeight);
+      context.restore();
 
-                return sum;
-            }
+      simplexNoise = new SimplexNoise();
+    }
 
-            function initParticle(p) {
-                p.x = p.pastX = screenWidth * Math.random();
-                p.y = p.pastY = screenHeight * Math.random();
-                p.color.h = hueBase + Math.atan2(centerY - p.y, centerX - p.x) * 180 / Math.PI;
-                p.color.s = 1;
-                p.color.l = 0.5;
-                p.color.a = 0;
-            }
+    // Functions
 
+    function getNoise(x, y, z) {
+      var octaves = 4,
+        fallout = 0.5,
+        amp = 1,
+        f = 1,
+        sum = 0,
+        i;
 
-            // Update
+      for (i = 0; i < octaves; ++i) {
+        amp *= fallout;
+        sum += amp * (simplexNoise.noise3D(x * f, y * f, z * f) + 1) * 0.5;
+        f *= 2;
+      }
 
-            function update() {
-                var step = Configs.step,
-                    base = Configs.base,
-                    i, p, angle;
-                
-                for (i = 0, len = particles.length; i < len; i++) {
-                    p = particles[i];
+      return sum;
+    }
 
-                    p.pastX = p.x;
-                    p.pastY = p.y;
-                
-                    angle = Math.PI * 6 * getNoise(p.x / base * 1.75, p.y / base * 1.75, zoff);
-                    p.x += Math.cos(angle) * step;
-                    p.y += Math.sin(angle) * step;
-                    
-                    if (p.color.a < 1) p.color.a += 0.003;
+    function initParticle(p) {
+      p.x = p.pastX = screenWidth * Math.random();
+      p.y = p.pastY = screenHeight * Math.random();
+      p.color.h =
+        hueBase + (Math.atan2(centerY - p.y, centerX - p.x) * 180) / Math.PI;
+      p.color.s = 1;
+      p.color.l = 0.5;
+      p.color.a = 0;
+    }
 
-                    context.beginPath();
-                    context.strokeStyle = p.color.toString();
-                    context.moveTo(p.pastX, p.pastY);
-                    context.lineTo(p.x, p.y);
-                    context.stroke();
-                    
-                    if (p.x < 0 || p.x > screenWidth || p.y < 0 || p.y > screenHeight) {
-                        initParticle(p);
-                    }
-                }
-                
-                hueBase += 0.1;
-                zoff += Configs.zInc;
+    // Update
 
-                requestAnimationFrame(update);
-            }
+    function update() {
+      var step = Configs.step,
+        base = Configs.base,
+        i,
+        p,
+        angle;
 
+      for (i = 0, len = particles.length; i < len; i++) {
+        p = particles[i];
 
-            /**
-            * HSLA
-            */
-            function HSLA(h, s, l, a) {
-                this.h = h || 0;
-                this.s = s || 0;
-                this.l = l || 0;
-                this.a = a || 0;
-            }
+        p.pastX = p.x;
+        p.pastY = p.y;
 
-            HSLA.prototype.toString = function() {
-                return 'hsla(' + this.h + ',' + (this.s * 100) + '%,' + (this.l * 100) + '%,' + this.a + ')';
-            }
+        angle =
+          Math.PI * 6 * getNoise((p.x / base) * 1.75, (p.y / base) * 1.75, zoff);
+        p.x += Math.cos(angle) * step;
+        p.y += Math.sin(angle) * step;
 
-            /**
-            * Particle
-            */
-            function Particle(x, y, color) {
-                this.x = x || 0;
-                this.y = y || 0;
-                this.color = color || new HSLA();
-                this.pastX = this.x;
-                this.pastY = this.y;
-            }
+        if (p.color.a < 1) p.color.a += 0.003;
 
+        context.beginPath();
+        context.strokeStyle = p.color.toString();
+        context.moveTo(p.pastX, p.pastY);
+        context.lineTo(p.x, p.y);
+        context.stroke();
 
-            // Run
+        if (p.x < 0 || p.x > screenWidth || p.y < 0 || p.y > screenHeight) {
+          initParticle(p);
+        }
+      }
 
-            init();
+      hueBase += 0.1;
+      zoff += Configs.zInc;
 
+      requestAnimationFrame(update);
+    }
 
-        </script>
+    /**
+     * HSLA
+     */
+    function HSLA(h, s, l, a) {
+      this.h = h || 0;
+      this.s = s || 0;
+      this.l = l || 0;
+      this.a = a || 0;
+    }
+
+    HSLA.prototype.toString = function () {
+      return (
+        "hsla(" +
+        this.h +
+        "," +
+        this.s * 100 +
+        "%," +
+        this.l * 100 +
+        "%," +
+        this.a +
+        ")"
+      );
+    };
+
+    /**
+     * Particle
+     */
+    function Particle(x, y, color) {
+      this.x = x || 0;
+      this.y = y || 0;
+      this.color = color || new HSLA();
+      this.pastX = this.x;
+      this.pastY = this.y;
+    }
+
+    // Run
+
+    init();
+  </script>
