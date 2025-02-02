@@ -545,8 +545,7 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.56.azimuthal-viscosity/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.56.azimuthal-viscosity/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
-###  > animation.57.browniandrix-noise (Browniandrix noise - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.
-Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.)
+###  > animation.57.browniandrix-noise (Browniandrix noise - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.)
 
 `- id: animation.57.browniandrix-noise`
 
