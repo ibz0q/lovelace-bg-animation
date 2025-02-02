@@ -5,6 +5,8 @@ metadata:
   author: alphardex
   source: https://codepen.io/alphardex/pen/RwrVoeL
   interactive: false
+  tags:
+    - slow
 compile:
   - id: scss_1
     scss: >

@@ -4,146 +4,142 @@ metadata:
   description: Practicing with ThreeJS
   author: Júlia Erő
   source: https://codepen.io/planktone/pen/EPXMGj
-
 helpers:
   insert_baseurl: true
-template: >
-  <!DOCTYPE html>
+template: |
+  <!doctype html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Polyhedron galaxy</title>
+      <style>
+        body {
+          margin: 0;
+          overflow: hidden;
+        }
+      </style>
+    </head>
+    <body>
+      <script src=".\three.min.js"></script>
+      <script>
+        var camera,
+          scene,
+          light,
+          mesh,
+          renderer,
+          raycaster,
+          mouse,
+          mouseX = 0,
+          mouseY = 0,
+          colors = [],
+          meshes = [];
 
-  <html lang="en" >
+        init();
 
-  <head>
-    <meta charset="UTF-8">
-    <title>Polyhedron galaxy</title>
-				<style>
-				body {
-				margin: 0;
-				overflow: hidden;
-			}
-			</style>
+        function init() {
+          camera = new THREE.PerspectiveCamera(
+            80,
+            window.innerWidth / window.innerHeight,
+            1,
+            4000,
+          );
+          camera.position.z = 1000;
 
+          scene = new THREE.Scene();
+          scene.add(camera);
 
-  </head>
+          light = new THREE.AmbientLight(0xf4f4f4);
+          scene.add(light);
 
-  <body>
+          renderer = new THREE.WebGLRenderer();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+          renderer.setClearColor(0x000012);
 
-		<script>
+          document.body.appendChild(renderer.domElement);
 
-					var camera,
-					scene,
-					light,
-					mesh,
-					renderer,
-					raycaster,
-					mouse,
-					mouseX = 0,
-					mouseY = 0,
-					colors = [],
-					meshes = [];
+          makeMeshes();
 
-			init();
+          raycaster = new THREE.Raycaster();
+          mouse = new THREE.Vector2();
 
-			function init() {
-					camera = new THREE.PerspectiveCamera(80, window.innerWidth/window.innerHeight, 1, 4000);
-					camera.position.z = 1000;
+          document.addEventListener("mousemove", onMouseMove, false);
+          document.addEventListener("mousedown", onMouseDown, false);
 
-					scene = new THREE.Scene();
-					scene.add(camera);
+          animate();
+        }
 
-					light = new THREE.AmbientLight( 0xf4f4f4 );
-					scene.add(light);
+        function animate() {
+          requestAnimationFrame(animate);
 
-					renderer = new THREE.WebGLRenderer();
-					renderer.setSize(window.innerWidth, window.innerHeight);
-					renderer.setClearColor(0x000012);
+          updateMeshes();
+          renderer.render(scene, camera);
+        }
 
-					document.body.appendChild(renderer.domElement);
+        function makeMeshes() {
+          var material,
+            icosa = new THREE.IcosahedronGeometry(5, 0),
+            dodeca = new THREE.DodecahedronGeometry(5, 0),
+            octa = new THREE.OctahedronGeometry(5, 0),
+            shapes = [icosa, dodeca, octa],
+            geometry,
+            zpos;
 
-					makeMeshes();
+          for (zpos = -1000; zpos < 1000; zpos += 20) {
+            material = new THREE.MeshLambertMaterial({
+              color: Math.random() * 0xffffff,
+              wireframe: true,
+              wireframeLinewidth: 2,
+            });
+            geometry = shapes[Math.floor(Math.random() * shapes.length)];
+            mesh = new THREE.Mesh(geometry, material);
+            mesh.position.x = Math.random() * 1000 - 500;
+            mesh.position.y = Math.random() * 1000 - 500;
+            mesh.position.z = zpos;
+            mesh.scale.x = mesh.scale.y = mesh.scale.z = 10;
+            color = mesh.material.color;
 
-					raycaster = new THREE.Raycaster();
-					mouse = new THREE.Vector2();
+            scene.add(mesh);
+            meshes.push(mesh);
+            colors.push(color);
+          }
+        }
 
-					document.addEventListener('mousemove', onMouseMove, false);
-					document.addEventListener('mousedown', onMouseDown, false);
+        function updateMeshes() {
+          var i;
 
-					animate();
-			}
+          for (i = 0; i < meshes.length; i++) {
+            mesh = meshes[i];
+            mesh.rotation.x = Date.now() * 0.0005;
+            mesh.rotation.y = Date.now() * 0.00025;
 
-			function animate() {
-					requestAnimationFrame(animate);
+            mesh.position.z += 1;
 
-					updateMeshes();
-					renderer.render(scene, camera);
-			}
+            if (mesh.position.z > 1000) {
+              mesh.position.z -= 2000;
+            }
+          }
+        }
 
-			function makeMeshes() {
-					var material,
-							icosa = new THREE.IcosahedronGeometry(5, 0),
-							dodeca = new THREE.DodecahedronGeometry(5, 0),
-							octa = new THREE.OctahedronGeometry(5, 0),
-							shapes = [icosa, dodeca, octa],
-							geometry,
-							zpos;
+        function onMouseMove(event) {
+          mouseX = event.clientX;
+          mouseY = event.clientY;
+        }
 
-					for (zpos = -1000; zpos < 1000; zpos += 20) {
-							material = new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff, wireframe: true, wireframeLinewidth: 2});
-							geometry = shapes[Math.floor(Math.random()*shapes.length)];
-							mesh = new THREE.Mesh(geometry, material);
-							mesh.position.x = Math.random() * 1000 - 500;
-							mesh.position.y = Math.random() * 1000 - 500;
-							mesh.position.z = zpos;
-							mesh.scale.x = mesh.scale.y = mesh.scale.z = 10;
-							color = mesh.material.color;
+        function onMouseDown(event) {
+          var intersects;
 
-							scene.add(mesh);
-							meshes.push(mesh);
-							colors.push(color);
-					}
-			}
+          mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+          mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
 
-			function updateMeshes() {
-					var i;
+          raycaster.setFromCamera(mouse, camera);
 
-					for (i = 0; i < meshes.length; i++) {
-							mesh = meshes[i];
-							mesh.rotation.x = Date.now() * 0.0005;
-							mesh.rotation.y = Date.now() * 0.00025;
+          intersects = raycaster.intersectObjects(meshes);
 
-							mesh.position.z += 1;
-
-							if (mesh.position.z > 1000) {
-									mesh.position.z -= 2000;
-							}
-					}
-			}
-
-			function onMouseMove(event) {
-					mouseX = event.clientX;
-					mouseY = event.clientY;
-			}
-
-			function onMouseDown(event) {
-					var intersects;
-
-					mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
-					mouse.y = - (event.clientY / renderer.domElement.clientHeight) * 2 + 1;
-
-					raycaster.setFromCamera(mouse, camera);
-
-					intersects = raycaster.intersectObjects(meshes);
-
-					if (intersects.length > 0) {
-							intersects[0].object.material.wireframe = false;
-							intersects[0].object.material.opacity = 0.5;
-					}
-			}
-
-		</script>
-
-
-
-
-  </body>
-
+          if (intersects.length > 0) {
+            intersects[0].object.material.wireframe = false;
+            intersects[0].object.material.opacity = 0.5;
+          }
+        }
+      </script>
+    </body>
   </html>
