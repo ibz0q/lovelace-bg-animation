@@ -14,13 +14,30 @@ template: |
       <title>Canvas Bokeh Generation</title>
       <style>
         body {
-          margin: 0;
+          background: #000;
           overflow: hidden;
+        }
+
+        canvas {
+          bottom: 0;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        #c1 {
+          opacity: 0;
+        }
+
+        #c2 {
+          background: #000;
         }
       </style>
     </head>
     <body>
-      <canvas id="canvas"></canvas>
+      <canvas id="c1"></canvas>
+      <canvas id="c2"></canvas>
       <script>
         var c1 = document.getElementById("c1"),
           ctx1 = c1.getContext("2d"),
