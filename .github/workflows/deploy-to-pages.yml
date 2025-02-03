@@ -44,7 +44,7 @@ jobs:
         working-directory: ./utils
     
       - name: Generate Metadata
-        run: node ./utils/create-metadata.js
+        run: node ./helpers/create-metadata.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -66,7 +66,7 @@ jobs:
         working-directory: ./utils
 
       - name: Generate Image Metadata
-        run: node ./utils/create-imagepreview.js
+        run: node ./helpers/create-imagepreview.js
 
       - name: Delete node_modules
         run: |

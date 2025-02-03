@@ -26,10 +26,10 @@ jobs:
         run: npm install
 
       - name: Generate Manifest
-        run: node ./utils/create-manifest.js
+        run: node ./helpers/create-manifest.js
 
       - name: Update documentation with package metadata
-        run: node ./utils/create-docs.js
+        run: node ./helpers/create-docs.js
 
       - name: Commit and Push
         run: |
