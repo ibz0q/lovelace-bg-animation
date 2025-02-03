@@ -26,6 +26,7 @@ module.exports = {
         { from: './src/css', to: './src/css' },
         { from: './src/webfonts', to: './src/webfonts' },
         { from: './gallery/packages', to: './gallery/packages' },
+        { from: './gallery/common', to: './gallery/common' },
         { from: './gallery/gallery.manifest', to: './gallery/gallery.manifest' },
       ],
     }),

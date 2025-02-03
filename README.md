@@ -28,7 +28,6 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - Tim Severien (1)
  - DanDog (1)
  - Andreas Wilcox (1)
- - Liam Egan (1)
  - Júlia Erő (1)
  - MenSeb (1)
  - Ana Tudor (1)

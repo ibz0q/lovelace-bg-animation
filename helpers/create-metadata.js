@@ -10,9 +10,9 @@ const galleryDir = '../gallery/';
 const galleryManifest = '../gallery/gallery.manifest';
 const packagesDir = '../gallery/packages';
 const metadataFolder = path.join("../gallery/metadata");
-const metadataManifest = [];
+let galleryRootManifest = [];
 
-function getSHA1(filePath) {
+function getFileSHA1(filePath) {
     const hashSum = crypto.createHash('sha1');
 
     fs.readdirSync(filePath).forEach(file => {
@@ -23,7 +23,7 @@ function getSHA1(filePath) {
             const fileBuffer = fs.readFileSync(fileFullPath);
             hashSum.update(crypto.createHash('sha1').update(fileBuffer).digest('hex'));
         } else if (stats.isDirectory()) {
-            hashSum.update(getSHA1(fileFullPath));
+            hashSum.update(getFileSHA1(fileFullPath));
         }
     });
 
@@ -33,24 +33,18 @@ function getSHA1(filePath) {
 async function processPackageManifest(packageManifestObject) {
     try {
 
-        let environment = {}
-        environment["assetPath"] = `../gallery/packages/${packageManifestObject.id}/`;
-
-        if (packageManifestObject.data.remote_includes) {
-            for (const [index, include] of packageManifestObject.data.remote_includes.entries()) {
-                packageManifestObject.data.remote_includes[index]["__processed"] = {};
-                packageManifestObject.data.remote_includes[index]["__processed"] = await fetch(include.url, { cache: "no-store" });
-            }
-        }
+        let environment = {};
+        environment["rootPath"] = "/gallery/"
+        environment["basePath"] = environment["rootPath"]
+        environment["assetPath"] = `../gallery/packages/${packageManifestObject.id}/`
+        environment["commonPath"] = `../gallery/common/`
 
         if (packageManifestObject.data.compile) {
             for (const [index, value] of packageManifestObject.data.compile.entries()) {
                 if (value.hasOwnProperty("scss")) {
                     packageManifestObject.data.compile[index]["__processed"] = sass.compileString(packageManifestObject.data.compile[index].scss).css;
                 }
-
             }
-
         }
 
         if (typeof window !== 'undefined') {
@@ -67,7 +61,8 @@ async function processPackageManifest(packageManifestObject) {
         if (packageManifestObject.data.template) {
 
             packageManifestObject.data.template__processed = packageManifestObject.data.template
-            const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env|remote_includes):(.*?)\}\}/g;
+
+            const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*(.*?)\}\}/g;
             packageManifestObject.data.template__processed = packageManifestObject.data.template__processed.replace(regex, function (match, type, key) {
                 key = key.trim();
                 switch (type) {
@@ -83,12 +78,17 @@ async function processPackageManifest(packageManifestObject) {
                     case 'environment':
                     case 'env':
                         return environment[key] || match;
-                    case 'remote_includes':
-                        if (Array.isArray(packageManifestObject.data.remote_includes)) {
-                            const include = packageManifestObject.data.remote_includes.find(item => item.id === key);
-                            return include?.__processed || match;
+                    case 'common':
+                        try {
+                            if (galleryRootManifest?.common && galleryRootManifest?.common[key]) {
+                                return environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename
+                            } else {
+                                return match;
+                            }
+                        } catch (error) {
+                            console.error(`Failed to process common: ${key}`, error);
+                            return match;
                         }
-                        return match;
                     default:
                         return match;
                 }
@@ -110,7 +110,7 @@ async function readDirectory(dir) {
     // fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
     const files = fs.readdirSync(dir);
-    const manifestData = YAML.parse((fs.readFileSync(galleryManifest, 'utf8')));
+    galleryRootManifest = JSON.parse((fs.readFileSync(galleryManifest, 'utf8')));
 
     try {
 
@@ -132,10 +132,10 @@ async function readDirectory(dir) {
                 const metadataFilePath = path.join(packageFolder, 'preview.html');
                 console.log(`Starting: ${packageName} \n`);
 
-                folderHash = getSHA1(packageDir);
+                folderHash = getFileSHA1(packageDir);
                 console.log(`Folder hash is ${folderHash}`)
 
-                const manifestEntry = Object.values(manifestData).find(entry => entry.id === packageName);
+                const manifestEntry = Object.values(galleryRootManifest.packages).find(entry => entry.id === packageName);
 
                 console.log(`Manifest hash is ${manifestEntry.hash}`)
                 console.log(`Metadata status is ${fs.existsSync(metadataFilePath)} : ${metadataFilePath}`)
@@ -174,7 +174,7 @@ async function readDirectory(dir) {
 
                 templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
                 templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
-                let htmldata = `<!DOCTYPE html>\n\n${metadataComments}\n` + templateProcessed.data.template__processed
+                let htmldata = `<!DOCTYPE html>` + templateProcessed.data.template__processed + `\n\n${metadataComments}\n`
                 fs.writeFileSync(metadataFilePath, htmldata.replace(/\n/g, '\r\n'), 'utf8');
 
                 console.log(`Generated: ${packageName} \n`);
@@ -184,7 +184,7 @@ async function readDirectory(dir) {
 
         }
 
-    } catch(err) {
+    } catch (err) {
         console.error("Something broke");
         console.error(err);
     }

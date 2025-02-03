@@ -104,10 +104,13 @@ async function processPackageManifest(packageConfig, packageManifest) {
     } else {
       let environment = {}
       if (rootPluginConfig.gallery.type == "local") {
-        environment["basePath"] = window.location.origin + lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageManifestName + "/"
+        environment["rootPath"] = window.location.origin + lovelaceUI.pluginAssetPath;
       } else {
-        environment["basePath"] = rootPluginConfig.gallery.remoteRootUrl + "/gallery/packages/" + packageManifestName + "/"
+        environment["rootPath"] = rootPluginConfig.gallery.remoteRootUrl;
       }
+
+      environment["basePath"] = environment["rootPath"] + "/gallery/packages/" + packageManifestName + "/";
+      environment["commonPath"] = environment["rootPath"] + "/gallery/common/"
 
       if (packageManifest.compile) {
         for (const [index, value] of packageManifest.compile.entries()) {
@@ -131,7 +134,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
       }
 
       if (packageManifest.template) {
-        const regex = /\{\{(compile|parameter|parameters|param|metadata|meta|environment|env):(.*?)\}\}/g;
+        const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*(.*?)\}\}/g;
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
           switch (type) {
@@ -147,6 +150,17 @@ async function processPackageManifest(packageConfig, packageManifest) {
             case 'environment':
             case 'env':
               return environment[key] || match;
+            case 'common':
+              try {
+                  if (galleryRootManifest?.common && galleryRootManifest?.common[key]) {
+                      return environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename
+                  } else {
+                      return match;
+                  }
+              } catch (error) {
+                  console.error(`Failed to process common: ${key}`, error);
+                  return match;
+              }
             default:
               return match;
           }
@@ -435,7 +449,7 @@ async function setupPlaylist() {
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
 
     currentPlaylist = currentPlaylist.filter(track => {
-      let trackExists = galleryRootManifest.some(manifest => manifest.id === track.id);
+      let trackExists = galleryRootManifest.packages.some(manifest => manifest.id === track.id);
       if (!trackExists) {
         isDebug ? console.log(`setupPlaylist: Track id ${track.id} does not exist in the manifest and has been removed.`) : null;
       }
