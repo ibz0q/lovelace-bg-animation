@@ -3,7 +3,7 @@ name: Generate previews and deploy to Pages
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["Generate Metadata"]
+    workflows: ["Generate Package Metadata"]
     types:
       - completed
   push:
