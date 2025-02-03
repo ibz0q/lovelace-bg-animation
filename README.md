@@ -92,6 +92,8 @@ Config needs to be placed inside Lovelaces config file, you can do this inside t
 ```yaml
 bg-animation:
   duration: 60000 # Global duration of each bg
+  gallery:
+    type: local
   transparency: # Sets the header transparent (Optional)
     header:
       enable: true
