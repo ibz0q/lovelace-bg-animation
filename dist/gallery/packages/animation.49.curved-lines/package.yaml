@@ -4,8 +4,7 @@ metadata:
   description: "`#GrayScale_HintOfRainbow_CurvedLinesWeekend`"
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/zGwqbq
-helpers:
-  insert_baseurl: true
+
 template: |
   <!doctype html>
   <html lang="en">

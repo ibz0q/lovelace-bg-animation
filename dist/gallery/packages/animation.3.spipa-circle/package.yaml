@@ -4,10 +4,9 @@ metadata:
   description: A cool electro field circle
   author: Alex Andrix
   source: https://codepen.io/alexandrix/pen/oQOvYp
-template: >
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js"></script>
 
+template: >
+  <script src="{{ common: https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js }}"></script>
 
   <style>
     * {
@@ -61,6 +60,37 @@ template: >
       color: white;
     }
   </style>
+
+  <div class="ui">
+    <p class="zoom">
+      <span class="zoom zoomin">+</span>
+      <span class="zoom zoomout">-</span>
+    </p>
+    <p class="zoomlevel">
+      <span class="percent">100</span>
+      % - (
+      <span class="width"></span>
+      px)(
+      <span class="height"></span>
+      px)
+    </p>
+    <p>
+      Dead:
+      <span class="dead">0</span>
+    </p>
+    <p>
+      Alive:
+      <span class="alive">0</span>
+    </p>
+    <p>
+      Drawn:
+      <span class="drawn">0</span>
+    </p>
+    <p>
+      <span class="fps">0</span>
+      FPS
+    </p>
+  </div>
 
   <script>
     /**

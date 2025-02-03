@@ -15,7 +15,7 @@
     "description": "Random speed shooting stars",
     "author": "alphardex",
     "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-    "hash": "11653bf95a10abd06e18a3b8894e0421dce38986"
+    "hash": "d79382046d91c3dbdba2f02d3a7e0151b4098c3e"
   },
   {
     "id": "animation.3.spipa-circle",
@@ -276,7 +276,7 @@
     "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/nYzapO",
-    "hash": "b07452e0621275c564ac91b5d86dc9cbb3d0bf78"
+    "hash": "23c1f9973300fd04dd18723db7f00c1e1abe58ec"
   },
   {
     "id": "animation.34.canvas-color-teams",
@@ -285,7 +285,7 @@
     "description": "",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/DdyGPB",
-    "hash": "9a7e04afcef38d707c249b1e837204af52b9b704"
+    "hash": "a2c094de8fa6df89f2ca607df2559b0f435055cb"
   },
   {
     "id": "animation.35.canvas-light-explosion",
@@ -312,7 +312,7 @@
     "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
     "author": "Jack Rugile",
     "source": "https://codepen.io/jackrugile/pen/zodPjd",
-    "hash": "9813f328c47af5a3d46fd7aff6fa469471be9c15"
+    "hash": "e853c567e4d36c3555b5e4e8040f4dca5e11bbb0"
   },
   {
     "id": "animation.47.color-trails",
@@ -366,7 +366,7 @@
     "description": "Practicing with ThreeJS",
     "author": "Júlia Erő",
     "source": "https://codepen.io/planktone/pen/EPXMGj",
-    "hash": "2a4048a6ef6ace1b104108ec973b719394006d08"
+    "hash": "fea09bdece68cda754b6ba1dc849e53192e60331"
   },
   {
     "id": "animation.53.stars",
@@ -393,16 +393,16 @@
     "description": "",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/ZVewby",
-    "hash": "9497a501280a696392b71bfd3a253446b388915d"
+    "hash": "bfd308e5f825384fbc5146f5e92f70816166f1d0"
   },
   {
     "id": "animation.57.browniandrix-noise",
     "version": "v1",
     "name": "Browniandrix noise",
-    "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
+    "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/jdGBjW",
-    "hash": "0493268fa1e656ebcfd398df0a5dee00d521524f"
+    "hash": "4acecaa886692b2fd717a702ee6d8dff9d416b31"
   },
   {
     "id": "animation.58.browniandrix-noise-l3",
@@ -411,7 +411,7 @@
     "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/VRaGKq",
-    "hash": "8474639762165fca51bd745442f5b2ed38767f9a"
+    "hash": "9d7b27beea5a7018167dcaa378fc44a4c790c228"
   },
   {
     "id": "animation.59.dimension-two-and-a-half",
@@ -420,7 +420,7 @@
     "description": "Vanishing point attractors",
     "author": "Alex Andrix",
     "source": "https://codepen.io/alexandrix/pen/OrpdNJ",
-    "hash": "4e3bcdfd23fbbd1f2d59103cfa3cf31197aa677a"
+    "hash": "f639b9f042ff52ad5782e3d4847980a9c6c294e8"
   },
   {
     "id": "animation.60.digital-frontier",
