@@ -14,6 +14,10 @@ properties:
         type: "string"
       source:
         type: "string"
+      tags:
+        type: "string"
+      interactive:
+        type: "bool"
   parameters:
     type: "array"
     items:
@@ -22,15 +26,6 @@ properties:
         id:
           type: "string"
         default:
-          type: "string"
-  remote_includes:
-    type: "array"
-    items:
-      type: "object"
-      properties:
-        id:
-          type: "string"
-        url:
           type: "string"
   helpers:
     type: "object"
