@@ -207,6 +207,10 @@ This project is compromised of the works of artists each with their own licensin
 
 - Iframe transitions 
 - Add redraw, allows you to repain the iframe within duration period.
+- Security:
+  - "Official packages" / Community packages via YAML tagging
+  - Provide a list of vetted libraries
+  - Eventually once all packages are self contained, use "Content-Security-Policy" to prevent external loading of scripts via metatag. 
 - Provide a way to add libraries in a trusted manner (Done, docs incoming)
   - Likely: Add packages via CDN into a common folder to be loaded by packages thus reducing overall size.
 - Slow down fast moving bgs (in progress)
