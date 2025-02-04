@@ -203,11 +203,11 @@ PRs need to be attached to an issue that contains the following info:
 
 ### Features / TODO
 
-- Provide a way to add libraries in a trusted manner
+- Iframe transitions 
+- Add redraw, allows you to repain the iframe within duration period.
+- Provide a way to add libraries in a trusted manner (Done, docs incoming)
   - Likely: Add packages via CDN into a common folder to be loaded by packages thus reducing overall size.
 - Slow down fast moving bgs (in progress)
-- Add redraw 
-- Iframe transitions (Removed)
 - postMessage 
 - Add ability for Iframe/package to interact with Lovelace Card (In progress)
 - Add video background package  
