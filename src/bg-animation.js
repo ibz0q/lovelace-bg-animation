@@ -1,7 +1,7 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
-var isDebug = true,
+var isDebug = false,
   pluginVersion = VERSION || "dev",
   lovelaceUI = {},
   viewPath,
@@ -152,14 +152,14 @@ async function processPackageManifest(packageConfig, packageManifest) {
               return environment[key] || match;
             case 'common':
               try {
-                  if (galleryRootManifest?.common && galleryRootManifest?.common[key]) {
-                      return environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename
-                  } else {
-                      return match;
-                  }
-              } catch (error) {
-                  console.error(`Failed to process common: ${key}`, error);
+                if (galleryRootManifest?.common && galleryRootManifest?.common[key]) {
+                  return environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename
+                } else {
                   return match;
+                }
+              } catch (error) {
+                console.error(`Failed to process common: ${key}`, error);
+                return match;
               }
             default:
               return match;
@@ -415,7 +415,7 @@ async function startPlaylistInterval(currentPlaylist) {
   let packageManifest = await getPackageManifest(currentPlaylistTrack);
   let processedPackageManifest = await processPackageManifest(currentPlaylistTrack, packageManifest);
   processedPackageManifests[currentPlaylistTrack.id] = processedPackageManifest;
-  processBackgroundFrame(currentPlaylistTrack, processedPackageManifest);
+  await processBackgroundFrame(currentPlaylistTrack, processedPackageManifest);
 
   document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylistTrack, "packageManifest": processedPackageManifest } } }));
 
@@ -570,6 +570,7 @@ async function initializeObservers() {
 }
 
 async function initialize() {
+  isDebug = lovelaceUI?.lovelaceObject?.config["bg-animation"]?.debug ?? isDebug;
   isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
   let initializeLovelaceVars = initializeLovelaceVariables()
   if (initializeLovelaceVars == true) {

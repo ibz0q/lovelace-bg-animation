@@ -9,8 +9,7 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-**View all backgrounds here [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)**
-
+Once you're setup and settled in. Take some time to [show off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10) ;)
 
 ## 🎀 Tributes (Artists featured)
 
@@ -109,6 +108,9 @@ bg-animation:
       - id: animation.50.sidelined
       
 ```
+
+Have I said this yet? Once you're setup. [Show off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10). There is no telemetry collected by this plug-in so engaging helps me alot!
+
 ### Full configuration options
 ` * = Optional `
 
