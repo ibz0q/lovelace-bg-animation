@@ -9,7 +9,7 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-Once you're setup and settled in. Take some time to [show off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10) ;)
+**View all backgrounds here [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)**
 
 ## ✌ Tributes (Artists featured)
 
