@@ -19,13 +19,22 @@
       "hash": "d79382046d91c3dbdba2f02d3a7e0151b4098c3e"
     },
     {
+      "id": "generator.2.knots",
+      "version": "v1",
+      "name": "Playstation 3",
+      "description": "RetroArch Menu Ribbon",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/jdawXK",
+      "hash": "60b8d6778f9c5aa26ce5d3cedfd0a4f986d51dcf"
+    },
+    {
       "id": "animation.3.spipa-circle",
       "version": "v1",
       "name": "Spipa circle",
       "description": "A cool electro field circle",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/oQOvYp",
-      "hash": "0c39ce3aa60f06a27da09a764ec5f2aad19db857"
+      "hash": "a4bbb2c3d54265cbe69dcb071cb4b5ef1ffc2d57"
     },
     {
       "id": "animation.4.colored-swipe",
@@ -340,7 +349,7 @@
       "description": "`#GrayScale_HintOfRainbow_CurvedLinesWeekend`",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/zGwqbq",
-      "hash": "757acf1cf1daa9a1e80c03f1b88196628556ab50"
+      "hash": "abf9f0e91256f1e429d9e47fe714bfc6df86521d"
     },
     {
       "id": "animation.50.sidelined",
@@ -506,6 +515,36 @@
     },
     {
       "id": "animation.70.blur",
+      "version": "v1",
+      "name": "Bit Ocean",
+      "description": "Bit Ocean",
+      "author": "Griffin Moyer",
+      "source": "https://codepen.io/gmoyer/pen/OxaObd",
+      "hash": "11d6d1f2a1e8437588061013c137321489ecd4a9",
+      "parameters": [
+        {
+          "id": "opacity",
+          "default": "0.5"
+        }
+      ]
+    },
+    {
+      "id": "animation.71.interactive-gradient",
+      "version": "v1",
+      "name": "Bit Ocean",
+      "description": "Bit Ocean",
+      "author": "Griffin Moyer",
+      "source": "https://codepen.io/gmoyer/pen/OxaObd",
+      "hash": "11d6d1f2a1e8437588061013c137321489ecd4a9",
+      "parameters": [
+        {
+          "id": "opacity",
+          "default": "0.5"
+        }
+      ]
+    },
+    {
+      "id": "animation.72.playstation-3-bg-style",
       "version": "v1",
       "name": "Bit Ocean",
       "description": "Bit Ocean",
