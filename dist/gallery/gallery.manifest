@@ -563,6 +563,10 @@
     "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js": {
       "hash": "21cab1e957740568c96355b3da95359b51243de3",
       "filename": "lodash.min.js"
+    },
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js": {
+      "hash": "0124f316f5cd3c0c16e7950857ade07f5aed4467",
+      "filename": "three.min.js"
     }
   }
 }
