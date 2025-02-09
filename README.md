@@ -11,7 +11,7 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 Once you're setup and settled in. Take some time to [show off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10) ;)
 
-## 🎀 Tributes (Artists featured)
+## ✌ Tributes (Artists featured)
 
  - Jack Rugile (13)
  - Ben Matthews (8)
@@ -36,19 +36,10 @@ Once you're setup and settled in. Take some time to [show off your dashboards to
  - nskrgv (1)
  - Yuki (1)
  - Fabio Ottaviani (1)
-### Support
 
-Please directly tip the artists you found most inspiring.
+### Support this project
 
-## Motivation
-
-Mostly nostalgia. Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
-
-Over time some of the experiments I have saved in my bookmarks have long been lost to digital oblivion. Luckily some I would save to disk.  I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
-
-### License 
-
-This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
+<a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Install
 
@@ -201,10 +192,25 @@ PRs need to be attached to an issue that contains the following info:
 
  Javascript is allowed and so you must be a reputable user on Github to submit to this repo. Any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant has quite a big attack surface. We will take steps to minimize risk. 
 
+## Motivation
+
+Mostly nostalgia. Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
+
+Over time some of the experiments I have saved in my bookmarks have long been lost to digital oblivion. Luckily some I would save to disk.  I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
+
+### License 
+
+This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
+
+
 ### Features / TODO
 
 - Iframe transitions 
 - Add redraw, allows you to repain the iframe within duration period.
+- Security:
+  - "Official packages" / Community packages via YAML tagging
+  - Provide a list of vetted libraries
+  - Eventually once all packages are self contained, use "Content-Security-Policy" to prevent external loading of scripts via metatag. 
 - Provide a way to add libraries in a trusted manner (Done, docs incoming)
   - Likely: Add packages via CDN into a common folder to be loaded by packages thus reducing overall size.
 - Slow down fast moving bgs (in progress)
