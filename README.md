@@ -18,9 +18,9 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - Bas Groothedde (5)
  - Alex Andrix (5)
  - Matei Copot (5)
- - Griffin Moyer (4)
  - Akimitsu Hamamuro (2)
  - yoichi kobayashi (2)
+ - Griffin Moyer (2)
  - Takeshi Kano (1)
  - cssscript.com (1)
  - alphardex (1)
@@ -35,8 +35,10 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - Nathan Gordon (1)
  - nskrgv (1)
  - Yuki (1)
- - Fabio Ottaviani (1)
+ - Ray Victor PRO (1)
  - Boris Šehovac (1)
+ - Fabio Ottaviani (1)
+ - Dillon (1)
 ### Support this project
 
 <a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>

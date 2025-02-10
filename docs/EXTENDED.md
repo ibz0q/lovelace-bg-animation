@@ -669,19 +669,19 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: Griffin Moyer* - Offline support? **Yes**
 
-###  > animation.71.interactive-gradient (Bit Ocean - Bit Ocean)
+###  > animation.71.interactive-gradient (Nothing - Interactive gradient)
 
 `- id: animation.71.interactive-gradient`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.71.interactive-gradient/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.71.interactive-gradient/preview.html) - *Author: Griffin Moyer* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.71.interactive-gradient/preview.html) - *Author: Ray Victor PRO* - Offline support? **Yes**
 
-###  > animation.72.playstation-3-bg-style (Bit Ocean - Bit Ocean)
+###  > animation.72.playstation-3-bg-style (Playstation 3 - RetroArch Menu Ribbon)
 
 `- id: animation.72.playstation-3-bg-style`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Griffin Moyer* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
 
 ###  > animation.9.rainbow-particles (Particle Horizon - rainbow particle horizon)
 
@@ -697,9 +697,9 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/preview.html) - *Author: Fabio Ottaviani* - Offline support? **Yes**
 
-###  > generator.2.knots (Playstation 3 - RetroArch Menu Ribbon)
+###  > generator.2.knots (Knots - Not knots)
 
 `- id: generator.2.knots`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/preview.html) - *Author: Dillon* - Offline support? **Yes**
