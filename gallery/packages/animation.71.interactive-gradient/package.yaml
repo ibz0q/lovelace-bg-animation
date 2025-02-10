@@ -1,306 +1,841 @@
 version: v1
 metadata:
-  name: Bit Ocean
-  description: Bit Ocean
-  author: Griffin Moyer
-  source: https://codepen.io/gmoyer/pen/OxaObd
-parameters:
-  - id: opacity
-    default: "0.5"
+  name: Nothing
+  description: Interactive gradient
+  author: Ray Victor PRO
+  source: https://codepen.io/ray7551/pen/EbVmZd
 helpers:
   insert_baseurl: true
 template: >
   <!doctype html>
 
-  <html lang="en" class="no-js">
+  <html lang="en">
     <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
       <meta charset="UTF-8" />
-      <meta name="author" content="Codrops" />
+
       <style>
-        article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}audio,canvas,video{display:inline-block;}audio:not([controls]){display:none;height:0;}[hidden]{display:none;}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}body{margin:0;}a:focus{outline:thin dotted;}a:active,a:hover{outline:0;}h1{font-size:2em;margin:0.67em 0;}abbr[title]{border-bottom:1px dotted;}b,strong{font-weight:bold;}dfn{font-style:italic;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}mark{background:#ff0;color:#000;}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em;}pre{white-space:pre-wrap;}q{quotes:"\201C" "\201D" "\2018" "\2019";}small{font-size:80%;}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline;}sup{top:-0.5em;}sub{bottom:-0.25em;}img{border:0;}svg:not(:root){overflow:hidden;}figure{margin:0;}fieldset{border:1px solid #c0c0c0;margin:0 2px;padding:0.35em 0.625em 0.75em;}legend{border:0;padding:0;}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;}button,input{line-height:normal;}button,select{text-transform:none;}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}button[disabled],html input[disabled]{cursor:default;}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}textarea{overflow:auto;vertical-align:top;}table{border-collapse:collapse;border-spacing:0;}
         *,
-        *::after,
-        *::before {
-            box-sizing: border-box;
+        *:before,
+        *:after {
+          box-sizing: border-box;
+        }
+        html,
+        body {
+          width: 100%;
+          margin: 0;
+        }
+        body {
+          background-color: black;
         }
 
-            body {
-                font-family: Didot, "Didot LT STD", "Bodoni MT", "ltc-bodoni-175", "Hoefler Text", Garamond, "Times New Roman", serif;
-                min-height: 100vh;
-                color: #57585c;
-                color: var(--color-text);
-                background-color: #000;
-                opacity:{{parameter: opacity}};
-                overflow: hidden;
-            }
-        p {
-        margin-bottom: 10px;
-        font-size: 18px;
-        line-height: 140%;
+        a {
+          outline: 0;
+          color: #fff;
+          text-decoration: none;
         }
-
-        .canvas {
-        position: relative;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        overflow: hidden;
-        width: 100%;
-        height: 100vh;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        background-color: #242424;
-        color: #fff;
+        .author {
+          color: #fff;
+          filter: blur(1px);
+          font-size: 1.2em;
+          font-family: Arial, sans-serif;
+          font-weight: bold;
+          z-index: 1;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          padding: 0.4em;
+          background-color: rgba(0, 0, 0, 0.43);
+          -webkit-transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
+          -moz-transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
+          transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
+          -ms-transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
         }
-
-        .blur-overlay {
-        position: absolute;
-        left: 0%;
-        top: 0%;
-        right: 0%;
-        bottom: 0%;
-        z-index: 1;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        width: 100%;
-        height: 100%;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-backdrop-filter: brightness(280%) saturate(130%) blur(80px);
-        backdrop-filter: brightness(280%) saturate(130%) blur(80px);
+        .author:hover {
+          background-color: #000;
+          filter: blur(0em);
         }
-
-        .heading {
-        margin-top: 0px;
-        margin-bottom: 0px;
-        color: hsla(0, 0%, 100%, 0.75);
-        font-size: 6vw;
-        line-height: 100%;
-        text-align: center;
-        text-transform: uppercase;
+        .author p span {
+          font-weight: normal;
         }
-
-        .utility-page-wrap {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        width: 100vw;
-        height: 100vh;
-        max-height: 100%;
-        max-width: 100%;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
+        .author p {
+          height: 0;
+          margin: 0;
+          overflow: hidden;
+          -webkit-transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
+          -moz-transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
+          transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
+          -ms-transition: all 0.56s cubic-bezier(0.93, 0.1, 1, 1);
         }
-
-        .utility-page-content {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        width: 260px;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        text-align: center;
+        .author:hover p {
+          height: 1.2em;
+          margin: 0.22em 0 0 0.2em;
         }
-
-        .utility-page-form {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -webkit-box-align: stretch;
-        -webkit-align-items: stretch;
-        -ms-flex-align: stretch;
-        align-items: stretch;
+        .fancy-underline a {
+          text-decoration: none;
+          -webkit-transition: all 0.13s linear;
+          -moz-transition: all 0.13s linear;
+          transition: all 0.13s linear;
+          -ms-transition: all 0.13s linear;
+          text-shadow:
+            -1px 0 0 #000,
+            1px 0 0 #000,
+            -2px 0 0 #000,
+            2px 0 0 #000;
         }
-
-        .og-source {
-        position: relative;
-        left: auto;
-        top: auto;
-        right: auto;
-        bottom: 20px;
-        z-index: 4;
-        display: block;
-        color: #000;
-        text-align: center;
-        }
-
-        .section {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        padding-top: 150px;
-        padding-bottom: 150px;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        }
-
-        .content {
-        max-width: 420px;
-        margin: 40px;
-        }
-
-        .image {
-        width: 45%;
-        max-width: 450px;
-        margin: 40px;
-        }
-
-        .heading-2 {
-        margin-top: 0px;
-        margin-bottom: 20px;
-        }
-
-        .wrapper {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: justify;
-        -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        }
-
-        .adjust-panel {
-        position: fixed;
-        left: auto;
-        top: auto;
-        right: 10px;
-        bottom: 10px;
-        z-index: 4;
-        width: 300px;
-        padding-right: 20px;
-        padding-bottom: 30px;
-        padding-left: 20px;
-        border-radius: 6px;
-        background-color: hsla(0, 0%, 100%, 0.4);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
-        color: #000;
-        }
-
-        .slider-wrapper {
-        margin-bottom: 10px;
-        }
-
-        .range-wrapper {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        height: 40px;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        }
-
-        .head {
-        margin-top: 40px;
-        margin-bottom: 20px;
-        }
-
-        .button {
-        margin-top: 20px;
-        padding: 10px 25px;
-        border-radius: 20px;
-        background-color: #000;
-        }
-
-        .scroll-down {
-        position: absolute;
-        left: 0%;
-        top: auto;
-        right: 0%;
-        bottom: 20px;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        max-width: 200px;
-        margin-right: auto;
-        margin-left: auto;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        color: #fff;
-        text-decoration: none;
-        cursor: pointer;
-        }
-
-        @media screen and (max-width: 767px) {
-        .section {
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-            -webkit-flex-direction: column;
-            -ms-flex-direction: column;
-            flex-direction: column;
-        }
-        .image {
-            width: 80%;
-            margin-top: 0px;
-        }
+        .fancy-underline a:hover {
+          background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #fff 50%)
+            repeat-x 0 0.96em;
+          background-size: 0.2em 0.2em;
         }
       </style>
     </head>
     <body>
-      <div class="canvas">
-        <div class="blur-overlay"></div>
-        <script src="noise.min.js"></script>
-        <script src="shift.js"></script>
-      </div>
+        <script src="{{common: https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js}}"></script>
+
+      <script>
+        /**
+         * @author mrdoob / http://mrdoob.com/
+         * @author philogb / http://blog.thejit.org/
+         * @author egraether / http://egraether.com/
+         * @author zz85 / http://www.lab4games.net/zz85/blog
+         */
+        function Vector2(x, y) {
+          this.x = x || 0;
+          this.y = y || 0;
+        }
+
+        Object.defineProperties(Vector2.prototype, {
+          width: {
+            get: function () {
+              return this.x;
+            },
+
+            set: function (value) {
+              this.x = value;
+            },
+          },
+
+          height: {
+            get: function () {
+              return this.y;
+            },
+
+            set: function (value) {
+              this.y = value;
+            },
+          },
+        });
+
+        Object.assign(Vector2.prototype, {
+          isVector2: true,
+
+          set: function (x, y) {
+            this.x = x;
+            this.y = y;
+
+            return this;
+          },
+
+          setScalar: function (scalar) {
+            this.x = scalar;
+            this.y = scalar;
+
+            return this;
+          },
+
+          setX: function (x) {
+            this.x = x;
+
+            return this;
+          },
+
+          setY: function (y) {
+            this.y = y;
+
+            return this;
+          },
+
+          setComponent: function (index, value) {
+            switch (index) {
+              case 0:
+                this.x = value;
+                break;
+              case 1:
+                this.y = value;
+                break;
+              default:
+                throw new Error("index is out of range: " + index);
+            }
+
+            return this;
+          },
+
+          getComponent: function (index) {
+            switch (index) {
+              case 0:
+                return this.x;
+              case 1:
+                return this.y;
+              default:
+                throw new Error("index is out of range: " + index);
+            }
+          },
+
+          clone: function () {
+            return new this.constructor(this.x, this.y);
+          },
+
+          copy: function (v) {
+            this.x = v.x;
+            this.y = v.y;
+
+            return this;
+          },
+
+          add: function (v, w) {
+            if (w !== undefined) {
+              console.warn(
+                "THREE.Vector2: .add() now only accepts one argument. Use .addVectors( a, b ) instead.",
+              );
+              return this.addVectors(v, w);
+            }
+
+            this.x += v.x;
+            this.y += v.y;
+
+            return this;
+          },
+
+          addScalar: function (s) {
+            this.x += s;
+            this.y += s;
+
+            return this;
+          },
+
+          addVectors: function (a, b) {
+            this.x = a.x + b.x;
+            this.y = a.y + b.y;
+
+            return this;
+          },
+
+          addScaledVector: function (v, s) {
+            this.x += v.x * s;
+            this.y += v.y * s;
+
+            return this;
+          },
+
+          sub: function (v, w) {
+            if (w !== undefined) {
+              console.warn(
+                "THREE.Vector2: .sub() now only accepts one argument. Use .subVectors( a, b ) instead.",
+              );
+              return this.subVectors(v, w);
+            }
+
+            this.x -= v.x;
+            this.y -= v.y;
+
+            return this;
+          },
+
+          subScalar: function (s) {
+            this.x -= s;
+            this.y -= s;
+
+            return this;
+          },
+
+          subVectors: function (a, b) {
+            this.x = a.x - b.x;
+            this.y = a.y - b.y;
+
+            return this;
+          },
+
+          multiply: function (v) {
+            this.x *= v.x;
+            this.y *= v.y;
+
+            return this;
+          },
+
+          multiplyScalar: function (scalar) {
+            this.x *= scalar;
+            this.y *= scalar;
+
+            return this;
+          },
+
+          divide: function (v) {
+            this.x /= v.x;
+            this.y /= v.y;
+
+            return this;
+          },
+
+          divideScalar: function (scalar) {
+            return this.multiplyScalar(1 / scalar);
+          },
+
+          min: function (v) {
+            this.x = Math.min(this.x, v.x);
+            this.y = Math.min(this.y, v.y);
+
+            return this;
+          },
+
+          max: function (v) {
+            this.x = Math.max(this.x, v.x);
+            this.y = Math.max(this.y, v.y);
+
+            return this;
+          },
+
+          clamp: function (min, max) {
+            // assumes min < max, componentwise
+
+            this.x = Math.max(min.x, Math.min(max.x, this.x));
+            this.y = Math.max(min.y, Math.min(max.y, this.y));
+
+            return this;
+          },
+
+          clampScalar: (function () {
+            var min = new Vector2();
+            var max = new Vector2();
+
+            return function clampScalar(minVal, maxVal) {
+              min.set(minVal, minVal);
+              max.set(maxVal, maxVal);
+
+              return this.clamp(min, max);
+            };
+          })(),
+
+          clampLength: function (min, max) {
+            var length = this.length();
+
+            return this.divideScalar(length || 1).multiplyScalar(
+              Math.max(min, Math.min(max, length)),
+            );
+          },
+
+          floor: function () {
+            this.x = Math.floor(this.x);
+            this.y = Math.floor(this.y);
+
+            return this;
+          },
+
+          ceil: function () {
+            this.x = Math.ceil(this.x);
+            this.y = Math.ceil(this.y);
+
+            return this;
+          },
+
+          round: function () {
+            this.x = Math.round(this.x);
+            this.y = Math.round(this.y);
+
+            return this;
+          },
+
+          roundToZero: function () {
+            this.x = this.x < 0 ? Math.ceil(this.x) : Math.floor(this.x);
+            this.y = this.y < 0 ? Math.ceil(this.y) : Math.floor(this.y);
+
+            return this;
+          },
+
+          negate: function () {
+            this.x = -this.x;
+            this.y = -this.y;
+
+            return this;
+          },
+
+          dot: function (v) {
+            return this.x * v.x + this.y * v.y;
+          },
+
+          lengthSq: function () {
+            return this.x * this.x + this.y * this.y;
+          },
+
+          length: function () {
+            return Math.sqrt(this.x * this.x + this.y * this.y);
+          },
+
+          lengthManhattan: function () {
+            return Math.abs(this.x) + Math.abs(this.y);
+          },
+
+          normalize: function () {
+            return this.divideScalar(this.length() || 1);
+          },
+
+          angle: function () {
+            // computes the angle in radians with respect to the positive x-axis
+
+            var angle = Math.atan2(this.y, this.x);
+
+            if (angle < 0) angle += 2 * Math.PI;
+
+            return angle;
+          },
+
+          distanceTo: function (v) {
+            return Math.sqrt(this.distanceToSquared(v));
+          },
+
+          distanceToSquared: function (v) {
+            var dx = this.x - v.x,
+              dy = this.y - v.y;
+            return dx * dx + dy * dy;
+          },
+
+          distanceToManhattan: function (v) {
+            return Math.abs(this.x - v.x) + Math.abs(this.y - v.y);
+          },
+
+          setLength: function (length) {
+            return this.normalize().multiplyScalar(length);
+          },
+
+          lerp: function (v, alpha) {
+            this.x += (v.x - this.x) * alpha;
+            this.y += (v.y - this.y) * alpha;
+
+            return this;
+          },
+
+          lerpVectors: function (v1, v2, alpha) {
+            return this.subVectors(v2, v1).multiplyScalar(alpha).add(v1);
+          },
+
+          equals: function (v) {
+            return v.x === this.x && v.y === this.y;
+          },
+
+          fromArray: function (array, offset) {
+            if (offset === undefined) offset = 0;
+
+            this.x = array[offset];
+            this.y = array[offset + 1];
+
+            return this;
+          },
+
+          toArray: function (array, offset) {
+            if (array === undefined) array = [];
+            if (offset === undefined) offset = 0;
+
+            array[offset] = this.x;
+            array[offset + 1] = this.y;
+
+            return array;
+          },
+
+          fromBufferAttribute: function (attribute, index, offset) {
+            if (offset !== undefined) {
+              console.warn(
+                "THREE.Vector2: offset has been removed from .fromBufferAttribute().",
+              );
+            }
+
+            this.x = attribute.getX(index);
+            this.y = attribute.getY(index);
+
+            return this;
+          },
+
+          rotateAround: function (center, angle) {
+            var c = Math.cos(angle),
+              s = Math.sin(angle);
+
+            var x = this.x - center.x;
+            var y = this.y - center.y;
+
+            this.x = x * c - y * s + center.x;
+            this.y = x * s + y * c + center.y;
+
+            return this;
+          },
+        });
+      </script>
+
+      <script>
+        function clamp(value, min, max) {
+          return Math.max(min, Math.min(max, value));
+        }
+
+        class Pointer {
+          constructor(
+            domElement,
+            {
+              scaleMin = 0.01,
+              scaleMax = 10.0,
+              pressureMax = 1.0,
+              pressureDuration = 1000,
+            } = {},
+          ) {
+            if (Pointer.instance) {
+              return Pointer.instance;
+            }
+
+            this.dom = domElement;
+            this.opt = { scaleMin, scaleMax, pressureMax, pressureDuration };
+            this.pressCheckInterval = 20;
+            this.deltaPressure =
+              (this.opt.pressureMax / this.opt.pressureDuration) *
+              this.pressCheckInterval;
+
+            this.position = new Vector2();
+            this.zoomSpeed = 1.0;
+            this.scale = 1.0;
+            this.dollyStart = new Vector2();
+            this.dollyEnd = new Vector2();
+            this.dollyDelta = new Vector2();
+
+            this.addMoveListener(this.onMove.bind(this));
+            this.addDownListener(this.onDown.bind(this));
+            this.addUpListener(this.onUp.bind(this));
+
+            this.dom.addEventListener(
+              "touchstart",
+              this._onTouchZoomStart,
+              false,
+            );
+            this.addZoomListener(this.onZoom.bind(this));
+            this.isPressing = false;
+            this.pressure = 0.0;
+
+            Pointer.instance = this;
+          }
+
+          get zoomScale() {
+            return Math.pow(0.95, this.zoomSpeed);
+          }
+          setScale(val) {
+            this.scale = clamp(val, this.opt.scaleMin, this.opt.scaleMax);
+          }
+
+          updatePosition(clientX, clientY) {
+            let size = Math.min(this.dom.clientWidth, this.dom.clientHeight);
+            this.position.x = (clientX * 2 - this.dom.clientWidth) / size;
+            this.position.y =
+              ((this.dom.clientHeight - clientY) * 2 - this.dom.clientHeight) /
+              size;
+          }
+
+          onMove(e) {
+            let x, y;
+            if (e.touches) {
+              x = e.touches[0].clientX;
+              y = e.touches[0].clientY;
+            } else {
+              x = e.clientX;
+              y = e.clientY;
+            }
+            this.updatePosition(x, y);
+            // e.preventDefault();
+          }
+          addMoveListener(cb) {
+            ["mousemove", "touchmove"].forEach((evtName) => {
+              this.dom.addEventListener(evtName, cb, false);
+            });
+          }
+
+          setPressure(val) {
+            let valid = val <= this.opt.pressureMax && val >= 0.0;
+            this.pressure = clamp(val, 0.0, this.opt.pressureMax);
+            //   console.log(this.pressure);
+            return valid;
+          }
+          onDown(e) {
+            if (
+              e instanceof MouseEvent &&
+              e.button !== Pointer.BUTTON.MOUSE_LEFT
+            ) {
+              return;
+            }
+
+            this.isPressing = true;
+            if (e.touches) {
+              let x = e.touches[0].clientX;
+              let y = e.touches[0].clientY;
+              this.updatePosition(x, y);
+            }
+
+            let intervalID = setInterval(() => {
+              if (
+                !this.isPressing ||
+                !this.setPressure(this.pressure + this.deltaPressure)
+              ) {
+                clearInterval(intervalID);
+              }
+            }, this.pressCheckInterval);
+
+            let pressingTest = setInterval(() => {
+              if (this.isPressing) {
+                var event = new CustomEvent("Pointer.pressing", {
+                  detail: this.pressure,
+                });
+                this.dom.dispatchEvent(event);
+              } else {
+                clearInterval(pressingTest);
+              }
+            }, this.pressCheckInterval);
+          }
+          addDownListener(cb) {
+            ["mousedown", "touchstart"].forEach((evtName) => {
+              this.dom.addEventListener(evtName, cb, false);
+            });
+          }
+
+          addPressingListener(cb) {
+            ["Pointer.pressing", "Pointer.postpressing"].forEach((evtName) => {
+              this.dom.addEventListener(evtName, cb, false);
+            });
+          }
+          addPressingEndListener(cb) {
+            this.dom.addEventListener("Pointer.pressingEnd", cb, false);
+          }
+
+          onUp(e) {
+            if (
+              e instanceof MouseEvent &&
+              e.button !== Pointer.BUTTON.MOUSE_LEFT
+            ) {
+              return;
+            }
+
+            this.isPressing = false;
+            let intervalID = setInterval(() => {
+              if (
+                this.isPressing ||
+                !this.setPressure(this.pressure - this.deltaPressure)
+              ) {
+                var event = new CustomEvent("Pointer.pressingEnd", {
+                  detail: this.pressure,
+                });
+                this.dom.dispatchEvent(event);
+                clearInterval(intervalID);
+              } else {
+                var event = new CustomEvent("Pointer.postpressing", {
+                  detail: this.pressure,
+                });
+                this.dom.dispatchEvent(event);
+              }
+            }, this.pressCheckInterval);
+          }
+          addUpListener(cb) {
+            ["mouseup", "touchend"].forEach((evtName) => {
+              this.dom.addEventListener(evtName, cb, false);
+            });
+          }
+
+          _onTouchZoomStart(e) {
+            if (e.touches.length !== 2) return;
+            let dx = e.touches[0].pageX - e.touches[1].pageX;
+            let dy = e.touches[0].pageY - e.touches[1].pageY;
+            this.dollyStart.set(0, Math.sqrt(dx * dx + dy * dy));
+          }
+          _onTouchZoom(e) {
+            var dx = e.touches[0].pageX - e.touches[1].pageX;
+            var dy = e.touches[0].pageY - e.touches[1].pageY;
+            this.dollyEnd.set(0, Math.sqrt(dx * dx + dy * dy));
+
+            this.dollyDelta.subVectors(this.dollyEnd, this.dollyStart);
+            if (dollyDelta.y > 0) {
+              this.zoomOut();
+            } else if (dollyDelta.y < 0) {
+              this.zoomIn();
+            }
+
+            this.dollyStart.copy(this.dollyEnd);
+          }
+          _onWheelZoom(e) {
+            if (e.deltaY > 0) {
+              this.zoomOut();
+            } else if (e.deltaY < 0) {
+              this.zoomIn();
+            }
+            e.preventDefault(); // prevent page scroll down
+          }
+          onZoom(e) {
+            if (e.touches) {
+              this._onTouchZoom(e);
+            } else {
+              this._onWheelZoom(e);
+            }
+          }
+          addZoomListener(cb) {
+            ["wheel", "touchmove"].forEach((evtName) => {
+              if (evtName === "touchmove") {
+                cb = (e) => {
+                  return e.touches.length === 2 ? cb(e) : undefined;
+                };
+              }
+              this.dom.addEventListener(evtName, cb, false);
+            });
+          }
+
+          zoomIn(scaleFactor = this.zoomScale) {
+            this.setScale(this.scale * scaleFactor);
+          }
+          zoomOut(scaleFactor = this.zoomScale) {
+            this.setScale(this.scale / scaleFactor);
+          }
+        }
+
+        Pointer.instance = null;
+        Pointer.BUTTON = {
+          MOUSE_LEFT: 0,
+          MOUSE_MIDDLE: 1,
+          MOUSE_RIGHT: 2,
+        };
+
+        const regl = createREGL();
+
+        const DEV = false;
+        const seed = DEV ? 38975.579831 : new Date().getTime() % 100000;
+
+        const pointer = new Pointer(regl._gl.canvas);
+        let lastPressingT,
+          dtSec = 0,
+          morphAmount = 0;
+        pointer.addPressingListener((e) => {
+          lastPressingT = lastPressingT || Date.now();
+          const nowInMs = Date.now();
+          dtSec = (nowInMs - lastPressingT) / 1000;
+          lastPressingT = nowInMs;
+
+          morphAmount += dtSec * pointer.pressure * 0.1;
+        });
+
+        // Calling regl() creates a new partially evaluated draw command
+        const draw = regl({
+          // Shaders in regl are just strings.  You can use glslify or whatever you want
+          // to define them.  No need to manually create shader objects.
+          frag: `
+          // Fork from http://glslsandbox.com/e#8143.0
+          precision mediump float;
+          #define SEED ${seed}.579831
+
+          uniform vec2 uResolution;
+          uniform float uTime;
+          uniform vec2 uMouse;
+          uniform float uMorph;
+          uniform vec2 uGrid;
+
+          const int   complexity  = 10;   // complexity of curls/computation
+          const float mouseSpeed  = 0.3;  // control the color changing
+          const float fixedOffset = 0.7;  // Drives complexity in the amount of curls/cuves.  Zero is a single whirlpool.
+          const float fluidSpeed  = 0.07; // Drives speed, smaller number will make it slower.
+          const float baseColor   = 0.6;
+          const float BLUR        = 0.47;
+
+          #define PI 3.14159
+
+          // more about noise: 
+          // http://thebookofshaders.com/11/
+          float random(float x) {
+            return fract(sin(x) * SEED);
+          }
+          float noise(float x) {
+            float i = floor(x);
+            float f = fract(x);
+            return mix(random(i), random(i + 1.0), smoothstep(0.0, 1.0, f));
+          }
+          float noiseS(float x) {
+            return noise(x) * 2.0 - 1.0;
+          }
+
+          void main() {
+            vec2 p = (2.0 * gl_FragCoord.xy - uResolution) / min(uResolution.x, uResolution.y) * 0.7;
+            float t = uTime * fluidSpeed + uMorph;
+            float noiseTime = noise(t);
+            float noiseSTime = noiseS(t);
+            float noiseSTime1 = noiseS(t + 1.0);
+
+            float blur = (BLUR + 0.14 * noiseSTime);
+            for(int i=1; i <= complexity; i++) {
+              p += blur / float(i) * sin(
+                  float(i) * p.yx + t + PI * vec2(noiseSTime, noiseSTime1))
+                + fixedOffset;
+            }
+            for(int i=1; i <= complexity; i++) {
+              p += blur / float(i) * cos(
+                  float(i) * p.yx + t + PI * vec2(noiseSTime, noiseSTime1))
+                + fixedOffset;
+            }
+            p += uMouse * mouseSpeed;
+
+            vec2 grid = uGrid * 2.0; // set complexity to 0 to debug the grid
+            gl_FragColor = vec4(
+              baseColor * vec3(
+                sin(grid * p + vec2(2.0 * noiseSTime, 3.0 * noiseSTime1)),
+                sin(p.x + p.y + noiseSTime)
+              )
+              + baseColor,
+              1.0);
+          }
+        `,
+
+          vert: `
+          attribute vec2 position;
+          void main () {
+            gl_Position = vec4(position, 0, 1);
+          }
+        `,
+
+          // Here we define the vertex attributes for the above shader
+          attributes: {
+            // regl.buffer creates a new array buffer object
+            position: regl.buffer([
+              [-1, -1],
+              [1, -1],
+              [-1, 1], // no need to flatten nested arrays, regl automatically
+              [-1, 1],
+              [1, 1],
+              [1, -1], // unrolls them into a typedarray (default Float32)
+            ]),
+
+            // regl automatically infers sane defaults for the vertex attribute pointers
+          },
+
+          uniforms: {
+            uResolution: ({ viewportWidth, viewportHeight }) => [
+              viewportWidth,
+              viewportHeight,
+            ],
+
+            uTime: ({ tick }) => 0.01 * tick,
+            uMouse: () => [pointer.position.x, pointer.position.y],
+            uMorph: () => morphAmount,
+            uRandomSeed: DEV ? 138975.579831 : new Date().getTime() % 1000000, //
+            uGrid: ({ viewportWidth, viewportHeight }) => {
+              const ratio = 0.32;
+              return viewportHeight >= viewportWidth
+                ? [1, (viewportHeight / viewportWidth) * ratio]
+                : [(viewportWidth / viewportHeight) * ratio, 1];
+            },
+          },
+
+          // This tells regl the number of vertices to draw in this command
+          count: 6,
+        });
+
+        // regl.frame() wraps requestAnimationFrame and also handles viewport changes
+        regl.frame(() => {
+          draw();
+        });
+      </script>
     </body>
   </html>

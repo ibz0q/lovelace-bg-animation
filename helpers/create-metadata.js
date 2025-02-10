@@ -37,7 +37,7 @@ async function processPackageManifest(packageManifestObject) {
         environment["rootPath"] = "/gallery/"
         environment["basePath"] = environment["rootPath"]
         environment["assetPath"] = `../gallery/packages/${packageManifestObject.id}/`
-        environment["commonPath"] = `../gallery/common/`
+        environment["commonPath"] = `../../../gallery/common/`
 
         if (packageManifestObject.data.compile) {
             for (const [index, value] of packageManifestObject.data.compile.entries()) {

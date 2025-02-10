@@ -7,7 +7,7 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
-      "hash": "302ed6b20230ab79df1fb6f8fa3a52a548531090"
+      "hash": "93b2bd1a39aec1f5b95f780cdd93a765ae6599a3"
     },
     {
       "id": "animation.2.shooting-stars",
@@ -21,11 +21,11 @@
     {
       "id": "generator.2.knots",
       "version": "v1",
-      "name": "Playstation 3",
-      "description": "RetroArch Menu Ribbon",
-      "author": "Boris Šehovac",
-      "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "60b8d6778f9c5aa26ce5d3cedfd0a4f986d51dcf"
+      "name": "Knots",
+      "description": "Not knots",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/OJYyMNR",
+      "hash": "1c1bf532b67d4a9b6c120a68f25d8a340959ac28"
     },
     {
       "id": "animation.3.spipa-circle",
@@ -259,7 +259,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-      "hash": "1b0c631b134f9047d67a5b191d20825eec125c5d"
+      "hash": "c5a5e35cc1a968e50b067165d3c39e068d3816f1"
     },
     {
       "id": "animation.31.blooming-flower",
@@ -322,7 +322,7 @@
       "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/zodPjd",
-      "hash": "e853c567e4d36c3555b5e4e8040f4dca5e11bbb0"
+      "hash": "f4db72559b45f5bfe8cc547b413f5959049d4b9a"
     },
     {
       "id": "animation.47.color-trails",
@@ -367,7 +367,7 @@
       "description": "Practicing with ThreeJS",
       "author": "Júlia Erő",
       "source": "https://codepen.io/planktone/pen/EPXMGj",
-      "hash": "fea09bdece68cda754b6ba1dc849e53192e60331"
+      "hash": "15bb3d8db2b79f85a9d733765525e01b5c016ea0"
     },
     {
       "id": "animation.53.stars",
@@ -466,7 +466,7 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "2968252ddb58865f27c6925aafea119e98ef6271"
+      "hash": "a53600ea80217fabf5727efe447f6fbe2114dd03"
     },
     {
       "id": "animation.65.cristal-lands",
@@ -520,7 +520,7 @@
       "description": "Bit Ocean",
       "author": "Griffin Moyer",
       "source": "https://codepen.io/gmoyer/pen/OxaObd",
-      "hash": "11d6d1f2a1e8437588061013c137321489ecd4a9",
+      "hash": "835199c62f1287d3d82b587bce5b8c175c75b7a8",
       "parameters": [
         {
           "id": "opacity",
@@ -531,38 +531,34 @@
     {
       "id": "animation.71.interactive-gradient",
       "version": "v1",
-      "name": "Bit Ocean",
-      "description": "Bit Ocean",
-      "author": "Griffin Moyer",
-      "source": "https://codepen.io/gmoyer/pen/OxaObd",
-      "hash": "11d6d1f2a1e8437588061013c137321489ecd4a9",
-      "parameters": [
-        {
-          "id": "opacity",
-          "default": "0.5"
-        }
-      ]
+      "name": "Nothing",
+      "description": "Interactive gradient",
+      "author": "Ray Victor PRO",
+      "source": "https://codepen.io/ray7551/pen/EbVmZd",
+      "hash": "7d34b646014dd73aa0376cfb998069e4c3cce76c"
     },
     {
       "id": "animation.72.playstation-3-bg-style",
       "version": "v1",
-      "name": "Bit Ocean",
-      "description": "Bit Ocean",
-      "author": "Griffin Moyer",
-      "source": "https://codepen.io/gmoyer/pen/OxaObd",
-      "hash": "11d6d1f2a1e8437588061013c137321489ecd4a9",
-      "parameters": [
-        {
-          "id": "opacity",
-          "default": "0.5"
-        }
-      ]
+      "name": "Playstation 3",
+      "description": "RetroArch Menu Ribbon",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/jdawXK",
+      "hash": "c40a61ae1b44300ec795bb9a1b064a262e637f51"
     }
   ],
   "common": {
     "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js": {
       "hash": "21cab1e957740568c96355b3da95359b51243de3",
       "filename": "lodash.min.js"
+    },
+    "https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js": {
+      "hash": "0156f0d5d1e5a3d6080e0d931d4c2f289c1e8904",
+      "filename": "regl.min.js"
+    },
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js": {
+      "hash": "0124f316f5cd3c0c16e7950857ade07f5aed4467",
+      "filename": "three.min.js"
     }
   }
 }
