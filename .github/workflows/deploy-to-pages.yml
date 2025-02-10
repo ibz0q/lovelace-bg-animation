@@ -39,9 +39,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Dependencies in utils
+      - name: Install Dependencies in helpers
         run: npm install
-        working-directory: ./utils
+        working-directory: ./helpers
     
       - name: Generate Metadata
         run: node ./helpers/create-metadata.js
@@ -63,7 +63,7 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-        working-directory: ./utils
+        working-directory: ./helpers
 
       - name: Generate Image Metadata
         run: node ./helpers/create-imagepreview.js
