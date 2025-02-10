@@ -1,9 +1,9 @@
 version: v1
 metadata:
-  name: Playstation 3
-  description: RetroArch Menu Ribbon
-  author: Boris Šehovac
-  source: https://codepen.io/bsehovac/pen/jdawXK
+  name: Knots
+  description: Not knots
+  author: Dillon
+  source: https://codepen.io/Dillo/pen/OJYyMNR
 helpers:
   insert_baseurl: true
 template: >
@@ -14,158 +14,766 @@ template: >
       <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
       <meta charset="UTF-8" />
 
-      <script src="{{common: https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js }}"></script>
       <style>
         body {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
+          font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
+          background-color: #000;
           margin: 0;
+          padding: 0;
+          border-width: 0;
           overflow: hidden;
-        }
-
-        #container {
-          position: absolute;
-          width: 100vmax;
-          height: 100vmax;
-          left: 50%;
-          top: 50%;
-          background: linear-gradient(to bottom, #000, #111);
-          transform: translate3d(-50%, -40%, 0);
-        }
-
-        canvas {
-          display: block;
+          cursor: pointer;
         }
       </style>
     </head>
     <body>
-      <div id="container"></div>
       <script>
-        /*
-         * RetroArch Menu Shader Pipeline Ribbon
-         * Port for THREE.js
-         * https://github.com/libretro/RetroArch
-         */
+        "use strict";
 
-        let scene, camera, renderer, ribbon;
+        let canv, ctx; // canvas and context
+        let maxx, maxy; // canvas dimensions
 
-        const container = document.querySelector("#container");
+        let radius; // hexagons radius (and side length)
+        let grid; // array of hexagons
+        let nbx, nby; // grid size (in elements, not pixels)
+        let orgx, orgy;
+        let perx, pery, superTile;
+        let bg;
+        let globalSpeed = 0.5;
+        let lines;
+        let relY = 0.5;
+        let lWidth;
+        let firstRun = true;
 
-        const init = () => {
-          scene = new THREE.Scene();
-          camera = new THREE.PerspectiveCamera(75, 1, 0.1, 10000);
-          camera.position.z = 2;
+        // to create a non linear (linear by ranges) relationship between mouse position and speed
+        const POSSPEED = [0, 0.05, 0.5, 0.8, 0.94, 0.95, 1.0];
+        const VALSPEED = [0, 0, 1, 5, 100, 1000, 1000];
 
-          renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-          container.appendChild(renderer.domElement);
+        // for animation
+        let messages;
 
-          ribbon = new THREE.Mesh(
-            new THREE.PlaneGeometry(1, 1, 128, 128),
-            new THREE.ShaderMaterial({
-              uniforms: {
-                time: { value: 1.0 },
-              },
-              vertexShader: `
-                varying vec3 vEC;
-                uniform float time;
+        // shortcuts for Math.
+        const mrandom = Math.random;
+        const mfloor = Math.floor;
+        const mround = Math.round;
+        const mceil = Math.ceil;
+        const mabs = Math.abs;
+        const mmin = Math.min;
+        const mmax = Math.max;
 
-                float iqhash(float n) {
-                  return fract(sin(n) * 43758.5453);
-                }
+        const mPI = Math.PI;
+        const mPIS2 = Math.PI / 2;
+        const mPIS3 = Math.PI / 3;
+        const m2PI = Math.PI * 2;
+        const m2PIS3 = (Math.PI * 2) / 3;
+        const msin = Math.sin;
+        const mcos = Math.cos;
+        const matan2 = Math.atan2;
 
-                float noise(vec3 x) {
-                  vec3 p = floor(x);
-                  vec3 f = fract(x);
-                  f = f * f * (3.0 - 2.0 * f);
-                  float n = p.x + p.y * 57.0 + 113.0 * p.z;
-                  return mix(mix(mix(iqhash(n), iqhash(n + 1.0), f.x),
-                            mix(iqhash(n + 57.0), iqhash(n + 58.0), f.x), f.y),
-                            mix(mix(iqhash(n + 113.0), iqhash(n + 114.0), f.x),
-                            mix(iqhash(n + 170.0), iqhash(n + 171.0), f.x), f.y), f.z);
-                }
+        const mhypot = Math.hypot;
+        const msqrt = Math.sqrt;
 
-                float xmb_noise2(vec3 x) {
-                  return cos(x.z * 4.0) * cos(x.z + time / 10.0 + x.x);
-                }
+        const rac3 = msqrt(3);
+        const rac3s2 = rac3 / 2;
 
-                void main() {
-                  vec4 pos = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-                  vec3 v = vec3(pos.x, 0.0, pos.y);
-                  vec3 v2 = v;
-                  vec3 v3 = v;
+        const mmod = (a, b) => a - mfloor(a / b) * b; // "true" modulo operation
 
-                  v.y = xmb_noise2(v2) / 8.0;
+        //------------------------------------------------------------------------
 
-                  v3.x -= time / 5.0;
-                  v3.x /= 4.0;
+        function alea(mini, maxi) {
+          // random number in given range
 
-                  v3.z -= time / 10.0;
-                  v3.y -= time / 100.0;
+          if (typeof maxi == "undefined") return mini * mrandom(); // range 0..mini
 
-                  v.z -= noise(v3 * 7.0) / 15.0;
-                  v.y -= noise(v3 * 7.0) / 15.0 + cos(v.x * 2.0 - time / 2.0) / 5.0 - 0.3;
+          return mini + mrandom() * (maxi - mini); // range mini..maxi
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        function intAlea(mini, maxi) {
+          // random integer in given range (mini..maxi - 1 or 0..mini - 1)
+          //
+          if (typeof maxi == "undefined") return mfloor(mini * mrandom()); // range 0..mini - 1
+          return mini + mfloor(mrandom() * (maxi - mini)); // range mini .. maxi - 1
+        }
 
-                  vEC = v;
-                  gl_Position = vec4(v, 1.0);
-                }
-              `,
-              fragmentShader: `
-                uniform float time;
-                varying vec3 vEC;
+        function lerp(p0, p1, alpha) {
+          return {
+            x: p0.x * (1 - alpha) + p1.x * alpha,
+            y: p0.y * (1 - alpha) + p1.y * alpha,
+          };
+        }
 
-                void main()
-                {
-                  const vec3 up = vec3(0.0, 0.0, 1.0);
-                  vec3 x = dFdx(vEC);
-                  vec3 y = dFdy(vEC);
-                  vec3 normal = normalize(cross(x, y));
-                  float c = 1.0 - dot(normal, up);
-                  c = (1.0 - cos(c * c)) / 3.0;
-                  gl_FragColor = vec4(1.0, 1.0, 1.0, c * 1.5);
-                }
-              `,
-              extensions: {
-                derivatives: true,
-                fragDepth: false,
-                drawBuffers: false,
-                shaderTextureLOD: false,
-              },
-              side: THREE.DoubleSide,
-              transparent: true,
-              depthTest: false,
+        //------------------------------------------------------------------------
+        class Hexa {
+          // like Hexagon, but for superTile only
+          constructor(kx, ky) {
+            this.kx = kx;
+            this.ky = ky;
+            this.rot = intAlea(6);
+            this.exits = Hexagon.exitss[this.rot];
+            this.arc0 = { k0: this.rot, k1: (this.rot + 5) % 6 };
+            this.arc1 = { k0: (this.rot + 3) % 6, k1: (this.rot + 1) % 6 };
+            this.arc2 = { k0: (this.rot + 4) % 6, k1: (this.rot + 2) % 6 };
+            this.edges = new Array(6)
+              .fill(0)
+              .map((v, kEdge) => ({ cell: this, kEdge })); // to record info about lines
+            this.edges[this.arc0.k0].arc = this.arc0;
+            this.edges[this.arc0.k1].arc = this.arc0;
+            this.edges[this.arc1.k0].arc = this.arc1;
+            this.edges[this.arc1.k1].arc = this.arc1;
+            this.edges[this.arc2.k0].arc = this.arc2;
+            this.edges[this.arc2.k1].arc = this.arc2;
+          }
+
+          getNeighborPosition(edge) {
+            return {
+              kx: this.kx + [0, 1, 1, 0, -1, -1][edge],
+              ky:
+                this.ky +
+                [
+                  [-1, 0, 1, 1, 1, 0],
+                  [-1, -1, 0, 1, 0, -1],
+                ][this.kx & 1][edge],
+            };
+          }
+        } // Hexa
+        //------------------------------------------------------------------------
+
+        class Hexagon {
+          static exitss;
+          static {
+            this.exitss = new Array(6).fill(0).map(() => new Array(6));
+            for (let rot = 0; rot < 6; ++rot) {
+              for (let k = 0; k < 6; ++k) {
+                this.exitss[rot][(k + rot) % 6] =
+                  ([5, 3, 4, 1, 2, 0][k] + rot) % 6;
+              }
+            }
+          }
+          constructor(kx, ky) {
+            this.kx = kx;
+            this.ky = ky;
+            //        this.rot = intAlea(6); // random orientation
+            this.rot = superTile[ky % pery][kx % perx].rot;
+            this.exits = Hexagon.exitss[this.rot];
+            this.arcs = [];
+            this.kArcCenters = []; // only indices of centers - caution, some are little arc centers, others big arc centers
+            for (let k = 0; k < 6; ++k) {
+              this.arcs[(k + this.rot) % 6] = ["l", "b", "b", "b", "b", "l"][k];
+              /* encoding for arcs l/b = little/big;  */
+              this.kArcCenters[(k + this.rot) % 6] = [
+                this.rot,
+                (this.rot + 2) % 6,
+                (this.rot + 3) % 6,
+                (this.rot + 2) % 6,
+                (this.rot + 3) % 6,
+                this.rot,
+              ][k];
+            }
+            this.size();
+          } // Hexagon.constructor
+
+          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          size() {
+            // coordinates of centre
+            this.xc = orgx + this.kx * 1.5 * radius;
+            this.yc = orgy + this.ky * radius * rac3;
+            if (this.kx & 1) this.yc -= radius * rac3s2; // odd columns, centre is a bit higher
+
+            this.vertices = new Array(6).fill(0).map((v, k) => ({
+              x: this.xc + radius * mcos(((k - 2) * mPI) / 3),
+              y: this.yc + radius * msin(((k - 2) * mPI) / 3),
+            }));
+            this.vertices[6] = this.vertices[0]; // makes things easier by avoiding many "% 6" in calculating other calculations
+
+            this.middle = new Array(6)
+              .fill(0)
+              .map((p, k) => lerp(this.vertices[k], this.vertices[k + 1], 0.5));
+
+            this.extCenters = new Array(6).fill(0).map((v, k) => ({
+              x: this.xc + rac3 * radius * mcos((k * mPI) / 3 - mPIS2),
+              y: this.yc + rac3 * radius * msin((k * mPI) / 3 - mPIS2),
+            }));
+          } // Hexagon.prototype.size
+
+          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          drawHexagon() {
+            ctx.beginPath();
+            this.vertices.forEach((p, k) => {
+              if (k == 0) ctx.moveTo(p.x, p.y);
+              else ctx.lineTo(p.x, p.y);
+            });
+            ctx.lineWidth = 0.25;
+            ctx.strokeStyle = "#fff";
+            ctx.stroke();
+          } // Hexagon.prototype.drawHexagon
+
+          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          getNeighbor(edge) {
+            const kx = this.kx + [0, 1, 1, 0, -1, -1][edge];
+            const ky =
+              this.ky +
+              [
+                [-1, 0, 1, 1, 1, 0],
+                [-1, -1, 0, 1, 0, -1],
+              ][this.kx & 1][edge];
+            if (kx < 0 || kx >= nbx || ky < 0 || ky >= nby) return false;
+            return grid[ky][kx];
+          }
+
+          draw() {
+            this.inters.forEach((arc) => {
+              let pth = new Path2D();
+              if (arc.line.kPos === undefined) return; // line not being drawn
+              if (arc.line.kPos > arc.kInLine) arc.addPath(pth, true);
+              else if (arc.line.kPos == arc.kInLine)
+                arc.addPathPart(pth, true, arc.alpha);
+              ctx.strokeStyle = "#000";
+              ctx.lineWidth = lWidth + 3;
+              ctx.stroke(pth);
+              ctx.strokeStyle = arc.line.color;
+              ctx.lineWidth = lWidth;
+              ctx.lineCap = "round"; // to hide artifacts at the end of segments
+              ctx.stroke(pth);
+              ctx.lineCap = "butt";
+            });
+          } // draw
+        } //class Hexagon
+
+        //-----------------------------------------------------------------------------
+        class Arc {
+          static tbx = [0, -rac3s2, -rac3s2, 0, rac3s2, rac3s2]; // pre-calculated coefficients for perpendicular to edges
+          static tby = [1, 0.5, -0.5, -1, -0.5, 0.5];
+          constructor(cell, kEntry) {
+            this.cell = cell;
+            this.kEntry = kEntry;
+            this.kExit = cell.exits[kEntry];
+            this.big = cell.arcs[kEntry].charAt(0) == "b";
+            this.kCenter = cell.kArcCenters[kEntry];
+            let thisradius = radius * (this.big ? 1.5 : 0.5);
+            this.len = thisradius * mPIS3 * (this.big ? 1 : 2);
+            this.bezierLength =
+              thisradius * (this.big ? 0.35726558989923185 : 0.7698003589002559);
+            this.p0 = cell.middle[kEntry];
+            this.p3 = cell.middle[this.kExit];
+            this.p1 = {
+              x: this.p0.x + this.bezierLength * Arc.tbx[kEntry],
+              y: this.p0.y + this.bezierLength * Arc.tby[kEntry],
+            };
+            this.p2 = {
+              x: this.p3.x + this.bezierLength * Arc.tbx[this.kExit],
+              y: this.p3.y + this.bezierLength * Arc.tby[this.kExit],
+            };
+          } // constructor
+
+          addPath(path, first) {
+            if (first) path.moveTo(this.p0.x, this.p0.y);
+            path.bezierCurveTo(
+              this.p1.x,
+              this.p1.y,
+              this.p2.x,
+              this.p2.y,
+              this.p3.x,
+              this.p3.y,
+            );
+          } // addPath;
+
+          reverse() {
+            [this.kEntry, this.kExit] = [this.kExit, this.kEntry];
+            [this.p0, this.p1, this.p2, this.p3] = [
+              this.p3,
+              this.p2,
+              this.p1,
+              this.p0,
+            ];
+          }
+
+          split(alpha) {
+            /* returns 2 lists of 4 points representing parts of the arc. the cutting point is close to this.p0
+                for alpha close to 0, and close to p3 for alpha close to 1
+                returned points are to be read only, since they are actually shared, and not copied, between different arcs
+                */
+            const pa = lerp(this.p0, this.p1, alpha);
+            const pb = lerp(this.p1, this.p2, alpha);
+            const pc = lerp(this.p2, this.p3, alpha);
+            const pd = lerp(pa, pb, alpha);
+            const pe = lerp(pb, pc, alpha);
+            const pf = lerp(pd, pe, alpha);
+            return [
+              [this.p0, pa, pd, pf],
+              [pf, pe, pc, this.p3],
+            ];
+          }
+
+          addPathPart(path, first, alpha) {
+            if (first) path.moveTo(this.p0.x, this.p0.y);
+            let [pa, pb, pc, pd] = this.split(alpha)[0];
+            path.bezierCurveTo(pb.x, pb.y, pc.x, pc.y, pd.x, pd.y);
+          } // addPath;
+        } // Arc
+        //-----------------------------------------------------------------------------
+
+        class Line {
+          constructor(cell, kEntry) {
+            /* lines are determined when hexagons are created. This function just "follows" a line
+             */
+            const cellInit = cell;
+            const kEntryInit = kEntry;
+            this.arcs = [];
+            this.closed = false;
+
+            let arc;
+            while (true) {
+              arc = new Arc(cell, kEntry);
+              arc.line = this;
+              arc.kInLine = this.arcs.length; // memorize position of arc within line
+              this.arcs.push(arc);
+              cell.lines[kEntry] = cell.lines[arc.kExit] = this;
+              cell = cell.getNeighbor(arc.kExit);
+              if (cell === false) break;
+              kEntry = (arc.kExit + 3) % 6;
+              if (cell == cellInit && kEntry == kEntryInit) {
+                this.closed = true;
+                break;
+              }
+            } // while true
+
+            this.speed = alea(0.4, 1.6);
+          } // makeLine
+
+          setPos() {
+            let current = 0;
+            this.arcs.forEach((arc) => {
+              arc.pos0 = current;
+              current += arc.len;
+              arc.pos1 = current;
+            });
+            this.len = current;
+          } //setPos
+
+          reverse(line) {
+            this.arcs.forEach((arc) => arc.reverse());
+            this.arcs.reverse();
+            this.arcs.map((arc, k) => (arc.kInLine = k));
+          }
+
+          setDrawingInfo(pos) {
+            /* must not be called with pos < 0
+                but may be called with pos >= len
+                */
+
+            if (pos >= this.len) {
+              this.kPos = 1e9;
+              return;
+            }
+            let kPos = this.arcs.findIndex((arc) => pos < arc.pos1);
+            this.kPos = kPos;
+            let pth = new Path2D();
+            let first = true;
+            for (let k = 0; k < kPos; ++k) {
+              this.arcs[k].alpha = 1;
+            }
+            let alpha =
+              (pos - this.arcs[kPos].pos0) /
+              (this.arcs[kPos].pos1 - this.arcs[kPos].pos0);
+            this.arcs[kPos].alpha = alpha;
+          }
+
+          start(time) {
+            this.tPrec = time;
+            this.pos = 0;
+          }
+
+          draw(time) {
+            // must not be called before start
+            // does not actually draw
+            this.pos += (time - this.tPrec) * this.speed * globalSpeed;
+            this.tPrec = time;
+            this.setDrawingInfo(this.pos);
+            return this.pos < this.len; // will return false when done
+          }
+        } // class Line
+
+        //-----------------------------------------------------------------------------
+        function makeLines() {
+          const lines = [];
+
+          grid.forEach((row) => row.forEach((cell) => (cell.lines = []))); // to record lines crossing every edge
+
+          /* first create open lines */
+          grid.forEach((row) =>
+            row.forEach((cell) => {
+              for (let kEntry = 0; kEntry < 6; ++kEntry) {
+                if (cell.getNeighbor(kEntry)) continue; // open lines can start only on the edges of the grid
+                if (cell.lines[kEntry]) continue; // already belong to another line
+                lines.push(new Line(cell, kEntry));
+              } // for kEntry
+            }),
+          );
+          /* closed lines now */
+          grid.forEach((row) =>
+            row.forEach((cell) => {
+              for (let kEntry = 0; kEntry < 6; ++kEntry) {
+                if (cell.lines[kEntry]) continue; // already belong to another line
+                lines.push(new Line(cell, kEntry));
+              } // for kEntry
             }),
           );
 
-          scene.add(ribbon);
+          return lines;
+        } // makeLines
 
-          resize();
-          window.addEventListener("resize", resize);
-        };
+        //-----------------------------------------------------------------------------
+        function createSuperTile() {
+          let line, nkx, nky;
 
-        const resize = () => {
-          const { offsetWidth, offsetHeight } = container;
+          perx = 2 * intAlea(1, 5); // perx must be even, because even and odd columns can't be matched
+          pery = intAlea(1, 6);
+          if (alea(0, 1) > 0.7) {
+            // no periodicity
+            perx = nbx; // no matter if odd, since no actual periodicity
+            pery = nby;
+          }
+          if (firstRun) {
+            perx = 2;
+            pery = 1;
+            firstRun = false;
+          }
+          superTile = new Array(pery)
+            .fill(0)
+            .map((v, ky) =>
+              new Array(perx).fill(0).map((v, kx) => new Hexa(kx, ky)),
+            );
 
-          renderer.setSize(offsetWidth, offsetHeight);
-          renderer.setPixelRatio(devicePixelRatio);
+          // analyze lines in superTile
+          superTile.forEach((row) => {
+            row.forEach((cell) => {
+              for (let k = 0; k < 6; ++k) {
+                if (cell.edges[k].arc.superLine) continue; // already visited this place
+                let superLine = { superArcs: [], instances: [], colors: [] };
+                let icell = cell;
+                let kEntry = k;
+                let skx = 0,
+                  sky = 0;
 
-          camera.aspect = offsetWidth / offsetHeight;
-          camera.updateProjectionMatrix();
+                while (true) {
+                  let arc = cell.edges[kEntry].arc;
+                  Object.assign(arc, {
+                    kEntry,
+                    kExit: cell.exits[kEntry],
+                    skx,
+                    sky,
+                    superLine,
+                  });
+                  superLine.superArcs.push(arc);
+                  ({ kx: nkx, ky: nky } = cell.getNeighborPosition(arc.kExit));
+                  if (nkx < 0) {
+                    --skx;
+                    nkx += perx;
+                  }
+                  if (nkx >= perx) {
+                    ++skx;
+                    nkx -= perx;
+                  }
+                  if (nky < 0) {
+                    --sky;
+                    nky += pery;
+                  }
+                  if (nky >= pery) {
+                    ++sky;
+                    nky -= pery;
+                  }
+                  cell = superTile[nky][nkx];
+                  kEntry = (arc.kExit + 3) % 6;
+                  if (cell == icell && kEntry == k) {
+                    superLine.skx = skx;
+                    superLine.sky = sky;
+                    break; // done with this superLine
+                  }
+                } // while true;
+              } // for k;
+            });
+          });
+        } // createSuperTile;
+        //-----------------------------------------------------------------------------
 
-          ribbon.scale.set(camera.aspect * 1.55, 0.75, 1);
-        };
+        function createGrid() {
+          grid = new Array(nby)
+            .fill(0)
+            .map((v, ky) =>
+              new Array(nbx).fill(0).map((v, kx) => new Hexagon(kx, ky)),
+            );
+        } // createGrid
+        //-----------------------------------------------------------------------------
+        function propagateColors() {
+          let key, color;
 
-        const animate = () => {
-          ribbon.material.uniforms.time.value += 0.003;
+          if (perx >= nbx && pery >= nby) {
+            // if not periodical, just pick random colors
+            lines.forEach(
+              (line) =>
+                (line.color = `hsl(${intAlea(360)} ${intAlea(70, 100)}% ${intAlea(
+                  30,
+                  70,
+                )}%)`),
+            );
+            return; // nothing to do if not periodical
+          }
 
-          renderer.render(scene, camera);
-          requestAnimationFrame(() => animate());
-        };
+          lines.forEach((line) => {
+            let arc0 = line.arcs[0];
+            let tileRef = superTile[arc0.cell.ky % pery][arc0.cell.kx % perx];
+            let cellRef = tileRef.edges[arc0.kEntry].cell;
+            let arcRef = tileRef.edges[arc0.kEntry].arc;
+            let superLine = arcRef.superLine;
+            let redx = arc0.cell.kx - cellRef.kx;
+            let redy = arc0.cell.ky - cellRef.ky;
+            let tkx = redx / perx - arcRef.skx;
+            let tky = redy / pery - arcRef.sky;
+            if (superLine.skx === 0 && superLine.sky === 0) {
+              // close loop, key is given by 2 tile coordinates
+              key = `${tkx},${tky}`;
+            } else if (superLine.skx === 0) {
+              key = `${tkx},${mmod(tky, superLine.sky)}`;
+            } else if (superLine.sky === 0) {
+              key = `${tky},${mmod(tkx, superLine.skx)}`;
+            } else {
+              // the following formula results in same key for pieces of line belonging to same line
+              key = `${tkx * superLine.sky - tky * superLine.skx},${mmod(
+                tkx,
+                superLine.skx,
+              )}`;
+            }
+            let indKey = superLine.instances.indexOf(key); // find if we already met this curve
+            if (indKey == -1) {
+              color = `hsl(${intAlea(360)} ${intAlea(70, 100)}% ${intAlea(30, 70)}%)`;
+              superLine.instances.push(key);
+              superLine.colors.push(color);
+            } else {
+              // already met, give same color
+              color = superLine.colors[indKey];
+            }
+            line.color = color;
+          });
+        } // propagate colors
+        //-----------------------------------------------------------------------------
 
-        init();
-        animate();
+        let animate;
+        let undrawn, nbDrawing;
+
+        {
+          // scope for animate
+
+          let animState = 0;
+
+          animate = function (tStamp) {
+            let message;
+
+            message = messages.shift();
+            if (message && message.message == "reset") animState = 0;
+            if (message && message.message == "click") animState = 0;
+            window.requestAnimationFrame(animate);
+
+            switch (animState) {
+              case 0:
+                if (startOver()) {
+                  undrawn = lines.slice();
+                  nbDrawing = 0;
+                  ++animState;
+                } else break;
+
+              case 1:
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, maxx, maxy);
+                if (nbDrawing < 20 && undrawn.length) {
+                  // begin to draw another
+                  let line = undrawn.splice(intAlea(undrawn.length), 1)[0];
+                  line.drawing = true;
+                  ++nbDrawing;
+                  line.start(tStamp);
+                }
+                let cont = false;
+                lines.forEach((line) => {
+                  if (line.tPrec === undefined) return;
+                  if (line.draw(tStamp)) cont = true;
+                  else if (line.drawing) {
+                    // finishing one
+                    line.drawing = false;
+                    --nbDrawing;
+                  }
+                });
+                // re-draw all intersections
+                grid.forEach((row) => row.forEach((cell) => cell.draw()));
+
+                if (globalSpeed === VALSPEED.at(-1)) {
+                  ++animState;
+                  break;
+                }
+                if (nbDrawing + undrawn.length) break;
+                animState = 5; //  all done!
+                break;
+
+              case 2:
+                while (undrawn.length) {
+                  let line = undrawn.splice(intAlea(undrawn.length), 1)[0];
+                  line.drawing = true;
+                  line.start(tStamp);
+                }
+
+                ctx.fillStyle = bg;
+                ctx.fillRect(0, 0, maxx, maxy);
+                lines.forEach((line) => line.draw(1e9));
+                // re-draw all intersections
+                grid.forEach((row) => row.forEach((cell) => cell.draw()));
+                animState = 5; // all done
+            } // switch
+          }; // animate
+        } // scope for animate
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+
+        function startOver() {
+          // canvas dimensions
+
+          maxx = window.innerWidth;
+          maxy = window.innerHeight;
+
+          canv.width = maxx;
+          canv.height = maxy;
+          //      ctx.lineJoin = 'round';
+          //      ctx.lineCap = 'round';
+
+          ctx.fillStyle = "#000";
+          ctx.fillRect(0, 0, maxx, maxy);
+
+          radius = msqrt(maxx * maxy) / (10 + 30 * relY);
+          const displayCrossingTime = 5000; // in ms
+          //      globalSpeed = msqrt(maxx * maxy) / displayCrossingTime; // in pixels / ms => average width/height in 5 s
+
+          // all hexagons fully visible
+          nbx = mfloor((maxx / radius - 0.5) / 1.5);
+          nby = mfloor(maxy / radius / rac3 - 0.5);
+          // all screen covered with hexagons
+          nbx = mceil(maxx / radius / 1.5 + 1);
+          nby = mceil(maxy / radius / rac3 + 0.5);
+
+          if (nbx < 1 || nby < 1) return false; // nothing to draw
+
+          lWidth = mmax(1, mmin(10, radius / 6));
+          orgx = (maxx - radius * (1.5 * nbx + 0.5)) / 2 + radius; // obvious, insn't it ?
+          orgy = (maxy - radius * rac3 * (nby + 0.5)) / 2 + radius * rac3; // yet more obvious
+
+          createSuperTile();
+          createGrid();
+          /*
+                    grid.forEach(line => line.forEach(cell => {
+                      cell.drawHexagon();
+                      //        cell.drawArcs();
+                    }));
+              */
+          lines = makeLines();
+          lines.forEach((line) => {
+            if (intAlea(2)) line.reverse();
+            line.setPos();
+          });
+          /* in all hexagons, replace arcs by the new Arc type defined in lines to manage arcs crossings
+           */
+          lines.forEach((line) =>
+            line.arcs.forEach((arc) => {
+              if (!arc.cell.inters) arc.cell.inters = [];
+
+              if (!arc.big) arc.cell.inters[2] = arc;
+              // not really involved in intersection
+              else arc.cell.inters[arc.kEntry & 1] = arc;
+            }),
+          );
+
+          propagateColors();
+
+          let hue = intAlea(360);
+          let sat = intAlea(50, 100);
+          bg = ctx.createLinearGradient(0, maxy, maxx, 0);
+          bg.addColorStop(0, `hsl(${hue} ${sat}% 85%)`);
+          bg.addColorStop(1, `hsl(${hue} ${sat}% 95%)`);
+
+          return true;
+        } // startOver
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        function mouseMove(event) {
+          cursorPosition(event.clientX, event.clientY);
+        } // mouseMove
+        //------------------------------------------------------------------------
+        function touchMove(event) {
+          if (event.touches.length == 1)
+            cursorPosition(event.touches[0].clientX, event.touches[0].clientY);
+        } // touchMove
+
+        //------------------------------------------------------------------------
+        function touchStart(event) {
+          if (event.touches.length == 1)
+            cursorPosition(event.touches[0].clientX, event.touches[0].clientY);
+        } // touchStart
+        //------------------------------------------------------------------------
+        function touchEnd(event) {
+          if (event.touches.length == 1)
+            cursorPosition(event.touches[0].clientX, event.touches[0].clientY);
+          // event.preventDefault();
+        } // touchEnd
+
+        //------------------------------------------------------------------------
+        function touchMove(event) {
+          if (event.touches.length == 1)
+            cursorPosition(event.touches[0].clientX, event.touches[0].clientY);
+        } // touchMove
+
+        //------------------------------------------------------------------------
+        function cursorPosition(x, y) {
+          if (!Number.isFinite(maxx) || !Number.isFinite(maxy)) return;
+          const relX = x / maxx;
+          let k = POSSPEED.findIndex((v) => relX <= v);
+          if (k == 0) globalSpeed = VALSPEED[0];
+          else {
+            let x0 = POSSPEED[k - 1],
+              x1 = POSSPEED[k],
+              y0 = VALSPEED[k - 1],
+              y1 = VALSPEED[k];
+            globalSpeed = y0 + ((y1 - y0) * (relX - x0)) / (x1 - x0);
+          }
+          relY = y / maxy;
+        } // mouseMove
+
+        //------------------------------------------------------------------------
+
+        function mouseClick(event) {
+          messages.push({ message: "click" });
+        } // mouseClick
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // beginning of execution
+
+        {
+          canv = document.createElement("canvas");
+          canv.style.position = "absolute";
+          document.body.appendChild(canv);
+          ctx = canv.getContext("2d");
+          //      canv.setAttribute('title', 'click me');
+        } // création CANVAS
+
+        canv.addEventListener("click", mouseClick);
+        canv.addEventListener("click", mouseClick);
+        canv.addEventListener("mousemove", mouseMove);
+        canv.addEventListener("touchstart", touchStart);
+        canv.addEventListener("touchmove", touchMove);
+        canv.addEventListener("touchend", touchEnd);
+
+        messages = [{ message: "reset" }];
+        requestAnimationFrame(animate);
       </script>
     </body>
   </html>
