@@ -1,9 +1,9 @@
 version: v1
 metadata:
-  name: Bit Ocean
-  description: Bit Ocean
-  author: Griffin Moyer
-  source: https://codepen.io/gmoyer/pen/OxaObd
+  name: Blur
+  description: Shift
+  author: tympanus
+  source: https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html
 parameters:
   - id: opacity
     default: "0.5"
