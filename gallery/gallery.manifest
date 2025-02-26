@@ -516,11 +516,11 @@
     {
       "id": "animation.70.blur",
       "version": "v1",
-      "name": "Bit Ocean",
-      "description": "Bit Ocean",
-      "author": "Griffin Moyer",
-      "source": "https://codepen.io/gmoyer/pen/OxaObd",
-      "hash": "11d6d1f2a1e8437588061013c137321489ecd4a9",
+      "name": "Blur",
+      "description": "Shift",
+      "author": "tympanus",
+      "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
+      "hash": "71bc7e80eab894b1b4851427699f92ee28a72997",
       "parameters": [
         {
           "id": "opacity",

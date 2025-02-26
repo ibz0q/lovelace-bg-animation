@@ -662,12 +662,12 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.7.rainbowness/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.7.rainbowness/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
-###  > animation.70.blur (Bit Ocean - Bit Ocean)
+###  > animation.70.blur (Blur - Shift)
 
 `- id: animation.70.blur`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: Griffin Moyer* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: tympanus* - Offline support? **Yes**
 
 ###  > animation.71.interactive-gradient (Nothing - Interactive gradient)
 
