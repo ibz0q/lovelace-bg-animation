@@ -2,7 +2,7 @@ version: v1
 metadata:
   name: Green Circuit
   description: I'm in
-  author: Jared Stanley, modified by Sjors Kaamgan
+  author: Jared Stanley, modified by Sjors Kaagman
   source: https://codepen.io/ykob/pen/YewoRz
 parameters:
   - id: textColor
