@@ -2,8 +2,11 @@ version: v1
 metadata:
   name: Green Circuit
   description: I'm in
-  author: Jared Stanley
+  author: Jared Stanley, modified by Sjors Kaamgan
   source: https://codepen.io/ykob/pen/YewoRz
+parameters:
+  - id: textColor
+    default: "rgba(22,222,82,0.6992)"
 helpers:
   insert_baseurl: true
 template: >
@@ -32,7 +35,7 @@ template: >
           dotCount = 1333,
           speedMax = 1.0,
           dotArray = [];
-        let clr = "rgba(22,222,82,0.6992)";
+        let clr = "{{parameter: textColor}}";
         //
         window.onload = function () {
           start();
