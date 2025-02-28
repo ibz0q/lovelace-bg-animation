@@ -30,7 +30,7 @@ A small Lovelace plugin that replaces the background with an animated one, vario
  - MenSeb (1)
  - Ana Tudor (1)
  - Ksenia Kondrashova (1)
- - Jared Stanley (1)
+ - Jared Stanley, modified by Sjors Kaagman (1)
  - Nathan Gordon (1)
  - nskrgv (1)
  - Yuki (1)

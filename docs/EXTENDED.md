@@ -576,7 +576,7 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 `- id: animation.63.green-circuit`
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley, modified by Sjors Kaagman* - Offline support? **Yes**
 
 ###  > animation.64.howls-moving-castle (Howl's Moving Castle - Howl's Moving Castle
 )
