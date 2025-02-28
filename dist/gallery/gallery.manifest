@@ -455,9 +455,15 @@
       "version": "v1",
       "name": "Green Circuit",
       "description": "I'm in",
-      "author": "Jared Stanley",
+      "author": "Jared Stanley, modified by Sjors Kaagman",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "e11b0f8a51ea3d4f1d5ed341ef7adbf59ef41585"
+      "hash": "11dc20f6d557ae34c12a047b09ab7a6f7908cae7",
+      "parameters": [
+        {
+          "id": "textColor",
+          "default": "rgba(22,222,82,0.6992)"
+        }
+      ]
     },
     {
       "id": "animation.64.howls-moving-castle",
