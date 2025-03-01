@@ -8,6 +8,7 @@ process.chdir(__dirname);
 const galleryDir = '../gallery/packages';
 const documentationPath = '../docs/EXTENDED.md';
 const authors = {};
+const contributors = {};
 const ignoreDirs = ['0.test'];
 let count = 1;
 let availableBgs = "";
@@ -52,9 +53,20 @@ function readDirectory(dir) {
       count++;
 
       const packageData = YAML.parse(fs.readFileSync(filePath, 'utf8'));
+      const packageName = path.basename(path.dirname(filePath));
+
       const author = packageData.metadata.author;
       authors[author] = (authors[author] || 0) + 1;
-      const packageName = path.basename(path.dirname(filePath));
+
+      if (packageData.metadata.contributors) {
+        packageData.metadata.contributors.forEach(element => {
+          if (!contributors[element.name]) {
+            contributors[element.name] = [];
+          }
+          contributors[element.name].push({ profile: element.profile, package: packageName });
+        });
+      }
+
       let offlineMode = supportsOfflineMode(packageData);
       let offlineModeExpand;
       if (supportsOfflineMode(packageData) == false) {
@@ -81,11 +93,39 @@ ${offlineMode}
 `
       }
 
+      // version: v1
+      // metadata:
+      //   name: Green Circuit
+      //   description: I'm in
+      //   author: Jared Stanley
+      //   source: https://codepen.io/ykob/pen/YewoRz
+      //   contributors:
+      //     - name: Sjors Kaagman
+      //       profile: https://github.com/SjorsMaster
+      // parameters:
+      //   - id: textColor
+      //     default: "rgba(22,222,82,0.6992)"
+
+
+      // include a table of available parameters 
+      let parameters = "";
+      if (packageData?.parameters) {
+        parameters = `Supported params:`;
+        packageData.parameters.forEach(element => {
+          parameters += `\n- \`${element.id}\` (defaults: \`${element.default}\`) \n\n  ${element.description} `;
+
+        }
+        )
+
+      }
+
       availableBgs += `
 
 ###  > ${packageName} (${packageData.metadata.name} - ${packageData.metadata.description})
 
 \`- id: ${packageName}\`
+
+${parameters}
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${packageName}/preview.html) - *Author: ${packageData.metadata.author}* - Offline support? ${offlineModeExpand}`
@@ -105,21 +145,32 @@ This file is generated through an Github Action, if any of the image previews do
 
 `;
 
-
 // Readme.md
 const sortedAuthors = Object.entries(authors)
   .sort((a, b) => b[1] - a[1]);
 
-const html = sortedAuthors
+const authorsHtml = sortedAuthors
   .map(([author, count]) => ` - ${author} (${count})`)
+  .join('\n');
+
+const sortedcontributors = Object.entries(contributors)
+  .sort((a, b) => b[1] - a[1]);
+
+const contributorsHtml = sortedcontributors
+  .map(([contributor, data]) => ` - [${contributor}](${data[0].profile}) (${data.length})`)
   .join('\n');
 
 const readmePath = path.join(__dirname, '../README.md');
 let readmeContent = fs.readFileSync(readmePath, 'utf8');
 
 // Replace the section below #### Artists with the new html using regex pattern matching
-let regex = /(Tributes \(Artists featured\))([\s\S]*?)(### Support)/;
-readmeContent = readmeContent.replace(regex, `$1\n\n${html}\n$3`);
+let regex = /(Tributes \(Artists featured\))([\s\S]*?)(###)/;
+
+readmeContent = readmeContent.replace(regex, `$1\n\n${authorsHtml}\n\n$3`);
+
+regex = /(### 🙏 Contributors)([\s\S]*?)(## Usage)/;
+
+readmeContent = readmeContent.replace(regex, `$1\n\n${contributorsHtml}\n\n$3`);
 
 
 // Replace the version number with the one from package.json
@@ -140,3 +191,5 @@ if (!fs.existsSync(documentationPath)) {
 fs.writeFileSync(documentationPath, extendedContent + availableBgs, 'utf8');
 // console.log(extendedContent + availableBgs);
 console.log("Documentation updated successfully");
+
+console.log(contributors);

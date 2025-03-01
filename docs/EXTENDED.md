@@ -12,12 +12,16 @@ This file is generated through an Github Action, if any of the image previews do
 
 `- id: animation.10.css-dark-particles`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.10.css-dark-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.10.css-dark-particles/preview.html) - *Author: Takeshi Kano* - Offline support? **Yes**
 
 ###  > animation.11.space (Space - The final frontier)
 
 `- id: animation.11.space`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.11.space/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.11.space/preview.html) - *Author: Akimitsu Hamamuro* - Offline support? **Yes**
@@ -26,6 +30,8 @@ This file is generated through an Github Action, if any of the image previews do
 
 `- id: animation.12.gradient-particles`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.12.gradient-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.12.gradient-particles/preview.html) - *Author: cssscript.com* - Offline support? **Yes**
 
@@ -33,13 +39,15 @@ This file is generated through an Github Action, if any of the image previews do
 
 `- id: animation.13.cyber-lights`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.13.cyber-lights/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.13.cyber-lights/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.13.cyber-lights/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.13.cyber-lights\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
@@ -57,13 +65,15 @@ Found these dependencies in (../gallery/packages/animation.13.cyber-lights/packa
 
 `- id: animation.14.ribbons-two`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.14.ribbons-two/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.14.ribbons-two/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.14.ribbons-two/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.14.ribbons-two\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -81,13 +91,15 @@ Found these dependencies in (../gallery/packages/animation.14.ribbons-two/packag
 
 `- id: animation.15.sound`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.15.sound/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.15.sound/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.15.sound/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.15.sound\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
@@ -105,13 +117,15 @@ Found these dependencies in (../gallery/packages/animation.15.sound/package.yaml
 
 `- id: animation.16.veil`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.16.veil/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.16.veil/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.16.veil/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.16.veil\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -129,13 +143,15 @@ Found these dependencies in (../gallery/packages/animation.16.veil/package.yaml)
 
 `- id: animation.17.ribbons`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.17.ribbons/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.17.ribbons/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.17.ribbons/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.17.ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -153,13 +169,15 @@ Found these dependencies in (../gallery/packages/animation.17.ribbons/package.ya
 
 `- id: animation.18.particle-cube`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.18.particle-cube/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.18.particle-cube/preview.html) - *Author: Bas Groothedde* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.18.particle-cube/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.18.particle-cube\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/codepen-utilities.min.js"></script>
@@ -177,13 +195,15 @@ Found these dependencies in (../gallery/packages/animation.18.particle-cube/pack
 
 `- id: animation.19.trapped-particles`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.19.trapped-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.19.trapped-particles/preview.html) - *Author: Bas Groothedde* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.19.trapped-particles/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.19.trapped-particles\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
@@ -201,6 +221,8 @@ Found these dependencies in (../gallery/packages/animation.19.trapped-particles/
 
 `- id: animation.2.shooting-stars`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/preview.html) - *Author: alphardex* - Offline support? **Yes**
 
@@ -208,13 +230,15 @@ Found these dependencies in (../gallery/packages/animation.19.trapped-particles/
 
 `- id: animation.20.manifold`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.20.manifold/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.20.manifold/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.20.manifold/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.20.manifold\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
@@ -232,13 +256,15 @@ Found these dependencies in (../gallery/packages/animation.20.manifold/package.y
 
 `- id: animation.21.noise-abstraction`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.21.noise-abstraction/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.21.noise-abstraction/preview.html) - *Author: Akimitsu Hamamuro* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.21.noise-abstraction/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.21.noise-abstraction\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://rawgit.com/akm2/simplex-noise.js/master/simplex-noise.js"></script>
@@ -256,13 +282,15 @@ Found these dependencies in (../gallery/packages/animation.21.noise-abstraction/
 
 `- id: animation.22.cloth-ribbons`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.22.cloth-ribbons/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.22.cloth-ribbons/preview.html) - *Author: Bas Groothedde* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.22.cloth-ribbons/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.22.cloth-ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -280,13 +308,15 @@ Found these dependencies in (../gallery/packages/animation.22.cloth-ribbons/pack
 
 `- id: animation.23.ribbons-four`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.23.ribbons-four/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.23.ribbons-four/preview.html) - *Author: Ben Matthews* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.23.ribbons-four/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.23.ribbons-four\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -304,13 +334,15 @@ Found these dependencies in (../gallery/packages/animation.23.ribbons-four/packa
 
 `- id: animation.24.trapped-gradient`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.24.trapped-gradient/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.24.trapped-gradient/preview.html) - *Author: Bas Groothedde* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.24.trapped-gradient\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
@@ -328,6 +360,8 @@ Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/p
 
 `- id: animation.25.galactic-swimmers`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.25.galactic-swimmers/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.25.galactic-swimmers/preview.html) - *Author: Bas Groothedde* - Offline support? **Yes**
 
@@ -335,13 +369,15 @@ Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/p
 
 `- id: animation.26.gpu-particles`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.26.gpu-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.26.gpu-particles/preview.html) - *Author: Tim Severien* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.26.gpu-particles/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.26.gpu-particles\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
@@ -359,12 +395,16 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 
 `- id: animation.27.tron`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.27.tron/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.27.tron/preview.html) - *Author: DanDog* - Offline support? **Yes**
 
 ###  > animation.28.black-sand-flow-field-v2 (Black Sand Flow Field v2 - )
 
 `- id: animation.28.black-sand-flow-field-v2`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.28.black-sand-flow-field-v2/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.28.black-sand-flow-field-v2/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
@@ -373,12 +413,16 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 
 `- id: animation.3.spipa-circle`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.3.spipa-circle/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.3.spipa-circle/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
 ###  > animation.31.blooming-flower (Blooming Flower - )
 
 `- id: animation.31.blooming-flower`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.31.blooming-flower/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.31.blooming-flower/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
@@ -387,12 +431,16 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 
 `- id: animation.32.canvas-blending-gradient-circles`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.32.canvas-blending-gradient-circles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.32.canvas-blending-gradient-circles/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
 ###  > animation.33.canvas-bokeh (Canvas Bokeh Generation - Pretty heavy, and not exactly true to real photography, but it's a start.)
 
 `- id: animation.33.canvas-bokeh`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.33.canvas-bokeh/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.33.canvas-bokeh/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
@@ -401,12 +449,16 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 
 `- id: animation.34.canvas-color-teams`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.34.canvas-color-teams/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.34.canvas-color-teams/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
 ###  > animation.35.canvas-light-explosion (Canvas Light Explosion - Click to clear and change hue.)
 
 `- id: animation.35.canvas-light-explosion`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.35.canvas-light-explosion/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.35.canvas-light-explosion/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
@@ -415,6 +467,8 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 
 `- id: animation.36.starfield`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.36.starfield/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.36.starfield/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
@@ -422,13 +476,15 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
 
 `- id: animation.4.colored-swipe`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.4.colored-swipe/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.4.colored-swipe/preview.html) - *Author: Andreas Wilcox* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.4.colored-swipe/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.4.colored-swipe\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
@@ -446,12 +502,16 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 
 `- id: animation.46.codevember-05-simplex-vector-flow-field`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.46.codevember-05-simplex-vector-flow-field/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.46.codevember-05-simplex-vector-flow-field/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
 ###  > animation.47.color-trails (Color Trails - )
 
 `- id: animation.47.color-trails`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.47.color-trails/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.47.color-trails/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
@@ -462,12 +522,16 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 `- id: animation.48.colorful-wanderers`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.48.colorful-wanderers/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.48.colorful-wanderers/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
 ###  > animation.49.curved-lines (Curved Lines - `#GrayScale_HintOfRainbow_CurvedLinesWeekend`)
 
 `- id: animation.49.curved-lines`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.49.curved-lines/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.49.curved-lines/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
@@ -476,12 +540,16 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 `- id: animation.5.neon-hexagon`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.neon-hexagon/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.neon-hexagon/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
 ###  > animation.5.plasma (Rainbow Particles - rainbow particle horizon)
 
 `- id: animation.5.plasma`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.plasma/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.5.plasma/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
@@ -490,12 +558,16 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 `- id: animation.50.sidelined`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.50.sidelined/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.50.sidelined/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
 ###  > animation.52.polyhedron-galaxy (Polyhedron galaxy - Practicing with ThreeJS)
 
 `- id: animation.52.polyhedron-galaxy`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.52.polyhedron-galaxy/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.52.polyhedron-galaxy/preview.html) - *Author: Júlia Erő* - Offline support? **Yes**
@@ -504,12 +576,16 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 `- id: animation.53.stars`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.53.stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.53.stars/preview.html) - *Author: Jack Rugile* - Offline support? **Yes**
 
 ###  > animation.54.stars-galaxy (Stars Galaxy - Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.)
 
 `- id: animation.54.stars-galaxy`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.54.stars-galaxy/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.54.stars-galaxy/preview.html) - *Author: MenSeb* - Offline support? **Yes**
@@ -518,12 +594,16 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 
 `- id: animation.56.azimuthal-viscosity`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.56.azimuthal-viscosity/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.56.azimuthal-viscosity/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
 ###  > animation.57.browniandrix-noise (Browniandrix noise - Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.)
 
 `- id: animation.57.browniandrix-noise`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.57.browniandrix-noise/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.57.browniandrix-noise/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
@@ -533,12 +613,16 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.58.browniandrix-noise-l3`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.58.browniandrix-noise-l3/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.58.browniandrix-noise-l3/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
 
 ###  > animation.59.dimension-two-and-a-half (Dimension of Two and a Half - Vanishing point attractors)
 
 `- id: animation.59.dimension-two-and-a-half`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.59.dimension-two-and-a-half/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.59.dimension-two-and-a-half/preview.html) - *Author: Alex Andrix* - Offline support? **Yes**
@@ -547,12 +631,16 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.6.binary-spiral`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.6.binary-spiral/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.6.binary-spiral/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
 ###  > animation.60.digital-frontier (The Digital Frontier - Dial me in)
 
 `- id: animation.60.digital-frontier`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.60.digital-frontier/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.60.digital-frontier/preview.html) - *Author: Ben Matthews* - Offline support? **Yes**
@@ -561,12 +649,16 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.61.cube`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.61.cube/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.61.cube/preview.html) - *Author: Ana Tudor* - Offline support? **Yes**
 
 ###  > animation.62.neural (Neural - Neural Glow)
 
 `- id: animation.62.neural`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.62.neural/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.62.neural/preview.html) - *Author: Ksenia Kondrashova* - Offline support? **Yes**
@@ -575,13 +667,20 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.63.green-circuit`
 
+Supported params:
+- `textColor` (defaults: `rgba(22,222,82,0.6992)`) 
+
+  The color of the dots 
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley, modified by Sjors Kaagman* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
 
 ###  > animation.64.howls-moving-castle (Howl's Moving Castle - Howl's Moving Castle
 )
 
 `- id: animation.64.howls-moving-castle`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.64.howls-moving-castle/preview.html) - *Author: Nathan Gordon* - Offline support? **Yes**
@@ -590,12 +689,16 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.65.cristal-lands`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.65.cristal-lands/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.65.cristal-lands/preview.html) - *Author: nskrgv* - Offline support? **Yes**
 
 ###  > animation.66.fog-of-war (Fog of War - WebGL Fog)
 
 `- id: animation.66.fog-of-war`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.66.fog-of-war/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.66.fog-of-war/preview.html) - *Author: yoichi kobayashi* - Offline support? **Yes**
@@ -604,6 +707,8 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.67.fly-particle`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/preview.html) - *Author: yoichi kobayashi* - Offline support? **Yes**
 
@@ -611,13 +716,15 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 
 `- id: animation.68.rgb-wave`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.68.rgb-wave/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.68.rgb-wave/preview.html) - *Author: Yuki* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.68.rgb-wave/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.68.rgb-wave\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
@@ -635,13 +742,15 @@ Found these dependencies in (../gallery/packages/animation.68.rgb-wave/package.y
 
 `- id: animation.69.bit-ocean`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.69.bit-ocean/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.69.bit-ocean/preview.html) - *Author: Griffin Moyer* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.69.bit-ocean\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
@@ -659,12 +768,19 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 
 `- id: animation.7.rainbowness`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.7.rainbowness/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.7.rainbowness/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
 ###  > animation.70.blur (Blur - Shift)
 
 `- id: animation.70.blur`
+
+Supported params:
+- `opacity` (defaults: `0.5`) 
+
+  The opacity of the background 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: tympanus* - Offline support? **Yes**
@@ -673,12 +789,16 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 
 `- id: animation.71.interactive-gradient`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.71.interactive-gradient/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.71.interactive-gradient/preview.html) - *Author: Ray Victor PRO* - Offline support? **Yes**
 
 ###  > animation.72.playstation-3-bg-style (Playstation 3 - RetroArch Menu Ribbon)
 
 `- id: animation.72.playstation-3-bg-style`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
@@ -687,6 +807,8 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 
 `- id: animation.9.rainbow-particles`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.9.rainbow-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.9.rainbow-particles/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
 
@@ -694,12 +816,16 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 
 `- id: generator.1.svg-wave`
 
+
+
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/preview.html) - *Author: Fabio Ottaviani* - Offline support? **Yes**
 
 ###  > generator.2.knots (Knots - Not knots)
 
 `- id: generator.2.knots`
+
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/preview.html) - *Author: Dillon* - Offline support? **Yes**

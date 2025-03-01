@@ -744,21 +744,3 @@ class LovelaceBgAnimation extends HTMLElement {
 customElements.define('lovelace-bg-animation', LovelaceBgAnimation);
 window.customCards = window.customCards || [];
 window.customCards.push({ type: "lovelace-bg-animation", name: "Lovelace BG Animation", preview: true, documentationURL: "https://github.com/ibz0q/lovelace-bg-animation" });
-
-
-
-/*
-
-TODO:
-- Fix transitions  - Done
-- Update the view on change - Done
-- Fix odd bug causing issues between view and pages - Done
-- Add stub config for media changer - Done
-- Fix repo , gen image issue - Done
-- Remove any invalid Gallery package IDs from the playlist - Done
-- Enable pausing completely on a track - Done
-- Fix view ui change bug - Done
- 
-- Allow comms to iframe
-- Add a video background package
-*/
