@@ -112,7 +112,7 @@ ${offlineMode}
       if (packageData?.parameters) {
         parameters = `Supported params:`;
         packageData.parameters.forEach(element => {
-          parameters += `\n- \`${element.id}\` (defaults: \`${element.default}\`) \n\n  ${element.description} `;
+          parameters += `\n- \`${element.id}\` - ${element.description} (defaults: \`${element.default}\`) `;
 
         }
         )

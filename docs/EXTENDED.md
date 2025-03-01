@@ -668,9 +668,7 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 `- id: animation.63.green-circuit`
 
 Supported params:
-- `textColor` (defaults: `rgba(22,222,82,0.6992)`) 
-
-  The color of the dots 
+- `textColor` - The color of the dots (defaults: `rgba(22,222,82,0.6992)`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
@@ -778,9 +776,7 @@ Found these dependencies in (..\gallery\packages\animation.69.bit-ocean\package.
 `- id: animation.70.blur`
 
 Supported params:
-- `opacity` (defaults: `0.5`) 
-
-  The opacity of the background 
+- `opacity` - The opacity of the background (defaults: `0.5`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: tympanus* - Offline support? **Yes**
