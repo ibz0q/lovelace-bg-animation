@@ -2,17 +2,19 @@ version: v1
 metadata:
   name: Green Circuit
   description: I'm in
-  author: Jared Stanley, modified by Sjors Kaagman
+  author: Jared Stanley
   source: https://codepen.io/ykob/pen/YewoRz
+  contributors:
+    - name: Sjors Kaagman
+      profile: https://github.com/SjorsMaster
 parameters:
   - id: textColor
     default: "rgba(22,222,82,0.6992)"
+    description: The color of the dots
 helpers:
   insert_baseurl: true
 template: >
   <!doctype html>
-
-
   <html lang="en">
     <head>
       <style>
