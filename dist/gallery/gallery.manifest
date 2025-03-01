@@ -455,13 +455,14 @@
       "version": "v1",
       "name": "Green Circuit",
       "description": "I'm in",
-      "author": "Jared Stanley, modified by Sjors Kaagman",
+      "author": "Jared Stanley",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "11dc20f6d557ae34c12a047b09ab7a6f7908cae7",
+      "hash": "025f33aa4ddd42b3ead24d43a8266d09540c328a",
       "parameters": [
         {
           "id": "textColor",
-          "default": "rgba(22,222,82,0.6992)"
+          "default": "rgba(22,222,82,0.6992)",
+          "description": "The color of the dots"
         }
       ]
     },
@@ -526,11 +527,12 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "71bc7e80eab894b1b4851427699f92ee28a72997",
+      "hash": "ec03175e930cf6f6ff88ba1a7883ac06a95b3492",
       "parameters": [
         {
           "id": "opacity",
-          "default": "0.5"
+          "default": "0.5",
+          "description": "The opacity of the background"
         }
       ]
     },

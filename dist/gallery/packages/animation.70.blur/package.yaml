@@ -7,11 +7,11 @@ metadata:
 parameters:
   - id: opacity
     default: "0.5"
+    description: The opacity of the background
 helpers:
   insert_baseurl: true
 template: >
   <!doctype html>
-
   <html lang="en" class="no-js">
     <head>
       <meta charset="UTF-8" />
