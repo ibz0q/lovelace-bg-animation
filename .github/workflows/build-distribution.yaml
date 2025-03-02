@@ -1,11 +1,6 @@
 name: Build Webpack Release
 
 on: 
-  push:
-    paths:
-      - 'src/**'
-      - 'gallery/**'
-      - 'webpack.config.js'
   workflow_dispatch:
   workflow_run:
     workflows: ["Generate Package Metadata"]

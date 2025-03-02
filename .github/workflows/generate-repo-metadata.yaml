@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'gallery/packages/**'
-      - 'src/'
+      - 'src/**'
       - 'package.json'
   workflow_dispatch:
 
