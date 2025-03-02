@@ -4,12 +4,10 @@ metadata:
   description: "Made with TroisJS"
   author: Kevin Levron
   source: https://codepen.io/soju22/pen/JjEqebK
-
 parameters:
-  name: POINTS_COUNT
+  id: POINTS_COUNT
   default: 30000
   description: Number of points
-
 helpers:
   insert_baseurl: true
 template: >
