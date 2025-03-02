@@ -369,7 +369,7 @@ template: >
         })();
 
         var waves = new Waves("#holder", {
-          fps: true,
+          fps: false,
           waves: 3,
           width: 200,
         });

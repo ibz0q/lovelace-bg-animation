@@ -1,8 +1,7 @@
 version: v1
 metadata:
   name: Remember Windows?
-  description: Experimenting with wander motion via the CreateJS Perlin Noise
-    Machine. Ended up with something resembling the old Windows screensaver.
+  description: The old Windows screensaver.
   author: Lanny
   source: https://codepen.io/lannymcnie/pen/PRZJab
 helpers:
@@ -43,17 +42,6 @@ template: >
     </head>
     <body>
       <canvas id="canvas" width="500" height="500"></canvas>
-      <a href="https://createjs.com/" target="_blank">
-        <img
-          id="logo"
-          src="https://createjs.com/mediakit/createjs-badge-reverse.png"
-        />
-      </a>
-      <img
-        id="badge"
-        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1524180/Button_Click_White.svg"
-      />
-
       <script src="https://cdn.jsdelivr.net/gh/CreateJS/EaselJS@ff1048658c9e5f19dacc020e4f3fc6c43a7b2a10/extras/PerlinNoise/PerlinNoiseMachine.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/EaselJS/1.0.2/easeljs.js"></script>
       <script>
