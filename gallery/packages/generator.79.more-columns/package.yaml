@@ -1,12 +1,7 @@
 version: v1
 metadata:
   name: More columns
-  description: >-
-    New variant still inspired by [Sophia (fractal
-    kitty)](https://codepen.io/fractalkitty)'s pen [Spark Studio Coding
-    night](https://codepen.io/fractalkitty/pen/ZYEWNmL)  
-
-    Click for new drawing.
+  description: Randomly generated columns
   author: Dillon
   source: https://codepen.io/Dillo/pen/NPWbdMP
 helpers:

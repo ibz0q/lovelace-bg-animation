@@ -1,10 +1,7 @@
 version: v1
 metadata:
   name: "Strange Tubes #2"
-  description: |-
-    Tubes, again... 
-    Click to randomize colors.
-    OrbitControl enabled.
+  description: Tubes, again... 
   author: Kevin Levron
   source: https://codepen.io/soju22/pen/JzzvbR
 helpers:
@@ -80,18 +77,18 @@ template: >
 
         function App(conf) {
           conf = {
-            fov: 75,
+            fov: 100,
             cameraZ: 150,
             background: 0x000000,
             tubeRadius: 3,
             resY: 10,
             resX: 4,
             noiseCoef: 50,
-            timeCoef: 50,
-            mouseCoef: 50,
+            timeCoef: 10,
+            mouseCoef: 1,
             heightCoef: 20,
             ambientColor: 0xcccccc,
-            lightIntensity: 1,
+            lightIntensity: 0.5,
             light1Color: 0x24f59e,
             light2Color: 0xe15040,
             light3Color: 0x1b859e,

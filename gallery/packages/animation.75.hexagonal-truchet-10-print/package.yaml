@@ -1,19 +1,18 @@
 version: v1
 metadata:
   name: Hexagonal Truchet 10 Print
-  description: >-
-    Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10
-    Print](https://codepen.io/tsuhre/full/BaXJrgw)  
-
-    I have no idea of how Ben Matthews did it, I just tried to do the same thing
-    because I liked it.  
-
-    I am using hexagonal tiles in this version. Click on the canvas or re-run
-    the pen to try different  sets of tiles and color schemes
+  description: Inspired by [Ben Matthews]
   author: Dillon
   source: https://codepen.io/Dillo/pen/qEWQgXW
+  
+parameters:
+  - id: screen_duration
+    description: Time to cross the screen vertically
+    default: 200
+
 helpers:
   insert_baseurl: true
+
 template: >
   <!DOCTYPE html>
 
@@ -43,7 +42,7 @@ template: >
 
         const NB_HEXAGONS_MIN = 15;
         const NB_HEXAGONS_MAX = 20;
-        const WINDOW_HEIGHT_DURATION = 15; // in seconds; used for vertical scrolling speed : time to cross the screen vertically
+        const WINDOW_HEIGHT_DURATION = {{parameter: screen_duration}}; // in seconds; used for vertical scrolling speed : time to cross the screen vertically
 
         let canv, ctx; // canvas and context
         let maxx, maxy; // canvas dimensions
