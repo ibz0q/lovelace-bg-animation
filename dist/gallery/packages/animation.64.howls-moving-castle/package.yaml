@@ -999,7 +999,7 @@ template: >
         <img class="foreground" src="./foreground.png" />
       </div>
 
-      <script src="./jquery.min.js"></script>
+      <script src="{{common: https://code.jquery.com/jquery-3.7.1.min.js }}"></script>
       <script src="./TweenMax.min.js"></script>
       <script id="rendered-js">
         var speed = 0.15;

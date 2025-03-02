@@ -69,7 +69,7 @@ template: >
       </style>
     </head>
     <body>
-      <script src="./lodash.min.js"></script>
+      <script src="{{common: https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js }}"></script>
       <div class="ui">
         <p class="zoom">
           <span class="zoom zoomin">+</span>

@@ -295,7 +295,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/DdyGPB",
-      "hash": "a2c094de8fa6df89f2ca607df2559b0f435055cb"
+      "hash": "83ff8c9f5cd323075c814a6b2a942e6114053e9a"
     },
     {
       "id": "animation.35.canvas-light-explosion",
@@ -394,7 +394,7 @@
       "description": "",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/ZVewby",
-      "hash": "bfd308e5f825384fbc5146f5e92f70816166f1d0"
+      "hash": "94e66b6f8361593d9483cad0f9575b944ce0e7a7"
     },
     {
       "id": "animation.57.browniandrix-noise",
@@ -403,7 +403,7 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/jdGBjW",
-      "hash": "4acecaa886692b2fd717a702ee6d8dff9d416b31"
+      "hash": "3050744031a672ef3fcb1664be2e3d004b744f4b"
     },
     {
       "id": "animation.58.browniandrix-noise-l3",
@@ -412,7 +412,7 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/VRaGKq",
-      "hash": "9d7b27beea5a7018167dcaa378fc44a4c790c228"
+      "hash": "6a9000a1c90657e6d68f9db68e2f080d5cf2fed4"
     },
     {
       "id": "animation.59.dimension-two-and-a-half",
@@ -421,7 +421,7 @@
       "description": "Vanishing point attractors",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/OrpdNJ",
-      "hash": "f639b9f042ff52ad5782e3d4847980a9c6c294e8"
+      "hash": "2f28d6803894e0d627eeb169a6060977d2ddcf42"
     },
     {
       "id": "animation.60.digital-frontier",
@@ -457,7 +457,7 @@
       "description": "I'm in",
       "author": "Jared Stanley",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "025f33aa4ddd42b3ead24d43a8266d09540c328a",
+      "hash": "f0a9d82a0c544d61471c6b3abbfc7e4d4870cd67",
       "parameters": [
         {
           "id": "textColor",
@@ -473,7 +473,7 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "2968252ddb58865f27c6925aafea119e98ef6271"
+      "hash": "9af247648d46f2634a8270bdfa6ec9028745eb6f"
     },
     {
       "id": "animation.65.cristal-lands",
@@ -527,7 +527,7 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "ec03175e930cf6f6ff88ba1a7883ac06a95b3492",
+      "hash": "e16cb5f0fd465a6c6a71fdb3c7ad353c87f24f9b",
       "parameters": [
         {
           "id": "opacity",
@@ -543,7 +543,7 @@
       "description": "Interactive gradient",
       "author": "Ray Victor PRO",
       "source": "https://codepen.io/ray7551/pen/EbVmZd",
-      "hash": "d2530db6d671447beab4c6a0a5eae6227a1e5ef5"
+      "hash": "087618b4b0284eb9150e3b3d0d0c64b818672b77"
     },
     {
       "id": "animation.72.playstation-3-bg-style",
@@ -559,6 +559,10 @@
     "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js": {
       "hash": "21cab1e957740568c96355b3da95359b51243de3",
       "filename": "lodash.min.js"
+    },
+    "https://code.jquery.com/jquery-3.7.1.min.js": {
+      "hash": "d0dbfbc15eee93c9f8a4adbc369a19800348310e",
+      "filename": "jquery-3.7.1.min.js"
     },
     "https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js": {
       "hash": "0156f0d5d1e5a3d6080e0d931d4c2f289c1e8904",
