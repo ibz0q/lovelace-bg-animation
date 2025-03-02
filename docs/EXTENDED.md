@@ -891,24 +891,7 @@ See variant [here](https://codepen.io/Dillo/full/LYvowrg))
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves-webgl-shader/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves-webgl-shader/preview.html) - *Author: Boris Šehovac* - Offline support? No
-<details>
-    <summary>(external dependencies detected, need inlining)</summary>
-    <br />
-
-Found these dependencies in (../gallery/packages/animation.80.particle-waves-webgl-shader/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
-
-```HTML
-<script src="https://codepen.io/bsehovac/pen/mddZWPw.js"></script>
-```
-
----
-
-</details>
-
-
-<br />
-
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves-webgl-shader/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
 
 ###  > animation.81.remember-windows (Remember Windows? - The old Windows screensaver.)
 
@@ -998,10 +981,7 @@ Supported params:
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/preview.html) - *Author: Kevin Levron* - Offline support? **Yes**
 
-###  > animation.85.truchet-10-print-imitation (Truchet 10 Print (imitation) - Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10 Print](https://codepen.io/tsuhre/full/BaXJrgw)  
-I have no idea of how Ben Matthews did it, I just tried to do the same thing because I liked it.  
-See [version with hexagonal tiles](https://codepen.io/Dillo/full/qEWQgXW)
-)
+###  > animation.85.truchet-10-print-imitation (Truchet 10 Print (imitation) - Inspired by [Ben Matthews])
 
 `- id: animation.85.truchet-10-print-imitation`
 

@@ -527,7 +527,7 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "49cbb165d2dfa2f355f9d479722613dbec1238f5",
+      "hash": "d579474c25af1b81cd4027871a523c28c8b9ca4c",
       "parameters": [
         {
           "name": "opacity",
@@ -622,7 +622,7 @@
       "description": "Text animation with a shader in the background.",
       "author": "Matthias Hurrle",
       "source": "https://codepen.io/atzedent/pen/PwobBLM",
-      "hash": "e33d4def9e462c2b1055b3095f940d8fe6966b88"
+      "hash": "1c1f8e09d1027e9bf517d0652da57d8e345bd8fc"
     },
     {
       "id": "generator.79.more-columns",
@@ -640,7 +640,7 @@
       "description": "Particle Waves made with native WebGL shader",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/GPweQe",
-      "hash": "772281672fc9bdc2bb69e1968d5ff28b291faa84"
+      "hash": "fda1867c1cdde57e9b088e352632f11ce275c392"
     },
     {
       "id": "animation.81.remember-windows",
@@ -676,12 +676,14 @@
       "description": "Made with TroisJS",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JjEqebK",
-      "hash": "43f2edbd6d9bf789d8459dbd7c5d2de79710e447",
-      "parameters": {
-        "name": "POINTS_COUNT",
-        "default": 30000,
-        "description": "Number of points"
-      }
+      "hash": "7b470bfa91c8a6b7bc62578fa3539fa9408862aa",
+      "parameters": [
+        {
+          "name": "POINTS_COUNT",
+          "default": 30000,
+          "description": "Number of points"
+        }
+      ]
     },
     {
       "id": "animation.85.truchet-10-print-imitation",
