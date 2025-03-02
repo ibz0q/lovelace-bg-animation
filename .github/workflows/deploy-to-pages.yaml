@@ -47,7 +47,9 @@ jobs:
       - name: Upload initial artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: |
+            .
+            !./node_modules
           name: "initial-artifact-${{ github.run_id }}"  
 
       - name: Deploy to GitHub Pages
@@ -77,6 +79,11 @@ jobs:
         run: |
           echo "Deleting all schema folders..."
           find . -name "schema" -type d -prune -exec rm -rf {} +
+
+      - name: Delete helpers
+        run: |
+          echo "Deleting all helpers folders..."
+          find . -name "helpers" -type d -prune -exec rm -rf {} +
 
       - name: Delete dist
         run: |
