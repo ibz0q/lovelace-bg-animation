@@ -141,8 +141,7 @@ template: >
     </head>
     <body>
       <canvas id="canvas"></canvas>
-      <script type="x-shader/x-fragment">
-        #version 300 es
+      <script type="x-shader/x-fragment">#version 300 es
         /*********
         * made by Matthias Hurrle (@atzedent)
         */
