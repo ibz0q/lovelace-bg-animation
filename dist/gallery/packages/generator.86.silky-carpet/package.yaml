@@ -1,6 +1,6 @@
 version: v1
 metadata:
-  name: Trying out p5.js, noise carpet
+  name: Silky Carpet
   description: Trying out p5- simulating noise variance in small updates
   author: Sarah Drasner
   source: https://codepen.io/sdras/pen/EgmOKV
@@ -27,7 +27,21 @@ template: >
       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
       <script>
         function setup() {
-          createCanvas(1600, 900);
+          createCanvas(windowWidth, windowHeight);
+          doe();
+        }
+
+        function drawPoint(x, y, noiseFactor) {
+          push();
+          translate(x, y);
+          rotate(noiseFactor * radians(360));
+          colorMode(HSB);
+          stroke(x * 0.1 + 20, 50, 138);
+          line(0, 0, 7, 0);
+          pop();
+        }
+        
+        function doe() {
           background(142, 46, 139);
           smooth();
 
@@ -44,15 +58,10 @@ template: >
             }
           }
         }
-
-        function drawPoint(x, y, noiseFactor) {
-          push();
-          translate(x, y);
-          rotate(noiseFactor * radians(360));
-          colorMode(HSB);
-          stroke(x * 0.1 + 20, 50, 138);
-          line(0, 0, 7, 0);
-          pop();
+        
+        function windowResized() {
+          resizeCanvas(windowWidth, windowHeight);
+          doe();
         }
       </script>
     </body>
