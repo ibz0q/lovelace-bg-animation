@@ -36,9 +36,22 @@ jobs:
             echo "new_version=false" >> $GITHUB_ENV
           fi
 
+      - name: Create Release Zip (Only /dist)
+        if: env.new_version == 'true'
+        run: |
+          if [ -d dist ]; then
+            zip -r lovelace-bg-animation-v${{ env.version }}.zip dist
+          else
+            echo "Error: /dist folder not found!" && exit 1
+          fi
+        shell: bash
+
       - name: Create Draft Release
         if: env.new_version == 'true'
         run: |
-          gh release create v${{ env.version }} --draft --title "Release v${{ env.version }}" --notes "New release v${{ env.version }}"
+          gh release create v${{ env.version }} --draft \
+            --title "Release v${{ env.version }}" \
+            --notes "New release v${{ env.version }}" \
+            release-v${{ env.version }}.zip
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
