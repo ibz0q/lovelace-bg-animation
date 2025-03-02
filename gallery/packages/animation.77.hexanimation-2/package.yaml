@@ -1,20 +1,7 @@
 version: v1
 metadata:
   name: Hexanimation 2
-  description: >-
-    Mouse vertical position controls pattern size when you click.  
-
-    Mouse horizontal position controls animation speed during animation.  
-
-    Go slowly if you want to actually see the animation. The full drawing can
-    then be very lengthy, move the mouse to the right to see the final drawing.
-    I tried to animate all the patterns at the same time, but it was an ugly
-    mess.  
-
-    Based on a tessellation of hexagons,  which are more visible here than in
-    most of my other pens.  
-
-    See variant [here](https://codepen.io/Dillo/full/LYvowrg)
+  description: "Mouse vertical position controls pattern size when you click.  "
   author: Dillon
   source: https://codepen.io/Dillo/pen/poBXvgg
 helpers:

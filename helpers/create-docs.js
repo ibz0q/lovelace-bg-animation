@@ -171,7 +171,6 @@ regex = /(### 🙏 Contributors)([\s\S]*?)(## Usage)/;
 
 readmeContent = readmeContent.replace(regex, `$1\n\n${contributorsHtml}\n\n$3`);
 
-
 // Replace the version number with the one from package.json
 readmeContent = readmeContent.replace(/Current Release:\s*v[\d\.]+/g, `Current Release: v${version}`);
 

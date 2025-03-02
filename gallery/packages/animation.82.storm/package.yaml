@@ -1,7 +1,7 @@
 version: v1
 metadata:
   name: Storm
-  description: "Storm approaches"
+  description: Storm approaches
   author: Liam Egan
   source: https://codepen.io/shubniggurath/pen/BVKgJK
 helpers:
