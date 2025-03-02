@@ -47,9 +47,7 @@ jobs:
       - name: Upload initial artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            .
-            !./node_modules
+          path: '.'
           name: "initial-artifact-${{ github.run_id }}"  
 
       - name: Deploy to GitHub Pages
