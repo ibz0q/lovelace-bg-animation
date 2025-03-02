@@ -1052,19 +1052,19 @@ Found these dependencies in (../gallery/packages/animation.87.point-sprites/pack
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.79.more-columns/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.79.more-columns/preview.html) - *Author: Dillon* - Offline support? **Yes**
 
-###  > generator.86.trying-out-p5-js-noise-carpet (Trying out p5.js, noise carpet - Trying out p5- simulating noise variance in small updates)
+###  > generator.86.silky-carpet (Silky Carpet - Trying out p5- simulating noise variance in small updates)
 
-`- id: generator.86.trying-out-p5-js-noise-carpet`
+`- id: generator.86.silky-carpet`
 
 
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.86.trying-out-p5-js-noise-carpet/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.86.trying-out-p5-js-noise-carpet/preview.html) - *Author: Sarah Drasner* - Offline support? No
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.86.silky-carpet/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.86.silky-carpet/preview.html) - *Author: Sarah Drasner* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/generator.86.trying-out-p5-js-noise-carpet/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (../gallery/packages/generator.86.silky-carpet/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>

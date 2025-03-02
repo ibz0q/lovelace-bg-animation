@@ -1,6 +1,6 @@
 # Lovelace Background Animation
 
-Current Release: v1.0.7
+Current Release: v1.0.8
 
 A small Lovelace plugin that replaces the background with an animated one, various animations available. 
 
