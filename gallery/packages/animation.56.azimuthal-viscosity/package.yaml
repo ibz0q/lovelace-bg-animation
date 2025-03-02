@@ -99,7 +99,7 @@ template: >
         <a class="save" href="" download="capture.png">Save</a>
       </div>
 
-      <script src="./lodash.min.js"></script>
+      <script src="{{common: https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js }}"></script>
 
       <script>
         /**

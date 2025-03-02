@@ -134,7 +134,8 @@ async function processPackageManifest(packageConfig, packageManifest) {
       }
 
       if (packageManifest.template) {
-        const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*(.*?)\}\}/g;
+        const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
+        
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
           switch (type) {

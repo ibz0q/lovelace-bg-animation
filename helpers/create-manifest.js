@@ -74,9 +74,15 @@ async function readDirectory(dir) {
                   continue;
                 }
 
+                const options = {
+                  headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+                  }
+                };
+
                 console.log(`Fetching: ${url}`);
                 await new Promise((resolve, reject) => {
-                  https.get(url, (response) => {
+                  https.get(url.trim(), options, (response) => {
                     if (response.statusCode !== 200) {
                       reject(new Error(`Failed to fetch ${url}: status code ${response.statusCode}`));
                       return;
@@ -100,7 +106,7 @@ async function readDirectory(dir) {
               } else {
                 console.log(`Already exists: ${filePath}`);
               }
-              
+
               manifest.common[url] = { hash: sha1, filename: fileName };
 
             } catch (error) {
