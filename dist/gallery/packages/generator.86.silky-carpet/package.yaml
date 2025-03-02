@@ -40,7 +40,7 @@ template: >
           line(0, 0, 7, 0);
           pop();
         }
-        
+
         function doe() {
           background(142, 46, 139);
           smooth();
@@ -58,7 +58,7 @@ template: >
             }
           }
         }
-        
+
         function windowResized() {
           resizeCanvas(windowWidth, windowHeight);
           doe();

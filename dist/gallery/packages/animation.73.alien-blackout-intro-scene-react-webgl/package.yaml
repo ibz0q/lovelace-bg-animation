@@ -1,7 +1,7 @@
 version: v1
 metadata:
-  name: "Alien - Blackout Intro Scene"
-  description: "Made with React and WebGL"
+  name: Alien - Blackout Intro Scene
+  description: Made with React and WebGL
   author: Boris Šehovac
   source: https://codepen.io/bsehovac/pen/MNOEVe
 helpers:
