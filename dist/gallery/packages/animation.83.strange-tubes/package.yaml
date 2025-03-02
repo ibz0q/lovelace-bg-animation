@@ -36,17 +36,6 @@ template: >
           height: 100%;
         }
 
-        header {
-          position: absolute;
-          width: 100%;
-          text-align: center;
-        }
-
-        header h1 {
-          font-size: 2rem;
-          margin: 0.5em 0 0.2em;
-        }
-
         a {
           font-size: 0.9rem;
           color: #bbb;
@@ -61,13 +50,6 @@ template: >
       </style>
     </head>
     <body>
-      <header>
-        <h1>Strange Tubes #2</h1>
-        <a href="https://codepen.io/collection/AGZywR" target="_blank">
-          ThreeJS Collection
-        </a>
-      </header>
-
       <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.0.3/chroma.min.js"></script>
