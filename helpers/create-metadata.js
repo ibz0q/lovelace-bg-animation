@@ -71,7 +71,7 @@ function processPackageManifest(packageManifestObject) {
                     case 'parameters':
                     case 'parameter':
                     case 'param':
-                        return packageManifestObject.data.parameters.find(item => item.id == key)?.default || match;
+                        return packageManifestObject.data.parameters.find(item => item.name == key)?.default || match;
                     case 'metadata':
                     case 'meta':
                         return packageManifestObject.data.metadata?.[key] || match;

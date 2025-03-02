@@ -144,7 +144,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
             case 'parameters':
             case 'parameter':
             case 'param':
-              return (packageConfig.parameters && packageConfig.parameters[key]) ? packageConfig.parameters[key] : packageManifest.parameters.find(item => item.id == key)?.default || match;
+              return (packageConfig.parameters && packageConfig.parameters[key]) ? packageConfig.parameters[key] : packageManifest.parameters.find(item => item.name == key)?.default || match;
             case 'metadata':
             case 'meta':
               return packageManifest.metadata?.[key] || match;

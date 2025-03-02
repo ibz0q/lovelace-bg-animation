@@ -4,9 +4,9 @@ metadata:
   description: Inspired by [Ben Matthews]
   author: Dillon
   source: https://codepen.io/Dillo/pen/qEWQgXW
-  
+
 parameters:
-  - id: screen_duration
+  - name: screen_duration
     description: Time to cross the screen vertically
     default: 200
 
