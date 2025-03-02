@@ -1,14 +1,7 @@
 version: v1
 metadata:
   name: Truchet 10 Print (imitation)
-  description: >
-    Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10
-    Print](https://codepen.io/tsuhre/full/BaXJrgw)  
-
-    I have no idea of how Ben Matthews did it, I just tried to do the same thing
-    because I liked it.  
-
-    See [version with hexagonal tiles](https://codepen.io/Dillo/full/qEWQgXW)
+  description: Inspired by [Ben Matthews]
   author: Dillon
   source: https://codepen.io/Dillo/pen/raBqEZy
 helpers:
