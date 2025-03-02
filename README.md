@@ -49,11 +49,14 @@ Now add a valid configuration (see below). You should see a background animation
 
  - Jack Rugile (13)
  - Ben Matthews (8)
+ - Dillon (6)
  - Bas Groothedde (5)
  - Alex Andrix (5)
  - Matei Copot (5)
+ - Boris Šehovac (4)
  - Akimitsu Hamamuro (2)
  - yoichi kobayashi (2)
+ - Kevin Levron (2)
  - Takeshi Kano (1)
  - cssscript.com (1)
  - alphardex (1)
@@ -71,9 +74,13 @@ Now add a valid configuration (see below). You should see a background animation
  - Griffin Moyer (1)
  - tympanus (1)
  - Ray Victor PRO (1)
- - Boris Šehovac (1)
+ - Karl Saunders (1)
+ - Matthias Hurrle (1)
+ - Lanny (1)
+ - Liam Egan (1)
+ - AzazelN28 (1)
  - Fabio Ottaviani (1)
- - Dillon (1)
+ - Sarah Drasner (1)
 
 ### 🙏 Contributors
 
