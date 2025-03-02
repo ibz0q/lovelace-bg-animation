@@ -4,6 +4,12 @@ metadata:
   description: "Made with TroisJS"
   author: Kevin Levron
   source: https://codepen.io/soju22/pen/JjEqebK
+
+parameters:
+  name: POINTS_COUNT
+  default: 30000
+  description: Number of points
+
 helpers:
   insert_baseurl: true
 template: >
@@ -118,7 +124,6 @@ template: >
           <ZoomBlurPass :strength="zoomStrength" />
         </EffectComposer>
       </Renderer>
-      <a href="#" @click="updateColors" @mouseenter="targetTimeCoef = 100" @mouseleave="targetTimeCoef = 1">Random Colors</a>
     `,
           components: {
             BufferGeometry,
@@ -134,7 +139,7 @@ template: >
             ZoomBlurPass,
           },
           setup() {
-            const POINTS_COUNT = 50000;
+            const POINTS_COUNT = {{parameter: POINTS_COUNT}};
 
             const palette = niceColors[83];
 
@@ -161,8 +166,8 @@ template: >
 
             const clock = new Clock();
 
-            const timeCoef = 1,
-              targetTimeCoef = 1;
+            const timeCoef = 0.4,
+              targetTimeCoef = 0.4;
 
             return {
               POINTS_COUNT,
