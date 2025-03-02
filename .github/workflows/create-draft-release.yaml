@@ -5,6 +5,7 @@ on:
       workflows: ["Build Webpack Release"]  # Name of the workflow to wait for
       types:
         - completed
+    workflow_dispatch:
 
 jobs:
   create_release:
