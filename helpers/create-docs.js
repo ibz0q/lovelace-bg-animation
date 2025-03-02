@@ -179,7 +179,6 @@ readmeContent = readmeContent.replace(/Current Release:\s*v[\d\.]+/g, `Current R
 // Write the updated content back to the README.md file
 fs.writeFileSync(readmePath, readmeContent, 'utf8');
 
-
 console.log("README.md updated successfully");
 
 // Check if the EXTENDED.MD file exists
@@ -191,5 +190,3 @@ if (!fs.existsSync(documentationPath)) {
 fs.writeFileSync(documentationPath, extendedContent + availableBgs, 'utf8');
 // console.log(extendedContent + availableBgs);
 console.log("Documentation updated successfully");
-
-console.log(contributors);
