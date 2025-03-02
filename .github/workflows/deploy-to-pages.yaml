@@ -6,11 +6,6 @@ on:
     workflows: ["Generate Package Metadata"]
     types:
       - completed
-  push:
-    branches:
-      - main
-    paths:
-      - 'gallery/**'
 
 permissions:
   contents: read
