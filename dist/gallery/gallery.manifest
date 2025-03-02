@@ -695,13 +695,13 @@
       "hash": "9d8f02384f3da6e2dcdb2a5c9fa80cace794ddd6"
     },
     {
-      "id": "generator.86.trying-out-p5-js-noise-carpet",
+      "id": "generator.86.silky-carpet",
       "version": "v1",
-      "name": "Trying out p5.js, noise carpet",
+      "name": "Silky Carpet",
       "description": "Trying out p5- simulating noise variance in small updates",
       "author": "Sarah Drasner",
       "source": "https://codepen.io/sdras/pen/EgmOKV",
-      "hash": "63bdf1e90f98f7aaefd92093cad6f176631d76ab"
+      "hash": "4daf451ddaac46766944cbd1753fd27496143334"
     },
     {
       "id": "animation.87.point-sprites",
