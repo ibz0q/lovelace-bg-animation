@@ -469,7 +469,7 @@ template: >
     <body>
       <canvas id="c">Can't Vas</canvas>
 
-      <script src="./jquery.min.js"></script>
+      <script src="{{common: https://code.jquery.com/jquery-3.7.1.min.js }}"></script>
 
       <script>
         var c = document.getElementById("c"),

@@ -91,7 +91,7 @@ template: >
       </style>
     </head>
     <body>
-        <script src="{{common: https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js}}"></script>
+      <script src="{{common: https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js}}"></script>
 
       <script>
         /**
