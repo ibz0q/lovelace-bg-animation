@@ -7,7 +7,7 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
-      "hash": "93b2bd1a39aec1f5b95f780cdd93a765ae6599a3"
+      "hash": "302ed6b20230ab79df1fb6f8fa3a52a548531090"
     },
     {
       "id": "animation.2.shooting-stars",
@@ -259,7 +259,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-      "hash": "c5a5e35cc1a968e50b067165d3c39e068d3816f1"
+      "hash": "1b0c631b134f9047d67a5b191d20825eec125c5d"
     },
     {
       "id": "animation.31.blooming-flower",
@@ -322,7 +322,7 @@
       "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/zodPjd",
-      "hash": "f4db72559b45f5bfe8cc547b413f5959049d4b9a"
+      "hash": "e853c567e4d36c3555b5e4e8040f4dca5e11bbb0"
     },
     {
       "id": "animation.47.color-trails",
@@ -367,7 +367,7 @@
       "description": "Practicing with ThreeJS",
       "author": "Júlia Erő",
       "source": "https://codepen.io/planktone/pen/EPXMGj",
-      "hash": "15bb3d8db2b79f85a9d733765525e01b5c016ea0"
+      "hash": "fea09bdece68cda754b6ba1dc849e53192e60331"
     },
     {
       "id": "animation.53.stars",
@@ -473,7 +473,7 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "c3c30512655fde520b9e81769d13ca6fb354dcc2"
+      "hash": "9af247648d46f2634a8270bdfa6ec9028745eb6f"
     },
     {
       "id": "animation.65.cristal-lands",
@@ -527,7 +527,7 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "49cbb165d2dfa2f355f9d479722613dbec1238f5",
+      "hash": "e16cb5f0fd465a6c6a71fdb3c7ad353c87f24f9b",
       "parameters": [
         {
           "id": "opacity",
@@ -555,5 +555,22 @@
       "hash": "c40a61ae1b44300ec795bb9a1b064a262e637f51"
     }
   ],
-  "common": {}
+  "common": {
+    "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js": {
+      "hash": "21cab1e957740568c96355b3da95359b51243de3",
+      "filename": "lodash.min.js"
+    },
+    "https://code.jquery.com/jquery-3.7.1.min.js": {
+      "hash": "d0dbfbc15eee93c9f8a4adbc369a19800348310e",
+      "filename": "jquery-3.7.1.min.js"
+    },
+    "https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js": {
+      "hash": "0156f0d5d1e5a3d6080e0d931d4c2f289c1e8904",
+      "filename": "regl.min.js"
+    },
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js": {
+      "hash": "0124f316f5cd3c0c16e7950857ade07f5aed4467",
+      "filename": "three.min.js"
+    }
+  }
 }
