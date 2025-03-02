@@ -668,7 +668,7 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 `- id: animation.63.green-circuit`
 
 Supported params:
-- `textColor` - The color of the dots (defaults: `rgba(22,222,82,0.6992)`) 
+- `undefined` - The color of the dots (defaults: `rgba(22,222,82,0.6992)`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
@@ -776,7 +776,7 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 `- id: animation.70.blur`
 
 Supported params:
-- `opacity` - The opacity of the background (defaults: `0.5`) 
+- `undefined` - The opacity of the background (defaults: `0.5`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: tympanus* - Offline support? **Yes**
@@ -799,7 +799,7 @@ Supported params:
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
 
-###  > animation.73.alien-blackout-intro-scene-react-webgl (Alien: Blackout Intro Scene (React + WebGL) - Alien: Blackout Intro Scene made with React and WebGL)
+###  > animation.73.alien-blackout-intro-scene-react-webgl (Alien - Blackout Intro Scene - Made with React and WebGL)
 
 `- id: animation.73.alien-blackout-intro-scene-react-webgl`
 
@@ -825,6 +825,15 @@ Found these dependencies in (../gallery/packages/animation.73.alien-blackout-int
 <br />
 
 
+###  > animation.73.canvas-ribbons (Canvas Ribbons - )
+
+`- id: animation.73.canvas-ribbons`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.73.canvas-ribbons/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.73.canvas-ribbons/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
+
 ###  > animation.74.dvd-screensaver (DVD Screensaver - Simple DVD screensaver implementation with requestAnimationFrame)
 
 `- id: animation.74.dvd-screensaver`
@@ -834,22 +843,17 @@ Found these dependencies in (../gallery/packages/animation.73.alien-blackout-int
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.74.dvd-screensaver/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.74.dvd-screensaver/preview.html) - *Author: Karl Saunders* - Offline support? **Yes**
 
-###  > animation.75.hexagonal-truchet-10-print (Hexagonal Truchet 10 Print - Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10 Print](https://codepen.io/tsuhre/full/BaXJrgw)  
-I have no idea of how Ben Matthews did it, I just tried to do the same thing because I liked it.  
-I am using hexagonal tiles in this version. Click on the canvas or re-run the pen to try different  sets of tiles and color schemes)
+###  > animation.75.hexagonal-truchet-10-print (Hexagonal Truchet 10 Print - Inspired by [Ben Matthews])
 
 `- id: animation.75.hexagonal-truchet-10-print`
 
-
+Supported params:
+- `undefined` - Time to cross the screen vertically (defaults: `200`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.75.hexagonal-truchet-10-print/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.75.hexagonal-truchet-10-print/preview.html) - *Author: Dillon* - Offline support? **Yes**
 
-###  > animation.76.hexanimation (Hexanimation - Mouse vertical position controls pattern size when you click.  
-Mouse horizontal position controls animation speed during animation.  
-Go slowly if you want to actually see the animation. The full drawing can then be very lengthy, move the mouse to the right to see the final drawing. I tried to animate all the patterns at the same time, but it was an ugly mess.  
-Based on a tessellation of hexagons,  which are more visible here than in most of my other pens.  
-See variant [here](https://codepen.io/Dillo/full/poBXvgg))
+###  > animation.76.hexanimation (Hexanimation - Mouse vertical position controls pattern size when you click.)
 
 `- id: animation.76.hexanimation`
 
@@ -880,16 +884,6 @@ See variant [here](https://codepen.io/Dillo/full/LYvowrg))
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.78.just-in-case/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.78.just-in-case/preview.html) - *Author: Matthias Hurrle* - Offline support? **Yes**
 
-###  > animation.79.more-columns (More columns - New variant still inspired by [Sophia (fractal kitty)](https://codepen.io/fractalkitty)'s pen [Spark Studio Coding night](https://codepen.io/fractalkitty/pen/ZYEWNmL)  
-Click for new drawing.)
-
-`- id: animation.79.more-columns`
-
-
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.79.more-columns/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.79.more-columns/preview.html) - *Author: Dillon* - Offline support? **Yes**
-
 ###  > animation.80.particle-waves-webgl-shader (Particle Waves WebGL Shader - Particle Waves made with native WebGL shader)
 
 `- id: animation.80.particle-waves-webgl-shader`
@@ -916,7 +910,7 @@ Found these dependencies in (../gallery/packages/animation.80.particle-waves-web
 <br />
 
 
-###  > animation.81.remember-windows (Remember Windows? - Experimenting with wander motion via the CreateJS Perlin Noise Machine. Ended up with something resembling the old Windows screensaver.)
+###  > animation.81.remember-windows (Remember Windows? - The old Windows screensaver.)
 
 `- id: animation.81.remember-windows`
 
@@ -942,7 +936,7 @@ Found these dependencies in (../gallery/packages/animation.81.remember-windows/p
 <br />
 
 
-###  > animation.82.storm (Storm - )
+###  > animation.82.storm (Storm - Storm approaches)
 
 `- id: animation.82.storm`
 
@@ -968,21 +962,19 @@ Found these dependencies in (../gallery/packages/animation.82.storm/package.yaml
 <br />
 
 
-###  > animation.83.strange-tubes-2 (Strange Tubes #2 - Tubes, again... 
-Click to randomize colors.
-OrbitControl enabled.)
+###  > animation.83.strange-tubes (Strange Tubes #2 - Tubes, again...)
 
-`- id: animation.83.strange-tubes-2`
+`- id: animation.83.strange-tubes`
 
 
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.83.strange-tubes-2/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.83.strange-tubes-2/preview.html) - *Author: Kevin Levron* - Offline support? No
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.83.strange-tubes/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.83.strange-tubes/preview.html) - *Author: Kevin Levron* - Offline support? No
 <details>
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.83.strange-tubes-2/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (../gallery/packages/animation.83.strange-tubes/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
@@ -996,31 +988,15 @@ Found these dependencies in (../gallery/packages/animation.83.strange-tubes-2/pa
 <br />
 
 
-###  > animation.84.troisjs-starfield (TroisJS Starfield - Made with TroisJS : https://github.com/troisjs/trois)
+###  > animation.84.troisjs-starfield (Color Starfield - Made with TroisJS)
 
 `- id: animation.84.troisjs-starfield`
 
-
+Supported params:
+- `undefined` - Number of points (defaults: `30000`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/preview.html) - *Author: Kevin Levron* - Offline support? No
-<details>
-    <summary>(external dependencies detected, need inlining)</summary>
-    <br />
-
-Found these dependencies in (../gallery/packages/animation.84.troisjs-starfield/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
-
-```HTML
-<script src="https://codepen.io/soju22/pen/mdRYQrq/40e576c3acef9d41be38338a5abfc3d4.js"></script>
-```
-
----
-
-</details>
-
-
-<br />
-
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/preview.html) - *Author: Kevin Levron* - Offline support? **Yes**
 
 ###  > animation.85.truchet-10-print-imitation (Truchet 10 Print (imitation) - Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10 Print](https://codepen.io/tsuhre/full/BaXJrgw)  
 I have no idea of how Ben Matthews did it, I just tried to do the same thing because I liked it.  
@@ -1087,14 +1063,14 @@ Found these dependencies in (../gallery/packages/animation.87.point-sprites/pack
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.2.knots/preview.html) - *Author: Dillon* - Offline support? **Yes**
 
-###  > generator.73.canvas-ribbons (Canvas Ribbons - )
+###  > generator.79.more-columns (More columns - Randomly generated columns)
 
-`- id: generator.73.canvas-ribbons`
+`- id: generator.79.more-columns`
 
 
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.73.canvas-ribbons/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.73.canvas-ribbons/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.79.more-columns/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.79.more-columns/preview.html) - *Author: Dillon* - Offline support? **Yes**
 
 ###  > generator.86.trying-out-p5-js-noise-carpet (Trying out p5.js, noise carpet - Trying out p5- simulating noise variance in small updates)
 
