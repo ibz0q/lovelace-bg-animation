@@ -1,0 +1,43 @@
+name: Draft Release
+
+on:
+    workflow_run:
+      workflows: ["Build Webpack Release"]  # Name of the workflow to wait for
+      types:
+        - completed
+
+jobs:
+  create_release:
+    name: Create Draft Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Read package.json Version
+        id: package_version
+        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+      - name: Get Latest Release Version
+        id: latest_release
+        run: |
+          LATEST_TAG=$(gh release list --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "")
+          echo "latest_tag=${LATEST_TAG#v}" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compare Versions
+        id: check_version
+        run: |
+          if [ -z "$latest_tag" ] || [ "$latest_tag" != "$version" ]; then
+            echo "new_version=true" >> $GITHUB_ENV
+          else
+            echo "new_version=false" >> $GITHUB_ENV
+          fi
+
+      - name: Create Draft Release
+        if: env.new_version == 'true'
+        run: |
+          gh release create v${{ env.version }} --draft --title "Release v${{ env.version }}" --notes "New release v${{ env.version }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

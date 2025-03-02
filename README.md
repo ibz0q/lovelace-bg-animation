@@ -23,9 +23,7 @@ You can install this plugin two ways:
 
 Click this button which automatically downloads this plugin. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
 
-If the above button does not work then:  
-
-Open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". 
+Alternatively: open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". 
 
 Click the Explore & Download Repositories button and search for "Live Background Animations" open and click Download.
 
