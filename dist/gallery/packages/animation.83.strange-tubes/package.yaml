@@ -1,7 +1,7 @@
 version: v1
 metadata:
   name: "Strange Tubes #2"
-  description: Tubes, again... 
+  description: Tubes, again...
   author: Kevin Levron
   source: https://codepen.io/soju22/pen/JzzvbR
 helpers:

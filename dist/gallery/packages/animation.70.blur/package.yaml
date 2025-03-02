@@ -4,12 +4,10 @@ metadata:
   description: Shift
   author: tympanus
   source: https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html
-
 parameters:
   - name: opacity
     default: "0.5"
     description: The opacity of the background
-
 helpers:
   insert_baseurl: true
 template: >

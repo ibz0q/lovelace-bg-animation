@@ -1,7 +1,7 @@
 version: v1
 metadata:
   name: Hexanimation
-  description: Mouse vertical position controls pattern size when you click.  
+  description: Mouse vertical position controls pattern size when you click.
   author: Dillon
   source: https://codepen.io/Dillo/pen/LYvowrg
 helpers:
