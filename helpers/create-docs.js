@@ -107,12 +107,11 @@ ${offlineMode}
       //     default: "rgba(22,222,82,0.6992)"
 
 
-      // include a table of available parameters 
       let parameters = "";
       if (packageData?.parameters) {
         parameters = `Supported params:`;
         packageData.parameters.forEach(element => {
-          parameters += `\n- \`${element.id}\` - ${element.description} (defaults: \`${element.default}\`) `;
+          parameters += `\n- \`${element.name}\` - ${element.description} (defaults: \`${element.default}\`) `;
 
         }
         )
