@@ -1,0 +1,703 @@
+version: v1
+metadata:
+  name: "Alien: Blackout Intro Scene (React + WebGL)"
+  description: "Alien: Blackout Intro Scene made with React and WebGL"
+  author: Boris Šehovac
+  source: https://codepen.io/bsehovac/pen/MNOEVe
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Alien: Blackout Intro Scene (React + WebGL)</title>
+      <style>
+        .shader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #000;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="root"></div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.production.min.js"></script>
+      <script>
+                      const Shader = ({
+                  antialias,
+                  depthTest,
+                  vertex,
+                  fragment,
+                  onResize,
+                  children,
+                  style,
+                  className }) =>
+                {
+                  const canvas = React.useRef(null);
+                  const wrapper = React.useRef(null);
+                  const [gl, setGl] = React.useState(null);
+                  const [program, setProgram] = React.useState(null);
+                  const [count, setCount] = React.useState(0);
+                  const [stage, setStage] = React.useState({ width: 0, height: 0 });
+
+                  React.useEffect(() => {
+                    const gl = canvas.current.getContext('webgl', { antialias });
+
+                    gl.enable(gl.BLEND);
+                    gl.enable(gl.CULL_FACE);
+                    gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+                    gl[depthTest ? 'enable' : 'disable'](gl.DEPTH_TEST);
+
+                    const createShader = (type, source) => {
+                      const shader = gl.createShader(type);
+                      gl.shaderSource(shader, source);
+                      gl.compileShader(shader);
+                      if (gl.getShaderParameter(shader, gl.COMPILE_STATUS)) return shader;else
+                      {
+                        console.log(gl.getShaderInfoLog(shader));
+                        gl.deleteShader(shader);
+                      }
+                    };
+
+                    const program = gl.createProgram();
+                    gl.attachShader(program, createShader(gl.VERTEX_SHADER, vertex));
+                    gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, fragment));
+                    gl.linkProgram(program);
+
+                    if (gl.getProgramParameter(program, gl.LINK_STATUS)) gl.useProgram(program);else
+                    {
+                      console.log(gl.getProgramInfoLog(program));
+                      gl.deleteProgram(program);
+                    }
+
+                    setGl(gl);
+                    setProgram(program);
+                  }, []);
+
+                  React.useEffect(() => {
+                    if (!gl || !program) return;
+
+                    const onShaderResize = () => {
+                      const dpi = window.devicePixelRatio;
+                      const { offsetWidth, offsetHeight } = wrapper.current;
+                      const width = offsetWidth * dpi;
+                      const height = offsetHeight * dpi;
+
+                      canvas.current.width = width;
+                      canvas.current.height = height;
+
+                      gl.viewport(0, 0, width, height);
+                      gl.clearColor(0, 0, 0, 0);
+
+                      onResize(offsetWidth, offsetHeight, dpi);
+                      setStage({ width, height });
+                    };
+                    onShaderResize();
+
+                    window.addEventListener('resize', onShaderResize);
+                    return () => window.removeEventListener('resize', onShaderResize);
+                  }, [gl, program]);
+
+                  React.useEffect(() => {
+                    if (count) gl.drawArrays(gl.POINTS, 0, count);
+                  });
+
+                  return /*#__PURE__*/(
+                    React.createElement("div", { ref: wrapper, style: { ...style }, className: className }, /*#__PURE__*/
+                    React.createElement("canvas", { ref: canvas, style: { display: 'block', width: '100%', height: '100%' } }),
+                    gl !== null && program !== null && React.Children.map(children, (child) =>
+                    React.cloneElement(child, { gl, program, stage, setCount }))));
+
+
+
+                };
+
+                const Uniform = ({
+                  name,
+                  type,
+                  value,
+                  gl,
+                  program }) =>
+                {
+                  const data = React.useRef({ update: () => {} });
+
+                  React.useEffect(() => {
+                    const location = gl.getUniformLocation(program, name);
+                    const update = {
+                      'int': value => gl.uniform1i(location, value),
+                      'float': value => gl.uniform1f(location, value),
+                      'vec2': value => gl.uniform2f(location, ...value),
+                      'vec3': value => gl.uniform3f(location, ...value),
+                      'vec4': value => gl.uniform4f(location, ...value),
+                      'mat2': value => gl.uniformMatrix2fv(location, false, value),
+                      'mat3': value => gl.uniformMatrix3fv(location, false, value),
+                      'mat4': value => gl.uniformMatrix4fv(location, false, value) }[
+                    type];
+
+                    data.current = { update };
+                  }, []);
+
+                  React.useEffect(() => {
+                    const { update } = data.current;
+                    update(value);
+                  }, [value]);
+
+                  return null;
+                };
+
+                const Attribute = ({
+                  name = '',
+                  size = 3,
+                  value = [],
+                  main = false,
+                  gl,
+                  program,
+                  setCount }) =>
+                {
+                  const data = React.useRef({ update: () => {} });
+
+                  React.useEffect(() => {
+                    const index = gl.getAttribLocation(program, name);
+                    const buffer = gl.createBuffer();
+
+                    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                    gl.enableVertexAttribArray(index);
+                    gl.vertexAttribPointer(index, size, gl.FLOAT, false, 0, 0);
+
+                    const update = value => {
+                      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+                      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(value), gl.STATIC_DRAW);
+                    };
+
+                    data.current = { update };
+                  }, []);
+
+                  React.useEffect(() => {
+                    const { update } = data.current;
+                    if (main === true) setCount(value.length / size);
+                    update(value);
+                  }, [value]);
+
+                  return null;
+                };
+
+                const Texture = ({
+                  src = null,
+                  gl }) =>
+                {
+                  React.useEffect(() => {
+                    const texture = gl.createTexture();
+                    gl.bindTexture(gl.TEXTURE_2D, texture);
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 0]));
+
+                    const img = new Image();
+                    img.onload = () => {
+                      gl.bindTexture(gl.TEXTURE_2D, texture);
+                      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+                      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                    };
+                    img.src = src;
+                  }, []);
+
+                  return null;
+                };
+
+                const Camera = ({
+                  fov,
+                  near,
+                  far,
+                  position,
+                  target,
+                  perspective,
+                  gl,
+                  program,
+                  stage: { width, height } }) =>
+                {
+                  const [projection, setProjection] = React.useState(Array.from({ length: 16 }));
+
+                  React.useEffect(() => {
+                    setProjection(createProjection({
+                      width,
+                      height,
+                      perspective,
+                      fov,
+                      near,
+                      far,
+                      position,
+                      target }));
+
+                  }, [fov, near, far, position, perspective, width, height]);
+
+                  return /*#__PURE__*/(
+                    React.createElement(Uniform, { name: "u_projection", type: "mat4", value: projection, gl: gl, program: program }));
+
+                };
+
+                const createProjection = ({
+                  width,
+                  height,
+                  fov = 60,
+                  near = 1,
+                  far = 10000,
+                  position = [0, 0, 100],
+                  target = [0, 0, 0],
+                  perspective = true }) =>
+                {
+                  if (perspective) {
+                    const aspect = width / height;
+
+                    const fovRad = fov * (Math.PI / 180);
+                    const f = Math.tan(Math.PI / 2 - fovRad / 2);
+                    const rangeInv = 1.0 / (near - far);
+
+                    const projectionMatrix = [
+                    f / aspect, 0, 0, 0,
+                    0, f, 0, 0,
+                    0, 0, (near + far) * rangeInv, -1,
+                    0, 0, near * far * rangeInv * 2, 0];
+
+
+                    const normalize = v => {
+                      const length = Math.sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+                      return length > 0 ? [v[0] / length, v[1] / length, v[2] / length] : [0, 0, 0];
+                    };
+
+                    const cross = (a, b) => [
+                    a[1] * b[2] - a[2] * b[1],
+                    a[2] * b[0] - a[0] * b[2],
+                    a[0] * b[1] - a[1] * b[0]];
+
+
+                    const subtract = (a, b) => [
+                    a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+
+
+                    const multiply = (a, b) => {
+                      return a.reduce((acc, val, idx) => {
+                        const i = Math.floor(idx / 4) * 4;
+                        const j = idx % 4;
+                        acc[idx] = b[i] * a[j] + b[i + 1] * a[j + 4] + b[i + 2] * a[j + 8] + b[i + 3] * a[j + 12];
+                        return acc;
+                      }, []);
+                    };
+
+                    const inverse = a => {
+                      const b = [
+                      a[0] * a[5] - a[1] * a[4], a[0] * a[6] - a[2] * a[4],
+                      a[0] * a[7] - a[3] * a[4], a[1] * a[6] - a[2] * a[5],
+                      a[1] * a[7] - a[3] * a[5], a[2] * a[7] - a[3] * a[6],
+                      a[8] * a[13] - a[9] * a[12], a[8] * a[14] - a[10] * a[12],
+                      a[8] * a[15] - a[11] * a[12], a[9] * a[14] - a[10] * a[13],
+                      a[9] * a[15] - a[11] * a[13], a[10] * a[15] - a[11] * a[14]];
+
+
+                      const det = 1.0 / (b[0] * b[11] - b[1] * b[10] + b[2] * b[9] + b[3] * b[8] - b[4] * b[7] + b[5] * b[6]);
+
+                      return [
+                      (a[5] * b[11] - a[6] * b[10] + a[7] * b[9]) * det,
+                      (a[2] * b[10] - a[1] * b[11] - a[3] * b[9]) * det,
+                      (a[13] * b[5] - a[14] * b[4] + a[15] * b[3]) * det,
+                      (a[10] * b[4] - a[9] * b[5] - a[11] * b[3]) * det,
+                      (a[6] * b[8] - a[4] * b[11] - a[7] * b[7]) * det,
+                      (a[0] * b[11] - a[2] * b[8] + a[3] * b[7]) * det,
+                      (a[14] * b[2] - a[12] * b[5] - a[15] * b[1]) * det,
+                      (a[8] * b[5] - a[10] * b[2] + a[11] * b[1]) * det,
+                      (a[4] * b[10] - a[5] * b[8] + a[7] * b[6]) * det,
+                      (a[1] * b[8] - a[0] * b[10] - a[3] * b[6]) * det,
+                      (a[12] * b[4] - a[13] * b[2] + a[15] * b[0]) * det,
+                      (a[9] * b[2] - a[8] * b[4] - a[11] * b[0]) * det,
+                      (a[5] * b[7] - a[4] * b[9] - a[6] * b[6]) * det,
+                      (a[0] * b[9] - a[1] * b[7] + a[2] * b[6]) * det,
+                      (a[13] * b[1] - a[12] * b[3] - a[14] * b[0]) * det,
+                      (a[8] * b[3] - a[9] * b[1] + a[10] * b[0]) * det];
+
+                    };
+
+                    const z = normalize(subtract(position, target));
+                    const x = normalize(cross([0, 1, 0], z));
+                    const y = normalize(cross(z, x));
+
+                    const cameraMatrix = [
+                    x[0], x[1], x[2], 0,
+                    y[0], y[1], y[2], 0,
+                    z[0], z[1], z[2], 0,
+                    position[0], position[1], position[2], 1];
+
+
+                    return multiply(projectionMatrix, inverse(cameraMatrix));
+                  } else {
+                    return [
+                    2 / width, 0, 0, 0,
+                    0, -2 / height, 0, 0,
+                    0, 0, 1, 0,
+                    -1, 1, 0, 1];
+
+                  }
+                };
+
+                const useAnimationFrame = cb => {
+                  const [, setRefresh] = React.useState(false);
+
+                  React.useEffect(() => {
+                    const start = performance.now();
+                    let old = start;
+                    let raf = null;
+
+                    const frame = () => {
+                      raf = requestAnimationFrame(frame);
+
+                      const now = performance.now();
+                      const delta = now - old;
+                      const elapsed = (now - start) / 5000;
+                      old = now;
+
+                      setRefresh(f => !f);
+                      cb(delta, elapsed);
+                    };
+
+                    raf = requestAnimationFrame(frame);
+                    return () => cancelAnimationFrame(raf);
+                  }, []);
+                };
+      </script>
+      <script>
+        // https://github.com/bsehovac/react-shader
+
+        const vertex = `
+    precision highp float;
+
+    attribute vec4 a_position;
+    attribute vec4 a_color;
+    attribute float a_size;
+    attribute vec2 a_twinkle;
+
+    uniform mat4 u_projection;
+    uniform float u_time;
+    uniform vec2 u_screen;
+    uniform float u_speed;
+
+    varying vec4 v_color;
+
+    void main() {
+      vec3 pos = a_position.xyz;
+
+      pos.x = mod(pos.x + u_time * u_speed, u_screen.x * 2.0);
+
+      gl_Position = u_projection * vec4(pos.xyz, a_position.w);
+      gl_PointSize = (a_size / gl_Position.w);
+
+      v_color = a_color;
+      if (a_twinkle.x > 0.0) {
+        float min = 0.2;
+        v_color.a = min * v_color.a + ((sin(u_time * a_twinkle.y) + 1.0) * 0.5) * (1.0 - min) * v_color.a;
+      }
+    }
+  `;
+
+        const fragment = `
+    precision highp float;
+
+    varying vec4 v_color;
+
+    void main() {
+      if (length(gl_PointCoord - vec2(0.5)) > 0.5) discard;
+      gl_FragColor = v_color;
+    }
+  `;
+
+        const perlin = (() => {
+          const fade = (t) => t * t * t * (t * (t * 6 - 15) + 10);
+          const lerp = (t, a, b) => a + t * (b - a);
+          const scale = (n) => (1 + n) / 2;
+          const grad = (hash, x, y, z) => {
+            const h = hash & 15;
+            const u = h < 8 ? x : y;
+            const v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+            return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+          };
+
+          return (x, y, z) => {
+            const p = new Array(512);
+            const permutation = [
+              151, 160, 137, 91, 90, 15, 131, 13, 201, 95, 96, 53, 194, 233, 7,
+              225, 140, 36, 103, 30, 69, 142, 8, 99, 37, 240, 21, 10, 23, 190, 6,
+              148, 247, 120, 234, 75, 0, 26, 197, 62, 94, 252, 219, 203, 117, 35,
+              11, 32, 57, 177, 33, 88, 237, 149, 56, 87, 174, 20, 125, 136, 171,
+              168, 68, 175, 74, 165, 71, 134, 139, 48, 27, 166, 77, 146, 158, 231,
+              83, 111, 229, 122, 60, 211, 133, 230, 220, 105, 92, 41, 55, 46, 245,
+              40, 244, 102, 143, 54, 65, 25, 63, 161, 1, 216, 80, 73, 209, 76,
+              132, 187, 208, 89, 18, 169, 200, 196, 135, 130, 116, 188, 159, 86,
+              164, 100, 109, 198, 173, 186, 3, 64, 52, 217, 226, 250, 124, 123, 5,
+              202, 38, 147, 118, 126, 255, 82, 85, 212, 207, 206, 59, 227, 47, 16,
+              58, 17, 182, 189, 28, 42, 223, 183, 170, 213, 119, 248, 152, 2, 44,
+              154, 163, 70, 221, 153, 101, 155, 167, 43, 172, 9, 129, 22, 39, 253,
+              19, 98, 108, 110, 79, 113, 224, 232, 178, 185, 112, 104, 218, 246,
+              97, 228, 251, 34, 242, 193, 238, 210, 144, 12, 191, 179, 162, 241,
+              81, 51, 145, 235, 249, 14, 239, 107, 49, 192, 214, 31, 181, 199,
+              106, 157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254,
+              138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78,
+              66, 215, 61, 156, 180,
+            ];
+            for (let i = 0; i < 256; i++) p[256 + i] = p[i] = permutation[i];
+
+            const X = Math.floor(x) & 255;
+            const Y = Math.floor(y) & 255;
+            const Z = Math.floor(z) & 255;
+            x -= Math.floor(x);
+            y -= Math.floor(y);
+            z -= Math.floor(z);
+            const u = fade(x);
+            const v = fade(y);
+            const w = fade(z);
+            const A = p[X] + Y,
+              AA = p[A] + Z,
+              AB = p[A + 1] + Z;
+            const B = p[X + 1] + Y,
+              BA = p[B] + Z,
+              BB = p[B + 1] + Z;
+
+            return scale(
+              lerp(
+                w,
+                lerp(
+                  v,
+                  lerp(u, grad(p[AA], x, y, z), grad(p[BA], x - 1, y, z)),
+                  lerp(u, grad(p[AB], x, y - 1, z), grad(p[BB], x - 1, y - 1, z)),
+                ),
+
+                lerp(
+                  v,
+                  lerp(
+                    u,
+                    grad(p[AA + 1], x, y, z - 1),
+                    grad(p[BA + 1], x - 1, y, z - 1),
+                  ),
+                  lerp(
+                    u,
+                    grad(p[AB + 1], x, y - 1, z - 1),
+                    grad(p[BB + 1], x - 1, y - 1, z - 1),
+                  ),
+                ),
+              ),
+            );
+          };
+        })();
+
+        const rnd = (a = 1, b) => {
+          const range = typeof b !== "undefined";
+          return (range ? a : 0) + Math.random() * (range ? b - a : a);
+        };
+
+        const perlinStars = ({
+          cellSize = 100,
+          cellStars = 10,
+          perlinScale = 0.002,
+          perlinSeed = null,
+          perlinMin = 0.45,
+          width = window.innerWidth,
+          height = window.innerHeight,
+          sizeMin = 2.5,
+          sizeMax = 4,
+          alphaMin = 0.2,
+          alphaMax = 1,
+        } = {}) => {
+          const w = Math.ceil(width / cellSize);
+          const h = Math.ceil(height / cellSize);
+
+          const scale = cellSize * perlinScale;
+          const seed = perlinSeed || rnd();
+
+          const cells = [];
+
+          for (let x = 0; x < w; x++)
+            for (let y = 0; y < h; y++)
+              cells.push({ x, y, noise: perlin(x * scale, y * scale, seed) });
+
+          const { min, max } = cells.reduce(
+            (acc, cell) => {
+              if (cell.noise > acc.max) acc.max = cell.noise;
+              if (cell.noise < acc.min) acc.min = cell.noise;
+              return acc;
+            },
+            { min: 1, max: 0 },
+          );
+
+          return cells.reduce((acc, { x, y, noise }) => {
+            noise -= min;
+            noise *= 1 / (max - min);
+            if (noise < perlinMin) return acc;
+            noise -= perlinMin;
+            noise *= 1 / perlinMin;
+
+            for (let s = 0; s < noise * cellStars; s++)
+              acc.push({
+                x: x * cellSize + rnd(cellSize),
+                y: y * cellSize + rnd(cellSize),
+                size: rnd(sizeMin, sizeMax),
+                alpha: noise * rnd(alphaMin, alphaMax),
+              });
+
+            return acc;
+          }, []);
+        };
+
+        const cellStars = ({
+          cellSize = 100,
+          cellStars = 30,
+          width = window.innerWidth,
+          height = window.innerHeight,
+          sizeMin = 1,
+          sizeMax = 3,
+          alphaMin = 0.1,
+          alphaMax = 0.5,
+        } = {}) => {
+          const w = Math.ceil(width / cellSize);
+          const h = Math.ceil(height / cellSize);
+
+          const cells = [];
+
+          for (let x = 0; x < w; x++)
+            for (let y = 0; y < h; y++) cells.push({ x, y });
+
+          return cells.reduce((acc, { x, y }) => {
+            for (let s = 0; s < rnd(cellStars); s++)
+              acc.push({
+                x: x * cellSize + rnd(cellSize),
+                y: y * cellSize + rnd(cellSize),
+                size: rnd(sizeMin, sizeMax),
+                alpha: rnd(alphaMin, alphaMax), // * 0.5
+              });
+
+            return acc;
+          }, []);
+        };
+
+        const StarsShader = () => {
+          const data = React.useRef({
+            position: [],
+            color: [],
+            size: [],
+            twinkle: [],
+            screen: [0, 0],
+            elapsed: 0,
+            speed: 0,
+          }).current;
+
+          useAnimationFrame((delta, elapsed) => {
+            data.elapsed = elapsed;
+          });
+
+          const onResize = (width, height, dpi) => {
+            const position = [],
+              color = [],
+              size = [],
+              twinkle = [];
+
+            cellStars({ width: width * 2, height }).forEach(
+              ({ x, y, size: s, alpha: a }) => {
+                const c = (s - 1) / 2;
+                position.push(x * dpi, y * dpi, 0);
+                color.push(c, c, 1, a);
+                size.push(s * dpi);
+                twinkle.push(rnd() > 0.75, rnd(5, 10));
+              },
+            );
+
+            perlinStars({ width: width * 2, height }).forEach(
+              ({ x, y, size: s, alpha: a }) => {
+                const c = 1 / 2 + (1 / 2) * ((s - 2) / 2);
+                position.push(x * dpi, y * dpi, 0);
+                color.push(c, c, 1, a);
+                size.push(s * dpi);
+                twinkle.push(rnd() > 0.75, rnd(5, 20));
+              },
+            );
+
+            const screen = [width * dpi, height * dpi];
+            const speed = -50 * dpi;
+
+            Object.assign(data, {
+              position,
+              size,
+              color,
+              twinkle,
+              screen,
+              speed,
+            });
+          };
+
+          const style = { position: "absolute", width: "100%", height: "100%" };
+          const { elapsed, position, size, color, twinkle, screen, speed } = data;
+
+          return /*#__PURE__*/ React.createElement(
+            Shader,
+            {
+              vertex: vertex,
+              fragment: fragment,
+              style: style,
+              onResize: onResize,
+              className: "shader",
+            } /*#__PURE__*/,
+            React.createElement(Camera, { perspective: false }) /*#__PURE__*/,
+            React.createElement(Attribute, {
+              name: "a_position",
+              size: 3,
+              value: position,
+              main: true,
+            }) /*#__PURE__*/,
+            React.createElement(Attribute, {
+              name: "a_size",
+              size: 1,
+              value: size,
+            }) /*#__PURE__*/,
+            React.createElement(Attribute, {
+              name: "a_twinkle",
+              size: 2,
+              value: twinkle,
+            }) /*#__PURE__*/,
+            React.createElement(Attribute, {
+              name: "a_color",
+              size: 4,
+              value: color,
+            }) /*#__PURE__*/,
+            React.createElement(Uniform, {
+              name: "u_time",
+              type: "float",
+              value: elapsed,
+            }) /*#__PURE__*/,
+            React.createElement(Uniform, {
+              name: "u_speed",
+              type: "float",
+              value: 5,
+            }) /*#__PURE__*/,
+            React.createElement(Uniform, {
+              name: "u_screen",
+              type: "vec2",
+              value: screen,
+            }) /*#__PURE__*/,
+            React.createElement(Uniform, {
+              name: "u_speed",
+              type: "float",
+              value: speed,
+            }),
+          );
+        };
+
+        ReactDOM.render(
+          /*#__PURE__*/
+          React.createElement(StarsShader, null),
+          document.getElementById("root"),
+        );
+      </script>
+    </body>
+  </html>
