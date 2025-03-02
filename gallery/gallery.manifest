@@ -553,7 +553,168 @@
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
       "hash": "c40a61ae1b44300ec795bb9a1b064a262e637f51"
+    },
+    {
+      "id": "animation.73.alien-blackout-intro-scene-react-webgl",
+      "version": "v1",
+      "name": "Alien: Blackout Intro Scene (React + WebGL)",
+      "description": "Alien: Blackout Intro Scene made with React and WebGL",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/MNOEVe",
+      "hash": "530158a1083e07d7aae2c2896414ba6059c2a31b"
+    },
+    {
+      "id": "generator.73.canvas-ribbons",
+      "version": "v1",
+      "name": "Canvas Ribbons",
+      "description": "",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/LQVzxJ",
+      "hash": "a07c3e946098fe6bef012387388763e31af71f13"
+    },
+    {
+      "id": "animation.74.dvd-screensaver",
+      "version": "v1",
+      "name": "DVD Screensaver",
+      "description": "Simple DVD screensaver implementation with requestAnimationFrame",
+      "author": "Karl Saunders",
+      "source": "https://codepen.io/Mobius1/pen/wGVveZ",
+      "hash": "a986d32d2c4c9b26d2d11927f87306d7f87579ff"
+    },
+    {
+      "id": "animation.75.hexagonal-truchet-10-print",
+      "version": "v1",
+      "name": "Hexagonal Truchet 10 Print",
+      "description": "Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10 Print](https://codepen.io/tsuhre/full/BaXJrgw)  \nI have no idea of how Ben Matthews did it, I just tried to do the same thing because I liked it.  \nI am using hexagonal tiles in this version. Click on the canvas or re-run the pen to try different  sets of tiles and color schemes",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/qEWQgXW",
+      "hash": "ef52a470cd6f5b2dcada4b721c7eb805a4e2a3e5"
+    },
+    {
+      "id": "animation.76.hexanimation",
+      "version": "v1",
+      "name": "Hexanimation",
+      "description": "Mouse vertical position controls pattern size when you click.  \nMouse horizontal position controls animation speed during animation.  \nGo slowly if you want to actually see the animation. The full drawing can then be very lengthy, move the mouse to the right to see the final drawing. I tried to animate all the patterns at the same time, but it was an ugly mess.  \nBased on a tessellation of hexagons,  which are more visible here than in most of my other pens.  \nSee variant [here](https://codepen.io/Dillo/full/poBXvgg)",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/LYvowrg",
+      "hash": "09fafa86959a1bb2e34adcf2dc73339a429582c0"
+    },
+    {
+      "id": "animation.77.hexanimation-2",
+      "version": "v1",
+      "name": "Hexanimation 2",
+      "description": "Mouse vertical position controls pattern size when you click.  \nMouse horizontal position controls animation speed during animation.  \nGo slowly if you want to actually see the animation. The full drawing can then be very lengthy, move the mouse to the right to see the final drawing. I tried to animate all the patterns at the same time, but it was an ugly mess.  \nBased on a tessellation of hexagons,  which are more visible here than in most of my other pens.  \nSee variant [here](https://codepen.io/Dillo/full/LYvowrg)",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/poBXvgg",
+      "hash": "860080c08bc7d279992c80a68c1d7aa63695d587"
+    },
+    {
+      "id": "animation.78.just-in-case",
+      "version": "v1",
+      "name": "Just In Case",
+      "description": "Text animation with a shader in the background.",
+      "author": "Matthias Hurrle",
+      "source": "https://codepen.io/atzedent/pen/PwobBLM",
+      "hash": "7c8292c850527ab49e62c40a481da55b18ab34ec"
+    },
+    {
+      "id": "animation.79.more-columns",
+      "version": "v1",
+      "name": "More columns",
+      "description": "New variant still inspired by [Sophia (fractal kitty)](https://codepen.io/fractalkitty)'s pen [Spark Studio Coding night](https://codepen.io/fractalkitty/pen/ZYEWNmL)  \nClick for new drawing.",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/NPWbdMP",
+      "hash": "d3115cb59c6f453b162f22b09eaeab60cf1a184f"
+    },
+    {
+      "id": "animation.80.particle-waves-webgl-shader",
+      "version": "v1",
+      "name": "Particle Waves WebGL Shader",
+      "description": "Particle Waves made with native WebGL shader",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/GPweQe",
+      "hash": "772281672fc9bdc2bb69e1968d5ff28b291faa84"
+    },
+    {
+      "id": "animation.81.remember-windows",
+      "version": "v1",
+      "name": "Remember Windows?",
+      "description": "Experimenting with wander motion via the CreateJS Perlin Noise Machine. Ended up with something resembling the old Windows screensaver.",
+      "author": "Lanny",
+      "source": "https://codepen.io/lannymcnie/pen/PRZJab",
+      "hash": "d5f642c3749f4b0f7096a9200ce9a0b906e6e1a5"
+    },
+    {
+      "id": "animation.82.storm",
+      "version": "v1",
+      "name": "Storm",
+      "description": "",
+      "author": "Liam Egan",
+      "source": "https://codepen.io/shubniggurath/pen/BVKgJK",
+      "hash": "b1d929a7046b2eb6de66fcc868cf44668d321af6"
+    },
+    {
+      "id": "animation.83.strange-tubes-2",
+      "version": "v1",
+      "name": "Strange Tubes #2",
+      "description": "Tubes, again... \nClick to randomize colors.\nOrbitControl enabled.",
+      "author": "Kevin Levron",
+      "source": "https://codepen.io/soju22/pen/JzzvbR",
+      "hash": "3dbf3115ecf7ccda4297d3f95318734d93c2de5c"
+    },
+    {
+      "id": "animation.84.troisjs-starfield",
+      "version": "v1",
+      "name": "TroisJS Starfield",
+      "description": "Made with TroisJS : https://github.com/troisjs/trois",
+      "author": "Kevin Levron",
+      "source": "https://codepen.io/soju22/pen/JjEqebK",
+      "hash": "91288cc1e665bf7bf9415fb05b80d6d72ae91f74"
+    },
+    {
+      "id": "animation.85.truchet-10-print-imitation",
+      "version": "v1",
+      "name": "Truchet 10 Print (imitation)",
+      "description": "Inspired by [Ben Matthews](https://codepen.io/tsuhre)'s pen [Truchet 10 Print](https://codepen.io/tsuhre/full/BaXJrgw)  \nI have no idea of how Ben Matthews did it, I just tried to do the same thing because I liked it.  \nSee [version with hexagonal tiles](https://codepen.io/Dillo/full/qEWQgXW)\n",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/raBqEZy",
+      "hash": "3f0bf370e691eb658ae88bfa094b1da6d010643d"
+    },
+    {
+      "id": "generator.86.trying-out-p5-js-noise-carpet",
+      "version": "v1",
+      "name": "Trying out p5.js, noise carpet",
+      "description": "Trying out p5- simulating noise variance in small updates",
+      "author": "Sarah Drasner",
+      "source": "https://codepen.io/sdras/pen/EgmOKV",
+      "hash": "63bdf1e90f98f7aaefd92093cad6f176631d76ab"
+    },
+    {
+      "id": "animation.87.point-sprites",
+      "version": "v1",
+      "name": "Point Sprites",
+      "description": "WebGL randomly generated starfield",
+      "author": "AzazelN28",
+      "source": "https://codepen.io/AzazelN28/pen/zvXZQw",
+      "hash": "a01e467abbf7dc815864fe9b377ac3e21c2064e8"
     }
   ],
-  "common": {}
+  "common": {
+    "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js": {
+      "hash": "21cab1e957740568c96355b3da95359b51243de3",
+      "filename": "lodash.min.js"
+    },
+    "https://code.jquery.com/jquery-3.7.1.min.js": {
+      "hash": "d0dbfbc15eee93c9f8a4adbc369a19800348310e",
+      "filename": "jquery-3.7.1.min.js"
+    },
+    "https://cdn.jsdelivr.net/npm/regl@1.3.1/dist/regl.min.js": {
+      "hash": "0156f0d5d1e5a3d6080e0d931d4c2f289c1e8904",
+      "filename": "regl.min.js"
+    },
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/101/three.min.js": {
+      "hash": "0124f316f5cd3c0c16e7950857ade07f5aed4467",
+      "filename": "three.min.js"
+    }
+  }
 }

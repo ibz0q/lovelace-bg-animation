@@ -1,0 +1,59 @@
+version: v1
+metadata:
+  name: Trying out p5.js, noise carpet
+  description: Trying out p5- simulating noise variance in small updates
+  author: Sarah Drasner
+  source: https://codepen.io/sdras/pen/EgmOKV
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Trying out p5.js, noise carpet</title>
+      <link
+        rel="stylesheet"
+        href="https://public.codepenassets.com/css/normalize-5.0.0.min.css"
+      />
+      <style>
+        body {
+          overflow: hidden;
+        }
+      </style>
+    </head>
+    <body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
+      <script>
+        function setup() {
+          createCanvas(1600, 900);
+          background(142, 46, 139);
+          smooth();
+
+          var xstart = random(10),
+            xnoise = xstart,
+            ynoise = random(10);
+
+          for (var y = 0; y <= height; y += 5) {
+            ynoise += 0.1;
+            xnoise = xstart;
+            for (var x = 0; x <= width; x += 5) {
+              xnoise += 0.1;
+              drawPoint(x, y, noise(xnoise, ynoise));
+            }
+          }
+        }
+
+        function drawPoint(x, y, noiseFactor) {
+          push();
+          translate(x, y);
+          rotate(noiseFactor * radians(360));
+          colorMode(HSB);
+          stroke(x * 0.1 + 20, 50, 138);
+          line(0, 0, 7, 0);
+          pop();
+        }
+      </script>
+    </body>
+  </html>

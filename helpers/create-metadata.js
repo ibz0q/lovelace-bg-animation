@@ -30,7 +30,7 @@ function getFileSHA1(filePath) {
     return hashSum.digest('hex');
 }
 
-async function processPackageManifest(packageManifestObject) {
+function processPackageManifest(packageManifestObject) {
     try {
 
         let environment = {};
@@ -133,6 +133,7 @@ async function readDirectory(dir) {
                 console.log(`Starting: ${packageName} \n`);
 
                 folderHash = getFileSHA1(packageDir);
+                console.log("Reading folder: "+packageDir);
                 console.log(`Folder hash is ${folderHash}`)
 
                 const manifestEntry = Object.values(galleryRootManifest.packages).find(entry => entry.id === packageName);
@@ -151,8 +152,8 @@ async function readDirectory(dir) {
                 }
 
                 console.log(`Generating.. ${packageName}`);
-                templateProcessed = await processPackageManifest({ "data": packageData, "packageIndex": packageName });
-
+                templateProcessed = processPackageManifest({ "data": packageData, "packageIndex": packageName });
+                
                 fs.mkdirSync(packageFolder, { recursive: true });
                 fs.cpSync(packageDir, packageFolder, {
                     recursive: true,
@@ -175,6 +176,7 @@ async function readDirectory(dir) {
                 templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
                 templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
                 let htmldata = `<!DOCTYPE html>` + templateProcessed.data.template__processed + `\n\n${metadataComments}\n`
+                console.log("Writing to "+metadataFilePath);
                 fs.writeFileSync(metadataFilePath, htmldata.replace(/\n/g, '\r\n'), 'utf8');
 
                 console.log(`Generated: ${packageName} \n`);

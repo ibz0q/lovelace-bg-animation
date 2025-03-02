@@ -13,5 +13,9 @@
     "less": "^4.2.0",
     "scss": "^0.2.4",
     "yaml": "^2.6.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "prettier": "^3.5.2"
   }
 }
