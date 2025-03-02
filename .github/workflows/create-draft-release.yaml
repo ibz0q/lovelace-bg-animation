@@ -51,7 +51,6 @@ jobs:
         run: |
           gh release create v${{ env.version }} --draft \
             --title "Release v${{ env.version }}" \
-            --notes "New release v${{ env.version }}" \
-            lovelace-bg-animation-v${{ env.version }}.zip
+            --notes "New release v${{ env.version }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
