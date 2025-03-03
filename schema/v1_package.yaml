@@ -15,9 +15,11 @@ properties:
       source:
         type: "string"
       tags:
+        type: "array"
+      added:
         type: "string"
-      interactive:
-        type: "bool"
+      format:
+        type: "boolean"
   parameters:
     type: "array"
     items:

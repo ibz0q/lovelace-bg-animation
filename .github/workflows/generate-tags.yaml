@@ -1,4 +1,4 @@
-name: Generate Package Metadata
+name: Generate Package Tags
 
 on:
   push:
@@ -26,15 +26,12 @@ jobs:
         run: npm install
 
       - name: Generate Manifest
-        run: node ./helpers/create-manifest.js
-
-      - name: Update documentation with package metadata
-        run: node ./helpers/create-docs.js
+        run: node ./helpers/generate-tags.js
 
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git commit -m "Generate Metadata Action" || exit 0
+          git commit -m "Generated Package Tags" || exit 0
           git push

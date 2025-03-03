@@ -9,12 +9,12 @@ metadata:
   tags: 
     - slow
     - ambient
-    - etc..
 
  # Define parameters for the package, these are used to allow customization by the user
 parameters:
-  - id: color
+  - name: color
     default: "#000000"
+    description: The color of the text
 
 helpers:
   # Inserts a valid base URL tag into document, needed if you are loading assets from the local folder e.g. /1.packagename/image.jpg
@@ -44,6 +44,6 @@ template: |
   </head>
   <body>
     <h1>Hello World, parameter color is: {{parameter: color}}</h1>
-    <script>{{remote_includes: threejs_1}}</script>
+    <script>{{common: https://code.jquery.com/jquery-3.7.1.min.js}}</script> // Caches the file locally, enables offline mode
   </body>
   </html>

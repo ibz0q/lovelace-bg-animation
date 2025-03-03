@@ -1,0 +1,40 @@
+name: Generate Package Metadata
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'gallery/packages/**'
+      - 'src/**'
+      - 'package.json'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Generate Manifest
+        run: node ./helpers/create-package-manifest.js
+
+      - name: Update documentation with package metadata
+        run: node ./helpers/create-docs.js
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git commit -m "Generated Package Manifest and Documentation" || exit 0
+          git push

@@ -4,6 +4,7 @@ metadata:
   description: Text animation with a shader in the background.
   author: Matthias Hurrle
   source: https://codepen.io/atzedent/pen/PwobBLM
+  format: false
 helpers:
   insert_baseurl: true
 template: >
