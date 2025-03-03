@@ -1,4 +1,4 @@
-name: Generate previews and deploy to Pages
+name: Generate Image Previews and Deploy to Pages
 
 on:
   workflow_dispatch:

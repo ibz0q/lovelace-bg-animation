@@ -27,8 +27,11 @@ async function takeScreenshot(filePath) {
   console.log("Processing: ", filePath)
   const packageName = path.basename(path.dirname(filePath));
   const browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-
+  // const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+  
+  // lower resultion for faster processing
+  const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
+  
   console.log("Taking screenshot for", packageName)
 
   try {
