@@ -1048,7 +1048,7 @@ Found these dependencies in (../gallery/packages/animation.87.point-sprites/pack
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.79.more-columns/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.79.more-columns/preview.html) - *Author: Dillon* - Offline support? **Yes**
 
-###  > generator.86.silky-carpet (Silky Carpet - Trying out p5- simulating noise variance in small updates)
+###  > generator.86.silky-carpet (Silky Carpet - Simulating noise variance)
 
 `- id: generator.86.silky-carpet`
 

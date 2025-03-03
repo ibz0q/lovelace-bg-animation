@@ -622,7 +622,7 @@
       "description": "Text animation with a shader in the background.",
       "author": "Matthias Hurrle",
       "source": "https://codepen.io/atzedent/pen/PwobBLM",
-      "hash": "1c1f8e09d1027e9bf517d0652da57d8e345bd8fc"
+      "hash": "1edc7bf3c61d2a7eda33e3cde78d4a9b3a4ce0c3"
     },
     {
       "id": "generator.79.more-columns",
@@ -698,10 +698,10 @@
       "id": "generator.86.silky-carpet",
       "version": "v1",
       "name": "Silky Carpet",
-      "description": "Trying out p5- simulating noise variance in small updates",
+      "description": "Simulating noise variance",
       "author": "Sarah Drasner",
       "source": "https://codepen.io/sdras/pen/EgmOKV",
-      "hash": "492a535f737514a4e34743e51930926ca78018e6"
+      "hash": "2c4b882ab4b627f33acda0f341df0180fda0c3d3"
     },
     {
       "id": "animation.87.point-sprites",

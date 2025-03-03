@@ -1,7 +1,7 @@
 version: v1
 metadata:
   name: Silky Carpet
-  description: Trying out p5- simulating noise variance in small updates
+  description: Simulating noise variance
   author: Sarah Drasner
   source: https://codepen.io/sdras/pen/EgmOKV
 helpers:
