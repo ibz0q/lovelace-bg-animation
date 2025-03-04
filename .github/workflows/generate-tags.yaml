@@ -1,13 +1,6 @@
 name: Generate Package Tags
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'gallery/packages/**'
-      - 'src/**'
-      - 'package.json'
   workflow_dispatch:
 
 jobs:
@@ -25,7 +18,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Generate Manifest
+      - name: Generate Tags
         run: node ./helpers/generate-tags.js
 
       - name: Commit and Push

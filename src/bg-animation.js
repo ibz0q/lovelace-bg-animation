@@ -135,7 +135,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
       if (packageManifest.template) {
         const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
-        
+
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
           switch (type) {
@@ -372,6 +372,14 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.style.cssText = packageConfig.style;
     iframeElement.srcdoc = packageManifest.template__processed;
     lovelaceUI.bgRootElement.appendChild(iframeElement);
+    iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
+      "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
+      "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
+      "rootPath": lovelaceUI.pluginAssetPath + "/",
+      "assetPath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
+      "packageManifest": packageManifest,
+      "packageConfig": packageConfig
+    };
     return iframeElement;
   };
 
@@ -408,6 +416,50 @@ function getPlaylistIndex() {
   return playlistIndexes[rootPluginConfig?.background?.view[getCurrentViewPath()] ? "view" : "global"];
 }
 
+window.bgMediaGovernor = function (action, secondary) {
+  let currentViewPath = getCurrentViewPath();
+  let playlistIndex = getPlaylistIndex();
+  let currentPlaylist = rootPluginConfig?.background?.view[currentViewPath] ? rootPluginConfig?.background?.view[currentViewPath] : rootPluginConfig?.background?.global
+
+  if (currentPlaylist.length == 1) {
+    isDebug ? console.log("Card: Playlist only has one item, skipping interval.") : null;
+    return;
+  }
+  switch (action) {
+    case 'back':
+      playlistIndex.next = playlistIndex.current - 1 < 0 ? currentPlaylist.length - 1 : playlistIndex.current - 1;
+      startPlaylistInterval(currentPlaylist)
+      break;
+    case 'toggle':
+      isDebug ? console.log("Toggle") : null;
+      document.dispatchEvent(new CustomEvent('mediaTicketUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
+      if (window.__global_minterval) {
+        clearTimeout(window.__global_minterval);
+        playlistIndex.timeout = false;
+      }
+      break;
+    case 'forward':
+      playlistIndex.next = (playlistIndex.current + 1) % currentPlaylist.length;
+      startPlaylistInterval(currentPlaylist)
+      break;
+    case 'play_track':
+      if (!secondary) {
+        isDebug ? console.log("No track id provided, skipping") : null;
+        return;
+      }
+      let track = currentPlaylist.findIndex(track => track.id == secondary);
+      if (track == -1) {
+        isDebug ? console.log("Track not found in playlist, skipping") : null;
+        return;
+      }
+      playlistIndex.next = currentPlaylist.findIndex(track => track.id == secondary);
+      startPlaylistInterval(currentPlaylist)
+      break;
+    default:
+      break;
+  }
+};
+
 async function startPlaylistInterval(currentPlaylist) {
   isDebug ? console.log("startPlaylistInterval: Setup playlist Int") : null;
   let playlistIndex = getPlaylistIndex();
@@ -418,7 +470,7 @@ async function startPlaylistInterval(currentPlaylist) {
   processedPackageManifests[currentPlaylistTrack.id] = processedPackageManifest;
   await processBackgroundFrame(currentPlaylistTrack, processedPackageManifest);
 
-  document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylistTrack, "packageManifest": processedPackageManifest } } }));
+  document.dispatchEvent(new CustomEvent('mediaTicketUpdate', { detail: { message: { "packageConfig": currentPlaylistTrack, "packageManifest": processedPackageManifest } } }));
 
   playlistIndex.current = playlistIndex.next;
   playlistIndex.next = (playlistIndex.next + 1) % currentPlaylist.length;
@@ -571,9 +623,10 @@ async function initializeObservers() {
 }
 
 async function initialize() {
-  isDebug = lovelaceUI?.lovelaceObject?.config["bg-animation"]?.debug ?? isDebug;
-  isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
   let initializeLovelaceVars = initializeLovelaceVariables()
+  isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
+  isDebug = lovelaceUI?.lovelaceObject?.config["bg-animation"]?.debug ?? isDebug;
+
   if (initializeLovelaceVars == true) {
     await initializeObservers();
   } else {
@@ -666,43 +719,11 @@ class LovelaceBgAnimation extends HTMLElement {
         this.content = this.querySelector("div");
         this.content.querySelectorAll('.control-button').forEach(button => {
           button.addEventListener('click', () => {
-            let currentViewPath = getCurrentViewPath();
-            let playlistIndex = getPlaylistIndex();
-            let currentPlaylist = rootPluginConfig?.background?.view[currentViewPath] ? rootPluginConfig?.background?.view[currentViewPath] : rootPluginConfig?.background?.global
-
-            if (currentPlaylist.length == 1) {
-              isDebug ? console.log("Card: Playlist only has one item, skipping interval.") : null;
-              return;
-
-            }
-            switch (button.id) {
-              case 'back':
-                playlistIndex.next = playlistIndex.current - 1 < 0 ? currentPlaylist.length - 1 : playlistIndex.current - 1;
-                startPlaylistInterval(currentPlaylist)
-                break;
-              case 'toggle':
-                isDebug ? console.log("Toggle") : null;
-
-                document.dispatchEvent(new CustomEvent('mediaUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
-
-                if (window.__global_minterval) {
-                  clearTimeout(window.__global_minterval);
-                  playlistIndex.timeout = false;
-                }
-
-                break;
-              case 'forward':
-                playlistIndex.next = (playlistIndex.current + 1) % currentPlaylist.length;
-                startPlaylistInterval(currentPlaylist)
-                break;
-              default:
-                break;
-            }
-
+            window.bgMediaGovernor(button.id);
           });
         });
 
-        document.addEventListener('mediaUpdate', (e) => {
+        document.addEventListener('mediaTicketUpdate', (e) => {
           let packageConfig = e.detail.message.packageConfig;
           let packageManifest = e.detail.message.packageManifest;
           let cardConfig = this.getCardConfig();

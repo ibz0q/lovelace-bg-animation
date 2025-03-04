@@ -216,22 +216,39 @@ Over time some of the experiments I have saved in my bookmarks have long been lo
 This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
 
 
-### Features / TODO
+### Todo
+
+#### UX
 
 - Iframe transitions 
-- Add redraw, allows you to repain the iframe within duration period.
-- Security:
-  - "Official packages" / Community packages via YAML tagging
-  - Provide a list of vetted libraries
-  - Eventually once all packages are self contained, use "Content-Security-Policy" to prevent external loading of scripts via metatag. 
-- Provide a way to add libraries in a trusted manner (Done, docs incoming)
-  - Likely: Add packages via CDN into a common folder to be loaded by packages thus reducing overall size.
+- Background previewer app  
 - Slow down fast moving bgs (in progress)
-- postMessage 
-- Add ability for Iframe/package to interact with Lovelace Card (In progress)
+- Add redraw, allows you to repain the iframe within duration period.
+
+#### Programmability / Extensibility
+
+Runtime interaction:
+ -  Allow basic interaction by exposing an API/function. Play, stop, start, track change 
+ -  Global postMessage listener (Considering) 
+ -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
+
+Programmability interaction: 
+
+ -  Add env variables within Iframe (Done) 
+ -  Add env variables to Iframe via card config  
+
+####  Security
+
+  - "Official bg packages" vs "Community packages" via YAML tagging
+  - Provide a list of vetted libraries or CDNs
+- Provide a way to add libraries in a trusted manner (Done, docs incoming)
 - Add video background package  
 - Default gallery to use all, if nothing is specified. (Removed)
-- Serialized data passthrough to Iframe
+
+#### Misc
+
+- Add video background package  
+- Add image background package with nice transitions
 - Submit to HACS once beta version is mature (Done)
 - Add overlay div (Done)
 - Media controls (Lovelace Card) (Done)
