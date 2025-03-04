@@ -552,7 +552,14 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "c40a61ae1b44300ec795bb9a1b064a262e637f51"
+      "hash": "f4a742f3fe13ac143c7db1f6319350b4ad9202de",
+      "parameters": [
+        {
+          "name": "waveColor",
+          "default": "rgb(255,255,255)",
+          "description": "The color of the wave in RGB format"
+        }
+      ]
     },
     {
       "id": "animation.73.alien-blackout-intro-scene-react-webgl",

@@ -794,7 +794,8 @@ Supported params:
 
 `- id: animation.72.playstation-3-bg-style`
 
-
+Supported params:
+- `waveColor` - The color of the wave in RGB format (defaults: `rgb(255,255,255)`) 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**

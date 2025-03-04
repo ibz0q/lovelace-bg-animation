@@ -84,7 +84,7 @@ Now add a valid configuration (see below). You should see a background animation
 
 ### 🙏 Contributors
 
- - [Sjors Kaagman](https://github.com/SjorsMaster) (1)
+ - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
 
 ## Usage
 
