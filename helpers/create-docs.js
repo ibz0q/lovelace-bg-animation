@@ -111,7 +111,7 @@ ${offlineMode}
       if (packageData?.parameters) {
         parameters = `Supported params:`;
         packageData.parameters.forEach(element => {
-          parameters += `\n- \`${element.name}\` - ${element.description} (defaults: \`${element.default}\`) `;
+          parameters += `\n- \`${element.name}\` - ${element.description} (defaults: \`${element.default}\`)`;
 
         }
         )

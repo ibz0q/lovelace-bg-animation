@@ -23,9 +23,7 @@ You can install this plugin two ways:
 
 Click this button which automatically downloads this plugin. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
 
-Alternatively: open HACS -> Frontend -> Custom Repositories -> Paste into Repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". 
-
-Click the Explore & Download Repositories button and search for "Live Background Animations" open and click Download.
+Alternatively - Open HACS -> Frontend -> Custom Repositories -> Paste in repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". Click the Explore & Download Repositories button and search for "Live Background Animations" and Download.
 
 ### Option 2: Manual 
 
@@ -121,6 +119,7 @@ Have I said this yet? Once you're setup. [Show off your dashboards to the commun
 ```yaml
 bg-animation: 
   duration: 5000 # * Duration of the animation in milliseconds (global)
+  loadTimeout: 2000 # In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed. This reduces the white flash on some bg's.
   redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
   style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
       background: transparent;
@@ -221,14 +220,14 @@ This project is compromised of the works of artists each with their own licensin
 #### UX
 
 - Iframe transitions 
-- Background previewer app  
+- Create a basic background previewer site (better than EXTENDED.md)  
 - Slow down fast moving bgs (in progress)
 - Add redraw, allows you to repain the iframe within duration period.
 
 #### Programmability / Extensibility
 
 Runtime interaction:
- -  Allow basic interaction by exposing an API/function. Play, stop, start, track change 
+ -  Allow basic interaction by exposing an API/function. Play, stop, start, track change (Done, but not mature)
  -  Global postMessage listener (Considering) 
  -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
 

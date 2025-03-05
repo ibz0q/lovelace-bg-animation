@@ -28,7 +28,7 @@ async function setPlaylistIndexes() {
 
 async function getGalleryRootManifest() {
   try {
-    let checkCacheGalleryManifest = retrieveCache("HASSanimatedBg_galleryRootManifest");
+    let checkCacheGalleryManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_galleryRootManifest");
     if (checkCacheGalleryManifest && rootPluginConfig.cache === true) {
       galleryRootManifest = checkCacheGalleryManifest
       return true;
@@ -48,7 +48,7 @@ async function getGalleryRootManifest() {
 
       let responseJson = await response.json();
       if (rootPluginConfig.cache === true) {
-        storeCache("HASSanimatedBg_galleryRootManifest", responseJson)
+        storeCache(applicationIdentifiers["appNameShort"] + "_galleryRootManifest", responseJson)
       }
       galleryRootManifest = responseJson
     }
@@ -64,7 +64,7 @@ async function getPackageManifest(packageConfig) {
     isDebug ? console.log("getPackageManifest: " + packageConfig?.id) : null;
     let packageManifestId = packageConfig.id;
     let packageCacheKey = btoa(packageManifestId + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
-    let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageRaw__" + packageCacheKey);
+    let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageRaw__" + packageCacheKey);
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
       return checkCachePackageManifest;
     } else {
@@ -82,7 +82,7 @@ async function getPackageManifest(packageConfig) {
       let packageManifest = await YAML.parse(await response.text());
 
       if (packageConfig.cache === true && rootPluginConfig.cache === true) {
-        storeCache("HASSanimatedBg_packageRaw__" + packageCacheKey, packageManifest);
+        storeCache(applicationIdentifiers["appNameShort"] + "_packageRaw__" + packageCacheKey, packageManifest);
       }
       return packageManifest;
     }
@@ -98,7 +98,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
     let packageManifestName = packageConfig.id;
     let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
-    let checkCachePackageManifest = retrieveCache("HASSanimatedBg_packageProcessed__" + packageCacheKey);
+    let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey);
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
       return checkCachePackageManifest;
     } else {
@@ -172,7 +172,7 @@ async function processPackageManifest(packageConfig, packageManifest) {
       }
 
       if (packageConfig.cache === true && rootPluginConfig.cache === true) {
-        storeCache("HASSanimatedBg_packageProcessed__" + packageCacheKey, packageManifest);
+        storeCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey, packageManifest);
       }
 
       return packageManifest;
@@ -236,13 +236,16 @@ function initializeRuntimeVariables() {
       "manifestFileName": rootPluginConfig.gallery?.manifestFileName ?? "gallery.manifest",
       "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"
     },
+    "transition": {
+      "enable": rootPluginConfig.transition?.enable ?? true,
+      "duration": rootPluginConfig.transition?.duration ?? 1000,
+    },
     "overlay": {
       "show": rootPluginConfig.overlay?.show ?? true,
       "style": rootPluginConfig.overlay?.style ?? "",
     },
     "duration": rootPluginConfig.duration ?? 50000,
-    "transition": rootPluginConfig.transition ?? false,
-    "loadTimeout": rootPluginConfig.loadTimeout ?? 2000,
+    "loadTimeout": rootPluginConfig.loadTimeout ?? 5000,
     "cache": rootPluginConfig.cache !== undefined ? rootPluginConfig.cache : true,
     "parentStyle": rootPluginConfig.parentStyle ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
     "transparency": {
@@ -383,10 +386,12 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     return iframeElement;
   };
 
-  const loadIframeWithTimeout = (iframe, timeoutDuration) =>
+  const loadIframeWithHardTimeout = (iframe, timeoutDuration) =>
     new Promise(resolve => {
+      // const startTime = performance.now(); 
       const timeoutId = setTimeout(() => resolve(true), timeoutDuration);
       iframe.onload = iframe.onerror = () => {
+        // console.log(`loadIframeWithHardTimeout: resolved after ${(performance.now() - startTime).toFixed(2)} ms`);
         clearTimeout(timeoutId);
         resolve(true);
       };
@@ -395,15 +400,40 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
   if (lovelaceUI.iframeElement === undefined) {
     isDebug ? console.log("processBackgroundFrame: Creating new") : null;
     lovelaceUI.iframeElement = await createIframe("background-iframe");
+    lovelaceUI.iframeElement.style.opacity = '1';
   } else {
     isDebug ? console.log("processBackgroundFrame: Swap") : null;
+
     lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy");
-    const loadLazyIframe = await loadIframeWithTimeout(lovelaceUI.iframeElementLazy, rootPluginConfig.loadTimeout);
+
+    if (rootPluginConfig.transition.enable) {
+      Object.assign(lovelaceUI.iframeElementLazy.style, {
+        transition: `opacity ${rootPluginConfig.transition.duration}ms ease-in-out`,
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        opacity: '0'
+      });
+    }
+    
+    await loadIframeWithHardTimeout(lovelaceUI.iframeElementLazy, rootPluginConfig.loadTimeout);
     if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
-      isDebug ? console.log("processBackgroundFrame: Passed check") : null;
-      lovelaceUI.iframeElement.remove();
-      lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
-      lovelaceUI.iframeElement.id = "background-iframe";
+      isDebug ? console.log("processBackgroundFrame: Ok") : null;
+      if (rootPluginConfig.transition.enable) {
+        lovelaceUI.iframeElementLazy.style.opacity = '1';
+        lovelaceUI.iframeElement.style.opacity = '0';
+        setTimeout(() => {
+          lovelaceUI.iframeElement.remove();
+          lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
+          lovelaceUI.iframeElement.id = "background-iframe";
+        }, rootPluginConfig.transition.duration);
+      } else {
+        lovelaceUI.iframeElement.remove();
+        lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
+        lovelaceUI.iframeElement.id = "background-iframe";
+      }
     }
   }
 }
@@ -432,7 +462,7 @@ window.bgMediaGovernor = function (action, secondary) {
       break;
     case 'toggle':
       isDebug ? console.log("Toggle") : null;
-      document.dispatchEvent(new CustomEvent('mediaTicketUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
+      document.dispatchEvent(new CustomEvent('mediaTickerUpdate', { detail: { message: { "packageConfig": currentPlaylist[playlistIndex.current], "packageManifest": processedPackageManifests[currentPlaylist[playlistIndex.current].id] } } }));
       if (window.__global_minterval) {
         clearTimeout(window.__global_minterval);
         playlistIndex.timeout = false;
@@ -470,7 +500,7 @@ async function startPlaylistInterval(currentPlaylist) {
   processedPackageManifests[currentPlaylistTrack.id] = processedPackageManifest;
   await processBackgroundFrame(currentPlaylistTrack, processedPackageManifest);
 
-  document.dispatchEvent(new CustomEvent('mediaTicketUpdate', { detail: { message: { "packageConfig": currentPlaylistTrack, "packageManifest": processedPackageManifest } } }));
+  document.dispatchEvent(new CustomEvent('mediaTickerUpdate', { detail: { message: { "packageConfig": currentPlaylistTrack, "packageManifest": processedPackageManifest } } }));
 
   playlistIndex.current = playlistIndex.next;
   playlistIndex.next = (playlistIndex.next + 1) % currentPlaylist.length;
@@ -723,7 +753,7 @@ class LovelaceBgAnimation extends HTMLElement {
           });
         });
 
-        document.addEventListener('mediaTicketUpdate', (e) => {
+        document.addEventListener('mediaTickerUpdate', (e) => {
           let packageConfig = e.detail.message.packageConfig;
           let packageManifest = e.detail.message.packageManifest;
           let cardConfig = this.getCardConfig();

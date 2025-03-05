@@ -1,3 +1,5 @@
+// Takes exported CodePen projects and converts them to a package.yaml file
+// Not perfect and some small manual adjustments may be needed. Lines 35-52 were generated with ChatGPT.
 
 const fs = require('fs');
 const path = require('path');
@@ -32,7 +34,6 @@ let i = 73;
             }
         });
 
-        // Replace local files in link and script tags with their contents
         $('link[href], script[src]').each((index, element) => {
             const tagName = element.tagName.toLowerCase();
             const filePath = $(element).attr('href') || $(element).attr('src');
@@ -42,10 +43,8 @@ let i = 73;
                 if (fs.existsSync(absoluteFilePath)) {
                     const fileContent = fs.readFileSync(absoluteFilePath, 'utf-8');
                     if (tagName === 'link') {
-                        // Replace link tag with style tag containing the CSS content
                         $(element).replaceWith(`<style>${fileContent}</style>`);
                     } else if (tagName === 'script') {
-                        // Replace script tag with script tag containing the JS content
                         $(element).replaceWith(`<script>${fileContent}</script>`);
                     }
                 }
