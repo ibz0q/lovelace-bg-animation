@@ -668,7 +668,7 @@ Then I applied it to attractors, and each attractor is followed by its own baby 
 `- id: animation.63.green-circuit`
 
 Supported params:
-- `textColor` - The color of the dots (defaults: `rgba(22,222,82,0.6992)`) 
+- `textColor` - The color of the dots (defaults: `rgba(22,222,82,0.6992)`)
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
@@ -776,7 +776,7 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
 `- id: animation.70.blur`
 
 Supported params:
-- `opacity` - The opacity of the background (defaults: `0.5`) 
+- `opacity` - The opacity of the background (defaults: `0.5`)
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: tympanus* - Offline support? **Yes**
@@ -795,7 +795,7 @@ Supported params:
 `- id: animation.72.playstation-3-bg-style`
 
 Supported params:
-- `waveColor` - The color of the wave in RGB format (defaults: `rgb(255,255,255)`) 
+- `waveColor` - The color of the wave in RGB format (defaults: `rgb(255,255,255)`)
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
@@ -849,7 +849,7 @@ Found these dependencies in (../gallery/packages/animation.73.alien-blackout-int
 `- id: animation.75.hexagonal-truchet-10-print`
 
 Supported params:
-- `screen_duration` - Time to cross the screen vertically (defaults: `200`) 
+- `screen_duration` - Time to cross the screen vertically (defaults: `200`)
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.75.hexagonal-truchet-10-print/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.75.hexagonal-truchet-10-print/preview.html) - *Author: Dillon* - Offline support? **Yes**
@@ -973,7 +973,7 @@ Found these dependencies in (../gallery/packages/animation.83.strange-tubes/pack
 `- id: animation.84.troisjs-starfield`
 
 Supported params:
-- `POINTS_COUNT` - Number of points (defaults: `30000`) 
+- `POINTS_COUNT` - Number of points (defaults: `30000`)
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/preview.html) - *Author: Kevin Levron* - Offline support? **Yes**
