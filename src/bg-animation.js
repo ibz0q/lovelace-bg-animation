@@ -7,6 +7,7 @@ var isDebug = false,
   viewPath,
   rootPluginConfig,
   galleryRootManifest,
+  zIndex = 1,
   domObserver = {},
   processedPackageManifests = {},
   playlistIndexes = {},
@@ -364,7 +365,13 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.srcdoc = "<style>*{background:black;}</style>";
     iframeElement.className = applicationIdentifiers.appNameShort;
     iframeElement.style.cssText = packageConfig.style;
+    iframeElement.style.zIndex = zIndex++;
     iframeElement.style.opacity = '0';
+    iframeElement.style.position = 'absolute';
+    iframeElement.style.top = '0';
+    iframeElement.style.left = '0';
+    iframeElement.style.width = '100%';
+    iframeElement.style.height = '100%';
     iframeElement.style.transition = rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '';
     iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
@@ -388,45 +395,33 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       };
     });
 
+  let inactiveFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') !== 'true');
   let activeFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') == 'true');
 
-  if (activeFrame == undefined) {
-    isDebug ? console.log("processBackgroundFrame: Creating new") : null;
-  let randomPick = lovelaceUI.frameContainers[Math.floor(Math.random() * 2)];
-    let iframeElm = createIframe(randomPick);
-    await loadIframeWithHardTimeout(iframeElm, rootPluginConfig.loadTimeout);
-    randomPick.setAttribute('data-frame-active', 'true');
-    iframeElm.style.opacity = "1";
-    iframeElm.style.zIndex = "1000"; 
-  } else {
-    isDebug ? console.log("processBackgroundFrame: Reusing") : null;
-    let inactiveFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') != 'true');
+  if (inactiveFrame) {
+    isDebug ? console.log("processBackgroundFrame: Inactive frame") : null;
     let iframeElm = createIframe(inactiveFrame);
     await loadIframeWithHardTimeout(iframeElm, rootPluginConfig.loadTimeout);
     inactiveFrame.setAttribute('data-frame-active', 'true');
-    iframeElm.style.opacity = "1";
-    iframeElm.style.zIndex = "1000"; 
-    activeFrame.setAttribute('data-frame-active', 'false');
-    activeFrame.style.opacity = "0";
-    activeFrame.style.zIndex = "0";
-  }
+    iframeElm.style.opacity = '1';
 
-  //   isDebug ? console.log("processBackgroundFrame: Swap") : null;
-  //   lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy", lovelaceUI.frameContainers["bg-animation-lazy"]);
-  //   let loadLazyIframe = await loadIframeWithHardTimeout(lovelaceUI.iframeElementLazy, rootPluginConfig.loadTimeout);
-  //   isDebug ? console.log("processBackgroundFrame: Lazy loaded") : null;
-  //   lovelaceUI.iframeElementLazy.style.opacity = '1';
-  //   if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
-  //     let waitResolve = await new Promise(resolve => setTimeout(() => {
-  //       isDebug ? console.log("processBackgroundFrame: transition start") : null;
-  //       lovelaceUI.iframeElement.remove();
-  //       lovelaceUI.iframeElementLazy.id = "background-iframe";
-  //       lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
-  //       isDebug ? console.log("processBackgroundFrame: transition ended") : null;
-  //       resolve();
-  //     }, rootPluginConfig.transition.enable ? rootPluginConfig.transition.duration : 0));
-  //   }
-  // }
+    if (activeFrame) {
+      isDebug ? console.log("processBackgroundFrame: Found active frame") : null;
+      activeFrame.setAttribute('data-frame-active', 'false');
+      let activeFrameIframe = activeFrame.querySelector('iframe');
+      await new Promise(resolve => setTimeout(() => {
+        activeFrameIframe.remove()
+        resolve();
+      }, rootPluginConfig.transition.enable ? rootPluginConfig.transition.duration + 500 : 0));
+      isDebug ? console.log("processBackgroundFrame: end active") : null;
+    }
+  } else {
+    isDebug ? console.log("processBackgroundFrame: No inactive frame found") : null;
+    lovelaceUI.frameContainers.forEach(frame => {
+      frame.innerHTML = '';
+      frame.setAttribute('data-frame-active', 'false');
+    });
+  }
 }
 
 function getCurrentViewPath() {
