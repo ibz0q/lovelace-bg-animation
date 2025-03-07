@@ -365,14 +365,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.srcdoc = "<style>*{background:black;}</style>";
     iframeElement.className = applicationIdentifiers.appNameShort;
     iframeElement.style.cssText = packageConfig.style;
-    iframeElement.style.zIndex = zIndex++;
-    iframeElement.style.opacity = '0';
-    iframeElement.style.position = 'absolute';
-    iframeElement.style.top = '0';
-    iframeElement.style.left = '0';
-    iframeElement.style.width = '100%';
-    iframeElement.style.height = '100%';
-    iframeElement.style.transition = rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '';
+    Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
     iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
     iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
@@ -404,7 +397,6 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     await loadIframeWithHardTimeout(iframeElm, rootPluginConfig.loadTimeout);
     inactiveFrame.setAttribute('data-frame-active', 'true');
     iframeElm.style.opacity = '1';
-
     if (activeFrame) {
       isDebug ? console.log("processBackgroundFrame: Found active frame") : null;
       activeFrame.setAttribute('data-frame-active', 'false');
@@ -412,7 +404,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       await new Promise(resolve => setTimeout(() => {
         activeFrameIframe.remove()
         resolve();
-      }, rootPluginConfig.transition.enable ? rootPluginConfig.transition.duration + 500 : 0));
+      }, rootPluginConfig.transition.enable ? rootPluginConfig.transition.duration + 200 : 0));
       isDebug ? console.log("processBackgroundFrame: end active") : null;
     }
   } else {
