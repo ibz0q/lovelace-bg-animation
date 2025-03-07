@@ -1,4 +1,4 @@
-# Lovelace Background Animation
+# Lovelace BG Animation 🌟
 
 Current Release: v1.0.8
 
@@ -15,17 +15,18 @@ A small Lovelace plugin that replaces the background with an animated one, vario
 
 <a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-## Install
+## Getting started
 
-You can install this plugin two ways: 
+> [!NOTE]
+> Once you have installed this plugin, you will need a valid configuration
 
-### Option 1: HACS 
+### Option 1: Install using HACS 
 
 Click this button which automatically downloads this plugin. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
 
 Alternatively - Open HACS -> Frontend -> Custom Repositories -> Paste in repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". Click the Explore & Download Repositories button and search for "Live Background Animations" and Download.
 
-### Option 2: Manual 
+### Option 2: Install manually
 
 Download the latest release zip. Extract the contents of dist into a folder inside www: homeassistant\config\www\lovelace-background-animation
 
@@ -39,56 +40,10 @@ homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
 
 Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/dist/bg-animation.min.js -> Javascript Module and click Create.
 
----
-
-Now add a valid configuration (see below). You should see a background animation immediately.
-
-## 🎀 Tributes (Artists featured)
-
- - Jack Rugile (13)
- - Ben Matthews (8)
- - Dillon (6)
- - Bas Groothedde (5)
- - Alex Andrix (5)
- - Matei Copot (5)
- - Boris Šehovac (4)
- - Akimitsu Hamamuro (2)
- - yoichi kobayashi (2)
- - Kevin Levron (2)
- - Takeshi Kano (1)
- - cssscript.com (1)
- - alphardex (1)
- - Tim Severien (1)
- - DanDog (1)
- - Andreas Wilcox (1)
- - Júlia Erő (1)
- - MenSeb (1)
- - Ana Tudor (1)
- - Ksenia Kondrashova (1)
- - Jared Stanley (1)
- - Nathan Gordon (1)
- - nskrgv (1)
- - Yuki (1)
- - Griffin Moyer (1)
- - tympanus (1)
- - Ray Victor PRO (1)
- - Karl Saunders (1)
- - Matthias Hurrle (1)
- - Lanny (1)
- - Liam Egan (1)
- - AzazelN28 (1)
- - Fabio Ottaviani (1)
- - Sarah Drasner (1)
-
-### 🙏 Contributors
-
- - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
-
-## Usage
 
 Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
-### Minimal Configuration (To get started)
+### Minimal Configuration (just to get started)
 
 ```yaml
 bg-animation:
@@ -111,7 +66,7 @@ bg-animation:
       
 ```
 
-Have I said this yet? Once you're setup. [Show off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10). There is no telemetry collected by this plug-in so engaging helps me alot!
+Psst. Once setup. [Consider showing off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10) :-)
 
 ### Full configuration options
 ` * = Optional `
@@ -158,37 +113,68 @@ type: custom:lovelace-bg-animation
 ![alt text](docs/card.png)
 
 
-### Offline support
+## 🎀 Tributes (Artists featured)
 
-Offline mode was a core feature, however backgrounds (packages) too need to load resources locally for this to work. So the plugin by default is remote (connects to this repos Github page https://ibz0q.github.io/lovelace-bg-animation to download resources).
+ - Jack Rugile (13)
+ - Ben Matthews (8)
+ - Dillon (6)
+ - Bas Groothedde (5)
+ - Alex Andrix (5)
+ - Matei Copot (5)
+ - Boris Šehovac (4)
+ - Akimitsu Hamamuro (2)
+ - yoichi kobayashi (2)
+ - Kevin Levron (2)
+ - Takeshi Kano (1)
+ - cssscript.com (1)
+ - alphardex (1)
+ - Tim Severien (1)
+ - DanDog (1)
+ - Andreas Wilcox (1)
+ - Júlia Erő (1)
+ - MenSeb (1)
+ - Ana Tudor (1)
+ - Ksenia Kondrashova (1)
+ - Jared Stanley (1)
+ - Nathan Gordon (1)
+ - nskrgv (1)
+ - Yuki (1)
+ - Griffin Moyer (1)
+ - tympanus (1)
+ - Ray Victor PRO (1)
+ - Karl Saunders (1)
+ - Matthias Hurrle (1)
+ - Lanny (1)
+ - Liam Egan (1)
+ - AzazelN28 (1)
+ - Fabio Ottaviani (1)
+ - Sarah Drasner (1)
 
-You can override this by using the below.
+### 🙏 Contributors
 
-```yaml
-bg-animation: 
-  gallery:
-    type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
-    localRootPath: "/local/files/custom" # * If your path uses a different one to HACS or /local for some reason
-    remoteRootPath: "" # * Specify your own remote path like the one in this repo
-    manifestFileName: "" # * Change the name of the manifest
-```
-
-This will tell the plugin to load everything locally. It's also useful if you wish to develop and test your own packages.  
+ - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
 
 ### Adding your own packages 
 
-Everything can be self-contained inside package folder. Instead of using plain HTML files I wanted structure and provide a basic templating and user customizability for users. This ruled out plain HTML files. 
+To create a package of your own check out some of the existing onces inside gallery/packages. 
 
-You may see some packages.yaml contain remote scripts like three.js or Stats.js. Please try to inline or locally save assets inside the package folder. If your package has a JS libraries, please load using a relative path and place the JS file inside the root of the package folder. 
-
-Ensure you use this in your package.yaml because it tells the transpiler to include a HTML baseURL tag which is calculated and placed into the background Iframe.
+Use this in your package.yaml - it tells the transpiler to include a HTML baseURL tag which is calculated and placed into the background Iframe.
 
 ```YAML
 helpers:
   insert_baseurl: true
 ```
 
-Include an SRI hash inside your JS tag so this can be validated. Why- Read security section in contributions.
+To tell the plugin to load locally, use this:
+
+```yaml
+bg-animation: 
+  gallery:
+    type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
+    localRootPath: "/local/files/custom" # Optional * If your path uses a different one to HACS or /local for some reason
+    remoteRootPath: "" # Optional * Specify your own remote path like the one in this repo
+    manifestFileName: "" # Optional * Change the name of the manifest
+```
 
 ## Contributions
 
@@ -200,11 +186,9 @@ PRs need to be attached to an issue that contains the following info:
  - - Javascript,
 - -  Uncompiled code like pug, scss
 - Have you audited the code yourself?
-- Is it safe?
 
- Javascript is allowed and so you must be a reputable user on Github to submit to this repo. Any code that looks to be obfuscated in any way will not be approved. The reason behind this is Home Assistant has quite a big attack surface. We will take steps to minimize risk. 
-
-## Motivation
+ 
+## Why/Motivation
 
 Mostly nostalgia. Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
 
@@ -212,8 +196,7 @@ Over time some of the experiments I have saved in my bookmarks have long been lo
 
 ### License 
 
-This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. This may change at a later date. 
-
+This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
 
 ### Todo
 

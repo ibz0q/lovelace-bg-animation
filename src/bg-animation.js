@@ -388,8 +388,8 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       };
     });
 
-  let inactiveFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') !== 'true');
-  let activeFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') == 'true');
+  let inactiveFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') !== 'true'),
+    activeFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') == 'true');
 
   if (inactiveFrame) {
     isDebug ? console.log("processBackgroundFrame: Inactive frame") : null;
