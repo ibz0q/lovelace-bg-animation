@@ -326,28 +326,20 @@ function initializeBackgroundElements() {
   if (lovelaceUI.groundElement.querySelector("#bg-animation-container")) {
     lovelaceUI.groundElement.querySelector("#bg-animation-container").remove();
   }
-
   lovelaceUI.bgRootElement = document.createElement("div");
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.parentStyle;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
+  lovelaceUI.frameContainers = {};
   isDebug ? console.log("initializeBackgroundElements: Created elm") : null;
-
-  if (lovelaceUI.iframeElement == undefined) {
-    lovelaceUI.iframeElement = document.createElement('iframe');
-    lovelaceUI.iframeElement.id = `background-iframe`;
-    lovelaceUI.iframeElement.frameborder = "0";
-    lovelaceUI.iframeElement.scrolling = "no";
-    lovelaceUI.iframeElement.srcdoc = "<style>*{background:black;}</style>";
-    lovelaceUI.iframeElement.style.cssText = "opacity: 0;";
-    lovelaceUI.iframeElement.className = applicationIdentifiers.appNameShort;
-    lovelaceUI.bgRootElement.appendChild(lovelaceUI.iframeElement);
-  }
+  ["bg-animation-0", "bg-animation-1"].forEach((index, key) => {
+    lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="${index}" class="bg-animation-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>`);
+  });
+  lovelaceUI.frameContainers = lovelaceUI.bgRootElement.querySelectorAll('.bg-animation-container');
   if (rootPluginConfig.overlay?.show) {
     lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="bg-overlay" ${rootPluginConfig.overlay.style ? `style="${rootPluginConfig.overlay.style}"` : ''}></div>`);
   }
 }
-
 function changeDefaultLovelaceStyles() {
   lovelaceUI.rootStyleElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#bg-animation-styles-root");
   if (!lovelaceUI.rootStyleElement) {
@@ -363,18 +355,19 @@ function changeDefaultLovelaceStyles() {
 }
 
 async function processBackgroundFrame(packageConfig, packageManifest) {
-
   isDebug ? console.log("processBackgroundFrame: Called") : null;
-  const createIframe = async (id) => {
+
+  const createIframe = (containerElement) => {
     const iframeElement = document.createElement('iframe');
-    iframeElement.id = id;
     iframeElement.frameborder = "0";
     iframeElement.scrolling = "no";
     iframeElement.srcdoc = "<style>*{background:black;}</style>";
     iframeElement.className = applicationIdentifiers.appNameShort;
     iframeElement.style.cssText = packageConfig.style;
+    iframeElement.style.opacity = '0';
+    iframeElement.style.transition = rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '';
     iframeElement.srcdoc = packageManifest.template__processed;
-    lovelaceUI.bgRootElement.appendChild(iframeElement);
+    containerElement.replaceChildren(iframeElement);
     iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
       "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
       "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
@@ -388,54 +381,52 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
 
   const loadIframeWithHardTimeout = (iframe, timeoutDuration) =>
     new Promise(resolve => {
-      // const startTime = performance.now(); 
       const timeoutId = setTimeout(() => resolve(true), timeoutDuration);
       iframe.onload = iframe.onerror = () => {
-        // console.log(`loadIframeWithHardTimeout: resolved after ${(performance.now() - startTime).toFixed(2)} ms`);
         clearTimeout(timeoutId);
         resolve(true);
       };
     });
 
-  if (lovelaceUI.iframeElement === undefined) {
+  let activeFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') == 'true');
+
+  if (activeFrame == undefined) {
     isDebug ? console.log("processBackgroundFrame: Creating new") : null;
-    lovelaceUI.iframeElement = await createIframe("background-iframe");
-    lovelaceUI.iframeElement.style.opacity = '1';
+  let randomPick = lovelaceUI.frameContainers[Math.floor(Math.random() * 2)];
+    let iframeElm = createIframe(randomPick);
+    await loadIframeWithHardTimeout(iframeElm, rootPluginConfig.loadTimeout);
+    randomPick.setAttribute('data-frame-active', 'true');
+    iframeElm.style.opacity = "1";
+    iframeElm.style.zIndex = "1000"; 
   } else {
-    isDebug ? console.log("processBackgroundFrame: Swap") : null;
-
-    lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy");
-
-    if (rootPluginConfig.transition.enable) {
-      Object.assign(lovelaceUI.iframeElementLazy.style, {
-        transition: `opacity ${rootPluginConfig.transition.duration}ms ease-in-out`,
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        opacity: '0'
-      });
-    }
-    
-    await loadIframeWithHardTimeout(lovelaceUI.iframeElementLazy, rootPluginConfig.loadTimeout);
-    if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
-      isDebug ? console.log("processBackgroundFrame: Ok") : null;
-      if (rootPluginConfig.transition.enable) {
-        lovelaceUI.iframeElementLazy.style.opacity = '1';
-        lovelaceUI.iframeElement.style.opacity = '0';
-        setTimeout(() => {
-          lovelaceUI.iframeElement.remove();
-          lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
-          lovelaceUI.iframeElement.id = "background-iframe";
-        }, rootPluginConfig.transition.duration);
-      } else {
-        lovelaceUI.iframeElement.remove();
-        lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
-        lovelaceUI.iframeElement.id = "background-iframe";
-      }
-    }
+    isDebug ? console.log("processBackgroundFrame: Reusing") : null;
+    let inactiveFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') != 'true');
+    let iframeElm = createIframe(inactiveFrame);
+    await loadIframeWithHardTimeout(iframeElm, rootPluginConfig.loadTimeout);
+    inactiveFrame.setAttribute('data-frame-active', 'true');
+    iframeElm.style.opacity = "1";
+    iframeElm.style.zIndex = "1000"; 
+    activeFrame.setAttribute('data-frame-active', 'false');
+    activeFrame.style.opacity = "0";
+    activeFrame.style.zIndex = "0";
   }
+
+  //   isDebug ? console.log("processBackgroundFrame: Swap") : null;
+  //   lovelaceUI.iframeElementLazy = await createIframe("background-iframe-lazy", lovelaceUI.frameContainers["bg-animation-lazy"]);
+  //   let loadLazyIframe = await loadIframeWithHardTimeout(lovelaceUI.iframeElementLazy, rootPluginConfig.loadTimeout);
+  //   isDebug ? console.log("processBackgroundFrame: Lazy loaded") : null;
+  //   lovelaceUI.iframeElementLazy.style.opacity = '1';
+  //   if (lovelaceUI.iframeElement && lovelaceUI.iframeElementLazy) {
+  //     let waitResolve = await new Promise(resolve => setTimeout(() => {
+  //       isDebug ? console.log("processBackgroundFrame: transition start") : null;
+  //       lovelaceUI.iframeElement.remove();
+  //       lovelaceUI.iframeElementLazy.id = "background-iframe";
+  //       lovelaceUI.iframeElement = lovelaceUI.iframeElementLazy;
+  //       isDebug ? console.log("processBackgroundFrame: transition ended") : null;
+  //       resolve();
+  //     }, rootPluginConfig.transition.enable ? rootPluginConfig.transition.duration : 0));
+  //   }
+  // }
 }
 
 function getCurrentViewPath() {
