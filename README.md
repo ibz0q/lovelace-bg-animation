@@ -1,4 +1,4 @@
-# Lovelace BG Animation 🌟
+# 🌟 Lovelace BG Animation 🌟
 
 Current Release: v1.0.8
 
