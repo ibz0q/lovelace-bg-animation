@@ -11,6 +11,8 @@ parameters:
   - name: textColor
     default: rgba(22,222,82,0.6992)
     description: The color of the dots
+    type: string
+
 helpers:
   insert_baseurl: true
 template: >

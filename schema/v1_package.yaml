@@ -31,6 +31,8 @@ properties:
           type: "string"
         description:
           type: "string"
+        type:
+          type: "string"
   helpers:
     type: "object"
     properties:

@@ -15,6 +15,7 @@ parameters:
   - name: color
     default: "#000000"
     description: The color of the text
+    type: string
 
 helpers:
   # Inserts a valid base URL tag into document, needed if you are loading assets from the local folder e.g. /1.packagename/image.jpg

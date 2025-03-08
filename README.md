@@ -1,30 +1,34 @@
-# 🌟 Lovelace BG Animation 🌟
+# Lovelace Background Animations 
 
-Current Release: v1.1.0
+A Lovelace plugin to replace Home Assistant's background with an animated one with many animations to choose from. 
 
-A small Lovelace plugin that replaces the background with an animated one, various animations available. 
+**Current Release: v1.1.0**
 
 <p align="center">
 
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-**View all backgrounds here [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)**
+View all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
-### Support this project
+### Support project
 
 <a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 ## Getting started
 
 > [!NOTE]
-> Once you have installed this plugin, you will need a valid configuration
+> Once installed, you will need a valid configuration
 
-### Option 1: Install using HACS 
+### Option 1: Install with HACS 
 
-Click this button which automatically downloads this plugin. [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
+Click this button which automatically downloads this plugin.
 
-Alternatively - Open HACS -> Frontend -> Custom Repositories -> Paste in repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". Click the Explore & Download Repositories button and search for "Live Background Animations" and Download.
+ [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
+
+Or
+
+Open HACS -> Frontend -> Custom Repositories -> Paste in repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". Click the Explore & Download Repositories button and search for "Live Background Animations" and Download.
 
 ### Option 2: Install manually
 
@@ -43,7 +47,7 @@ Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add res
 
 Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
-### Minimal Configuration (just to get started)
+### Minimal Configuration (to get started)
 
 ```yaml
 bg-animation:
@@ -65,10 +69,7 @@ bg-animation:
       - id: animation.50.sidelined
       
 ```
-
-Psst. Once setup. [Consider showing off your dashboards to the community](https://github.com/ibz0q/lovelace-bg-animation/discussions/10) :-)
-
-### Full configuration options
+### All configuration options
 ` * = Optional `
 
 ```yaml
@@ -76,6 +77,9 @@ bg-animation:
   duration: 5000 # * Duration of the animation in milliseconds (global)
   loadTimeout: 2000 # In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed. This reduces the white flash on some bg's.
   redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
+  transition:
+    enable: true
+    duration: 1500 # Default is 1000
   style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
       background: transparent;
   gallery: # *
@@ -87,30 +91,30 @@ bg-animation:
   sort: random # * Order bgs will be displayed. 'random" | "reverse" | "id_asc" | "id_desc". Default is the order you specify
   background: 
     global: # Global background settings, if no view is specified, will be applied to all views
-      - id: 11.space # ID for a background (Folder name of /gallery/package/ID)
+      - id: animation.11.space # ID for a background (Folder name of /gallery/package/ID)
         style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
         parameters: 
           background-image: black # Example of a parameter thats passed onto a background
     view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
       lights: # Settings for the 'lights' view
-        - id: 11.space # Identifier for a background
+        - id: animation.11.space # Identifier for a background
           duration: 40000 
-        - id: 15.sound # Identifier for another background
+        - id: animation.15.sound # Identifier for another background
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
-        - id: 11.space # Identifier for a background
+        - id: animation.11.space # Identifier for a background
           duration: 40000
-        - id: 15.sound # Identifier for another background
+        - id: animation.15.square # Identifier for another background
           duration: 40000 
 
 ```
 
-The plugin also comes with a card: 
+There's also a card that let's you control bg's:
+
+![alt text](docs/card.png)
 
 ```YAML
 type: custom:lovelace-bg-animation
 ```
-
-![alt text](docs/card.png)
 
 
 ## 🎀 Tributes (Artists featured)
@@ -154,27 +158,6 @@ type: custom:lovelace-bg-animation
 
  - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
 
-### Adding your own packages 
-
-To create a package of your own check out some of the existing onces inside gallery/packages. 
-
-Use this in your package.yaml - it tells the transpiler to include a HTML baseURL tag which is calculated and placed into the background Iframe.
-
-```YAML
-helpers:
-  insert_baseurl: true
-```
-
-To tell the plugin to load locally, use this:
-
-```yaml
-bg-animation: 
-  gallery:
-    type: local # * Specifies the type of gallery, 'local' means the gallery is hosted on the same server
-    localRootPath: "/local/files/custom" # Optional * If your path uses a different one to HACS or /local for some reason
-    remoteRootPath: "" # Optional * Specify your own remote path like the one in this repo
-    manifestFileName: "" # Optional * Change the name of the manifest
-```
 
 ## Contributions
 
@@ -183,14 +166,14 @@ PRs need to be attached to an issue that contains the following info:
 - Image Preview
 - name: description: author: source: 
 - Does the package contain any of the following?
- - - Javascript,
-- -  Uncompiled code like pug, scss
+  - Javascript,
+  -  Uncompiled code like pug, scss
 - Have you audited the code yourself?
 
  
-## Why/Motivation
+## Motivation
 
-Mostly nostalgia. Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
+Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
 
 Over time some of the experiments I have saved in my bookmarks have long been lost to digital oblivion. Luckily some I would save to disk.  I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
 

@@ -14,12 +14,7 @@ var isDebug = false,
   applicationIdentifiers = { "appNameShort": "lovelace-bg-animation", "rootFolderName": "lovelace-bg-animation", "scriptName": ["bg-animation.min.js", "bg-animation.js"] }, memoryCache = {}, uiWriteDelay;
 
 function sortArray(array, method) {
-  const methods = {
-    random: () => array.sort(() => Math.random() - 0.5),
-    reverse: () => array.reverse(),
-    id_asc: () => array.sort((a, b) => a.id - b.id),
-    id_desc: () => array.sort((a, b) => b.id - a.id),
-  };
+  const methods = { random: () => array.sort(() => Math.random() - 0.5), reverse: () => array.reverse(), id_asc: () => array.sort((a, b) => a.id - b.id), id_desc: () => array.sort((a, b) => b.id - a.id) };
   return methods[method]?.() || console.error('Invalid sorting method') || array;
 }
 
@@ -34,7 +29,6 @@ async function getGalleryRootManifest() {
       galleryRootManifest = checkCacheGalleryManifest
       return true;
     } else {
-
       let url;
       if (rootPluginConfig.gallery.type == "local") {
         url = window.location.origin + lovelaceUI.pluginAssetPath + "/gallery/" + rootPluginConfig.gallery.manifestFileName
@@ -216,7 +210,6 @@ function opportunisticallyDetermineLocalInstallPath() {
       applicationIdentifiers.scriptName.forEach(key => src = src.replace(key, ''));
       memoryCache.installPath = src.replace('/dist/', '/dist').replace(/\/$/, '');
       isDebug ? console.log("opportunisticallyDetermineLocalInstallPath: " + memoryCache.installPath) : null;
-
     }
     return memoryCache.installPath;
   } catch (error) {
@@ -315,7 +308,6 @@ function initializeLovelaceVariables() {
     lovelaceUI.groundElement = lovelaceUI.huiRootElement?.shadowRoot?.querySelector("div");
     lovelaceUI.lovelaceObject = lovelaceUI.huiRootElement?.lovelace;
     return !!lovelaceUI.lovelaceObject;
-
   } catch (error) {
     isDebug ? console.error("initializeLovelaceVariables: Error in initializeRuntimeVariables:", error) : null;
     return false;
@@ -331,7 +323,6 @@ function initializeBackgroundElements() {
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.parentStyle;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
-  lovelaceUI.frameContainers = {};
   isDebug ? console.log("initializeBackgroundElements: Created elm") : null;
   ["bg-animation-0", "bg-animation-1"].forEach((index, key) => {
     lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="${index}" class="bg-animation-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>`);
@@ -357,7 +348,6 @@ function changeDefaultLovelaceStyles() {
 
 async function processBackgroundFrame(packageConfig, packageManifest) {
   isDebug ? console.log("processBackgroundFrame: Called") : null;
-
   const createIframe = (containerElement) => {
     const iframeElement = document.createElement('iframe');
     iframeElement.frameborder = "0";
@@ -402,7 +392,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       activeFrame.setAttribute('data-frame-active', 'false');
       let activeFrameIframe = activeFrame.querySelector('iframe');
       await new Promise(resolve => setTimeout(() => {
-        activeFrameIframe.remove()
+        activeFrameIframe.remove();
         resolve();
       }, rootPluginConfig.transition.enable ? rootPluginConfig.transition.duration + 200 : 0));
       isDebug ? console.log("processBackgroundFrame: end active") : null;
@@ -576,7 +566,6 @@ async function initializeObservers() {
         });
       }
     }
-
   });
 
   domObserver.viewElement.observe(lovelaceUI.viewElement, {
@@ -632,15 +621,17 @@ async function initializeObservers() {
 
 async function initialize() {
   let initializeLovelaceVars = initializeLovelaceVariables()
-  isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
   isDebug = lovelaceUI?.lovelaceObject?.config["bg-animation"]?.debug ?? isDebug;
+  isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
 
   if (initializeLovelaceVars == true) {
     await initializeObservers();
   } else {
     isDebug ? console.log("initialize: Failed to initialize lovelace variables from this view.") : null;
   }
+
   isDebug ? console.log("initialize: after") : null;
+
   if (initializeLovelaceVars == true && lovelaceUI.lovelaceObject.config["bg-animation"]) {
     initializeRuntimeVariables();
     changeDefaultLovelaceStyles()

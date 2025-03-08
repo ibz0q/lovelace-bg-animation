@@ -8,6 +8,7 @@ parameters:
   - name: screen_duration
     description: Time to cross the screen vertically
     default: 200
+    type: string
 helpers:
   insert_baseurl: true
 template: >
