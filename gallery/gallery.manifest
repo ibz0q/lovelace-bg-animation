@@ -687,13 +687,13 @@
       "description": "Made with TroisJS",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JjEqebK",
-      "hash": "0731ba1115ec9b716fc2963e100c8d5898ca2976",
+      "hash": "81251d0cf637a0e096a07f1e91a585e807668f1f",
       "parameters": [
         {
           "name": "POINTS_COUNT",
           "default": 30000,
           "description": "Number of points",
-          "type": "substitute"
+          "type": "string"
         }
       ]
     },
