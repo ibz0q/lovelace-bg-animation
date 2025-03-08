@@ -8,7 +8,8 @@ parameters:
   - name: POINTS_COUNT
     default: 30000
     description: Number of points
-    type: substitute
+    type: string
+
 helpers:
   insert_baseurl: true
 template: >
