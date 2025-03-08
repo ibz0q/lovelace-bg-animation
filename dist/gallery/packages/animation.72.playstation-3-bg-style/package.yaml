@@ -12,7 +12,6 @@ parameters:
     default: rgb(255,255,255)
     description: The color of the wave in RGB format
     type: string
-
 helpers:
   insert_baseurl: true
 template: >
@@ -149,7 +148,6 @@ template: >
               depthTest: false,
             }),
           );
-
 
           scene.add(ribbon);
 

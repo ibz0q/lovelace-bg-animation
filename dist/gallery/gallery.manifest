@@ -457,12 +457,13 @@
       "description": "I'm in",
       "author": "Jared Stanley",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "efa27fef0f0fd4b48e92fb27598c63b0f947ddf9",
+      "hash": "8032963e058fcacf91d281165f7d4ea1519428fc",
       "parameters": [
         {
           "name": "textColor",
           "default": "rgba(22,222,82,0.6992)",
-          "description": "The color of the dots"
+          "description": "The color of the dots",
+          "type": "string"
         }
       ]
     },
@@ -527,12 +528,13 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "4861f48c92b1e7ed4cea14fa1a900cc489ee8189",
+      "hash": "f3ee02c06769a7339df465453fa02fad1c69f76b",
       "parameters": [
         {
           "name": "opacity",
           "default": "0.5",
-          "description": "The opacity of the background"
+          "description": "The opacity of the background",
+          "type": "string"
         }
       ]
     },
@@ -552,12 +554,13 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "952b8e16ba62cbe48fa5f8b8729b81fb3062659a",
+      "hash": "a3893a27865f2a46dea3bb1a0a18ce81e1dabea4",
       "parameters": [
         {
           "name": "waveColor",
           "default": "rgb(255,255,255)",
-          "description": "The color of the wave in RGB format"
+          "description": "The color of the wave in RGB format",
+          "type": "string"
         }
       ]
     },
@@ -595,12 +598,13 @@
       "description": "Inspired by [Ben Matthews]",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/qEWQgXW",
-      "hash": "ecb19a1046db57903af3b5c566fb65ce79db15b5",
+      "hash": "98af085df418c89086205c9578f75e58efb16221",
       "parameters": [
         {
           "name": "screen_duration",
           "description": "Time to cross the screen vertically",
-          "default": 200
+          "default": 200,
+          "type": "string"
         }
       ]
     },
@@ -683,12 +687,13 @@
       "description": "Made with TroisJS",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JjEqebK",
-      "hash": "bbf278fd710fd23edb130a6020a2d1c3ebf3e177",
+      "hash": "81251d0cf637a0e096a07f1e91a585e807668f1f",
       "parameters": [
         {
           "name": "POINTS_COUNT",
           "default": 30000,
-          "description": "Number of points"
+          "description": "Number of points",
+          "type": "string"
         }
       ]
     },
