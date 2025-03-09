@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0",
-    "prettier": "^3.5.2"
+    "prettier": "^3.5.2",
+    "simple-git": "^3.27.0",
+    "string-similarity": "^4.0.4"
   }
 }
