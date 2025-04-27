@@ -55,7 +55,6 @@ template: >
       var width, height;
       var particleCounter = 0,
         hover = false,
-        stats = new Stats(),
         mmon = new MousePositionMonitor();
 
 
