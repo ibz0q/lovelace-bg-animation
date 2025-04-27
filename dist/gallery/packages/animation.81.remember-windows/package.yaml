@@ -1,0 +1,169 @@
+version: v1
+metadata:
+  name: Remember Windows?
+  description: The old Windows screensaver.
+  author: Lanny
+  source: https://codepen.io/lannymcnie/pen/PRZJab
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Remember Windows?</title>
+      <style>
+        canvas,
+        body {
+          background: black;
+        }
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+        }
+        #logo {
+          position: absolute;
+          right: 0px;
+          bottom: 0px;
+        }
+        #badge,
+        #badge2 {
+          width: 60px;
+          height: 70px;
+          position: absolute;
+          left: 10px;
+          bottom: 10px;
+          cursor: default;
+        }
+      </style>
+    </head>
+    <body>
+      <canvas id="canvas" width="500" height="500"></canvas>
+      <script src="https://cdn.jsdelivr.net/gh/CreateJS/EaselJS@ff1048658c9e5f19dacc020e4f3fc6c43a7b2a10/extras/PerlinNoise/PerlinNoiseMachine.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/EaselJS/1.0.2/easeljs.js"></script>
+      <script>
+        var stage = new createjs.Stage("canvas"),
+          w = 500,
+          h = 500,
+          shapes = [];
+
+        createjs.Ticker.on("tick", tick);
+        createjs.Ticker.timingMode = "raf";
+        stage.autoClear = false;
+
+        var noiseMachine = new PerlinNoiseMachine();
+
+        var cont = new createjs.Container();
+        stage.addChild(cont);
+
+        var f = new createjs.Shape().set({ alpha: 0.05 });
+        f.size = f.graphics.f("black").dr(0, 0, w, h).command;
+        stage.addChild(f);
+
+        function addShape() {
+          var shape = {
+            shape: new createjs.Shape(),
+            points: [],
+            color: createjs.Graphics.getHSL((Math.random() * 360) | 0, 100, 50),
+          };
+          shapes.push(shape);
+          shape.shape.shadow = new createjs.Shadow(shape.color, 0, 0, 20);
+          shape.compositeOperation = "screen";
+          cont.addChild(shape.shape);
+          for (var i = 0, l = ((Math.random() * 5) | 0) + 6; i < l; i++) {
+            addPoint(shape);
+          }
+        }
+        function addPoint(shape) {
+          var p = {
+            i1: Math.random() * 1000,
+            i2: Math.random() * 1000,
+            i3: Math.random() * 1000,
+            speed: 1,
+            p: new createjs.Point(),
+          };
+          shape.points.push(p);
+        }
+
+        addShape();
+        stage.on("stagemouseup", addShape);
+
+        var index = 0,
+          i2 = 0,
+          i3 = 0;
+        function tick(e) {
+          var h2 = h / 2,
+            w2 = w / 2;
+          for (var j = 0, jl = shapes.length; j < jl; j++) {
+            var shape = shapes[j];
+            shape.shape.graphics.clear().s(shape.color);
+
+            for (
+              var i = 0, l = (shape.points.length / 2) | 0;
+              i < l - 1;
+              i += 2
+            ) {
+              var p = shape.points[i],
+                lp = shape.points[i + 1];
+              p.p.setValues(
+                w2 +
+                  (noiseMachine.noise(p.i1++ / 200, p.i2++ / 200, p.i3++ / 200) *
+                    w *
+                    2 -
+                    w),
+                h2 +
+                  (noiseMachine.noise(p.i1 / 224, p.i2 / 223, p.i3 / 222) *
+                    h *
+                    2 -
+                    h),
+              );
+              lp.p.setValues(
+                w2 +
+                  (noiseMachine.noise(
+                    lp.i1++ / 200,
+                    lp.i2++ / 200,
+                    lp.i3++ / 200,
+                  ) *
+                    w *
+                    2 -
+                    w),
+                h2 +
+                  (noiseMachine.noise(lp.i1 / 224, lp.i2 / 223, lp.i3 / 222) *
+                    h *
+                    2 -
+                    h),
+              );
+              if (i == 0) {
+                shape.shape.graphics.moveTo(p.p.x, p.p.y);
+              } else {
+                shape.shape.graphics.qt(p.p.x, p.p.x, lp.p.x, lp.p.y);
+              }
+            }
+            p = shape.points[shape.points.length - 1];
+            shape.shape.graphics.qt(
+              p.p.x,
+              p.p.y,
+              shape.points[0].p.x,
+              shape.points[0].p.y,
+            );
+          }
+          stage.update(e);
+        }
+
+        window.addEventListener("resize", handleResize);
+        function handleResize() {
+          w = window.innerWidth;
+          h = window.innerHeight;
+          stage.canvas.width = w;
+          stage.canvas.height = h;
+          f.size.w = w;
+          f.size.h = h;
+        }
+
+        handleResize();
+      </script>
+    </body>
+  </html>

@@ -1,0 +1,729 @@
+{
+  "packages": [
+    {
+      "id": "generator.1.svg-wave",
+      "version": "v1",
+      "name": "Gradient Wave Generator",
+      "description": "SVG Gradient Wave Generator",
+      "author": "Fabio Ottaviani",
+      "source": "https://codepen.io/supah/pen/prVVOx",
+      "hash": "302ed6b20230ab79df1fb6f8fa3a52a548531090"
+    },
+    {
+      "id": "animation.2.shooting-stars",
+      "version": "v1",
+      "name": "Shooting Stars",
+      "description": "Random speed shooting stars",
+      "author": "alphardex",
+      "source": "https://codepen.io/alphardex/pen/RwrVoeL",
+      "hash": "1b90261da9ffd402d42083e7d755ff0eff0a022a"
+    },
+    {
+      "id": "generator.2.knots",
+      "version": "v1",
+      "name": "Knots",
+      "description": "Not knots",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/OJYyMNR",
+      "hash": "1c1bf532b67d4a9b6c120a68f25d8a340959ac28"
+    },
+    {
+      "id": "animation.3.spipa-circle",
+      "version": "v1",
+      "name": "Spipa circle",
+      "description": "A cool electro field circle",
+      "author": "Alex Andrix",
+      "source": "https://codepen.io/alexandrix/pen/oQOvYp",
+      "hash": "a4bbb2c3d54265cbe69dcb071cb4b5ef1ffc2d57"
+    },
+    {
+      "id": "animation.4.colored-swipe",
+      "version": "v1",
+      "name": "Colored Swipe Transition",
+      "description": "Whole page colored swipes",
+      "author": "Andreas Wilcox",
+      "source": "https://codepen.io/SvDvorak/pen/bxoxde",
+      "hash": "55c7bf2bbf3fc7762953b36ac14d1cec1c9a1f8b"
+    },
+    {
+      "id": "animation.5.neon-hexagon",
+      "version": "v1",
+      "name": "Neon Hexagon",
+      "description": "Neon Hexagon Foming Particles",
+      "author": "Matei Copot",
+      "source": "https://codepen.io/towc/pen/mJzOWJ",
+      "hash": "00d33a3a1cfe69410d58529b384135dc74092e7c"
+    },
+    {
+      "id": "animation.5.plasma",
+      "version": "v1",
+      "name": "Rainbow Particles",
+      "description": "rainbow particle horizon",
+      "author": "Matei Copot",
+      "source": "https://codepen.io/towc/pen/WvLaKw",
+      "hash": "6e86755cfde1c0efc741d4c60e6d450b0bd14078"
+    },
+    {
+      "id": "animation.6.binary-spiral",
+      "version": "v1",
+      "name": "Binary Spirals",
+      "description": "Binary Spirals",
+      "author": "Matei Copot",
+      "source": "https://codepen.io/towc/pen/dXevxg",
+      "hash": "fed22c430a0e174d7d83aa328e236992030789ec"
+    },
+    {
+      "id": "animation.7.rainbowness",
+      "version": "v1",
+      "name": "Rainbowness",
+      "description": "Rainbowness",
+      "author": "Matei Copot",
+      "source": "https://codepen.io/towc/pen/EbQKmy",
+      "hash": "5469eacfbbe575e17a2044356602bd946a64fe09"
+    },
+    {
+      "id": "animation.9.rainbow-particles",
+      "version": "v1",
+      "name": "Particle Horizon",
+      "description": "rainbow particle horizon",
+      "author": "Matei Copot",
+      "source": "https://codepen.io/towc/pen/BQEGdz",
+      "hash": "47093112a9990215c44f06f376ef6f48e4c946df"
+    },
+    {
+      "id": "animation.10.css-dark-particles",
+      "version": "v1",
+      "name": "CSS Dark Particles",
+      "description": "CSS Dark Particles",
+      "author": "Takeshi Kano",
+      "source": "https://codepen.io/towc/pen/BQEGdz",
+      "hash": "712b48c70915ed07a50d1d66925610f29fa19d5d"
+    },
+    {
+      "id": "animation.11.space",
+      "version": "v1",
+      "name": "Space",
+      "description": "The final frontier",
+      "author": "Akimitsu Hamamuro",
+      "source": "https://codepen.io/akm2/pen/RwQXLdP",
+      "hash": "79d8b440e0e76406df6d86f6d3dc96a08382c3f7"
+    },
+    {
+      "id": "animation.12.gradient-particles",
+      "version": "v1",
+      "name": "Gradient Particles",
+      "description": "animated-gradient-particle",
+      "author": "cssscript.com",
+      "source": "https://www.cssscript.com/demo/animated-gradient-particle/",
+      "hash": "4fc40b11bf8358c58c72dbcd4a0f7f547ee4eb2a"
+    },
+    {
+      "id": "animation.13.cyber-lights",
+      "version": "v1",
+      "name": "Cyber Lights",
+      "description": "Frosted type lights moving diagnolly",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/GLRdKP",
+      "hash": "476f9f8b3535418c1012a52264aebfa23847c519"
+    },
+    {
+      "id": "animation.14.ribbons-two",
+      "version": "v1",
+      "name": "Ribbons Two",
+      "description": "It looks like Windows Vista",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/BYbjyg",
+      "hash": "f6abb2dcf927154b2dff38686f32e2c1bb63114e"
+    },
+    {
+      "id": "animation.15.sound",
+      "version": "v1",
+      "name": "Sound",
+      "description": "Vibes",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/jOqeYWy",
+      "hash": "0c3808ccfd86052fbfda08066238daf09a13fcd3"
+    },
+    {
+      "id": "animation.16.veil",
+      "version": "v1",
+      "name": "Veil",
+      "description": "Slithers   of   color   veil   the   screen",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/QmLVax",
+      "hash": "fba780872b9c8a870409629167574bd2cd002f57"
+    },
+    {
+      "id": "animation.17.ribbons",
+      "version": "v1",
+      "name": "Ribbons",
+      "description": "So many layers of ribbons",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/MNVYdq",
+      "hash": "bd2e87a28962f48f3790b84f71ef34d0534b6eb4"
+    },
+    {
+      "id": "animation.18.particle-cube",
+      "version": "v1",
+      "name": "3D particle Cube",
+      "description": "Pure JS 3D particle Cube - 1000 particles",
+      "author": "Bas Groothedde",
+      "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
+      "hash": "e81fe0f4d974130ebb7abf000cdc263ce06b9280"
+    },
+    {
+      "id": "animation.19.trapped-particles",
+      "version": "v1",
+      "name": "Trapped particles",
+      "description": "Trapped particles with shocking connections",
+      "author": "Bas Groothedde",
+      "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
+      "hash": "f4b3d6ff20db90554b0a1e7716f4e769f323f7fa"
+    },
+    {
+      "id": "animation.20.manifold",
+      "version": "v1",
+      "name": "Manifold",
+      "description": "Enter into the fold",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/PozModJ",
+      "hash": "eaedebe638d6affaa28b26509fa240b8d8d16c68"
+    },
+    {
+      "id": "animation.21.noise-abstraction",
+      "version": "v1",
+      "name": "Noise Abstraction",
+      "description": "Noise Abstraction",
+      "author": "Akimitsu Hamamuro",
+      "source": "https://codepen.io/akm2/pen/AxGzJb",
+      "hash": "d79375f3c363c8ffc7e28a08cb0a1249f537b0c5"
+    },
+    {
+      "id": "animation.22.cloth-ribbons",
+      "version": "v1",
+      "name": "Cloth Ribbons",
+      "description": "It Colorful Cloth Ribbons",
+      "author": "Bas Groothedde",
+      "source": "https://codepen.io/ImagineProgramming/pen/BavevR",
+      "hash": "2ff1e1f69f25dce249689bf64a8e43bd4153038d"
+    },
+    {
+      "id": "animation.23.ribbons-four",
+      "version": "v1",
+      "name": "Ribbons Four",
+      "description": "It looks like Windows Vista",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/MNVYdq",
+      "hash": "1fae2b5fe4607777d23065cc1b14d48f81b3b9d7"
+    },
+    {
+      "id": "animation.24.trapped-gradient",
+      "version": "v1",
+      "name": "Trapped graident",
+      "description": "Trapped particles with gradient connections",
+      "author": "Bas Groothedde",
+      "source": "https://codepen.io/ImagineProgramming/pen/qdZWag",
+      "hash": "9b15efa9d34c709c0b4bc8ab00014cab6594942b"
+    },
+    {
+      "id": "animation.25.galactic-swimmers",
+      "version": "v1",
+      "name": "Galactic Swimmers",
+      "description": "A sea of particles swimming in the galaxy",
+      "author": "Bas Groothedde",
+      "source": "https://codepen.io/ImagineProgramming/pen/KwVWmE",
+      "hash": "9851e4dd2429f4d2a450c3ff8fbffccfb58f7b4b"
+    },
+    {
+      "id": "animation.26.gpu-particles",
+      "version": "v1",
+      "name": "GPU Particles",
+      "description": "First Time GPGPU Particles",
+      "author": "Tim Severien",
+      "source": "https://codepen.io/timseverien/pen/rWdJZY",
+      "hash": "d6f1ee2c95d23c4b5adf160a38ae806259e47b1a"
+    },
+    {
+      "id": "animation.27.tron",
+      "version": "v1",
+      "name": "Tron",
+      "description": "LightCycles in Tron",
+      "author": "DanDog",
+      "source": "https://codepen.io/timseverien/pen/rWdJZY",
+      "hash": "9abe7f022fea763564a707daa07586b898ee88c7"
+    },
+    {
+      "id": "animation.28.black-sand-flow-field-v2",
+      "version": "v1",
+      "name": "Black Sand Flow Field v2",
+      "description": "",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
+      "hash": "1b0c631b134f9047d67a5b191d20825eec125c5d"
+    },
+    {
+      "id": "animation.31.blooming-flower",
+      "version": "v1",
+      "name": "Blooming Flower",
+      "description": "",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/qPrGbo",
+      "hash": "b5d24385ca78a781d67254bce93dec2556f4d74c"
+    },
+    {
+      "id": "animation.32.canvas-blending-gradient-circles",
+      "version": "v1",
+      "name": "Canvas Blending Gradient Circles",
+      "description": "",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/pomzqE",
+      "hash": "ad13377f38603d422fa11a1caf8b864657775d87"
+    },
+    {
+      "id": "animation.33.canvas-bokeh",
+      "version": "v1",
+      "name": "Canvas Bokeh Generation",
+      "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/nYzapO",
+      "hash": "02b29b0af38d9fb5decc0ade7788e10634fd4714"
+    },
+    {
+      "id": "animation.34.canvas-color-teams",
+      "version": "v1",
+      "name": "Canvas Color Teams",
+      "description": "",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/DdyGPB",
+      "hash": "fd602b767f651df50983af814bf76d4eb1905624"
+    },
+    {
+      "id": "animation.35.canvas-light-explosion",
+      "version": "v1",
+      "name": "Canvas Light Explosion",
+      "description": "Click to clear and change hue.",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/Xdaavx",
+      "hash": "d4f12756a3e81094f6f8794585d7548f8e315cac"
+    },
+    {
+      "id": "animation.36.starfield",
+      "version": "v1",
+      "name": "Starfield",
+      "description": "Engage",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
+      "hash": "725298f3d49b67dd9c72a91e13579ce0ab917417"
+    },
+    {
+      "id": "animation.46.codevember-05-simplex-vector-flow-field",
+      "version": "v1",
+      "name": "#Codevember 05 Simplex Vector Flow Field",
+      "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/zodPjd",
+      "hash": "e853c567e4d36c3555b5e4e8040f4dca5e11bbb0"
+    },
+    {
+      "id": "animation.47.color-trails",
+      "version": "v1",
+      "name": "Color Trails",
+      "description": "",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/GprWyw",
+      "hash": "0da3b658e6b3081dfc7475e3d390d6a28eaf9760"
+    },
+    {
+      "id": "animation.48.colorful-wanderers",
+      "version": "v1",
+      "name": "Colorful Wanderers",
+      "description": "\n\nForked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/xbRqGz",
+      "hash": "e2718503efc92e1297b0757705a8dbbdb9ee8001"
+    },
+    {
+      "id": "animation.49.curved-lines",
+      "version": "v1",
+      "name": "Curved Lines",
+      "description": "`#GrayScale_HintOfRainbow_CurvedLinesWeekend`",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/zGwqbq",
+      "hash": "abf9f0e91256f1e429d9e47fe714bfc6df86521d"
+    },
+    {
+      "id": "animation.50.sidelined",
+      "version": "v1",
+      "name": "Line Loop",
+      "description": "Side lines",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/rNvPvod",
+      "hash": "7cdc15d4a8a041ee9f582a58d0b0dd1efeb59d2a"
+    },
+    {
+      "id": "animation.52.polyhedron-galaxy",
+      "version": "v1",
+      "name": "Polyhedron galaxy",
+      "description": "Practicing with ThreeJS",
+      "author": "Júlia Erő",
+      "source": "https://codepen.io/planktone/pen/EPXMGj",
+      "hash": "fea09bdece68cda754b6ba1dc849e53192e60331"
+    },
+    {
+      "id": "animation.53.stars",
+      "version": "v1",
+      "name": "Stars",
+      "description": "The odd twinkle",
+      "author": "Jack Rugile",
+      "source": "https://codepen.io/jackrugile/pen/BjBGoM",
+      "hash": "f90529974109b8837f2084a19e17b8f29573ba0a"
+    },
+    {
+      "id": "animation.54.stars-galaxy",
+      "version": "v1",
+      "name": "Stars Galaxy",
+      "description": "Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.",
+      "author": "MenSeb",
+      "source": "https://codepen.io/MenSeb/pen/yWJgeE",
+      "hash": "f84abb005802459a2d672b6e2ca7d68d7e913c5b"
+    },
+    {
+      "id": "animation.56.azimuthal-viscosity",
+      "version": "v1",
+      "name": "Azimuthal Viscosity 3",
+      "description": "",
+      "author": "Alex Andrix",
+      "source": "https://codepen.io/alexandrix/pen/ZVewby",
+      "hash": "94e66b6f8361593d9483cad0f9575b944ce0e7a7"
+    },
+    {
+      "id": "animation.57.browniandrix-noise",
+      "version": "v1",
+      "name": "Browniandrix noise",
+      "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
+      "author": "Alex Andrix",
+      "source": "https://codepen.io/alexandrix/pen/jdGBjW",
+      "hash": "3050744031a672ef3fcb1664be2e3d004b744f4b"
+    },
+    {
+      "id": "animation.58.browniandrix-noise-l3",
+      "version": "v1",
+      "name": "Browniandrix noise L3",
+      "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
+      "author": "Alex Andrix",
+      "source": "https://codepen.io/alexandrix/pen/VRaGKq",
+      "hash": "6a9000a1c90657e6d68f9db68e2f080d5cf2fed4"
+    },
+    {
+      "id": "animation.59.dimension-two-and-a-half",
+      "version": "v1",
+      "name": "Dimension of Two and a Half",
+      "description": "Vanishing point attractors",
+      "author": "Alex Andrix",
+      "source": "https://codepen.io/alexandrix/pen/OrpdNJ",
+      "hash": "2f28d6803894e0d627eeb169a6060977d2ddcf42"
+    },
+    {
+      "id": "animation.60.digital-frontier",
+      "version": "v1",
+      "name": "The Digital Frontier",
+      "description": "Dial me in",
+      "author": "Ben Matthews",
+      "source": "https://codepen.io/tsuhre/pen/YzjEBoG",
+      "hash": "8ff3b7fcb9121d6a0ea3d31ec085a08b17f9a77a"
+    },
+    {
+      "id": "animation.61.cube",
+      "version": "v1",
+      "name": "Pure CSS cube",
+      "description": "[Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288). Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.",
+      "author": "Ana Tudor",
+      "source": "https://codepen.io/thebabydino/pen/OJvYZrx",
+      "hash": "0af6ecb3971b34983cffae31687df62b3ea99801"
+    },
+    {
+      "id": "animation.62.neural",
+      "version": "v1",
+      "name": "Neural",
+      "description": "Neural Glow",
+      "author": "Ksenia Kondrashova",
+      "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
+      "hash": "d40832d3cd397cc098653c6e5887c7b0b3ca53d4"
+    },
+    {
+      "id": "animation.63.green-circuit",
+      "version": "v1",
+      "name": "Green Circuit",
+      "description": "I'm in",
+      "author": "Jared Stanley",
+      "source": "https://codepen.io/ykob/pen/YewoRz",
+      "hash": "8032963e058fcacf91d281165f7d4ea1519428fc",
+      "parameters": [
+        {
+          "name": "textColor",
+          "default": "rgba(22,222,82,0.6992)",
+          "description": "The color of the dots",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "animation.64.howls-moving-castle",
+      "version": "v1",
+      "name": "Howl's Moving Castle",
+      "description": "Howl's Moving Castle\n",
+      "author": "Nathan Gordon",
+      "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
+      "hash": "9af247648d46f2634a8270bdfa6ec9028745eb6f"
+    },
+    {
+      "id": "animation.65.cristal-lands",
+      "version": "v1",
+      "name": "Cristal Lands",
+      "description": "Cristal Lands",
+      "author": "nskrgv",
+      "source": "https://codepen.io/nskrgv/pen/PQzpKb",
+      "hash": "892ed8f6e66a2c6024f00a1566ca77e72d260dae"
+    },
+    {
+      "id": "animation.66.fog-of-war",
+      "version": "v1",
+      "name": "Fog of War",
+      "description": "WebGL Fog",
+      "author": "yoichi kobayashi",
+      "source": "https://codepen.io/ykob/pen/YewoRz",
+      "hash": "5679b6079a2203b090c9cee46ac1acd0114acff5"
+    },
+    {
+      "id": "animation.67.fly-particle",
+      "version": "v1",
+      "name": "Fog of War",
+      "description": "WebGL Fog",
+      "author": "yoichi kobayashi",
+      "source": "https://codepen.io/ykob/pen/YewoRz",
+      "hash": "833665cb0c18cb3fa7c833dcf7493a57b3bf1e93"
+    },
+    {
+      "id": "animation.68.rgb-wave",
+      "version": "v1",
+      "name": "RGB Wave",
+      "description": "RGB Wave",
+      "author": "Yuki",
+      "source": "https://codepen.io/Web_yuki1027/pen/yLgYpWM",
+      "hash": "bd6311ea7ad48b68fda7e21b1e7648a6c5c252d7"
+    },
+    {
+      "id": "animation.69.bit-ocean",
+      "version": "v1",
+      "name": "Bit Ocean",
+      "description": "Bit Ocean",
+      "author": "Griffin Moyer",
+      "source": "https://codepen.io/gmoyer/pen/OxaObd",
+      "hash": "a7f1d0edac9d30dffc2231a4ec80d29e2836edd0"
+    },
+    {
+      "id": "animation.70.blur",
+      "version": "v1",
+      "name": "Blur",
+      "description": "Shift",
+      "author": "tympanus",
+      "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
+      "hash": "f3ee02c06769a7339df465453fa02fad1c69f76b",
+      "parameters": [
+        {
+          "name": "opacity",
+          "default": "0.5",
+          "description": "The opacity of the background",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "animation.71.interactive-gradient",
+      "version": "v1",
+      "name": "Nothing",
+      "description": "Interactive gradient",
+      "author": "Ray Victor PRO",
+      "source": "https://codepen.io/ray7551/pen/EbVmZd",
+      "hash": "087618b4b0284eb9150e3b3d0d0c64b818672b77"
+    },
+    {
+      "id": "animation.72.playstation-3-bg-style",
+      "version": "v1",
+      "name": "Playstation 3",
+      "description": "RetroArch Menu Ribbon",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/jdawXK",
+      "hash": "a3893a27865f2a46dea3bb1a0a18ce81e1dabea4",
+      "parameters": [
+        {
+          "name": "waveColor",
+          "default": "rgb(255,255,255)",
+          "description": "The color of the wave in RGB format",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "animation.73.alien-blackout-intro-scene-react-webgl",
+      "version": "v1",
+      "name": "Alien - Blackout Intro Scene",
+      "description": "Made with React and WebGL",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/MNOEVe",
+      "hash": "bb3d8948c21dc456999ad5f22e0f0a6be2957261"
+    },
+    {
+      "id": "animation.74.dvd-screensaver",
+      "version": "v1",
+      "name": "DVD Screensaver",
+      "description": "Simple DVD screensaver implementation with requestAnimationFrame",
+      "author": "Karl Saunders",
+      "source": "https://codepen.io/Mobius1/pen/wGVveZ",
+      "hash": "a986d32d2c4c9b26d2d11927f87306d7f87579ff"
+    },
+    {
+      "id": "animation.75.hexagonal-truchet-10-print",
+      "version": "v1",
+      "name": "Hexagonal Truchet 10 Print",
+      "description": "Inspired by [Ben Matthews]",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/qEWQgXW",
+      "hash": "98af085df418c89086205c9578f75e58efb16221",
+      "parameters": [
+        {
+          "name": "screen_duration",
+          "description": "Time to cross the screen vertically",
+          "default": 200,
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "animation.76.hexanimation",
+      "version": "v1",
+      "name": "Hexanimation",
+      "description": "Mouse vertical position controls pattern size when you click.",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/LYvowrg",
+      "hash": "df7bea3590b69726fdbee44aa6bf8d9c6abf8b97"
+    },
+    {
+      "id": "animation.77.hexanimation-2",
+      "version": "v1",
+      "name": "Hexanimation 2",
+      "description": "Mouse vertical position controls pattern size when you click.  ",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/poBXvgg",
+      "hash": "841d0093d789aa9a3d196240c23c298ee5e9204e"
+    },
+    {
+      "id": "animation.78.just-in-case",
+      "version": "v1",
+      "name": "Just In Case",
+      "description": "Text animation with a shader in the background.",
+      "author": "Matthias Hurrle",
+      "source": "https://codepen.io/atzedent/pen/PwobBLM",
+      "hash": "3c5685479ba0442d18f45d12c979fd7ac11e6e33"
+    },
+    {
+      "id": "animation.79.canvas-ribbons",
+      "version": "v1",
+      "name": "Canvas Ribbons",
+      "description": "",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/LQVzxJ",
+      "hash": "d7d8d646c7527b090b4bc49d8682742a36137235"
+    },
+    {
+      "id": "generator.79.more-columns",
+      "version": "v1",
+      "name": "More columns",
+      "description": "Randomly generated columns",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/NPWbdMP",
+      "hash": "d7c36df7370cd16b16a179541a243963a23eebda"
+    },
+    {
+      "id": "animation.80.particle-waves-webgl-shader",
+      "version": "v1",
+      "name": "Particle Waves WebGL Shader",
+      "description": "Particle Waves made with native WebGL shader",
+      "author": "Boris Šehovac",
+      "source": "https://codepen.io/bsehovac/pen/GPweQe",
+      "hash": "00648a68ebd3e473475f7e480f480e1efd803355"
+    },
+    {
+      "id": "animation.81.remember-windows",
+      "version": "v1",
+      "name": "Remember Windows?",
+      "description": "The old Windows screensaver.",
+      "author": "Lanny",
+      "source": "https://codepen.io/lannymcnie/pen/PRZJab",
+      "hash": "54cab473f23bfe1b73fe61d9b854565e9977d4de"
+    },
+    {
+      "id": "animation.82.storm",
+      "version": "v1",
+      "name": "Storm",
+      "description": "Storm approaches",
+      "author": "Liam Egan",
+      "source": "https://codepen.io/shubniggurath/pen/BVKgJK",
+      "hash": "3b74cdd6c6561d9befb1650bbad2b3e3587a7f5e"
+    },
+    {
+      "id": "animation.83.strange-tubes",
+      "version": "v1",
+      "name": "Strange Tubes #2",
+      "description": "Tubes, again...",
+      "author": "Kevin Levron",
+      "source": "https://codepen.io/soju22/pen/JzzvbR",
+      "hash": "21d1f35bfab46fff7ef87b8d2ecc50459c1cf363"
+    },
+    {
+      "id": "animation.84.troisjs-starfield",
+      "version": "v1",
+      "name": "Color Starfield",
+      "description": "Made with TroisJS",
+      "author": "Kevin Levron",
+      "source": "https://codepen.io/soju22/pen/JjEqebK",
+      "hash": "81251d0cf637a0e096a07f1e91a585e807668f1f",
+      "parameters": [
+        {
+          "name": "POINTS_COUNT",
+          "default": 30000,
+          "description": "Number of points",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "id": "animation.85.truchet-10-print-imitation",
+      "version": "v1",
+      "name": "Truchet 10 Print (imitation)",
+      "description": "Inspired by [Ben Matthews]",
+      "author": "Dillon",
+      "source": "https://codepen.io/Dillo/pen/raBqEZy",
+      "hash": "9d8f02384f3da6e2dcdb2a5c9fa80cace794ddd6"
+    },
+    {
+      "id": "generator.86.silky-carpet",
+      "version": "v1",
+      "name": "Silky Carpet",
+      "description": "Simulating noise variance",
+      "author": "Sarah Drasner",
+      "source": "https://codepen.io/sdras/pen/EgmOKV",
+      "hash": "2c4b882ab4b627f33acda0f341df0180fda0c3d3"
+    },
+    {
+      "id": "animation.87.point-sprites",
+      "version": "v1",
+      "name": "Point Sprites",
+      "description": "WebGL randomly generated starfield",
+      "author": "AzazelN28",
+      "source": "https://codepen.io/AzazelN28/pen/zvXZQw",
+      "hash": "a01e467abbf7dc815864fe9b377ac3e21c2064e8"
+    }
+  ],
+  "common": {}
+}

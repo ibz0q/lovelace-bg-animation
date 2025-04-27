@@ -1,0 +1,744 @@
+version: v1
+metadata:
+  name: Hexagonal Truchet 10 Print
+  description: Inspired by [Ben Matthews]
+  author: Dillon
+  source: https://codepen.io/Dillo/pen/qEWQgXW
+parameters:
+  - name: screen_duration
+    description: Time to cross the screen vertically
+    default: 200
+    type: string
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <title>Hexagonal Truchet 10 Print</title>
+      <style>
+        body {
+          font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
+          background-color: #000;
+          margin: 0;
+          padding: 0;
+          border-width: 0;
+          overflow: hidden;
+          /*  cursor: pointer; */
+        }
+      </style>
+    </head>
+    <body>
+      <script>
+        "use strict";
+        /*
+          Very, very much inspired by Ben Matthews' pen: https://codepen.io/tsuhre/full/BaXJrgw
+          though I did not have a look at his code and extended it to hexagonal tiles
+          */
+
+        const NB_HEXAGONS_MIN = 15;
+        const NB_HEXAGONS_MAX = 20;
+        const WINDOW_HEIGHT_DURATION = {{parameter: screen_duration}}; // in seconds; used for vertical scrolling speed : time to cross the screen vertically
+
+        let canv, ctx; // canvas and context
+        let maxx, maxy; // canvas dimensions
+
+        let radius;
+        let nbx, nby, nbyDraw;
+        let offsx;
+        let grid;
+        // for animation
+        let messages;
+        let vertices, sidePoints;
+        let chains;
+        let shiftY, stepY;
+        let speed; // in pix/ms
+        let colorScheme;
+        let baseHue;
+        let lineWidth;
+        /* algorithm used to set points around hexagon :
+          0 : 1 everywhere
+          1 : 2 everywhere
+          else : randomly 1 or 2
+          */
+        let pointsStyle = 1;
+        let predef; // subset of tiles with predefined connections, to produce hopefully nicer results
+        const predef1 = [
+          [
+            [0, 1],
+            [2, 3],
+            [4, 5],
+          ],
+          [
+            [1, 2],
+            [3, 4],
+            [5, 0],
+          ],
+        ];
+        const predef2 = [
+          [
+            [0, 3],
+            [1, 2],
+            [4, 5],
+          ],
+          [
+            [1, 4],
+            [2, 3],
+            [5, 0],
+          ],
+          [
+            [2, 5],
+            [3, 4],
+            [0, 1],
+          ],
+        ];
+        const predef3 = [
+          [
+            [0, 1],
+            [2, 3],
+            [4, 5],
+            [6, 7],
+            [8, 9],
+            [10, 11],
+          ],
+          [
+            [1, 2],
+            [3, 4],
+            [5, 6],
+            [7, 8],
+            [9, 10],
+            [11, 0],
+          ],
+        ];
+        const predef4 = [
+          [
+            [11, 0],
+            [1, 4],
+            [2, 3],
+            [5, 6],
+            [7, 10],
+            [8, 9],
+          ],
+          [
+            [1, 2],
+            [3, 6],
+            [4, 5],
+            [7, 8],
+            [9, 0],
+            [10, 11],
+          ],
+          [
+            [3, 4],
+            [5, 8],
+            [6, 7],
+            [9, 10],
+            [11, 2],
+            [0, 1],
+          ],
+        ];
+        const variants = [
+          [0, predef1],
+          [0, predef2],
+          [0, undefined],
+          [1, predef3],
+          [1, predef4],
+          [1, undefined],
+          [2, undefined],
+        ];
+
+        const opposite = [3, 4, 5, 0, 1, 2]; // index of opposite side
+        // shortcuts for Math.
+        const mrandom = Math.random;
+        const mfloor = Math.floor;
+        const mround = Math.round;
+        const mceil = Math.ceil;
+        const mabs = Math.abs;
+        const mmin = Math.min;
+        const mmax = Math.max;
+
+        const mPI = Math.PI;
+        const mPIS2 = Math.PI / 2;
+        const mPIS3 = Math.PI / 3;
+        const m2PI = Math.PI * 2;
+        const m2PIS3 = (Math.PI * 2) / 3;
+        const msin = Math.sin;
+        const mcos = Math.cos;
+        const matan2 = Math.atan2;
+
+        const mhypot = Math.hypot;
+        const msqrt = Math.sqrt;
+
+        const rac3 = msqrt(3);
+        const rac3s2 = rac3 / 2;
+
+        //------------------------------------------------------------------------
+
+        function alea(mini, maxi) {
+          // random number in given range
+
+          if (typeof maxi == "undefined") return mini * mrandom(); // range 0..mini
+
+          return mini + mrandom() * (maxi - mini); // range mini..maxi
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        function intAlea(mini, maxi) {
+          // random integer in given range (mini..maxi - 1 or 0..mini - 1)
+          //
+          if (typeof maxi == "undefined") return mfloor(mini * mrandom()); // range 0..mini - 1
+          return mini + mfloor(mrandom() * (maxi - mini)); // range mini .. maxi - 1
+        }
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        /* returns intermediate point between p0 and p1,
+            alpha = 0 will return p0, alpha = 1 will return p1
+            values of alpha outside [0,1] may be used to compute points outside the p0-p1 segment
+          */
+        function lerp(p0, p1, alpha) {
+          return {
+            x: (1 - alpha) * p0.x + alpha * p1.x,
+            y: (1 - alpha) * p0.y + alpha * p1.y,
+          };
+        } // function lerp
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        function distance(p0, p1) {
+          /* distance between points */
+          return mhypot(p0.x - p1.x, p0.y - p1.y);
+        } // function distance
+        function arrayShuffle(array) {
+          /* randomly changes the order of items in an array
+                 only the order is modified, not the elements
+              */
+          let k1, temp;
+          for (let k = array.length - 1; k >= 1; --k) {
+            k1 = intAlea(0, k + 1);
+            temp = array[k];
+            array[k] = array[k1];
+            array[k1] = temp;
+          } // for k
+          return array;
+        } // arrayShuffle
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // classe Hexagon
+
+        class Hexagon {
+          constructor(kx, ky) {
+            this.kx = kx;
+            this.ky = ky;
+            // coordinates of centre
+            this.xc = offsx + this.kx * 1.5 * radius;
+            this.yc = (this.ky + 1 - nbx) * radius * rac3;
+            if (this.kx & 1) this.yc -= radius * rac3s2; // odd columns, centre a bit higher
+
+            /* define number of points on each side */
+            this.nbPPSide = []; // number of points per side (1 or 2)
+            let availSides = [];
+            let sum = 0; // total number of points, for parity
+            for (let side = 0; side < 6; ++side) {
+              let neigh = this.neighbor(side);
+              if (neigh) {
+                this.nbPPSide[side] = neigh.nbPPSide[opposite[side]];
+                sum += this.nbPPSide[side];
+              } else availSides.push(side);
+            } // for kSide
+            availSides = arrayShuffle(availSides); // set values in random ordrer
+            while (availSides.length) {
+              let side = availSides.pop();
+              if (availSides.length) {
+                switch (pointsStyle) {
+                  case 0:
+                    this.nbPPSide[side] = 1;
+                    break;
+                  case 1:
+                    this.nbPPSide[side] = 2;
+                    break;
+                  default:
+                    this.nbPPSide[side] = intAlea(1, 3); // 1 or 2
+                }
+                sum += this.nbPPSide[side];
+              } else {
+                // no more choice : pick value to make sum even
+                this.nbPPSide[side] = 2 - (sum & 1);
+                this.nbPoints = sum + this.nbPPSide[side];
+              }
+            }
+            /* after nbPPSide has been initialised, prepares a few structures to make points manupulation easier */
+            this.sideOfPoint = [];
+            for (let side = 0; side < 6; ++side) {
+              for (let k = 0; k < this.nbPPSide[side]; ++k)
+                this.sideOfPoint.push(side);
+            } // for kcote
+
+            /* compute, for each side of the current Hexagon, which points belong to it */
+            this.pointsOfSide = [[], [], [], [], [], []];
+            for (let k = 0; k < this.nbPoints; ++k)
+              this.pointsOfSide[this.sideOfPoint[k]].push(k);
+
+            // now create connections between pairs of points so that 2 connections do not cross each other
+            /* create the set of points that can be connected together in one hexagon
+                       - initially all of them */
+            this.connectables = [[]];
+            for (let kin = 0; kin < this.nbPoints; ++kin)
+              this.connectables[0][kin] = kin;
+            this.connections = [];
+            if (predef) {
+              let picked = predef[intAlea(predef.length)];
+              picked.forEach((conn) =>
+                this.connections.push({ kin: conn[0], kout: conn[1] }),
+              );
+            } else {
+              let unconnected = Array.from(new Array(this.nbPoints).keys());
+              while (unconnected.length) {
+                let kin = unconnected.splice(intAlea(unconnected.length), 1)[0];
+                let kconn = this.connectables.findIndex((subset) =>
+                  subset.includes(kin),
+                ); // index of subset containing kin
+                let idxConn0 = this.connectables[kconn].indexOf(kin); // index of kin in this subset
+                let idxConn =
+                  intAlea(this.connectables[kconn].length / 2) * 2 +
+                  ((idxConn0 & 1) ^ 1);
+                let kout = this.connectables[kconn][idxConn];
+                this.connect(kin, kout, kconn);
+                this.connections.push({ kin, kout });
+                unconnected.splice(unconnected.indexOf(kout), 1);
+              }
+            }
+            /* create path for each connection */
+            this.makePaths();
+            this.chain();
+          } // constructor
+
+          // returns a pair of values {kx, ky}
+
+          kNeighbor(side) {
+            // sides are numbered 0..5 for SE,S,SW,NW,N,NE
+            // returns coordinates of neighbour, even if no actual neighbor exists
+            return {
+              kx: this.kx + [1, 0, -1, -1, 0, 1][side],
+              ky:
+                this.ky +
+                [
+                  [1, 1, 1, 0, -1, 0],
+                  [0, 1, 0, -1, -1, -1],
+                ][this.kx & 1][side],
+            };
+          } // kNeighbor
+
+          neighbor(side) {
+            // returns false if neighbor does not exist
+            // remark : current row must exist, even if it is not fully populated
+            const { kx: knx, ky: kny } = this.kNeighbor(side);
+            if (knx < 0 || knx >= nbx || kny < 0 || kny >= grid.length)
+              return false;
+            const neigh = grid[kny][knx];
+            return neigh === undefined ? false : neigh;
+          }
+          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+          connect(kin, kout, kcon) {
+            /* manages the 'connectables' property wich tells which points may be connected together
+                    without cutting a previously created connection
+                /* normally, kin et kout should have different parities */
+
+            let k0, k1;
+            k0 = this.connectables[kcon].indexOf(kin);
+            k1 = this.connectables[kcon].indexOf(kout);
+            if (k1 < k0) [k0, k1] = [k1, k0];
+            // put apart points associated with kin and kout
+            let narr = this.connectables[kcon].splice(k0, k1 + 1 - k0);
+            // remove kin and kout from 'connectables' since they now are used
+            narr.shift();
+            narr.pop();
+            if (narr.length > 0) this.connectables.push(narr); // the rest becomes a new 'connectable' subset
+            if (this.connectables[kcon].length == 0)
+              this.connectables.splice(kcon, 1); // remove subset if empty
+          } // connect
+          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          chain() {
+            let side1, side2;
+            let neigh1, neigh2;
+            let k1, k2;
+            let pdc;
+            this.connections.forEach((conn) => {
+              let chn1, chn2;
+              /* find chains at both ends */
+              side1 = this.sideOfPoint[conn.kin];
+              neigh1 = this.neighbor(side1);
+              if (neigh1) {
+                if (this.nbPPSide[side1] == 1) {
+                  k1 = neigh1.pointsOfSide[opposite[side1]][0];
+                } else {
+                  pdc = conn.kin - this.pointsOfSide[side1][0];
+                  k1 = neigh1.pointsOfSide[opposite[side1]][1 - pdc];
+                }
+                chn1 = neigh1.connections.find(
+                  (conn) => conn.kin == k1 || conn.kout == k1,
+                );
+                chn1 = chn1.chain;
+              }
+              side2 = this.sideOfPoint[conn.kout];
+              neigh2 = this.neighbor(side2);
+              if (neigh2) {
+                if (this.nbPPSide[side2] == 1) {
+                  k2 = neigh2.pointsOfSide[opposite[side2]][0];
+                } else {
+                  pdc = conn.kout - this.pointsOfSide[side2][0];
+                  k2 = neigh2.pointsOfSide[opposite[side2]][1 - pdc];
+                }
+                chn2 = neigh2.connections.find(
+                  (conn) => conn.kin == k2 || conn.kout == k2,
+                );
+                chn2 = chn2.chain;
+              }
+              if (!chn1 && !chn2) {
+                conn.chain = new Chain();
+                chains.push(conn.chain);
+              } else if (chn1 && !chn2) {
+                conn.chain = chn1;
+              } else if (!chn1 && chn2) {
+                conn.chain = chn2;
+              } else {
+                // chn1 && chn2
+                let idx1 = chains.indexOf(chn1);
+                let idx2 = chains.indexOf(chn2);
+                if (idx1 > idx2) {
+                  //chain1 youngest, swap chains to keep the oldest
+                  [chn1, chn2] = [chn2, chn1];
+                  [idx1, idx2] = [idx2, idx1];
+                }
+                conn.chain = chn1;
+                if (idx1 != idx2) {
+                  chn2.connections.forEach((c) => (c.chain = chn1)); // affect chn1 to cells of chn2
+                  chn1.connections = chn1.connections.union(chn2.connections); // append cells of chn2 to chn1
+                  chains.splice(idx2, 1); // remove chn2 from array (no longer exists)
+                }
+              }
+              conn.chain.connections.add(conn);
+            });
+          }
+          // end of class Hexagon
+
+          // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          makePaths(connection) {
+            /* calculates path for a (0,0) centered tile
+             */
+
+            const ztd = 0.6; // coefficient for straight lines
+            const zdt = 0.2; // coefficient for U-turn
+
+            let pa, pb; // control points of the Bézier curve
+            let dx, dy, dd;
+            let kCommVert; // index of common vertex
+            let din, dout;
+
+            this.connections.forEach((conn) => {
+              // the curve is drawn as if entering the hexagon through point p0 and leaving it through point p1
+              let bin = this.sideOfPoint[conn.kin];
+              let bout = this.sideOfPoint[conn.kout];
+              let p0 =
+                sidePoints[this.nbPPSide[bin]][bin][
+                  this.pointsOfSide[bin][0] == conn.kin ? 0 : 1
+                ];
+              let p1 =
+                sidePoints[this.nbPPSide[bout]][bout][
+                  this.pointsOfSide[bout][0] == conn.kout ? 0 : 1
+                ];
+              let tp = [
+                { x: -rac3s2, y: -1 / 2 },
+                { x: 0, y: -1 },
+                { x: rac3s2, y: -1 / 2 },
+                { x: rac3s2, y: 1 / 2 },
+                { x: 0, y: 1 },
+                { x: -rac3s2, y: 1 / 2 },
+              ]; // table of perpendiculars
+
+              /* bout - bin gives (in 1/6 of turn) the direction change of the curve between entry and exit
+               */
+
+              switch (bout - bin) {
+                case 3: // straightforward
+                case -3:
+                  dd = ztd * radius; // probably not the smartest way
+                  pa = {
+                    x: p0.x + tp[bin].x * dd,
+                    y: p0.y + tp[bin].y * dd,
+                  };
+                  pb = {
+                    x: p1.x + tp[bout].x * dd,
+                    y: p1.y + tp[bout].y * dd,
+                  };
+
+                  break;
+                case 1:
+                case -1:
+                case 5:
+                case -5:
+                  /* 120 degrees : curve around a vertex
+                                 compute distances from p0 and p1 to that vertex and use these distances
+                                 to compute position of intermediate Bezier control points pa and pb
+                              */
+                  if (bout - bin == -1 || bout - bin == 5) {
+                    kCommVert = bin;
+                  } else {
+                    kCommVert = bout;
+                  }
+
+                  din = distance(vertices[kCommVert], p0);
+                  dout = distance(vertices[kCommVert], p1);
+
+                  dd = 0.75;
+
+                  pa = {
+                    x: p0.x + tp[bin].x * dd * dout,
+                    y: p0.y + tp[bin].y * dd * dout,
+                  };
+                  pb = {
+                    x: p1.x + tp[bout].x * dd * din,
+                    y: p1.y + tp[bout].y * dd * din,
+                  };
+
+                  break;
+                case 2:
+                case -2:
+                case 4: // 60 degrees
+                case -4:
+                  dd = 0.55 * radius; // probably not the smartest way
+                  pa = {
+                    x: p0.x + tp[bin].x * dd,
+                    y: p0.y + tp[bin].y * dd,
+                  };
+                  pb = {
+                    x: p1.x + tp[bout].x * dd,
+                    y: p1.y + tp[bout].y * dd,
+                  };
+
+                  break;
+
+                case 0: // U-turn
+                  dx = p1.x - p0.x;
+                  dy = p1.y - p0.y;
+                  dd = zdt * radius;
+
+                  pa = {
+                    x: p0.x + tp[bin].x * dd,
+                    y: p0.y + tp[bin].y * dd,
+                  };
+                  pb = {
+                    x: p1.x + tp[bin].x * dd,
+                    y: p1.y + tp[bin].y * dd,
+                  };
+                  break;
+              } // switch
+              let path = new Path2D();
+              path.moveTo(p0.x, p0.y);
+              path.bezierCurveTo(pa.x, pa.y, pb.x, pb.y, p1.x, p1.y);
+              conn.path = path;
+            });
+          } // make paths
+
+          draw() {
+            ctx.translate(this.xc, this.yc);
+            this.connections.forEach((conn) => {
+              ctx.lineWidth = lineWidth;
+              ctx.strokeStyle = conn.chain.strokeStyle;
+              ctx.stroke(conn.path);
+            });
+            ctx.resetTransform();
+          }
+        } // class Hexagon
+
+        //------------------------------------------------------------------------
+        class Chain {
+          constructor() {
+            this.connections = new Set();
+            switch (colorScheme) {
+              case 0:
+                this.strokeStyle = `hsl(${intAlea(360)} 100% 50%)`;
+                break;
+              case 1:
+                this.strokeStyle = `hsl(${baseHue + alea(-40, 40)} ${alea(
+                  50,
+                  100,
+                )}% 50%)`;
+                break;
+            }
+          }
+          delete(connection) {
+            // removes connection from this chain. if this chain becomes empty, it is removed from the chains array
+            this.connections.delete(connection);
+            if (this.connections.size == 0)
+              chains.splice(chains.indexOf(this), 1);
+          }
+        } // Chain
+        //------------------------------------------------------------------------
+
+        function makeGrid() {
+          grid = [];
+          for (let ky = 0; ky < nby; ++ky) addRow();
+        }
+        //------------------------------------------------------------------------
+        function drawGrid() {
+          ctx.fillStyle = "#000";
+          ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+          for (let ky = 0; ky < nbyDraw; ++ky) {
+            grid[ky + nbx].forEach((cell) => cell.draw());
+          } // for ky
+        } // drawGrid
+        //------------------------------------------------------------------------
+        function addRow() {
+          /* row is always added at the end of the grid
+           */
+          grid.forEach((row, ky) =>
+            row.forEach((cell) => {
+              cell.ky = ky + 1; // re-number rows (++cell.ky should work too)
+              cell.yc = (ky + 1 - nbx) * radius * rac3;
+              if (cell.kx & 1) cell.yc -= radius * rac3s2; // odd columns, centre a bit higher
+            }),
+          );
+
+          let row = [];
+          let ky = grid.length;
+          grid.unshift(row);
+          for (let kx = 0; kx < nbx; ++kx) {
+            let cell = new Hexagon(kx, 0);
+            row.push(cell);
+          }
+        } // addRow
+        //------------------------------------------------------------------------
+        function removeRow() {
+          /* row 0 is removed from grid */
+          let removed = grid.pop();
+          // remove connections from chains (will remove chains too if they become empty)
+          removed.forEach((cell) =>
+            cell.connections.forEach((conn) => conn.chain.delete(conn)),
+          );
+        }
+        //------------------------------------------------------------------------
+
+        let animate;
+
+        {
+          // scope for animate
+
+          let animState = 0;
+          let tdraw;
+
+          animate = function (tStamp) {
+            let message, dt;
+
+            message = messages.shift();
+            if (message && message.message == "reset") animState = 0;
+            if (message && message.message == "click") animState = 0;
+            window.requestAnimationFrame(animate);
+
+            switch (animState) {
+              case 0:
+                if (startOver()) {
+                  ++animState;
+                  shiftY = 0;
+                  tdraw = tStamp;
+                }
+                break;
+
+              case 1:
+                dt = tStamp - tdraw;
+                tdraw = tStamp;
+                if (dt > 100) dt = 100; // speed limit
+
+                shiftY += speed * dt;
+                if (shiftY < 0) {
+                  canv.style.top = `${shiftY}px`;
+                } else {
+                  shiftY -= stepY;
+                  canv.style.top = `${shiftY}px`;
+                  removeRow();
+                  addRow();
+                  drawGrid();
+                }
+
+                break;
+
+              case 2:
+                break;
+            } // switch
+          }; // animate
+        } // scope for animate
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+
+        function startOver() {
+          // canvas dimensions
+
+          maxx = window.innerWidth;
+          maxy = window.innerHeight;
+
+          let lRef = msqrt(maxx * maxy);
+          radius = lRef / alea(NB_HEXAGONS_MIN, NB_HEXAGONS_MAX);
+          stepY = radius * rac3;
+          shiftY = 0;
+          speed = maxy / WINDOW_HEIGHT_DURATION / 1000;
+
+          canv.width = maxx;
+          canv.height = maxy + stepY;
+          ctx.lineJoin = "round";
+          ctx.lineCap = "round";
+
+          // all screen covered with hexagons
+          nbx = mceil(maxx / radius / 1.5 + 1);
+          nbyDraw = mceil(maxy / radius / rac3 + 2); // number of rows worth drawing
+          nby = nbyDraw + nbx; // +nbx good idea ???
+          offsx = (maxx - 1.5 * radius * (nbx - 1)) / 2; // center of leftmost hexagon on line
+          lineWidth = alea(1, 3) * radius * 0.06;
+          baseHue = intAlea(360);
+          colorScheme = intAlea(2);
+
+          vertices = [];
+          for (let k = 0; k < 6; ++k) {
+            vertices[k] = {
+              x: radius * mcos((k * mPI) / 3),
+              y: radius * msin((k * mPI) / 3),
+            };
+          }
+          sidePoints = [, [], []];
+          for (let k = 0; k < 6; ++k) {
+            let p0 = vertices[k];
+            let p1 = vertices[(k + 1) % 6];
+            sidePoints[1][k] = [lerp(p0, p1, 0.5)];
+            sidePoints[2][k] = [lerp(p0, p1, 0.35), lerp(p1, p0, 0.35)];
+          }
+
+          let variant = variants[intAlea(variants.length)];
+          pointsStyle = variant[0];
+          predef = variant[1];
+
+          chains = [];
+          makeGrid();
+          return true;
+        } // startOver
+
+        //------------------------------------------------------------------------
+
+        function mouseClick(event) {
+          messages.push({ message: "click" });
+        } // mouseClick
+
+        //------------------------------------------------------------------------
+        //------------------------------------------------------------------------
+        // beginning of execution
+
+        {
+          canv = document.createElement("canvas");
+          canv.style.position = "absolute";
+          document.body.appendChild(canv);
+          ctx = canv.getContext("2d");
+          /*    canv.setAttribute ('title','click me'); */
+        } // CANVAS creation
+        canv.addEventListener("click", mouseClick);
+        messages = [{ message: "reset" }];
+        requestAnimationFrame(animate);
+      </script>
+    </body>
+  </html>
