@@ -7,16 +7,6 @@ metadata:
 template: >
   <canvas id="c"></canvas>
 
-  <!--
-
-  Move your mouse to controll the larger green particle!
-
-  -->
-
-
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
-
   <script
   src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/MousePositionMonitor.js"></script>
 
@@ -70,18 +60,8 @@ template: >
       var width, height;
       var particleCounter = 0,
         hover = false,
-        stats = new Stats(),
         mmon = new MousePositionMonitor(),
         is_firefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
-
-      stats.setMode(0); // Start off with FPS mode
-
-      // Place the statistics at the bottom right.
-      stats.domElement.style.position = "absolute";
-      stats.domElement.style.right = "5px";
-      stats.domElement.style.bottom = "5px";
-
-      document.body.appendChild(stats.domElement);
 
       context.lineWidth = "hairline";
 
@@ -275,9 +255,7 @@ template: >
 
       var loop = function () {
         requestAnimFrame(loop);
-        stats.begin();
         render();
-        stats.end();
       };
       loop();
     });
