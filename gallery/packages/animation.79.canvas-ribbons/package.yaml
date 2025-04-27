@@ -69,7 +69,6 @@ template: >
 
             Waves.hue = Waves.options.hue[0];
             Waves.hueFw = true;
-            Waves.stats = new Stats();
 
             Waves.resize();
             Waves.init(Waves.options.preload);
@@ -137,10 +136,8 @@ template: >
             Waves.render();
 
             if (Waves.options.fps) {
-              Waves.stats.log();
               Waves.ctx.font = "12px Arial";
               Waves.ctx.fillStyle = "#fff";
-              Waves.ctx.fillText(Waves.stats.fps() + " FPS", 10, 22);
             }
 
             window.requestAnimationFrame(Waves.animate.bind(Waves));
@@ -301,37 +298,6 @@ template: >
 
             Line.color = color;
           }
-
-          function Stats() {
-            this.data = [];
-          }
-
-          Stats.prototype.time = function () {
-            return (performance || Date).now();
-          };
-
-          Stats.prototype.log = function () {
-            if (!this.last) {
-              this.last = this.time();
-              return 0;
-            }
-
-            this.new = this.time();
-            this.delta = this.new - this.last;
-            this.last = this.new;
-
-            this.data.push(this.delta);
-            if (this.data.length > 10) this.data.shift();
-          };
-
-          Stats.prototype.fps = function () {
-            var fps = 0;
-            each(this.data, function (data, i) {
-              fps += data;
-            });
-
-            return Math.round(1000 / (fps / this.data.length));
-          };
 
           function each(items, callback) {
             for (var i = 0; i < items.length; i++) {
