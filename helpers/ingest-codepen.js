@@ -83,9 +83,6 @@ let i = 73;
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin",
     "sec-gpc": "1",
-    "x-csrf-token": "cDpEoOvZVPU-vMX50ItuMWeznRVbGn8quBwvYa76raHtCjgm_k_pMiG4vCrc8R5TTOgNNExNlwpCYWAZGDBO9A",
-    "x-requested-with": "XMLHttpRequest",
-    "cookie": "__cf_bm=ta08GeV3ua8iW_wqsOwLtR.QJGp6zNRi5qhYzyGWooY-1741564236-1.0.1.1-kuZsIBO02TczbqiYotzwDRV2XNw1ef8PGoHXhtx33dzpmyTDLDu_9USo09D26ooFWcTZ5A5mu6VXq6gWaa4P8oJL6MDV1d2fMvYSrHf.xYo; __cfruid=971a45309d4c54eb7e482dde999345c63e88918b-1741564236; __editor_layout=top; cf_clearance=Alr4RjPosRfJ2LH.6jvaXjyiHvOqfVcAtRNWbG7GhLo-1741564237-1.2.1.1-_tJB73LPl2qUsxlj7qmo3DpwySNxDXMLuQBTdKCaaUob1zUdfvBx4IDOxkid_JE2JcaBz0uTqN8AV0wn6Wiv_o.B.nTa2YSiXxMmIzvEui.u0VVm9TQ_M7p4jzAMN9UzCEuFJ4YU1Ii6IgFjD7TW.Od_eiRyo7PMw5Joj8VErrUOJ_DsJUN5S6nBBPgrs6KVRffKMrpoAjqN2fVlYd93w88MJBMvUGwCe7LrNO0wAvOyIWkGgQWBtu1cwD9g0qVPN6N9Lb1dY2qeRPgMto2Xzd2T2fbn08n35hu_QJdreEVT47uDQVXJeyZd5BA_27_06ABqA0eozNDP4OC20d6RkGOOIjK2mRcxPVnTLaVU9Yul7rd5d2vZwBB17FeWOFzFV0m92HFS4MNC_DkYVptSaDUrOQPI1DG9SmLka8UvHwU; cp_session=gf2HKCTebSUe%2Bapx--WYsn9ADF%2BCtWgAQgbNu%2BEdHDFeAeTf0tnRTezcsCOKpGdZBjgsjBicIf9lPHWrZB7tF2lHIO4XCKWcpxlQIEoKFwJwXlPn0MxRy%2FjdqhpW9U3BLBeCdNL8uWUCkcx8EIn6PwAPcgDUvcuzQlkiYeDLxHLIUV7zoM9dmph03BJ2%2B0YQbZUrmjxsEULhmVyjSa07GKF9Opti78--9cgvOvdtaayaVfERPzLTQA%3D%3D",
     "Referer": "https://codepen.io/shauchenka/pen/OJzxgoJ",
     "Referrer-Policy": "strict-origin-when-cross-origin"
             },
