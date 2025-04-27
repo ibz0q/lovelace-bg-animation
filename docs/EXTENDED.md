@@ -206,7 +206,7 @@ Found these dependencies in (../gallery/packages/animation.18.particle-cube/pack
 Found these dependencies in (../gallery/packages/animation.19.trapped-particles/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/MousePositionMonitor.js"></script>
 ```
 
 ---
@@ -345,7 +345,7 @@ Found these dependencies in (../gallery/packages/animation.23.ribbons-four/packa
 Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/MousePositionMonitor.js"></script>
 ```
 
 ---
@@ -826,15 +826,6 @@ Found these dependencies in (../gallery/packages/animation.73.alien-blackout-int
 <br />
 
 
-###  > animation.73.canvas-ribbons (Canvas Ribbons - )
-
-`- id: animation.73.canvas-ribbons`
-
-
-
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.73.canvas-ribbons/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.73.canvas-ribbons/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
-
 ###  > animation.74.dvd-screensaver (DVD Screensaver - Simple DVD screensaver implementation with requestAnimationFrame)
 
 `- id: animation.74.dvd-screensaver`
@@ -880,6 +871,15 @@ Supported params:
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.78.just-in-case/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.78.just-in-case/preview.html) - *Author: Matthias Hurrle* - Offline support? **Yes**
+
+###  > animation.79.canvas-ribbons (Canvas Ribbons - )
+
+`- id: animation.79.canvas-ribbons`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.79.canvas-ribbons/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.79.canvas-ribbons/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
 
 ###  > animation.80.particle-waves-webgl-shader (Particle Waves WebGL Shader - Particle Waves made with native WebGL shader)
 

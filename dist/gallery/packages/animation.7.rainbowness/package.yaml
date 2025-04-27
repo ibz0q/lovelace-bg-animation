@@ -1,0 +1,127 @@
+version: v1
+metadata:
+  name: Rainbowness
+  description: Rainbowness
+  author: Matei Copot
+  source: https://codepen.io/towc/pen/EbQKmy
+template: >
+  <canvas id="c"></canvas>
+
+
+  <style>
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+
+
+  <script>
+    let w = (c.width = window.innerWidth);
+    let h = (c.height = window.innerHeight);
+
+    const ctx = c.getContext("2d");
+    const opts = {
+      hexLength: 30,
+      lenFn: ({ len, t }) => len + Math.sin(t),
+      radFn: ({ rad, len, t, excitement }) =>
+        rad + ((excitement + opts.propFn({ len, t })) * 2) / 4,
+      propFn: ({ len, t }) => len / opts.hexLength / 10 - t,
+      excitementFn: ({ len, t }) => Math.sin(opts.propFn({ len, t })) ** 2,
+      colorFn: ({ rad, excitement, t }) =>
+        `hsl(${(rad / Math.TAU) * 360 + t}, ${excitement * 100}%, ${20 + excitement * 50}%)`,
+      timeStep: 0.004,
+      randomJig: 2,
+
+      repaintColor: "rgba(0,0,0,.1)",
+    };
+    let tick = 0;
+
+    Math.TAU = 6.28318530717958647692;
+
+    const vertices = [];
+    class Vertex {
+      constructor({ x, y }) {
+        this.len = Math.sqrt(x * x + y * y);
+        this.rad = Math.acos(x / this.len) * (y > 0 ? 1 : -1) + 0.13;
+        this.prevPoint = { x, y };
+      }
+
+      step() {
+        const excitement = opts.excitementFn({ len: this.len, t: tick });
+        const param = {
+          len: this.len,
+          rad: this.rad,
+          t: tick,
+          excitement,
+        };
+        const nextLen = opts.lenFn(param);
+        const nextRad = opts.radFn(param);
+        const color = opts.colorFn(param);
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = excitement + 0.2;
+        ctx.beginPath();
+        ctx.moveTo(this.prevPoint.x, this.prevPoint.y);
+        this.prevPoint.x =
+          nextLen * Math.cos(nextRad) +
+          Math.random() * (1 - excitement) ** 2 * opts.randomJig * 2 -
+          opts.randomJig;
+        this.prevPoint.y =
+          nextLen * Math.sin(nextRad) +
+          Math.random() * (1 - excitement) ** 2 * opts.randomJig * 2 -
+          opts.randomJig;
+        ctx.lineTo(this.prevPoint.x, this.prevPoint.y);
+        ctx.stroke();
+      }
+
+      static gen() {
+        vertices.length = 0;
+        const hexCos = Math.cos(Math.TAU / 12) * opts.hexLength;
+        const hexSin = Math.sin(Math.TAU / 12) * opts.hexLength;
+
+        let alternanceX = false;
+        for (let x = 0; x < w; x += hexCos) {
+          let alternance = (alternanceX = !alternanceX);
+          for (let y = 0; y < h; y += hexSin + opts.hexLength) {
+            alternance = !alternance;
+            vertices.push(
+              new Vertex({
+                x: x - w / 2,
+                y: y + alternance * hexSin - h / 2,
+              }),
+            );
+          }
+        }
+      }
+    }
+
+    Vertex.gen();
+
+    ctx.fillStyle = "#222";
+    ctx.fillRect(0, 0, w, h);
+    const anim = () => {
+      window.requestAnimationFrame(anim);
+
+      tick += opts.timeStep;
+
+      ctx.fillStyle = opts.repaintColor;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.translate(w / 2, h / 2);
+      vertices.forEach((vertex) => vertex.step());
+      ctx.translate(-w / 2, -h / 2);
+    };
+    anim();
+
+    window.addEventListener("resize", () => {
+      w = c.width = window.innerWidth;
+      h = c.height = window.innerHeight;
+
+      Vertex.gen();
+      tick = 0;
+      ctx.fillStyle = "#222";
+      ctx.fillRect(0, 0, w, h);
+    });
+  </script>

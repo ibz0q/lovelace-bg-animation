@@ -1,0 +1,459 @@
+version: v1
+metadata:
+  name: Browniandrix noise L3
+  description: >-
+    Working with a nanomechanics physicist. The dude told me about the nature of
+    Brownian motion, so I made my own special version.
+
+    Then I applied it to attractors, and each attractor is followed by its own
+    baby particle, with a  set of viscosity and spring force. What we see is the
+    particle babes motion.
+  author: Alex Andrix
+  source: https://codepen.io/alexandrix/pen/VRaGKq
+helpers:
+  insert_baseurl: true
+template: >
+  <!doctype html>
+
+  <html>
+    <head>
+      <script src="{{common: https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js }}"></script>
+
+      <style>
+        * {
+          border: none;
+          margin: 0;
+        }
+        html,
+        body {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+        }
+        body {
+          //background: radial-gradient(#555, #111);
+        }
+        canvas {
+          background: white;
+          background: radial-gradient(#fff, #ddd);
+          //background: radial-gradient(hsl(40, 80%, 60%), hsl(0, 50%, 40%));
+          //filter: blur(1px) contrast(5);
+          //transform: scale(0.1);
+          transform-origin: 0 0;
+          //border: solid 0.8em green;
+        }
+        .ui {
+          display: none;
+          position: fixed;
+          z-index: 5;
+          bottom: 0;
+          left: 0;
+          width: 120px;
+          padding: 10px;
+          background: rgba(255, 255, 255, 0.7);
+
+          p {
+            //color: white;
+            font-size: 11px;
+            font-weight: 700;
+
+            &.zoom {
+              margin-bottom: 5px;
+
+              span {
+                margin-right: 5px;
+                border: solid 1px #777;
+                cursor: pointer;
+                border-radius: 2px;
+
+                &.zoomin {
+                  padding: 2px 5px;
+                }
+                &.zoomout {
+                  padding: 2px 8px;
+                }
+                &:hover {
+                  background: black;
+                  color: white;
+                }
+              }
+            }
+          }
+
+          span.zoom {
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="ui">
+        <p class="zoom">
+          <span class="zoom zoomin">+</span>
+          <span class="zoom zoomout">-</span>
+        </p>
+        <p class="zoomlevel">
+          <span class="percent">100</span>
+          % - (
+          <span class="width"></span>
+          px)(
+          <span class="height"></span>
+          px)
+        </p>
+        <p>
+          Dead:
+          <span class="dead">0</span>
+        </p>
+        <p>
+          Alive:
+          <span class="alive">0</span>
+        </p>
+        <p>
+          Drawn:
+          <span class="drawn">0</span>
+        </p>
+        <p>
+          <span class="fps">0</span>
+          FPS
+        </p>
+        <a class="save" href="" download="capture.png">Save</a>
+      </div>
+
+      <script>
+        /** * @author Alex Andrix <alex@alexandrix.com> * @since 2019-02-05 */
+        var App = {};
+        App.setup = function () {
+          var canvas = document.createElement("canvas");
+          var maxWidth = 9933,
+            maxHeight = 14043;
+          var quality = 0.15;
+
+          this.filename = "brownie";
+          this.canvas = canvas;
+          this.canvas.width = window.innerWidth;
+          this.canvas.height = window.innerHeight;
+          this.ctx = this.canvas.getContext("2d");
+          this.width = this.canvas.width;
+          this.height = this.canvas.height;
+          this.dataToImageRatio = this.width / 1000; // Adimensional space [-500, 500]
+          // Blend mode /!\ Don't use if you can! Mega source of lag, proportional to canvas size, and depends on which mode
+
+          //this.ctx.globalCompositeOperation = 'darker';
+          //this.ctx.globalCompositeOperation = 'lighter';
+
+          this.ctx.imageSmoothingEnabled = false;
+          this.ctx.webkitImageSmoothingEnabled = false;
+          this.ctx.msImageSmoothingEnabled = false;
+          this.xC = this.width / 2;
+          this.yC = this.height / 2;
+
+          document.getElementsByTagName("body")[0].appendChild(canvas);
+
+          this.stepCount = 0;
+          this.particles = [];
+          this.lifespan = 2000;
+          this.popPerBirth = 1;
+          this.maxPop = 10;
+          this.birthFreq = 10;
+
+          // Counters for UI
+          this.drawnInLastFrame = 0;
+          this.deathCount = 0;
+
+          this.initDraw();
+        };
+        App.evolve = function () {
+          var time1 = performance.now();
+
+          this.stepCount++;
+
+          if (
+            this.stepCount % this.birthFreq == 0 &&
+            this.particles.length + this.popPerBirth < this.maxPop
+          ) {
+            this.birth();
+          }
+          App.move();
+          App.draw();
+
+          var time2 = performance.now();
+
+          // Update UI
+          document.getElementsByClassName("dead")[0].textContent =
+            this.deathCount;
+          document.getElementsByClassName("alive")[0].textContent =
+            this.particles.length;
+          document.getElementsByClassName("fps")[0].textContent = Math.floor(
+            1000 / (time2 - time1),
+          );
+          document.getElementsByClassName("drawn")[0].textContent =
+            this.drawnInLastFrame;
+        };
+        App.birth = function () {
+          var x,
+            y,
+            v2 = Math.sqrt(2);
+          x = -500 + 1000 * Math.random();
+          y = v2 * (-500 + 1000 * Math.random());
+
+          /*
+    // Birth on edges
+    var rand = Math.random();
+    // Left side
+    if (rand < 0.25) { x = -500; y = v2 * (-500 + 1000 * Math.random()); }
+    // Right side
+    else if (rand < 0.5) { x = 500; y = v2 * (-500 + 1000 * Math.random()); }
+    // Top side
+    else if (rand < 0.75) { x = -500 + 1000 * Math.random(); y = v2 * (-500); }
+    // Bottom side
+    else { x = -500 + 1000 * Math.random(); y = v2 * (500); }
+    
+    // Birth at center
+    if (Math.random() < 1/6) { x = 0; y = 0; }
+    
+    */
+
+          var particle = {
+            x: x,
+            y: y,
+            xLast: x,
+            yLast: y,
+            xSpeed: 0,
+            ySpeed: 0,
+            xAcc: 0,
+            yAcc: 0,
+            age: 0,
+            mark: Math.random(),
+            attractor: {
+              x: x,
+              y: y,
+              xSpeed: 0,
+              ySpeed: 0,
+            },
+            name: "seed-" + Math.ceil(10000000 * Math.random()),
+          };
+          this.particles.push(particle);
+        };
+        App.kill = function (particleName) {
+          var newArray = _.reject(this.particles, function (seed) {
+            return seed.name == particleName;
+          });
+          this.particles = _.cloneDeep(newArray);
+        };
+        App.move = function () {
+          for (var i = 0; i < this.particles.length; i++) {
+            // Get particle
+            var p = this.particles[i];
+
+            // Save last position
+            p.xLast = p.x;
+            p.yLast = p.y;
+
+            // Brownian viscous for attractor
+            var broVisc = 0.9;
+
+            // Brownian jump amplitude based on distance to center (no actually the overall nice look depends on uniformity in space)
+            var r = Math.sqrt(p.x * p.x + p.y * p.y);
+            var amp = 25 * Math.random(), //(1 - Math.exp(-Math.pow(r/400, 1.5))) * Math.random(),
+              dir = 2 * Math.PI * Math.random();
+
+            var xAccA = amp * Math.cos(dir),
+              yAccA = amp * Math.sin(dir);
+
+            p.attractor.xSpeed += xAccA;
+            p.attractor.ySpeed += yAccA;
+            p.attractor.xSpeed *= broVisc;
+            p.attractor.ySpeed *= broVisc;
+
+            p.attractor.x += 0.1 * p.attractor.xSpeed;
+            p.attractor.y += 0.1 * p.attractor.ySpeed;
+
+            // Particle is linked to its attractor with stiffness and visc (I tried gravitation but it really doesn't do much)
+            var k = 1, // Wow, so nervous man 30 is huge
+              visc = 0.99;
+            var dx = p.x - p.attractor.x,
+              dy = p.y - p.attractor.y;
+
+            var xAccP = -k * dx,
+              yAccP = -k * dy;
+
+            p.xAcc = xAccP;
+            p.yAcc = yAccP;
+
+            p.xSpeed += xAccP;
+            p.ySpeed += yAccP;
+            p.xSpeed *= visc;
+            p.ySpeed *= visc;
+
+            p.x += 0.1 * p.xSpeed;
+            p.y += 0.1 * p.ySpeed;
+
+            // Get older
+            p.age++;
+
+            // Kill if too old
+            if (p.age > this.lifespan) {
+              this.kill(p.name);
+              this.deathCount++;
+            }
+          }
+        };
+        App.initDraw = function () {
+          // White layer
+          this.ctx.beginPath();
+          this.ctx.rect(0, 0, this.width, this.height);
+          this.ctx.fillStyle = "black";
+          this.ctx.fill();
+          this.ctx.closePath();
+        };
+        App.draw = function () {
+          this.drawnInLastFrame = 0;
+          if (!this.particles.length) return false;
+
+          for (var i = 0; i < this.particles.length; i++) {
+            // Draw particle
+            var p = this.particles[i];
+
+            var speedP = Math.sqrt(p.xSpeed * p.xSpeed + p.ySpeed * p.ySpeed);
+
+            var h, s, l, a;
+            h = 200; //240 + 70 * Math.sin(this.stepCount/230);
+            //h = 180 + this.stepCount/10;// You can try a linear drift it's cool too
+            s = 70;
+            //l = 30 + 0.17 * (-0.5 + Math.random()) * speedP;// Magic HSL trick
+
+            var speedDir = segmentAngleRad(0, 0, p.xSpeed, p.ySpeed, false);
+            var accDir = segmentAngleRad(0, 0, p.xAcc, p.yAcc, false);
+
+            var accLight = Math.pow(1 + Math.cos(accDir + Math.PI / 2), 3);
+            var speedLight = Math.pow(1 + Math.cos(speedDir + Math.PI / 2), 3);
+            l = 10 + 0.5 * accLight * speedLight;
+            a = 0.9;
+
+            this.ctx.beginPath();
+            var b4 = this.dataXYtoCanvasXY(p.xLast, p.yLast),
+              aftah = this.dataXYtoCanvasXY(p.x, p.y);
+            this.ctx.moveTo(b4.x, b4.y);
+            this.ctx.lineTo(aftah.x, aftah.y);
+            this.ctx.strokeStyle =
+              "hsla(" + h + ", " + s + "%, " + l + "%, " + a + ")";
+            //this.ctx.lineWidth = 1.2 * Math.floor(p.mark * 3) * this.dataToImageRatio;
+            this.ctx.lineWidth = (l / 10) * this.dataToImageRatio;
+            this.ctx.stroke();
+            this.ctx.closePath();
+
+            // Attractor
+            /*
+      this.ctx.beginPath();
+      h += 30;
+      a *= 0.1;
+      this.ctx.fillStyle = 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a + ')';
+      var r = Math.floor(p.mark * 3) * this.dataToImageRatio;
+      this.ctx.arc(p.attractor.x, p.attractor.y, r, 0, 2 * Math.PI, false);
+      this.ctx.fill();
+      this.ctx.closePath();
+      */
+
+            // UI counter
+            this.drawnInLastFrame++;
+          }
+        };
+        App.dataXYtoCanvasXY = function (dataX, dataY) {
+          var zoom = 0.9;
+
+          return {
+            x: this.xC + zoom * dataX * this.dataToImageRatio,
+            y: this.yC + zoom * dataY * this.dataToImageRatio,
+          };
+        };
+        App.ui = function () {
+          var $canvas = document.querySelector("canvas");
+          var $zoomPercent = document.querySelector(".zoomlevel .percent");
+          var $zoomWidth = document.querySelector(".zoomlevel .width");
+          var $zoomHeight = document.querySelector(".zoomlevel .height");
+          var scale = 1;
+          var updateUIzoom = function () {
+            $zoomPercent.innerHTML = Math.round(scale * 100);
+            $zoomWidth.innerHTML = App.width;
+            $zoomHeight.innerHTML = App.height;
+          };
+          var zoomIn = function () {
+            scale *= 2;
+            $canvas.style.transform = "scale(" + scale + ")";
+            updateUIzoom();
+          };
+          var zoomOut = function () {
+            scale /= 2;
+            $canvas.style.transform = "scale(" + scale + ")";
+            updateUIzoom();
+          };
+
+          // Zoom in on click
+          document.querySelector(".zoomin").addEventListener("click", zoomIn);
+
+          // Zoom out on click
+          document.querySelector(".zoomout").addEventListener("click", zoomOut);
+
+          // Preforce zoom
+          //zoomOut();zoomOut();//zoomOut();zoomOut();
+
+          document.querySelector("a.save").addEventListener(
+            "click",
+            function (ev) {
+              this.href = App.canvas.toDataURL();
+              var date = new Date(),
+                timestamp = date.getTime();
+              this.download =
+                App.filename +
+                "-" +
+                App.width +
+                "-" +
+                App.height +
+                "-" +
+                timestamp +
+                ".png";
+            },
+            false,
+          );
+        };
+        document.addEventListener("DOMContentLoaded", function () {
+          App.setup();
+          App.ui();
+          App.draw();
+
+          var frame = function () {
+            App.evolve();
+            requestAnimationFrame(frame);
+          };
+          frame();
+        });
+
+        /** * Some old util I wrote, might not even use it. * * @param {Number} Xstart X value of the segment starting point * @param {Number} Ystart Y value of the segment starting point * @param {Number} Xtarget X value of the segment target point * @param {Number} Ytarget Y value of the segment target point * @param {Boolean} realOrWeb true if Real (Y towards top), false if Web (Y towards bottom) * @returns {Number} Angle between 0 and 2PI */ segmentAngleRad =
+          function (Xstart, Ystart, Xtarget, Ytarget, realOrWeb) {
+            var result; // Will range between 0 and 2PI
+            if (Xstart == Xtarget) {
+              if (Ystart == Ytarget) {
+                result = 0;
+              } else if (Ystart < Ytarget) {
+                result = Math.PI / 2;
+              } else if (Ystart > Ytarget) {
+                result = (3 * Math.PI) / 2;
+              } else {
+              }
+            } else if (Xstart < Xtarget) {
+              result = Math.atan((Ytarget - Ystart) / (Xtarget - Xstart));
+            } else if (Xstart > Xtarget) {
+              result =
+                Math.PI + Math.atan((Ytarget - Ystart) / (Xtarget - Xstart));
+            }
+
+            result = (result + 2 * Math.PI) % (2 * Math.PI);
+
+            if (!realOrWeb) {
+              result = 2 * Math.PI - result;
+            }
+
+            return result;
+          };
+      </script>
+    </body>
+  </html>
