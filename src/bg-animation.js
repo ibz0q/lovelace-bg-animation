@@ -1,6 +1,12 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
+//Overlays
+// Fish
+// Video and image bg
+// Music visualizer
+// Card
+
 var isDebug = false,
   pluginVersion = VERSION || "dev",
   lovelaceUI = {},
@@ -262,6 +268,17 @@ function initializeRuntimeVariables() {
             cache: item?.cache !== undefined ? item.cache : true,
             duration: item?.duration ?? false,
             redraw: item?.redraw ?? 0,
+            overlays:
+              rootPluginConfig.background.global.overlays
+                ? rootPluginConfig.background.global.overlays.map(item => ({
+                  ...item,
+                  style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
+                  cache: item?.cache !== undefined ? item.cache : true,
+                  duration: item?.duration ?? false,
+                  overlays: item?.overlays ?? false,
+                  redraw: item?.redraw ?? 0,
+                }))
+                : false,
           }))
           : false,
       "view": rootPluginConfig.background.view
@@ -271,7 +288,18 @@ function initializeRuntimeVariables() {
             style: viewItem?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
             cache: viewItem?.cache !== undefined ? viewItem.cache : true,
             duration: viewItem?.duration ?? false,
-            redraw: viewItem?.redraw ?? 0
+            redraw: viewItem?.redraw ?? 0,
+            overlays:
+              rootPluginConfig.background.view[key].overlays
+                ? rootPluginConfig.background.view[key].overlays.map(item => ({
+                  ...item,
+                  style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
+                  cache: item?.cache !== undefined ? item.cache : true,
+                  duration: item?.duration ?? false,
+                  overlays: item?.overlays ?? false,
+                  redraw: item?.redraw ?? 0,
+                }))
+                : false,
           }));
           return acc;
         }, {})
