@@ -1,0 +1,433 @@
+version: v1
+metadata:
+  name: Shamrock
+  description:  A shamrock of flowers, a celebration of spring and the Irish spirit.
+  author: Scott Weaver
+  source: https://codepen.io/sweaver2112/pen/MWyNYoq
+
+helpers:
+  insert_baseurl: true
+template: >
+  <!DOCTYPE html>
+
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <style>
+            body {
+            height: 100vh;
+            width: 100vw;
+            overflow:hidden;
+            }
+
+            canvas {
+                image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            }
+      </style>
+    </head>
+    <body>
+
+    <canvas id="canvas"></canvas>
+     <script>
+                            (function () {
+
+                //fields
+                var c = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+
+                var body = document.getElementsByTagName("body")[0];
+                var positions = []
+                
+                
+                /*Initialize flowers*/
+                body.addEventListener("click",function(ev){
+                    drawFlowers(false)
+                })
+                
+                window.onload = ()=>{drawFlowers(true)}
+                window.onresize = ()=>{drawFlowers(false)}
+
+                /*Flower flunctions*/
+                function Flower(opt) {
+                
+                    this.r = opt.allowLarge && chance(.05) ? getRandomInt(50,150) : getRandomInt(20,50)
+                    this.x = getRandomInt(0, canvas.width)
+                    this.y = getRandomInt(0, canvas.height)
+
+                    this.lw = 4;    
+                    this.angle = getRandomInt(-30,30)
+                    this.rad = this.angle * (Math.PI / 180) /*FLOWER ROTATION*/
+                    this.opacity = 1;
+                    this.petals = chance(.03) ? 4 : 3;
+                    this.shiftOut = this.petals == 4 ? 0 : 0
+                    this.petalBase = 0;
+                    this.petalSpread1 = getRandomFloat(opt.minSpread, opt.maxSpread)
+                    this.petalLength1 = this.petalSpread1 * getRandomFloat(1.4, 1.8) /*length 1.5 longer than spread*/
+                    this.petalSpread2 = getRandomFloat(this.petalSpread1+.15,this.petalSpread1-.15);
+                    this.petalLength2 = this.petalLength1
+                    this.leafRotation = Math.floor(360/this.petals)/*PETAL ROTATION*/
+                    this.color1 = vary(opt.color1, opt.colorVariance)
+                }
+                
+                function drawFlowers(firstTime) {
+                    scaleCanvas() 
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+                    positions = [];
+                    
+                    //drawing options
+                    let mainColor = new Color(pick(greens));
+                    let altColor = new Color(pick(greens));
+                    var opt = {    
+                    doLeafStroke:chance(.7),
+                    leafStrokeStyle:pick(["black", mainColor.hsl(), altColor.hsl()]),
+                    spaceAround:chance(), 
+                    allowLarge:chance(.03), 
+                    padding:getRandomFloat(.5,3), /*multiplier*/
+                    color1:mainColor,
+                    stems: chance(.7),
+                    stemLength : getRandomInt(20,(chance(.2)?150:60)), /*multiplier*/
+                    stemWidth:getRandomInt(2,5), /*multiplier*/
+                    colorVariance:getRandomInt(10,70),
+                    minSpread:getRandomFloat(.4,.7),
+                    maxSpread:getRandomFloat(.4,1.2),
+                    fieldEffect:firstTime || chance(.33),
+                    randomY:chance()
+                    }
+                    opt.stemsFirst = opt.fieldEffect || chance()
+                    canvas.style.transform = "rotate(0deg)"
+                    if(opt.fieldEffect){
+                    opt.stemLength *= getRandomInt(4,12)
+                    opt.stems = true
+                    opt.spaceAround = false
+                    if(chance(.1)) canvas.style.transform = "rotate(180deg)"
+                    
+                    } 
+                    opt.isDark = opt.color1.l<50
+                    console.log(opt.color1.name)
+                    let bg = new Color(pick(greens))
+                    if(chance(.2)) bg.h = getRandomInt(0,359)
+                    bg.l = bg.l>50? bg.l+15: bg.l-15;
+                    canvas.style.backgroundColor = bg.hsl()
+                    
+                    let screenSize = Math.min(window.innerWidth, window.innerHeight)
+                    let numFlower = opt.fieldEffect?getRandomInt(500,1000):getRandomInt(50,screenSize>1000?3000:1500)
+                    let flowers = []
+                    let baseHeightRandom = getRandomInt(window.innerHeight-300,window.innerHeight)
+                    
+                    
+                    for(let i=0; i<numFlower; i++){
+                    let f = new Flower(opt)
+                    if(opt.fieldEffect) {      
+                        let yPos = getRandomInt(-150,150)+(opt.randomY?getRandomInt(window.innerHeight/2.25,window.innerHeight):baseHeightRandom); 
+                        f.y = yPos        
+                    }
+                    flowers.push(f)  
+                    }
+                    
+                    /*sort functions*/
+                    function hueSort(a,b) { 
+                    let greenDistance1 = Math.abs(120-a.color1.h)
+                    let greenDistance2 = Math.abs(120-b.color1.h)
+                    return (greenDistance1>greenDistance2?-1:1) 
+                    }
+                    function lightSort(a,b){
+                    return a.color1.l>b.color1.l?(opt.isDark?1:-1):(opt.isDark?-1:1)
+                    }
+                    
+                    let filter = pick([hueSort,lightSort])
+                    console.log("filter is:"+filter, ",isDark:\n"+opt.isDark)
+                    flowers.sort(filter)
+                    
+                    //draw stems first then layer on flower part.
+                    for(let i=0; i<numFlower; i++){
+                    let previous = flowers.slice(0,i)
+                    let f = flowers[i];
+                    if(opt.spaceAround&&previous.some(function(pos) {
+                        let d =  distance(new Point(f.x,f.y), new Point(pos.x,pos.y))
+                        return d<f.r*opt.padding;
+                    })) {
+                        f.hide = true;
+                    } else {
+                        if(opt.stems && opt.stemsFirst) drawStem(f,opt)
+                    }
+                    
+                    }
+                    for(let i=0; i<numFlower; i++){
+                    if(opt.stems && !opt.stemsFirst) drawStem(flowers[i],opt)
+                    drawFlower(flowers[i],opt)
+                    }
+                } 
+                
+                function drawStem(f, opt){
+                    if(f.hide) {  
+                    return false;
+                    }
+                    ctx.translate(f.x, f.y);
+                    let angle = getRandomInt(-20,20)*(Math.PI/180)
+                    ctx.rotate(angle);
+                    ctx.translate(-f.x, -f.y);
+                    
+                    ctx.fillStyle = f.color1.hsl()
+                    ctx.strokeStyle = ctx.fillStyle;
+                    
+                    ctx.beginPath()
+                    
+                    ctx.lineWidth = f.petalSpread1*opt.stemWidth;
+                    let stemLength = f.petalSpread1*getRandomFloat(opt.stemLength-2, opt.stemLength+2)
+                    ctx.moveTo(f.x,f.y)
+                    let curve = getRandomInt(5,20)
+                    if(chance()) curve *= -1
+                    //each petal is two curves
+                    ctx.quadraticCurveTo(f.x+curve, f.y+(stemLength/2),
+                                        f.x, f.y+stemLength);
+                    ctx.moveTo(f.x,f.y)
+                    ctx.quadraticCurveTo(f.x+curve, f.y+(stemLength/2),
+                                        f.x+1, f.y+stemLength);
+                    
+                    ctx.save()
+                    ctx.setTransform(0, .1, 0, 0, 0, 0)
+                    ctx.restore()
+                    
+                    ctx.stroke()
+                    ctx.translate(f.x, f.y);
+                    ctx.rotate(-angle);
+                    ctx.translate(-f.x, -f.y);
+                    ctx.closePath()
+                    ctx.restore()
+                }
+                
+                function drawFlower(f,opt) {
+
+                    if(f.hide) {
+                    return false;
+                    }
+
+                    positions.push(new Point(f.x, f.y))
+                    ctx.save();
+                    ctx.globalAlpha = f.opacity
+                    ctx.lineWidth = f.lw;
+                    ctx.translate(f.x, f.y);
+                    ctx.rotate(f.rad);
+                    ctx.translate(-f.x, -f.y);
+                    
+                    ctx.fillStyle = f.color1.hsl()
+                    let lineColor = new Color(f.color1)
+                    lineColor.l += getRandomInt(-10,10)
+                    
+                    //PETALS
+                    for (let i = 0; i < f.petals; i++) {
+                    
+                    ctx.translate(f.x, f.y);
+                    ctx.rotate((f.leafRotation) * (Math.PI / 180));
+                    ctx.translate(-f.x, -f.y);
+
+                    ctx.beginPath();
+                    ctx.moveTo(f.x, f.y-f.shiftOut); 
+                    ctx.fillStyle = f.color1.hsl() 
+                    let sp1 = f.r*f.petalSpread1
+                    let len1 = f.r*f.petalLength1
+                    let sp2 = f.r*f.petalSpread2
+                    let len2 = f.r*f.petalLength2
+                    let endX = f.petalBase
+                    let endY = f.shiftOut
+                    let angle = getRandomInt(15,50) * (Math.PI / 180)
+                    
+                    //LEAF
+                    for (let j = 0; j < 2; j++) {
+                        
+                        //'heart' shaped petals via two bezier curves
+                        ctx.translate(f.x, f.y)     
+                        ctx.rotate(j*angle);      
+                        ctx.translate(-f.x, -f.y)
+                        
+                        ctx.bezierCurveTo(f.x-sp1,/*control point #1 'upper left'*/
+                                        f.y-len1,
+                                        f.x+sp2,/*control point #2 'upper right'*/
+                                        f.y-len2,
+                                        f.x+endX,/*ending point*/
+                                        f.y-endY)  
+                        
+                        ctx.translate(f.x, f.y);
+                        ctx.rotate(-angle*j); 
+                        ctx.translate(-f.x, -f.y);
+
+                        }   
+                    ctx.closePath()   
+                    if(opt.doLeafStroke) {
+                        
+                        ctx.strokeStyle = opt.leafStrokeStyle
+                        ctx.stroke()   
+                    }
+                    
+                    ctx.fill()
+                    
+                    //DETAILS
+                    ctx.beginPath()
+                    ctx.moveTo(f.x, f.y-f.shiftOut)
+                    ctx.fillStyle = lineColor.hsl()
+                    
+                    ctx.translate(f.x, f.y);      
+                    ctx.rotate((angle/2));      
+                    ctx.translate(-f.x, -f.y);
+                    
+                    ctx.bezierCurveTo(f.x-.2,/*control point #1 'upper left'*/
+                                        f.y-(len1/3),
+                                        f.x+.2,/*control point #2 'upper right'*/
+                                        f.y-(len2/3),
+                                        f.x+endX,/*ending point*/
+                                        f.y-endY)
+                    ctx.closePath()
+                    ctx.fill()
+                    
+                    ctx.translate(f.x, f.y);
+                    ctx.rotate(-angle/2); 
+                    ctx.translate(-f.x, -f.y);
+                    
+                    }//end for(petals)
+
+                    //PISTIL (tiniest little circle)
+                    ctx.closePath()
+                    ctx.beginPath();
+                    ctx.arc(f.x, f.y, f.r/20, 0, 2 * Math.PI, false);
+                    ctx.fillStyle = lineColor.hsl()
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                function vary(color, variance){ 
+                    //note: this function also confusingly serves to init (call the new Color function) the color objects.
+                    let c = Object.assign({},color);
+                    c = new Color(c)
+                    c.h = c.h + getRandomInt(-variance,variance)
+                    c.s = c.s + getRandomInt(-variance,variance)
+                    c.s = Math.min(c.s, 100)
+                    c.l = c.l + getRandomInt(-variance,variance)
+                    c.l = Math.min(c.l, 100)
+                    return c;
+                }
+
+                /*utility*/
+                function scaleCanvas(){
+                var w = Math.max(document.documentElement.clientWidth, window.innerWidth);
+                var h = Math.max(document.documentElement.clientHeight, window.innerHeight);
+                canvas.style.width = w + "px";
+                canvas.style.height = h + "px";
+                var scale = window.devicePixelRatio;
+                canvas.width = Math.floor(w * scale);
+                canvas.height = Math.floor(h * scale);
+                ctx.scale(scale, scale);
+                }
+                function distance(p1, p2) {
+                return Math.floor(Math.sqrt(Math.pow(p1.x-p2.x,2) + Math.pow(p1.y - p2.y,2)))      
+                }
+                function Color(obj){
+                this.name = obj.name
+                this.h = obj.h
+                this.s = obj.s
+                this.l = obj.l
+                this.hsl = ()=>{return`hsl(${this.h},${this.s}%,${this.l}%)`};
+                }
+                function getRandomInt(min, max) {
+                min = Math.floor(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                function getRandomFloat(min, max) {
+                return Math.random() * (max - min) + min;
+                }
+                function pick(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+                }
+                function chance(limit = 0.5) {
+                return Math.random() < limit;
+                }
+                function Point(x,y) {
+                this.x = x
+                this.y = y
+                }
+                var greens = [{name:"Avocado", h:81, s:95, l:26},
+                {name:"Dark olive green (web)", h:82, s:39, l:30},
+                {name:"Inchworm", h:84, s:79, l:65},
+                {name:"Green-yellow (web)", h:84, s:100, l:59},
+                {name:"Green Lizard", h:84, s:90, l:58},
+                {name:"Olivine", h:87, s:33, l:59},
+                {name:"French lime", h:89, s:98, l:61},
+                {name:"Maximum green", h:90, s:48, l:37},
+                {name:"Lawn green (web)", h:90, s:100, l:49},
+                {name:"Chartreuse (web)", h:90, s:100, l:50},
+                {name:"Sap green", h:93, s:50, l:33},
+                {name:"Asparagus", h:93, s:26, l:54},
+                {name:"Spring Frost", h:94, s:100, l:58},
+                {name:"Green (RYB)", h:95, s:56, l:44},
+                {name:"Pistachio", h:96, s:42, l:61},
+                {name:"Bright green", h:96, s:100, l:50},
+                {name:"Kelly green", h:101, s:78, l:41},
+                {name:"Bud green", h:102, s:37, l:55},
+                {name:"Harlequin", h:105, s:100, l:50},
+                {name:"Lincoln green", h:106, s:89, l:18},
+                {name:"Fern green", h:106, s:29, l:37},
+                {name:"Mantis", h:110, s:44, l:58},
+                {name:"Slimy green", h:111, s:73, l:34},
+                {name:"Neon green", h:111, s:100, l:54},
+                {name:"Yellow-green (Color Wheel)", h:112, s:75, l:40},
+                {name:"May green", h:112, s:38, l:41},
+                {name:"India green", h:115, s:89, l:28},
+                {name:"Pakistan green", h:120, s:100, l:20},
+                {name:"Lime green (web)", h:120, s:61, l:50},
+                {name:"Lime (web) (X11 green)", h:120, s:100, l:50},
+                {name:"Green (web)", h:120, s:100, l:25},
+                {name:"Green (web)", h:120, s:100, l:50},
+                {name:"Forest green (web)", h:120, s:61, l:34},
+                {name:"Electric green", h:120, s:100, l:50},
+                {name:"Dark sea green (web)", h:120, s:25, l:65},
+                {name:"Dark green (X11)", h:120, s:100, l:20},
+                {name:"Ao (English)", h:120, s:100, l:25},
+                {name:"Hunter green", h:129, s:28, l:29},
+                {name:"Middle green", h:130, s:29, l:43},
+                {name:"Eton blue", h:134, s:31, l:69},
+                {name:"Erin", h:135, s:100, l:50},
+                {name:"Dark pastel green", h:138, s:97, l:38},
+                {name:"Paris Green", h:140, s:52, l:55},
+                {name:"Malachite", h:140, s:90, l:45},
+                {name:"Forest green (Crayola)", h:140, s:29, l:51},
+                {name:"Emerald", h:140, s:52, l:55},
+                {name:"Shiny Shamrock", h:141, s:29, l:51},
+                {name:"Green (Pantone)", h:143, s:100, l:34},
+                {name:"Sea green (web)", h:146, s:50, l:36},
+                {name:"Medium sea green (web)", h:147, s:50, l:47},
+                {name:"Amazon", h:147, s:35, l:36},
+                {name:"UP Forest green", h:149, s:97, l:14},
+                {name:"Green (pigment)", h:149, s:100, l:32},
+                {name:"Forest green (traditional)", h:149, s:97, l:14},
+                {name:"Spring green (web)", h:150, s:100, l:50},
+                {name:"Dark spring green", h:150, s:66, l:27},
+                {name:"Phthalo green", h:151, s:49, l:14},
+                {name:"Dartmouth green", h:152, s:100, l:22},
+                {name:"Spanish green", h:153, s:100, l:28},
+                {name:"Medium aquamarine (web)", h:154, s:64, l:63},
+                {name:"Cadmium green", h:154, s:100, l:21},
+                {name:"British racing green", h:154, s:100, l:13},
+                {name:"Shamrock green", h:156, s:100, l:31},
+                {name:"GO green", h:156, s:100, l:34},
+                {name:"Ocean green", h:157, s:48, l:52},
+                {name:"Medium spring green (web)", h:157, s:100, l:49},
+                {name:"Mint", h:158, s:49, l:47},
+                {name:"Jade", h:158, s:100, l:33},
+                {name:"Green (Crayola)", h:158, s:72, l:39},
+                {name:"Dark green (web)", h:158, s:96, l:10},
+                {name:"Sacramento State green", h:160, s:87, l:12},
+                {name:"Green-cyan", h:160, s:100, l:30},
+                {name:"Green (NCS)", h:160, s:100, l:31},
+                {name:"Viridian", h:161, s:34, l:38},
+                {name:"Mountain Meadow", h:161, s:59, l:46},
+                {name:"English green", h:162, s:48, l:20},
+                {name:"Brunswick green", h:162, s:48, l:20},
+                {name:"Spanish viridian", h:163, s:100, l:25}];
+                })("sweaverD.com");
+
+     </script>
+    </body>
+  </html>

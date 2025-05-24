@@ -1,7 +1,7 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
-var isDebug = true,
+var isDebug = false,
   pluginVersion = VERSION || "dev",
   lovelaceUI = {},
   viewPath,
@@ -333,7 +333,7 @@ function initializeBackgroundElements() {
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.parentStyle;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
-  isDebug ? console.log("initializeBackgroundElements: Created") : null;
+  isDebug ? console.log("initializeBackgroundElements: Created element") : null;
   ["bg-animation-0", "bg-animation-1"].forEach((index, key) => {
     lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="${index}" class="bg-animation-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>`);
   });
