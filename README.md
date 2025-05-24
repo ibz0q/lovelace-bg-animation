@@ -173,13 +173,13 @@ PRs need to be attached to an issue that contains the following info:
  
 ## Motivation
 
-Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
+Artists created some pretty awe inspiring animations back when HTML5/Canvas/JS/CSS3/Flash was new. There's still some amazing artists doing this today. I wanted to curate all these and admire them on my Home Assistant tablet/dashboard, which incidentally make great backgrounds.
 
-Over time some of the experiments I have saved in my bookmarks have long been lost to digital oblivion. Luckily some I would save to disk.  I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
+Unfortunately, over time many older web experiments/animations have been lost to digital oblivion. Sometimes I would save these locally. I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
 
 ### License 
 
-This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
+This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license or some were created at a time when licensing wasn't really a thing on the web. In some cases works aren't as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
 
 ### Todo
 
@@ -188,7 +188,7 @@ This project is compromised of the works of artists each with their own licensin
 - Iframe transitions 
 - Create a basic background previewer site (better than EXTENDED.md)  
 - Slow down fast moving bgs (in progress)
-- Add redraw, allows you to repain the iframe within duration period.
+- Add redraw, allows you to repaint the iframe within duration period.
 
 #### Programmability / Extensibility
 

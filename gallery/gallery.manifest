@@ -727,11 +727,11 @@
     {
       "id": "animation.88.fish-tank",
       "version": "v1",
-      "name": "Point Sprites",
-      "description": "WebGL randomly generated starfield",
-      "author": "AzazelN28",
-      "source": "https://codepen.io/AzazelN28/pen/zvXZQw",
-      "hash": "bcbffdd7470a6d58a7d1e0065a238b6fd19a70b9",
+      "name": "Fish Tank",
+      "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
+      "author": "Scott Weaver",
+      "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
+      "hash": "a6e0f4d6b40900c08519413a933bd1d0eb7c3751",
       "parameters": [
         {
           "name": "Presets",
@@ -803,6 +803,15 @@
           "type": "string"
         }
       ]
+    },
+    {
+      "id": "animation.88.shamrocks",
+      "version": "v1",
+      "name": "Shamrock",
+      "description": "A shamrock of flowers, a celebration of spring and the Irish spirit.",
+      "author": "Scott Weaver",
+      "source": "https://codepen.io/sweaver2112/pen/MWyNYoq",
+      "hash": "093e6295f2016c769477f35ab6d255b918a07473"
     }
   ],
   "common": {
