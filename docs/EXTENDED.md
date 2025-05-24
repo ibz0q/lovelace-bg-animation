@@ -1032,14 +1032,14 @@ Supported params:
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.88.fish-tank/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.88.fish-tank/preview.html) - *Author: Scott Weaver* - Offline support? **Yes**
 
-###  > animation.88.shamrocks (Shamrock - A shamrock of flowers, a celebration of the Irish spirit, history and spring.)
+###  > animation.89.shamrocks (Shamrock - A shamrock of flowers, a celebration of the Irish spirit, history and spring.)
 
-`- id: animation.88.shamrocks`
+`- id: animation.89.shamrocks`
 
 
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.88.shamrocks/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.88.shamrocks/preview.html) - *Author: Scott Weaver* - Offline support? **Yes**
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.89.shamrocks/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.89.shamrocks/preview.html) - *Author: Scott Weaver* - Offline support? **Yes**
 
 ###  > animation.9.rainbow-particles (Particle Horizon - rainbow particle horizon)
 
