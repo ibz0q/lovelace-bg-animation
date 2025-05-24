@@ -4,7 +4,7 @@ A Lovelace plugin to replace Home Assistant's background with an animated one wi
 
 **Current Release: v1.1.2**
 
-<a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee? ☕</a>
+<a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee?</a> ☕
 
 <p align="center">
 
@@ -14,13 +14,13 @@ A Lovelace plugin to replace Home Assistant's background with an animated one wi
 View all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
-## Get started
+## Install
 
-### Option 1: Install with HACS 
+### Option 1: with HACS 
 
 Search "Live Background Animations" in HACS and Install.
 
-### Option 2: Install manually
+### Option 2: Manually
 
 Download the latest release zip. Extract the contents of dist into a folder inside www: homeassistant\config\www\lovelace-background-animation
 
@@ -49,10 +49,9 @@ bg-animation:
       enable: true
   background:
     global: # Add and remove as required
-      - id: animation.11.space
-      - id: animation.65.cristal-lands
-      - id: animation.17.ribbons
+      - id: animation.88.fish-tank
       - id: animation.64.howls-moving-castle
+      - id: animation.17.ribbons
       - id: animation.63.green-circuit
       - id: animation.58.browniandrix-noise-l3
       - id: animation.53.stars
@@ -73,9 +72,9 @@ bg-animation:
          -  AppleWebKit.*12PROMAX.*
        FullKioskBrowserHallway: # Custom UA set in Fullys device settings
          -  .*FullyKioskBrowserHallway.*
-transition:
-    enable: true
-    duration: 1500 # Default is 1000
+  transition: # *
+      enable: true
+      duration: 1500 # Default 1000
   style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
       background: transparent;
   gallery: # *

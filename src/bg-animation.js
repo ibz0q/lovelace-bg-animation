@@ -515,6 +515,40 @@ async function setupPlaylist() {
         isDebug ? console.log(`setupPlaylist: Track id ${track.id} does not exist in the manifest and has been removed.`) : null;
       }
 
+      if (track.conditions?.exclude_devices && track.conditions?.include_devices) {
+        isDebug ? console.log(`setupPlaylist: Track id ${track.id} has both excludeDevice and includeDevice conditions, this is not supported. Ignored.`) : null;
+      } else if (track.conditions?.include_devices || track.conditions?.exclude_devices) {
+        let userAgent = navigator.userAgent;
+        isDebug ? console.log(`setupPlaylist: Track id ${track.id} has device conditions, checking user agent: ${userAgent}`) : null;
+
+        const deviceMatchesPatterns = (deviceKey) => {
+          const regexPatterns = rootPluginConfig?.conditions?.regex_device_map?.[deviceKey];
+          if (!regexPatterns) {
+            isDebug ? console.log(`setupPlaylist: No regex patterns found for device key: ${deviceKey}`) : null;
+            return false;
+          }
+          return regexPatterns.some(pattern => new RegExp(pattern).test(userAgent));
+        };
+
+        if (userAgent && track.conditions?.exclude_devices) {
+          let deviceMatched = track.conditions.exclude_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
+          if (deviceMatched) {
+            isDebug ? console.log(`setupPlaylist: Track id ${track.id} excluded due to device condition.`) : null;
+            return false;
+          }
+          isDebug ? console.log(`setupPlaylist: Track id ${track.id} included due to device condition.`) : null;
+        }
+
+        if (userAgent && track.conditions?.include_devices) {
+          let deviceMatched = track.conditions.include_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
+          if (!deviceMatched) {
+            isDebug ? console.log(`setupPlaylist: Track id ${track.id} not included due to device condition.`) : null;
+            return false;
+          }
+          isDebug ? console.log(`setupPlaylist: Track id ${track.id} included due to device condition.`) : null;
+        }
+      }
+
       if (track.conditions?.exclude_user && track.conditions?.include_user) {
         isDebug ? console.log(`setupPlaylist: Track id ${track.id} has both excludeUsers and includeUsers conditions, this is not supported. Ignored.`) : null;
 
@@ -532,7 +566,7 @@ async function setupPlaylist() {
         }
 
         if (userName && track.conditions?.include_user) {
-          let userExist =  track.conditions.include_user.includes(userName);
+          let userExist = track.conditions.include_user.includes(userName);
           if (!userExist) {
             isDebug ? console.log(`setupPlaylist: Track id ${track.id} not included due to user condition.`) : null;
             return false;
