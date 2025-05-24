@@ -2,7 +2,7 @@
 
 A Lovelace plugin to replace Home Assistant's background with an animated one with many animations to choose from.  
 
-**Current Release: v1.1.2**
+**Current Release: v1.1.1**
 
 <a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee?</a> ☕
 
@@ -130,7 +130,7 @@ type: custom:lovelace-bg-animation
  - Akimitsu Hamamuro (2)
  - yoichi kobayashi (2)
  - Kevin Levron (2)
- - AzazelN28 (2)
+ - Scott Weaver (2)
  - Takeshi Kano (1)
  - cssscript.com (1)
  - alphardex (1)
@@ -152,6 +152,7 @@ type: custom:lovelace-bg-animation
  - Matthias Hurrle (1)
  - Lanny (1)
  - Liam Egan (1)
+ - AzazelN28 (1)
  - Fabio Ottaviani (1)
  - Sarah Drasner (1)
 
