@@ -1,13 +1,7 @@
 import YAML from 'yaml'
 import * as sass from 'sass';
 
-//Overlays
-// Fish
-// Video and image bg
-// Music visualizer
-// Card
-
-var isDebug = false,
+var isDebug = true,
   pluginVersion = VERSION || "dev",
   lovelaceUI = {},
   viewPath,
@@ -222,6 +216,30 @@ function opportunisticallyDetermineLocalInstallPath() {
     return null;
   }
 }
+
+function processBackgroundSchema(config) {
+  return config
+    ? config.map(item => ({
+      ...item,
+      style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
+      cache: item?.cache !== undefined ? item.cache : true,
+      duration: item?.duration ?? false,
+      redraw: item?.redraw ?? 0,
+      conditions: item?.conditions ?? false,
+      overlays: item?.overlays
+        ? item.overlays.map(overlay => ({
+          ...overlay,
+          style: overlay?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
+          cache: overlay?.cache !== undefined ? overlay.cache : true,
+          duration: overlay?.duration ?? false,
+          overlays: overlay?.overlays ?? false,
+          redraw: overlay?.redraw ?? 0,
+        }))
+        : false,
+    }))
+    : false;
+}
+
 function initializeRuntimeVariables() {
   if (!lovelaceUI?.lovelaceObject?.config["bg-animation"]) {
     isDebug ? console.log("initializeRuntimeVariables: No bg-animation config found in lovelace configuration: ") : null;
@@ -245,6 +263,7 @@ function initializeRuntimeVariables() {
       "style": rootPluginConfig.overlay?.style ?? "",
     },
     "duration": rootPluginConfig.duration ?? 50000,
+    "conditions": rootPluginConfig.conditions ?? {},
     "loadTimeout": rootPluginConfig.loadTimeout ?? 5000,
     "cache": rootPluginConfig.cache !== undefined ? rootPluginConfig.cache : true,
     "parentStyle": rootPluginConfig.parentStyle ?? "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;",
@@ -260,47 +279,10 @@ function initializeRuntimeVariables() {
       "background": rootPluginConfig.transparency?.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
     },
     "background": {
-      "global":
-        rootPluginConfig.background.global
-          ? rootPluginConfig.background.global.map(item => ({
-            ...item,
-            style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-            cache: item?.cache !== undefined ? item.cache : true,
-            duration: item?.duration ?? false,
-            redraw: item?.redraw ?? 0,
-            overlays:
-              rootPluginConfig.background.global.overlays
-                ? rootPluginConfig.background.global.overlays.map(item => ({
-                  ...item,
-                  style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-                  cache: item?.cache !== undefined ? item.cache : true,
-                  duration: item?.duration ?? false,
-                  overlays: item?.overlays ?? false,
-                  redraw: item?.redraw ?? 0,
-                }))
-                : false,
-          }))
-          : false,
+      "global": processBackgroundSchema(rootPluginConfig.background.global),
       "view": rootPluginConfig.background.view
         ? Object.keys(rootPluginConfig.background.view).reduce((acc, key) => {
-          acc[key] = rootPluginConfig.background.view[key].map(viewItem => ({
-            ...viewItem,
-            style: viewItem?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-            cache: viewItem?.cache !== undefined ? viewItem.cache : true,
-            duration: viewItem?.duration ?? false,
-            redraw: viewItem?.redraw ?? 0,
-            overlays:
-              rootPluginConfig.background.view[key].overlays
-                ? rootPluginConfig.background.view[key].overlays.map(item => ({
-                  ...item,
-                  style: item?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-                  cache: item?.cache !== undefined ? item.cache : true,
-                  duration: item?.duration ?? false,
-                  overlays: item?.overlays ?? false,
-                  redraw: item?.redraw ?? 0,
-                }))
-                : false,
-          }));
+          acc[key] = processBackgroundSchema(rootPluginConfig.background.view[key]);
           return acc;
         }, {})
         : false,
@@ -351,7 +333,7 @@ function initializeBackgroundElements() {
   lovelaceUI.bgRootElement.id = "bg-animation-container";
   lovelaceUI.bgRootElement.style.cssText = rootPluginConfig.parentStyle;
   lovelaceUI.groundElement.prepend(lovelaceUI.bgRootElement);
-  isDebug ? console.log("initializeBackgroundElements: Created elm") : null;
+  isDebug ? console.log("initializeBackgroundElements: Created") : null;
   ["bg-animation-0", "bg-animation-1"].forEach((index, key) => {
     lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="${index}" class="bg-animation-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%"></div>`);
   });
@@ -531,6 +513,33 @@ async function setupPlaylist() {
       let trackExists = galleryRootManifest.packages.some(manifest => manifest.id === track.id);
       if (!trackExists) {
         isDebug ? console.log(`setupPlaylist: Track id ${track.id} does not exist in the manifest and has been removed.`) : null;
+      }
+
+      if (track.conditions?.exclude_user && track.conditions?.include_user) {
+        isDebug ? console.log(`setupPlaylist: Track id ${track.id} has both excludeUsers and includeUsers conditions, this is not supported. Ignored.`) : null;
+
+      } else if (track.conditions?.include_user || track.conditions?.exclude_user) {
+        let userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
+        isDebug ? console.log(`setupPlaylist: Track id ${track.id} has user conditions, checking user: ${userName}`) : null;
+
+        if (userName && track.conditions?.exclude_user) {
+          let userExist = track.conditions.exclude_user.includes(userName);
+          if (userExist) {
+            isDebug ? console.log(`setupPlaylist: Track id ${track.id} excluded due to user condition.`) : null;
+            return false;
+          }
+          isDebug ? console.log(`setupPlaylist: Track id ${track.id} included due to user condition.`) : null;
+        }
+
+        if (userName && track.conditions?.include_user) {
+          let userExist =  track.conditions.include_user.includes(userName);
+          if (!userExist) {
+            isDebug ? console.log(`setupPlaylist: Track id ${track.id} not included due to user condition.`) : null;
+            return false;
+          }
+          isDebug ? console.log(`setupPlaylist: Track id ${track.id} included due to user condition.`) : null;
+        }
+
       }
       return trackExists;
     });

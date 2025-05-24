@@ -725,13 +725,84 @@
       "hash": "20185bb7981dba1c5a66c345ceadd0f68ade72a7"
     },
     {
-      "id": "animation.88-fish-tank",
+      "id": "animation.88.fish-tank",
       "version": "v1",
       "name": "Point Sprites",
       "description": "WebGL randomly generated starfield",
       "author": "AzazelN28",
       "source": "https://codepen.io/AzazelN28/pen/zvXZQw",
-      "hash": "192599769aef6cb4e02204f25f8c7e05480719bd"
+      "hash": "bcbffdd7470a6d58a7d1e0065a238b6fd19a70b9",
+      "parameters": [
+        {
+          "name": "Presets",
+          "default": "Ocean Mix",
+          "description": "Preset options",
+          "type": "string",
+          "options": [
+            "Ocean Mix",
+            "75 Lone Fish",
+            "Tropical Seas",
+            "Schools",
+            "Coral Reef",
+            "Salmon Run",
+            "Deep Water"
+          ]
+        },
+        {
+          "name": "NumFishGroups",
+          "default": "20",
+          "description": "Number of fish groups",
+          "type": "string"
+        },
+        {
+          "name": "SingleFishOnly",
+          "default": "false",
+          "description": "Only single fish",
+          "type": "boolean"
+        },
+        {
+          "name": "MaxPerSchool",
+          "default": "6",
+          "description": "Maximum number of fish per school",
+          "type": "string"
+        },
+        {
+          "name": "ColorChanging",
+          "default": true,
+          "description": "Color changing fish",
+          "type": "boolean"
+        },
+        {
+          "name": "PercentSchools",
+          "default": "25",
+          "description": "Percentage of schools",
+          "type": "string"
+        },
+        {
+          "name": "SwimSpeed",
+          "default": "Slow",
+          "description": "Speed of swimming fish",
+          "type": "string"
+        },
+        {
+          "name": "FishSpecies",
+          "default": "🐟 🐠 🐡",
+          "description": "Species of fish",
+          "type": "string"
+        },
+        {
+          "name": "backgroundColor",
+          "default": "#000",
+          "description": "Background color",
+          "type": "string"
+        },
+        {
+          "name": "backgroundImage",
+          "default": "oceanBackdrop.jpg",
+          "description": "Background image",
+          "type": "string"
+        }
+      ]
     }
   ],
   "common": {
