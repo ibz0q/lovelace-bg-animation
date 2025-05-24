@@ -12,15 +12,13 @@ A Lovelace plugin to replace Home Assistant's background with an animated one wi
 View all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
-### Support project
-
-<a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+### Support this project? <a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee</a>.
 
 ## Get started
 
 ### Option 1: Install with HACS 
 
-Search for "Live Animations" in HACS and Install :)
+Search "Live Background Animations" in HACS and Install.
 
 ### Option 2: Install manually
 
@@ -61,7 +59,7 @@ bg-animation:
       - id: animation.50.sidelined
       
 ```
-### All configuration options
+### ALL configuration options (Advanced)
 ` * = Optional `
 
 ```yaml
@@ -69,7 +67,13 @@ bg-animation:
   duration: 5000 # * Duration of the animation in milliseconds (global)
   loadTimeout: 2000 # In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed. This reduces the white flash on some bg's.
   redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
-  transition:
+  conditions: # *
+    regex_device_map: # Any key names of your devices 'iPhone12ProMax'
+       iPhone12ProMax: # An array of regex patterns e.g. https://regex101.com/r/LtuSVN/1
+         -  AppleWebKit.*12PROMAX.*
+       FullKioskBrowserHallway: # Custom UA set in Fullys device settings
+         -  .*FullyKioskBrowserHallway.*
+transition:
     enable: true
     duration: 1500 # Default is 1000
   style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
@@ -87,10 +91,16 @@ bg-animation:
         style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
         parameters: 
           background-image: black # Example of a parameter thats passed onto a background
+        conditions: # *
+          include_users: [wallpanel] # Only include this users
+          include_device: [FullKioskBrowserHallway]
     view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
       lights: # Settings for the 'lights' view
         - id: animation.11.space # Identifier for a background
-          duration: 40000 
+          duration: 40000
+          conditions: # *
+            exclude_users: [ibz] # Exclude these users from this bg
+            exclude_device: [iPhone12ProMax] # Exclude this device
         - id: animation.15.sound # Identifier for another background
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: animation.11.space # Identifier for a background
