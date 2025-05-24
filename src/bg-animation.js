@@ -515,7 +515,8 @@ async function setupPlaylist() {
         isDebug ? console.log(`setupPlaylist: ${track.id} does not exist in the manifest and has been removed.`) : null;
       }
 
-      let conditionsPassed = true;
+      let deviceConditions = true;
+      let userConditions = true;
 
       if (track.conditions?.exclude_devices && track.conditions?.include_devices) {
         isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported. Ignored.`) : null;
@@ -523,20 +524,15 @@ async function setupPlaylist() {
         let userAgent = navigator.userAgent;
         isDebug ? console.log(`setupPlaylist: ${track.id} has device conditions. User agent: ${userAgent}`) : null;
 
-        const deviceMatchesPatterns = (deviceKey) => {
-          const regexPatterns = rootPluginConfig?.conditions?.regex_device_map?.[deviceKey];
-          if (!regexPatterns) {
-            isDebug ? console.log(`setupPlaylist: No regex patterns found for device key: ${deviceKey}`) : null;
-            return false;
-          }
-          return regexPatterns.some(pattern => new RegExp(pattern).test(userAgent));
-        };
+        const deviceMatchesPatterns = deviceKey =>
+          rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern =>
+            new RegExp(pattern).test(userAgent));
 
         if (userAgent && track.conditions?.exclude_devices) {
           let deviceMatched = track.conditions.exclude_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
           if (deviceMatched) {
             isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
-            conditionsPassed = false;
+            deviceConditions = false;
           }
           isDebug ? console.log(`setupPlaylist: Exclude Device no match`) : null;
         }
@@ -545,39 +541,40 @@ async function setupPlaylist() {
           let deviceMatched = track.conditions.include_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
           if (!deviceMatched) {
             isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
-            conditionsPassed = false;
+            deviceConditions = false;
           }
           isDebug ? console.log(`setupPlaylist: Include Device match`) : null;
         }
       }
 
-      if (track.conditions?.exclude_user && track.conditions?.include_user) {
+      // User conditions check
+      if (track.conditions?.exclude_users && track.conditions?.include_users) {
         isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported. Ignored.`) : null;
-
-      } else if (track.conditions?.include_user || track.conditions?.exclude_user) {
+      } else if (track.conditions?.include_users || track.conditions?.exclude_users) {
         let userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
         isDebug ? console.log(`setupPlaylist: ${track.id} has user conditions, checking user: ${userName}`) : null;
 
-        if (userName && track.conditions?.exclude_user) {
-          let userExist = track.conditions.exclude_user.includes(userName);
+        if (userName && track.conditions?.exclude_users) {
+          let userExist = track.conditions.exclude_users.includes(userName);
           if (userExist) {
             isDebug ? console.log(`setupPlaylist: ${track.id} excluded due to user condition.`) : null;
-            conditionsPassed = false;
+            userConditions = false;
           }
           isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
         }
 
-        if (userName && track.conditions?.include_user) {
-          let userExist = track.conditions.include_user.includes(userName);
+        if (userName && track.conditions?.include_users) {
+          let userExist = track.conditions.include_users.includes(userName);
           if (!userExist) {
             isDebug ? console.log(`setupPlaylist: ${track.id} not included due to user condition.`) : null;
-            conditionsPassed = false;
+            userConditions = false;
           }
           isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
         }
-
       }
-      return trackExists && conditionsPassed;
+
+      console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`);
+      return trackExists && deviceConditions && userConditions;
     });
 
     if (currentPlaylist.length === 0) {
@@ -805,7 +802,7 @@ class LovelaceBgAnimation extends HTMLElement {
             <div class="media-ticker">
               ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
               ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
-              ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
+              ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: " }</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
             </div>
         `;
 
