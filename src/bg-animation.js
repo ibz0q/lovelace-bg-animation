@@ -547,7 +547,6 @@ async function setupPlaylist() {
         }
       }
 
-      // User conditions check
       if (track.conditions?.exclude_users && track.conditions?.include_users) {
         isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported. Ignored.`) : null;
       } else if (track.conditions?.include_users || track.conditions?.exclude_users) {
@@ -572,8 +571,7 @@ async function setupPlaylist() {
           isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
         }
       }
-
-      console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`);
+      isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;    
       return trackExists && deviceConditions && userConditions;
     });
 
@@ -802,7 +800,7 @@ class LovelaceBgAnimation extends HTMLElement {
             <div class="media-ticker">
               ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
               ${cardConfig?.ticker?.labels?.description?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.description?.style ? 'style="' + cardConfig?.ticker?.labels?.description?.style + '"' : ''}>${cardConfig?.ticker?.labels?.description?.name ?? "Description: "}</span> ${packageManifest.metadata?.description ?? "No description available."}` : ''}
-              ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: " }</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
+              ${cardConfig?.ticker?.labels?.author?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.author?.style ? 'style="' + cardConfig?.ticker?.labels?.author?.style + '"' : ''}>${cardConfig?.ticker?.labels?.author?.name ?? "Author: "}</span> ${packageManifest.metadata?.author ?? "Unknown"}` : ''}</i>
             </div>
         `;
 
