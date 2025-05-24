@@ -2,35 +2,25 @@
 
 A Lovelace plugin to replace Home Assistant's background with an animated one with many animations to choose from.  
 
-See available backgrounds: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+**Current Release: v1.1.2**
 
-**Current Release: v1.1.0**
+<a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee?</a> ☕
 
 <p align="center">
 
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-### Support project
+View all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
-<a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-## Getting started
+## Install
 
-> [!NOTE]
-> Once installed, you will need a valid configuration
+### Option 1: with HACS 
 
-### Option 1: Install with HACS 
+Search "Live Background Animations" in HACS and Install.
 
-Click this button which automatically downloads this plugin.
-
- [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
-
-Or
-
-Open HACS -> Frontend -> Custom Repositories -> Paste in repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". Click the Explore & Download Repositories button and search for "Live Background Animations" and Download.
-
-### Option 2: Install manually
+### Option 2: Manually
 
 Download the latest release zip. Extract the contents of dist into a folder inside www: homeassistant\config\www\lovelace-background-animation
 
@@ -59,17 +49,16 @@ bg-animation:
       enable: true
   background:
     global: # Add and remove as required
-      - id: animation.11.space
-      - id: animation.65.cristal-lands
-      - id: animation.17.ribbons
+      - id: animation.88.fish-tank
       - id: animation.64.howls-moving-castle
+      - id: animation.17.ribbons
       - id: animation.63.green-circuit
       - id: animation.58.browniandrix-noise-l3
       - id: animation.53.stars
       - id: animation.50.sidelined
       
 ```
-### All configuration options
+### Configuration options (Advanced)
 ` * = Optional `
 
 ```yaml
@@ -77,9 +66,15 @@ bg-animation:
   duration: 5000 # * Duration of the animation in milliseconds (global)
   loadTimeout: 2000 # In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed. This reduces the white flash on some bg's.
   redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
-  transition:
-    enable: true
-    duration: 1500 # Default is 1000
+  conditions: # *
+    regex_device_map: # Any names of your devices 'iPhone12ProMax'
+       iPhone12ProMax: # An array of regex patterns check this: https://regex101.com/r/LtuSVN/1
+         -  AppleWebKit.*12PROMAX.*
+       FullKioskBrowserHallway: # Custom UA set in Fullys device settings
+         -  .*FullyKioskBrowserHallway.*
+  transition: # *
+      enable: true
+      duration: 1500 # Default 1000
   style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
       background: transparent;
   gallery: # *
@@ -95,10 +90,16 @@ bg-animation:
         style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
         parameters: 
           background-image: black # Example of a parameter thats passed onto a background
+        conditions: # *
+          include_users: [wallpanel] # Only include these users
+          include_device: [FullKioskBrowserHallway]
     view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
       lights: # Settings for the 'lights' view
         - id: animation.11.space # Identifier for a background
-          duration: 40000 
+          duration: 40000
+          conditions: # *
+            exclude_users: [ibz] # Exclude these users
+            exclude_device: [iPhone12ProMax] # Exclude this device
         - id: animation.15.sound # Identifier for another background
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: animation.11.space # Identifier for a background
@@ -129,6 +130,7 @@ type: custom:lovelace-bg-animation
  - Akimitsu Hamamuro (2)
  - yoichi kobayashi (2)
  - Kevin Levron (2)
+ - AzazelN28 (2)
  - Takeshi Kano (1)
  - cssscript.com (1)
  - alphardex (1)
@@ -150,7 +152,6 @@ type: custom:lovelace-bg-animation
  - Matthias Hurrle (1)
  - Lanny (1)
  - Liam Egan (1)
- - AzazelN28 (1)
  - Fabio Ottaviani (1)
  - Sarah Drasner (1)
 
@@ -173,13 +174,13 @@ PRs need to be attached to an issue that contains the following info:
  
 ## Motivation
 
-Back when HTML5/Canvas/JS/CSS3 was new I remember the awe of abstract animations. I wanted to preserve some and view them like art pieces on my Home Assistant tablet/dashboard which make great backgrounds.
+Artists created some pretty awe inspiring animations back when HTML5/Canvas/JS/CSS3/Flash was new. There's still some amazing artists doing this today. I wanted to curate all these and admire them on my Home Assistant tablet/dashboard, which incidentally make great backgrounds.
 
-Over time some of the experiments I have saved in my bookmarks have long been lost to digital oblivion. Luckily some I would save to disk.  I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
+Unfortunately, over time many older web experiments/animations have been lost to digital oblivion. Sometimes I would save these locally. I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
 
 ### License 
 
-This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license. However other works are not as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
+This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license or some were created at a time when licensing wasn't really a thing on the web. In some cases works aren't as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
 
 ### Todo
 
@@ -188,7 +189,7 @@ This project is compromised of the works of artists each with their own licensin
 - Iframe transitions 
 - Create a basic background previewer site (better than EXTENDED.md)  
 - Slow down fast moving bgs (in progress)
-- Add redraw, allows you to repain the iframe within duration period.
+- Add redraw, allows you to repaint the iframe within duration period.
 
 #### Programmability / Extensibility
 
