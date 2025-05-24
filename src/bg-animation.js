@@ -519,56 +519,35 @@ async function setupPlaylist() {
       let userConditions = true;
 
       if (track.conditions?.exclude_devices && track.conditions?.include_devices) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported. Ignored.`) : null;
+        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported.`) : null;
       } else if (track.conditions?.include_devices || track.conditions?.exclude_devices) {
-        let userAgent = navigator.userAgent;
-        isDebug ? console.log(`setupPlaylist: ${track.id} has device conditions. User agent: ${userAgent}`) : null;
-
-        const deviceMatchesPatterns = deviceKey =>
-          rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern =>
-            new RegExp(pattern).test(userAgent));
-
-        if (userAgent && track.conditions?.exclude_devices) {
-          let deviceMatched = track.conditions.exclude_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
-          if (deviceMatched) {
-            isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
-            deviceConditions = false;
-          }
-          isDebug ? console.log(`setupPlaylist: Exclude Device no match`) : null;
+        const userAgent = navigator.userAgent;
+        const deviceMatchesPatterns = deviceKey => rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern => new RegExp(pattern).test(userAgent));
+        
+        if (userAgent && track.conditions?.exclude_devices && track.conditions.exclude_devices.some(deviceMatchesPatterns)) {
+          isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
+          deviceConditions = false;
         }
-
-        if (userAgent && track.conditions?.include_devices) {
-          let deviceMatched = track.conditions.include_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
-          if (!deviceMatched) {
-            isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
-            deviceConditions = false;
-          }
-          isDebug ? console.log(`setupPlaylist: Include Device match`) : null;
+        
+        if (userAgent && track.conditions?.include_devices && !track.conditions.include_devices.some(deviceMatchesPatterns)) {
+          isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
+          deviceConditions = false;
         }
       }
 
       if (track.conditions?.exclude_users && track.conditions?.include_users) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported. Ignored.`) : null;
+        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported.`) : null;
       } else if (track.conditions?.include_users || track.conditions?.exclude_users) {
-        let userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
-        isDebug ? console.log(`setupPlaylist: ${track.id} has user conditions, checking user: ${userName}`) : null;
-
-        if (userName && track.conditions?.exclude_users) {
-          let userExist = track.conditions.exclude_users.includes(userName);
-          if (userExist) {
+        const userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
+        if (userName) {
+          if (track.conditions?.exclude_users?.includes(userName)) {
             isDebug ? console.log(`setupPlaylist: ${track.id} excluded due to user condition.`) : null;
             userConditions = false;
           }
-          isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
-        }
-
-        if (userName && track.conditions?.include_users) {
-          let userExist = track.conditions.include_users.includes(userName);
-          if (!userExist) {
+          if (track.conditions?.include_users && !track.conditions.include_users.includes(userName)) {
             isDebug ? console.log(`setupPlaylist: ${track.id} not included due to user condition.`) : null;
             userConditions = false;
           }
-          isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
         }
       }
       isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;    
