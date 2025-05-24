@@ -9,27 +9,18 @@ A Lovelace plugin to replace Home Assistant's background with an animated one wi
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-View all backgrounds: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+View all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
 ### Support project
 
 <a href="https://buymeacoffee.com/iba0q" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/white_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-## Getting started
-
-> [!NOTE]
-> Once installed, you will need a valid configuration
+## Get started
 
 ### Option 1: Install with HACS 
 
-Click this button which automatically downloads this plugin.
-
- [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ibz0q&repository=lovelace-bg-animation&category=Plugin) 
-
-Or
-
-Open HACS -> Frontend -> Custom Repositories -> Paste in repository "ibz0q/lovelace-bg-animation" -> Category -> Lovelace -> Click "Add". Click the Explore & Download Repositories button and search for "Live Background Animations" and Download.
+Search for "Live Animations" in HACS and Install :)
 
 ### Option 2: Install manually
 
