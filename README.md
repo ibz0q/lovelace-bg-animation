@@ -2,14 +2,15 @@
 
 A Lovelace plugin to replace Home Assistant's background with an animated one with many animations to choose from.  
 
-See available backgrounds: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
-
 **Current Release: v1.1.2**
 
 <p align="center">
 
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
+
+View all backgrounds: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+
 
 ### Support project
 
