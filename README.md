@@ -1,6 +1,7 @@
 # Lovelace Background Animations 
 
-A Lovelace plugin to replace Home Assistant's background with an animated one with many animations to choose from.  
+Replace Home Assistant's background with an animated one with many animations to choose from. All backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+
 
 **Current Release: v1.1.1**
 
@@ -11,20 +12,58 @@ A Lovelace plugin to replace Home Assistant's background with an animated one wi
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-View all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
-## Install
+## 🎀 Tributes (Artists featured)
 
-### Option 1: with HACS 
+ - Jack Rugile (13)
+ - Ben Matthews (8)
+ - Dillon (6)
+ - Bas Groothedde (5)
+ - Alex Andrix (5)
+ - Matei Copot (5)
+ - Boris Šehovac (4)
+ - Akimitsu Hamamuro (2)
+ - yoichi kobayashi (2)
+ - Kevin Levron (2)
+ - Scott Weaver (2)
+ - Takeshi Kano (1)
+ - cssscript.com (1)
+ - alphardex (1)
+ - Tim Severien (1)
+ - DanDog (1)
+ - Andreas Wilcox (1)
+ - Júlia Erő (1)
+ - MenSeb (1)
+ - Ana Tudor (1)
+ - Ksenia Kondrashova (1)
+ - Jared Stanley (1)
+ - Nathan Gordon (1)
+ - nskrgv (1)
+ - Yuki (1)
+ - Griffin Moyer (1)
+ - tympanus (1)
+ - Ray Victor PRO (1)
+ - Karl Saunders (1)
+ - Matthias Hurrle (1)
+ - Lanny (1)
+ - Liam Egan (1)
+ - AzazelN28 (1)
+ - Fabio Ottaviani (1)
+ - Sarah Drasner (1)
+
+### 🙏 Contributors
+
+ - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
+
+
+### Install with HACS 
 
 Search "Live Background Animations" in HACS and Install.
 
-### Option 2: Manually
+### Install manually
 
-Download the latest release zip. Extract the contents of dist into a folder inside www: homeassistant\config\www\lovelace-background-animation
-
-***Files should be placed so they exist like this:***
+Download latest release zip. Extract `dist` into a new folder inside www: homeassistant\config\www\lovelace-background-animation ***e.g.***
 ```
 homeassistant\config\www\lovelace-background-animation\
 homeassistant\config\www\lovelace-background-animation\dist\
@@ -32,10 +71,11 @@ homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
 ...
 ```
 
-Finally go to your Lovelace dashboard, click Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/dist/bg-animation.min.js -> Javascript Module and click Create.
+Go to Lovelace dashboard: Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/dist/bg-animation.min.js -> Javascript Module and click Create.
 
+--- 
 
-Config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
+A config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
 ### Minimal Configuration (to get started)
 
@@ -117,50 +157,6 @@ There's also a card that let's you control bg's:
 type: custom:lovelace-bg-animation
 ```
 
-
-## 🎀 Tributes (Artists featured)
-
- - Jack Rugile (13)
- - Ben Matthews (8)
- - Dillon (6)
- - Bas Groothedde (5)
- - Alex Andrix (5)
- - Matei Copot (5)
- - Boris Šehovac (4)
- - Akimitsu Hamamuro (2)
- - yoichi kobayashi (2)
- - Kevin Levron (2)
- - Scott Weaver (2)
- - Takeshi Kano (1)
- - cssscript.com (1)
- - alphardex (1)
- - Tim Severien (1)
- - DanDog (1)
- - Andreas Wilcox (1)
- - Júlia Erő (1)
- - MenSeb (1)
- - Ana Tudor (1)
- - Ksenia Kondrashova (1)
- - Jared Stanley (1)
- - Nathan Gordon (1)
- - nskrgv (1)
- - Yuki (1)
- - Griffin Moyer (1)
- - tympanus (1)
- - Ray Victor PRO (1)
- - Karl Saunders (1)
- - Matthias Hurrle (1)
- - Lanny (1)
- - Liam Egan (1)
- - AzazelN28 (1)
- - Fabio Ottaviani (1)
- - Sarah Drasner (1)
-
-### 🙏 Contributors
-
- - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
-
-
 ## Contributions
 
 PRs need to be attached to an issue that contains the following info:
@@ -175,55 +171,53 @@ PRs need to be attached to an issue that contains the following info:
  
 ## Motivation
 
-Artists created some pretty awe inspiring animations back when HTML5/Canvas/JS/CSS3/Flash was new. There's still some amazing artists doing this today. I wanted to curate all these and admire them on my Home Assistant tablet/dashboard, which incidentally make great backgrounds.
+People created some pretty inspiring animations when HTML5/Canvas/JS/CSS3/Flash was new. There's still amazing artists doing this today. I wanted to curate these, use them on my Home Assistant tablet/dashboard, which incidentally make great backgrounds.
 
-Unfortunately, over time many older web experiments/animations have been lost to digital oblivion. Sometimes I would save these locally. I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
+Unfortunately over time many older web experiments/animations have been lost to digital oblivion. Sometimes I would save these locally. I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
 
 ### License 
 
 This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license or some were created at a time when licensing wasn't really a thing on the web. In some cases works aren't as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
 
-### Todo
+## To do
 
-#### UX
+- UX
 
-- Iframe transitions 
-- Create a basic background previewer site (better than EXTENDED.md)  
-- Slow down fast moving bgs (in progress)
-- Add redraw, allows you to repaint the iframe within duration period.
+  - Transparent Overlays
+  - Iframe transitions (Done)
+  - Create a basic background previewer site (better than EXTENDED.md)  
+  - Add redraw, allows you to repaint the iframe within duration period.
 
-#### Programmability / Extensibility
+- Extensibility
 
-Runtime interaction:
- -  Allow basic interaction by exposing an API/function. Play, stop, start, track change (Done, but not mature)
- -  Global postMessage listener (Considering) 
- -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
+  -  basic interaction by exposing an API/function. Play, stop, start, track change (Done, but not mature)
+  -  Global postMessage listener (Considering) 
+  -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
 
-Programmability interaction: 
+- Programmability 
 
- -  Add env variables within Iframe (Done) 
- -  Add env variables to Iframe via card config  
+  -  Add env variables within Iframe (Done) 
+  -  Add env variables to Iframe via card config  
 
-####  Security
+- Security
 
-  - "Official bg packages" vs "Community packages" via YAML tagging
-  - Provide a list of vetted libraries or CDNs
-- Provide a way to add libraries in a trusted manner (Done, docs incoming)
-- Add video background package  
-- Default gallery to use all, if nothing is specified. (Removed)
+    - "Official bg packages" vs "Community packages" via YAML tagging
+    - Provide a list of vetted libraries or CDNs
+  - Provide a way to add libraries in a trusted manner (Done, docs incoming)
+  - Add video background package  
+  - Default gallery to use all, if nothing is specified. (Removed)
 
-#### Misc
+- Misc
 
-- Add video background package  
-- Add image background package with nice transitions
-- Submit to HACS once beta version is mature (Done)
-- Add overlay div (Done)
-- Media controls (Lovelace Card) (Done)
-- Fix iframe writes (Done)
-- Add duration (Done)
-- Add opportunistic sanity check for path (Done)
-- Add BaseURL (Done)
-- Allow for multi instance (Done)
-- Auto generate metadata (Done)
-  - Video/Picture Preview (Done)
-  - HTML (Done)
+  - Add video background package  
+  - Add image background package with nice transitions
+  - Add overlay div (Done)
+  - Media controls (Lovelace Card) (Done)
+  - Fix iframe writes (Done)
+  - Add duration (Done)
+  - Add opportunistic sanity check for path (Done)
+  - Add BaseURL (Done)
+  - Allow for multi instance (Done)
+  - Auto generate metadata (Done)
+    - Video/Picture Preview (Done)
+    - HTML (Done)

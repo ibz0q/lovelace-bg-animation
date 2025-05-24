@@ -90,7 +90,6 @@ async function getPackageManifest(packageConfig) {
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
     isDebug ? console.log("processPackageManifest: Called packagemani") : null;
-
     let packageManifestName = packageConfig.id;
     let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey);
@@ -130,7 +129,6 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
       if (packageManifest.template) {
         const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
-
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
           switch (type) {
@@ -369,6 +367,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
     iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
+      "lovelaceUI": lovelaceUI,
       "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
       "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
       "rootPath": lovelaceUI.pluginAssetPath + "/",
@@ -523,12 +522,12 @@ async function setupPlaylist() {
       } else if (track.conditions?.include_devices || track.conditions?.exclude_devices) {
         const userAgent = navigator.userAgent;
         const deviceMatchesPatterns = deviceKey => rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern => new RegExp(pattern).test(userAgent));
-        
+
         if (userAgent && track.conditions?.exclude_devices && track.conditions.exclude_devices.some(deviceMatchesPatterns)) {
           isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
           deviceConditions = false;
         }
-        
+
         if (userAgent && track.conditions?.include_devices && !track.conditions.include_devices.some(deviceMatchesPatterns)) {
           isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
           deviceConditions = false;
@@ -550,7 +549,7 @@ async function setupPlaylist() {
           }
         }
       }
-      isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;    
+      isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;
       return trackExists && deviceConditions && userConditions;
     });
 
@@ -716,10 +715,7 @@ class LovelaceBgAnimation extends HTMLElement {
   }
 
   static get properties() {
-    return {
-      hass: {},
-      config: {}
-    }
+    return { hass: {}, config: {} }
   }
 
   connectedCallback() {
@@ -736,24 +732,16 @@ class LovelaceBgAnimation extends HTMLElement {
       "ticker": {
         "labels": this.config.labels ?? {
           "name": {
-            show: true,
-            style: false,
-            name: "Name"
+            show: true, style: false, name: "Name"
           },
           "description": {
-            show: true,
-            style: false,
-            name: " / "
+            show: true, style: false, name: " / "
           },
           "author": {
-            show: true,
-            style: false,
-            name: "Author"
+            show: true, style: false, name: "Author"
           }
         },
-        "speed": this.config.speed ?? 60,
-        "show": this.config.show ?? true,
-        "style": this.config.style ?? false,
+        "speed": this.config.speed ?? 60, "show": this.config.show ?? true, "style": this.config.style ?? false,
       }
     }
   }
@@ -774,7 +762,6 @@ class LovelaceBgAnimation extends HTMLElement {
           let packageManifest = e.detail.message.packageManifest;
           let cardConfig = this.getCardConfig();
           let playlistIndex = getPlaylistIndex();
-
           let mediaInfo = `
             <div class="media-ticker">
               ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
