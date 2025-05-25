@@ -224,16 +224,6 @@ function processBackgroundSchema(config) {
       duration: item?.duration ?? false,
       redraw: item?.redraw ?? 0,
       conditions: item?.conditions ?? false,
-      overlays: item?.overlays
-        ? item.overlays.map(overlay => ({
-          ...overlay,
-          style: overlay?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-          cache: overlay?.cache !== undefined ? overlay.cache : true,
-          duration: overlay?.duration ?? false,
-          overlays: overlay?.overlays ?? false,
-          redraw: overlay?.redraw ?? 0,
-        }))
-        : false,
     }))
     : false;
 }
