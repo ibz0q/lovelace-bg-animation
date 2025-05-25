@@ -90,7 +90,6 @@ async function getPackageManifest(packageConfig) {
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
     isDebug ? console.log("processPackageManifest: Called packagemani") : null;
-
     let packageManifestName = packageConfig.id;
     let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey);
@@ -130,7 +129,6 @@ async function processPackageManifest(packageConfig, packageManifest) {
 
       if (packageManifest.template) {
         const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
-
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
           key = key.trim();
           switch (type) {
@@ -226,16 +224,6 @@ function processBackgroundSchema(config) {
       duration: item?.duration ?? false,
       redraw: item?.redraw ?? 0,
       conditions: item?.conditions ?? false,
-      overlays: item?.overlays
-        ? item.overlays.map(overlay => ({
-          ...overlay,
-          style: overlay?.style ?? 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;',
-          cache: overlay?.cache !== undefined ? overlay.cache : true,
-          duration: overlay?.duration ?? false,
-          overlays: overlay?.overlays ?? false,
-          redraw: overlay?.redraw ?? 0,
-        }))
-        : false,
     }))
     : false;
 }
@@ -274,7 +262,7 @@ function initializeRuntimeVariables() {
       },
       "sidebar": {
         "enable": rootPluginConfig.transparency?.sidebar?.enable ?? false,
-        "style": rootPluginConfig.transparency?.sidebar?.style ?? "ha-sidebar {background: transparent !important;}",
+        "style": rootPluginConfig.transparency?.sidebar?.style ?? "background: transparent !important;",
       },
       "background": rootPluginConfig.transparency?.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
     },
@@ -353,6 +341,9 @@ function changeDefaultLovelaceStyles() {
   if (rootPluginConfig.transparency.header.enable == true) {
     cssText += rootPluginConfig.transparency.header.style;
   }
+  if (rootPluginConfig.transparency.sidebar.enable == true) {
+    lovelaceUI.sidebarElement.style.cssText += rootPluginConfig.transparency.sidebar.style;
+  }
   lovelaceUI.rootStyleElement.innerHTML = cssText;
 }
 
@@ -369,6 +360,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
     iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
+      "lovelaceUI": lovelaceUI,
       "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
       "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
       "rootPath": lovelaceUI.pluginAssetPath + "/",
@@ -519,59 +511,38 @@ async function setupPlaylist() {
       let userConditions = true;
 
       if (track.conditions?.exclude_devices && track.conditions?.include_devices) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported. Ignored.`) : null;
+        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported.`) : null;
       } else if (track.conditions?.include_devices || track.conditions?.exclude_devices) {
-        let userAgent = navigator.userAgent;
-        isDebug ? console.log(`setupPlaylist: ${track.id} has device conditions. User agent: ${userAgent}`) : null;
+        const userAgent = navigator.userAgent;
+        const deviceMatchesPatterns = deviceKey => rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern => new RegExp(pattern).test(userAgent));
 
-        const deviceMatchesPatterns = deviceKey =>
-          rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern =>
-            new RegExp(pattern).test(userAgent));
-
-        if (userAgent && track.conditions?.exclude_devices) {
-          let deviceMatched = track.conditions.exclude_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
-          if (deviceMatched) {
-            isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
-            deviceConditions = false;
-          }
-          isDebug ? console.log(`setupPlaylist: Exclude Device no match`) : null;
+        if (userAgent && track.conditions?.exclude_devices && track.conditions.exclude_devices.some(deviceMatchesPatterns)) {
+          isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
+          deviceConditions = false;
         }
 
-        if (userAgent && track.conditions?.include_devices) {
-          let deviceMatched = track.conditions.include_devices.some(deviceKey => deviceMatchesPatterns(deviceKey));
-          if (!deviceMatched) {
-            isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
-            deviceConditions = false;
-          }
-          isDebug ? console.log(`setupPlaylist: Include Device match`) : null;
+        if (userAgent && track.conditions?.include_devices && !track.conditions.include_devices.some(deviceMatchesPatterns)) {
+          isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
+          deviceConditions = false;
         }
       }
 
       if (track.conditions?.exclude_users && track.conditions?.include_users) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported. Ignored.`) : null;
+        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported.`) : null;
       } else if (track.conditions?.include_users || track.conditions?.exclude_users) {
-        let userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
-        isDebug ? console.log(`setupPlaylist: ${track.id} has user conditions, checking user: ${userName}`) : null;
-
-        if (userName && track.conditions?.exclude_users) {
-          let userExist = track.conditions.exclude_users.includes(userName);
-          if (userExist) {
+        const userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
+        if (userName) {
+          if (track.conditions?.exclude_users?.includes(userName)) {
             isDebug ? console.log(`setupPlaylist: ${track.id} excluded due to user condition.`) : null;
             userConditions = false;
           }
-          isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
-        }
-
-        if (userName && track.conditions?.include_users) {
-          let userExist = track.conditions.include_users.includes(userName);
-          if (!userExist) {
+          if (track.conditions?.include_users && !track.conditions.include_users.includes(userName)) {
             isDebug ? console.log(`setupPlaylist: ${track.id} not included due to user condition.`) : null;
             userConditions = false;
           }
-          isDebug ? console.log(`setupPlaylist: ${track.id} included due to user condition.`) : null;
         }
       }
-      isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;    
+      isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;
       return trackExists && deviceConditions && userConditions;
     });
 
@@ -737,10 +708,7 @@ class LovelaceBgAnimation extends HTMLElement {
   }
 
   static get properties() {
-    return {
-      hass: {},
-      config: {}
-    }
+    return { hass: {}, config: {} }
   }
 
   connectedCallback() {
@@ -757,24 +725,16 @@ class LovelaceBgAnimation extends HTMLElement {
       "ticker": {
         "labels": this.config.labels ?? {
           "name": {
-            show: true,
-            style: false,
-            name: "Name"
+            show: true, style: false, name: "Name"
           },
           "description": {
-            show: true,
-            style: false,
-            name: " / "
+            show: true, style: false, name: " / "
           },
           "author": {
-            show: true,
-            style: false,
-            name: "Author"
+            show: true, style: false, name: "Author"
           }
         },
-        "speed": this.config.speed ?? 60,
-        "show": this.config.show ?? true,
-        "style": this.config.style ?? false,
+        "speed": this.config.speed ?? 60, "show": this.config.show ?? true, "style": this.config.style ?? false,
       }
     }
   }
@@ -795,7 +755,6 @@ class LovelaceBgAnimation extends HTMLElement {
           let packageManifest = e.detail.message.packageManifest;
           let cardConfig = this.getCardConfig();
           let playlistIndex = getPlaylistIndex();
-
           let mediaInfo = `
             <div class="media-ticker">
               ${cardConfig?.ticker?.labels?.name?.show ? `<span class="soft" ${cardConfig?.ticker?.labels?.name?.style ? 'style="' + cardConfig?.ticker?.labels?.name?.style + '"' : ''}>${cardConfig?.ticker?.labels?.name?.name ?? "Name: "}</span> ${packageManifest.metadata?.name ?? packageConfig.id}` : ''}
