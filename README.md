@@ -123,7 +123,6 @@ bg-animation:
     sidebar:
       enable: false # Enable sidebar transparency
       style: "background: transparent !important;" # Custom sidebar style
-    background: "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}" # Background transparency style
   gallery: # *
     type: "remote" # Type of gallery: "local" | "remote"
     localRootPath: "/local/lovelace-bg-animation/dist" # Local gallery root path
@@ -136,22 +135,25 @@ bg-animation:
         style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;" # * Custom iframe style
         cache: true # * Enable caching for this background
         duration: false # * Override global duration
-        redraw: 0 # * Time in ms to redraw the background
         conditions: # *
           include_users: [username1, username2] # Only show for these users
           exclude_users: [username3] # Don't show for these users
           include_devices: [device1] # Only show on these devices
           exclude_devices: [device2] # Don't show on these devices
-        overlays: # * Additional overlay backgrounds
-          - id: animation.12.overlay
-            style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;"
-            cache: true
-            duration: false
-            redraw: 0
-    view: # View-specific backgrounds
-      lights: # View name
-        - id: animation.15.light
-          # Same options as global backgrounds
+    view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
+      lights: # Settings for the 'lights' view
+        - id: animation.11.space # Identifier for a background
+          duration: 40000
+          conditions: # *
+            exclude_users: [ibz] # Exclude these users
+            exclude_devices: [iPhone12ProMax] # Exclude this device
+        - id: animation.15.sound # Identifier for another background
+      gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
+        - id: animation.11.space # Identifier for a background
+          duration: 40000
+        - id: animation.15.square # Identifier for another background
+          duration: 40000 
+
 ```
 
 There's also a card that let's you control bg's:
