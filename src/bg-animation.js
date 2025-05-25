@@ -351,6 +351,10 @@ function changeDefaultLovelaceStyles() {
   if (rootPluginConfig.transparency.header.enable == true) {
     cssText += rootPluginConfig.transparency.header.style;
   }
+  if (rootPluginConfig.transparency.sidebar.enable == true) {
+    console.log(lovelaceUI.sidebarElement);
+    cssText += rootPluginConfig.transparency.sidebar.style;
+  }
   lovelaceUI.rootStyleElement.innerHTML = cssText;
 }
 
