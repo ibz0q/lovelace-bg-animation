@@ -103,50 +103,55 @@ bg-animation:
 
 ```yaml
 bg-animation: 
-  duration: 5000 # * Duration of the animation in milliseconds (global)
-  loadTimeout: 2000 # In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed. This reduces the white flash on some bg's.
-  redraw: 200000 # * Time in milliseconds after which the animation should be redrawn
+  duration: 50000 # * Duration of the animation in milliseconds (global)
+  loadTimeout: 5000 # * In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed
+  cache: true # * If false, nothing will be cached
   conditions: # *
     regex_device_map: # Any names of your devices 'iPhone12ProMax'
-       iPhone12ProMax: # An array of regex patterns check this: https://regex101.com/r/LtuSVN/1
+       iPhone12ProMax: # An array of regex patterns
          -  AppleWebKit.*12PROMAX.*
-       FullKioskBrowserHallway: # Custom UA set in Fullys device settings
+       FullKioskBrowserHallway:
          -  .*FullyKioskBrowserHallway.*
   transition: # *
-      enable: true
-      duration: 1500 # Default 1000
-  style: | # * Change the default style of root container holding iframe (This can cause bugs if original style is not applied)
-      background: transparent;
-  gallery: # *
-    type: local # Type of gallery, "local" | "remote" 
-  transparency: # Sets the header transparent (Optional)
+    enable: true
+    duration: 1000 # Transition duration in milliseconds
+  parentStyle: "position: fixed; right: 0; top: 0; min-width: 100vw; min-height: 100vh; z-index: -10;" # * Root container style
+  transparency: # *
     header:
-      enable: true
-  cache: false # * If false, nothing will not be cached. Default is true
-  sort: random # * Order bgs will be displayed. 'random" | "reverse" | "id_asc" | "id_desc". Default is the order you specify
-  background: 
-    global: # Global background settings, if no view is specified, will be applied to all views
-      - id: animation.11.space # ID for a background (Folder name of /gallery/package/ID)
-        style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
-        parameters: 
-          background-color: black # Example of a parameter thats passed onto a background
+      enable: true # Enable header transparency
+      style: ".header {background: transparent !important;}" # Custom header style
+    sidebar:
+      enable: false # Enable sidebar transparency
+      style: "background: transparent !important;" # Custom sidebar style
+    background: "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}" # Background transparency style
+  gallery: # *
+    type: "remote" # Type of gallery: "local" | "remote"
+    localRootPath: "/local/lovelace-bg-animation/dist" # Local gallery root path
+    manifestFileName: "gallery.manifest" # Gallery manifest filename
+    remoteRootUrl: "https://ibz0q.github.io/lovelace-bg-animation" # Remote gallery URL
+  sort: "random" # * Order backgrounds will be displayed: "random" | "reverse" | "id_asc" | "id_desc"
+  background:
+    global: # Global background settings
+      - id: animation.11.space # Background identifier
+        style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;" # * Custom iframe style
+        cache: true # * Enable caching for this background
+        duration: false # * Override global duration
+        redraw: 0 # * Time in ms to redraw the background
         conditions: # *
-          include_users: [wallpanel] # Only include these users
-          include_devices: [FullKioskBrowserHallway]
-    view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
-      lights: # Settings for the 'lights' view
-        - id: animation.11.space # Identifier for a background
-          duration: 40000
-          conditions: # *
-            exclude_users: [ibz] # Exclude these users
-            exclude_devices: [iPhone12ProMax] # Exclude this device
-        - id: animation.15.sound # Identifier for another background
-      gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
-        - id: animation.11.space # Identifier for a background
-          duration: 40000
-        - id: animation.15.square # Identifier for another background
-          duration: 40000 
-
+          include_users: [username1, username2] # Only show for these users
+          exclude_users: [username3] # Don't show for these users
+          include_devices: [device1] # Only show on these devices
+          exclude_devices: [device2] # Don't show on these devices
+        overlays: # * Additional overlay backgrounds
+          - id: animation.12.overlay
+            style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;"
+            cache: true
+            duration: false
+            redraw: 0
+    view: # View-specific backgrounds
+      lights: # View name
+        - id: animation.15.light
+          # Same options as global backgrounds
 ```
 
 There's also a card that let's you control bg's:
