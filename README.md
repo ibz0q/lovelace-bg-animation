@@ -1,17 +1,17 @@
 # Lovelace Background Animations 
 
-Replace Home Assistant's background with an animated one with many animations to choose from. All backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+Replace Home Assistant's background with an background animation!
+Find all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
 **Current Release: v1.1.1**
 
-<a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee?</a> ☕
+<a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee</a> ☕
 
 <p align="center">
 
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
-
 
 
 ## 🎀 Tributes (Artists featured)
@@ -129,17 +129,17 @@ bg-animation:
       - id: animation.11.space # ID for a background (Folder name of /gallery/package/ID)
         style: # CSS applied to individual bg's, say if you prefer the bg to be darker, acting like an overlay
         parameters: 
-          background-image: black # Example of a parameter thats passed onto a background
+          background-color: black # Example of a parameter thats passed onto a background
         conditions: # *
           include_users: [wallpanel] # Only include these users
-          include_device: [FullKioskBrowserHallway]
+          include_devices: [FullKioskBrowserHallway]
     view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
       lights: # Settings for the 'lights' view
         - id: animation.11.space # Identifier for a background
           duration: 40000
           conditions: # *
             exclude_users: [ibz] # Exclude these users
-            exclude_device: [iPhone12ProMax] # Exclude this device
+            exclude_devices: [iPhone12ProMax] # Exclude this device
         - id: animation.15.sound # Identifier for another background
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: animation.11.space # Identifier for a background
@@ -221,3 +221,4 @@ This project is compromised of the works of artists each with their own licensin
   - Auto generate metadata (Done)
     - Video/Picture Preview (Done)
     - HTML (Done)
+
