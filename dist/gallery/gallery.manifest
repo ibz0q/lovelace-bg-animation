@@ -812,6 +812,15 @@
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/MWyNYoq",
       "hash": "9ac6eaeae90ca9580b59dbd05c8a7fc3c1dc3fea"
+    },
+    {
+      "id": "animation.90.aurora",
+      "version": "v1",
+      "name": "Icelandic Aurora",
+      "description": "Watch the aurora borealis dance across your screen.",
+      "author": "Ibz",
+      "source": "https://github.com/ibz0q/lovelace-bg-animation",
+      "hash": "cc42fcf4467f993fcb4f6d301d2773e80214f80c"
     }
   ],
   "common": {
