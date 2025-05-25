@@ -272,7 +272,7 @@ function initializeRuntimeVariables() {
       },
       "sidebar": {
         "enable": rootPluginConfig.transparency?.sidebar?.enable ?? false,
-        "style": rootPluginConfig.transparency?.sidebar?.style ?? "ha-sidebar {background: transparent !important;}",
+        "style": rootPluginConfig.transparency?.sidebar?.style ?? "background: transparent !important;",
       },
       "background": rootPluginConfig.transparency?.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
     },
@@ -352,8 +352,7 @@ function changeDefaultLovelaceStyles() {
     cssText += rootPluginConfig.transparency.header.style;
   }
   if (rootPluginConfig.transparency.sidebar.enable == true) {
-    console.log(lovelaceUI.sidebarElement);
-    cssText += rootPluginConfig.transparency.sidebar.style;
+    lovelaceUI.sidebarElement.style.cssText += rootPluginConfig.transparency.sidebar.style;
   }
   lovelaceUI.rootStyleElement.innerHTML = cssText;
 }
