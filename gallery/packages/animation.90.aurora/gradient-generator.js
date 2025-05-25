@@ -6,7 +6,7 @@ class GradientGenerator {
         this.time = 0;
         
         // Animation settings
-        this.speed = 0.5;
+        this.speed = 0.1;
         this.blurIntensity = 40;
         this.colorIntensity = 0.7;
         
