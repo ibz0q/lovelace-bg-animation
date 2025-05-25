@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (79 total)
+## All backgrounds (80 total)
 
 
 
@@ -1049,6 +1049,15 @@ Supported params:
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.9.rainbow-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.9.rainbow-particles/preview.html) - *Author: Matei Copot* - Offline support? **Yes**
+
+###  > animation.90.aurora (Icelandic Aurora - Watch the aurora borealis dance across your screen.)
+
+`- id: animation.90.aurora`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.90.aurora/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.90.aurora/preview.html) - *Author: Ibz* - Offline support? **Yes**
 
 ###  > generator.1.svg-wave (Gradient Wave Generator - SVG Gradient Wave Generator)
 

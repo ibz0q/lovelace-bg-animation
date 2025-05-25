@@ -7,7 +7,7 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
-      "hash": "98f11f05eee34901b03c472be448e623823826a4"
+      "hash": "302ed6b20230ab79df1fb6f8fa3a52a548531090"
     },
     {
       "id": "animation.2.shooting-stars",
@@ -16,7 +16,7 @@
       "description": "Random speed shooting stars",
       "author": "alphardex",
       "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-      "hash": "739454696b03e0605435992e421c9be2bfac3d44"
+      "hash": "1b90261da9ffd402d42083e7d755ff0eff0a022a"
     },
     {
       "id": "generator.2.knots",
@@ -25,7 +25,7 @@
       "description": "Not knots",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/OJYyMNR",
-      "hash": "3b63e95ba92cfe689f0e5c8b26c38d1fbfe7bf59"
+      "hash": "1c1bf532b67d4a9b6c120a68f25d8a340959ac28"
     },
     {
       "id": "animation.3.spipa-circle",
@@ -34,7 +34,7 @@
       "description": "A cool electro field circle",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/oQOvYp",
-      "hash": "2de4b818a35644c09493d3fa257a9d919422a542"
+      "hash": "a4bbb2c3d54265cbe69dcb071cb4b5ef1ffc2d57"
     },
     {
       "id": "animation.4.colored-swipe",
@@ -43,7 +43,7 @@
       "description": "Whole page colored swipes",
       "author": "Andreas Wilcox",
       "source": "https://codepen.io/SvDvorak/pen/bxoxde",
-      "hash": "12481e80700c93de3027bc3e74f3375b3d6b8aeb"
+      "hash": "55c7bf2bbf3fc7762953b36ac14d1cec1c9a1f8b"
     },
     {
       "id": "animation.5.neon-hexagon",
@@ -52,7 +52,7 @@
       "description": "Neon Hexagon Foming Particles",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/mJzOWJ",
-      "hash": "7e2fc77b6ad30f3d9e2bf85aa673774b9c4f24e5"
+      "hash": "00d33a3a1cfe69410d58529b384135dc74092e7c"
     },
     {
       "id": "animation.5.plasma",
@@ -61,7 +61,7 @@
       "description": "rainbow particle horizon",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/WvLaKw",
-      "hash": "8c9d594fc75d45b29b51658a09d2e92217b77f02"
+      "hash": "6e86755cfde1c0efc741d4c60e6d450b0bd14078"
     },
     {
       "id": "animation.6.binary-spiral",
@@ -70,7 +70,7 @@
       "description": "Binary Spirals",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/dXevxg",
-      "hash": "a3967c76961da92291ea23e229c6d03291e7c906"
+      "hash": "fed22c430a0e174d7d83aa328e236992030789ec"
     },
     {
       "id": "animation.7.rainbowness",
@@ -79,7 +79,7 @@
       "description": "Rainbowness",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/EbQKmy",
-      "hash": "34497ad9eb5538e231d2546fd1fbf74a88479f55"
+      "hash": "5469eacfbbe575e17a2044356602bd946a64fe09"
     },
     {
       "id": "animation.9.rainbow-particles",
@@ -88,7 +88,7 @@
       "description": "rainbow particle horizon",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/BQEGdz",
-      "hash": "6600c07376d4743c5ca765d16f398dc8f3b1e9a2"
+      "hash": "47093112a9990215c44f06f376ef6f48e4c946df"
     },
     {
       "id": "animation.10.css-dark-particles",
@@ -97,7 +97,7 @@
       "description": "CSS Dark Particles",
       "author": "Takeshi Kano",
       "source": "https://codepen.io/towc/pen/BQEGdz",
-      "hash": "4bc2530181fc13616252e07606e338c07de36542"
+      "hash": "712b48c70915ed07a50d1d66925610f29fa19d5d"
     },
     {
       "id": "animation.11.space",
@@ -106,7 +106,7 @@
       "description": "The final frontier",
       "author": "Akimitsu Hamamuro",
       "source": "https://codepen.io/akm2/pen/RwQXLdP",
-      "hash": "787a5d1bfdbb23cc432a7c1dd31216fdc39de6b0"
+      "hash": "79d8b440e0e76406df6d86f6d3dc96a08382c3f7"
     },
     {
       "id": "animation.12.gradient-particles",
@@ -115,7 +115,7 @@
       "description": "animated-gradient-particle",
       "author": "cssscript.com",
       "source": "https://www.cssscript.com/demo/animated-gradient-particle/",
-      "hash": "04e0587b70ae3528f0a0e63b8b69c9b629519b50"
+      "hash": "4fc40b11bf8358c58c72dbcd4a0f7f547ee4eb2a"
     },
     {
       "id": "animation.13.cyber-lights",
@@ -124,7 +124,7 @@
       "description": "Frosted type lights moving diagnolly",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/GLRdKP",
-      "hash": "42f5cbc89c562321dcf9550fb855dc79f9b8acc4"
+      "hash": "476f9f8b3535418c1012a52264aebfa23847c519"
     },
     {
       "id": "animation.14.ribbons-two",
@@ -133,7 +133,7 @@
       "description": "It looks like Windows Vista",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/BYbjyg",
-      "hash": "448f5b543ed3e43812cbbc3049573704a3a0b15b"
+      "hash": "f6abb2dcf927154b2dff38686f32e2c1bb63114e"
     },
     {
       "id": "animation.15.sound",
@@ -142,7 +142,7 @@
       "description": "Vibes",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/jOqeYWy",
-      "hash": "693afe4b37cbb1cf101204399aae9771838289c6"
+      "hash": "0c3808ccfd86052fbfda08066238daf09a13fcd3"
     },
     {
       "id": "animation.16.veil",
@@ -151,7 +151,7 @@
       "description": "Slithers   of   color   veil   the   screen",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/QmLVax",
-      "hash": "d9edb7d7d67f4a2f2e57f852e3df92685f8c9703"
+      "hash": "fba780872b9c8a870409629167574bd2cd002f57"
     },
     {
       "id": "animation.17.ribbons",
@@ -160,7 +160,7 @@
       "description": "So many layers of ribbons",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-      "hash": "9b970dd31139ace08ab21ed8826fd4438dd6d812"
+      "hash": "bd2e87a28962f48f3790b84f71ef34d0534b6eb4"
     },
     {
       "id": "animation.18.particle-cube",
@@ -169,7 +169,7 @@
       "description": "Pure JS 3D particle Cube - 1000 particles",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
-      "hash": "214f1ca69e16b98fa57566db8612627bb5eb9d6e"
+      "hash": "e81fe0f4d974130ebb7abf000cdc263ce06b9280"
     },
     {
       "id": "animation.19.trapped-particles",
@@ -178,7 +178,7 @@
       "description": "Trapped particles with shocking connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
-      "hash": "fa9cc38e530bd1f6fa956a94487f264b6ca8e8fc"
+      "hash": "96e3a0acba2f725e33c7153956865c165e389bc4"
     },
     {
       "id": "animation.20.manifold",
@@ -187,7 +187,7 @@
       "description": "Enter into the fold",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/PozModJ",
-      "hash": "36a95ae67803e20c0897cd96cfd2998542c9c0c6"
+      "hash": "eaedebe638d6affaa28b26509fa240b8d8d16c68"
     },
     {
       "id": "animation.21.noise-abstraction",
@@ -196,7 +196,7 @@
       "description": "Noise Abstraction",
       "author": "Akimitsu Hamamuro",
       "source": "https://codepen.io/akm2/pen/AxGzJb",
-      "hash": "43973a324cac61f7ae04bdf40948a8c64f1a6f35"
+      "hash": "d79375f3c363c8ffc7e28a08cb0a1249f537b0c5"
     },
     {
       "id": "animation.22.cloth-ribbons",
@@ -205,7 +205,7 @@
       "description": "It Colorful Cloth Ribbons",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/BavevR",
-      "hash": "803b6247c1c90ea1ba959f8cff10f51315aa266d"
+      "hash": "2ff1e1f69f25dce249689bf64a8e43bd4153038d"
     },
     {
       "id": "animation.23.ribbons-four",
@@ -214,7 +214,7 @@
       "description": "It looks like Windows Vista",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-      "hash": "1e016d2e41abb4f3eed39742aea507973e337b70"
+      "hash": "1fae2b5fe4607777d23065cc1b14d48f81b3b9d7"
     },
     {
       "id": "animation.24.trapped-gradient",
@@ -223,7 +223,7 @@
       "description": "Trapped particles with gradient connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/qdZWag",
-      "hash": "ce597aa47c0102323d9cb7563efc093bc16d5d39"
+      "hash": "9b15efa9d34c709c0b4bc8ab00014cab6594942b"
     },
     {
       "id": "animation.25.galactic-swimmers",
@@ -232,7 +232,7 @@
       "description": "A sea of particles swimming in the galaxy",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/KwVWmE",
-      "hash": "894e5492764d86116df9b89763b77b1a95b388c2"
+      "hash": "9851e4dd2429f4d2a450c3ff8fbffccfb58f7b4b"
     },
     {
       "id": "animation.26.gpu-particles",
@@ -241,7 +241,7 @@
       "description": "First Time GPGPU Particles",
       "author": "Tim Severien",
       "source": "https://codepen.io/timseverien/pen/rWdJZY",
-      "hash": "1e4073841220260f063ee2c5179f4801e87413d6"
+      "hash": "d6f1ee2c95d23c4b5adf160a38ae806259e47b1a"
     },
     {
       "id": "animation.27.tron",
@@ -250,7 +250,7 @@
       "description": "LightCycles in Tron",
       "author": "DanDog",
       "source": "https://codepen.io/timseverien/pen/rWdJZY",
-      "hash": "e6f7808faa5116ce746f152f4cdbf11e700a2ac3"
+      "hash": "9abe7f022fea763564a707daa07586b898ee88c7"
     },
     {
       "id": "animation.28.black-sand-flow-field-v2",
@@ -259,7 +259,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-      "hash": "47df120602e809cd64f36b46b654c13e19002794"
+      "hash": "1b0c631b134f9047d67a5b191d20825eec125c5d"
     },
     {
       "id": "animation.31.blooming-flower",
@@ -268,7 +268,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/qPrGbo",
-      "hash": "d546a3d82f4f3be3a4d16f07581ab634322d5021"
+      "hash": "b5d24385ca78a781d67254bce93dec2556f4d74c"
     },
     {
       "id": "animation.32.canvas-blending-gradient-circles",
@@ -277,7 +277,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/pomzqE",
-      "hash": "759e675082ac0767c42301852ec6d4288322f60b"
+      "hash": "ad13377f38603d422fa11a1caf8b864657775d87"
     },
     {
       "id": "animation.33.canvas-bokeh",
@@ -286,7 +286,7 @@
       "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/nYzapO",
-      "hash": "468e193fa4bb316fc871ce144d0bbe2ed3ec7479"
+      "hash": "02b29b0af38d9fb5decc0ade7788e10634fd4714"
     },
     {
       "id": "animation.34.canvas-color-teams",
@@ -295,7 +295,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/DdyGPB",
-      "hash": "e7bdd888d8f7f40dc425b3f2fa3b2906ba74a680"
+      "hash": "fd602b767f651df50983af814bf76d4eb1905624"
     },
     {
       "id": "animation.35.canvas-light-explosion",
@@ -304,7 +304,7 @@
       "description": "Click to clear and change hue.",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/Xdaavx",
-      "hash": "6c608fcff07db1a536fae9be0590852e9be59dbb"
+      "hash": "d4f12756a3e81094f6f8794585d7548f8e315cac"
     },
     {
       "id": "animation.36.starfield",
@@ -313,7 +313,7 @@
       "description": "Engage",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-      "hash": "63c3393caaf8f2002dc8185eeda3e110e5f6e6a5"
+      "hash": "725298f3d49b67dd9c72a91e13579ce0ab917417"
     },
     {
       "id": "animation.46.codevember-05-simplex-vector-flow-field",
@@ -322,7 +322,7 @@
       "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/zodPjd",
-      "hash": "a758598ec9f7df36a0186d93a16c927b50c3a5c0"
+      "hash": "e853c567e4d36c3555b5e4e8040f4dca5e11bbb0"
     },
     {
       "id": "animation.47.color-trails",
@@ -331,7 +331,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/GprWyw",
-      "hash": "6973a80fc607fd1690b9c7d180e939bc6156487f"
+      "hash": "0da3b658e6b3081dfc7475e3d390d6a28eaf9760"
     },
     {
       "id": "animation.48.colorful-wanderers",
@@ -340,7 +340,7 @@
       "description": "\n\nForked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/xbRqGz",
-      "hash": "304b7538553106054b9d4fbd58b9948b821f739e"
+      "hash": "e2718503efc92e1297b0757705a8dbbdb9ee8001"
     },
     {
       "id": "animation.49.curved-lines",
@@ -349,7 +349,7 @@
       "description": "`#GrayScale_HintOfRainbow_CurvedLinesWeekend`",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/zGwqbq",
-      "hash": "5295ee81be54fc941425ca09df37ffc98ad6f07f"
+      "hash": "abf9f0e91256f1e429d9e47fe714bfc6df86521d"
     },
     {
       "id": "animation.50.sidelined",
@@ -358,7 +358,7 @@
       "description": "Side lines",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/rNvPvod",
-      "hash": "dfd4754f20c942333bd2000ce350d1dce80eead5"
+      "hash": "7cdc15d4a8a041ee9f582a58d0b0dd1efeb59d2a"
     },
     {
       "id": "animation.52.polyhedron-galaxy",
@@ -367,7 +367,7 @@
       "description": "Practicing with ThreeJS",
       "author": "Júlia Erő",
       "source": "https://codepen.io/planktone/pen/EPXMGj",
-      "hash": "ba9306fe8fb65d92b06c68d5b7ad1a9ec00fab4b"
+      "hash": "fea09bdece68cda754b6ba1dc849e53192e60331"
     },
     {
       "id": "animation.53.stars",
@@ -376,7 +376,7 @@
       "description": "The odd twinkle",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/BjBGoM",
-      "hash": "39b6e695318f44a94ec70239a134ef6771616355"
+      "hash": "f90529974109b8837f2084a19e17b8f29573ba0a"
     },
     {
       "id": "animation.54.stars-galaxy",
@@ -385,7 +385,7 @@
       "description": "Stars Galaxy made for CodePen challenge. This Pen was realized using CSS with SASS. Stars are pseudo elements rotated and translated.",
       "author": "MenSeb",
       "source": "https://codepen.io/MenSeb/pen/yWJgeE",
-      "hash": "ce4d6c2dd5cfa1c65bdc3d75b670e2d7e4571ab1"
+      "hash": "f84abb005802459a2d672b6e2ca7d68d7e913c5b"
     },
     {
       "id": "animation.56.azimuthal-viscosity",
@@ -394,7 +394,7 @@
       "description": "",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/ZVewby",
-      "hash": "dba568399d2a519ca6edd5952c337b660ab3a4b6"
+      "hash": "94e66b6f8361593d9483cad0f9575b944ce0e7a7"
     },
     {
       "id": "animation.57.browniandrix-noise",
@@ -403,7 +403,7 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/jdGBjW",
-      "hash": "0d659fae1a271c97f652a237d17587294f41b023"
+      "hash": "3050744031a672ef3fcb1664be2e3d004b744f4b"
     },
     {
       "id": "animation.58.browniandrix-noise-l3",
@@ -412,7 +412,7 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/VRaGKq",
-      "hash": "440f130eecfefe364ca3bb78b04911e04c663761"
+      "hash": "6a9000a1c90657e6d68f9db68e2f080d5cf2fed4"
     },
     {
       "id": "animation.59.dimension-two-and-a-half",
@@ -421,7 +421,7 @@
       "description": "Vanishing point attractors",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/OrpdNJ",
-      "hash": "246474afdc4e26b4f8cdce3f7075a180971921f0"
+      "hash": "2f28d6803894e0d627eeb169a6060977d2ddcf42"
     },
     {
       "id": "animation.60.digital-frontier",
@@ -430,7 +430,7 @@
       "description": "Dial me in",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/YzjEBoG",
-      "hash": "be2844eab34a6f80d3b48c6503bde5d48a58afcc"
+      "hash": "8ff3b7fcb9121d6a0ea3d31ec085a08b17f9a77a"
     },
     {
       "id": "animation.61.cube",
@@ -439,7 +439,7 @@
       "description": "[Inspiration](https://twitter.com/beesandbombs/status/1562937289784844288). Dedicated to the memory of someone dear who passed away in January 2019. Missing you every day.",
       "author": "Ana Tudor",
       "source": "https://codepen.io/thebabydino/pen/OJvYZrx",
-      "hash": "abf0247900f6945086c1addf535d14546bdf1c1f"
+      "hash": "0af6ecb3971b34983cffae31687df62b3ea99801"
     },
     {
       "id": "animation.62.neural",
@@ -448,7 +448,7 @@
       "description": "Neural Glow",
       "author": "Ksenia Kondrashova",
       "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
-      "hash": "b5301bde13c802e2f16495e0cf3d27ce03858768"
+      "hash": "d40832d3cd397cc098653c6e5887c7b0b3ca53d4"
     },
     {
       "id": "animation.63.green-circuit",
@@ -457,7 +457,7 @@
       "description": "I'm in",
       "author": "Jared Stanley",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "cb0922ff54c6e8a6401adbebcf4c042c54556611",
+      "hash": "8032963e058fcacf91d281165f7d4ea1519428fc",
       "parameters": [
         {
           "name": "textColor",
@@ -474,7 +474,7 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "e81bebc874f5470aa3bdff9649bfe430be32a617"
+      "hash": "9af247648d46f2634a8270bdfa6ec9028745eb6f"
     },
     {
       "id": "animation.65.cristal-lands",
@@ -483,7 +483,7 @@
       "description": "Cristal Lands",
       "author": "nskrgv",
       "source": "https://codepen.io/nskrgv/pen/PQzpKb",
-      "hash": "60eb75046c54da9bfb5e3546c06fe85753d720f5"
+      "hash": "892ed8f6e66a2c6024f00a1566ca77e72d260dae"
     },
     {
       "id": "animation.66.fog-of-war",
@@ -492,7 +492,7 @@
       "description": "WebGL Fog",
       "author": "yoichi kobayashi",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "edfb25bace27a63215dfb27874eecf06098e10af"
+      "hash": "5679b6079a2203b090c9cee46ac1acd0114acff5"
     },
     {
       "id": "animation.67.fly-particle",
@@ -501,7 +501,7 @@
       "description": "WebGL Fog",
       "author": "yoichi kobayashi",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "fa7098200cf26301a450e38dbbd2348e0e43c07b"
+      "hash": "833665cb0c18cb3fa7c833dcf7493a57b3bf1e93"
     },
     {
       "id": "animation.68.rgb-wave",
@@ -510,7 +510,7 @@
       "description": "RGB Wave",
       "author": "Yuki",
       "source": "https://codepen.io/Web_yuki1027/pen/yLgYpWM",
-      "hash": "9b5cc61206c5ee6806de47e9e23d31b8b5bebf6c"
+      "hash": "bd6311ea7ad48b68fda7e21b1e7648a6c5c252d7"
     },
     {
       "id": "animation.69.bit-ocean",
@@ -519,7 +519,7 @@
       "description": "Bit Ocean",
       "author": "Griffin Moyer",
       "source": "https://codepen.io/gmoyer/pen/OxaObd",
-      "hash": "49bb23d1aa5d7e632397b16a4d97d14f09ac3bd1"
+      "hash": "a7f1d0edac9d30dffc2231a4ec80d29e2836edd0"
     },
     {
       "id": "animation.70.blur",
@@ -528,7 +528,7 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "a714b12b60442891e7d7dda57d9b45541cd3d2bd",
+      "hash": "f3ee02c06769a7339df465453fa02fad1c69f76b",
       "parameters": [
         {
           "name": "opacity",
@@ -545,7 +545,7 @@
       "description": "Interactive gradient",
       "author": "Ray Victor PRO",
       "source": "https://codepen.io/ray7551/pen/EbVmZd",
-      "hash": "d0d2fc3916965b8239f0d34b03305857ecd73c0c"
+      "hash": "087618b4b0284eb9150e3b3d0d0c64b818672b77"
     },
     {
       "id": "animation.72.playstation-3-bg-style",
@@ -554,7 +554,7 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "069a02ebed1d5c65ab8b9e6f24f3524b972834f9",
+      "hash": "a3893a27865f2a46dea3bb1a0a18ce81e1dabea4",
       "parameters": [
         {
           "name": "waveColor",
@@ -571,7 +571,7 @@
       "description": "Made with React and WebGL",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/MNOEVe",
-      "hash": "b725dd0979097c9e3dce374ffb2a4539165e89f9"
+      "hash": "bb3d8948c21dc456999ad5f22e0f0a6be2957261"
     },
     {
       "id": "animation.74.dvd-screensaver",
@@ -580,7 +580,7 @@
       "description": "Simple DVD screensaver implementation with requestAnimationFrame",
       "author": "Karl Saunders",
       "source": "https://codepen.io/Mobius1/pen/wGVveZ",
-      "hash": "a927fc1fd4c2bcaa9676b854352da0428cb21ba1"
+      "hash": "a986d32d2c4c9b26d2d11927f87306d7f87579ff"
     },
     {
       "id": "animation.75.hexagonal-truchet-10-print",
@@ -589,7 +589,7 @@
       "description": "Inspired by [Ben Matthews]",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/qEWQgXW",
-      "hash": "4781534359970d9ef2468e2f8251d80a6a368bcd",
+      "hash": "98af085df418c89086205c9578f75e58efb16221",
       "parameters": [
         {
           "name": "screen_duration",
@@ -606,7 +606,7 @@
       "description": "Mouse vertical position controls pattern size when you click.",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/LYvowrg",
-      "hash": "2759c1d439194a8dbb3f7503e5d8ed9d4d03c85e"
+      "hash": "df7bea3590b69726fdbee44aa6bf8d9c6abf8b97"
     },
     {
       "id": "animation.77.hexanimation-2",
@@ -615,7 +615,7 @@
       "description": "Mouse vertical position controls pattern size when you click.  ",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/poBXvgg",
-      "hash": "e7ad0403eba22f10b249cc15146918d06487257c"
+      "hash": "841d0093d789aa9a3d196240c23c298ee5e9204e"
     },
     {
       "id": "animation.78.just-in-case",
@@ -624,7 +624,7 @@
       "description": "Text animation with a shader in the background.",
       "author": "Matthias Hurrle",
       "source": "https://codepen.io/atzedent/pen/PwobBLM",
-      "hash": "f7b348a9ceeeb9a428a93f33f724040f94232813"
+      "hash": "3c5685479ba0442d18f45d12c979fd7ac11e6e33"
     },
     {
       "id": "animation.79.canvas-ribbons",
@@ -633,7 +633,7 @@
       "description": "",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/LQVzxJ",
-      "hash": "811f2aa94b73e505f9a65ad86aed5eafb80ef0b3"
+      "hash": "8fef6c70fd5ed669be4a786d7e7659d93b3b76b5"
     },
     {
       "id": "generator.79.more-columns",
@@ -642,7 +642,7 @@
       "description": "Randomly generated columns",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/NPWbdMP",
-      "hash": "9d7f4985fe45dae8b077ddfd0a980d2a45899575"
+      "hash": "d7c36df7370cd16b16a179541a243963a23eebda"
     },
     {
       "id": "animation.80.particle-waves-webgl-shader",
@@ -651,7 +651,7 @@
       "description": "Particle Waves made with native WebGL shader",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/GPweQe",
-      "hash": "52bc8dab1bb78b8ef7f0cf97c39076581aa40aef"
+      "hash": "00648a68ebd3e473475f7e480f480e1efd803355"
     },
     {
       "id": "animation.81.remember-windows",
@@ -660,7 +660,7 @@
       "description": "The old Windows screensaver.",
       "author": "Lanny",
       "source": "https://codepen.io/lannymcnie/pen/PRZJab",
-      "hash": "668378d125a9911371f5c5a9afb17b813c13a5b1"
+      "hash": "54cab473f23bfe1b73fe61d9b854565e9977d4de"
     },
     {
       "id": "animation.82.storm",
@@ -669,7 +669,7 @@
       "description": "Storm approaches",
       "author": "Liam Egan",
       "source": "https://codepen.io/shubniggurath/pen/BVKgJK",
-      "hash": "440004704a138622476f70d4bc366d1edf9f60f7"
+      "hash": "3b74cdd6c6561d9befb1650bbad2b3e3587a7f5e"
     },
     {
       "id": "animation.83.strange-tubes",
@@ -678,7 +678,7 @@
       "description": "Tubes, again...",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JzzvbR",
-      "hash": "bace6250e4466776e48b27b1c3bc38f610aa80f1"
+      "hash": "21d1f35bfab46fff7ef87b8d2ecc50459c1cf363"
     },
     {
       "id": "animation.84.troisjs-starfield",
@@ -687,7 +687,7 @@
       "description": "Made with TroisJS",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JjEqebK",
-      "hash": "259fb2e8dde4ae72d1c1901bc1c9849bc85ced00",
+      "hash": "81251d0cf637a0e096a07f1e91a585e807668f1f",
       "parameters": [
         {
           "name": "POINTS_COUNT",
@@ -704,7 +704,7 @@
       "description": "Inspired by [Ben Matthews]",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/raBqEZy",
-      "hash": "2227d65b93686c7f32575cdd8ec2b4e1ef5896b8"
+      "hash": "9d8f02384f3da6e2dcdb2a5c9fa80cace794ddd6"
     },
     {
       "id": "generator.86.silky-carpet",
@@ -713,7 +713,7 @@
       "description": "Simulating noise variance",
       "author": "Sarah Drasner",
       "source": "https://codepen.io/sdras/pen/EgmOKV",
-      "hash": "e5bb3d0713c6c876c926c8b352833c51c773302e"
+      "hash": "2c4b882ab4b627f33acda0f341df0180fda0c3d3"
     },
     {
       "id": "animation.87.point-sprites",
@@ -722,7 +722,7 @@
       "description": "WebGL randomly generated starfield",
       "author": "AzazelN28",
       "source": "https://codepen.io/AzazelN28/pen/zvXZQw",
-      "hash": "20185bb7981dba1c5a66c345ceadd0f68ade72a7"
+      "hash": "a01e467abbf7dc815864fe9b377ac3e21c2064e8"
     },
     {
       "id": "animation.88.fish-tank",
@@ -731,7 +731,7 @@
       "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
-      "hash": "a6e0f4d6b40900c08519413a933bd1d0eb7c3751",
+      "hash": "46f00970446e25d57522b954981bb8c5ba7a0240",
       "parameters": [
         {
           "name": "Presets",
@@ -811,16 +811,16 @@
       "description": "A shamrock of flowers, a celebration of the Irish spirit, history and spring.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/MWyNYoq",
-      "hash": "0772c1f9e0648e04ca5244f725384fe8c4457a64"
+      "hash": "9ac6eaeae90ca9580b59dbd05c8a7fc3c1dc3fea"
     },
     {
       "id": "animation.90.aurora",
       "version": "v1",
       "name": "Icelandic Aurora",
-      "description": null,
+      "description": "Watch the aurora borealis dance across your screen.",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "b72c13d4b612f79250cc77e1e5c4d84c7ee71846"
+      "hash": "cc42fcf4467f993fcb4f6d301d2773e80214f80c"
     }
   ],
   "common": {

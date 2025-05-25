@@ -49,6 +49,7 @@ Find all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-
  - Lanny (1)
  - Liam Egan (1)
  - AzazelN28 (1)
+ - Ibz (1)
  - Fabio Ottaviani (1)
  - Sarah Drasner (1)
 
