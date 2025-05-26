@@ -13,7 +13,7 @@ Find all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-
 [<img src="https://i.imgur.com/PLlO4cA.gif">](https://i.imgur.com/f3hLlRu.mp4)
 </p>
 
-
+ 
 ## 🎀 Tributes (Artists featured)
 
  - Jack Rugile (13)

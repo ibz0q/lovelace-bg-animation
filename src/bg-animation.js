@@ -85,7 +85,7 @@ async function getPackageManifest(packageConfig) {
     isDebug ? console.error("getPackageManifest: Failed to fetch package manifest: " + error) : null;
     return null;
   }
-}
+} 
 
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
