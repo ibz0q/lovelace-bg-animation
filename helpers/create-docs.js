@@ -39,8 +39,45 @@ function supportsOfflineMode(obj) {
 }
 
 function readDirectory(dir) {
-  const files = fs.readdirSync(dir);
+  const files = fs.readdirSync(dir).sort((a, b) => {
+    // Extract the type and number from the folder names
+    const getTypeAndNumber = (name) => {
+      const match = name.match(/^(\w+)\.(\d+)\./);
+      if (!match) return { type: name, number: 0 };
+      return {
+        type: match[1],
+        number: parseInt(match[2])
+      };
+    };
 
+    const typeA = getTypeAndNumber(a);
+    const typeB = getTypeAndNumber(b);
+
+    // Define type priority (animation = 1, generator = 2, others = 3)
+    const typePriority = {
+      'animation': 1,
+      'generator': 2
+    };
+
+    const priorityA = typePriority[typeA.type] || 3;
+    const priorityB = typePriority[typeB.type] || 3;
+
+    // First sort by type priority
+    if (priorityA !== priorityB) {
+      return priorityA - priorityB;
+    }
+
+    // If same type, sort by number in descending order
+    if (typeA.number !== typeB.number) {
+      return typeB.number - typeA.number;
+    }
+
+    // If everything else is equal, sort alphabetically
+    return a.localeCompare(b);
+  });
+
+
+  
   for (const file of files) {
     if (ignoreDirs.includes(file)) {
       continue;
