@@ -7,12 +7,12 @@ metadata:
 
 parameters:
   - name: speed
-    default: 0.05
+    default: 0.5
     description: Animation movement speed
     type: number
     behavior: environment
   - name: blurIntensity
-    default: 40
+    default: 60
     description: Intensity of the blur effect (10-100)
     type: number
     behavior: environment
