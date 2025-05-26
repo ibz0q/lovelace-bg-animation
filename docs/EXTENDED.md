@@ -1130,13 +1130,14 @@ Found these dependencies in (../gallery/packages/generator.86.silky-carpet/packa
 
 
 Supported params:
-- `transition` - The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left']. (defaults: `random`)
+- `transition` - The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left']. (defaults: `crossfade`)
 - `transitionDuration` - The duration of the transition effect in milliseconds. (defaults: `1000`)
 - `order` - The order to play media items. Options are 'sequence', 'reverse', or 'shuffle'. (defaults: `shuffle`)
 - `showProgressBar` - Show or hide the progress bar. (defaults: `true`)
 - `progressBarColor` - CSS color or gradient for the progress bar. (defaults: `linear-gradient(90deg, #00c6ff, #0072ff)`)
 - `progressBarOpacity` - Opacity of the progress bar (0 to 1). (defaults: `0.9`)
-- `mediaList` - Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted} properties.
+- `fit` - Default fitting mode for all media. Options are 'contain', 'cover', 'fill', 'scale-down', 'none'. (defaults: `cover`)
+- `mediaList` - Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted, fit} properties.
   Schema:
   - `file`: `string` - URL or path to media file
   - `duration`: `number | string` - Duration in ms or 'playback' for videos
@@ -1145,6 +1146,7 @@ Supported params:
   - `stretchToFit`: `boolean` - Whether to stretch media to cover container
   - `muted`: `boolean` - Whether to mute video (videos only)
   - `transition`: `string` - Optional per-item transition override
+  - `fit`: `string` - Per-item fitting mode override (options: `contain`, `cover`, `fill`, `scale-down`, `none`)
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/application.1.media-background/screenshot.png)
