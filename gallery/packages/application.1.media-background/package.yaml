@@ -25,7 +25,7 @@ parameters:
     type: string
     behavior: environment
   - name: showProgressBar
-    default: true
+    default: false
     description: Show or hide the progress bar.
     type: boolean
     behavior: environment
@@ -368,12 +368,10 @@ template: >
           progressBarColor: window.env?.progressBarColor || 'linear-gradient(90deg, #00c6ff, #0072ff)', // or any CSS color/gradient
           progressBarOpacity: window.env?.progressBarOpacity ?? 0.9, // 0 to 1
           mediaList: window.env?.mediaList || [
-            { file: 'https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4', duration: 4000, preload: 'eager', tags: ['nature', 'image'], fit: 'cover' },
-            { file: 'https://cdn.flixel.com/flixel/on3ysblo5hzdmrhv1kwh.hd.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation'], fit: 'cover' },
+            { file: 'https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4', duration: 4000, preload: 'eager', tags: ['nature', 'image'], stretchToFit: true },
+            { file: 'https://cdn.flixel.com/flixel/on3ysblo5hzdmrhv1kwh.hd.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation'] },
           ]
         };
-
-        console.log(config);
 
       // Store original mediaList for filtering
       const originalMediaList = [...config.mediaList];
