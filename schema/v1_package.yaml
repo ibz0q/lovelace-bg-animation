@@ -25,14 +25,40 @@ properties:
     items:
       type: "object"
       properties:
-        id:
+        name:
           type: "string"
         default:
-          type: "string"
+          type: ["string", "number", "boolean", "array", "object"]
         description:
           type: "string"
         type:
+          type: ["string", "array"]
+          items:
+            type: "string"
+        behavior:
           type: "string"
+          enum: ["environment"]
+        schema:
+          type: "object"
+          properties:
+            type:
+              type: "string"
+            properties:
+              type: "object"
+              additionalProperties:
+                type: "object"
+                properties:
+                  type:
+                    type: ["string", "array"]
+                  description:
+                    type: "string"
+                  enum:
+                    type: "array"
+                  items:
+                    type: "object"
+                    properties:
+                      type:
+                        type: "string"
   helpers:
     type: "object"
     properties:
