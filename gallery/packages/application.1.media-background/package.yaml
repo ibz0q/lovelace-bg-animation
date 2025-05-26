@@ -1,7 +1,7 @@
 version: v1
 metadata:
   name: Media Background
-  description: A fullscreen media slideshow with various transition effects.
+  description: Media slideshow with various transition effects (Supports images and videos)
   author: Ibz
   source: https://github.com/ibz0q/lovelace-bg-animation
 
@@ -11,7 +11,7 @@ helpers:
 parameters:
   - name: transition
     default: random
-    description: The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions like ['fade', 'slide-left'].
+    description: The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left'].
     type: [string, array]
     behavior: environment
   - name: transitionDuration
@@ -41,16 +41,111 @@ parameters:
     behavior: environment
   - name: mediaList
     default: 
-      - file: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb'
-        duration: 4000
-        preload: eager
-        tags: ['nature', 'image']
-        stretchToFit: true
-      - file: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
-        duration: 15000
+      - file: 'https://cdn.flixel.com/flixel/x9dr8caygivq5secll7i.hd.mp4'
+        duration: 'playback'
         muted: true
-        preload: auto
-        tags: ['video', 'animation', 'elephant']
+        preload: 'auto'
+        tags: ['video']
+      - file: 'https://cdn.flixel.com/flixel/v26zyfd6yf0r33s46vpe.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video']
+      - file: 'https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video']
+      - file: 'https://cdn.flixel.com/flixel/rosz2gi676xhkiw1ut6i.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video']
+      - file: 'https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'cloudy', 'partlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'cloudy', 'partlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'cloudy', 'partlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'cloudy', 'partlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'cloudy', 'partlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'cloudy', 'partlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'fog']
+      - file: 'https://cdn.flixel.com/flixel/5363uhabodwwrzgnq6vx.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'fog']
+      - file: 'https://cdn.flixel.com/flixel/e95h5cqyvhnrk4ytqt4q.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'mostlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/l2bjw34wnusyf5q2qq3p.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'mostlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/rrgta099ulami3zb9fd2.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'mostlycloudy']
+      - file: 'https://cdn.flixel.com/flixel/f0w23bd0enxur5ff0bxz.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'rainy']
+      - file: 'https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'sunny']
+      - file: 'https://cdn.flixel.com/flixel/zjqsoc6ecqhntpl5vacs.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'sunny']
+      - file: 'https://cdn.flixel.com/flixel/jvw1avupguhfbo11betq.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'sunny']
+      - file: 'https://cdn.flixel.com/flixel/8cmeusxf3pkanai43djs.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'sunny']
+      - file: 'https://cdn.flixel.com/flixel/guwb10mfddctfvwioaex.hd.mp4'
+        duration: 'playback'
+        muted: true
+        preload: 'auto'
+        tags: ['video', 'sunny']
     description: Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted} properties.
     type: array
     behavior: environment
@@ -65,9 +160,12 @@ parameters:
           description: Duration in ms or 'playback' for videos
         preload:
           type: string
-          description: 'eager' or 'auto'
+          enum: ['eager', 'auto']
+          description: "eager or auto"  # Changed to double quotes to avoid single quote issues
         tags:
           type: array
+          items:
+            type: string
           description: Array of tags for filtering
         stretchToFit:
           type: boolean
@@ -75,6 +173,9 @@ parameters:
         muted:
           type: boolean
           description: Whether to mute video (videos only)
+        transition:
+          type: [string]
+          description: Optional per-item transition override
 
 template: >
   <!DOCTYPE html>
@@ -240,17 +341,19 @@ template: >
     <div id="progress-bar-container" style="display:none;"><div id="progress-bar"></div></div>
     <script>
         const config = {
-          transition: window.ENV.transition || 'random', 
-          transitionDuration: window.ENV.transitionDuration || 1000, // ms
-          order: window.ENV.order || 'shuffle', // 'sequence', 'reverse', 'shuffle'
-          showProgressBar: window.ENV.showProgressBar || true, // Show/hide progress bar
-          progressBarColor: window.ENV.progressBarColor || 'linear-gradient(90deg, #00c6ff, #0072ff)', // or any CSS color/gradient
-          progressBarOpacity: window.ENV.progressBarOpacity || 0.9, // 0 to 1
-          mediaList: window.ENV.mediaList || [
-            { file: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', duration: 4000, preload: 'eager', tags: ['nature', 'image'], stretchToFit: true },
-            { file: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation', 'elephant'] },
+          transition: window.env?.transition || 'fade-to-black', // 'fade-to-black', 'random', or array of transitions
+          transitionDuration: window.env?.transitionDuration || 1200, // ms
+          order: window.env?.order || 'shuffle', // 'sequence', 'reverse', 'shuffle'
+          showProgressBar: window.env?.showProgressBar ?? true, // Show/hide progress bar
+          progressBarColor: window.env?.progressBarColor || 'linear-gradient(90deg, #00c6ff, #0072ff)', // or any CSS color/gradient
+          progressBarOpacity: window.env?.progressBarOpacity ?? 0.9, // 0 to 1
+          mediaList: window.env?.mediaList || [
+            { file: 'https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4', duration: 4000, preload: 'eager', tags: ['nature', 'image'], stretchToFit: true },
+            { file: 'https://cdn.flixel.com/flixel/on3ysblo5hzdmrhv1kwh.hd.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation'] },
           ]
         };
+
+        console.log(config);
 
       // Store original mediaList for filtering
       const originalMediaList = [...config.mediaList];

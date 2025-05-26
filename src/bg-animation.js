@@ -359,7 +359,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
     iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
-    iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
+    let environmentVars = {
       "lovelaceUI": lovelaceUI,
       "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
       "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
@@ -368,6 +368,16 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       "packageManifest": packageManifest,
       "packageConfig": packageConfig
     };
+    if (packageManifest.parameters) {
+      packageManifest.parameters.forEach(param => {
+        if (param.behavior === 'environment') {
+          if (!environmentVars[param.name]) {
+            environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
+          }
+        }
+      });
+    }
+    iframeElement.contentWindow["env"] = environmentVars;
     return iframeElement;
   };
 

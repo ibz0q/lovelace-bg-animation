@@ -30,6 +30,7 @@ This file is generated through an Github Action, if any of the image previews do
 
 `- id: animation.88.fish-tank`
 
+
 Supported params:
 - `Presets` - Preset options (defaults: `Ocean Mix`)
 - `NumFishGroups` - Number of fish groups (defaults: `20`)
@@ -41,6 +42,7 @@ Supported params:
 - `FishSpecies` - Species of fish (defaults: `🐟 🐠 🐡`)
 - `backgroundColor` - Background color (defaults: `#000`)
 - `backgroundImage` - Background image (defaults: `oceanBackdrop.jpg`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.88.fish-tank/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.88.fish-tank/preview.html) - *Author: Scott Weaver* - Offline support? **Yes**
@@ -84,8 +86,10 @@ Found these dependencies in (..\gallery\packages\animation.87.point-sprites\pack
 
 `- id: animation.84.troisjs-starfield`
 
+
 Supported params:
 - `POINTS_COUNT` - Number of points (defaults: `30000`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.84.troisjs-starfield/preview.html) - *Author: Kevin Levron* - Offline support? **Yes**
@@ -168,14 +172,14 @@ Found these dependencies in (..\gallery\packages\animation.81.remember-windows\p
 <br />
 
 
-###  > animation.80.particle-waves-webgl-shader (Particle Waves WebGL Shader - Particle Waves made with native WebGL shader)
+###  > animation.80.particle-waves (Particle Waves WebGL Shader - Particle Waves made with native WebGL shader)
 
-`- id: animation.80.particle-waves-webgl-shader`
+`- id: animation.80.particle-waves`
 
 
 
-![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves-webgl-shader/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves-webgl-shader/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.80.particle-waves/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
 
 ###  > animation.79.canvas-ribbons (Canvas Ribbons - )
 
@@ -217,8 +221,10 @@ Found these dependencies in (..\gallery\packages\animation.81.remember-windows\p
 
 `- id: animation.75.hexagonal-truchet-10-print`
 
+
 Supported params:
 - `screen_duration` - Time to cross the screen vertically (defaults: `200`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.75.hexagonal-truchet-10-print/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.75.hexagonal-truchet-10-print/preview.html) - *Author: Dillon* - Offline support? **Yes**
@@ -262,8 +268,10 @@ Found these dependencies in (..\gallery\packages\animation.73.alien-blackout-int
 
 `- id: animation.72.playstation-3-bg-style`
 
+
 Supported params:
 - `waveColor` - The color of the wave in RGB format (defaults: `rgb(255,255,255)`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.72.playstation-3-bg-style/preview.html) - *Author: Boris Šehovac* - Offline support? **Yes**
@@ -281,8 +289,10 @@ Supported params:
 
 `- id: animation.70.blur`
 
+
 Supported params:
 - `opacity` - The opacity of the background (defaults: `0.5`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.70.blur/preview.html) - *Author: tympanus* - Offline support? **Yes**
@@ -380,8 +390,10 @@ Found these dependencies in (..\gallery\packages\animation.68.rgb-wave\package.y
 
 `- id: animation.63.green-circuit`
 
+
 Supported params:
 - `textColor` - The color of the dots (defaults: `rgba(22,222,82,0.6992)`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.63.green-circuit/preview.html) - *Author: Jared Stanley* - Offline support? **Yes**
@@ -1116,6 +1128,23 @@ Found these dependencies in (..\gallery\packages\generator.86.silky-carpet\packa
 
 `- id: application.1.media-background`
 
+
+Supported params:
+- `transition` - The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions like ['fade', 'slide-left']. (defaults: `random`)
+- `transitionDuration` - The duration of the transition effect in milliseconds. (defaults: `1000`)
+- `order` - The order to play media items. Options are 'sequence', 'reverse', or 'shuffle'. (defaults: `shuffle`)
+- `showProgressBar` - Show or hide the progress bar. (defaults: `true`)
+- `progressBarColor` - CSS color or gradient for the progress bar. (defaults: `linear-gradient(90deg, #00c6ff, #0072ff)`)
+- `progressBarOpacity` - Opacity of the progress bar (0 to 1). (defaults: `0.9`)
+- `mediaList` - Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted} properties.
+  Schema:
+  - `file`: `string` - URL or path to media file
+  - `duration`: `number | string` - Duration in ms or 'playback' for videos
+  - `preload`: `string` - eager or auto (options: `eager`, `auto`)
+  - `tags`: `array` - Array of tags for filtering
+  - `stretchToFit`: `boolean` - Whether to stretch media to cover container
+  - `muted`: `boolean` - Whether to mute video (videos only)
+  - `transition`: `string` - Optional per-item transition override
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/application.1.media-background/screenshot.png)
