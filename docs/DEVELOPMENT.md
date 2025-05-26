@@ -112,39 +112,6 @@ window.env = {
 }
 ```
 
-## Undocumented Features
-
-### Package Redraw
-Packages can request a redraw by setting redraw in milliseconds:
-```yaml
-- id: animation.example
-  redraw: 5000  # Redraws iframe every 5 seconds
-```
-
-### Per-Item Transitions
-Individual items can override global transitions:
-```yaml
-- id: animation.example
-  transition: fade-to-black
-```
-
-### Conditional Loading
-Packages can be conditionally loaded based on:
-```yaml
-conditions:
-  include_users: [user1, user2]
-  exclude_users: [user3]
-  include_devices: [device1] 
-  exclude_devices: [device2]
-```
-
-### Cache Control
-Control caching per package:
-```yaml
-- id: animation.example
-  cache: false
-```
-
 ## Best Practices
 
 1. Asset Loading
