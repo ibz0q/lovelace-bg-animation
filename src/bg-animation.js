@@ -82,7 +82,7 @@ async function getPackageManifest(packageConfig) {
       return packageManifest;
     }
   } catch (error) {
-    isDebug ? console.error("getPackageManifest: Failed to fetch package manifest: " + packageManifestId, error) : null;
+    isDebug ? console.error("getPackageManifest: Failed to fetch package manifest: " + error) : null;
     return null;
   }
 }
