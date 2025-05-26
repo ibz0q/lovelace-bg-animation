@@ -8,6 +8,74 @@ metadata:
 helpers:
   insert_baseurl: true
 
+parameters:
+  - name: transition
+    default: random
+    description: The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions like ['fade', 'slide-left'].
+    type: [string, array]
+    behavior: environment
+  - name: transitionDuration
+    default: 1000
+    description: The duration of the transition effect in milliseconds.
+    type: number
+    behavior: environment
+  - name: order
+    default: shuffle
+    description: The order to play media items. Options are 'sequence', 'reverse', or 'shuffle'.
+    type: string
+    behavior: environment
+  - name: showProgressBar
+    default: true
+    description: Show or hide the progress bar.
+    type: boolean
+    behavior: environment
+  - name: progressBarColor
+    default: "linear-gradient(90deg, #00c6ff, #0072ff)"
+    description: CSS color or gradient for the progress bar.
+    type: string
+    behavior: environment
+  - name: progressBarOpacity
+    default: 0.9
+    description: Opacity of the progress bar (0 to 1).
+    type: number
+    behavior: environment
+  - name: mediaList
+    default: 
+      - file: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb'
+        duration: 4000
+        preload: eager
+        tags: ['nature', 'image']
+        stretchToFit: true
+      - file: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4'
+        duration: 15000
+        muted: true
+        preload: auto
+        tags: ['video', 'animation', 'elephant']
+    description: Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted} properties.
+    type: array
+    behavior: environment
+    schema:
+      type: object
+      properties:
+        file: 
+          type: string
+          description: URL or path to media file
+        duration:
+          type: [number, string]
+          description: Duration in ms or 'playback' for videos
+        preload:
+          type: string
+          description: 'eager' or 'auto'
+        tags:
+          type: array
+          description: Array of tags for filtering
+        stretchToFit:
+          type: boolean
+          description: Whether to stretch media to cover container
+        muted:
+          type: boolean
+          description: Whether to mute video (videos only)
+
 template: >
   <!DOCTYPE html>
   <html lang="en">
@@ -171,19 +239,18 @@ template: >
     <div id="black-overlay"></div>
     <div id="progress-bar-container" style="display:none;"><div id="progress-bar"></div></div>
     <script>
-      // Config object with mediaList, defaultTransition, and transitionDuration
-      const config = {
-        transition: 'random', // global: 'fade-to-black', 'random', etc.
-        transitionDuration: 1000, // ms
-        order: 'shuffle', // 'sequence', 'reverse', 'shuffle'
-        showProgressBar: true, // Show/hide progress bar
-        progressBarColor: 'linear-gradient(90deg, #00c6ff, #0072ff)', // or any CSS color/gradient
-        progressBarOpacity: 0.9, // 0 to 1
-        mediaList: [
-          { file: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', duration: 4000, preload: 'eager', tags: ['nature', 'image'], stretchToFit: true },
-          { file: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation', 'elephant'] },
-        ]
-      };
+        const config = {
+          transition: window.ENV.transition || 'random', 
+          transitionDuration: window.ENV.transitionDuration || 1000, // ms
+          order: window.ENV.order || 'shuffle', // 'sequence', 'reverse', 'shuffle'
+          showProgressBar: window.ENV.showProgressBar || true, // Show/hide progress bar
+          progressBarColor: window.ENV.progressBarColor || 'linear-gradient(90deg, #00c6ff, #0072ff)', // or any CSS color/gradient
+          progressBarOpacity: window.ENV.progressBarOpacity || 0.9, // 0 to 1
+          mediaList: window.ENV.mediaList || [
+            { file: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', duration: 4000, preload: 'eager', tags: ['nature', 'image'], stretchToFit: true },
+            { file: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation', 'elephant'] },
+          ]
+        };
 
       // Store original mediaList for filtering
       const originalMediaList = [...config.mediaList];
@@ -482,4 +549,4 @@ template: >
       window.filterMediaByTags = filterMediaByTags;
     </script>
   </body>
-  </html> 
+  </html>
