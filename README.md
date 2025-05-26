@@ -136,6 +136,7 @@ bg-animation:
         style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;" # * Custom iframe style
         cache: true # * Enable caching for this background
         duration: false # * Override global duration
+        redraw: 5000 # * Redraws the iframe - must be above 500 ms otherwise ignored.
         conditions: # *
           include_users: [username1, username2] # Only show for these users
           exclude_users: [username3] # Don't show for these users
@@ -194,7 +195,7 @@ This project is compromised of the works of artists each with their own licensin
   - Transparent Overlays
   - Iframe transitions (Done)
   - Create a basic background previewer site (better than EXTENDED.md)  
-  - Add redraw, allows you to repaint the iframe within duration period.
+  - Add redraw, allows you to repaint the iframe within duration period. (Done)
 
 - Extensibility
 
