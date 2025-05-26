@@ -19,39 +19,39 @@ Find all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-
  - Jack Rugile (13)
  - Ben Matthews (8)
  - Dillon (6)
- - Bas Groothedde (5)
  - Alex Andrix (5)
+ - Bas Groothedde (5)
  - Matei Copot (5)
  - Boris Šehovac (4)
- - Akimitsu Hamamuro (2)
- - yoichi kobayashi (2)
- - Kevin Levron (2)
+ - Ibz (2)
  - Scott Weaver (2)
- - Takeshi Kano (1)
- - cssscript.com (1)
- - alphardex (1)
- - Tim Severien (1)
- - DanDog (1)
- - Andreas Wilcox (1)
- - Júlia Erő (1)
- - MenSeb (1)
- - Ana Tudor (1)
- - Ksenia Kondrashova (1)
- - Jared Stanley (1)
- - Nathan Gordon (1)
- - nskrgv (1)
- - Yuki (1)
- - Griffin Moyer (1)
- - tympanus (1)
- - Ray Victor PRO (1)
- - Karl Saunders (1)
- - Matthias Hurrle (1)
- - Lanny (1)
- - Liam Egan (1)
+ - Kevin Levron (2)
+ - yoichi kobayashi (2)
+ - Akimitsu Hamamuro (2)
  - AzazelN28 (1)
- - Ibz (1)
- - Fabio Ottaviani (1)
+ - Liam Egan (1)
+ - Lanny (1)
+ - Matthias Hurrle (1)
+ - Karl Saunders (1)
+ - Ray Victor PRO (1)
+ - tympanus (1)
+ - Griffin Moyer (1)
+ - Yuki (1)
+ - nskrgv (1)
+ - Nathan Gordon (1)
+ - Jared Stanley (1)
+ - Ksenia Kondrashova (1)
+ - Ana Tudor (1)
+ - MenSeb (1)
+ - Júlia Erő (1)
+ - DanDog (1)
+ - Tim Severien (1)
+ - cssscript.com (1)
+ - Takeshi Kano (1)
+ - Andreas Wilcox (1)
+ - alphardex (1)
  - Sarah Drasner (1)
+ - Fabio Ottaviani (1)
 
 ### 🙏 Contributors
 
@@ -136,6 +136,7 @@ bg-animation:
         style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;" # * Custom iframe style
         cache: true # * Enable caching for this background
         duration: false # * Override global duration
+        redraw: 5000 # * Redraws the iframe - must be above 500 ms otherwise ignored.
         conditions: # *
           include_users: [username1, username2] # Only show for these users
           exclude_users: [username3] # Don't show for these users
@@ -194,7 +195,7 @@ This project is compromised of the works of artists each with their own licensin
   - Transparent Overlays
   - Iframe transitions (Done)
   - Create a basic background previewer site (better than EXTENDED.md)  
-  - Add redraw, allows you to repaint the iframe within duration period.
+  - Add redraw, allows you to repaint the iframe within duration period. (Done)
 
 - Extensibility
 

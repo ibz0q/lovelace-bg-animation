@@ -359,7 +359,7 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
     iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
-    iframeElement.contentWindow[applicationIdentifiers.appNameShort] = {
+    let environmentVars = {
       "lovelaceUI": lovelaceUI,
       "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
       "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
@@ -368,6 +368,16 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       "packageManifest": packageManifest,
       "packageConfig": packageConfig
     };
+    if (packageManifest.parameters) {
+      packageManifest.parameters.forEach(param => {
+        if (param.behavior === 'environment') {
+          if (!environmentVars[param.name]) {
+            environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
+          }
+        }
+      });
+    }
+    iframeElement.contentWindow["env"] = environmentVars;
     return iframeElement;
   };
 
@@ -388,6 +398,8 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     let iframeElm = createIframe(inactiveFrame);
     await loadIframeWithHardTimeout(iframeElm, rootPluginConfig.loadTimeout);
     inactiveFrame.setAttribute('data-frame-active', 'true');
+    // could go further, check if data-frame-id exist and new param for redraw - check if matches and break
+    inactiveFrame.setAttribute('data-package-id', packageConfig.id);
     iframeElm.style.opacity = '1';
     if (activeFrame) {
       isDebug ? console.log("processBackgroundFrame: Found active frame") : null;
@@ -406,6 +418,18 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
       frame.setAttribute('data-frame-active', 'false');
     });
   }
+
+  if (packageConfig?.redraw !== false && packageConfig.redraw > 500) {
+    isDebug ? console.log("processBackgroundFrame: Setting up redraw for " + packageConfig.id + " ms") : null;
+    setTimeout(() => {
+      let currentFrame = Array.from(lovelaceUI.frameContainers).find(frame => frame.getAttribute('data-frame-active') == 'true' && frame.getAttribute('data-package-id') == packageConfig.id);
+      if (currentFrame) {
+        processBackgroundFrame(packageConfig, packageManifest);
+      }
+      isDebug ? console.log("processBackgroundFrame: mismatch protection") : null;
+    }, packageConfig.redraw);
+  }
+
 }
 
 function getCurrentViewPath() {

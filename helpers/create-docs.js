@@ -39,8 +39,45 @@ function supportsOfflineMode(obj) {
 }
 
 function readDirectory(dir) {
-  const files = fs.readdirSync(dir);
+  const files = fs.readdirSync(dir).sort((a, b) => {
+    // Extract the type and number from the folder names
+    const getTypeAndNumber = (name) => {
+      const match = name.match(/^(\w+)\.(\d+)\./);
+      if (!match) return { type: name, number: 0 };
+      return {
+        type: match[1],
+        number: parseInt(match[2])
+      };
+    };
 
+    const typeA = getTypeAndNumber(a);
+    const typeB = getTypeAndNumber(b);
+
+    // Define type priority (animation = 1, generator = 2, others = 3)
+    const typePriority = {
+      'animation': 1,
+      'generator': 2
+    };
+
+    const priorityA = typePriority[typeA.type] || 3;
+    const priorityB = typePriority[typeB.type] || 3;
+
+    // First sort by type priority
+    if (priorityA !== priorityB) {
+      return priorityA - priorityB;
+    }
+
+    // If same type, sort by number in descending order
+    if (typeA.number !== typeB.number) {
+      return typeB.number - typeA.number;
+    }
+
+    // If everything else is equal, sort alphabetically
+    return a.localeCompare(b);
+  });
+
+
+  
   for (const file of files) {
     if (ignoreDirs.includes(file)) {
       continue;
@@ -93,29 +130,68 @@ ${offlineMode}
 `
       }
 
-      // version: v1
-      // metadata:
-      //   name: Green Circuit
-      //   description: I'm in
-      //   author: Jared Stanley
-      //   source: https://codepen.io/ykob/pen/YewoRz
-      //   contributors:
-      //     - name: Sjors Kaagman
-      //       profile: https://github.com/SjorsMaster
-      // parameters:
-      //   - id: textColor
-      //     default: "rgba(22,222,82,0.6992)"
+      function formatParameterDefault(defaultValue) {
+        if (defaultValue === undefined) return 'undefined';
+        if (Array.isArray(defaultValue)) {
+          if (defaultValue.length === 0) return '[]';
+          // Format array of objects
+          if (typeof defaultValue[0] === 'object') {
+            return JSON.stringify(defaultValue, null, 2);
+          }
+          // Format simple arrays
+          return JSON.stringify(defaultValue);
+        }
+        if (typeof defaultValue === 'object' && defaultValue !== null) {
+          return JSON.stringify(defaultValue, null, 2);
+        }
+        // For simple values, just convert to string without extra newlines
+        return String(defaultValue);
+      }
 
+      function formatParameterType(type) {
+        if (Array.isArray(type)) {
+          return type.join(' | ');
+        }
+        return type;
+      }
 
+      function generateParameterDocs(parameters) {
+        if (!parameters || !parameters.length) return '';
+
+        let docs = `\nSupported params:\n`;
+        parameters.forEach(param => {
+          const defaultValue = formatParameterDefault(param.default);
+          if (param.name === 'mediaList') {
+            // Special handling for mediaList to make it more readable
+            docs += `- \`${param.name}\` - ${param.description}\n`;
+            if (param.schema) {
+              docs += `  Schema:\n`;
+              if (param.schema.type === 'object' && param.schema.properties) {
+                Object.entries(param.schema.properties).forEach(([propName, propDetails]) => {
+                  docs += `  - \`${propName}\`: \`${formatParameterType(propDetails.type)}\``;
+                  if (propDetails.description) {
+                    docs += ` - ${propDetails.description}`;
+                  }
+                  if (propDetails.enum) {
+                    docs += ` (options: ${propDetails.enum.map(e => `\`${e}\``).join(', ')})`;
+                  }
+                  docs += '\n';
+                });
+              }
+            }
+          } else {
+            // For all other parameters, use the concise single-line format
+            docs += `- \`${param.name}\` - ${param.description} (defaults: \`${defaultValue}\`)\n`;
+          }
+        });
+        return docs;
+      }
+
+      // Replace the existing parameter formatting in the readDirectory function
+      // Find this section in the code:
       let parameters = "";
       if (packageData?.parameters) {
-        parameters = `Supported params:`;
-        packageData.parameters.forEach(element => {
-          parameters += `\n- \`${element.name}\` - ${element.description} (defaults: \`${element.default}\`)`;
-
-        }
-        )
-
+        parameters = generateParameterDocs(packageData.parameters);
       }
 
       availableBgs += `
@@ -140,7 +216,7 @@ let extendedContent = `
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (${count} total)
+## All backgrounds (${count} total) - Newest first
 
 `;
 
