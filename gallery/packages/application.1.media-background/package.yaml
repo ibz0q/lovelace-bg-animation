@@ -1,0 +1,485 @@
+version: v1
+metadata:
+  name: Media Background
+  description: A fullscreen media slideshow with various transition effects.
+  author: Ibz
+  source: https://github.com/ibz0q/lovelace-bg-animation
+
+helpers:
+  insert_baseurl: true
+
+template: >
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen Media Slideshow</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: black;
+      }
+      #media-container {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: black;
+        z-index: 1;
+      }
+      .media {
+        max-width: 100vw;
+        max-height: 100vh;
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        position: absolute;
+        top: 0; left: 0;
+        opacity: 0;
+        transition: none;
+        z-index: 2;
+        pointer-events: none;
+        background: black;
+      }
+      .media.stretch {
+        object-fit: cover;
+      }
+      .show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .fade {
+        transition: opacity 1.5s cubic-bezier(0.4,0,0.2,1);
+      }
+      .slide-left {
+        transition: transform 2s cubic-bezier(0.4,0,0.2,1), opacity 2s cubic-bezier(0.4,0,0.2,1);
+        transform: translateX(100vw);
+        opacity: 0;
+      }
+      .slide-left.show {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      .zoom-in {
+        transition: transform 2s cubic-bezier(0.4,0,0.2,1), opacity 2s cubic-bezier(0.4,0,0.2,1);
+        transform: scale(1.2);
+        opacity: 0;
+      }
+      .zoom-in.show {
+        transform: scale(1);
+        opacity: 1;
+      }
+      .fade-to-black {
+        transition: opacity 1.5s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+      }
+      .fade-to-black.show {
+        opacity: 1;
+      }
+      #black-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+        transition: opacity 1.5s cubic-bezier(0.4,0,0.2,1);
+      }
+      .fade-up {
+        transition: opacity 2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      .fade-up.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-down {
+        transition: opacity 2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      .fade-down.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .fade-right {
+        transition: opacity 2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+        transform: translateX(-100vw);
+      }
+      .fade-right.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .crossfade {
+        transition: opacity 2.5s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+      }
+      .crossfade.show {
+        opacity: 1;
+      }
+      .blur-in {
+        transition: opacity 2s cubic-bezier(0.4,0,0.2,1), filter 2s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+        filter: blur(16px);
+      }
+      .blur-in.show {
+        opacity: 1;
+        filter: blur(0);
+      }
+      .scale-out {
+        transition: opacity 2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      .scale-out.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+      #progress-bar-container {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 6px;
+        background: transparent;
+        z-index: 1000;
+        pointer-events: none;
+        opacity: 0.6;
+      }
+      #progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #00c6ff, #0072ff);
+        border-radius: 3px;
+        transition: width 0s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="media-container"></div>
+    <div id="black-overlay"></div>
+    <div id="progress-bar-container" style="display:none;"><div id="progress-bar"></div></div>
+    <script>
+      // Config object with mediaList, defaultTransition, and transitionDuration
+      const config = {
+        transition: 'random', // global: 'fade-to-black', 'random', etc.
+        transitionDuration: 1000, // ms
+        order: 'shuffle', // 'sequence', 'reverse', 'shuffle'
+        showProgressBar: true, // Show/hide progress bar
+        progressBarColor: 'linear-gradient(90deg, #00c6ff, #0072ff)', // or any CSS color/gradient
+        progressBarOpacity: 0.9, // 0 to 1
+        mediaList: [
+          { file: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb', duration: 4000, preload: 'eager', tags: ['nature', 'image'], stretchToFit: true },
+          { file: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', duration: 15000, muted: true, preload: 'auto', tags: ['video', 'animation', 'elephant'] },
+        ]
+      };
+
+      // Store original mediaList for filtering
+      const originalMediaList = [...config.mediaList];
+      let cycleAbortController = null;
+
+      // Transition types
+      const transitions = [
+        'fade',
+        'fade-to-black',
+        'slide-left',
+        'zoom-in',
+        'fade-up',
+        'fade-down',
+        'fade-right',
+        'crossfade',
+        'blur-in',
+        'scale-out'
+      ];
+
+      function getMediaOrder(list, mode) {
+        if (mode === 'shuffle') {
+          // Fisher-Yates shuffle
+          const arr = list.map((_, i) => i);
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+          }
+          return arr;
+        } else if (mode === 'reverse') {
+          return list.map((_, i) => list.length - 1 - i);
+        } else if (mode === 'sequence') {
+          return list.map((_, i) => i);
+        } else {
+          return list.map((_, i) => i);
+        }
+      }
+      let order = getMediaOrder(config.mediaList, config.order);
+      let current = 0;
+      let currentTransition = 0;
+      const displayDuration = 4000; // ms for images
+      const container = document.getElementById('media-container');
+      const blackOverlay = document.getElementById('black-overlay');
+
+      function isVideo(src) {
+        return src.match(/\.mp4$|\.webm$|\.ogg$/i);
+      }
+
+      function createMediaElement(src, muted, preload) {
+        let el;
+        if (isVideo(src)) {
+          el = document.createElement('video');
+          el.src = src;
+          el.autoplay = true;
+          el.loop = false;
+          el.muted = muted !== undefined ? muted : true;
+          el.playsInline = true;
+          el.setAttribute('playsinline', '');
+          el.setAttribute('webkit-playsinline', '');
+          el.style.background = 'black';
+          el.preload = preload !== undefined ? preload : 'auto';
+        } else {
+          el = document.createElement('img');
+          el.src = src;
+          el.alt = '';
+          el.decoding = 'async';
+          el.loading = preload !== undefined ? preload : 'eager';
+          el.style.background = 'black';
+        }
+        el.className = 'media';
+        // Per-file stretchToFit
+        const mediaItem = config.mediaList.find(item => item.file === src);
+        if (mediaItem && mediaItem.stretchToFit === true) {
+          el.classList.add('stretch');
+        }
+        return el;
+      }
+
+      function showMedia(index, transitionType) {
+        return new Promise((resolve) => {
+          const media = config.mediaList[index];
+          const src = media.file;
+          // Use media item, then fallback
+          const muted = media.muted !== undefined ? media.muted : true;
+          const preload = media.preload !== undefined ? media.preload : 'auto';
+          const el = createMediaElement(src, muted, preload);
+          el.classList.add(transitionType);
+          container.appendChild(el);
+
+          // For fade-to-black, use overlay
+          if (transitionType === 'fade-to-black') {
+            blackOverlay.style.transition = `opacity ${config.transitionDuration}ms cubic-bezier(0.4,0,0.2,1)`;
+            blackOverlay.style.opacity = '1';
+            setTimeout(() => {
+              blackOverlay.style.opacity = '0';
+              el.classList.add('show');
+              setTimeout(() => {
+                if (isVideo(src)) el.play().catch(()=>{});
+                resolve(el);
+              }, config.transitionDuration);
+            }, config.transitionDuration);
+          } else {
+            // Start transition
+            setTimeout(() => {
+              el.classList.add('show');
+            }, 50);
+            setTimeout(() => {
+              if (isVideo(src)) el.play().catch(()=>{});
+              resolve(el);
+            }, config.transitionDuration + 100);
+          }
+        });
+      }
+
+      function hideMedia(el, transitionType) {
+        return new Promise((resolve) => {
+          if (transitionType === 'fade-to-black') {
+            blackOverlay.style.transition = `opacity ${config.transitionDuration}ms cubic-bezier(0.4,0,0.2,1)`;
+            blackOverlay.style.opacity = '1';
+            setTimeout(() => {
+              container.removeChild(el);
+              blackOverlay.style.opacity = '0';
+              resolve();
+            }, config.transitionDuration);
+          } else {
+            el.classList.remove('show');
+            setTimeout(() => {
+              container.removeChild(el);
+              resolve();
+            }, config.transitionDuration);
+          }
+        });
+      }
+
+      // Progress bar logic
+      const progressBarContainer = document.getElementById('progress-bar-container');
+      const progressBar = document.getElementById('progress-bar');
+      if (config.showProgressBar) {
+        progressBarContainer.style.display = 'block';
+      }
+
+      function animateProgressBar(duration, videoEl) {
+        progressBar.style.transition = 'none';
+        progressBar.style.width = '0%';
+        // Force reflow
+        void progressBar.offsetWidth;
+        progressBar.style.transition = `width linear ${duration}ms`;
+        progressBar.style.width = '100%';
+        if (videoEl) {
+          // Sync with video currentTime
+          let rafId;
+          function updateBar() {
+            if (videoEl.duration && !isNaN(videoEl.duration)) {
+              const percent = Math.min(100, (videoEl.currentTime / videoEl.duration) * 100);
+              progressBar.style.transition = 'none';
+              progressBar.style.width = percent + '%';
+              progressBar.offsetWidth; // force reflow
+              progressBar.style.transition = '';
+            }
+            if (!videoEl.paused && !videoEl.ended) {
+              rafId = requestAnimationFrame(updateBar);
+            }
+          }
+          videoEl.addEventListener('play', updateBar);
+          videoEl.addEventListener('ended', () => cancelAnimationFrame(rafId));
+          updateBar();
+        }
+      }
+
+      async function cycleMedia() {
+        if (cycleAbortController) cycleAbortController.abort();
+        cycleAbortController = new AbortController();
+        const signal = cycleAbortController.signal;
+        while (true) {
+          if (signal.aborted) return;
+          const idx = order[current % order.length];
+          const media = config.mediaList[idx];
+          // Use media item, then fallback
+          let transitionSource = media.transition !== undefined ? media.transition : config.transition;
+          let transitionType;
+          if (Array.isArray(transitionSource)) {
+            if (transitionSource.includes('random')) {
+              transitionType = transitions[Math.floor(Math.random() * transitions.length)];
+            } else {
+              transitionType = transitionSource[currentTransition % transitionSource.length];
+            }
+          } else if (transitionSource === 'random') {
+            transitionType = transitions[Math.floor(Math.random() * transitions.length)];
+          } else {
+            transitionType = transitionSource;
+          }
+          const el = await showMedia(idx, transitionType);
+          // Use media.duration, then fallback
+          let duration = media.duration !== undefined ? media.duration : 4000;
+          if (config.showProgressBar) {
+            if (isVideo(media.file)) {
+              if (duration === 'playback') {
+                // Wait for metadata to load so el.duration is available
+                if (isNaN(el.duration) || !el.duration) {
+                  await new Promise(resolve => {
+                    el.onloadedmetadata = resolve;
+                  });
+                }
+                animateProgressBar(el.duration ? el.duration * 1000 : 20000, el);
+              } else {
+                animateProgressBar(duration, el);
+              }
+            } else {
+              animateProgressBar(duration);
+            }
+          }
+          if (isVideo(media.file)) {
+            if (duration === 'playback') {
+              await new Promise((res) => {
+                el.onended = res;
+              });
+            } else {
+              await new Promise((res) => {
+                el.onended = res;
+                setTimeout(res, duration || 20000);
+              });
+            }
+          } else {
+            await new Promise((res) => setTimeout(res, duration));
+          }
+          progressBar.style.transition = 'none';
+          progressBar.style.width = '0%';
+          await hideMedia(el, transitionType);
+          current = (current + 1) % order.length;
+          currentTransition = (currentTransition + 1) % transitions.length;
+          if (current === 0 && config.order === 'shuffle') {
+            order = getMediaOrder(config.mediaList, config.order); // Reshuffle after each loop
+          }
+        }
+      }
+
+      // Preload all images before starting the slideshow
+      function preloadImages(list) {
+        const promises = list.filter(item => !isVideo(item.file)).map(item => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = item.file;
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+          });
+        });
+        return Promise.all(promises);
+      }
+
+      // Start cycling after preloading images
+      window.onload = async function() {
+        await preloadImages(config.mediaList);
+        cycleMedia();
+      };
+
+      // Add CSS for progress bar
+      const style = document.createElement('style');
+      style.innerHTML = `
+        #progress-bar-container {
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 6px;
+          background: transparent;
+          z-index: 1000;
+          pointer-events: none;
+          opacity: ${config.progressBarOpacity};
+        }
+        #progress-bar {
+          height: 100%;
+          width: 0%;
+          background: ${config.progressBarColor};
+          border-radius: 3px;
+          transition: width 0s;
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Filter function
+      function filterMediaByTags(tags) {
+        if (!Array.isArray(tags) || tags.length === 0) {
+          config.mediaList = [...originalMediaList];
+        } else {
+          config.mediaList = originalMediaList.filter(item =>
+            tags.every(tag => item.tags && item.tags.includes(tag))
+          );
+        }
+        order = getMediaOrder(config.mediaList, config.order);
+        current = 0;
+        currentTransition = 0;
+        // Remove all current media elements
+        while (container.firstChild) container.removeChild(container.firstChild);
+        // Restart slideshow
+        cycleMedia();
+      }
+      window.filterMediaByTags = filterMediaByTags;
+    </script>
+  </body>
+  </html> 
