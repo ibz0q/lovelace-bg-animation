@@ -6,7 +6,7 @@ class GradientGenerator {
         this.time = 0;
         
         // Animation settings
-        this.speed = 0.1;
+        this.speed = 0.05;
         this.blurIntensity = 40;
         this.colorIntensity = 0.7;
         
@@ -119,6 +119,11 @@ class GradientGenerator {
             this.colorIntensity = parseFloat(e.target.value);
             this.preCalculateStaticValues(); // Recalculate colors when intensity changes
         });
+        
+        // Click anywhere on the canvas to regenerate gradients (like page reload)
+        this.canvas.addEventListener('click', (e) => {
+            this.regenerateGradients();
+        });
     }
     
     setupControlToggle() {
@@ -146,10 +151,10 @@ class GradientGenerator {
         
         if (this.controlsVisible) {
             // Show all UI elements
-            uiContainer.classList.remove('hidden');
+            uiContainer.classList.add('visible');
         } else {
             // Hide all UI elements for pure gradient mode
-            uiContainer.classList.add('hidden');
+            uiContainer.classList.remove('visible');
         }
     }
     
@@ -243,10 +248,16 @@ class GradientGenerator {
         this.animationId = requestAnimationFrame((time) => this.animate(time));
     }
     
-    randomizeColors() {
-        // Generate completely new random streaks
+    regenerateGradients() {
+        // Generate completely new random streaks (like page reload)
         this.gradientStreaks = this.generateRandomStreaks();
         this.preCalculateStaticValues();
+        this.time = 0; // Reset animation time for fresh start
+    }
+    
+    randomizeColors() {
+        // Use the same method as regenerateGradients for consistency
+        this.regenerateGradients();
     }
     
     saveImage() {
@@ -259,8 +270,8 @@ class GradientGenerator {
     initializeUIState() {
         const uiContainer = document.getElementById('uiContainer');
         
-        if (!this.controlsVisible) {
-            uiContainer.classList.add('hidden');
+        if (this.controlsVisible) {
+            uiContainer.classList.add('visible');
         }
     }
 }
@@ -283,10 +294,10 @@ window.addEventListener('DOMContentLoaded', () => {
     window.gradientGenerator = new GradientGenerator();
     
     // Ensure UI state is properly initialized after DOM is ready
-    if (!window.gradientGenerator.controlsVisible) {
+    if (window.gradientGenerator.controlsVisible) {
         const uiContainer = document.getElementById('uiContainer');
         if (uiContainer) {
-            uiContainer.classList.add('hidden');
+            uiContainer.classList.add('visible');
         }
     }
-}); 
+});
