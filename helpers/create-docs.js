@@ -177,7 +177,7 @@ let extendedContent = `
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (${count} total)
+## All backgrounds (${count} total) - Newest first
 
 `;
 

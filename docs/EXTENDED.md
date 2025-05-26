@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (80 total)
+## All backgrounds (81 total) - Newest first
 
 
 
@@ -1111,3 +1111,12 @@ Found these dependencies in (..\gallery\packages\generator.86.silky-carpet\packa
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/generator.1.svg-wave/preview.html) - *Author: Fabio Ottaviani* - Offline support? **Yes**
+
+###  > application.1.media-background (Media Background - A fullscreen media slideshow with various transition effects.)
+
+`- id: application.1.media-background`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/application.1.media-background/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/application.1.media-background/preview.html) - *Author: Ibz* - Offline support? **Yes**
