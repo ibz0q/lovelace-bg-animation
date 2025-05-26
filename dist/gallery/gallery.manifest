@@ -7,15 +7,14 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "0d74202c3c02be6a5382dac506a20af163f47d89",
+      "hash": "8f0cfc8a7576530ab1824c8d499d86443a83a673",
       "parameters": [
         {
           "name": "transition",
-          "default": "random",
+          "default": "crossfade",
           "description": "The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left'].",
           "type": [
-            "string",
-            "array"
+            "string"
           ],
           "behavior": "environment"
         },
@@ -52,6 +51,20 @@
           "default": 0.9,
           "description": "Opacity of the progress bar (0 to 1).",
           "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "fit",
+          "default": "cover",
+          "description": "Default fitting mode for all media. Options are 'contain', 'cover', 'fill', 'scale-down', 'none'.",
+          "type": "string",
+          "enum": [
+            "contain",
+            "cover",
+            "fill",
+            "scale-down",
+            "none"
+          ],
           "behavior": "environment"
         },
         {
@@ -270,7 +283,7 @@
               ]
             }
           ],
-          "description": "Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted} properties.",
+          "description": "Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted, fit} properties.",
           "type": "array",
           "behavior": "environment",
           "schema": {
@@ -315,6 +328,17 @@
                   "string"
                 ],
                 "description": "Optional per-item transition override"
+              },
+              "fit": {
+                "type": "string",
+                "enum": [
+                  "contain",
+                  "cover",
+                  "fill",
+                  "scale-down",
+                  "none"
+                ],
+                "description": "Per-item fitting mode override"
               }
             }
           }
