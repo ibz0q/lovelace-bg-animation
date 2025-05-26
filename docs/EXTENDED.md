@@ -13,6 +13,15 @@ This file is generated through an Github Action, if any of the image previews do
 `- id: animation.90.aurora`
 
 
+Supported params:
+- `speed` - Animation movement speed (defaults: `0.5`)
+- `blurIntensity` - Intensity of the blur effect (10-100) (defaults: `60`)
+- `colorIntensity` - Intensity of colors (0.3-1.0) (defaults: `0.7`)
+- `targetFPS` - Target frames per second (defaults: `60`)
+- `controlsVisible` - Show controls by default (defaults: `false`)
+- `animationTimeout` - Time in milliseconds before animation stops (0 for no timeout) (defaults: `5000`)
+- `enableAnimationTimeout` - Enable/disable animation timeout feature (defaults: `true`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.90.aurora/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.90.aurora/preview.html) - *Author: Ibz* - Offline support? **Yes**
