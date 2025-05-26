@@ -1,6 +1,327 @@
 {
   "packages": [
     {
+      "id": "application.1.media-background",
+      "version": "v1",
+      "name": "Media Background",
+      "description": "Media slideshow with various transition effects (Supports images and videos)",
+      "author": "Ibz",
+      "source": "https://github.com/ibz0q/lovelace-bg-animation",
+      "hash": "0d74202c3c02be6a5382dac506a20af163f47d89",
+      "parameters": [
+        {
+          "name": "transition",
+          "default": "random",
+          "description": "The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left'].",
+          "type": [
+            "string",
+            "array"
+          ],
+          "behavior": "environment"
+        },
+        {
+          "name": "transitionDuration",
+          "default": 1000,
+          "description": "The duration of the transition effect in milliseconds.",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "order",
+          "default": "shuffle",
+          "description": "The order to play media items. Options are 'sequence', 'reverse', or 'shuffle'.",
+          "type": "string",
+          "behavior": "environment"
+        },
+        {
+          "name": "showProgressBar",
+          "default": true,
+          "description": "Show or hide the progress bar.",
+          "type": "boolean",
+          "behavior": "environment"
+        },
+        {
+          "name": "progressBarColor",
+          "default": "linear-gradient(90deg, #00c6ff, #0072ff)",
+          "description": "CSS color or gradient for the progress bar.",
+          "type": "string",
+          "behavior": "environment"
+        },
+        {
+          "name": "progressBarOpacity",
+          "default": 0.9,
+          "description": "Opacity of the progress bar (0 to 1).",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "mediaList",
+          "default": [
+            {
+              "file": "https://cdn.flixel.com/flixel/x9dr8caygivq5secll7i.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/v26zyfd6yf0r33s46vpe.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/rosz2gi676xhkiw1ut6i.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "cloudy",
+                "partlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "cloudy",
+                "partlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "cloudy",
+                "partlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "cloudy",
+                "partlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "cloudy",
+                "partlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "cloudy",
+                "partlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "fog"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/5363uhabodwwrzgnq6vx.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "fog"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/e95h5cqyvhnrk4ytqt4q.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "mostlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/l2bjw34wnusyf5q2qq3p.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "mostlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/rrgta099ulami3zb9fd2.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "mostlycloudy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/f0w23bd0enxur5ff0bxz.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "rainy"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "sunny"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/zjqsoc6ecqhntpl5vacs.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "sunny"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/jvw1avupguhfbo11betq.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "sunny"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/8cmeusxf3pkanai43djs.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "sunny"
+              ]
+            },
+            {
+              "file": "https://cdn.flixel.com/flixel/guwb10mfddctfvwioaex.hd.mp4",
+              "duration": "playback",
+              "muted": true,
+              "preload": "auto",
+              "tags": [
+                "video",
+                "sunny"
+              ]
+            }
+          ],
+          "description": "Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted} properties.",
+          "type": "array",
+          "behavior": "environment",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "type": "string",
+                "description": "URL or path to media file"
+              },
+              "duration": {
+                "type": [
+                  "number",
+                  "string"
+                ],
+                "description": "Duration in ms or 'playback' for videos"
+              },
+              "preload": {
+                "type": "string",
+                "enum": [
+                  "eager",
+                  "auto"
+                ],
+                "description": "eager or auto"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Array of tags for filtering"
+              },
+              "stretchToFit": {
+                "type": "boolean",
+                "description": "Whether to stretch media to cover container"
+              },
+              "muted": {
+                "type": "boolean",
+                "description": "Whether to mute video (videos only)"
+              },
+              "transition": {
+                "type": [
+                  "string"
+                ],
+                "description": "Optional per-item transition override"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       "id": "generator.1.svg-wave",
       "version": "v1",
       "name": "Gradient Wave Generator",
@@ -645,13 +966,13 @@
       "hash": "d7c36df7370cd16b16a179541a243963a23eebda"
     },
     {
-      "id": "animation.80.particle-waves-webgl-shader",
+      "id": "animation.80.particle-waves",
       "version": "v1",
       "name": "Particle Waves WebGL Shader",
       "description": "Particle Waves made with native WebGL shader",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/GPweQe",
-      "hash": "00648a68ebd3e473475f7e480f480e1efd803355"
+      "hash": "657f59377e64b802eda9fa3d8e2e749db3aded44"
     },
     {
       "id": "animation.81.remember-windows",
@@ -820,7 +1141,7 @@
       "description": "Watch the aurora borealis dance across your screen.",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "cc42fcf4467f993fcb4f6d301d2773e80214f80c"
+      "hash": "27b9e6c162b71d89b7c020ae4da2f6c4d9b5fe57"
     }
   ],
   "common": {

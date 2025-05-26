@@ -9,177 +9,178 @@ helpers:
   insert_baseurl: true
 
 template: >
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mac Gradient Background Generator</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Mac Gradient Background Generator</title>
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                
+                body, html {
+                    height: 100%;
+                    overflow: hidden;
+                    background: #000;
+                }
+                
+                canvas {
+                    display: block;
+                    width: 100vw;
+                    height: 100vh;
+                }
+                
+                .ui-container {
+                    transition: opacity 0.5s ease, visibility 0.5s ease;
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                }
+                
+                .ui-container.visible {
+                    opacity: 1;
+                    visibility: visible;
+                    pointer-events: auto;
+                }
+                
+                .controls {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 100;
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    border-radius: 12px;
+                    padding: 20px;
+                    color: white;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    font-size: 14px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                }
+                
+                .toggle-button {
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 101;
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    color: white;
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 22px;
+                    cursor: pointer;
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                }
+                
+                .toggle-button:hover {
+                    background: rgba(255, 255, 255, 0.25);
+                    transform: scale(1.05);
+                }
+                
+                .toggle-button.controls-visible {
+                    transform: translateX(-280px);
+                }
+                
+                .control-group {
+                    margin-bottom: 15px;
+                }
+                
+                .control-group:last-child {
+                    margin-bottom: 0;
+                }
+                
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: 500;
+                }
+                
+                input[type="range"] {
+                    width: 100%;
+                    margin-bottom: 5px;
+                }
+                
+                button {
+                    background: rgba(255, 255, 255, 0.2);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    color: white;
+                    padding: 8px 16px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                }
+                
+                button:hover {
+                    background: rgba(255, 255, 255, 0.3);
+                }
+                
+                .keyboard-hint {
+                    position: fixed;
+                    bottom: 20px;
+                    left: 20px;
+                    z-index: 100;
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    border-radius: 8px;
+                    padding: 12px 16px;
+                    color: white;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    font-size: 12px;
+                    border: 1px solid rgba(255, 255, 255, 0.2);
+                    opacity: 0.7;
+                    transition: opacity 0.3s ease;
+                }
+                
+                .keyboard-hint:hover {
+                    opacity: 1;
+                }
+            </style>
+        </head>
+        <body>
+            <canvas id="gradientCanvas"></canvas>
             
-            body, html {
-                height: 100%;
-                overflow: hidden;
-                background: #000;
-            }
-            
-            canvas {
-                display: block;
-                width: 100vw;
-                height: 100vh;
-            }
-            
-            .ui-container {
-                transition: opacity 0.5s ease, visibility 0.5s ease;
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .ui-container.hidden {
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-            }
-            
-            .controls {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 100;
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                border-radius: 12px;
-                padding: 20px;
-                color: white;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                font-size: 14px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-            }
-            
-            .toggle-button {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 101;
-                background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(10px);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                color: white;
-                width: 44px;
-                height: 44px;
-                border-radius: 22px;
-                cursor: pointer;
-                font-size: 18px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            }
-            
-            .toggle-button:hover {
-                background: rgba(255, 255, 255, 0.25);
-                transform: scale(1.05);
-            }
-            
-            .toggle-button.controls-visible {
-                transform: translateX(-280px);
-            }
-            
-            .control-group {
-                margin-bottom: 15px;
-            }
-            
-            .control-group:last-child {
-                margin-bottom: 0;
-            }
-            
-            label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: 500;
-            }
-            
-            input[type="range"] {
-                width: 100%;
-                margin-bottom: 5px;
-            }
-            
-            button {
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                color: white;
-                padding: 8px 16px;
-                border-radius: 6px;
-                cursor: pointer;
-                font-size: 12px;
-                margin-right: 8px;
-                margin-bottom: 8px;
-            }
-            
-            button:hover {
-                background: rgba(255, 255, 255, 0.3);
-            }
-            
-            .keyboard-hint {
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-                z-index: 100;
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                border-radius: 8px;
-                padding: 12px 16px;
-                color: white;
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                font-size: 12px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                opacity: 0.7;
-                transition: opacity 0.3s ease;
-            }
-            
-            .keyboard-hint:hover {
-                opacity: 1;
-            }
-        </style>
-    </head>
-    <body>
-        <canvas id="gradientCanvas"></canvas>
-        
-        <div class="ui-container" id="uiContainer">
-            <button class="toggle-button controls-visible" id="toggleButton" title="Hide Controls (H)">
-                ⚙️
-            </button>
-            
-            <div class="controls" id="controlPanel">
-                <div class="control-group">
-                    <label>Animation Speed</label>
-                    <input type="range" id="speedControl" min="0.1" max="2" step="0.1" value="0.5">
+            <div class="ui-container" id="uiContainer">
+                <button class="toggle-button controls-visible" id="toggleButton" title="Hide Controls (H)">
+                    ⚙️
+                </button>
+                
+                <div class="controls" id="controlPanel">
+                    <div class="control-group">
+                        <label>Animation Speed</label>
+                        <input type="range" id="speedControl" min="0.1" max="2" step="0.1" value="0.5">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Blur Intensity</label>
+                        <input type="range" id="blurControl" min="10" max="100" step="5" value="40">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Color Intensity</label>
+                        <input type="range" id="intensityControl" min="0.3" max="1" step="0.1" value="0.7">
+                    </div>
+                    
+                    <div class="control-group">
+                        <button onclick="randomizeColors()">Randomize Colors</button>
+                        <button onclick="saveImage()">Save Image</button>
+                    </div>
                 </div>
                 
-                <div class="control-group">
-                    <label>Blur Intensity</label>
-                    <input type="range" id="blurControl" min="10" max="100" step="5" value="40">
-                </div>
-                
-                <div class="control-group">
-                    <label>Color Intensity</label>
-                    <input type="range" id="intensityControl" min="0.3" max="1" step="0.1" value="0.7">
-                </div>
-                
-                <div class="control-group">
-                    <button onclick="randomizeColors()">Randomize Colors</button>
-                    <button onclick="saveImage()">Save Image</button>
-                </div>
             </div>
             
-        </div>
-        
-        <script src="gradient-generator.js"></script>
-    </body>
-    </html> 
+            <script src="gradient-generator.js"></script>
+        </body>
+        </html> 
