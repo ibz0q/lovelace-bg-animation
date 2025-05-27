@@ -4,6 +4,8 @@ metadata:
   description: Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.
   author: Scott Weaver
   source: https://codepen.io/sweaver2112/pen/qBdZLMQ
+  tags:
+    - interactive
 
 parameters:
     - name: Presets

@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: 3D particle Cube
   description: Pure JS 3D particle Cube - 1000 particles
   author: Bas Groothedde
   source: https://codepen.io/ImagineProgramming/pen/dXVvYb
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

@@ -4,6 +4,8 @@ metadata:
   description: Tubes, again...
   author: Kevin Levron
   source: https://codepen.io/soju22/pen/JzzvbR
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

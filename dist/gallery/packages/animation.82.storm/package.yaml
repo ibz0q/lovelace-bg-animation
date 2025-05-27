@@ -4,6 +4,8 @@ metadata:
   description: Storm approaches
   author: Liam Egan
   source: https://codepen.io/shubniggurath/pen/BVKgJK
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

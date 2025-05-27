@@ -4,6 +4,8 @@ metadata:
   description: Mouse vertical position controls pattern size when you click.
   author: Dillon
   source: https://codepen.io/Dillo/pen/LYvowrg
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

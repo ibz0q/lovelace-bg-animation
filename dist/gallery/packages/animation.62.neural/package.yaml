@@ -4,6 +4,8 @@ metadata:
   description: Neural Glow
   author: Ksenia Kondrashova
   source: https://codepen.io/ksenia-k/pen/vYwgrWv
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

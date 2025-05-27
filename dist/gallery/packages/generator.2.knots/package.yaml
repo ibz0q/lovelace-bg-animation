@@ -4,6 +4,8 @@ metadata:
   description: Not knots
   author: Dillon
   source: https://codepen.io/Dillo/pen/OJYyMNR
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

@@ -4,6 +4,8 @@ metadata:
   description: Randomly generated columns
   author: Dillon
   source: https://codepen.io/Dillo/pen/NPWbdMP
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >
