@@ -1165,7 +1165,58 @@
       "description": "Watch the aurora borealis dance across your screen.",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "27b9e6c162b71d89b7c020ae4da2f6c4d9b5fe57"
+      "hash": "9ec3dcb1f932e20b60fab81e22aefef4221421d7",
+      "parameters": [
+        {
+          "name": "speed",
+          "default": 0.5,
+          "description": "Animation movement speed",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "blurIntensity",
+          "default": 60,
+          "description": "Intensity of the blur effect (10-100)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "colorIntensity",
+          "default": 0.7,
+          "description": "Intensity of colors (0.3-1.0)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "targetFPS",
+          "default": 60,
+          "description": "Target frames per second",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "controlsVisible",
+          "default": false,
+          "description": "Show controls by default",
+          "type": "boolean",
+          "behavior": "environment"
+        },
+        {
+          "name": "animationTimeout",
+          "default": 5000,
+          "description": "Time in milliseconds before animation stops (0 for no timeout)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "enableAnimationTimeout",
+          "default": true,
+          "description": "Enable/disable animation timeout feature",
+          "type": "boolean",
+          "behavior": "environment"
+        }
+      ]
     }
   ],
   "common": {
