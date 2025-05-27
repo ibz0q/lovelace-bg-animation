@@ -358,14 +358,14 @@ Found these dependencies in (../gallery/packages/animation.68.rgb-wave/package.y
 <br />
 
 
-###  > animation.67.fly-particle (Fog of War - WebGL Fog)
+###  > animation.67.fly-particle (Fly Particle - Interactive particle animation)
 
 `- id: animation.67.fly-particle`
 
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/preview.html) - *Author: yoichi kobayashi* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.67.fly-particle/preview.html) - *Author: Original Author* - Offline support? **Yes**
 
 ###  > animation.66.fog-of-war (Fog of War - WebGL Fog)
 
