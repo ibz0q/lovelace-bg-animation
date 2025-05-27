@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Cristal Lands
   description: Cristal Lands
   author: nskrgv
   source: https://codepen.io/nskrgv/pen/PQzpKb
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

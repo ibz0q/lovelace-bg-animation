@@ -4,6 +4,8 @@ metadata:
   description: Interactive gradient
   author: Ray Victor PRO
   source: https://codepen.io/ray7551/pen/EbVmZd
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

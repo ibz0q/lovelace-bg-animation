@@ -4,6 +4,8 @@ metadata:
   description: Click to clear and change hue.
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/Xdaavx
+  tags:
+    - interactive
 template: >
   <!doctype html>
 

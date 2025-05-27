@@ -4,6 +4,8 @@ metadata:
   description:  A shamrock of flowers, a celebration of the Irish spirit, history and spring.
   author: Scott Weaver
   source: https://codepen.io/sweaver2112/pen/MWyNYoq
+  tags:
+    - interactive
 
 helpers:
   insert_baseurl: true

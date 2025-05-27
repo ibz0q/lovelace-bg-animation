@@ -10,6 +10,8 @@ metadata:
     particle babes motion.
   author: Alex Andrix
   source: https://codepen.io/alexandrix/pen/VRaGKq
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

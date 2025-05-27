@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Canvas Blending Gradient Circles
   description: ""
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/pomzqE
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

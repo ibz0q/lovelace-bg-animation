@@ -4,6 +4,8 @@ metadata:
   description: Watch the aurora borealis dance across your screen.
   author: Ibz
   source: https://github.com/ibz0q/lovelace-bg-animation
+  tags:
+    - interactive
 
 parameters:
   - name: speed
