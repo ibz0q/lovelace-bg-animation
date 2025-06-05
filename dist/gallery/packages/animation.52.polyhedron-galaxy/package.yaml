@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Polyhedron galaxy
   description: Practicing with ThreeJS
   author: Júlia Erő
   source: https://codepen.io/planktone/pen/EPXMGj
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: |

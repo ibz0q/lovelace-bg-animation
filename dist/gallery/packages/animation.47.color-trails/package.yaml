@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Color Trails
   description: ""
   author: Jack Rugile
   source: https://codepen.io/jackrugile/pen/GprWyw
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: |

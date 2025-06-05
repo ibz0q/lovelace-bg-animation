@@ -1,4 +1,4 @@
-version: v1
+﻿version: v1
 metadata:
   name: Browniandrix noise
   description: Working with a nanomechanics physicist. The dude told me about the
@@ -8,6 +8,8 @@ metadata:
     motion.
   author: Alex Andrix
   source: https://codepen.io/alexandrix/pen/jdGBjW
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

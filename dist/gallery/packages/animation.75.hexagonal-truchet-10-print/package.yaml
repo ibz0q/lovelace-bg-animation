@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Hexagonal Truchet 10 Print
   description: Inspired by [Ben Matthews]
   author: Dillon
   source: https://codepen.io/Dillo/pen/qEWQgXW
+  tags:
+    - interactive
 parameters:
   - name: screen_duration
     description: Time to cross the screen vertically
@@ -428,7 +430,7 @@ template: >
             const ztd = 0.6; // coefficient for straight lines
             const zdt = 0.2; // coefficient for U-turn
 
-            let pa, pb; // control points of the Bézier curve
+            let pa, pb; // control points of the BÃ©zier curve
             let dx, dy, dd;
             let kCommVert; // index of common vertex
             let din, dout;

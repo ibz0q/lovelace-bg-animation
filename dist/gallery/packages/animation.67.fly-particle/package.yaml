@@ -1,9 +1,11 @@
 version: v1
 metadata:
-  name: Fog of War
-  description: WebGL Fog
-  author: yoichi kobayashi
-  source: https://codepen.io/ykob/pen/YewoRz
+  name: Fly Particle
+  description: Interactive particle animation
+  author: Original Author
+  source: Original Source
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

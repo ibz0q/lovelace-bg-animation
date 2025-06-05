@@ -1000,7 +1000,7 @@ template: >
       </div>
 
       <script src="{{common: https://code.jquery.com/jquery-3.7.1.min.js }}"></script>
-      <script src="./TweenMax.min.js"></script>
+      <script src="TweenMax.min.js"></script>
       <script id="rendered-js">
         var speed = 0.15;
         var WIDTH;
@@ -1962,7 +1962,6 @@ template: >
           }),
           TweenLite.to(_cannon, 2.6, { x: 0, y: 0, delay: 1.4, force3D: true }),
         ]);
-        //# sourceURL=pen.js
       </script>
     </body>
   </html>

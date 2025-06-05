@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Trapped graident
   description: Trapped particles with gradient connections
   author: Bas Groothedde
   source: https://codepen.io/ImagineProgramming/pen/qdZWag
+  tags:
+    - interactive
 template: >
   <canvas id="c"></canvas>
 

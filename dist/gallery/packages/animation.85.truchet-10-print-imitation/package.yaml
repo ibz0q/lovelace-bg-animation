@@ -4,6 +4,8 @@ metadata:
   description: Inspired by [Ben Matthews]
   author: Dillon
   source: https://codepen.io/Dillo/pen/raBqEZy
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

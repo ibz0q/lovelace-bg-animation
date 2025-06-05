@@ -1,9 +1,11 @@
-version: v1
+﻿version: v1
 metadata:
   name: Trapped particles
   description: Trapped particles with shocking connections
   author: Bas Groothedde
   source: https://codepen.io/ImagineProgramming/pen/MavMNO
+  tags:
+    - interactive
 template: >
   <canvas id="c"></canvas>
 
