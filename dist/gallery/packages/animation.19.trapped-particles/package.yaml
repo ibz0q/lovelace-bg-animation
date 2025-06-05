@@ -1,4 +1,4 @@
-﻿version: v1
+version: v1
 metadata:
   name: Trapped particles
   description: Trapped particles with shocking connections
@@ -58,7 +58,6 @@ template: >
       var particleCounter = 0,
         hover = false,
         mmon = new MousePositionMonitor();
-
 
       context.lineWidth = 1;
 

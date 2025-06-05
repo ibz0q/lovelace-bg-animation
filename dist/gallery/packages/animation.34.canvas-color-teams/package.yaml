@@ -139,8 +139,9 @@ template: >
         }
       </style>
       <style>
-      body{
-      overflow: hidden;}
+        body {
+          overflow: hidden;
+        }
         canvas {
           background: #080808;
           display: block;

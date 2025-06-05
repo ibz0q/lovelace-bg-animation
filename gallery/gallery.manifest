@@ -7,7 +7,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "d7ae5c2f6a0153a82b30e5a1675bc641485b90a8",
+      "hash": "0efb81710ca4475018eee9db0274559bbdfb457f",
       "parameters": [
         {
           "name": "transition",
@@ -514,7 +514,7 @@
       "description": "Pure JS 3D particle Cube - 1000 particles",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
-      "hash": "6b3586667ffed272252d6de796360cf0d4bce709"
+      "hash": "d1cc112341e0f257a159b5c26efe72675246eeac"
     },
     {
       "id": "animation.19.trapped-particles",
@@ -523,7 +523,7 @@
       "description": "Trapped particles with shocking connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
-      "hash": "98fcc3b9001c5eada57045a863bb4a7a980b5cfc"
+      "hash": "543ed3208b56f4ece7dccb2e29912f3c9ce061d2"
     },
     {
       "id": "animation.20.manifold",
@@ -541,7 +541,7 @@
       "description": "Noise Abstraction",
       "author": "Akimitsu Hamamuro",
       "source": "https://codepen.io/akm2/pen/AxGzJb",
-      "hash": "72a42a1f092ff2bd058b3976c4c417903d4a4d18"
+      "hash": "e18a2e635c62be47dc7fb948769765baf8b4c8e3"
     },
     {
       "id": "animation.22.cloth-ribbons",
@@ -568,7 +568,7 @@
       "description": "Trapped particles with gradient connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/qdZWag",
-      "hash": "e169c212f69d4988ae73bfa528d86feed23c1c4d"
+      "hash": "ea9a62666ed75663600a949a4d3aa78af648450f"
     },
     {
       "id": "animation.25.galactic-swimmers",
@@ -622,7 +622,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/pomzqE",
-      "hash": "a61541e114f8a4d1626b869be1cec4a0488e3950"
+      "hash": "074ff26e932dc28618bbbba534d609e96a56ad0e"
     },
     {
       "id": "animation.33.canvas-bokeh",
@@ -631,7 +631,7 @@
       "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/nYzapO",
-      "hash": "cd361c17b68812dbea7288636add712c09a1cf4b"
+      "hash": "98ad625e1835e7aee6010e03641c91d057e309f5"
     },
     {
       "id": "animation.34.canvas-color-teams",
@@ -640,7 +640,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/DdyGPB",
-      "hash": "fd602b767f651df50983af814bf76d4eb1905624"
+      "hash": "1a711c862be6be0a86ab6c00230dbc53764e884a"
     },
     {
       "id": "animation.35.canvas-light-explosion",
@@ -658,7 +658,7 @@
       "description": "Engage",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-      "hash": "913a7ec6e1161c080299c9fb62159d4f20dad8fc"
+      "hash": "c7e8cbb2a4024fc2cd94b1adc5fce00fe4561cbb"
     },
     {
       "id": "animation.46.codevember-05-simplex-vector-flow-field",
@@ -676,7 +676,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/GprWyw",
-      "hash": "cc823bddd032951218f377af6eed1c993c379278"
+      "hash": "c13df9befb34b3857b1e87e03c3369a7c3fb6f3b"
     },
     {
       "id": "animation.48.colorful-wanderers",
@@ -712,7 +712,7 @@
       "description": "Practicing with ThreeJS",
       "author": "Júlia Erő",
       "source": "https://codepen.io/planktone/pen/EPXMGj",
-      "hash": "8ea81df1f2fe66f58b113c9dd5d18f95b24a3188"
+      "hash": "015ca2ad5efc9a7a29bda10bc4ffb0ba36139303"
     },
     {
       "id": "animation.53.stars",
@@ -721,7 +721,7 @@
       "description": "The odd twinkle",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/BjBGoM",
-      "hash": "f90529974109b8837f2084a19e17b8f29573ba0a"
+      "hash": "56a8e2a6d9dccc0684fbf134a1816a4659df2c93"
     },
     {
       "id": "animation.54.stars-galaxy",
@@ -748,7 +748,7 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/jdGBjW",
-      "hash": "5b47b4f0a86b45d443420886717bc0a7a5eb4749"
+      "hash": "71c923b984246addf5fe31b5eafc12f4e5c981da"
     },
     {
       "id": "animation.58.browniandrix-noise-l3",
@@ -819,7 +819,7 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "9af247648d46f2634a8270bdfa6ec9028745eb6f"
+      "hash": "a2a1bc98765661e21d2a3688498b6cd59fa62f19"
     },
     {
       "id": "animation.65.cristal-lands",
@@ -828,7 +828,7 @@
       "description": "Cristal Lands",
       "author": "nskrgv",
       "source": "https://codepen.io/nskrgv/pen/PQzpKb",
-      "hash": "193ac9292e4df8b8021c707b3fa966e8a5633374"
+      "hash": "420f8a50e9deae2c6a6e8a8f6359b612b517faf1"
     },
     {
       "id": "animation.66.fog-of-war",
@@ -934,7 +934,7 @@
       "description": "Inspired by [Ben Matthews]",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/qEWQgXW",
-      "hash": "be2408fca1474fe9ae32041b593ce17f99170d01",
+      "hash": "0881eeda05890dd271cecaa409a3973d0d789c2f",
       "parameters": [
         {
           "name": "screen_duration",
@@ -1032,7 +1032,7 @@
       "description": "Made with TroisJS",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JjEqebK",
-      "hash": "81251d0cf637a0e096a07f1e91a585e807668f1f",
+      "hash": "f1eaaf8ef0c4e402fde5cca753ba8470fba20847",
       "parameters": [
         {
           "name": "POINTS_COUNT",
@@ -1076,7 +1076,7 @@
       "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
-      "hash": "1956a84ebb7ad0ff4a9abd3fb1ae99ed5ddbae17",
+      "hash": "8deb5a30f89d855a9fa3c9bbde20c627796206ad",
       "parameters": [
         {
           "name": "Presets",
@@ -1156,7 +1156,7 @@
       "description": "A shamrock of flowers, a celebration of the Irish spirit, history and spring.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/MWyNYoq",
-      "hash": "843bd634820cb73906f198e5ab67adccb184fc12"
+      "hash": "55c13356cfd087c84df77f6e103f007f002d707b"
     },
     {
       "id": "animation.90.aurora",
@@ -1165,7 +1165,7 @@
       "description": "Watch the aurora borealis dance across your screen.",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "f2f3ec8adebf29bacc0b99fc7ed06e9b1098faa2",
+      "hash": "09ffedaf1806aa752d8a0e5983042c83465b451f",
       "parameters": [
         {
           "name": "speed",

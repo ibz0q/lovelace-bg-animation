@@ -9,7 +9,6 @@ parameters:
     default: 30000
     description: Number of points
     type: string
-
 helpers:
   insert_baseurl: true
 template: >
