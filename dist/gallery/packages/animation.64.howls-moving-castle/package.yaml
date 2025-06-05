@@ -9,8 +9,6 @@ helpers:
   insert_baseurl: true
 template: >
   <!doctype html>
-
-  <html lang="en">
     <head>
       <style>
         html,
@@ -1128,7 +1126,10 @@ template: >
         if (document.readyState == "complete") {
           init();
         } else {
-          $(window).load(init);
+           $(window).on("load", function () {
+            init();
+          });
+
         }
 
         TweenMax.to($(".cloud-bg"), 40, {
@@ -1961,7 +1962,8 @@ template: >
             force3D: true,
           }),
           TweenLite.to(_cannon, 2.6, { x: 0, y: 0, delay: 1.4, force3D: true }),
-        ]);
+        ]);         //# sourceURL=pen.js
+
       </script>
     </body>
   </html>
