@@ -206,11 +206,12 @@ parameters:
         duration: playback
         muted: true
         preload: auto
+        playbackRate: 0.75
         tags:
           - video
           - sunny
     description: Array of media items. Each item should have {file, duration,
-      preload, tags, stretchToFit, muted, fit} properties.
+      preload, tags, stretchToFit, muted, fit, playbackRate} properties.
     type: array
     behavior: environment
     schema:
@@ -254,6 +255,9 @@ parameters:
             - scale-down
             - none
           description: Per-item fitting mode override
+        playbackRate:
+          type: number
+          description: Playback speed multiplier for videos (videos only). 1.0 = normal speed, 0.5 = half speed, 2.0 = double speed, etc. Values between 0.1 and 16.0 are supported by most browsers.
 template: >
   <!DOCTYPE html>
 
@@ -525,7 +529,7 @@ template: >
           return src.match(/\.mp4$|\.webm$|\.ogg$/i);
         }
 
-        function createMediaElement(src, muted, preload) {
+        function createMediaElement(src, muted, preload, playbackRate) {
           let el;
           if (isVideo(src)) {
             el = document.createElement("video");
@@ -538,6 +542,10 @@ template: >
             el.setAttribute("webkit-playsinline", "");
             el.style.background = "black";
             el.preload = preload !== undefined ? preload : "auto";
+            // Set playback rate if specified (videos only)
+            if (playbackRate !== undefined && playbackRate !== 1.0) {
+              el.playbackRate = playbackRate;
+            }
           } else {
             el = document.createElement("img");
             el.src = src;
@@ -574,7 +582,8 @@ template: >
             // Use media item, then fallback
             const muted = media.muted !== undefined ? media.muted : true;
             const preload = media.preload !== undefined ? media.preload : "auto";
-            const el = createMediaElement(src, muted, preload);
+            const playbackRate = media.playbackRate !== undefined ? media.playbackRate : 1.0;
+            const el = createMediaElement(src, muted, preload, playbackRate);
             el.classList.add(transitionType);
             container.appendChild(el);
 

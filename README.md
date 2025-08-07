@@ -79,18 +79,16 @@ Go to Lovelace dashboard: Edit -> Manage Resources -> Add resource -> URL: /loca
 
 A config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
 
-### Minimal Configuration (to get started)
+### Starter configuration
 
 ```yaml
 bg-animation:
   duration: 60000 # Global duration of each bg
-  gallery:
-    type: local
   transparency: # Sets the header transparent (Optional)
     header:
       enable: true
   background:
-    global: # Add and remove as required
+    global: 
       - id: animation.88.fish-tank
       - id: animation.64.howls-moving-castle
       - id: animation.17.ribbons
@@ -147,6 +145,9 @@ bg-animation:
       lights: # Settings for the 'lights' view
         - id: animation.11.space # Identifier for a background
           duration: 40000
+          manifestOverride: # override any package manifest values 
+            helpers:
+              insert_baseurl: false
           conditions: # *
             exclude_users: [ibz] # Exclude these users
             exclude_devices: [iPhone12ProMax] # Exclude this device
