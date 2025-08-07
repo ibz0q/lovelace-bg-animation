@@ -36,12 +36,11 @@ template: >
 
         #container {
           position: absolute;
-          width: 100vmax;
-          height: 100vmax;
-          left: 50%;
-          top: 50%;
+          width: 100vw;
+          height: 100vh;
+          top: 0;
+          left: 0;
           background: linear-gradient(to bottom, #000, #111);
-          transform: translate3d(-50%, -40%, 0);
         }
 
         canvas {

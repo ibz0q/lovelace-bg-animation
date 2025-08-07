@@ -447,7 +447,7 @@ template: >
       </div>
       <script>
         const config = {
-          transition: window.env?.transition || "fade-to-black", // 'fade-to-black', 'random', or array of transitions
+          transition: window.env?.transition || "crossfade", // 'fade-to-black', 'random', or array of transitions
           transitionDuration: window.env?.transitionDuration || 1200, // ms
           order: window.env?.order || "shuffle", // 'sequence', 'reverse', 'shuffle'
           fit: window.env?.fit || "cover", // 'contain', 'cover', 'fill', 'scale-down', 'none'

@@ -68,7 +68,7 @@ Supported params:
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.87.point-sprites/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.87.point-sprites\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.3.1/gl-matrix-min.js"></script>
@@ -115,7 +115,7 @@ Supported params:
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.83.strange-tubes/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.83.strange-tubes\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
@@ -141,7 +141,7 @@ Found these dependencies in (../gallery/packages/animation.83.strange-tubes/pack
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.82.storm/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.82.storm\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/88/three.min.js"></script>
@@ -167,7 +167,7 @@ Found these dependencies in (../gallery/packages/animation.82.storm/package.yaml
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.81.remember-windows/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.81.remember-windows\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdn.jsdelivr.net/gh/CreateJS/EaselJS@ff1048658c9e5f19dacc020e4f3fc6c43a7b2a10/extras/PerlinNoise/PerlinNoiseMachine.js"></script>
@@ -259,7 +259,7 @@ Supported params:
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.73.alien-blackout-intro-scene-react-webgl/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.73.alien-blackout-intro-scene-react-webgl\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.production.min.js"></script>
@@ -318,7 +318,7 @@ Supported params:
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.69.bit-ocean\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r79/three.min.js"></script>
@@ -344,7 +344,7 @@ Found these dependencies in (../gallery/packages/animation.69.bit-ocean/package.
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.68.rgb-wave/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.68.rgb-wave\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
@@ -629,7 +629,7 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.26.gpu-particles/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.26.gpu-particles\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
@@ -664,7 +664,7 @@ Found these dependencies in (../gallery/packages/animation.26.gpu-particles/pack
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.24.trapped-gradient\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/MousePositionMonitor.js"></script>
@@ -690,7 +690,7 @@ Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/p
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.23.ribbons-four/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.23.ribbons-four\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -716,7 +716,7 @@ Found these dependencies in (../gallery/packages/animation.23.ribbons-four/packa
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.22.cloth-ribbons/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.22.cloth-ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -742,7 +742,7 @@ Found these dependencies in (../gallery/packages/animation.22.cloth-ribbons/pack
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.21.noise-abstraction/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.21.noise-abstraction\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://rawgit.com/akm2/simplex-noise.js/master/simplex-noise.js"></script>
@@ -768,7 +768,7 @@ Found these dependencies in (../gallery/packages/animation.21.noise-abstraction/
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.20.manifold/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.20.manifold\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
@@ -794,7 +794,7 @@ Found these dependencies in (../gallery/packages/animation.20.manifold/package.y
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.19.trapped-particles/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.19.trapped-particles\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/MousePositionMonitor.js"></script>
@@ -820,7 +820,7 @@ Found these dependencies in (../gallery/packages/animation.19.trapped-particles/
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.18.particle-cube/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.18.particle-cube\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/188512/codepen-utilities.min.js"></script>
@@ -846,7 +846,7 @@ Found these dependencies in (../gallery/packages/animation.18.particle-cube/pack
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.17.ribbons/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.17.ribbons\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -872,7 +872,7 @@ Found these dependencies in (../gallery/packages/animation.17.ribbons/package.ya
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.16.veil/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.16.veil\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -898,7 +898,7 @@ Found these dependencies in (../gallery/packages/animation.16.veil/package.yaml)
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.15.sound/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.15.sound\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
@@ -924,7 +924,7 @@ Found these dependencies in (../gallery/packages/animation.15.sound/package.yaml
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.14.ribbons-two/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.14.ribbons-two\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
@@ -950,7 +950,7 @@ Found these dependencies in (../gallery/packages/animation.14.ribbons-two/packag
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.13.cyber-lights/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.13.cyber-lights\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
@@ -1048,7 +1048,7 @@ Found these dependencies in (../gallery/packages/animation.13.cyber-lights/packa
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/animation.4.colored-swipe/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\animation.4.colored-swipe\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
@@ -1092,7 +1092,7 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
     <summary>(external dependencies detected, need inlining)</summary>
     <br />
 
-Found these dependencies in (../gallery/packages/generator.86.silky-carpet/package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
+Found these dependencies in (..\gallery\packages\generator.86.silky-carpet\package.yaml) that need to be inlined for offline mode. Please help inline them and submit a PR.
 
 ```HTML
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.min.js"></script>
