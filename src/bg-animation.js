@@ -1,4 +1,4 @@
-import YAML from 'yaml'
+zimport YAML from 'yaml'
 import * as sass from 'sass';
 
 var isDebug = false,
@@ -85,7 +85,7 @@ async function getPackageManifest(packageConfig) {
     isDebug ? console.error("getPackageManifest: Failed to fetch package manifest: " + error) : null;
     return null;
   }
-} 
+}
 
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
@@ -93,6 +93,15 @@ async function processPackageManifest(packageConfig, packageManifest) {
     let packageManifestName = packageConfig.id;
     let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
     let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey);
+
+    if (packageConfig.manifestOverride) {
+      isDebug ? console.log("processPackageManifest: Applying manifest overrides for " + packageConfig.id) : null;
+      packageManifest = {
+        ...packageManifest,
+        ...packageConfig.manifestOverride
+      }
+    }
+
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
       return checkCachePackageManifest;
     } else {
@@ -224,6 +233,7 @@ function processBackgroundSchema(config) {
       duration: item?.duration ?? false,
       redraw: item?.redraw ?? 0,
       conditions: item?.conditions ?? false,
+      manifestOverride: item?.manifestOverride ?? false
     }))
     : false;
 }
