@@ -98,7 +98,9 @@ async function processPackageManifest(packageConfig, packageManifest) {
       isDebug ? console.log("processPackageManifest: Applying manifest overrides for " + packageConfig.id) : null;
       packageManifest = {
         ...packageManifest,
-        ...packageConfig.manifestOverride
+        ...Object.fromEntries(
+          Object.entries(packageConfig.manifestOverride).filter(([key]) => key !== 'metadata' && key !== 'template')
+        )
       }
     }
 

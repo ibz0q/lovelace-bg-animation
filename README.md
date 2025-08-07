@@ -154,7 +154,15 @@ bg-animation:
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
         - id: animation.11.space # Identifier for a background
           duration: 40000
-        - id: animation.15.square # Identifier for another background
+        - id: application.1.media-background # Identifier for another background
+          parameters:
+          mediaList:
+            - file: /images/somefile.png
+              duration: 5000
+              preload: auto
+              stretchToFit: true
+              muted: true
+
           duration: 40000 
 
 ```
