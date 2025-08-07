@@ -96,7 +96,6 @@ bg-animation:
       - id: animation.58.browniandrix-noise-l3
       - id: animation.53.stars
       - id: animation.50.sidelined
-      
 ```
 ### Configuration options (Advanced)
 ` * = Optional `
@@ -157,15 +156,13 @@ bg-animation:
           duration: 40000
         - id: application.1.media-background # Identifier for another background
           parameters:
-          mediaList:
-            - file: /images/somefile.png
-              duration: 5000
-              preload: auto
-              stretchToFit: true
-              muted: true
-
+            mediaList:
+              - file: /images/somefile.png
+                duration: 5000
+                preload: auto
+                stretchToFit: true
+                muted: true
           duration: 40000 
-
 ```
 
 There's also a card that let's you control bg's:
