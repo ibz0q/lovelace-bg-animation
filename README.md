@@ -50,6 +50,7 @@ Preview backgrounds here: https://ibz0q.github.io/lovelace-bg-animation/ or here
  - Takeshi Kano (1)
  - Andreas Wilcox (1)
  - alphardex (1)
+ - Home Assistant Team (Adapted) (1)
  - Sarah Drasner (1)
  - Fabio Ottaviani (1)
 

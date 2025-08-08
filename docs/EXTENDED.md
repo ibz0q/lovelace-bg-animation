@@ -4,7 +4,7 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (81 total) - Newest first
+## All backgrounds (82 total) - Newest first
 
 
 
@@ -1079,6 +1079,22 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/preview.html) - *Author: alphardex* - Offline support? **Yes**
+
+###  > animation.1.home-assistant-particles (Particle Background - Clean particle background with configurable settings and light/dark mode)
+
+`- id: animation.1.home-assistant-particles`
+
+
+Supported params:
+- `darkMode` - Use dark mode by default (true for dark mode, false for light mode) (defaults: `true`)
+- `particleCount` - Number of particles (recommended range 20-100) (defaults: `50`)
+- `linkDistance` - Maximum distance for particle connections (pixels) (defaults: `100`)
+- `mouseDistance` - Distance for mouse interaction with particles (pixels) (defaults: `150`)
+- `particleSpeed` - Speed of particle movement (0.1-2.0) (defaults: `0.5`)
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.home-assistant-particles/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.home-assistant-particles/preview.html) - *Author: Home Assistant Team (Adapted)* - Offline support? **Yes**
 
 ###  > generator.86.silky-carpet (Silky Carpet - Simulating noise variance)
 
