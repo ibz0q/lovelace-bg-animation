@@ -1,12 +1,11 @@
 # Lovelace Background Animations 
 
 Replace Home Assistant's background with an background animation!
-Find all backgrounds here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+
+Preview backgrounds here: https://ibz0q.github.io/lovelace-bg-animation/ or here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
 **Current Release: v1.1.2**
-
-<a href="https://buymeacoffee.com/iba0q" target="_blank">Buy me a coffee</a> ☕
 
 <p align="center">
 

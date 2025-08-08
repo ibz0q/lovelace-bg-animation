@@ -34,12 +34,49 @@ body {
     background: #000;
 }
 
-/* Menu button */
-.menu-button {
+/* Navigation controls */
+.navigation-controls {
     position: fixed;
     top: 20px;
     left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+}
+
+/* Nav buttons (prev/next) */
+.nav-button {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    opacity: 0;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transform: scale(0.8);
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-button.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Menu button */
+.menu-button {
     width: 60px;
     height: 60px;
     background: rgba(255, 255, 255, 0.15);
@@ -51,10 +88,10 @@ body {
     justify-content: center;
     cursor: pointer;
     color: white;
-    z-index: 1000;
     opacity: 0;
     transition: all 0.4s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
 }
 
 .menu-button:hover {
@@ -306,7 +343,7 @@ body {
 .package-interactive-indicator {
     position: absolute;
     bottom: 10px;
-    left: 10px;
+    right: 10px;
     width: 24px;
     height: 24px;
     background: rgba(75, 0, 130, 0.9);
@@ -425,18 +462,28 @@ body {
         left: -100vw;
     }
     
-    .menu-button {
+    .navigation-controls {
         top: 15px;
         left: 15px;
-        transform: scale(0.8);
+        gap: 10px;
+    }
+    
+    .nav-button {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .menu-button {
         width: 50px;
         height: 50px;
     }
     
+    .nav-button.visible,
     .menu-button.visible {
         transform: scale(1);
     }
     
+    .nav-button:hover,
     .menu-button:hover {
         transform: scale(1.05);
     }
@@ -635,12 +682,31 @@ body {
     text-align: right;
 }
 
+.credits-line {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
 .credits-name {
     color: white;
     font-size: 0.9rem;
     font-weight: 500;
-    margin-bottom: 2px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.credits-interactive-icon {
+    font-size: 0.8rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.credits-interactive-icon.visible {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .credits-author {
@@ -658,13 +724,30 @@ body {
         <iframe id="preview-iframe" src="" frameborder="0"></iframe>
     </div>
 
-    <!-- Floating menu button -->
-    <div id="menu-button" class="menu-button">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
+    <!-- Navigation controls -->
+    <div class="navigation-controls">
+        <!-- Previous button -->
+        <div id="prev-button" class="nav-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+        </div>
+        
+        <!-- Floating menu button -->
+        <div id="menu-button" class="menu-button">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </div>
+        
+        <!-- Next button -->
+        <div id="next-button" class="nav-button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9,18 15,12 9,6"></polyline>
+            </svg>
+        </div>
     </div>
 
     <!-- Sidebar -->
@@ -755,7 +838,10 @@ body {
     <!-- Credits overlay -->
     <div id="credits-overlay" class="credits-overlay">
         <div class="credits-content">
-            <div class="credits-name"></div>
+            <div class="credits-line">
+                <div class="credits-name"></div>
+                <div class="credits-interactive-icon">🎮</div>
+            </div>
             <div class="credits-author"></div>
         </div>
     </div>
@@ -767,7 +853,6 @@ class BackgroundGallery {
         this.currentPackage = null;
         this.filteredPackages = [];
         this.mouseTimeout = null;
-        this.focusTimeout = null;
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
         this.viewedPackages = this.loadViewingHistory();
         this.currentView = 'sidebar'; // 'sidebar' or 'bottom'
@@ -885,6 +970,15 @@ class BackgroundGallery {
             this.toggleSidebar();
         });
 
+        // Navigation button clicks
+        document.getElementById('prev-button').addEventListener('click', () => {
+            this.navigateToPrevious();
+        });
+
+        document.getElementById('next-button').addEventListener('click', () => {
+            this.navigateToNext();
+        });
+
         // Close sidebar button
         document.getElementById('close-sidebar').addEventListener('click', () => {
             this.closeSidebar();
@@ -893,7 +987,6 @@ class BackgroundGallery {
         // Search functionality
         document.getElementById('search-input').addEventListener('input', (e) => {
             this.filterPackages(e.target.value);
-            this.resetFocusTimeout();
         });
 
         // Keyboard shortcuts
@@ -901,6 +994,12 @@ class BackgroundGallery {
             if (e.key === 'Escape') {
                 this.closeSidebar();
                 this.closeBottomModal();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                this.navigateToPrevious();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                this.navigateToNext();
             }
         });
 
@@ -908,42 +1007,31 @@ class BackgroundGallery {
         document.addEventListener('click', (e) => {
             const sidebar = document.getElementById('sidebar');
             const bottomModal = document.getElementById('bottom-modal');
-            const menuButton = document.getElementById('menu-button');
+            const navigationControls = document.querySelector('.navigation-controls');
             
             // Check if sidebar is open and click is outside
             if (sidebar.classList.contains('open')) {
-                if (!sidebar.contains(e.target) && !menuButton.contains(e.target)) {
+                if (!sidebar.contains(e.target) && !navigationControls.contains(e.target)) {
                     this.closeSidebar();
                 }
             }
             
             // Check if bottom modal is open and click is outside
             if (bottomModal.classList.contains('open')) {
-                if (!bottomModal.contains(e.target) && !menuButton.contains(e.target)) {
+                if (!bottomModal.contains(e.target) && !navigationControls.contains(e.target)) {
                     this.closeBottomModal();
                 }
             }
         });
 
-        // Prevent sidebar clicks from closing the sidebar and reset focus timeout
+        // Prevent sidebar clicks from closing the sidebar
         document.getElementById('sidebar').addEventListener('click', (e) => {
             e.stopPropagation();
-            this.resetFocusTimeout();
         });
 
-        // Prevent bottom modal clicks from closing it and reset focus timeout
+        // Prevent bottom modal clicks from closing it
         document.getElementById('bottom-modal').addEventListener('click', (e) => {
             e.stopPropagation();
-            this.resetFocusTimeout();
-        });
-
-        // Reset focus timeout on any mouse movement over modals
-        document.getElementById('sidebar').addEventListener('mousemove', () => {
-            this.resetFocusTimeout();
-        });
-
-        document.getElementById('bottom-modal').addEventListener('mousemove', () => {
-            this.resetFocusTimeout();
         });
 
         // View switching buttons (sidebar)
@@ -972,13 +1060,17 @@ class BackgroundGallery {
         // Bottom modal search
         document.getElementById('bottom-search-input').addEventListener('input', (e) => {
             this.filterPackages(e.target.value);
-            this.resetFocusTimeout();
         });
     }
 
     showMenuButton() {
         const menuButton = document.getElementById('menu-button');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        
         menuButton.classList.add('visible');
+        prevButton.classList.add('visible');
+        nextButton.classList.add('visible');
     }
 
     resetMouseTimeout() {
@@ -988,47 +1080,39 @@ class BackgroundGallery {
         
         this.mouseTimeout = setTimeout(() => {
             const menuButton = document.getElementById('menu-button');
+            const prevButton = document.getElementById('prev-button');
+            const nextButton = document.getElementById('next-button');
             const sidebar = document.getElementById('sidebar');
             const bottomModal = document.getElementById('bottom-modal');
             
             // Only hide if no modals are open
             if (!sidebar.classList.contains('open') && !bottomModal.classList.contains('open')) {
                 menuButton.classList.remove('visible');
+                prevButton.classList.remove('visible');
+                nextButton.classList.remove('visible');
             }
         }, 2000);
     }
 
-    resetFocusTimeout() {
-        if (this.focusTimeout) {
-            clearTimeout(this.focusTimeout);
-        }
-        
-        this.focusTimeout = setTimeout(() => {
-            const sidebar = document.getElementById('sidebar');
-            const bottomModal = document.getElementById('bottom-modal');
-            const menuButton = document.getElementById('menu-button');
-            
-            // Hide modals and menu button if no interaction for 3 seconds
-            if (sidebar.classList.contains('open')) {
-                this.closeSidebar();
-            }
-            if (bottomModal.classList.contains('open')) {
-                this.closeBottomModal();
-            }
-            menuButton.classList.remove('visible');
-        }, 3000);
-    }
+
 
     showMenuButtonBriefly() {
-        // Show the menu button for 3 seconds on first load to indicate it's available
+        // Show the navigation controls for 3 seconds on first load to indicate they're available
         const menuButton = document.getElementById('menu-button');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        
         menuButton.classList.add('visible');
+        prevButton.classList.add('visible');
+        nextButton.classList.add('visible');
         
         setTimeout(() => {
             // Only hide if sidebar isn't open
             const sidebar = document.getElementById('sidebar');
             if (!sidebar.classList.contains('open')) {
                 menuButton.classList.remove('visible');
+                prevButton.classList.remove('visible');
+                nextButton.classList.remove('visible');
             }
         }, 3000);
     }
@@ -1040,7 +1124,6 @@ class BackgroundGallery {
             sidebar.classList.toggle('open');
             
             if (sidebar.classList.contains('open')) {
-                this.resetFocusTimeout();
                 document.getElementById('search-input').focus();
             }
         } else {
@@ -1070,9 +1153,6 @@ class BackgroundGallery {
         // Update button states
         this.updateViewButtonStates();
         
-        // Reset focus timeout when opening
-        this.resetFocusTimeout();
-        
         // Focus search in sidebar
         document.getElementById('search-input').focus();
     }
@@ -1087,9 +1167,6 @@ class BackgroundGallery {
         
         // Update button states
         this.updateViewButtonStates();
-        
-        // Reset focus timeout when opening
-        this.resetFocusTimeout();
         
         // Render packages in bottom view and focus search
         this.renderBottomPackagesList();
@@ -1290,6 +1367,28 @@ class BackgroundGallery {
         }
     }
 
+    navigateToPrevious() {
+        if (!this.currentPackage || this.packages.length === 0) return;
+        
+        const currentIndex = this.packages.findIndex(pkg => pkg.id === this.currentPackage.id);
+        if (currentIndex === -1) return;
+        
+        // Go to previous package, wrap around to end if at beginning
+        const prevIndex = currentIndex === 0 ? this.packages.length - 1 : currentIndex - 1;
+        this.selectPackage(this.packages[prevIndex]);
+    }
+
+    navigateToNext() {
+        if (!this.currentPackage || this.packages.length === 0) return;
+        
+        const currentIndex = this.packages.findIndex(pkg => pkg.id === this.currentPackage.id);
+        if (currentIndex === -1) return;
+        
+        // Go to next package, wrap around to beginning if at end
+        const nextIndex = currentIndex === this.packages.length - 1 ? 0 : currentIndex + 1;
+        this.selectPackage(this.packages[nextIndex]);
+    }
+
     showLoading() {
         const loadingOverlay = document.getElementById('loading-overlay');
         loadingOverlay.classList.add('visible');
@@ -1330,10 +1429,21 @@ class BackgroundGallery {
         const creditsOverlay = document.getElementById('credits-overlay');
         const creditsName = document.querySelector('.credits-name');
         const creditsAuthor = document.querySelector('.credits-author');
+        const creditsInteractiveIcon = document.querySelector('.credits-interactive-icon');
         
         // Set the content
         creditsName.textContent = packageData.name || packageData.id;
         creditsAuthor.textContent = `by ${packageData.author || 'Unknown Author'}`;
+        
+        // Show interactive icon if this package is interactive
+        const isInteractive = (packageData.tags && packageData.tags.includes('interactive')) || 
+                              (packageData.description || '').toLowerCase().includes('interactive');
+        
+        if (isInteractive) {
+            creditsInteractiveIcon.classList.add('visible');
+        } else {
+            creditsInteractiveIcon.classList.remove('visible');
+        }
         
         // Show the credits
         creditsOverlay.classList.add('visible');
