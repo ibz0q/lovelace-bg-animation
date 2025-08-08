@@ -4,10 +4,10 @@ metadata:
   description: It Colorful Cloth Ribbons
   author: Bas Groothedde
   source: https://codepen.io/ImagineProgramming/pen/BavevR
-template: >
-  <script
-  src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
-
+  tags:
+    - interactive
+template: |
+  <script src="https://github.com/processing/p5.js/releases/download/0.6.0/p5.min.js"></script>
 
   <style>
     body {
@@ -18,9 +18,7 @@ template: >
       position: absolute;
     }
   </style>
-
   <canvas></canvas>
-
   <script>
     var canvas = document.querySelector("canvas"),
       ctx = canvas.getContext("2d"),

@@ -4,8 +4,7 @@ metadata:
   description: The old Windows screensaver.
   author: Lanny
   source: https://codepen.io/lannymcnie/pen/PRZJab
-  tags:
-    - interactive
+  tags: []
 helpers:
   insert_baseurl: true
 template: >
