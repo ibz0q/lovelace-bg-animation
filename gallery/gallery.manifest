@@ -364,7 +364,10 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
-      "hash": "302ed6b20230ab79df1fb6f8fa3a52a548531090"
+      "hash": "6d5ef78d181c88d35e7a5b911d1daed2df04e938",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.2.shooting-stars",
@@ -580,7 +583,10 @@
       "description": "It Colorful Cloth Ribbons",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/BavevR",
-      "hash": "2ff1e1f69f25dce249689bf64a8e43bd4153038d"
+      "hash": "7b8e5260f5c96a53d6a54f6d011e592945910666",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.23.ribbons-four",
@@ -733,7 +739,10 @@
       "description": "\n\nForked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderers](http://codepen.io/satchmorun/pen/yyVJxa/).",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/xbRqGz",
-      "hash": "e2718503efc92e1297b0757705a8dbbdb9ee8001"
+      "hash": "61aaefeb75c52eb2f20e1b20073ef155083fd2d1",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.49.curved-lines",
@@ -879,7 +888,10 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "74d5d9d449f1f20747397982014be84e9bf1e22b"
+      "hash": "2028edc88a830842ceb082bcb90bb1dcefbcbfdc",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.65.cristal-lands",
@@ -985,7 +997,10 @@
       "description": "Made with React and WebGL",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/MNOEVe",
-      "hash": "bb3d8948c21dc456999ad5f22e0f0a6be2957261"
+      "hash": "0a203f8f33d5ae07de6eef79c126415555b2f73e",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.74.dvd-screensaver",
@@ -1047,7 +1062,10 @@
       "description": "Text animation with a shader in the background.",
       "author": "Matthias Hurrle",
       "source": "https://codepen.io/atzedent/pen/PwobBLM",
-      "hash": "3c5685479ba0442d18f45d12c979fd7ac11e6e33"
+      "hash": "116fcde7b59d63de7503fda9fbf27c58069c2243",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.79.canvas-ribbons",
@@ -1077,7 +1095,10 @@
       "description": "Particle Waves made with native WebGL shader",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/GPweQe",
-      "hash": "657f59377e64b802eda9fa3d8e2e749db3aded44"
+      "hash": "524666ffd51b54a6fe40f989633dc2d0673b5b80",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.81.remember-windows",
@@ -1086,10 +1107,8 @@
       "description": "The old Windows screensaver.",
       "author": "Lanny",
       "source": "https://codepen.io/lannymcnie/pen/PRZJab",
-      "hash": "41e802ea7751b3d30795f5cb4029539324ae80ce",
-      "tags": [
-        "interactive"
-      ]
+      "hash": "6c434764d9847ad6e5e728a0501667e9900e8605",
+      "tags": []
     },
     {
       "id": "animation.82.storm",
@@ -1160,7 +1179,10 @@
       "description": "WebGL randomly generated starfield",
       "author": "AzazelN28",
       "source": "https://codepen.io/AzazelN28/pen/zvXZQw",
-      "hash": "a01e467abbf7dc815864fe9b377ac3e21c2064e8"
+      "hash": "31b7f37a7d505adcf9c09d97358251266e1de1a6",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.88.fish-tank",
