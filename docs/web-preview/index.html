@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovelace BG Animation Gallery</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Main preview container */
+#preview-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#preview-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #000;
+}
+
+/* Menu button */
+.menu-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: scale(0.8);
+}
+
+.menu-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1);
+}
+
+.menu-button.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h2 {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Search */
+.search-container {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#search-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#search-input:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Packages list */
+.packages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+}
+
+.packages-list {
+    padding: 10px 0;
+}
+
+.package-item {
+    padding: 15px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+}
+
+.package-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.package-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.package-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.package-item .package-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.package-item .package-author {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.package-item .package-type {
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-size: 11px;
+    color: white;
+    margin-top: 5px;
+}
+
+/* Sidebar footer */
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.package-info {
+    color: white;
+}
+
+.package-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.package-author {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+.package-description {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+}
+
+/* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+.loading-text {
+    color: white;
+    font-size: 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100vw;
+        right: -100vw;
+    }
+    
+    .menu-button {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Scrollbar styling */
+.packages-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.packages-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.packages-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+.packages-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+    </style>
+</head>
+<body>
+    <!-- Main iframe container -->
+    <div id="preview-container">
+        <iframe id="preview-iframe" src="" frameborder="0"></iframe>
+    </div>
+
+    <!-- Floating menu button -->
+    <div id="menu-button" class="menu-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h2>Background Gallery</h2>
+            <button id="close-sidebar" class="close-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search backgrounds..." />
+        </div>
+
+        <div class="packages-container">
+            <div id="packages-list" class="packages-list">
+                <!-- Packages will be loaded here -->
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div id="package-info" class="package-info">
+                <div id="current-package-name" class="package-name"></div>
+                <div id="current-package-author" class="package-author"></div>
+                <div id="current-package-description" class="package-description"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading background...</div>
+    </div>
+
+    <script>
+class BackgroundGallery {
+    constructor() {
+        this.packages = [];
+        this.currentPackage = null;
+        this.filteredPackages = [];
+        this.mouseTimeout = null;
+        this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
+        
+        this.init();
+    }
+
+    async init() {
+        await this.loadGalleryManifest();
+        this.setupEventListeners();
+        this.loadDefaultPackage();
+    }
+
+    async loadGalleryManifest() {
+        try {
+            const response = await fetch(this.galleryManifestUrl);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch gallery manifest: ${response.status}`);
+            }
+            
+            const manifest = await response.json();
+            this.packages = manifest.packages || [];
+            this.filteredPackages = [...this.packages];
+            
+            this.renderPackagesList();
+            console.log(`Loaded ${this.packages.length} packages from gallery manifest`);
+        } catch (error) {
+            console.error('Error loading gallery manifest:', error);
+            this.showError('Failed to load gallery packages. Please refresh the page.');
+        }
+    }
+
+    setupEventListeners() {
+        // Mouse movement for menu button visibility
+        document.addEventListener('mousemove', () => {
+            this.showMenuButton();
+            this.resetMouseTimeout();
+        });
+
+        // Menu button click
+        document.getElementById('menu-button').addEventListener('click', () => {
+            this.toggleSidebar();
+        });
+
+        // Close sidebar button
+        document.getElementById('close-sidebar').addEventListener('click', () => {
+            this.closeSidebar();
+        });
+
+        // Search functionality
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            this.filterPackages(e.target.value);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeSidebar();
+            }
+        });
+
+        // Click outside sidebar to close
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (sidebar.classList.contains('open') && 
+                !sidebar.contains(e.target) && 
+                !menuButton.contains(e.target)) {
+                this.closeSidebar();
+            }
+        });
+    }
+
+    showMenuButton() {
+        const menuButton = document.getElementById('menu-button');
+        menuButton.classList.add('visible');
+    }
+
+    resetMouseTimeout() {
+        if (this.mouseTimeout) {
+            clearTimeout(this.mouseTimeout);
+        }
+        
+        this.mouseTimeout = setTimeout(() => {
+            const menuButton = document.getElementById('menu-button');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (!sidebar.classList.contains('open')) {
+                menuButton.classList.remove('visible');
+            }
+        }, 2000);
+    }
+
+    toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+        
+        if (sidebar.classList.contains('open')) {
+            document.getElementById('search-input').focus();
+        }
+    }
+
+    closeSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.remove('open');
+    }
+
+    filterPackages(searchTerm) {
+        const searchLower = searchTerm.toLowerCase();
+        
+        this.filteredPackages = this.packages.filter(package => {
+            const name = package.name?.toLowerCase() || '';
+            const description = package.description?.toLowerCase() || '';
+            const author = package.author?.toLowerCase() || '';
+            const id = package.id?.toLowerCase() || '';
+            
+            return name.includes(searchLower) || 
+                   description.includes(searchLower) || 
+                   author.includes(searchLower) || 
+                   id.includes(searchLower);
+        });
+        
+        this.renderPackagesList();
+    }
+
+    renderPackagesList() {
+        const packagesList = document.getElementById('packages-list');
+        packagesList.innerHTML = '';
+        
+        if (this.filteredPackages.length === 0) {
+            packagesList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">No packages found</div>';
+            return;
+        }
+        
+        this.filteredPackages.forEach(package => {
+            const packageElement = this.createPackageElement(package);
+            packagesList.appendChild(packageElement);
+        });
+    }
+
+    createPackageElement(package) {
+        const div = document.createElement('div');
+        div.className = 'package-item';
+        div.dataset.packageId = package.id;
+        
+        // Determine package type from ID
+        const type = this.getPackageType(package.id);
+        
+        div.innerHTML = `
+            <h3>${package.name || package.id}</h3>
+            <div class="package-description">${package.description || 'No description available'}</div>
+            <div class="package-author">by ${package.author || 'Unknown'}</div>
+            <div class="package-type">${type}</div>
+        `;
+        
+        div.addEventListener('click', () => {
+            this.selectPackage(package);
+        });
+        
+        return div;
+    }
+
+    getPackageType(packageId) {
+        if (packageId.startsWith('animation.')) return 'Animation';
+        if (packageId.startsWith('generator.')) return 'Generator';
+        if (packageId.startsWith('application.')) return 'Application';
+        return 'Other';
+    }
+
+    async selectPackage(package) {
+        // Update active state
+        document.querySelectorAll('.package-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        const activeItem = document.querySelector(`[data-package-id="${package.id}"]`);
+        if (activeItem) {
+            activeItem.classList.add('active');
+        }
+        
+        // Update package info in footer
+        this.updatePackageInfo(package);
+        
+        // Load the package
+        await this.loadPackage(package);
+        
+        // Close sidebar on mobile
+        if (window.innerWidth <= 768) {
+            this.closeSidebar();
+        }
+    }
+
+    updatePackageInfo(package) {
+        document.getElementById('current-package-name').textContent = package.name || package.id;
+        document.getElementById('current-package-author').textContent = `by ${package.author || 'Unknown'}`;
+        document.getElementById('current-package-description').textContent = package.description || 'No description available';
+    }
+
+    async loadPackage(package) {
+        this.showLoading();
+        
+        try {
+            const previewUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${package.id}/preview.html`;
+            
+            // Test if the preview URL exists
+            const response = await fetch(previewUrl, { method: 'HEAD' });
+            if (!response.ok) {
+                throw new Error('Preview not available');
+            }
+            
+            const iframe = document.getElementById('preview-iframe');
+            iframe.src = previewUrl;
+            
+            this.currentPackage = package;
+            
+            // Hide loading after iframe loads
+            iframe.onload = () => {
+                this.hideLoading();
+            };
+            
+            // Fallback timeout for loading
+            setTimeout(() => {
+                this.hideLoading();
+            }, 5000);
+            
+        } catch (error) {
+            console.error('Error loading package:', error);
+            this.hideLoading();
+            this.showError(`Failed to load ${package.name}. Preview may not be available.`);
+        }
+    }
+
+    loadDefaultPackage() {
+        // Load the first available package
+        if (this.packages.length > 0) {
+            this.selectPackage(this.packages[0]);
+        }
+    }
+
+    showLoading() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        loadingOverlay.classList.add('visible');
+    }
+
+    hideLoading() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        loadingOverlay.classList.remove('visible');
+    }
+
+    showError(message) {
+        // Create a simple error notification
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            z-index: 4000;
+            font-size: 14px;
+            max-width: 400px;
+            text-align: center;
+        `;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+}
+
+// Initialize the gallery when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    new BackgroundGallery();
+});
+    </script>
+</body>
+</html>
