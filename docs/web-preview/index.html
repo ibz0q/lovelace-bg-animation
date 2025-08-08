@@ -237,6 +237,15 @@ body {
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
 }
 
+.package-item.selected {
+    border-color: #4CAF50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.3);
+}
+
+.package-item.selected::before {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+}
+
 .package-item h3 {
     font-size: 16px;
     font-weight: 600;
@@ -273,7 +282,7 @@ body {
     right: 10px;
     width: 24px;
     height: 24px;
-    background: none;
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -282,6 +291,10 @@ body {
     opacity: 0;
     transform: scale(0);
     transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    line-height: 1;
 }
 
 .package-item.viewed .package-viewed-indicator {
@@ -289,27 +302,48 @@ body {
     transform: scale(1);
 }
 
-.package-viewed-indicator {
-    font-size: 16px;
-    line-height: 1;
-}
-
 /* Interactive indicator */
 .package-interactive-indicator {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    bottom: 10px;
+    left: 10px;
     width: 24px;
     height: 24px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(75, 0, 130, 0.9);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
     z-index: 3;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(75, 0, 130, 0.4);
+    cursor: help;
+}
+
+.package-interactive-indicator::after {
+    content: "Interactive";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    margin-bottom: 5px;
+    z-index: 10;
+}
+
+.package-interactive-indicator:hover::after {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Sidebar footer */
@@ -450,24 +484,25 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex: 1;
 }
 
-.bottom-search-container {
-    padding: 0 20px 15px 20px;
-    flex-shrink: 0;
+.bottom-search-inline {
+    flex: 1;
+    max-width: 300px;
 }
 
-.bottom-search-container input {
+.bottom-search-inline input {
     width: 100%;
-    padding: 12px;
+    padding: 8px 12px;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
+    border-radius: 6px;
     color: white;
     font-size: 14px;
 }
 
-.bottom-search-container input::placeholder {
+.bottom-search-inline input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
@@ -558,6 +593,63 @@ body {
 .packages-container::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
 }
+
+/* Credits overlay */
+.credits-overlay {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 3000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s ease;
+    pointer-events: none;
+}
+
+.credits-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: creditsSlideIn 4s ease forwards;
+}
+
+@keyframes creditsSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    15% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    85% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+.credits-content {
+    text-align: right;
+}
+
+.credits-name {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.credits-author {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 400;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
     </style>
 </head>
 <body>
@@ -623,6 +715,9 @@ body {
         <div class="bottom-modal-header">
             <h3>Background Gallery</h3>
             <div class="bottom-modal-controls">
+                <div class="bottom-search-inline">
+                    <input type="text" id="bottom-search-input" placeholder="Search backgrounds..." />
+                </div>
                 <div class="view-controls">
                     <button id="sidebar-view-bottom" class="view-button" title="Sidebar View">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -643,10 +738,6 @@ body {
                 </button>
             </div>
         </div>
-        
-        <div class="bottom-search-container">
-            <input type="text" id="bottom-search-input" placeholder="Search backgrounds..." />
-        </div>
 
         <div class="bottom-packages-container">
             <div id="bottom-packages-list" class="bottom-packages-list">
@@ -661,6 +752,14 @@ body {
         <div class="loading-text">Loading background...</div>
     </div>
 
+    <!-- Credits overlay -->
+    <div id="credits-overlay" class="credits-overlay">
+        <div class="credits-content">
+            <div class="credits-name"></div>
+            <div class="credits-author"></div>
+        </div>
+    </div>
+
     <script>
 class BackgroundGallery {
     constructor() {
@@ -668,6 +767,7 @@ class BackgroundGallery {
         this.currentPackage = null;
         this.filteredPackages = [];
         this.mouseTimeout = null;
+        this.focusTimeout = null;
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
         this.viewedPackages = this.loadViewingHistory();
         this.currentView = 'sidebar'; // 'sidebar' or 'bottom'
@@ -679,6 +779,7 @@ class BackgroundGallery {
         await this.loadGalleryManifest();
         this.setupEventListeners();
         this.loadDefaultPackage();
+        this.showMenuButtonBriefly();
     }
 
     loadViewingHistory() {
@@ -792,6 +893,7 @@ class BackgroundGallery {
         // Search functionality
         document.getElementById('search-input').addEventListener('input', (e) => {
             this.filterPackages(e.target.value);
+            this.resetFocusTimeout();
         });
 
         // Keyboard shortcuts
@@ -802,23 +904,46 @@ class BackgroundGallery {
             }
         });
 
-        // Click outside sidebar to close
+        // Combined click outside handler for both sidebar and bottom modal
         document.addEventListener('click', (e) => {
             const sidebar = document.getElementById('sidebar');
+            const bottomModal = document.getElementById('bottom-modal');
             const menuButton = document.getElementById('menu-button');
             
             // Check if sidebar is open and click is outside
             if (sidebar.classList.contains('open')) {
-                // If click is not inside sidebar and not on menu button
                 if (!sidebar.contains(e.target) && !menuButton.contains(e.target)) {
                     this.closeSidebar();
                 }
             }
+            
+            // Check if bottom modal is open and click is outside
+            if (bottomModal.classList.contains('open')) {
+                if (!bottomModal.contains(e.target) && !menuButton.contains(e.target)) {
+                    this.closeBottomModal();
+                }
+            }
         });
 
-        // Prevent sidebar clicks from closing the sidebar
+        // Prevent sidebar clicks from closing the sidebar and reset focus timeout
         document.getElementById('sidebar').addEventListener('click', (e) => {
             e.stopPropagation();
+            this.resetFocusTimeout();
+        });
+
+        // Prevent bottom modal clicks from closing it and reset focus timeout
+        document.getElementById('bottom-modal').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.resetFocusTimeout();
+        });
+
+        // Reset focus timeout on any mouse movement over modals
+        document.getElementById('sidebar').addEventListener('mousemove', () => {
+            this.resetFocusTimeout();
+        });
+
+        document.getElementById('bottom-modal').addEventListener('mousemove', () => {
+            this.resetFocusTimeout();
         });
 
         // View switching buttons (sidebar)
@@ -847,23 +972,7 @@ class BackgroundGallery {
         // Bottom modal search
         document.getElementById('bottom-search-input').addEventListener('input', (e) => {
             this.filterPackages(e.target.value);
-        });
-
-        // Click outside bottom modal to close
-        document.addEventListener('click', (e) => {
-            const bottomModal = document.getElementById('bottom-modal');
-            const menuButton = document.getElementById('menu-button');
-            
-            if (bottomModal.classList.contains('open')) {
-                if (!bottomModal.contains(e.target) && !menuButton.contains(e.target)) {
-                    this.closeBottomModal();
-                }
-            }
-        });
-
-        // Prevent bottom modal clicks from closing it
-        document.getElementById('bottom-modal').addEventListener('click', (e) => {
-            e.stopPropagation();
+            this.resetFocusTimeout();
         });
     }
 
@@ -880,11 +989,48 @@ class BackgroundGallery {
         this.mouseTimeout = setTimeout(() => {
             const menuButton = document.getElementById('menu-button');
             const sidebar = document.getElementById('sidebar');
+            const bottomModal = document.getElementById('bottom-modal');
             
-            if (!sidebar.classList.contains('open')) {
+            // Only hide if no modals are open
+            if (!sidebar.classList.contains('open') && !bottomModal.classList.contains('open')) {
                 menuButton.classList.remove('visible');
             }
         }, 2000);
+    }
+
+    resetFocusTimeout() {
+        if (this.focusTimeout) {
+            clearTimeout(this.focusTimeout);
+        }
+        
+        this.focusTimeout = setTimeout(() => {
+            const sidebar = document.getElementById('sidebar');
+            const bottomModal = document.getElementById('bottom-modal');
+            const menuButton = document.getElementById('menu-button');
+            
+            // Hide modals and menu button if no interaction for 3 seconds
+            if (sidebar.classList.contains('open')) {
+                this.closeSidebar();
+            }
+            if (bottomModal.classList.contains('open')) {
+                this.closeBottomModal();
+            }
+            menuButton.classList.remove('visible');
+        }, 3000);
+    }
+
+    showMenuButtonBriefly() {
+        // Show the menu button for 3 seconds on first load to indicate it's available
+        const menuButton = document.getElementById('menu-button');
+        menuButton.classList.add('visible');
+        
+        setTimeout(() => {
+            // Only hide if sidebar isn't open
+            const sidebar = document.getElementById('sidebar');
+            if (!sidebar.classList.contains('open')) {
+                menuButton.classList.remove('visible');
+            }
+        }, 3000);
     }
 
     toggleSidebar() {
@@ -894,6 +1040,7 @@ class BackgroundGallery {
             sidebar.classList.toggle('open');
             
             if (sidebar.classList.contains('open')) {
+                this.resetFocusTimeout();
                 document.getElementById('search-input').focus();
             }
         } else {
@@ -923,6 +1070,9 @@ class BackgroundGallery {
         // Update button states
         this.updateViewButtonStates();
         
+        // Reset focus timeout when opening
+        this.resetFocusTimeout();
+        
         // Focus search in sidebar
         document.getElementById('search-input').focus();
     }
@@ -937,6 +1087,9 @@ class BackgroundGallery {
         
         // Update button states
         this.updateViewButtonStates();
+        
+        // Reset focus timeout when opening
+        this.resetFocusTimeout();
         
         // Render packages in bottom view and focus search
         this.renderBottomPackagesList();
@@ -1038,6 +1191,11 @@ class BackgroundGallery {
             div.classList.add('viewed');
         }
         
+        // Add selected class if this is the current package
+        if (this.currentPackage && this.currentPackage.id === pkg.id) {
+            div.classList.add('selected');
+        }
+        
         div.addEventListener('click', () => {
             this.selectPackage(pkg);
         });
@@ -1098,8 +1256,14 @@ class BackgroundGallery {
             
             this.currentPackage = pkg;
             
+            // Update selected states in both lists
+            this.updateSelectedStates();
+            
             // Mark package as viewed when it loads successfully
             this.markPackageAsViewed(pkg.id);
+            
+            // Show credits
+            this.showCredits(pkg);
             
             // Hide loading after iframe loads
             iframe.onload = () => {
@@ -1119,9 +1283,10 @@ class BackgroundGallery {
     }
 
     loadDefaultPackage() {
-        // Load the first available package
+        // Load a random available package
         if (this.packages.length > 0) {
-            this.selectPackage(this.packages[0]);
+            const randomIndex = Math.floor(Math.random() * this.packages.length);
+            this.selectPackage(this.packages[randomIndex]);
         }
     }
 
@@ -1159,6 +1324,39 @@ class BackgroundGallery {
         setTimeout(() => {
             notification.remove();
         }, 5000);
+    }
+
+    showCredits(packageData) {
+        const creditsOverlay = document.getElementById('credits-overlay');
+        const creditsName = document.querySelector('.credits-name');
+        const creditsAuthor = document.querySelector('.credits-author');
+        
+        // Set the content
+        creditsName.textContent = packageData.name || packageData.id;
+        creditsAuthor.textContent = `by ${packageData.author || 'Unknown Author'}`;
+        
+        // Show the credits
+        creditsOverlay.classList.add('visible');
+        
+        // Auto-hide after animation completes
+        setTimeout(() => {
+            creditsOverlay.classList.remove('visible');
+        }, 4000);
+    }
+
+    updateSelectedStates() {
+        // Remove selected class from all package items
+        document.querySelectorAll('.package-item').forEach(item => {
+            item.classList.remove('selected');
+        });
+        
+        // Add selected class to current package
+        if (this.currentPackage) {
+            const selectedItems = document.querySelectorAll(`[data-package-id="${this.currentPackage.id}"]`);
+            selectedItems.forEach(item => {
+                item.classList.add('selected');
+            });
+        }
     }
 }
 
