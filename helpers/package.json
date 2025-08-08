@@ -12,7 +12,7 @@
     "@types/node": "^20.12.7",
     "less": "^4.2.0",
     "scss": "^0.2.4",
-    "yaml": "^2.6.0"
+    "yaml": "^2.8.1"
   },
   "dependencies": {
     "cheerio": "^1.0.0",

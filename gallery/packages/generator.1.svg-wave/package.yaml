@@ -4,6 +4,8 @@ metadata:
   description: SVG Gradient Wave Generator
   author: Fabio Ottaviani
   source: https://codepen.io/supah/pen/prVVOx
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

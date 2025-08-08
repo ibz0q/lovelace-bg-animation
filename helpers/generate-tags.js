@@ -1,197 +1,239 @@
-// A function that takes a file path, reads the contents of the file and then checks all of git history
-// for the most similar file it saw commited to git, checks its similarity in percentage
-// it then returns the date the file with the most similarity was originally added to the git
-// to make things more efficient, we should check files only with the same extension
+/**
+ * Lovelace Background Animation Package Tag Generator
+ * 
+ * This script analyzes all packages in the gallery and automatically generates
+ * appropriate tags based on the content analysis, particularly focusing on
+ * interactive content detection.
+ */
 
-const simpleGit = require('simple-git');
-const git = simpleGit();
 const fs = require('fs').promises;
 const path = require('path');
-const { exec } = require('child_process');
-const util = require('util');
-const execAsync = util.promisify(exec);
+const YAML = require('yaml');
 
-async function checkCommitsToTemp() {
-    try {
-      await fs.mkdir('./temp', { recursive: true });
-      const commits = await git.log();
-      const total = commits.all.length;
-      
-      for (let i = 0; i < commits.all.length; i++) {
-        const commit = commits.all[i];
-        const commitDir = path.join('./temp', `git_${commit.hash}`);
-        const targetPath = path.join(commitDir, 'gallery');
-        
-        // Skip if directory already exists
-        try {
-          await fs.access(targetPath);
-          console.log(`${i+1}/${total} Skipping existing commit ${commit.hash}`);
-          continue;
-        } catch (err) {
-          // Directory doesn't exist, proceed with extraction
+// Patterns that typically indicate interactive content
+const INTERACTIVE_PATTERNS = [
+    // Mouse events
+    /addEventListener\s*\(\s*['"`](?:mouse|click|pointer)/i,
+    /on(?:mouse|click|pointer)\s*=/i,
+    /\.on(?:Mouse|Click|Pointer)/i,
+    
+    // Touch events
+    /addEventListener\s*\(\s*['"`]touch/i,
+    /on(?:touch)\s*=/i,
+    /\.on(?:Touch)/i,
+    
+    // Keyboard events
+    /addEventListener\s*\(\s*['"`]key/i,
+    /on(?:key)\s*=/i,
+    /\.on(?:Key)/i,
+    
+    // Common interactive libraries/classes
+    /class\s+Pointer\b/i,
+    /new\s+Pointer\b/i,
+    /Pointer\s*\(/i,
+    
+    // Mouse position tracking
+    /(?:mouse|cursor|pointer)(?:X|Y|Position)/i,
+    /clientX|clientY/i,
+    /pageX|pageY/i,
+    /offsetX|offsetY/i,
+    
+    // Touch position tracking
+    /touches\[.*?\]\.(?:client|page|offset)/i,
+    
+    // Canvas interaction
+    /getImageData|putImageData/i,
+    /canvas.*?(?:mouse|click|touch)/i,
+    
+    // Common interaction variables
+    /uMouse|u_mouse|uniform.*?(?:mouse|cursor|pointer)/i,
+    
+    // Dragging/movement that typically indicates user interaction
+    /drag|dragging|isDragging/i,
+    
+    // User input handling
+    /user.*?input|input.*?user/i,
+    
+    // Event handling patterns
+    /handleClick|handleMouse|handleTouch|handleKey/i,
+    /preventDefault\(\)/i,
+    /stopPropagation\(\)/i
+];
+
+/**
+ * Analyzes content for interactive patterns
+ */
+function analyzeInteractivity(content) {
+    const matches = [];
+    let score = 0;
+    
+    INTERACTIVE_PATTERNS.forEach((pattern) => {
+        const match = content.match(pattern);
+        if (match) {
+            matches.push({
+                pattern: pattern.toString(),
+                match: match[0],
+                index: match.index
+            });
+            score++;
         }
-        
-        await fs.mkdir(commitDir, { recursive: true });
-        
-        try {
-          // Extract gallery directory
-          await execAsync(`git --work-tree="${commitDir}" checkout ${commit.hash} -- gallery`);
-          
-          // Remove metadata and common folders
-          const metadataPath = path.join(targetPath, 'metadata');
-          const commonPath = path.join(targetPath, 'common');
-          
-          await fs.rm(metadataPath, { recursive: true, force: true });
-          await fs.rm(commonPath, { recursive: true, force: true });
-          
-          console.log(`${i+1}/${total} Extracted commit ${commit.hash}`);
-        } catch (err) {
-          console.log(`${i+1}/${total} Failed to extract commit ${commit.hash} - ${err.message}`);
-        }
-      }
-    } catch (err) {
-      console.error('Error:', err);
-    }
-
-
-
+    });
+    
+    return {
+        isInteractive: score > 0,
+        confidence: Math.min(score / 3, 1), // Normalize to 0-1, max at 3+ matches
+        score,
+        matches
+    };
 }
-checkCommitsToTemp();
 
-
-// const fs = require('fs').promises;
-// const path = require('path');
-
-// async function processYAMLFile(filePath) {
-//   try {
-//         console.log('Checking:', filePath);
-
-//         await analyzeFile(filePath).then(result => {
-//             console.log('Most Similar File Date:', result.mostSimilarFile);
-//             console.log('Similarity:', result.similarity);
-//             console.log('Original Date:', result.originalDate);
-//           }).catch(error => {
-//             console.error('Error:', error);
-//           });
-          
-          
-//     } catch (err) {
-//         console.error(`Failed to process ${filePath}:`, err);
-//     }
-// }
-
-// async function processDirectory(directory) {
-//     try {
-//       const files = await fs.readdir(directory);
-  
-//       for (const file of files) {
-//         console.log(file);
-//         const filePath = path.join(directory, file);
-//         const stat = await fs.stat(filePath);
-  
-//         if (stat.isDirectory()) {
-//           await processDirectory(filePath); 
-//         } else if (file === 'package.yaml') {
-//           await processYAMLFile(filePath); 
-//         }
-//       }
-//     } catch (err) {
-//       console.error('Unable to scan directory:', err);
-//     }
-//   }
-  
-// processDirectory('../gallery/packages')
-
-
-
-
-
-
-
-
-
-// const fs = require('fs');
-// const path = require('path');
-// const YAML = require('yaml');
-// const { execSync } = require('child_process');
-// const stringSimilarity = require('string-similarity');
-
-// const directory = '../gallery/packages';
-
-
-
-// function readFileContent(filePath) {
-//     return fs.readFileSync(filePath, 'utf8');
-// }
-
-
-// async function processYAMLFile(filePath) {
-
-//   try {
-//         const fileContent = fs.readFileSync(filePath, 'utf8');
-
-//         // Get the list of all files in the Git history
-//         const files = execSync('git ls-tree -r --name-only HEAD', { encoding: 'utf8' }).trim().split('\n');
-
-//         let mostSimilarFile = null;
-//         let highestSimilarity = 0;
-
-//         files.forEach(file => {
-//             const fileContent = readFileContent(file);
-//             // const similarity = stringSimilarity.compareTwoStrings(targetContent, fileContent);
-// console.log(file);
-//             return;
-//             if (similarity > highestSimilarity) {
-//                 highestSimilarity = similarity;
-//                 mostSimilarFile = { file, similarity };
-//             }
-//         });
-
-//         return mostSimilarFile;
-
-//     //     let parsedYAML = YAML.parse(fileContent);
-
-
-//     //     if(parsedYAML.metadata.format == false)
-//     //     {
-//     //         console.log(`Skipping ${filePath}`);
-//     //         return;
-//     //     }
+/**
+ * Processes a single package and updates its tags
+ */
+async function processPackage(packagePath) {
+    try {
+        const packageFile = path.join(packagePath, 'package.yaml');
+        const packageName = path.basename(packagePath);
         
-//     //     if (parsedYAML.template) {
-//     //         let templateContent = parsedYAML.template;
+        // Check if package.yaml exists
+        try {
+            await fs.access(packageFile);
+        } catch (err) {
+            console.log(`⚠️  No package.yaml found in ${packageName}`);
+            return null;
+        }
+        
+        // Read and parse package data
+        const fileContent = await fs.readFile(packageFile, 'utf8');
+        const packageData = YAML.parse(fileContent);
+        
+        if (!packageData.metadata) {
+            console.log(`⚠️  No metadata found in ${packageName}`);
+            return null;
+        }
+        
+        // Analyze the template content for interactivity
+        const content = packageData.template || '';
+        const analysis = analyzeInteractivity(content);
+        
+        // Get current tags
+        const currentTags = packageData.metadata.tags || [];
+        const hasInteractiveTag = currentTags.includes('interactive');
+        
+        let needsUpdate = false;
+        let action = '';
+        
+        // Determine if we need to update tags
+        if (analysis.isInteractive && !hasInteractiveTag) {
+            // Add interactive tag
+            currentTags.push('interactive');
+            packageData.metadata.tags = currentTags;
+            needsUpdate = true;
+            action = 'Added interactive tag';
+        } else if (!analysis.isInteractive && hasInteractiveTag) {
+            // Remove interactive tag (only if confidence is high that it's not interactive)
+            const filteredTags = currentTags.filter(tag => tag !== 'interactive');
+            packageData.metadata.tags = filteredTags;
+            needsUpdate = true;
+            action = 'Removed interactive tag';
+        }
+        
+        // Update the file if needed
+        if (needsUpdate) {
+            const updatedYaml = YAML.stringify(packageData);
+            await fs.writeFile(packageFile, updatedYaml, 'utf8');
+            console.log(`✅ ${packageName}: ${action} (confidence: ${(analysis.confidence * 100).toFixed(1)}%)`);
+            
+            if (analysis.matches.length > 0) {
+                console.log(`   Evidence: ${analysis.matches.slice(0, 2).map(m => m.match).join(', ')}`);
+            }
+        } else {
+            const status = analysis.isInteractive ? '✓ Interactive' : '✓ Non-interactive';
+            console.log(`${status} - ${packageName} (no changes needed)`);
+        }
+        
+        return {
+            name: packageName,
+            wasUpdated: needsUpdate,
+            action,
+            analysis
+        };
+        
+    } catch (error) {
+        console.error(`❌ Error processing ${path.basename(packagePath)}:`, error.message);
+        return null;
+    }
+}
 
-//     //         parsedYAML.template = prettyContent;
+/**
+ * Main function to process all packages
+ */
+async function generateTags() {
+    console.log('🏷️  Lovelace Background Animation - Tag Generator');
+    console.log('='.repeat(60));
+    
+    const packagesDir = '../gallery/packages';
+    const results = [];
+    const summary = {
+        total: 0,
+        updated: 0,
+        addedInteractive: 0,
+        removedInteractive: 0,
+        errors: 0
+    };
+    
+    try {
+        const packages = await fs.readdir(packagesDir);
+        
+        for (const packageName of packages) {
+            const packagePath = path.join(packagesDir, packageName);
+            const stats = await fs.stat(packagePath);
+            
+            if (stats.isDirectory()) {
+                const result = await processPackage(packagePath);
+                if (result) {
+                    results.push(result);
+                    summary.total++;
+                    
+                    if (result.wasUpdated) {
+                        summary.updated++;
+                        if (result.action.includes('Added')) {
+                            summary.addedInteractive++;
+                        } else if (result.action.includes('Removed')) {
+                            summary.removedInteractive++;
+                        }
+                    }
+                } else {
+                    summary.errors++;
+                }
+            }
+        }
+        
+    } catch (error) {
+        console.error('❌ Error scanning packages directory:', error);
+        return;
+    }
+    
+    // Print summary
+    console.log('\n' + '='.repeat(60));
+    console.log('📊 SUMMARY:');
+    console.log(`Total packages processed: ${summary.total}`);
+    console.log(`Packages updated: ${summary.updated}`);
+    console.log(`Interactive tags added: ${summary.addedInteractive}`);
+    console.log(`Interactive tags removed: ${summary.removedInteractive}`);
+    console.log(`Errors encountered: ${summary.errors}`);
+    
+    if (summary.updated > 0) {
+        console.log('\n✨ Tag generation completed successfully!');
+        console.log('💡 Don\'t forget to commit the changes to your repository.');
+    } else {
+        console.log('\n✨ All packages are already correctly tagged!');
+    }
+}
 
-//     //         const updatedYAML = YAML.stringify(parsedYAML);
+// Run the tag generation
+generateTags().catch(error => {
+    console.error('❌ Fatal error:', error);
+    process.exit(1);
+});
 
-//     //         fs.writeFileSync(filePath, updatedYAML, 'utf8');
-
-//     //         console.log(`Processed and saved: ${filePath}`);
-//     //     } else {
-//     //         console.log(`No template found in: ${filePath}`);
-//     //     }
-//     } catch (err) {
-//         console.error(`Failed to process ${filePath}:`, err);
-//     }
-// }
-
-// function processDirectory(directory) {
-//     fs.readdir(directory, (err, files) => {
-//         if (err) {
-//             return console.error('Unable to scan directory:', err);
-//         }
-
-//         files.forEach(file => {
-//             const filePath = path.join(directory, file);
-
-//             if (fs.statSync(filePath).isDirectory()) {
-//                 processDirectory(filePath); // Recursive call for subdirectories
-//             } else if (file === 'package.yaml') {
-//                 processYAMLFile(filePath);
-//             }
-//         });
-//     });
-// }
-
-// processDirectory(directory);

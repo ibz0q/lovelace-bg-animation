@@ -4,6 +4,8 @@ metadata:
   description: Particle Waves made with native WebGL shader
   author: Boris Šehovac
   source: https://codepen.io/bsehovac/pen/GPweQe
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >
