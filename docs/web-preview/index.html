@@ -656,7 +656,7 @@ body {
 .credits-overlay.visible {
     opacity: 1;
     visibility: visible;
-    animation: creditsSlideIn 4s ease forwards;
+    animation: creditsSlideIn 6s ease forwards;
 }
 
 @keyframes creditsSlideIn {
@@ -664,11 +664,11 @@ body {
         opacity: 0;
         transform: translateX(20px);
     }
-    15% {
+    12% {
         opacity: 1;
         transform: translateX(0);
     }
-    85% {
+    83% {
         opacity: 1;
         transform: translateX(0);
     }
@@ -715,6 +715,38 @@ body {
     font-weight: 400;
     font-style: italic;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.package-copy-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(8px);
+    margin-top: 8px;
+    width: fit-content;
+}
+
+.package-copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.package-copy-button:active {
+    transform: translateY(0);
+}
+
+.package-copy-button.copied {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: rgba(76, 175, 80, 0.5);
 }
     </style>
 </head>
@@ -853,6 +885,7 @@ class BackgroundGallery {
         this.currentPackage = null;
         this.filteredPackages = [];
         this.mouseTimeout = null;
+        this.creditsTimeout = null;
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
         this.viewedPackages = this.loadViewingHistory();
         this.currentView = 'sidebar'; // 'sidebar' or 'bottom'
@@ -1061,6 +1094,14 @@ class BackgroundGallery {
         document.getElementById('bottom-search-input').addEventListener('input', (e) => {
             this.filterPackages(e.target.value);
         });
+
+        // Hash change listener for browser navigation
+        window.addEventListener('hashchange', () => {
+            const hashPackage = this.getPackageFromHash();
+            if (hashPackage && (!this.currentPackage || hashPackage.id !== this.currentPackage.id)) {
+                this.selectPackage(hashPackage);
+            }
+        });
     }
 
     showMenuButton() {
@@ -1250,18 +1291,25 @@ class BackgroundGallery {
         const isInteractive = (pkg.tags && pkg.tags.includes('interactive')) || 
                               (pkg.description || '').toLowerCase().includes('interactive');
         
-        div.innerHTML = `
-            <div class="package-viewed-indicator">
-                👀
-            </div>
-            ${isInteractive ? '<div class="package-interactive-indicator">🎮</div>' : ''}
-            <div class="package-content">
-                <h3>${pkg.name || pkg.id}</h3>
-                <div class="package-description">${pkg.description || 'No description available'}</div>
-                <div class="package-author">by ${pkg.author || 'Unknown'}</div>
-                <div class="package-type">${type}</div>
-            </div>
-        `;
+                 div.innerHTML = `
+             <div class="package-viewed-indicator">
+                 👀
+             </div>
+             ${isInteractive ? '<div class="package-interactive-indicator">🎮</div>' : ''}
+             <div class="package-content">
+                 <h3>${pkg.name || pkg.id}</h3>
+                 <div class="package-description">${pkg.description || 'No description available'}</div>
+                 <div class="package-author">by ${pkg.author || 'Unknown'}</div>
+                 <div class="package-type">${type}</div>
+                 <button class="package-copy-button" title="Copy background ID for Home Assistant">
+                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                         <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                     </svg>
+                     Copy ID
+                 </button>
+             </div>
+         `;
         
         // Add viewed class if this package has been viewed before
         if (this.viewedPackages.has(pkg.id)) {
@@ -1276,6 +1324,15 @@ class BackgroundGallery {
         div.addEventListener('click', () => {
             this.selectPackage(pkg);
         });
+
+        // Add copy button event listener
+        const copyButton = div.querySelector('.package-copy-button');
+        if (copyButton) {
+            copyButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.copyPackageId(pkg);
+            });
+        }
         
         return div;
     }
@@ -1333,6 +1390,9 @@ class BackgroundGallery {
             
             this.currentPackage = pkg;
             
+            // Update URL hash
+            this.updateUrlHash(pkg.id);
+            
             // Update selected states in both lists
             this.updateSelectedStates();
             
@@ -1360,8 +1420,14 @@ class BackgroundGallery {
     }
 
     loadDefaultPackage() {
-        // Load a random available package
-        if (this.packages.length > 0) {
+        if (this.packages.length === 0) return;
+        
+        // Check if there's a package specified in the URL hash
+        const hashPackage = this.getPackageFromHash();
+        if (hashPackage) {
+            this.selectPackage(hashPackage);
+        } else {
+            // Load a random available package
             const randomIndex = Math.floor(Math.random() * this.packages.length);
             this.selectPackage(this.packages[randomIndex]);
         }
@@ -1387,6 +1453,74 @@ class BackgroundGallery {
         // Go to next package, wrap around to beginning if at end
         const nextIndex = currentIndex === this.packages.length - 1 ? 0 : currentIndex + 1;
         this.selectPackage(this.packages[nextIndex]);
+    }
+
+    async copyPackageId(pkg) {
+        const backgroundId = `id: ${pkg.id}`;
+        
+        // Find the clicked copy button (could be in sidebar or bottom modal)
+        const copyButtons = document.querySelectorAll('.package-copy-button');
+        let clickedButton = null;
+        
+        // Find the copy button for this specific package
+        copyButtons.forEach(button => {
+            const packageItem = button.closest('.package-item');
+            if (packageItem && packageItem.dataset.packageId === pkg.id) {
+                clickedButton = button;
+            }
+        });
+        
+        if (!clickedButton) return;
+        
+        try {
+            await navigator.clipboard.writeText(backgroundId);
+            
+            // Show success feedback
+            clickedButton.textContent = 'Copied!';
+            clickedButton.classList.add('copied');
+            
+            setTimeout(() => {
+                clickedButton.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    </svg>
+                    Copy ID
+                `;
+                clickedButton.classList.remove('copied');
+            }, 2000);
+            
+        } catch (error) {
+            console.error('Failed to copy to clipboard:', error);
+            
+            // Fallback: show the text for manual copying
+            clickedButton.textContent = backgroundId;
+            setTimeout(() => {
+                clickedButton.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    </svg>
+                    Copy ID
+                `;
+            }, 3000);
+        }
+    }
+
+    updateUrlHash(packageId) {
+        // Update URL hash without triggering page reload
+        const newHash = `#${packageId}`;
+        if (window.location.hash !== newHash) {
+            history.replaceState(null, null, newHash);
+        }
+    }
+
+    getPackageFromHash() {
+        const hash = window.location.hash.slice(1); // Remove the # symbol
+        if (hash) {
+            return this.packages.find(pkg => pkg.id === hash);
+        }
+        return null;
     }
 
     showLoading() {
@@ -1431,6 +1565,12 @@ class BackgroundGallery {
         const creditsAuthor = document.querySelector('.credits-author');
         const creditsInteractiveIcon = document.querySelector('.credits-interactive-icon');
         
+        // Clear any existing credits timeout to prevent premature hiding
+        if (this.creditsTimeout) {
+            clearTimeout(this.creditsTimeout);
+            this.creditsTimeout = null;
+        }
+        
         // Set the content
         creditsName.textContent = packageData.name || packageData.id;
         creditsAuthor.textContent = `by ${packageData.author || 'Unknown Author'}`;
@@ -1445,13 +1585,18 @@ class BackgroundGallery {
             creditsInteractiveIcon.classList.remove('visible');
         }
         
+        // Remove any existing visible class and force reflow to restart animation
+        creditsOverlay.classList.remove('visible');
+        creditsOverlay.offsetHeight; // Force reflow
+        
         // Show the credits
         creditsOverlay.classList.add('visible');
         
         // Auto-hide after animation completes
-        setTimeout(() => {
+        this.creditsTimeout = setTimeout(() => {
             creditsOverlay.classList.remove('visible');
-        }, 4000);
+            this.creditsTimeout = null;
+        }, 6000);
     }
 
     updateSelectedStates() {
