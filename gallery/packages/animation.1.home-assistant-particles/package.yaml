@@ -1,18 +1,44 @@
 version: v1
 metadata:
-  name: Home Assistant Particles
-  description: Authentic Home Assistant login page particle background with exact colors and configuration
+  name: Particle Background
+  description: Clean particle background with configurable settings and light/dark mode
   author: Home Assistant Team (Adapted)
   source: https://github.com/home-assistant/frontend
   tags:
     - interactive
+parameters:
+  - name: darkMode
+    default: true
+    description: Use dark mode by default (true for dark mode, false for light mode)
+    type: boolean
+    behavior: environment
+  - name: particleCount
+    default: 50
+    description: Number of particles (recommended range 20-100)
+    type: number
+    behavior: environment
+  - name: linkDistance
+    default: 100
+    description: Maximum distance for particle connections (pixels)
+    type: number
+    behavior: environment
+  - name: mouseDistance
+    default: 150
+    description: Distance for mouse interaction with particles (pixels)
+    type: number
+    behavior: environment
+  - name: particleSpeed
+    default: 0.5
+    description: Speed of particle movement (0.1-2.0)
+    type: number
+    behavior: environment
 template: >
   <!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Home Assistant Particles</title>
+      <title>Particle Background</title>
       <style>
         * {
           margin: 0;
@@ -21,9 +47,26 @@ template: >
         }
 
         body {
-          background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
+          margin: 0;
+          padding: 0;
           overflow: hidden;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Dark mode (Home Assistant exact colors) */
+        .dark-mode {
+          --bg-start: #111111;
+          --bg-end: #1c1c1c;
+          --text-color: #e1e1e1;
+          --text-opacity: 0.8;
+        }
+
+        /* Light mode (Home Assistant exact colors) */
+        .light-mode {
+          --bg-start: #fafafa;
+          --bg-end: #e5e5e5;
+          --text-color: #212121;
+          --text-opacity: 0.9;
         }
 
         #particles {
@@ -32,67 +75,16 @@ template: >
           left: 0;
           width: 100%;
           height: 100%;
+          background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+          transition: background 0.3s ease;
           z-index: -1;
         }
 
-        .content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          text-align: center;
-          color: #e1e1e1;
-          z-index: 1;
-          opacity: 0.8;
-        }
 
-        .ha-logo {
-          width: 80px;
-          height: 80px;
-          margin: 0 auto 20px;
-          background: linear-gradient(135deg, #009ac7, #18bcf2);
-          border-radius: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 8px 32px rgba(0, 154, 199, 0.3);
-        }
-
-        .ha-logo::before {
-          content: "🏠";
-          font-size: 40px;
-          filter: brightness(0) invert(1);
-        }
-
-        h1 {
-          font-size: 2.5rem;
-          font-weight: 300;
-          margin-bottom: 10px;
-          background: linear-gradient(135deg, #009ac7, #18bcf2);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        p {
-          font-size: 1.1rem;
-          opacity: 0.7;
-          font-weight: 300;
-        }
       </style>
     </head>
     <body>
       <div id="particles"></div>
-      
-      <div class="content">
-        <div class="ha-logo"></div>
-        <h1>Home Assistant</h1>
-        <p>Particle Background</p>
-      </div>
-
-      <!-- TSParticles -->
-      <script src="https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/tsparticles.engine.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@tsparticles/preset-links@3.0.3/tsparticles.preset.links.min.js"></script>
 
       <script>
         // Helper functions for container sizing
@@ -108,163 +100,275 @@ template: >
           return rect.height || container.clientHeight || window.innerHeight;
         }
 
+        // Configuration from environment variables (like media-background)
+        const config = {
+          darkMode: window.env?.darkMode ?? true, // Default to dark mode
+          particleCount: window.env?.particleCount ?? 50,
+          linkDistance: window.env?.linkDistance ?? 100,
+          mouseDistance: window.env?.mouseDistance ?? 150,
+          particleSpeed: window.env?.particleSpeed ?? 0.5
+        };
+
         // Home Assistant Primary Color (exact match)
         const DefaultPrimaryColor = "#009ac7";
 
-        // Load tsParticles with Home Assistant's exact configuration
-        async function loadParticles() {
-          await loadLinksPreset(tsParticles);
+        // Mode management
+        let isDarkMode = config.darkMode;
+        
+        function applyMode() {
+          const particlesDiv = document.getElementById('particles');
           
-          await tsParticles.load({
-            id: "particles",
-            options: {
-              preset: "links",
-              background: {
-                opacity: 0,
-              },
-              fullScreen: {
-                enable: false,
-                zIndex: -1,
-              },
-              detectRetina: true,
-              fpsLimit: 60,
-              motion: {
-                disable: false,
-                reduce: {
-                  factor: 4,
-                  value: true,
-                },
-              },
-              particles: {
-                color: {
-                  value: DefaultPrimaryColor,
-                },
-                links: {
-                  color: {
-                    value: DefaultPrimaryColor,
-                  },
-                  distance: 100,
-                  enable: true,
-                  frequency: 1,
-                  opacity: 0.7,
-                  width: 1,
-                },
-                move: {
-                  enable: true,
-                  speed: 0.5,
-                },
-                number: {
-                  limit: undefined,
-                  value: 50,
-                },
-                opacity: {
-                  value: {
-                    min: 0.3,
-                    max: 0.5,
-                  },
-                  animation: {
-                    destroy: "none",
-                    enable: true,
-                    speed: 0.5,
-                    startValue: "random",
-                    sync: false,
-                  },
-                },
-                size: {
-                  value: {
-                    min: 1,
-                    max: 3,
-                  },
-                  animation: {
-                    destroy: "none",
-                    enable: true,
-                    speed: 3,
-                    startValue: "random",
-                    sync: false,
-                  },
-                },
-              },
-              pauseOnBlur: true,
-              interactivity: {
-                detectOn: "window",
-                events: {
-                  onHover: {
-                    enable: true,
-                    mode: "grab",
-                  },
-                  onClick: {
-                    enable: true,
-                    mode: "push",
-                  },
-                  resize: {
-                    enable: true,
-                    delay: 0.5,
-                  },
-                },
-                modes: {
-                  grab: {
-                    distance: 150,
-                    links: {
-                      opacity: 1,
-                    },
-                  },
-                  push: {
-                    quantity: 3,
-                  },
-                },
-              },
-              responsive: [
-                {
-                  maxWidth: 768,
-                  options: {
-                    particles: {
-                      number: {
-                        value: 30,
-                      },
-                      links: {
-                        distance: 80,
-                      },
-                    },
-                  },
-                },
-              ],
-            },
-          });
+          if (particlesDiv) {
+            if (isDarkMode) {
+              particlesDiv.className = 'dark-mode';
+            } else {
+              particlesDiv.className = 'light-mode';
+            }
+          }
         }
 
-        // Handle window resize properly for iframe contexts
-        function handleResize() {
-          const container = document.getElementById('particles');
+        class HomeAssistantParticles {
+          constructor(containerId) {
+            this.container = document.getElementById(containerId);
+            this.canvas = document.createElement('canvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.particles = [];
+            this.mouse = { x: null, y: null };
+            this.animationId = null;
+            
+            this.container.appendChild(this.canvas);
+            
+            this.resize();
+            this.init();
+            this.setupEventListeners();
+            this.animate();
+          }
+
+          resize() {
           const width = getContainerWidth();
           const height = getContainerHeight();
           
-          if (container && container.style) {
-            container.style.width = width + 'px';
-            container.style.height = height + 'px';
+            this.canvas.width = width;
+            this.canvas.height = height;
+            this.canvas.style.width = width + 'px';
+            this.canvas.style.height = height + 'px';
           }
-          
-          // Refresh particles on resize
-          if (window.tsParticles) {
-            tsParticles.setOnClickHandler(() => {});
-            loadParticles();
+
+          init() {
+            this.particles = [];
+            const numParticles = Math.min(config.particleCount, Math.floor((this.canvas.width * this.canvas.height) / 15000));
+            
+            for (let i = 0; i < numParticles; i++) {
+              this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                vx: (Math.random() - 0.5) * config.particleSpeed,
+                vy: (Math.random() - 0.5) * config.particleSpeed,
+                size: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.2 + 0.3,
+                opacityDirection: Math.random() > 0.5 ? 1 : -1,
+                sizeDirection: Math.random() > 0.5 ? 1 : -1,
+                originalSize: Math.random() * 2 + 1
+              });
+            }
+          }
+
+          setupEventListeners() {
+            window.addEventListener('resize', () => {
+              this.resize();
+              this.init();
+            });
+
+            this.canvas.addEventListener('mousemove', (e) => {
+              const rect = this.canvas.getBoundingClientRect();
+              this.mouse.x = e.clientX - rect.left;
+              this.mouse.y = e.clientY - rect.top;
+            });
+
+            this.canvas.addEventListener('mouseleave', () => {
+              this.mouse.x = null;
+              this.mouse.y = null;
+            });
+
+            this.canvas.addEventListener('click', (e) => {
+              const rect = this.canvas.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const clickY = e.clientY - rect.top;
+              
+              // Add new particles on click
+              for (let i = 0; i < 3; i++) {
+                this.particles.push({
+                  x: clickX + (Math.random() - 0.5) * 50,
+                  y: clickY + (Math.random() - 0.5) * 50,
+                  vx: (Math.random() - 0.5) * config.particleSpeed * 2,
+                  vy: (Math.random() - 0.5) * config.particleSpeed * 2,
+                  size: Math.random() * 2 + 1,
+                  opacity: 0.5,
+                  opacityDirection: -1,
+                  sizeDirection: 1,
+                  originalSize: Math.random() * 2 + 1,
+                  isNew: true,
+                  life: 60
+                });
+              }
+            });
+          }
+
+          drawConnections() {
+            this.ctx.strokeStyle = DefaultPrimaryColor;
+            
+            // Adjust opacity based on mode
+            const baseOpacity = isDarkMode ? 0.7 : 0.5;
+            const mouseOpacity = isDarkMode ? 1 : 0.8;
+            
+            for (let i = 0; i < this.particles.length; i++) {
+              for (let j = i + 1; j < this.particles.length; j++) {
+                const dx = this.particles[i].x - this.particles[j].x;
+                const dy = this.particles[i].y - this.particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < config.linkDistance) {
+                  const opacity = (1 - distance / config.linkDistance) * baseOpacity;
+                  this.ctx.globalAlpha = opacity;
+                  this.ctx.lineWidth = 1;
+                  this.ctx.beginPath();
+                  this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                  this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
+                  this.ctx.stroke();
+                }
+              }
+              
+              // Draw connection to mouse if close enough
+              if (this.mouse.x !== null && this.mouse.y !== null) {
+                const dx = this.particles[i].x - this.mouse.x;
+                const dy = this.particles[i].y - this.mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < config.mouseDistance) {
+                  const opacity = (1 - distance / config.mouseDistance) * mouseOpacity;
+                  this.ctx.globalAlpha = opacity;
+                  this.ctx.lineWidth = 1;
+                  this.ctx.beginPath();
+                  this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
+                  this.ctx.lineTo(this.mouse.x, this.mouse.y);
+                  this.ctx.stroke();
+                }
+              }
+            }
+            
+            this.ctx.globalAlpha = 1;
+          }
+
+          updateParticles() {
+            for (let i = this.particles.length - 1; i >= 0; i--) {
+              const particle = this.particles[i];
+              
+              // Update position
+              particle.x += particle.vx;
+              particle.y += particle.vy;
+              
+              // Bounce off edges
+              if (particle.x <= 0 || particle.x >= this.canvas.width) {
+                particle.vx *= -1;
+              }
+              if (particle.y <= 0 || particle.y >= this.canvas.height) {
+                particle.vy *= -1;
+              }
+              
+              // Keep particles in bounds
+              particle.x = Math.max(0, Math.min(this.canvas.width, particle.x));
+              particle.y = Math.max(0, Math.min(this.canvas.height, particle.y));
+              
+              // Animate opacity
+              particle.opacity += particle.opacityDirection * 0.01;
+              if (particle.opacity <= 0.3 || particle.opacity >= 0.5) {
+                particle.opacityDirection *= -1;
+              }
+              
+              // Animate size
+              particle.size += particle.sizeDirection * 0.03;
+              if (particle.size <= particle.originalSize * 0.5 || particle.size >= particle.originalSize * 1.5) {
+                particle.sizeDirection *= -1;
+              }
+              
+              // Remove temporary particles
+              if (particle.isNew) {
+                particle.life--;
+                if (particle.life <= 0) {
+                  this.particles.splice(i, 1);
+                }
+              }
+              
+              // Mouse repulsion effect
+              if (this.mouse.x !== null && this.mouse.y !== null) {
+                const dx = particle.x - this.mouse.x;
+                const dy = particle.y - this.mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 200) {
+                  const force = (200 - distance) / 200;
+                  particle.vx += (dx / distance) * force * 0.01;
+                  particle.vy += (dy / distance) * force * 0.01;
+                }
+              }
+              
+              // Damping
+              particle.vx *= 0.999;
+              particle.vy *= 0.999;
+            }
+          }
+
+          drawParticles() {
+            this.ctx.fillStyle = DefaultPrimaryColor;
+            
+            // Adjust particle opacity based on mode
+            const particleOpacityMultiplier = isDarkMode ? 1 : 0.8;
+            
+            for (const particle of this.particles) {
+              this.ctx.globalAlpha = particle.opacity * particleOpacityMultiplier;
+              this.ctx.beginPath();
+              this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+              this.ctx.fill();
+            }
+            
+            this.ctx.globalAlpha = 1;
+          }
+
+          animate() {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            
+            this.updateParticles();
+            this.drawConnections();
+            this.drawParticles();
+            
+            this.animationId = requestAnimationFrame(() => this.animate());
+          }
+
+          destroy() {
+            if (this.animationId) {
+              cancelAnimationFrame(this.animationId);
+            }
+            if (this.canvas && this.canvas.parentNode) {
+              this.canvas.parentNode.removeChild(this.canvas);
+            }
           }
         }
 
         // Initialize particles when page loads
+        let particleSystem = null;
+        
         document.addEventListener('DOMContentLoaded', () => {
-          loadParticles();
+          // Apply initial mode
+          applyMode();
           
-          // Handle resize events
-          window.addEventListener('resize', handleResize);
-          
-          // Initial size setup
-          handleResize();
+          // Initialize particle system
+          particleSystem = new HomeAssistantParticles('particles');
         });
 
         // Cleanup function for better performance
         window.addEventListener('beforeunload', () => {
-          if (window.tsParticles) {
-            tsParticles.destroy();
+          if (particleSystem) {
+            particleSystem.destroy();
           }
         });
       </script>
