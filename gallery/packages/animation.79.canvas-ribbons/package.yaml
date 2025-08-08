@@ -39,6 +39,19 @@ template: >
       <div id="holder"></div>
 
       <script>
+        // Helper function to get container dimensions instead of window dimensions
+        function getContainerWidth() {
+          const container = document.body.parentElement || document.body;
+          const rect = container.getBoundingClientRect();
+          return rect.width || container.clientWidth || window.innerWidth;
+        }
+        
+        function getContainerHeight() {
+          const container = document.body.parentElement || document.body;
+          const rect = container.getBoundingClientRect();
+          return rect.height || container.clientHeight || window.innerHeight;
+        }
+
         (function () {
           var pi = Math.PI;
           var pi2 = 2 * Math.PI;
@@ -132,12 +145,22 @@ template: >
 
           Waves.prototype.animate = function () {
             var Waves = this;
-
-            Waves.render();
-
-            if (Waves.options.fps) {
-              Waves.ctx.font = "12px Arial";
-              Waves.ctx.fillStyle = "#fff";
+            
+            // Add frame rate limiting (target 60fps)
+            var now = performance.now();
+            if (!Waves.lastFrameTime) Waves.lastFrameTime = now;
+            var deltaTime = now - Waves.lastFrameTime;
+            
+            // Only render if enough time has passed (16.67ms = 60fps)
+            if (deltaTime >= 16.67) {
+              Waves.render();
+              Waves.lastFrameTime = now;
+              
+              if (Waves.options.fps) {
+                Waves.ctx.font = "12px Arial";
+                Waves.ctx.fillStyle = "#fff";
+                Waves.ctx.fillText(Math.round(1000 / deltaTime) + " FPS", 10, 20);
+              }
             }
 
             window.requestAnimationFrame(Waves.animate.bind(Waves));
@@ -145,26 +168,35 @@ template: >
 
           Waves.prototype.clear = function () {
             var Waves = this;
-            Waves.ctx.clearRect(0, 0, Waves.width, Waves.height);
+            // Use faster composite operation for clearing
+            Waves.ctx.globalCompositeOperation = 'source-over';
+            Waves.ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Slight fade for trail effect
+            Waves.ctx.fillRect(0, 0, Waves.width, Waves.height);
           };
 
           Waves.prototype.background = function () {
             var Waves = this;
             var ctx = Waves.ctx;
 
-            var gradient = Waves.ctx.createLinearGradient(0, 0, 0, Waves.height);
-            gradient.addColorStop(0, "#000");
-            gradient.addColorStop(1, Waves.color);
+            // Cache gradient creation to avoid recreating every frame
+            if (!Waves.gradient || Waves.lastColor !== Waves.color) {
+              Waves.gradient = Waves.ctx.createLinearGradient(0, 0, 0, Waves.height);
+              Waves.gradient.addColorStop(0, "#000");
+              Waves.gradient.addColorStop(1, Waves.color);
+              Waves.lastColor = Waves.color;
+            }
 
-            ctx.fillStyle = gradient;
+            ctx.fillStyle = Waves.gradient;
             ctx.fillRect(0, 0, Waves.width, Waves.height);
           };
 
           Waves.prototype.resize = function () {
             var Waves = this;
-            var width = Waves.holder.offsetWidth;
-            var height = Waves.holder.offsetHeight;
-            Waves.scale = window.devicePixelRatio || 1;
+            // Use container dimensions for proper iframe sizing
+            var width = getContainerWidth();
+            var height = getContainerHeight();
+            // Limit pixel ratio to 1 for better performance
+            Waves.scale = Math.min(window.devicePixelRatio || 1, 1.5);
             Waves.width = width * Waves.scale;
             Waves.height = height * Waves.scale;
             Waves.canvas.width = Waves.width;
@@ -243,10 +275,14 @@ template: >
             var debug = Waves.options.debug;
 
             var Lines = Wave.Lines;
+            
+            // Skip every other line for better performance
+            var step = debug ? 1 : 2;
 
-            each(Lines, function (line, i) {
+            for (var i = 0; i < Lines.length; i += step) {
               if (debug && i > 0) return;
-
+              
+              var line = Lines[i];
               var angle = line.angle;
 
               var x1 = x - radius * Math.cos(angle[0] * amplitude + rotation);
@@ -280,7 +316,7 @@ template: >
 
                 ctx.globalAlpha = 1;
               }
-            });
+            }
           };
 
           function Line(Wave, color) {
@@ -336,8 +372,10 @@ template: >
 
         var waves = new Waves("#holder", {
           fps: false,
-          waves: 3,
-          width: 200,
+          waves: 3,         // Back to original 3 waves
+          width: 120,       // Increased to maintain ribbon density
+          speed: [0.004, 0.008],  // Back to original speed
+          amplitude: 0.5,   // Back to original amplitude
         });
 
         waves.animate();

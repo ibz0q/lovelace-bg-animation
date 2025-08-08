@@ -222,6 +222,60 @@ body {
     padding: 10px 0;
 }
 
+/* Tag groups styling */
+.tag-group-item {
+    padding: 15px 20px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tag-group-item:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.tag-group-name {
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.tag-group-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tag-group-back {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.tag-group-back:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
 .package-item {
     padding: 20px;
     margin-bottom: 12px;
@@ -771,9 +825,18 @@ body {
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
-            <h2>Background Gallery</h2>
             <div class="view-controls">
-                <button id="sidebar-view" class="view-button active" title="Sidebar View">
+                <button id="list-view" class="view-button active" title="List View">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                    </svg>
+                </button>
+                <button id="tags-view" class="view-button" title="Tags View">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+                    </svg>
+                </button>
+                <button id="sidebar-view" class="view-button" title="Sidebar View">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                         <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
                     </svg>
@@ -814,12 +877,21 @@ body {
     <!-- Bottom Modal -->
     <div id="bottom-modal" class="bottom-modal">
         <div class="bottom-modal-header">
-            <h3>Background Gallery</h3>
             <div class="bottom-modal-controls">
                 <div class="bottom-search-inline">
                     <input type="text" id="bottom-search-input" placeholder="Search backgrounds..." />
                 </div>
                 <div class="view-controls">
+                    <button id="list-view-bottom" class="view-button active" title="List View">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                        </svg>
+                    </button>
+                    <button id="tags-view-bottom" class="view-button" title="Tags View">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+                        </svg>
+                    </button>
                     <button id="sidebar-view-bottom" class="view-button" title="Sidebar View">
                         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
                             <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
@@ -875,6 +947,9 @@ class BackgroundGallery {
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
         this.viewedPackages = this.loadViewingHistory();
         this.currentView = 'sidebar'; // 'sidebar' or 'bottom'
+        this.currentListView = 'list'; // 'list' or 'tags'
+        this.currentTag = null; // Currently selected tag
+        this.tagGroups = new Map(); // Tag groups cache
         
         this.init();
     }
@@ -882,6 +957,7 @@ class BackgroundGallery {
     async init() {
         await this.loadGalleryManifest();
         this.setupEventListeners();
+        this.updateListViewButtonStates();
         this.loadDefaultPackage();
         this.showMenuButtonBriefly();
     }
@@ -1053,6 +1129,15 @@ class BackgroundGallery {
             e.stopPropagation();
         });
 
+        // List/Tags view switching buttons (sidebar)
+        document.getElementById('list-view').addEventListener('click', () => {
+            this.switchToListView();
+        });
+
+        document.getElementById('tags-view').addEventListener('click', () => {
+            this.switchToTagsView();
+        });
+
         // View switching buttons (sidebar)
         document.getElementById('sidebar-view').addEventListener('click', () => {
             this.switchToSidebarView();
@@ -1060,6 +1145,15 @@ class BackgroundGallery {
 
         document.getElementById('bottom-view').addEventListener('click', () => {
             this.switchToBottomView();
+        });
+
+        // List/Tags view switching buttons (bottom modal)
+        document.getElementById('list-view-bottom').addEventListener('click', () => {
+            this.switchToListView();
+        });
+
+        document.getElementById('tags-view-bottom').addEventListener('click', () => {
+            this.switchToTagsView();
         });
 
         // View switching buttons (bottom modal)
@@ -1200,6 +1294,44 @@ class BackgroundGallery {
         document.getElementById('bottom-search-input').focus();
     }
 
+    switchToListView() {
+        this.currentListView = 'list';
+        this.currentTag = null;
+        this.updateListViewButtonStates();
+        this.renderPackagesList();
+        this.renderBottomPackagesList();
+    }
+
+    switchToTagsView() {
+        this.currentListView = 'tags';
+        this.currentTag = null;
+        this.updateListViewButtonStates();
+        this.generateTagGroups();
+        this.renderTagGroups();
+        this.renderBottomTagGroups();
+    }
+
+    generateTagGroups() {
+        this.tagGroups.clear();
+        
+        this.packages.forEach(pkg => {
+            const tags = pkg.tags || [];
+            tags.forEach(tag => {
+                if (!this.tagGroups.has(tag)) {
+                    this.tagGroups.set(tag, []);
+                }
+                this.tagGroups.get(tag).push(pkg);
+            });
+        });
+    }
+
+    showTagPackages(tag) {
+        this.currentTag = tag;
+        this.filteredPackages = this.tagGroups.get(tag) || [];
+        this.renderPackagesList();
+        this.renderBottomPackagesList();
+    }
+
     updateViewButtonStates() {
         // Update sidebar view buttons
         document.getElementById('sidebar-view').classList.toggle('active', this.currentView === 'sidebar');
@@ -1208,6 +1340,16 @@ class BackgroundGallery {
         // Update bottom modal view buttons
         document.getElementById('sidebar-view-bottom').classList.toggle('active', this.currentView === 'sidebar');
         document.getElementById('bottom-view-bottom').classList.toggle('active', this.currentView === 'bottom');
+    }
+
+    updateListViewButtonStates() {
+        // Update sidebar list view buttons
+        document.getElementById('list-view').classList.toggle('active', this.currentListView === 'list');
+        document.getElementById('tags-view').classList.toggle('active', this.currentListView === 'tags');
+        
+        // Update bottom modal list view buttons
+        document.getElementById('list-view-bottom').classList.toggle('active', this.currentListView === 'list');
+        document.getElementById('tags-view-bottom').classList.toggle('active', this.currentListView === 'tags');
     }
 
     filterPackages(searchTerm) {
@@ -1230,6 +1372,11 @@ class BackgroundGallery {
     }
 
     renderPackagesList() {
+        if (this.currentListView === 'tags') {
+            this.renderTagGroups();
+            return;
+        }
+        
         const packagesList = document.getElementById('packages-list');
         packagesList.innerHTML = '';
         
@@ -1245,6 +1392,11 @@ class BackgroundGallery {
     }
 
     renderBottomPackagesList() {
+        if (this.currentListView === 'tags') {
+            this.renderBottomTagGroups();
+            return;
+        }
+        
         const bottomPackagesList = document.getElementById('bottom-packages-list');
         bottomPackagesList.innerHTML = '';
         
@@ -1256,6 +1408,114 @@ class BackgroundGallery {
         this.filteredPackages.forEach(pkg => {
             const packageElement = this.createPackageElement(pkg);
             bottomPackagesList.appendChild(packageElement);
+        });
+    }
+
+    renderTagGroups() {
+        const packagesList = document.getElementById('packages-list');
+        packagesList.innerHTML = '';
+        
+        // Show back button if we're viewing a specific tag
+        if (this.currentTag) {
+            const backButton = document.createElement('div');
+            backButton.className = 'tag-group-back';
+            backButton.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+                Back to Tags
+            `;
+            backButton.addEventListener('click', () => {
+                this.currentTag = null;
+                this.renderTagGroups();
+            });
+            packagesList.appendChild(backButton);
+            
+            // Show packages for this tag
+            this.filteredPackages.forEach(pkg => {
+                const packageElement = this.createPackageElement(pkg);
+                packagesList.appendChild(packageElement);
+            });
+            return;
+        }
+        
+        // Show tag groups
+        if (this.tagGroups.size === 0) {
+            packagesList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">No tags found</div>';
+            return;
+        }
+        
+        // Sort tags alphabetically
+        const sortedTags = Array.from(this.tagGroups.keys()).sort();
+        
+        sortedTags.forEach(tag => {
+            const packages = this.tagGroups.get(tag);
+            const tagElement = document.createElement('div');
+            tagElement.className = 'tag-group-item';
+            tagElement.innerHTML = `
+                <div class="tag-group-name">${tag}</div>
+                <div class="tag-group-count">${packages.length}</div>
+            `;
+            tagElement.addEventListener('click', () => {
+                this.showTagPackages(tag);
+            });
+            packagesList.appendChild(tagElement);
+        });
+    }
+
+    renderBottomTagGroups() {
+        const bottomPackagesList = document.getElementById('bottom-packages-list');
+        bottomPackagesList.innerHTML = '';
+        
+        // Show back button if we're viewing a specific tag
+        if (this.currentTag) {
+            const backButton = document.createElement('div');
+            backButton.className = 'tag-group-back';
+            backButton.style.flexShrink = '0';
+            backButton.style.width = '300px';
+            backButton.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+                Back to Tags
+            `;
+            backButton.addEventListener('click', () => {
+                this.currentTag = null;
+                this.renderBottomTagGroups();
+            });
+            bottomPackagesList.appendChild(backButton);
+            
+            // Show packages for this tag
+            this.filteredPackages.forEach(pkg => {
+                const packageElement = this.createPackageElement(pkg);
+                bottomPackagesList.appendChild(packageElement);
+            });
+            return;
+        }
+        
+        // Show tag groups
+        if (this.tagGroups.size === 0) {
+            bottomPackagesList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px; width: 100%;">No tags found</div>';
+            return;
+        }
+        
+        // Sort tags alphabetically
+        const sortedTags = Array.from(this.tagGroups.keys()).sort();
+        
+        sortedTags.forEach(tag => {
+            const packages = this.tagGroups.get(tag);
+            const tagElement = document.createElement('div');
+            tagElement.className = 'tag-group-item';
+            tagElement.style.flexShrink = '0';
+            tagElement.style.width = '300px';
+            tagElement.innerHTML = `
+                <div class="tag-group-name">${tag}</div>
+                <div class="tag-group-count">${packages.length}</div>
+            `;
+            tagElement.addEventListener('click', () => {
+                this.showTagPackages(tag);
+            });
+            bottomPackagesList.appendChild(tagElement);
         });
     }
 
