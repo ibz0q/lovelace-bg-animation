@@ -51,6 +51,7 @@ async function readDirectory(dir) {
         source: packageData.metadata.source,
         hash: getSHA1(packageDir),
         parameters: packageData.parameters,
+        tags: packageData.metadata.tags,
       });
 
       try {

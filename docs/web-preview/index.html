@@ -102,6 +102,38 @@ body {
     font-weight: 600;
 }
 
+/* View controls */
+.view-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.view-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.view-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.view-button.active {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 .close-button {
     background: none;
     border: none;
@@ -241,7 +273,7 @@ body {
     right: 10px;
     width: 24px;
     height: 24px;
-    background: rgba(34, 197, 94, 0.9);
+    background: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -257,10 +289,27 @@ body {
     transform: scale(1);
 }
 
-.package-viewed-indicator svg {
-    width: 14px;
-    height: 14px;
-    fill: white;
+.package-viewed-indicator {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Interactive indicator */
+.package-interactive-indicator {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    z-index: 3;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Sidebar footer */
@@ -359,6 +408,139 @@ body {
     }
 }
 
+/* Bottom Modal */
+.bottom-modal {
+    position: fixed;
+    bottom: -100%;
+    left: 20px;
+    right: 20px;
+    height: 60vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+    transition: bottom 0.4s ease;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-modal.open {
+    bottom: 0;
+}
+
+.bottom-modal-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.bottom-modal-header h3 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.bottom-modal-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bottom-search-container {
+    padding: 0 20px 15px 20px;
+    flex-shrink: 0;
+}
+
+.bottom-search-container input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.bottom-search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bottom-packages-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 20px 10px 20px;
+    min-height: 0;
+}
+
+.bottom-packages-list {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: 100%;
+    align-items: flex-start;
+}
+
+.bottom-packages-list .package-item {
+    flex: 0 0 300px;
+    height: calc(100% - 20px);
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-packages-list .package-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bottom-packages-list .package-description {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    max-height: calc(1.4em * 3);
+}
+
+.bottom-packages-list .package-author,
+.bottom-packages-list .package-type {
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+/* Horizontal scrollbar for bottom view */
+.bottom-packages-list::-webkit-scrollbar {
+    height: 8px;
+}
+
+.bottom-packages-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.bottom-packages-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.bottom-packages-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
 /* Scrollbar styling */
 .packages-container::-webkit-scrollbar {
     width: 6px;
@@ -397,6 +579,18 @@ body {
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <h2>Background Gallery</h2>
+            <div class="view-controls">
+                <button id="sidebar-view" class="view-button active" title="Sidebar View">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                    </svg>
+                </button>
+                <button id="bottom-view" class="view-button" title="Bottom View">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M4 18h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2zM4 8h16v8H4V8z"/>
+                    </svg>
+                </button>
+            </div>
             <button id="close-sidebar" class="close-button">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -424,6 +618,43 @@ body {
         </div>
     </div>
 
+    <!-- Bottom Modal -->
+    <div id="bottom-modal" class="bottom-modal">
+        <div class="bottom-modal-header">
+            <h3>Background Gallery</h3>
+            <div class="bottom-modal-controls">
+                <div class="view-controls">
+                    <button id="sidebar-view-bottom" class="view-button" title="Sidebar View">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                        </svg>
+                    </button>
+                    <button id="bottom-view-bottom" class="view-button active" title="Bottom View">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path d="M4 18h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2zM4 8h16v8H4V8z"/>
+                        </svg>
+                    </button>
+                </div>
+                <button id="close-bottom-modal" class="close-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="bottom-search-container">
+            <input type="text" id="bottom-search-input" placeholder="Search backgrounds..." />
+        </div>
+
+        <div class="bottom-packages-container">
+            <div id="bottom-packages-list" class="bottom-packages-list">
+                <!-- Packages will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Loading overlay -->
     <div id="loading-overlay" class="loading-overlay">
         <div class="loading-spinner"></div>
@@ -439,6 +670,7 @@ class BackgroundGallery {
         this.mouseTimeout = null;
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
         this.viewedPackages = this.loadViewingHistory();
+        this.currentView = 'sidebar'; // 'sidebar' or 'bottom'
         
         this.init();
     }
@@ -566,6 +798,7 @@ class BackgroundGallery {
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 this.closeSidebar();
+                this.closeBottomModal();
             }
         });
 
@@ -585,6 +818,51 @@ class BackgroundGallery {
 
         // Prevent sidebar clicks from closing the sidebar
         document.getElementById('sidebar').addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // View switching buttons (sidebar)
+        document.getElementById('sidebar-view').addEventListener('click', () => {
+            this.switchToSidebarView();
+        });
+
+        document.getElementById('bottom-view').addEventListener('click', () => {
+            this.switchToBottomView();
+        });
+
+        // View switching buttons (bottom modal)
+        document.getElementById('sidebar-view-bottom').addEventListener('click', () => {
+            this.switchToSidebarView();
+        });
+
+        document.getElementById('bottom-view-bottom').addEventListener('click', () => {
+            this.switchToBottomView();
+        });
+
+        // Close bottom modal
+        document.getElementById('close-bottom-modal').addEventListener('click', () => {
+            this.closeBottomModal();
+        });
+
+        // Bottom modal search
+        document.getElementById('bottom-search-input').addEventListener('input', (e) => {
+            this.filterPackages(e.target.value);
+        });
+
+        // Click outside bottom modal to close
+        document.addEventListener('click', (e) => {
+            const bottomModal = document.getElementById('bottom-modal');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (bottomModal.classList.contains('open')) {
+                if (!bottomModal.contains(e.target) && !menuButton.contains(e.target)) {
+                    this.closeBottomModal();
+                }
+            }
+        });
+
+        // Prevent bottom modal clicks from closing it
+        document.getElementById('bottom-modal').addEventListener('click', (e) => {
             e.stopPropagation();
         });
     }
@@ -610,17 +888,69 @@ class BackgroundGallery {
     }
 
     toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('open');
-        
-        if (sidebar.classList.contains('open')) {
-            document.getElementById('search-input').focus();
+        if (this.currentView === 'sidebar') {
+            // If currently in sidebar view, just toggle sidebar
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+            
+            if (sidebar.classList.contains('open')) {
+                document.getElementById('search-input').focus();
+            }
+        } else {
+            // If currently in bottom view, switch to sidebar view
+            this.switchToSidebarView();
         }
     }
 
     closeSidebar() {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.remove('open');
+    }
+
+    closeBottomModal() {
+        const bottomModal = document.getElementById('bottom-modal');
+        bottomModal.classList.remove('open');
+    }
+
+    switchToSidebarView() {
+        this.currentView = 'sidebar';
+        
+        // Close bottom modal and open sidebar
+        this.closeBottomModal();
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.add('open');
+        
+        // Update button states
+        this.updateViewButtonStates();
+        
+        // Focus search in sidebar
+        document.getElementById('search-input').focus();
+    }
+
+    switchToBottomView() {
+        this.currentView = 'bottom';
+        
+        // Close sidebar and open bottom modal
+        this.closeSidebar();
+        const bottomModal = document.getElementById('bottom-modal');
+        bottomModal.classList.add('open');
+        
+        // Update button states
+        this.updateViewButtonStates();
+        
+        // Render packages in bottom view and focus search
+        this.renderBottomPackagesList();
+        document.getElementById('bottom-search-input').focus();
+    }
+
+    updateViewButtonStates() {
+        // Update sidebar view buttons
+        document.getElementById('sidebar-view').classList.toggle('active', this.currentView === 'sidebar');
+        document.getElementById('bottom-view').classList.toggle('active', this.currentView === 'bottom');
+        
+        // Update bottom modal view buttons
+        document.getElementById('sidebar-view-bottom').classList.toggle('active', this.currentView === 'sidebar');
+        document.getElementById('bottom-view-bottom').classList.toggle('active', this.currentView === 'bottom');
     }
 
     filterPackages(searchTerm) {
@@ -639,6 +969,7 @@ class BackgroundGallery {
         });
         
         this.renderPackagesList();
+        this.renderBottomPackagesList();
     }
 
     renderPackagesList() {
@@ -656,6 +987,21 @@ class BackgroundGallery {
         });
     }
 
+    renderBottomPackagesList() {
+        const bottomPackagesList = document.getElementById('bottom-packages-list');
+        bottomPackagesList.innerHTML = '';
+        
+        if (this.filteredPackages.length === 0) {
+            bottomPackagesList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px; width: 100%;">No packages found</div>';
+            return;
+        }
+        
+        this.filteredPackages.forEach(pkg => {
+            const packageElement = this.createPackageElement(pkg);
+            bottomPackagesList.appendChild(packageElement);
+        });
+    }
+
     createPackageElement(pkg) {
         const div = document.createElement('div');
         div.className = 'package-item';
@@ -670,12 +1016,15 @@ class BackgroundGallery {
         // Set background image
         div.style.backgroundImage = `url('${thumbnailUrl}')`;
         
+        // Check if package is interactive (check tags first, fallback to description)
+        const isInteractive = (pkg.tags && pkg.tags.includes('interactive')) || 
+                              (pkg.description || '').toLowerCase().includes('interactive');
+        
         div.innerHTML = `
             <div class="package-viewed-indicator">
-                <svg viewBox="0 0 24 24">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                </svg>
+                👀
             </div>
+            ${isInteractive ? '<div class="package-interactive-indicator">🎮</div>' : ''}
             <div class="package-content">
                 <h3>${pkg.name || pkg.id}</h3>
                 <div class="package-description">${pkg.description || 'No description available'}</div>
