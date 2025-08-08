@@ -4,6 +4,8 @@ metadata:
   description: WebGL randomly generated starfield
   author: AzazelN28
   source: https://codepen.io/AzazelN28/pen/zvXZQw
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

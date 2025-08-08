@@ -5,6 +5,8 @@ metadata:
     Howl's Moving Castle
   author: Nathan Gordon
   source: https://codepen.io/gordonnl/pen/RwOYEQ
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

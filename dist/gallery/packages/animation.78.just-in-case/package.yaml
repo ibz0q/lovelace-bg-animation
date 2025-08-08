@@ -5,6 +5,8 @@ metadata:
   author: Matthias Hurrle
   source: https://codepen.io/atzedent/pen/PwobBLM
   format: false
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >

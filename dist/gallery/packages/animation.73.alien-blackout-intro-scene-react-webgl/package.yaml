@@ -4,6 +4,8 @@ metadata:
   description: Made with React and WebGL
   author: Boris Šehovac
   source: https://codepen.io/bsehovac/pen/MNOEVe
+  tags:
+    - interactive
 helpers:
   insert_baseurl: true
 template: >
