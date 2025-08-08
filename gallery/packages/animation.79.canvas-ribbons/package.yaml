@@ -137,6 +137,9 @@ template: >
               Waves.background();
             }
 
+            // Set global line width once for all waves
+            ctx.lineWidth = 1;
+            
             each(Waves.waves, function (wave, i) {
               wave.update();
               wave.draw();
@@ -168,10 +171,8 @@ template: >
 
           Waves.prototype.clear = function () {
             var Waves = this;
-            // Use faster composite operation for clearing
-            Waves.ctx.globalCompositeOperation = 'source-over';
-            Waves.ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Slight fade for trail effect
-            Waves.ctx.fillRect(0, 0, Waves.width, Waves.height);
+            // Back to original clear for proper ribbon look
+            Waves.ctx.clearRect(0, 0, Waves.width, Waves.height);
           };
 
           Waves.prototype.background = function () {
@@ -195,8 +196,8 @@ template: >
             // Use container dimensions for proper iframe sizing
             var width = getContainerWidth();
             var height = getContainerHeight();
-            // Limit pixel ratio to 1 for better performance
-            Waves.scale = Math.min(window.devicePixelRatio || 1, 1.5);
+            // Limit pixel ratio more aggressively for ribbons (they look good at lower res)
+            Waves.scale = Math.min(window.devicePixelRatio || 1, 1.25);
             Waves.width = width * Waves.scale;
             Waves.height = height * Waves.scale;
             Waves.canvas.width = Waves.width;
@@ -276,13 +277,19 @@ template: >
 
             var Lines = Wave.Lines;
             
-            // Skip every other line for better performance
-            var step = debug ? 1 : 2;
+            // Render more lines but with optimization
+            var step = debug ? 1 : 1; // Render every line for proper ribbon look
 
+            // Batch drawing operations for better performance
+            var initialColor = Lines.length > 0 && Lines[0] ? Lines[0].color : "rgba(255,255,255,0.1)";
+            ctx.strokeStyle = debug ? "#fff" : initialColor;
+            
             for (var i = 0; i < Lines.length; i += step) {
               if (debug && i > 0) return;
               
               var line = Lines[i];
+              if (!line) continue;
+              
               var angle = line.angle;
 
               var x1 = x - radius * Math.cos(angle[0] * amplitude + rotation);
@@ -294,7 +301,10 @@ template: >
               var cpx2 = x + radius3 * Math.cos(angle[2] * amplitude * 2);
               var cpy2 = y + radius3 * Math.sin(angle[2] * amplitude * 2);
 
-              ctx.strokeStyle = debug ? "#fff" : line.color;
+              // Only change stroke style if different from previous
+              if (!debug && line.color !== ctx.strokeStyle) {
+                ctx.strokeStyle = line.color;
+              }
 
               ctx.beginPath();
               ctx.moveTo(x1, y1);
