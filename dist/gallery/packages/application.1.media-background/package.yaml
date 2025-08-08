@@ -32,13 +32,18 @@ parameters:
     type: boolean
     behavior: environment
   - name: progressBarColor
-    default: "linear-gradient(90deg, #00c6ff, #0072ff)"
+    default: "linear-gradient(90deg, #667eea, #764ba2)"
     description: CSS color or gradient for the progress bar.
     type: string
     behavior: environment
   - name: progressBarOpacity
-    default: 0.9
+    default: 0.2
     description: Opacity of the progress bar (0 to 1).
+    type: number
+    behavior: environment
+  - name: defaultDuration
+    default: 9000
+    description: Default duration in milliseconds for media items that don't specify their own duration.
     type: number
     behavior: environment
   - name: fit
@@ -201,11 +206,12 @@ parameters:
         duration: playback
         muted: true
         preload: auto
+        playbackRate: 0.75
         tags:
           - video
           - sunny
     description: Array of media items. Each item should have {file, duration,
-      preload, tags, stretchToFit, muted, fit} properties.
+      preload, tags, stretchToFit, muted, fit, playbackRate} properties.
     type: array
     behavior: environment
     schema:
@@ -249,6 +255,9 @@ parameters:
             - scale-down
             - none
           description: Per-item fitting mode override
+        playbackRate:
+          type: number
+          description: Playback speed multiplier for videos (videos only). 1.0 = normal speed, 0.5 = half speed, 2.0 = double speed, etc. Values between 0.1 and 16.0 are supported by most browsers.
 template: >
   <!DOCTYPE html>
 
@@ -428,14 +437,13 @@ template: >
           background: transparent;
           z-index: 1000;
           pointer-events: none;
-          opacity: 0.6;
         }
         #progress-bar {
           height: 100%;
           width: 0%;
-          background: linear-gradient(90deg, #00c6ff, #0072ff);
+          background: linear-gradient(90deg, #667eea, #764ba2);
           border-radius: 3px;
-          transition: width 0s;
+          transition: width 0.1s ease-out;
         }
       </style>
     </head>
@@ -447,15 +455,16 @@ template: >
       </div>
       <script>
         const config = {
-          transition: window.env?.transition || "crossfade", // 'fade-to-black', 'random', or array of transitions
+          transition: window.env?.transition || "fade-to-black",
           transitionDuration: window.env?.transitionDuration || 1200, // ms
           order: window.env?.order || "shuffle", // 'sequence', 'reverse', 'shuffle'
           fit: window.env?.fit || "cover", // 'contain', 'cover', 'fill', 'scale-down', 'none'
           showProgressBar: window.env?.showProgressBar ?? true, // Show/hide progress bar
           progressBarColor:
             window.env?.progressBarColor ||
-            "linear-gradient(90deg, #00c6ff, #0072ff)", // or any CSS color/gradient
-          progressBarOpacity: window.env?.progressBarOpacity ?? 0.9, // 0 to 1
+            "linear-gradient(90deg, #667eea, #764ba2)", // or any CSS color/gradient
+          progressBarOpacity: window.env?.progressBarOpacity ?? 0.2, // 0 to 1
+          defaultDuration: window.env?.defaultDuration || 4000, // Default duration in ms
           mediaList: window.env?.mediaList || [
             {
               file: "https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4",
@@ -520,7 +529,7 @@ template: >
           return src.match(/\.mp4$|\.webm$|\.ogg$/i);
         }
 
-        function createMediaElement(src, muted, preload) {
+        function createMediaElement(src, muted, preload, playbackRate) {
           let el;
           if (isVideo(src)) {
             el = document.createElement("video");
@@ -533,6 +542,10 @@ template: >
             el.setAttribute("webkit-playsinline", "");
             el.style.background = "black";
             el.preload = preload !== undefined ? preload : "auto";
+            // Set playback rate if specified (videos only)
+            if (playbackRate !== undefined && playbackRate !== 1.0) {
+              el.playbackRate = playbackRate;
+            }
           } else {
             el = document.createElement("img");
             el.src = src;
@@ -569,7 +582,8 @@ template: >
             // Use media item, then fallback
             const muted = media.muted !== undefined ? media.muted : true;
             const preload = media.preload !== undefined ? media.preload : "auto";
-            const el = createMediaElement(src, muted, preload);
+            const playbackRate = media.playbackRate !== undefined ? media.playbackRate : 1.0;
+            const el = createMediaElement(src, muted, preload, playbackRate);
             el.classList.add(transitionType);
             container.appendChild(el);
 
@@ -632,7 +646,7 @@ template: >
           progressBar.style.width = "0%";
           // Force reflow
           void progressBar.offsetWidth;
-          progressBar.style.transition = `width linear ${duration}ms`;
+          progressBar.style.transition = `width ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
           progressBar.style.width = "100%";
           if (videoEl) {
             // Sync with video currentTime
@@ -643,10 +657,8 @@ template: >
                   100,
                   (videoEl.currentTime / videoEl.duration) * 100,
                 );
-                progressBar.style.transition = "none";
+                progressBar.style.transition = "width 0.1s ease-out";
                 progressBar.style.width = percent + "%";
-                progressBar.offsetWidth; // force reflow
-                progressBar.style.transition = "";
               }
               if (!videoEl.paused && !videoEl.ended) {
                 rafId = requestAnimationFrame(updateBar);
@@ -687,8 +699,8 @@ template: >
               transitionType = transitionSource;
             }
             const el = await showMedia(idx, transitionType);
-            // Use media.duration, then fallback
-            let duration = media.duration !== undefined ? media.duration : 4000;
+            // Use media.duration, then fallback to global default
+            let duration = media.duration !== undefined ? media.duration : config.defaultDuration;
             if (config.showProgressBar) {
               if (isVideo(media.file)) {
                 if (duration === "playback") {
@@ -714,12 +726,12 @@ template: >
                 await new Promise((res) => {
                   el.onended = res;
                 });
-              } else {
-                await new Promise((res) => {
-                  el.onended = res;
-                  setTimeout(res, duration || 20000);
-                });
-              }
+                              } else {
+                  await new Promise((res) => {
+                    el.onended = res;
+                    setTimeout(res, duration || config.defaultDuration);
+                  });
+                }
             } else {
               await new Promise((res) => setTimeout(res, duration));
             }
@@ -774,7 +786,7 @@ template: >
           width: 0%;
           background: ${config.progressBarColor};
           border-radius: 3px;
-          transition: width 0s;
+          transition: width 0.1s ease-out;
         }
       `;
         document.head.appendChild(style);

@@ -7,7 +7,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "0efb81710ca4475018eee9db0274559bbdfb457f",
+      "hash": "57d9165b95ceef9e670de72ef34c87d2a3137d94",
       "parameters": [
         {
           "name": "transition",
@@ -41,15 +41,22 @@
         },
         {
           "name": "progressBarColor",
-          "default": "linear-gradient(90deg, #00c6ff, #0072ff)",
+          "default": "linear-gradient(90deg, #667eea, #764ba2)",
           "description": "CSS color or gradient for the progress bar.",
           "type": "string",
           "behavior": "environment"
         },
         {
           "name": "progressBarOpacity",
-          "default": 0.9,
+          "default": 0.2,
           "description": "Opacity of the progress bar (0 to 1).",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "defaultDuration",
+          "default": 9000,
+          "description": "Default duration in milliseconds for media items that don't specify their own duration.",
           "type": "number",
           "behavior": "environment"
         },
@@ -277,13 +284,14 @@
               "duration": "playback",
               "muted": true,
               "preload": "auto",
+              "playbackRate": 0.75,
               "tags": [
                 "video",
                 "sunny"
               ]
             }
           ],
-          "description": "Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted, fit} properties.",
+          "description": "Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted, fit, playbackRate} properties.",
           "type": "array",
           "behavior": "environment",
           "schema": {
@@ -339,6 +347,10 @@
                   "none"
                 ],
                 "description": "Per-item fitting mode override"
+              },
+              "playbackRate": {
+                "type": "number",
+                "description": "Playback speed multiplier for videos (videos only). 1.0 = normal speed, 0.5 = half speed, 2.0 = double speed, etc. Values between 0.1 and 16.0 are supported by most browsers."
               }
             }
           }
@@ -361,7 +373,10 @@
       "description": "Random speed shooting stars",
       "author": "alphardex",
       "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-      "hash": "1b90261da9ffd402d42083e7d755ff0eff0a022a"
+      "hash": "1b90261da9ffd402d42083e7d755ff0eff0a022a",
+      "tags": [
+        "slow"
+      ]
     },
     {
       "id": "generator.2.knots",
@@ -370,7 +385,10 @@
       "description": "Not knots",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/OJYyMNR",
-      "hash": "08a4670a149f5bb1a2d79c47275c7bcf0b744d0d"
+      "hash": "08a4670a149f5bb1a2d79c47275c7bcf0b744d0d",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.3.spipa-circle",
@@ -451,7 +469,10 @@
       "description": "The final frontier",
       "author": "Akimitsu Hamamuro",
       "source": "https://codepen.io/akm2/pen/RwQXLdP",
-      "hash": "35e64b6458ca9e4bbfd3a350d2218156c9162f7d"
+      "hash": "35e64b6458ca9e4bbfd3a350d2218156c9162f7d",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.12.gradient-particles",
@@ -514,7 +535,10 @@
       "description": "Pure JS 3D particle Cube - 1000 particles",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/dXVvYb",
-      "hash": "d1cc112341e0f257a159b5c26efe72675246eeac"
+      "hash": "d1cc112341e0f257a159b5c26efe72675246eeac",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.19.trapped-particles",
@@ -523,7 +547,10 @@
       "description": "Trapped particles with shocking connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
-      "hash": "543ed3208b56f4ece7dccb2e29912f3c9ce061d2"
+      "hash": "543ed3208b56f4ece7dccb2e29912f3c9ce061d2",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.20.manifold",
@@ -541,7 +568,10 @@
       "description": "Noise Abstraction",
       "author": "Akimitsu Hamamuro",
       "source": "https://codepen.io/akm2/pen/AxGzJb",
-      "hash": "e18a2e635c62be47dc7fb948769765baf8b4c8e3"
+      "hash": "e18a2e635c62be47dc7fb948769765baf8b4c8e3",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.22.cloth-ribbons",
@@ -568,7 +598,10 @@
       "description": "Trapped particles with gradient connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/qdZWag",
-      "hash": "ea9a62666ed75663600a949a4d3aa78af648450f"
+      "hash": "ea9a62666ed75663600a949a4d3aa78af648450f",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.25.galactic-swimmers",
@@ -622,7 +655,10 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/pomzqE",
-      "hash": "074ff26e932dc28618bbbba534d609e96a56ad0e"
+      "hash": "074ff26e932dc28618bbbba534d609e96a56ad0e",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.33.canvas-bokeh",
@@ -631,7 +667,10 @@
       "description": "Pretty heavy, and not exactly true to real photography, but it's a start.",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/nYzapO",
-      "hash": "98ad625e1835e7aee6010e03641c91d057e309f5"
+      "hash": "98ad625e1835e7aee6010e03641c91d057e309f5",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.34.canvas-color-teams",
@@ -649,7 +688,10 @@
       "description": "Click to clear and change hue.",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/Xdaavx",
-      "hash": "95a1241aa34782d0671ede0882636ce30e1e9c92"
+      "hash": "95a1241aa34782d0671ede0882636ce30e1e9c92",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.36.starfield",
@@ -658,7 +700,10 @@
       "description": "Engage",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/Vwxvbw",
-      "hash": "c7e8cbb2a4024fc2cd94b1adc5fce00fe4561cbb"
+      "hash": "c7e8cbb2a4024fc2cd94b1adc5fce00fe4561cbb",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.46.codevember-05-simplex-vector-flow-field",
@@ -676,7 +721,10 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/GprWyw",
-      "hash": "c13df9befb34b3857b1e87e03c3369a7c3fb6f3b"
+      "hash": "c13df9befb34b3857b1e87e03c3369a7c3fb6f3b",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.48.colorful-wanderers",
@@ -712,7 +760,10 @@
       "description": "Practicing with ThreeJS",
       "author": "Júlia Erő",
       "source": "https://codepen.io/planktone/pen/EPXMGj",
-      "hash": "015ca2ad5efc9a7a29bda10bc4ffb0ba36139303"
+      "hash": "015ca2ad5efc9a7a29bda10bc4ffb0ba36139303",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.53.stars",
@@ -748,7 +799,10 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version. Then I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/jdGBjW",
-      "hash": "71c923b984246addf5fe31b5eafc12f4e5c981da"
+      "hash": "71c923b984246addf5fe31b5eafc12f4e5c981da",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.58.browniandrix-noise-l3",
@@ -757,7 +811,10 @@
       "description": "Working with a nanomechanics physicist. The dude told me about the nature of Brownian motion, so I made my own special version.\nThen I applied it to attractors, and each attractor is followed by its own baby particle, with a  set of viscosity and spring force. What we see is the particle babes motion.",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/VRaGKq",
-      "hash": "6fec1a1f5ad2ed6bdc38c82506edad8084fbbf4c"
+      "hash": "6fec1a1f5ad2ed6bdc38c82506edad8084fbbf4c",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.59.dimension-two-and-a-half",
@@ -793,7 +850,10 @@
       "description": "Neural Glow",
       "author": "Ksenia Kondrashova",
       "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
-      "hash": "24b70b8dc9ab657cdbcbbc6745896593a64d3f1e"
+      "hash": "24b70b8dc9ab657cdbcbbc6745896593a64d3f1e",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.63.green-circuit",
@@ -828,7 +888,10 @@
       "description": "Cristal Lands",
       "author": "nskrgv",
       "source": "https://codepen.io/nskrgv/pen/PQzpKb",
-      "hash": "420f8a50e9deae2c6a6e8a8f6359b612b517faf1"
+      "hash": "420f8a50e9deae2c6a6e8a8f6359b612b517faf1",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.66.fog-of-war",
@@ -846,7 +909,10 @@
       "description": "Interactive particle animation",
       "author": "Original Author",
       "source": "Original Source",
-      "hash": "5fe6861c45b24a4a654f3d98486c8e4af2ae0de1"
+      "hash": "5fe6861c45b24a4a654f3d98486c8e4af2ae0de1",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.68.rgb-wave",
@@ -890,7 +956,10 @@
       "description": "Interactive gradient",
       "author": "Ray Victor PRO",
       "source": "https://codepen.io/ray7551/pen/EbVmZd",
-      "hash": "d0288e903837466a9969a4215cdff2d089c229de"
+      "hash": "d0288e903837466a9969a4215cdff2d089c229de",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.72.playstation-3-bg-style",
@@ -899,7 +968,7 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "a3893a27865f2a46dea3bb1a0a18ce81e1dabea4",
+      "hash": "39417188085d20c2a8a70a2a9201a724d22c1f75",
       "parameters": [
         {
           "name": "waveColor",
@@ -942,6 +1011,9 @@
           "default": 200,
           "type": "string"
         }
+      ],
+      "tags": [
+        "interactive"
       ]
     },
     {
@@ -951,7 +1023,10 @@
       "description": "Mouse vertical position controls pattern size when you click.",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/LYvowrg",
-      "hash": "3d5552b52fafa3aa1d6787c33907eff97f7842f3"
+      "hash": "3d5552b52fafa3aa1d6787c33907eff97f7842f3",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.77.hexanimation-2",
@@ -960,7 +1035,10 @@
       "description": "Mouse vertical position controls pattern size when you click.  ",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/poBXvgg",
-      "hash": "63683ad66a9fa3970a96c2c43b18e17bcb9dc71c"
+      "hash": "63683ad66a9fa3970a96c2c43b18e17bcb9dc71c",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.78.just-in-case",
@@ -987,7 +1065,10 @@
       "description": "Randomly generated columns",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/NPWbdMP",
-      "hash": "5484794360ca855787be90d9f8abcacda79f2c98"
+      "hash": "5484794360ca855787be90d9f8abcacda79f2c98",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.80.particle-waves",
@@ -1005,7 +1086,10 @@
       "description": "The old Windows screensaver.",
       "author": "Lanny",
       "source": "https://codepen.io/lannymcnie/pen/PRZJab",
-      "hash": "41e802ea7751b3d30795f5cb4029539324ae80ce"
+      "hash": "41e802ea7751b3d30795f5cb4029539324ae80ce",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.82.storm",
@@ -1014,7 +1098,10 @@
       "description": "Storm approaches",
       "author": "Liam Egan",
       "source": "https://codepen.io/shubniggurath/pen/BVKgJK",
-      "hash": "2a6e609fb19571f7c2f640eac98ad23c4a5d1d72"
+      "hash": "2a6e609fb19571f7c2f640eac98ad23c4a5d1d72",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.83.strange-tubes",
@@ -1023,7 +1110,10 @@
       "description": "Tubes, again...",
       "author": "Kevin Levron",
       "source": "https://codepen.io/soju22/pen/JzzvbR",
-      "hash": "376fcd37dfc3c24156626b0d947a0635e0eb8951"
+      "hash": "376fcd37dfc3c24156626b0d947a0635e0eb8951",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.84.troisjs-starfield",
@@ -1049,7 +1139,10 @@
       "description": "Inspired by [Ben Matthews]",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/raBqEZy",
-      "hash": "a383c5d872e558fe80641b1ac07c1a7816596444"
+      "hash": "a383c5d872e558fe80641b1ac07c1a7816596444",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "generator.86.silky-carpet",
@@ -1147,6 +1240,9 @@
           "description": "Background image",
           "type": "string"
         }
+      ],
+      "tags": [
+        "interactive"
       ]
     },
     {
@@ -1156,7 +1252,10 @@
       "description": "A shamrock of flowers, a celebration of the Irish spirit, history and spring.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/MWyNYoq",
-      "hash": "55c13356cfd087c84df77f6e103f007f002d707b"
+      "hash": "55c13356cfd087c84df77f6e103f007f002d707b",
+      "tags": [
+        "interactive"
+      ]
     },
     {
       "id": "animation.90.aurora",
@@ -1216,6 +1315,9 @@
           "type": "boolean",
           "behavior": "environment"
         }
+      ],
+      "tags": [
+        "interactive"
       ]
     }
   ],

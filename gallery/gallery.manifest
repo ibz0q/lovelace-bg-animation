@@ -7,7 +7,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "b0437f981182dc09571f96fdaf3bbff4887adf10",
+      "hash": "57d9165b95ceef9e670de72ef34c87d2a3137d94",
       "parameters": [
         {
           "name": "transition",
@@ -364,7 +364,7 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
-      "hash": "93b2bd1a39aec1f5b95f780cdd93a765ae6599a3"
+      "hash": "302ed6b20230ab79df1fb6f8fa3a52a548531090"
     },
     {
       "id": "animation.2.shooting-stars",
@@ -637,7 +637,7 @@
       "description": "",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/wvPvjLX",
-      "hash": "c5a5e35cc1a968e50b067165d3c39e068d3816f1"
+      "hash": "1b0c631b134f9047d67a5b191d20825eec125c5d"
     },
     {
       "id": "animation.31.blooming-flower",
@@ -712,7 +712,7 @@
       "description": "Using Jonas Wagner's simplex noise JS implementation to create a vector flow field: https://github.com/jwagner/simplex-noise.js",
       "author": "Jack Rugile",
       "source": "https://codepen.io/jackrugile/pen/zodPjd",
-      "hash": "f4db72559b45f5bfe8cc547b413f5959049d4b9a"
+      "hash": "e853c567e4d36c3555b5e4e8040f4dca5e11bbb0"
     },
     {
       "id": "animation.47.color-trails",
@@ -760,7 +760,7 @@
       "description": "Practicing with ThreeJS",
       "author": "Júlia Erő",
       "source": "https://codepen.io/planktone/pen/EPXMGj",
-      "hash": "9972ad7ce9d68f7fb3f3c54db7e06999c7e30b8b",
+      "hash": "015ca2ad5efc9a7a29bda10bc4ffb0ba36139303",
       "tags": [
         "interactive"
       ]
@@ -832,7 +832,7 @@
       "description": "Dial me in",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/YzjEBoG",
-      "hash": "910a9eee7c91f0cb38a1610de6eaab383863836f"
+      "hash": "8ff3b7fcb9121d6a0ea3d31ec085a08b17f9a77a"
     },
     {
       "id": "animation.61.cube",
@@ -879,7 +879,7 @@
       "description": "Howl's Moving Castle\n",
       "author": "Nathan Gordon",
       "source": "https://codepen.io/gordonnl/pen/RwOYEQ",
-      "hash": "0dddcf7a9b17c6b5c01b4698e45b242536b69117"
+      "hash": "74d5d9d449f1f20747397982014be84e9bf1e22b"
     },
     {
       "id": "animation.65.cristal-lands",
@@ -888,7 +888,7 @@
       "description": "Cristal Lands",
       "author": "nskrgv",
       "source": "https://codepen.io/nskrgv/pen/PQzpKb",
-      "hash": "8e4eb596c19192e370c742c618cdb035ddb12a8a",
+      "hash": "420f8a50e9deae2c6a6e8a8f6359b612b517faf1",
       "tags": [
         "interactive"
       ]
@@ -900,7 +900,7 @@
       "description": "WebGL Fog",
       "author": "yoichi kobayashi",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "93f566d61b9be267c1a0b7823da7ed8c763ee9b6"
+      "hash": "5679b6079a2203b090c9cee46ac1acd0114acff5"
     },
     {
       "id": "animation.67.fly-particle",
@@ -909,7 +909,7 @@
       "description": "Interactive particle animation",
       "author": "Original Author",
       "source": "Original Source",
-      "hash": "c623872fcb8a84301e083a53ee821ed6e06223b6",
+      "hash": "5fe6861c45b24a4a654f3d98486c8e4af2ae0de1",
       "tags": [
         "interactive"
       ]
@@ -939,7 +939,7 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "cb4e56d10834f720b2dd15cbcc4fe416d6e0821e",
+      "hash": "f3ee02c06769a7339df465453fa02fad1c69f76b",
       "parameters": [
         {
           "name": "opacity",
@@ -968,7 +968,7 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "1232d37b74264e392f905cc259828760c3735df9",
+      "hash": "39417188085d20c2a8a70a2a9201a724d22c1f75",
       "parameters": [
         {
           "name": "waveColor",
@@ -1047,7 +1047,7 @@
       "description": "Text animation with a shader in the background.",
       "author": "Matthias Hurrle",
       "source": "https://codepen.io/atzedent/pen/PwobBLM",
-      "hash": "f7b348a9ceeeb9a428a93f33f724040f94232813"
+      "hash": "3c5685479ba0442d18f45d12c979fd7ac11e6e33"
     },
     {
       "id": "animation.79.canvas-ribbons",
