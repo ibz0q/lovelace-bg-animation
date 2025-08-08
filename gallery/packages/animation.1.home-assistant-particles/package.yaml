@@ -1,0 +1,272 @@
+version: v1
+metadata:
+  name: Home Assistant Particles
+  description: Authentic Home Assistant login page particle background with exact colors and configuration
+  author: Home Assistant Team (Adapted)
+  source: https://github.com/home-assistant/frontend
+  tags:
+    - interactive
+template: >
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Home Assistant Particles</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
+          overflow: hidden;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #particles {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+        }
+
+        .content {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+          color: #e1e1e1;
+          z-index: 1;
+          opacity: 0.8;
+        }
+
+        .ha-logo {
+          width: 80px;
+          height: 80px;
+          margin: 0 auto 20px;
+          background: linear-gradient(135deg, #009ac7, #18bcf2);
+          border-radius: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 8px 32px rgba(0, 154, 199, 0.3);
+        }
+
+        .ha-logo::before {
+          content: "🏠";
+          font-size: 40px;
+          filter: brightness(0) invert(1);
+        }
+
+        h1 {
+          font-size: 2.5rem;
+          font-weight: 300;
+          margin-bottom: 10px;
+          background: linear-gradient(135deg, #009ac7, #18bcf2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        p {
+          font-size: 1.1rem;
+          opacity: 0.7;
+          font-weight: 300;
+        }
+      </style>
+    </head>
+    <body>
+      <div id="particles"></div>
+      
+      <div class="content">
+        <div class="ha-logo"></div>
+        <h1>Home Assistant</h1>
+        <p>Particle Background</p>
+      </div>
+
+      <!-- TSParticles -->
+      <script src="https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.0.3/tsparticles.engine.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@tsparticles/preset-links@3.0.3/tsparticles.preset.links.min.js"></script>
+
+      <script>
+        // Helper functions for container sizing
+        function getContainerWidth() {
+          const container = document.body.parentElement || document.body;
+          const rect = container.getBoundingClientRect();
+          return rect.width || container.clientWidth || window.innerWidth;
+        }
+        
+        function getContainerHeight() {
+          const container = document.body.parentElement || document.body;
+          const rect = container.getBoundingClientRect();
+          return rect.height || container.clientHeight || window.innerHeight;
+        }
+
+        // Home Assistant Primary Color (exact match)
+        const DefaultPrimaryColor = "#009ac7";
+
+        // Load tsParticles with Home Assistant's exact configuration
+        async function loadParticles() {
+          await loadLinksPreset(tsParticles);
+          
+          await tsParticles.load({
+            id: "particles",
+            options: {
+              preset: "links",
+              background: {
+                opacity: 0,
+              },
+              fullScreen: {
+                enable: false,
+                zIndex: -1,
+              },
+              detectRetina: true,
+              fpsLimit: 60,
+              motion: {
+                disable: false,
+                reduce: {
+                  factor: 4,
+                  value: true,
+                },
+              },
+              particles: {
+                color: {
+                  value: DefaultPrimaryColor,
+                },
+                links: {
+                  color: {
+                    value: DefaultPrimaryColor,
+                  },
+                  distance: 100,
+                  enable: true,
+                  frequency: 1,
+                  opacity: 0.7,
+                  width: 1,
+                },
+                move: {
+                  enable: true,
+                  speed: 0.5,
+                },
+                number: {
+                  limit: undefined,
+                  value: 50,
+                },
+                opacity: {
+                  value: {
+                    min: 0.3,
+                    max: 0.5,
+                  },
+                  animation: {
+                    destroy: "none",
+                    enable: true,
+                    speed: 0.5,
+                    startValue: "random",
+                    sync: false,
+                  },
+                },
+                size: {
+                  value: {
+                    min: 1,
+                    max: 3,
+                  },
+                  animation: {
+                    destroy: "none",
+                    enable: true,
+                    speed: 3,
+                    startValue: "random",
+                    sync: false,
+                  },
+                },
+              },
+              pauseOnBlur: true,
+              interactivity: {
+                detectOn: "window",
+                events: {
+                  onHover: {
+                    enable: true,
+                    mode: "grab",
+                  },
+                  onClick: {
+                    enable: true,
+                    mode: "push",
+                  },
+                  resize: {
+                    enable: true,
+                    delay: 0.5,
+                  },
+                },
+                modes: {
+                  grab: {
+                    distance: 150,
+                    links: {
+                      opacity: 1,
+                    },
+                  },
+                  push: {
+                    quantity: 3,
+                  },
+                },
+              },
+              responsive: [
+                {
+                  maxWidth: 768,
+                  options: {
+                    particles: {
+                      number: {
+                        value: 30,
+                      },
+                      links: {
+                        distance: 80,
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          });
+        }
+
+        // Handle window resize properly for iframe contexts
+        function handleResize() {
+          const container = document.getElementById('particles');
+          const width = getContainerWidth();
+          const height = getContainerHeight();
+          
+          if (container && container.style) {
+            container.style.width = width + 'px';
+            container.style.height = height + 'px';
+          }
+          
+          // Refresh particles on resize
+          if (window.tsParticles) {
+            tsParticles.setOnClickHandler(() => {});
+            loadParticles();
+          }
+        }
+
+        // Initialize particles when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+          loadParticles();
+          
+          // Handle resize events
+          window.addEventListener('resize', handleResize);
+          
+          // Initial size setup
+          handleResize();
+        });
+
+        // Cleanup function for better performance
+        window.addEventListener('beforeunload', () => {
+          if (window.tsParticles) {
+            tsParticles.destroy();
+          }
+        });
+      </script>
+    </body>
+  </html>
