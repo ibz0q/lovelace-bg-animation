@@ -1,6 +1,55 @@
 {
   "packages": [
     {
+      "id": "animation.1.home-assistant-particles",
+      "version": "v1",
+      "name": "Particle Background",
+      "description": "Clean particle background with configurable settings and light/dark mode",
+      "author": "Home Assistant Team (Adapted)",
+      "source": "https://github.com/home-assistant/frontend",
+      "hash": "4bb252d8cbf164e698b43fcb7d274e3522af96db",
+      "parameters": [
+        {
+          "name": "darkMode",
+          "default": true,
+          "description": "Use dark mode by default (true for dark mode, false for light mode)",
+          "type": "boolean",
+          "behavior": "environment"
+        },
+        {
+          "name": "particleCount",
+          "default": 50,
+          "description": "Number of particles (recommended range 20-100)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "linkDistance",
+          "default": 100,
+          "description": "Maximum distance for particle connections (pixels)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "mouseDistance",
+          "default": 150,
+          "description": "Distance for mouse interaction with particles (pixels)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "particleSpeed",
+          "default": 0.5,
+          "description": "Speed of particle movement (0.1-2.0)",
+          "type": "number",
+          "behavior": "environment"
+        }
+      ],
+      "tags": [
+        "interactive"
+      ]
+    },
+    {
       "id": "application.1.media-background",
       "version": "v1",
       "name": "Media Background",
@@ -1074,7 +1123,7 @@
       "description": "",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/LQVzxJ",
-      "hash": "8fef6c70fd5ed669be4a786d7e7659d93b3b76b5"
+      "hash": "ba019014ac4ae88d0fe84e76174d265491bbacc0"
     },
     {
       "id": "generator.79.more-columns",
