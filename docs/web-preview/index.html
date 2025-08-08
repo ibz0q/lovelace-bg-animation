@@ -319,8 +319,6 @@ body {
     right: 10px;
     width: 24px;
     height: 24px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -328,8 +326,6 @@ body {
     opacity: 0;
     transform: scale(0);
     transition: all 0.3s ease;
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 14px;
     line-height: 1;
 }
@@ -359,29 +355,7 @@ body {
     cursor: help;
 }
 
-.package-interactive-indicator::after {
-    content: "Interactive";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    margin-bottom: 5px;
-    z-index: 10;
-}
 
-.package-interactive-indicator:hover::after {
-    opacity: 1;
-    visibility: visible;
-}
 
 /* Sidebar footer */
 .sidebar-footer {
@@ -694,7 +668,13 @@ body {
     color: white;
     font-size: 0.9rem;
     font-weight: 500;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 1),
+        -1px -1px 2px rgba(0, 0, 0, 1),
+        1px -1px 2px rgba(0, 0, 0, 1),
+        -1px 1px 2px rgba(0, 0, 0, 1),
+        0 0 4px rgba(0, 0, 0, 0.9),
+        0 0 8px rgba(0, 0, 0, 0.8);
 }
 
 .credits-interactive-icon {
@@ -714,7 +694,13 @@ body {
     font-size: 0.8rem;
     font-weight: 400;
     font-style: italic;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 
+        1px 1px 2px rgba(0, 0, 0, 1),
+        -1px -1px 2px rgba(0, 0, 0, 1),
+        1px -1px 2px rgba(0, 0, 0, 1),
+        -1px 1px 2px rgba(0, 0, 0, 1),
+        0 0 4px rgba(0, 0, 0, 0.9),
+        0 0 8px rgba(0, 0, 0, 0.8);
 }
 
 .package-copy-button {
@@ -1292,10 +1278,10 @@ class BackgroundGallery {
                               (pkg.description || '').toLowerCase().includes('interactive');
         
                  div.innerHTML = `
-             <div class="package-viewed-indicator">
+             <div class="package-viewed-indicator" title="Viewed">
                  👀
              </div>
-             ${isInteractive ? '<div class="package-interactive-indicator">🎮</div>' : ''}
+             ${isInteractive ? '<div class="package-interactive-indicator" title="Interactive">🎮</div>' : ''}
              <div class="package-content">
                  <h3>${pkg.name || pkg.id}</h3>
                  <div class="package-description">${pkg.description || 'No description available'}</div>
