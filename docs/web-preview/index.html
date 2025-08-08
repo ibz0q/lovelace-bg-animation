@@ -38,12 +38,13 @@ body {
 .menu-button {
     position: fixed;
     top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    left: 20px;
+    transform: scale(0.8);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -52,13 +53,14 @@ body {
     color: white;
     z-index: 1000;
     opacity: 0;
-    transition: all 0.3s ease;
-    transform: scale(0.8);
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .menu-button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1);
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .menu-button.visible {
@@ -70,20 +72,20 @@ body {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -400px;
-    width: 400px;
+    left: -420px;
+    width: 420px;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(20px);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 2000;
-    transition: right 0.3s ease;
+    transition: left 0.3s ease;
     display: flex;
     flex-direction: column;
 }
 
 .sidebar.open {
-    right: 0;
+    left: 0;
 }
 
 .sidebar-header {
@@ -152,25 +154,55 @@ body {
 }
 
 .package-item {
-    padding: 15px;
-    margin-bottom: 10px;
+    padding: 20px;
+    margin-bottom: 12px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     color: white;
+    position: relative;
+    overflow: hidden;
+    min-height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.package-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: 1;
+}
+
+.package-content {
+    position: relative;
+    z-index: 2;
 }
 
 .package-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.package-item:hover::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%);
 }
 
 .package-item.active {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.package-item.active::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 100%);
 }
 
 .package-item h3 {
@@ -201,6 +233,34 @@ body {
     font-size: 11px;
     color: white;
     margin-top: 5px;
+}
+
+.package-viewed-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background: rgba(34, 197, 94, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.package-item.viewed .package-viewed-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.package-viewed-indicator svg {
+    width: 14px;
+    height: 14px;
+    fill: white;
 }
 
 /* Sidebar footer */
@@ -279,14 +339,23 @@ body {
 @media (max-width: 768px) {
     .sidebar {
         width: 100vw;
-        right: -100vw;
+        left: -100vw;
     }
     
     .menu-button {
         top: 15px;
-        right: 15px;
-        width: 45px;
-        height: 45px;
+        left: 15px;
+        transform: scale(0.8);
+        width: 50px;
+        height: 50px;
+    }
+    
+    .menu-button.visible {
+        transform: scale(1);
+    }
+    
+    .menu-button:hover {
+        transform: scale(1.05);
     }
 }
 
@@ -369,6 +438,7 @@ class BackgroundGallery {
         this.filteredPackages = [];
         this.mouseTimeout = null;
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
+        this.viewedPackages = this.loadViewingHistory();
         
         this.init();
     }
@@ -377,6 +447,36 @@ class BackgroundGallery {
         await this.loadGalleryManifest();
         this.setupEventListeners();
         this.loadDefaultPackage();
+    }
+
+    loadViewingHistory() {
+        try {
+            const stored = localStorage.getItem('lovelace-bg-viewed-packages');
+            return stored ? new Set(JSON.parse(stored)) : new Set();
+        } catch (error) {
+            console.warn('Failed to load viewing history:', error);
+            return new Set();
+        }
+    }
+
+    saveViewingHistory() {
+        try {
+            const viewedArray = Array.from(this.viewedPackages);
+            localStorage.setItem('lovelace-bg-viewed-packages', JSON.stringify(viewedArray));
+        } catch (error) {
+            console.warn('Failed to save viewing history:', error);
+        }
+    }
+
+    markPackageAsViewed(packageId) {
+        this.viewedPackages.add(packageId);
+        this.saveViewingHistory();
+        
+        // Update the UI to show the viewed indicator
+        const packageElement = document.querySelector(`[data-package-id="${packageId}"]`);
+        if (packageElement) {
+            packageElement.classList.add('viewed');
+        }
     }
 
     async loadGalleryManifest() {
@@ -388,6 +488,9 @@ class BackgroundGallery {
             
             const manifest = await response.json();
             this.packages = manifest.packages || [];
+            
+            // Sort packages using the same logic as create-docs.js
+            this.packages = this.sortPackages(this.packages);
             this.filteredPackages = [...this.packages];
             
             this.renderPackagesList();
@@ -396,6 +499,45 @@ class BackgroundGallery {
             console.error('Error loading gallery manifest:', error);
             this.showError('Failed to load gallery packages. Please refresh the page.');
         }
+    }
+
+    sortPackages(packages) {
+        return packages.sort((a, b) => {
+            // Extract the type and number from the package IDs
+            const getTypeAndNumber = (id) => {
+                const match = id.match(/^(\w+)\.(\d+)\./);
+                if (!match) return { type: id, number: 0 };
+                return {
+                    type: match[1],
+                    number: parseInt(match[2])
+                };
+            };
+
+            const typeA = getTypeAndNumber(a.id);
+            const typeB = getTypeAndNumber(b.id);
+
+            // Define type priority (animation = 1, generator = 2, others = 3)
+            const typePriority = {
+                'animation': 1,
+                'generator': 2
+            };
+
+            const priorityA = typePriority[typeA.type] || 3;
+            const priorityB = typePriority[typeB.type] || 3;
+
+            // First sort by type priority
+            if (priorityA !== priorityB) {
+                return priorityA - priorityB;
+            }
+
+            // If same type, sort by number in descending order (newest first)
+            if (typeA.number !== typeB.number) {
+                return typeB.number - typeA.number;
+            }
+
+            // If everything else is equal, sort alphabetically
+            return a.id.localeCompare(b.id);
+        });
     }
 
     setupEventListeners() {
@@ -432,11 +574,18 @@ class BackgroundGallery {
             const sidebar = document.getElementById('sidebar');
             const menuButton = document.getElementById('menu-button');
             
-            if (sidebar.classList.contains('open') && 
-                !sidebar.contains(e.target) && 
-                !menuButton.contains(e.target)) {
-                this.closeSidebar();
+            // Check if sidebar is open and click is outside
+            if (sidebar.classList.contains('open')) {
+                // If click is not inside sidebar and not on menu button
+                if (!sidebar.contains(e.target) && !menuButton.contains(e.target)) {
+                    this.closeSidebar();
+                }
             }
+        });
+
+        // Prevent sidebar clicks from closing the sidebar
+        document.getElementById('sidebar').addEventListener('click', (e) => {
+            e.stopPropagation();
         });
     }
 
@@ -477,11 +626,11 @@ class BackgroundGallery {
     filterPackages(searchTerm) {
         const searchLower = searchTerm.toLowerCase();
         
-        this.filteredPackages = this.packages.filter(package => {
-            const name = package.name?.toLowerCase() || '';
-            const description = package.description?.toLowerCase() || '';
-            const author = package.author?.toLowerCase() || '';
-            const id = package.id?.toLowerCase() || '';
+        this.filteredPackages = this.packages.filter(pkg => {
+            const name = pkg.name?.toLowerCase() || '';
+            const description = pkg.description?.toLowerCase() || '';
+            const author = pkg.author?.toLowerCase() || '';
+            const id = pkg.id?.toLowerCase() || '';
             
             return name.includes(searchLower) || 
                    description.includes(searchLower) || 
@@ -501,29 +650,47 @@ class BackgroundGallery {
             return;
         }
         
-        this.filteredPackages.forEach(package => {
-            const packageElement = this.createPackageElement(package);
+        this.filteredPackages.forEach(pkg => {
+            const packageElement = this.createPackageElement(pkg);
             packagesList.appendChild(packageElement);
         });
     }
 
-    createPackageElement(package) {
+    createPackageElement(pkg) {
         const div = document.createElement('div');
         div.className = 'package-item';
-        div.dataset.packageId = package.id;
+        div.dataset.packageId = pkg.id;
         
         // Determine package type from ID
-        const type = this.getPackageType(package.id);
+        const type = this.getPackageType(pkg.id);
+        
+        // Create thumbnail URL (same as in create-docs.js)
+        const thumbnailUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${pkg.id}/screenshot.png`;
+        
+        // Set background image
+        div.style.backgroundImage = `url('${thumbnailUrl}')`;
         
         div.innerHTML = `
-            <h3>${package.name || package.id}</h3>
-            <div class="package-description">${package.description || 'No description available'}</div>
-            <div class="package-author">by ${package.author || 'Unknown'}</div>
-            <div class="package-type">${type}</div>
+            <div class="package-viewed-indicator">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+            </div>
+            <div class="package-content">
+                <h3>${pkg.name || pkg.id}</h3>
+                <div class="package-description">${pkg.description || 'No description available'}</div>
+                <div class="package-author">by ${pkg.author || 'Unknown'}</div>
+                <div class="package-type">${type}</div>
+            </div>
         `;
         
+        // Add viewed class if this package has been viewed before
+        if (this.viewedPackages.has(pkg.id)) {
+            div.classList.add('viewed');
+        }
+        
         div.addEventListener('click', () => {
-            this.selectPackage(package);
+            this.selectPackage(pkg);
         });
         
         return div;
@@ -536,22 +703,22 @@ class BackgroundGallery {
         return 'Other';
     }
 
-    async selectPackage(package) {
+    async selectPackage(pkg) {
         // Update active state
         document.querySelectorAll('.package-item').forEach(item => {
             item.classList.remove('active');
         });
         
-        const activeItem = document.querySelector(`[data-package-id="${package.id}"]`);
+        const activeItem = document.querySelector(`[data-package-id="${pkg.id}"]`);
         if (activeItem) {
             activeItem.classList.add('active');
         }
         
         // Update package info in footer
-        this.updatePackageInfo(package);
+        this.updatePackageInfo(pkg);
         
         // Load the package
-        await this.loadPackage(package);
+        await this.loadPackage(pkg);
         
         // Close sidebar on mobile
         if (window.innerWidth <= 768) {
@@ -559,17 +726,17 @@ class BackgroundGallery {
         }
     }
 
-    updatePackageInfo(package) {
-        document.getElementById('current-package-name').textContent = package.name || package.id;
-        document.getElementById('current-package-author').textContent = `by ${package.author || 'Unknown'}`;
-        document.getElementById('current-package-description').textContent = package.description || 'No description available';
+    updatePackageInfo(pkg) {
+        document.getElementById('current-package-name').textContent = pkg.name || pkg.id;
+        document.getElementById('current-package-author').textContent = `by ${pkg.author || 'Unknown'}`;
+        document.getElementById('current-package-description').textContent = pkg.description || 'No description available';
     }
 
-    async loadPackage(package) {
+    async loadPackage(pkg) {
         this.showLoading();
         
         try {
-            const previewUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${package.id}/preview.html`;
+            const previewUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${pkg.id}/preview.html`;
             
             // Test if the preview URL exists
             const response = await fetch(previewUrl, { method: 'HEAD' });
@@ -580,7 +747,10 @@ class BackgroundGallery {
             const iframe = document.getElementById('preview-iframe');
             iframe.src = previewUrl;
             
-            this.currentPackage = package;
+            this.currentPackage = pkg;
+            
+            // Mark package as viewed when it loads successfully
+            this.markPackageAsViewed(pkg.id);
             
             // Hide loading after iframe loads
             iframe.onload = () => {
@@ -595,7 +765,7 @@ class BackgroundGallery {
         } catch (error) {
             console.error('Error loading package:', error);
             this.hideLoading();
-            this.showError(`Failed to load ${package.name}. Preview may not be available.`);
+            this.showError(`Failed to load ${pkg.name}. Preview may not be available.`);
         }
     }
 
