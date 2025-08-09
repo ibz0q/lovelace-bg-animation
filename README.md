@@ -1,8 +1,8 @@
 # Lovelace Background Animations 
 
-Replace Home Assistant's background with an background animation!
+Replace Home Assistant's background with an animation! 
 
-Preview backgrounds here: https://ibz0q.github.io/lovelace-bg-animation/ or here: [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+Preview animations here: https://ibz0q.github.io/lovelace-bg-animation/ or [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
 **Current Release: v1.1.3**
@@ -83,7 +83,7 @@ A config needs to be placed inside Lovelaces config file, you can do this inside
 
 ```yaml
 bg-animation:
-  duration: 60000 # Global duration of each bg
+  duration: 60000 # Global duration of each bg (millisecondns) 
   transparency: # Sets the header transparent (Optional)
     header:
       enable: true
@@ -102,13 +102,13 @@ bg-animation:
 
 ```yaml
 bg-animation: 
-  duration: 50000 # * Duration of the animation in milliseconds (global)
+  duration: 50000 # * Global duration of each bg (millisecondns) 
   loadTimeout: 5000 # * In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed
-  cache: true # * If false, nothing will be cached
+  cache: true # * Default is true, speeds up processing slightly  
   conditions: # *
-    regex_device_map: # Any names of your devices 'iPhone12ProMax'
-       iPhone12ProMax: # An array of regex patterns
-         -  AppleWebKit.*12PROMAX.*
+    regex_device_map: 
+       iPhone12ProMax: # Name your your device
+         -  AppleWebKit.*12PROMAX.* # Array of regex patterns that match the devices user-agent
        FullKioskBrowserHallway:
          -  .*FullyKioskBrowserHallway.*
   transition: # *
@@ -129,8 +129,8 @@ bg-animation:
     remoteRootUrl: "https://ibz0q.github.io/lovelace-bg-animation" # Remote gallery URL
   sort: "random" # * Order backgrounds will be displayed: "random" | "reverse" | "id_asc" | "id_desc"
   background:
-    global: # Global background settings
-      - id: animation.11.space # Background identifier
+    global: # Global bgs are applied to all views, unless there is one specified below 
+      - id: animation.11.space # Background id
         style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;" # * Custom iframe style
         cache: true # * Enable caching for this background
         duration: false # * Override global duration
@@ -140,21 +140,21 @@ bg-animation:
           exclude_users: [username3] # Don't show for these users
           include_devices: [device1] # Only show on these devices
           exclude_devices: [device2] # Don't show on these devices
-    view: # View-specific background settings e.g. http://homeassistant/lovelace/lights - "lights"
-      lights: # Settings for the 'lights' view
-        - id: animation.11.space # Identifier for a background
+    view: # View-specific background settings http://homeassistant/lovelace/lights becomes "lights"
+      lights: # 'lights' view
+        - id: animation.11.space # Background id
           duration: 40000
-          manifestOverride: # override any package manifest values 
+          manifestOverride: # Overrides any package values 
             helpers:
               insert_baseurl: false
           conditions: # *
-            exclude_users: [ibz] # Exclude these users
-            exclude_devices: [iPhone12ProMax] # Exclude this device
-        - id: animation.15.sound # Identifier for another background
+            exclude_users: [ibz] # Exclude these HA users
+            exclude_devices: [iPhone12ProMax] # Exclude this device key (from conditions)
+        - id: animation.15.sound 
       gruffalo: # e.g. http://homeassistant/lovelace/gruffalo - "gruffalo" etc
-        - id: animation.11.space # Identifier for a background
+        - id: animation.11.space # Background ID
           duration: 40000
-        - id: application.1.media-background # Identifier for another background
+        - id: application.1.media-background
           parameters:
             mediaList:
               - file: /images/somefile.png
@@ -185,11 +185,11 @@ PRs need to be attached to an issue that contains the following info:
 - Have you audited the code yourself?
 
  
-## Motivation
+## Why
 
-People created some pretty inspiring animations when HTML5/Canvas/JS/CSS3/Flash was new. There's still amazing artists doing this today. I wanted to curate these, use them on my Home Assistant tablet/dashboard, which incidentally make great backgrounds.
+People created some pretty animations using HTML5/Canvas/JS/CSS3/Flash a long time ago. There's still cool artists doing this today. I wanted to curate old and new, use them on my Home Assistant tablet/dashboard, they look cool.
 
-Unfortunately over time many older web experiments/animations have been lost to digital oblivion. Sometimes I would save these locally. I have tried my best to find references and credit the artists, archive.org links provided if they are available - This is not always the case.
+Unfortunately over time some older animations were lost to digital oblivion. I would sometimes save these locally and I have tried my best to repair them to original and credit the original artists, archive.org links provided if they are available - This is not always the case.
 
 ### License 
 
@@ -200,9 +200,6 @@ This project is compromised of the works of artists each with their own licensin
 - UX
 
   - Transparent Overlays
-  - Iframe transitions (Done)
-  - Create a basic background previewer site (better than EXTENDED.md)  
-  - Add redraw, allows you to repaint the iframe within duration period. (Done)
 
 - Extensibility
 
@@ -210,31 +207,11 @@ This project is compromised of the works of artists each with their own licensin
   -  Global postMessage listener (Considering) 
   -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
 
-- Programmability 
-
-  -  Add env variables within Iframe (Done) 
-  -  Add env variables to Iframe via card config  
-
 - Security
 
-    - "Official bg packages" vs "Community packages" via YAML tagging
-    - Provide a list of vetted libraries or CDNs
+  - "Official bg packages" vs "Community packages" via YAML tagging
+  - Provide a list of vetted libraries or CDNs
   - Provide a way to add libraries in a trusted manner (Done, docs incoming)
   - Add video background package  
   - Default gallery to use all, if nothing is specified. (Removed)
-
-- Misc
-
-  - Add video background package  
-  - Add image background package with nice transitions
-  - Add overlay div (Done)
-  - Media controls (Lovelace Card) (Done)
-  - Fix iframe writes (Done)
-  - Add duration (Done)
-  - Add opportunistic sanity check for path (Done)
-  - Add BaseURL (Done)
-  - Allow for multi instance (Done)
-  - Auto generate metadata (Done)
-    - Video/Picture Preview (Done)
-    - HTML (Done)
 
