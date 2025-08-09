@@ -1,6 +1,6 @@
 version: v1
 metadata:
-  name: Particle Background
+  name: Home Assistant Background
   description: Clean particle background with configurable settings and light/dark mode
   author: Home Assistant Team
   source: https://github.com/home-assistant/frontend

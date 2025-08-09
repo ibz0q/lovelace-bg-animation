@@ -1080,7 +1080,7 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/preview.html) - *Author: alphardex* - Offline support? **Yes**
 
-###  > animation.1.home-assistant-particles (Particle Background - Clean particle background with configurable settings and light/dark mode)
+###  > animation.1.home-assistant-particles (Home Assistant Background - Clean particle background with configurable settings and light/dark mode)
 
 `- id: animation.1.home-assistant-particles`
 

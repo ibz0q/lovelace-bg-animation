@@ -3,11 +3,11 @@
     {
       "id": "animation.1.home-assistant-particles",
       "version": "v1",
-      "name": "Particle Background",
+      "name": "Home Assistant Background",
       "description": "Clean particle background with configurable settings and light/dark mode",
       "author": "Home Assistant Team",
       "source": "https://github.com/home-assistant/frontend",
-      "hash": "164ec2e15dbef428d429dcd4e8ac4cc038a6756e",
+      "hash": "ead3ee979a687b9e8568b8901e9cbfb04fd6d7da",
       "parameters": [
         {
           "name": "darkMode",
