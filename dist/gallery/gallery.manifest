@@ -1047,7 +1047,7 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "39417188085d20c2a8a70a2a9201a724d22c1f75",
+      "hash": "0fb60a01bf5b9118e80df8cc263deb66b72f21a0",
       "parameters": [
         {
           "name": "waveColor",
