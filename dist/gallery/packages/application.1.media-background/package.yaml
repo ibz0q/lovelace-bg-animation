@@ -450,7 +450,7 @@ template: >
             window.env?.progressBarColor ||
             "linear-gradient(90deg, #667eea, #764ba2)", // or any CSS color/gradient
           progressBarOpacity: window.env?.progressBarOpacity ?? 0.2, // 0 to 1
-          defaultDuration: window.env?.defaultDuration || 4000, // Default duration in ms
+          defaultDuration: window.env?.defaultDuration || 20000, // Default duration in ms
           mediaList: window.env?.mediaList || [
             {
               file: "https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4",
@@ -468,6 +468,7 @@ template: >
             },
           ],
         };
+          console.log(config.defaultDuration);
 
         // Store original mediaList for filtering
         const originalMediaList = [...config.mediaList];
