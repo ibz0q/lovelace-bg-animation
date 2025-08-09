@@ -1161,7 +1161,7 @@ Supported params:
 - `showProgressBar` - Show or hide the progress bar. (defaults: `false`)
 - `progressBarColor` - CSS color or gradient for the progress bar. (defaults: `linear-gradient(90deg, #667eea, #764ba2)`)
 - `progressBarOpacity` - Opacity of the progress bar (0 to 1). (defaults: `0.2`)
-- `defaultDuration` - Default duration in milliseconds for media items that don't specify their own duration. (defaults: `9000`)
+- `defaultDuration` - Default duration in milliseconds for media items that don't specify their own duration. (defaults: `70000`)
 - `fit` - Default fitting mode for all media. Options are 'contain', 'cover', 'fill', 'scale-down', 'none'. (defaults: `cover`)
 - `mediaList` - Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted, fit, playbackRate} properties.
   Schema:
