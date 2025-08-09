@@ -85,13 +85,26 @@ async function getPackageManifest(packageConfig) {
     isDebug ? console.error("getPackageManifest: Failed to fetch package manifest: " + error) : null;
     return null;
   }
-} 
+}
 
 async function processPackageManifest(packageConfig, packageManifest) {
   try {
     isDebug ? console.log("processPackageManifest: Called packagemani") : null;
     let packageManifestName = packageConfig.id;
     let packageCacheKey = btoa(packageManifestName + Object.entries(packageConfig.parameters || { 0: "none" }).map(([key, value]) => `${key}:${value}`).join(' '));
+
+    if (packageConfig.packageOverride) {
+      isDebug ? console.log("processPackageManifest: Applying manifest overrides for " + packageConfig.id) : null;
+      packageManifest = {
+        ...packageManifest,
+        ...Object.fromEntries(
+          Object.entries(packageConfig.packageOverride).filter(([key]) => key !== 'metadata' && key !== 'template')
+        )
+     }
+     console.log(packageManifest);  
+    }
+
+
     let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey);
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
       return checkCachePackageManifest;
@@ -224,6 +237,7 @@ function processBackgroundSchema(config) {
       duration: item?.duration ?? false,
       redraw: item?.redraw ?? 0,
       conditions: item?.conditions ?? false,
+      packageOverride: item?.packageOverride ?? false,
     }))
     : false;
 }
@@ -685,8 +699,8 @@ async function initializeObservers() {
 async function initialize() {
   let initializeLovelaceVars = initializeLovelaceVariables()
   isDebug = lovelaceUI?.lovelaceObject?.config["bg-animation"]?.debug ?? isDebug;
+  console.log("Debug is set to: " + isDebug); 
   isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
-
   if (initializeLovelaceVars == true) {
     await initializeObservers();
   } else {
