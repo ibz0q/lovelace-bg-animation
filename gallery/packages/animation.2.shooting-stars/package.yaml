@@ -6,6 +6,7 @@ metadata:
   source: https://codepen.io/alphardex/pen/RwrVoeL
   tags:
     - slow
+    - stars
 compile:
   - id: scss_1
     scss: >
