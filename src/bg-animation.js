@@ -100,10 +100,8 @@ async function processPackageManifest(packageConfig, packageManifest) {
         ...Object.fromEntries(
           Object.entries(packageConfig.packageOverride).filter(([key]) => key !== 'metadata' && key !== 'template')
         )
-     }
-     console.log(packageManifest);  
+      }
     }
-
 
     let checkCachePackageManifest = retrieveCache(applicationIdentifiers["appNameShort"] + "_packageProcessed__" + packageCacheKey);
     if (checkCachePackageManifest && packageConfig.cache === true && rootPluginConfig.cache === true) {
@@ -699,7 +697,6 @@ async function initializeObservers() {
 async function initialize() {
   let initializeLovelaceVars = initializeLovelaceVariables()
   isDebug = lovelaceUI?.lovelaceObject?.config["bg-animation"]?.debug ?? isDebug;
-  console.log("Debug is set to: " + isDebug); 
   isDebug ? console.log(`initialize plugin: ${pluginVersion}`) : null;
   if (initializeLovelaceVars == true) {
     await initializeObservers();
