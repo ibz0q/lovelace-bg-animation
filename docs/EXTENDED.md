@@ -1094,7 +1094,7 @@ Supported params:
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.home-assistant-particles/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.home-assistant-particles/preview.html) - *Author: Home Assistant Team (Adapted)* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.home-assistant-particles/preview.html) - *Author: Home Assistant Team* - Offline support? **Yes**
 
 ###  > generator.86.silky-carpet (Silky Carpet - Simulating noise variance)
 

@@ -7,7 +7,11 @@
       "description": "Clean particle background with configurable settings and light/dark mode",
       "author": "Home Assistant Team",
       "source": "https://github.com/home-assistant/frontend",
+<<<<<<< HEAD
       "hash": "3ece7d5c3cb57625033e8f26961e1be4bfb22cd0",
+=======
+      "hash": "164ec2e15dbef428d429dcd4e8ac4cc038a6756e",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "parameters": [
         {
           "name": "darkMode",
@@ -57,7 +61,11 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
+<<<<<<< HEAD
       "hash": "17e39226b40ca31867ccf35d4abd4feea1802101",
+=======
+      "hash": "7347d03cef40bd4febc3da52a07ac5c0c3f4a5c1",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "parameters": [
         {
           "name": "transition",
@@ -422,7 +430,11 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
+<<<<<<< HEAD
       "hash": "c23c0adc9446b35d66dbc02a43f93f626a7b4862",
+=======
+      "hash": "c70a9a0bae5d2b6a2da714e24c639ebd5632cb2b",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "tags": [
         "interactive",
         "generative",
@@ -449,7 +461,11 @@
       "description": "Not knots",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/OJYyMNR",
+<<<<<<< HEAD
       "hash": "15560b1fe5dcc45da95c100a11a3dbba6228069e",
+=======
+      "hash": "3e64b75c8e85d1c7c929938cd63fc64ccabfe7af",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "tags": [
         "interactive",
         "knots",
@@ -466,7 +482,11 @@
       "description": "A cool electro field circle",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/oQOvYp",
+<<<<<<< HEAD
       "hash": "2a18fbc8e8d910d628608a0e3de1c597803722d5",
+=======
+      "hash": "63b0c12bc7d8a1af91e36cc703313e5a82379d78",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "tags": [
         "electro",
         "circle"
@@ -492,7 +512,11 @@
       "description": "Neon Hexagon Foming Particles",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/mJzOWJ",
+<<<<<<< HEAD
       "hash": "0965ad937809549f8dca4255e6369e60e126786e",
+=======
+      "hash": "fc6fb9e400b7048de65076ed701f84faf48e6d82",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "tags": [
         "hexagon",
         "neon",
@@ -629,7 +653,11 @@
       "description": "Trapped particles with shocking connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
+<<<<<<< HEAD
       "hash": "58f9330f7e52703b33432d6094532b0a0059e640",
+=======
+      "hash": "6a5fa948bbbf714d854d7d90c41c9e84b8d37175",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "tags": [
         "interactive",
         "particles",
@@ -1171,7 +1199,11 @@
       "description": "Randomly generated columns",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/NPWbdMP",
+<<<<<<< HEAD
       "hash": "48ef3d8915603080bf54856ce2e84d70cab32591",
+=======
+      "hash": "0da582e85df7743cbacc67f721ccc0aec7777600",
+>>>>>>> d9a06233d0a230b40a0d68256f83ff2b10780886
       "tags": [
         "interactive",
         "columns",

@@ -4,6 +4,13 @@ metadata:
   description: Media slideshow with various transition effects (Supports images and videos)
   author: Ibz
   source: https://github.com/ibz0q/lovelace-bg-animation
+  tags:
+    - slideshow
+    - video
+    - image
+    - background
+    - transition
+    - fullscreen
 helpers:
   insert_baseurl: true
 parameters:

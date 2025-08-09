@@ -4,6 +4,9 @@ metadata:
   description: A cool electro field circle
   author: Alex Andrix
   source: https://codepen.io/alexandrix/pen/oQOvYp
+  tags:
+    - electro
+    - circle
 template: >
   <script src="{{ common:
   https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.min.js

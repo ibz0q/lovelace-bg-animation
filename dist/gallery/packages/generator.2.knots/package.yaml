@@ -6,6 +6,11 @@ metadata:
   source: https://codepen.io/Dillo/pen/OJYyMNR
   tags:
     - interactive
+    - knots
+    - generative
+    - hexagon
+    - noise
+    - fractal
 helpers:
   insert_baseurl: true
 template: >
