@@ -142,8 +142,24 @@ body {
 /* View controls */
 .view-controls {
     display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.control-group {
+    display: flex;
     gap: 8px;
     align-items: center;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.control-separator {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 0 4px;
 }
 
 .view-button {
@@ -828,6 +844,81 @@ body {
 .package-copy-button.copied {
     background: rgba(76, 175, 80, 0.3);
     border-color: rgba(76, 175, 80, 0.5);
+    color: rgba(76, 175, 80, 1);
+}
+
+.package-copy-button.copied svg {
+    stroke: rgba(76, 175, 80, 1);
+}
+
+/* Grid View */
+.grid-view-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+}
+
+.grid-view-container.open {
+    display: flex;
+}
+
+.grid-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.grid-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.grid-search-container {
+    flex: 1;
+    max-width: 400px;
+}
+
+#grid-search-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#grid-search-input:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.grid-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.grid-packages-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.grid-packages-list .package-item {
+    height: 250px;
+    margin-bottom: 0;
 }
     </style>
 </head>
@@ -866,27 +957,40 @@ body {
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
-            <div class="view-controls">
-                <button id="list-view" class="view-button active" title="List View">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                    </svg>
-                </button>
-                <button id="tags-view" class="view-button" title="Tags View">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                        <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
-                    </svg>
-                </button>
-                <button id="sidebar-view" class="view-button" title="Sidebar View">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                    </svg>
-                </button>
-                <button id="bottom-view" class="view-button" title="Bottom View">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                        <path d="M4 18h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2zM4 8h16v8H4V8z"/>
-                    </svg>
-                </button>
+                            <div class="view-controls">
+                    <!-- Display mode controls -->
+                    <div class="control-group">
+                        <button id="list-view" class="view-button active" title="List View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"/>
+                            </svg>
+                        </button>
+                        <button id="tags-view" class="view-button" title="Tags View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Separator -->
+                    <div class="control-separator"></div>
+                    <!-- View mode controls -->
+                    <div class="control-group">
+                        <button id="sidebar-view" class="view-button" title="Sidebar View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                            </svg>
+                        </button>
+                        <button id="bottom-view" class="view-button" title="Bottom View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12z"/>
+                            </svg>
+                        </button>
+                        <button id="grid-view" class="view-button" title="Grid View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/>
+                            </svg>
+                        </button>
+                    </div>
             </div>
             <button id="close-sidebar" class="close-button">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -915,6 +1019,57 @@ body {
         </div>
     </div>
 
+    <!-- Grid View -->
+    <div id="grid-view-container" class="grid-view-container">
+        <div class="grid-header">
+            <div class="grid-controls">
+                <div class="grid-search-container">
+                    <input type="text" id="grid-search-input" placeholder="Search backgrounds..." />
+                </div>
+                <div class="view-controls">
+                    <!-- Display mode controls -->
+                    <div class="control-group">
+                        <button id="list-view-grid" class="view-button" title="List View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"/>
+                            </svg>
+                        </button>
+                        <button id="tags-view-grid" class="view-button" title="Tags View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Separator -->
+                    <div class="control-separator"></div>
+                    <!-- View mode controls -->
+                    <div class="control-group">
+                        <button id="sidebar-view-grid" class="view-button" title="Sidebar View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                            </svg>
+                        </button>
+                        <button id="bottom-view-grid" class="view-button" title="Bottom View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12z"/>
+                            </svg>
+                        </button>
+                        <button id="grid-view-grid" class="view-button active" title="Grid View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-content">
+            <div id="grid-packages-list" class="grid-packages-list">
+                <!-- Packages will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Modal -->
     <div id="bottom-modal" class="bottom-modal">
         <div class="bottom-modal-header">
@@ -923,26 +1078,39 @@ body {
                     <input type="text" id="bottom-search-input" placeholder="Search backgrounds..." />
                 </div>
                 <div class="view-controls">
-                    <button id="list-view-bottom" class="view-button active" title="List View">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                        </svg>
-                    </button>
-                    <button id="tags-view-bottom" class="view-button" title="Tags View">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                            <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
-                        </svg>
-                    </button>
-                    <button id="sidebar-view-bottom" class="view-button" title="Sidebar View">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                        </svg>
-                    </button>
-                    <button id="bottom-view-bottom" class="view-button active" title="Bottom View">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                            <path d="M4 18h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2zM4 8h16v8H4V8z"/>
-                        </svg>
-                    </button>
+                    <!-- Display mode controls -->
+                    <div class="control-group">
+                        <button id="list-view-bottom" class="view-button active" title="List View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M4 14h4v-4H4v4zm0 5h4v-4H4v4zM4 9h4V5H4v4zm5 5h12v-4H9v4zm0 5h12v-4H9v4zM9 5v4h12V5H9z"/>
+                            </svg>
+                        </button>
+                        <button id="tags-view-bottom" class="view-button" title="Tags View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <!-- Separator -->
+                    <div class="control-separator"></div>
+                    <!-- View mode controls -->
+                    <div class="control-group">
+                        <button id="sidebar-view-bottom" class="view-button" title="Sidebar View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                            </svg>
+                        </button>
+                        <button id="bottom-view-bottom" class="view-button active" title="Bottom View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12z"/>
+                            </svg>
+                        </button>
+                        <button id="grid-view-bottom" class="view-button" title="Grid View">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                                <path d="M4 11h5V5H4v6zm0 7h5v-6H4v6zm6 0h5v-6h-5v6zm6 0h5v-6h-5v6zm-6-7h5V5h-5v6zm6-6v6h5V5h-5z"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <button id="close-bottom-modal" class="close-button">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -987,7 +1155,7 @@ class BackgroundGallery {
         this.creditsTimeout = null;
         this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
         this.viewedPackages = this.loadViewingHistory();
-        this.currentView = 'sidebar'; // 'sidebar' or 'bottom'
+        this.currentView = 'sidebar'; // 'sidebar', 'bottom', or 'grid'
         this.currentListView = 'list'; // 'list' or 'tags'
         this.currentTag = null; // Currently selected tag
         this.tagGroups = new Map(); // Tag groups cache
@@ -1188,6 +1356,10 @@ class BackgroundGallery {
             this.switchToBottomView();
         });
 
+        document.getElementById('grid-view').addEventListener('click', () => {
+            this.switchToGridView();
+        });
+
         // List/Tags view switching buttons (bottom modal)
         document.getElementById('list-view-bottom').addEventListener('click', () => {
             this.switchToListView();
@@ -1204,6 +1376,36 @@ class BackgroundGallery {
 
         document.getElementById('bottom-view-bottom').addEventListener('click', () => {
             this.switchToBottomView();
+        });
+
+        document.getElementById('grid-view-bottom').addEventListener('click', () => {
+            this.switchToGridView();
+        });
+
+        // Grid view buttons
+        document.getElementById('list-view-grid').addEventListener('click', () => {
+            this.switchToListView();
+        });
+
+        document.getElementById('tags-view-grid').addEventListener('click', () => {
+            this.switchToTagsView();
+        });
+
+        document.getElementById('sidebar-view-grid').addEventListener('click', () => {
+            this.switchToSidebarView();
+        });
+
+        document.getElementById('bottom-view-grid').addEventListener('click', () => {
+            this.switchToBottomView();
+        });
+
+        document.getElementById('grid-view-grid').addEventListener('click', () => {
+            this.switchToGridView();
+        });
+
+        // Grid search functionality
+        document.getElementById('grid-search-input').addEventListener('input', (e) => {
+            this.filterPackages(e.target.value);
         });
 
         // Close bottom modal
@@ -1322,8 +1524,9 @@ class BackgroundGallery {
     switchToBottomView() {
         this.currentView = 'bottom';
         
-        // Close sidebar and open bottom modal
+        // Close other views and open bottom modal
         this.closeSidebar();
+        this.closeGridView();
         const bottomModal = document.getElementById('bottom-modal');
         bottomModal.classList.add('open');
         
@@ -1335,12 +1538,108 @@ class BackgroundGallery {
         document.getElementById('bottom-search-input').focus();
     }
 
+    switchToGridView() {
+        this.currentView = 'grid';
+        
+        // Close other views and open grid view
+        this.closeSidebar();
+        this.closeBottomModal();
+        const gridView = document.getElementById('grid-view-container');
+        gridView.classList.add('open');
+        
+        // Update button states
+        this.updateViewButtonStates();
+        
+        // Render packages in grid view and focus search
+        this.renderGridPackagesList();
+        document.getElementById('grid-search-input').focus();
+    }
+
+    closeGridView() {
+        const gridView = document.getElementById('grid-view-container');
+        gridView.classList.remove('open');
+    }
+
+    renderGridPackagesList() {
+        if (this.currentListView === 'tags') {
+            this.renderGridTagGroups();
+            return;
+        }
+        
+        const gridPackagesList = document.getElementById('grid-packages-list');
+        gridPackagesList.innerHTML = '';
+        
+        if (this.filteredPackages.length === 0) {
+            gridPackagesList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px; width: 100%;">No packages found</div>';
+            return;
+        }
+        
+        this.filteredPackages.forEach(pkg => {
+            const packageElement = this.createPackageElement(pkg);
+            gridPackagesList.appendChild(packageElement);
+        });
+    }
+
+    renderGridTagGroups() {
+        const gridPackagesList = document.getElementById('grid-packages-list');
+        gridPackagesList.innerHTML = '';
+        
+        // Show back button if we're viewing a specific tag
+        if (this.currentTag) {
+            const backButton = document.createElement('div');
+            backButton.className = 'tag-group-back';
+            backButton.style.gridColumn = '1 / -1';
+            backButton.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+                Back to Tags
+            `;
+            backButton.addEventListener('click', () => {
+                this.currentTag = null;
+                this.renderGridTagGroups();
+            });
+            gridPackagesList.appendChild(backButton);
+            
+            // Show packages for this tag
+            this.filteredPackages.forEach(pkg => {
+                const packageElement = this.createPackageElement(pkg);
+                gridPackagesList.appendChild(packageElement);
+            });
+            return;
+        }
+        
+        // Show tag groups
+        if (this.tagGroups.size === 0) {
+            gridPackagesList.innerHTML = '<div style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px; width: 100%;">No tags found</div>';
+            return;
+        }
+        
+        // Sort tags by frequency (most to least)
+        const sortedTags = Array.from(this.tagGroups.entries())
+            .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
+        
+        sortedTags.forEach(([tag, packages]) => {
+            const tagElement = document.createElement('div');
+            tagElement.className = 'tag-group-item';
+            tagElement.innerHTML = `
+                <div class="tag-group-name">${tag}</div>
+                <div class="tag-group-count">${packages.length}</div>
+            `;
+            tagElement.addEventListener('click', () => {
+                this.showTagPackages(tag);
+            });
+            gridPackagesList.appendChild(tagElement);
+        });
+    }
+
     switchToListView() {
         this.currentListView = 'list';
         this.currentTag = null;
         this.updateListViewButtonStates();
         this.renderPackagesList();
         this.renderBottomPackagesList();
+        this.renderGridPackagesList();
     }
 
     switchToTagsView() {
@@ -1350,6 +1649,7 @@ class BackgroundGallery {
         this.generateTagGroups();
         this.renderTagGroups();
         this.renderBottomTagGroups();
+        this.renderGridTagGroups();
     }
 
     generateTagGroups() {
@@ -1393,10 +1693,17 @@ class BackgroundGallery {
         // Update sidebar view buttons
         document.getElementById('sidebar-view').classList.toggle('active', this.currentView === 'sidebar');
         document.getElementById('bottom-view').classList.toggle('active', this.currentView === 'bottom');
+        document.getElementById('grid-view').classList.toggle('active', this.currentView === 'grid');
         
         // Update bottom modal view buttons
         document.getElementById('sidebar-view-bottom').classList.toggle('active', this.currentView === 'sidebar');
         document.getElementById('bottom-view-bottom').classList.toggle('active', this.currentView === 'bottom');
+        document.getElementById('grid-view-bottom').classList.toggle('active', this.currentView === 'grid');
+
+        // Update grid view buttons
+        document.getElementById('sidebar-view-grid').classList.toggle('active', this.currentView === 'sidebar');
+        document.getElementById('bottom-view-grid').classList.toggle('active', this.currentView === 'bottom');
+        document.getElementById('grid-view-grid').classList.toggle('active', this.currentView === 'grid');
     }
 
     updateListViewButtonStates() {
@@ -1407,6 +1714,10 @@ class BackgroundGallery {
         // Update bottom modal list view buttons
         document.getElementById('list-view-bottom').classList.toggle('active', this.currentListView === 'list');
         document.getElementById('tags-view-bottom').classList.toggle('active', this.currentListView === 'tags');
+
+        // Update grid view list view buttons
+        document.getElementById('list-view-grid').classList.toggle('active', this.currentListView === 'list');
+        document.getElementById('tags-view-grid').classList.toggle('active', this.currentListView === 'tags');
     }
 
     filterPackages(searchTerm) {
@@ -1631,6 +1942,10 @@ class BackgroundGallery {
         }
         
         div.addEventListener('click', () => {
+            // If we're in grid view, close it when selecting a package
+            if (this.currentView === 'grid') {
+                this.closeGridView();
+            }
             this.selectPackage(pkg);
         });
 
@@ -1779,7 +2094,12 @@ class BackgroundGallery {
             await navigator.clipboard.writeText(backgroundId);
             
             // Show success feedback
-            clickedButton.textContent = 'Copied!';
+            clickedButton.innerHTML = `
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                Copied!
+            `;
             clickedButton.classList.add('copied');
             
             setTimeout(() => {
