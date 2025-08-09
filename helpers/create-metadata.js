@@ -4,6 +4,10 @@ const path = require('path');
 const YAML = require('yaml');
 const crypto = require('crypto');
 
+// Parse command line arguments
+const args = process.argv.slice(2);
+const shouldClearDirectory = args.includes('--clear-directory');
+
 process.chdir(__dirname);
 
 const galleryDir = '../gallery/';
@@ -106,8 +110,14 @@ function processPackageManifest(packageManifestObject) {
     }
 }
 
+// Clear metadata directory if flag is set
+if (shouldClearDirectory) {
+    console.log('\nClearing metadata directory...');
+    fs.rmSync(metadataFolder, { recursive: true, force: true });
+    console.log('Metadata directory cleared.\n');
+}
+
 async function readDirectory(dir) {
-    // fs.rmSync(metadataFolder, { recursive: true, force: true });
     fs.mkdirSync(metadataFolder, { recursive: true });
     const files = fs.readdirSync(dir);
     galleryRootManifest = JSON.parse((fs.readFileSync(galleryManifest, 'utf8')));
@@ -133,7 +143,7 @@ async function readDirectory(dir) {
                 console.log(`Starting: ${packageName} \n`);
 
                 folderHash = getFileSHA1(packageDir);
-                console.log("Reading folder: "+packageDir);
+                console.log("Reading folder: " + packageDir);
                 console.log(`Folder hash is ${folderHash}`)
 
                 const manifestEntry = Object.values(galleryRootManifest.packages).find(entry => entry.id === packageName);
@@ -153,7 +163,7 @@ async function readDirectory(dir) {
 
                 console.log(`Generating.. ${packageName}`);
                 templateProcessed = processPackageManifest({ "data": packageData, "packageIndex": packageName });
-                
+
                 fs.mkdirSync(packageFolder, { recursive: true });
                 fs.cpSync(packageDir, packageFolder, {
                     recursive: true,
@@ -176,7 +186,7 @@ async function readDirectory(dir) {
                 templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/<!DOCTYPE html>\n?/, '');
                 templateProcessed.data.template__processed = templateProcessed.data.template__processed.replace(/CodePen -\s?|CodePen/g, '');
                 let htmldata = `<!DOCTYPE html>` + templateProcessed.data.template__processed + `\n\n${metadataComments}\n`
-                console.log("Writing to "+metadataFilePath);
+                console.log("Writing to " + metadataFilePath);
                 fs.writeFileSync(metadataFilePath, htmldata.replace(/\n/g, '\r\n'), 'utf8');
 
                 console.log(`Generated: ${packageName} \n`);
