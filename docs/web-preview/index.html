@@ -251,10 +251,19 @@ body {
 
 .tag-group-count {
     background: rgba(255, 255, 255, 0.2);
-    padding: 4px 8px;
+    padding: 4px 12px;
     border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    min-width: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tag-group-item:hover .tag-group-count {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 
 .tag-group-back {
@@ -357,14 +366,26 @@ body {
     font-style: italic;
 }
 
-.package-item .package-type {
+.package-item .package-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 5px;
+}
+
+.package-item .package-tag {
     display: inline-block;
     padding: 2px 8px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     font-size: 11px;
     color: white;
-    margin-top: 5px;
+    transition: all 0.2s ease;
+}
+
+.package-item .package-tag:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
 }
 
 .package-viewed-indicator {
@@ -1314,6 +1335,7 @@ class BackgroundGallery {
     generateTagGroups() {
         this.tagGroups.clear();
         
+        // First, collect all tags and their packages
         this.packages.forEach(pkg => {
             const tags = pkg.tags || [];
             tags.forEach(tag => {
@@ -1322,6 +1344,21 @@ class BackgroundGallery {
                 }
                 this.tagGroups.get(tag).push(pkg);
             });
+        });
+
+        // Convert to array and sort by frequency
+        const sortedEntries = Array.from(this.tagGroups.entries()).sort((a, b) => {
+            // Sort by count (descending)
+            const countDiff = b[1].length - a[1].length;
+            if (countDiff !== 0) return countDiff;
+            // If counts are equal, sort alphabetically
+            return a[0].localeCompare(b[0]);
+        });
+
+        // Clear and rebuild the map in sorted order
+        this.tagGroups.clear();
+        sortedEntries.forEach(([tag, packages]) => {
+            this.tagGroups.set(tag, packages);
         });
     }
 
@@ -1445,11 +1482,11 @@ class BackgroundGallery {
             return;
         }
         
-        // Sort tags alphabetically
-        const sortedTags = Array.from(this.tagGroups.keys()).sort();
+        // Sort tags by frequency (most to least)
+        const sortedTags = Array.from(this.tagGroups.entries())
+            .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
         
-        sortedTags.forEach(tag => {
-            const packages = this.tagGroups.get(tag);
+        sortedTags.forEach(([tag, packages]) => {
             const tagElement = document.createElement('div');
             tagElement.className = 'tag-group-item';
             tagElement.innerHTML = `
@@ -1499,11 +1536,11 @@ class BackgroundGallery {
             return;
         }
         
-        // Sort tags alphabetically
-        const sortedTags = Array.from(this.tagGroups.keys()).sort();
+        // Sort tags by frequency (most to least)
+        const sortedTags = Array.from(this.tagGroups.entries())
+            .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
         
-        sortedTags.forEach(tag => {
-            const packages = this.tagGroups.get(tag);
+        sortedTags.forEach(([tag, packages]) => {
             const tagElement = document.createElement('div');
             tagElement.className = 'tag-group-item';
             tagElement.style.flexShrink = '0';
@@ -1524,9 +1561,6 @@ class BackgroundGallery {
         div.className = 'package-item';
         div.dataset.packageId = pkg.id;
         
-        // Determine package type from ID
-        const type = this.getPackageType(pkg.id);
-        
         // Create thumbnail URL (same as in create-docs.js)
         const thumbnailUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${pkg.id}/screenshot.png`;
         
@@ -1546,7 +1580,9 @@ class BackgroundGallery {
                  <h3>${pkg.name || pkg.id}</h3>
                  <div class="package-description">${pkg.description || 'No description available'}</div>
                  <div class="package-author">by ${pkg.author || 'Unknown'}</div>
-                 <div class="package-type">${type}</div>
+                 <div class="package-tags">
+                    ${pkg.tags ? pkg.tags.map(tag => `<span class="package-tag">${tag}</span>`).join('') : ''}
+                 </div>
                  <button class="package-copy-button" title="Copy background ID for Home Assistant">
                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -1583,12 +1619,6 @@ class BackgroundGallery {
         return div;
     }
 
-    getPackageType(packageId) {
-        if (packageId.startsWith('animation.')) return 'Animation';
-        if (packageId.startsWith('generator.')) return 'Generator';
-        if (packageId.startsWith('application.')) return 'Application';
-        return 'Other';
-    }
 
     async selectPackage(pkg) {
         // Update active state
