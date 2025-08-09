@@ -49,7 +49,7 @@ parameters:
     type: number
     behavior: environment
   - name: defaultDuration
-    default: 9000
+    default: 70000
     description: Default duration in milliseconds for media items that don't specify their own duration.
     type: number
     behavior: environment
@@ -68,31 +68,26 @@ parameters:
   - name: mediaList
     default:
       - file: https://cdn.flixel.com/flixel/x9dr8caygivq5secll7i.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
       - file: https://cdn.flixel.com/flixel/v26zyfd6yf0r33s46vpe.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
       - file: https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
       - file: https://cdn.flixel.com/flixel/rosz2gi676xhkiw1ut6i.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
       - file: https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
@@ -100,7 +95,6 @@ parameters:
           - cloudy
           - partlycloudy
       - file: https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
@@ -108,7 +102,6 @@ parameters:
           - cloudy
           - partlycloudy
       - file: https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
@@ -116,7 +109,6 @@ parameters:
           - cloudy
           - partlycloudy
       - file: https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
@@ -124,7 +116,6 @@ parameters:
           - cloudy
           - partlycloudy
       - file: https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
@@ -132,7 +123,6 @@ parameters:
           - cloudy
           - partlycloudy
       - file: https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
@@ -140,77 +130,66 @@ parameters:
           - cloudy
           - partlycloudy
       - file: https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - fog
       - file: https://cdn.flixel.com/flixel/5363uhabodwwrzgnq6vx.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - fog
       - file: https://cdn.flixel.com/flixel/e95h5cqyvhnrk4ytqt4q.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - mostlycloudy
       - file: https://cdn.flixel.com/flixel/l2bjw34wnusyf5q2qq3p.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - mostlycloudy
       - file: https://cdn.flixel.com/flixel/rrgta099ulami3zb9fd2.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - mostlycloudy
       - file: https://cdn.flixel.com/flixel/f0w23bd0enxur5ff0bxz.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - rainy
       - file: https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - sunny
       - file: https://cdn.flixel.com/flixel/zjqsoc6ecqhntpl5vacs.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - sunny
       - file: https://cdn.flixel.com/flixel/jvw1avupguhfbo11betq.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - sunny
       - file: https://cdn.flixel.com/flixel/8cmeusxf3pkanai43djs.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         tags:
           - video
           - sunny
       - file: https://cdn.flixel.com/flixel/guwb10mfddctfvwioaex.hd.mp4
-        duration: playback
         muted: true
         preload: auto
         playbackRate: 0.75
