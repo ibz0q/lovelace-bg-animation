@@ -84,7 +84,7 @@ A config needs to be placed inside Lovelaces config file, you can do this inside
 ```yaml
 bg-animation:
   duration: 60000 # Global duration of each bg (millisecondns) 
-  transparency: # Sets the header transparent (Optional)
+  transparency:
     header:
       enable: true
   background:
@@ -187,9 +187,9 @@ PRs need to be attached to an issue that contains the following info:
  
 ## Why
 
-People created some pretty animations using HTML5/Canvas/JS/CSS3/Flash a long time ago. There's still cool artists doing this today. I wanted to curate old and new, use them on my Home Assistant tablet/dashboard, they look cool.
+Lot's of pretty animations existed at the dawn of HTML5/Canvas/JS/CSS3/Flash and there's still cool artists doing this today. I wanted to curate old and new, use them on my Home Assistant tablet/dashboard, they look cool.
 
-Unfortunately over time some older animations were lost to digital oblivion. I would sometimes save these locally and I have tried my best to repair them to original and credit the original artists, archive.org links provided if they are available - This is not always the case.
+Unfortunately over time some older animations were lost to digital oblivion. I sometimes saved these locally and have tried to repair them to original to the best of my ability and credit the original artists, archive.org links provided if they are available - This is not always the case.
 
 ### License 
 
