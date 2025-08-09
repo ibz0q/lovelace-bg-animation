@@ -103,7 +103,7 @@ bg-animation:
 ```yaml
 bg-animation: 
   duration: 50000 # * Global duration of each bg (millisecondns) 
-  loadTimeout: 5000 # * In milliseconds - When Iframe takes longer than this value to load, it is forced to be displayed
+  loadTimeout: 5000 # * BGs are shown once loaded but forced to be displayed after this timeout
   cache: true # * Default is true, speeds up processing slightly  
   conditions: # *
     regex_device_map: 
