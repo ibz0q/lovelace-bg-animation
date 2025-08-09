@@ -4,6 +4,11 @@ metadata:
   description: Enter into the fold
   author: Ben Matthews
   source: https://codepen.io/tsuhre/pen/PozModJ
+  tags:
+    - manifold
+    - generative
+    - noise
+    - fractal
 template: >
   <div id="controls"></div>
 

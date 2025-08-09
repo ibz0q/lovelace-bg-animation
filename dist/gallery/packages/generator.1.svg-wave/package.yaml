@@ -6,6 +6,8 @@ metadata:
   source: https://codepen.io/supah/pen/prVVOx
   tags:
     - interactive
+    - generative
+    - noise
 helpers:
   insert_baseurl: true
 template: >

@@ -6,6 +6,10 @@ metadata:
   source: https://codepen.io/Dillo/pen/NPWbdMP
   tags:
     - interactive
+    - columns
+    - noise
+    - fractal
+    - generative
 helpers:
   insert_baseurl: true
 template: >

@@ -5,9 +5,9 @@
       "version": "v1",
       "name": "Particle Background",
       "description": "Clean particle background with configurable settings and light/dark mode",
-      "author": "Home Assistant Team (Adapted)",
+      "author": "Home Assistant Team",
       "source": "https://github.com/home-assistant/frontend",
-      "hash": "4bb252d8cbf164e698b43fcb7d274e3522af96db",
+      "hash": "164ec2e15dbef428d429dcd4e8ac4cc038a6756e",
       "parameters": [
         {
           "name": "darkMode",
@@ -46,7 +46,8 @@
         }
       ],
       "tags": [
-        "interactive"
+        "interactive",
+        "particles"
       ]
     },
     {
@@ -56,7 +57,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "57d9165b95ceef9e670de72ef34c87d2a3137d94",
+      "hash": "7347d03cef40bd4febc3da52a07ac5c0c3f4a5c1",
       "parameters": [
         {
           "name": "transition",
@@ -404,6 +405,14 @@
             }
           }
         }
+      ],
+      "tags": [
+        "slideshow",
+        "video",
+        "image",
+        "background",
+        "transition",
+        "fullscreen"
       ]
     },
     {
@@ -413,9 +422,11 @@
       "description": "SVG Gradient Wave Generator",
       "author": "Fabio Ottaviani",
       "source": "https://codepen.io/supah/pen/prVVOx",
-      "hash": "6d5ef78d181c88d35e7a5b911d1daed2df04e938",
+      "hash": "c70a9a0bae5d2b6a2da714e24c639ebd5632cb2b",
       "tags": [
-        "interactive"
+        "interactive",
+        "generative",
+        "noise"
       ]
     },
     {
@@ -425,9 +436,10 @@
       "description": "Random speed shooting stars",
       "author": "alphardex",
       "source": "https://codepen.io/alphardex/pen/RwrVoeL",
-      "hash": "1b90261da9ffd402d42083e7d755ff0eff0a022a",
+      "hash": "7e9b5aa689a0b04ff4a730fdb9fbad2a2f49c8c8",
       "tags": [
-        "slow"
+        "slow",
+        "stars"
       ]
     },
     {
@@ -437,9 +449,14 @@
       "description": "Not knots",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/OJYyMNR",
-      "hash": "08a4670a149f5bb1a2d79c47275c7bcf0b744d0d",
+      "hash": "3e64b75c8e85d1c7c929938cd63fc64ccabfe7af",
       "tags": [
-        "interactive"
+        "interactive",
+        "knots",
+        "generative",
+        "hexagon",
+        "noise",
+        "fractal"
       ]
     },
     {
@@ -449,7 +466,11 @@
       "description": "A cool electro field circle",
       "author": "Alex Andrix",
       "source": "https://codepen.io/alexandrix/pen/oQOvYp",
-      "hash": "a4bbb2c3d54265cbe69dcb071cb4b5ef1ffc2d57"
+      "hash": "63b0c12bc7d8a1af91e36cc703313e5a82379d78",
+      "tags": [
+        "electro",
+        "circle"
+      ]
     },
     {
       "id": "animation.4.colored-swipe",
@@ -458,7 +479,11 @@
       "description": "Whole page colored swipes",
       "author": "Andreas Wilcox",
       "source": "https://codepen.io/SvDvorak/pen/bxoxde",
-      "hash": "55c7bf2bbf3fc7762953b36ac14d1cec1c9a1f8b"
+      "hash": "a92269b5f5362777fda8045967b2302ff0182e59",
+      "tags": [
+        "swipe",
+        "transition"
+      ]
     },
     {
       "id": "animation.5.neon-hexagon",
@@ -467,7 +492,12 @@
       "description": "Neon Hexagon Foming Particles",
       "author": "Matei Copot",
       "source": "https://codepen.io/towc/pen/mJzOWJ",
-      "hash": "00d33a3a1cfe69410d58529b384135dc74092e7c"
+      "hash": "fc6fb9e400b7048de65076ed701f84faf48e6d82",
+      "tags": [
+        "hexagon",
+        "neon",
+        "particles"
+      ]
     },
     {
       "id": "animation.5.plasma",
@@ -599,9 +629,12 @@
       "description": "Trapped particles with shocking connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
-      "hash": "543ed3208b56f4ece7dccb2e29912f3c9ce061d2",
+      "hash": "6a5fa948bbbf714d854d7d90c41c9e84b8d37175",
       "tags": [
-        "interactive"
+        "interactive",
+        "particles",
+        "generative",
+        "noise"
       ]
     },
     {
@@ -611,7 +644,13 @@
       "description": "Enter into the fold",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/PozModJ",
-      "hash": "eaedebe638d6affaa28b26509fa240b8d8d16c68"
+      "hash": "8c34605e46c2f831c4bc9e6186cca6cff6bc44fd",
+      "tags": [
+        "manifold",
+        "generative",
+        "noise",
+        "fractal"
+      ]
     },
     {
       "id": "animation.21.noise-abstraction",
@@ -1132,9 +1171,13 @@
       "description": "Randomly generated columns",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/NPWbdMP",
-      "hash": "5484794360ca855787be90d9f8abcacda79f2c98",
+      "hash": "0da582e85df7743cbacc67f721ccc0aec7777600",
       "tags": [
-        "interactive"
+        "interactive",
+        "columns",
+        "noise",
+        "fractal",
+        "generative"
       ]
     },
     {

@@ -6,6 +6,9 @@ metadata:
   source: https://codepen.io/ImagineProgramming/pen/MavMNO
   tags:
     - interactive
+    - particles
+    - generative
+    - noise
 template: >
   <canvas id="c"></canvas>
 

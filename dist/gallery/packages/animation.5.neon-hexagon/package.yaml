@@ -4,6 +4,10 @@ metadata:
   description: Neon Hexagon Foming Particles
   author: Matei Copot
   source: https://codepen.io/towc/pen/mJzOWJ
+  tags:
+    - hexagon
+    - neon
+    - particles
 template: |
   <canvas id="c"></canvas>
 
