@@ -3104,7 +3104,51 @@ class BackgroundGallery {
             
             this.showLoading('Rendering background...');
             const iframe = document.getElementById('preview-iframe');
-            iframe.srcdoc = processedTemplate;
+            
+            // Set up environment variables like bg-animation.js does
+            const packageConfig = {
+                id: pkg.id,
+                parameters: this.packageParameters[pkg.id] || {},
+                style: 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;'
+            };
+            
+            // Match bg-animation.js environment variables structure
+            let environmentVars = {
+                "basePath": `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${packageConfig.id}/`,
+                "commonPath": `https://ibz0q.github.io/lovelace-bg-animation/gallery/common/`,
+                "rootPath": `https://ibz0q.github.io/lovelace-bg-animation/`,
+                "assetPath": `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${packageConfig.id}/`,
+                "packageManifest": packageYaml,
+                "packageConfig": packageConfig
+            };
+            
+            // Process environment behavior parameters
+            if (packageYaml.parameters) {
+                packageYaml.parameters.forEach(param => {
+                    if (param.behavior === 'environment') {
+                        if (!environmentVars[param.name]) {
+                            environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
+                        }
+                    }
+                });
+            }
+            
+            // Create a blank document first to ensure contentWindow is available
+            iframe.srcdoc = '<html><body><style>*{background:black;}</style></body></html>';
+            
+            // Wait for the blank document to load
+            await new Promise(resolve => {
+                iframe.onload = resolve;
+            });
+            
+            // Now we can safely set environment variables
+            if (iframe.contentWindow) {
+                iframe.contentWindow["env"] = environmentVars;
+                // Now load the actual content
+                iframe.srcdoc = processedTemplate;
+            } else {
+                console.error('Failed to access iframe contentWindow');
+            }
             
             this.currentPackage = pkg;
             

@@ -365,11 +365,10 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     const iframeElement = document.createElement('iframe');
     iframeElement.frameborder = "0";
     iframeElement.scrolling = "no";
-    iframeElement.srcdoc = "<style>*{background:black;}</style>";
+    iframeElement.srcdoc = "<html><body><style>*{background:black;}</style></body></html>";
     iframeElement.className = applicationIdentifiers.appNameShort;
     iframeElement.style.cssText = packageConfig.style;
     Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
-    iframeElement.srcdoc = packageManifest.template__processed;
     containerElement.replaceChildren(iframeElement);
     let environmentVars = {
       "lovelaceUI": lovelaceUI,
@@ -389,7 +388,10 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
         }
       });
     }
-    iframeElement.contentWindow["env"] = environmentVars;
+    if (iframeElement?.contentWindow) {
+      iframeElement.contentWindow["env"] = environmentVars;
+    }
+    iframeElement.srcdoc = packageManifest.template__processed;
     return iframeElement;
   };
 
