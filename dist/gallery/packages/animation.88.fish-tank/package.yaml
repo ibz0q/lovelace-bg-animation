@@ -12,7 +12,7 @@ parameters:
     default: Ocean Mix
     description: Preset options
     type: string
-    options:
+    enum:
       - Ocean Mix
       - 75 Lone Fish
       - Tropical Seas

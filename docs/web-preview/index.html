@@ -62,6 +62,8 @@ body {
     transition: all 0.4s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     transform: scale(0.8);
+    line-height: 1;
+    text-align: center;
 }
 
 .nav-button:hover {
@@ -110,6 +112,10 @@ body {
     top: 20px !important;
     right: 20px !important;
     left: auto !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 /* Tooltip */
@@ -166,7 +172,7 @@ body {
     right: -400px;
     width: 400px;
     height: 100vh;
-    background: rgba(15, 15, 15, 0.95);
+    background: rgba(15, 15, 15, 0.75);
     backdrop-filter: blur(20px);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
     z-index: 2000;
@@ -1344,11 +1350,7 @@ body {
         </div>
 
         <div class="sidebar-footer">
-            <div id="package-info" class="package-info">
-                <div id="current-package-name" class="package-name"></div>
-                <div id="current-package-author" class="package-author"></div>
-                <div id="current-package-description" class="package-description"></div>
-            </div>
+            <!-- Package info removed to save space -->
         </div>
     </div>
 
@@ -2552,7 +2554,7 @@ class BackgroundGallery {
         }
         
         // Update package info in footer
-        this.updatePackageInfo(pkg);
+        // Package info update removed
         
         // Load the package
         await this.loadPackage(pkg);
@@ -2563,11 +2565,7 @@ class BackgroundGallery {
         }
     }
 
-    updatePackageInfo(pkg) {
-        document.getElementById('current-package-name').textContent = pkg.name || pkg.id;
-        document.getElementById('current-package-author').textContent = `by ${pkg.author || 'Unknown'}`;
-        document.getElementById('current-package-description').textContent = pkg.description || 'No description available';
-    }
+    // updatePackageInfo method removed since package-info div was removed
 
     async getPackageYaml(pkg) {
         try {
@@ -3012,6 +3010,24 @@ class BackgroundGallery {
         return convertToHexColor(color);
     }
 
+    formatValueAsYaml(value) {
+        try {
+            if (value === null || value === undefined) {
+                return '';
+            }
+            // Convert to YAML string with proper indentation
+            return jsyaml.dump(value, {
+                indent: 2,
+                lineWidth: -1, // Don't wrap lines
+                noRefs: true,
+                skipInvalid: true
+            }).trim();
+        } catch (error) {
+            console.warn('Failed to format value as YAML, falling back to JSON:', error);
+            return JSON.stringify(value, null, 2);
+        }
+    }
+
     showBackgroundLoading() {
         // Show loading in config panel if open
         this.showConfigLoading();
@@ -3115,10 +3131,22 @@ class BackgroundGallery {
         if (hasCustomParams) {
             configYaml += `\n        parameters:`;
             Object.entries(parameters).forEach(([key, value]) => {
-                const valueStr = typeof value === 'string' ? `"${value}"` : 
-                                typeof value === 'object' ? JSON.stringify(value, null, 8).replace(/\n/g, '\n          ') : 
-                                value;
-                configYaml += `\n          ${key}: ${valueStr}`;
+                if (typeof value === 'string') {
+                    configYaml += `\n          ${key}: "${value}"`;
+                } else if (typeof value === 'object') {
+                    // Format objects and arrays as YAML
+                    const yamlValue = jsyaml.dump(value, {
+                        indent: 2,
+                        lineWidth: -1,
+                        noRefs: true,
+                        skipInvalid: true
+                    }).trim();
+                    // Indent each line properly for the YAML structure
+                    const indentedYaml = yamlValue.split('\n').map(line => `          ${line}`).join('\n');
+                    configYaml += `\n          ${key}: |\n${indentedYaml}`;
+                } else {
+                    configYaml += `\n          ${key}: ${value}`;
+                }
             });
         }
 
@@ -3171,14 +3199,16 @@ class BackgroundGallery {
                 </select>
             `;
         } else if (actualType === 'array' || (typeof param.default === 'object' && Array.isArray(param.default))) {
+            const yamlValue = this.formatValueAsYaml(value);
             inputHtml = `
                 <label for="${inputId}" class="parameter-label">${param.name}</label>
-                <textarea id="${inputId}" class="parameter-textarea" placeholder="JSON array format">${JSON.stringify(value, null, 2)}</textarea>
+                <textarea id="${inputId}" class="parameter-textarea" placeholder="YAML array format" data-format="yaml">${yamlValue}</textarea>
             `;
         } else if (actualType === 'object' || (typeof param.default === 'object' && !Array.isArray(param.default))) {
+            const yamlValue = this.formatValueAsYaml(value);
             inputHtml = `
                 <label for="${inputId}" class="parameter-label">${param.name}</label>
-                <textarea id="${inputId}" class="parameter-textarea" placeholder="JSON object format">${JSON.stringify(value, null, 2)}</textarea>
+                <textarea id="${inputId}" class="parameter-textarea" placeholder="YAML object format" data-format="yaml">${yamlValue}</textarea>
             `;
         } else {
             // string, number, or other basic types
@@ -3417,14 +3447,30 @@ class BackgroundGallery {
             } else if (actualType === 'number') {
                 value = parseFloat(inputElement.value) || param.default;
             } else if (actualType === 'array' || (typeof param.default === 'object' && Array.isArray(param.default))) {
-                value = JSON.parse(inputElement.value);
-                if (!Array.isArray(value)) {
-                    throw new Error('Must be an array');
+                // Check if input has YAML format data attribute
+                if (inputElement.dataset.format === 'yaml') {
+                    value = jsyaml.load(inputElement.value);
+                    if (!Array.isArray(value)) {
+                        throw new Error('Must be an array in YAML format');
+                    }
+                } else {
+                    value = JSON.parse(inputElement.value);
+                    if (!Array.isArray(value)) {
+                        throw new Error('Must be an array');
+                    }
                 }
             } else if (actualType === 'object' || (typeof param.default === 'object' && !Array.isArray(param.default))) {
-                value = JSON.parse(inputElement.value);
-                if (typeof value !== 'object' || Array.isArray(value)) {
-                    throw new Error('Must be an object');
+                // Check if input has YAML format data attribute
+                if (inputElement.dataset.format === 'yaml') {
+                    value = jsyaml.load(inputElement.value);
+                    if (typeof value !== 'object' || Array.isArray(value)) {
+                        throw new Error('Must be an object in YAML format');
+                    }
+                } else {
+                    value = JSON.parse(inputElement.value);
+                    if (typeof value !== 'object' || Array.isArray(value)) {
+                        throw new Error('Must be an object');
+                    }
                 }
             } else {
                 value = inputElement.value;

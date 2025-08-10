@@ -249,7 +249,7 @@ function initializeRuntimeVariables() {
   rootPluginConfig = lovelaceUI?.lovelaceObject?.config["bg-animation"]
   rootPluginConfig = {
     "gallery": {
-      "type": rootPluginConfig.gallery?.type ?? "remote",
+      "type": rootPluginConfig.gallery?.type ?? "local",
       "localRootPath": rootPluginConfig.gallery?.localRootPath ?? "/local/lovelace-bg-animation/dist",
       "manifestFileName": rootPluginConfig.gallery?.manifestFileName ?? "gallery.manifest",
       "remoteRootUrl": rootPluginConfig.gallery?.remoteRootUrl ?? "https://ibz0q.github.io/lovelace-bg-animation"

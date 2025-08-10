@@ -12,7 +12,7 @@ parameters:
     default: Ocean Mix
     description: Preset options
     type: string
-    options:
+    enum:
       - Ocean Mix
       - 75 Lone Fish
       - Tropical Seas
@@ -51,7 +51,7 @@ parameters:
   - name: backgroundColor
     default: "#000"
     description: Background color
-    type: string
+    type: color
   - name: backgroundImage
     default: oceanBackdrop.jpg
     description: Background image
