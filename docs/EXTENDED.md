@@ -4,9 +4,18 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (82 total) - Newest first
+## All backgrounds (83 total) - Newest first
 
 
+
+###  > animation.91.sliced-blobs (Dimensional Slicing - Dimensional blob slicing)
+
+`- id: animation.91.sliced-blobs`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.91.sliced-blobs/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.91.sliced-blobs/preview.html) - *Author: Ibz (Modified from Ksenia Kondrashova)* - Offline support? **Yes**
 
 ###  > animation.90.aurora (Icelandic Aurora - Watch the aurora borealis dance across your screen.)
 
