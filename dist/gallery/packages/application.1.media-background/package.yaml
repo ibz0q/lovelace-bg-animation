@@ -19,8 +19,14 @@ parameters:
     description: The transition effect to use between media items. Options include
       'fade-to-black', 'random', or an array of specific transitions ['fade',
       'slide-left'].
-    type:
-      - string
+    type: string
+    enum:
+      - crossfade
+      - slide-left
+      - slide-right
+      - zoom-in
+      - fade-up
+      - fade-down
     behavior: environment
   - name: transitionDuration
     default: 1000
@@ -33,6 +39,10 @@ parameters:
       or 'shuffle'.
     type: string
     behavior: environment
+    enum:
+      - sequence
+      - reverse
+      - shuffle
   - name: showProgressBar
     default: false
     description: Show or hide the progress bar.
