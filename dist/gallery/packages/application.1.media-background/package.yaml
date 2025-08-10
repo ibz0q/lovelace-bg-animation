@@ -51,6 +51,7 @@ parameters:
   - name: progressBarColor
     default: "linear-gradient(90deg, #667eea, #764ba2)"
     description: CSS color or gradient for the progress bar.
+    helper: color
     type: string
     behavior: environment
   - name: progressBarOpacity
