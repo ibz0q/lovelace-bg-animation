@@ -1147,6 +1147,7 @@ body {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sass.js@0.11.1/dist/sass.sync.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
     <script>
 class BackgroundGallery {
     constructor() {
@@ -1996,29 +1997,13 @@ class BackgroundGallery {
 
     async getPackageYaml(pkg) {
         try {
-            // Check cache first
-            const cacheKey = `lovelace-bg-preview_package_${pkg.id}`;
-            const cached = sessionStorage.getItem(cacheKey);
-            if (cached) {
-                return JSON.parse(cached);
-            }
-
             const packageUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${pkg.id}/package.yaml`;
             const response = await fetch(packageUrl);
             if (!response.ok) {
                 throw new Error('Package YAML not available');
             }
             const yamlText = await response.text();
-            const parsedYaml = jsyaml.load(yamlText);
-
-            // Cache the result
-            try {
-                sessionStorage.setItem(cacheKey, JSON.stringify(parsedYaml));
-            } catch (cacheError) {
-                console.warn('Failed to cache package YAML:', cacheError);
-            }
-
-            return parsedYaml;
+            return jsyaml.load(yamlText);
         } catch (error) {
             console.error('Error loading package YAML:', error);
             return null;
@@ -2041,13 +2026,6 @@ class BackgroundGallery {
         if (!packageYaml) return null;
 
         try {
-            // Check cache first
-            const cacheKey = `lovelace-bg-preview_processed_${pkg.id}`;
-            const cached = sessionStorage.getItem(cacheKey);
-            if (cached) {
-                return cached;
-            }
-
             // Apply package overrides if any
             if (pkg.packageOverride) {
                 console.log('Applying package overrides for', pkg.id);
@@ -2075,13 +2053,35 @@ class BackgroundGallery {
             }
 
             // Process parameters if any
-            if (packageYaml.parameters) {
-                const paramRegex = /\{\{\s*parameter:\s*([\w\d_-]+)\s*\}\}/g;
-                processedTemplate = processedTemplate.replace(paramRegex, (match, paramName) => {
-                    const param = packageYaml.parameters.find(p => p.name === paramName);
-                    return param ? param.default : match;
-                });
-            }
+            const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
+            processedTemplate = processedTemplate.replace(regex, function (match, type, key) {
+                key = key.trim();
+                switch (type) {
+                    case 'parameters':
+                    case 'parameter':
+                    case 'param':
+                        return (packageYaml.parameters && packageYaml.parameters[key]) ? packageYaml.parameters[key] : packageYaml.parameters.find(item => item.name == key)?.default || match;
+                    case 'metadata':
+                    case 'meta':
+                        return packageYaml.metadata?.[key] || match;
+                    case 'environment':
+                    case 'env':
+                        return environment[key] || match;
+                    case 'common':
+                        try {
+                            if (galleryRootManifest?.common && galleryRootManifest?.common[key]) {
+                                return environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename
+                            } else {
+                                return match;
+                            }
+                        } catch (error) {
+                            console.error(`Failed to process common: ${key}`, error);
+                            return match;
+                        }
+                    default:
+                        return match;
+                }
+            });
 
             // Process common library references
             const commonRegex = /\{\{\s*common:\s*([^\s\}]+)\s*\}\}/g;
@@ -2140,13 +2140,6 @@ class BackgroundGallery {
                 processedTemplate = processedTemplate.replace(compileRegex, (match, compileId) => {
                     return compiledSections[compileId] || match;
                 });
-            }
-
-            // Cache the processed template
-            try {
-                sessionStorage.setItem(cacheKey, processedTemplate);
-            } catch (cacheError) {
-                console.warn('Failed to cache processed template:', cacheError);
             }
 
             return processedTemplate;
