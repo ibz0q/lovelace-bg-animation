@@ -57,14 +57,20 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "75c80544b3bcfef25a09cb9baa28215933b91950",
+      "hash": "89a7c776309337ee0b14c085200c2a989ce5d2da",
       "parameters": [
         {
           "name": "transition",
           "default": "crossfade",
           "description": "The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left'].",
-          "type": [
-            "string"
+          "type": "string",
+          "enum": [
+            "crossfade",
+            "slide-left",
+            "slide-right",
+            "zoom-in",
+            "fade-up",
+            "fade-down"
           ],
           "behavior": "environment"
         },
@@ -80,7 +86,12 @@
           "default": "shuffle",
           "description": "The order to play media items. Options are 'sequence', 'reverse', or 'shuffle'.",
           "type": "string",
-          "behavior": "environment"
+          "behavior": "environment",
+          "enum": [
+            "sequence",
+            "reverse",
+            "shuffle"
+          ]
         },
         {
           "name": "showProgressBar",
@@ -1262,14 +1273,14 @@
       "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
-      "hash": "8deb5a30f89d855a9fa3c9bbde20c627796206ad",
+      "hash": "2c39706edec7ce6dd617126d6fae159bdb47317c",
       "parameters": [
         {
           "name": "Presets",
           "default": "Ocean Mix",
           "description": "Preset options",
           "type": "string",
-          "options": [
+          "enum": [
             "Ocean Mix",
             "75 Lone Fish",
             "Tropical Seas",
@@ -1325,7 +1336,7 @@
           "name": "backgroundColor",
           "default": "#000",
           "description": "Background color",
-          "type": "string"
+          "type": "color"
         },
         {
           "name": "backgroundImage",
