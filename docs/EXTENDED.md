@@ -1165,11 +1165,12 @@ Found these dependencies in (../gallery/packages/generator.86.silky-carpet/packa
 
 Supported params:
 - `transition` - The transition effect to use between media items. Options include 'fade-to-black', 'random', or an array of specific transitions ['fade', 'slide-left']. (defaults: `crossfade`)
-- `transitionDuration` - The duration of the transition effect in milliseconds. (defaults: `1000`)
+- `transitionDuration` - The duration of the transition effect in milliseconds. (defaults: `4000`)
 - `order` - The order to play media items. Options are 'sequence', 'reverse', or 'shuffle'. (defaults: `shuffle`)
 - `showProgressBar` - Show or hide the progress bar. (defaults: `false`)
 - `progressBarColor` - CSS color or gradient for the progress bar. (defaults: `linear-gradient(90deg, #667eea, #764ba2)`)
 - `progressBarOpacity` - Opacity of the progress bar (0 to 1). (defaults: `0.2`)
+- `backgroundColor` - Background color for the media container and loading states. (defaults: `#000`)
 - `defaultDuration` - Default duration in milliseconds for media items that don't specify their own duration. (defaults: `70000`)
 - `fit` - Default fitting mode for all media. Options are 'contain', 'cover', 'fill', 'scale-down', 'none'. (defaults: `cover`)
 - `mediaList` - Array of media items. Each item should have {file, duration, preload, tags, stretchToFit, muted, fit, playbackRate} properties.

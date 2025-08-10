@@ -29,7 +29,7 @@ parameters:
       - fade-down
     behavior: environment
   - name: transitionDuration
-    default: 1000
+    default: 4000
     description: The duration of the transition effect in milliseconds.
     type: number
     behavior: environment
@@ -58,6 +58,12 @@ parameters:
     default: 0.2
     description: Opacity of the progress bar (0 to 1).
     type: number
+    behavior: environment
+  - name: backgroundColor
+    default: "#000"
+    description: Background color for the media container and loading states.
+    type: string
+    helper: color
     behavior: environment
   - name: defaultDuration
     default: 70000
@@ -270,7 +276,7 @@ template: >
           margin: 0;
           padding: 0;
           overflow: hidden;
-          background: black;
+          background: {{ backgroundColor }};
         }
         #media-container {
           position: fixed;
@@ -283,7 +289,7 @@ template: >
           display: flex;
           align-items: center;
           justify-content: center;
-          background: black;
+          background: {{ backgroundColor }};
           z-index: 1;
         }
         .media {
@@ -299,7 +305,11 @@ template: >
           transition: none;
           z-index: 2;
           pointer-events: none;
-          background: black;
+          background: {{ backgroundColor }} !important;
+        }
+        .media video,
+        .media img {
+          background: {{ backgroundColor }} !important;
         }
         .media.stretch {
           object-fit: cover;
@@ -357,7 +367,7 @@ template: >
           bottom: 0;
           width: 100vw;
           height: 100vh;
-          background: black;
+          background: {{ backgroundColor }};
           opacity: 0;
           pointer-events: none;
           z-index: 10;
@@ -397,7 +407,7 @@ template: >
           transform: translateX(0);
         }
         .crossfade {
-          transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: opacity var(--transition-duration, 2.5s) cubic-bezier(0.4, 0, 0.2, 1);
           opacity: 0;
         }
         .crossfade.show {
@@ -452,7 +462,7 @@ template: >
       </div>
       <script>
         const config = {
-          transition: window.env?.transition || "fade-to-black",
+          transition: window.env?.transition || "crossfade",
           transitionDuration: window.env?.transitionDuration || 1200, // ms
           order: window.env?.order || "shuffle", // 'sequence', 'reverse', 'shuffle'
           fit: window.env?.fit || "cover", // 'contain', 'cover', 'fill', 'scale-down', 'none'
@@ -461,6 +471,7 @@ template: >
             window.env?.progressBarColor ||
             "linear-gradient(90deg, #667eea, #764ba2)", // or any CSS color/gradient
           progressBarOpacity: window.env?.progressBarOpacity ?? 0.2, // 0 to 1
+          backgroundColor: window.env?.backgroundColor || "#000000", // Background color
           defaultDuration: window.env?.defaultDuration || 20000, // Default duration in ms
           mediaList: window.env?.mediaList || [
             {
@@ -479,7 +490,6 @@ template: >
             },
           ],
         };
-          console.log(config.defaultDuration);
 
         // Store original mediaList for filtering
         const originalMediaList = [...config.mediaList];
@@ -531,6 +541,8 @@ template: >
           let el;
           if (isVideo(src)) {
             el = document.createElement("video");
+            el.style.background = config.backgroundColor;
+            el.style.backgroundColor = config.backgroundColor;
             el.src = src;
             el.autoplay = true;
             el.loop = false;
@@ -538,7 +550,6 @@ template: >
             el.playsInline = true;
             el.setAttribute("playsinline", "");
             el.setAttribute("webkit-playsinline", "");
-            el.style.background = "black";
             el.preload = preload !== undefined ? preload : "auto";
             // Set playback rate if specified (videos only)
             if (playbackRate !== undefined && playbackRate !== 1.0) {
@@ -546,11 +557,12 @@ template: >
             }
           } else {
             el = document.createElement("img");
+            el.style.background = config.backgroundColor;
+            el.style.backgroundColor = config.backgroundColor;
             el.src = src;
             el.alt = "";
             el.decoding = "async";
             el.loading = preload !== undefined ? preload : "eager";
-            el.style.background = "black";
           }
           el.className = "media";
 
@@ -585,8 +597,39 @@ template: >
             el.classList.add(transitionType);
             container.appendChild(el);
 
+            // For crossfade, handle simultaneous video playback
+            if (transitionType === "crossfade") {
+              // Get the currently visible media element
+              const currentlyVisible = container.querySelector('.media.show');
+              
+              if (currentlyVisible) {
+                // New video goes UNDERNEATH the old one with lower z-index
+                el.style.zIndex = parseInt(currentlyVisible.style.zIndex || 2) - 1;
+                // Show new video immediately at full opacity underneath
+                el.classList.add("show");
+                // Start playing the new video immediately
+                if (isVideo(src)) {
+                  el.play().catch(() => {});
+                }
+                
+                // After new video is ready, fade out the old one on top
+                setTimeout(() => {
+                  resolve(el);
+                }, 100);
+              } else {
+                // For the very first video, just show it immediately
+                el.style.zIndex = 2;
+                el.classList.add("show");
+                if (isVideo(src)) {
+                  el.play().catch(() => {});
+                }
+                setTimeout(() => {
+                  resolve(el);
+                }, 100);
+              }
+            }
             // For fade-to-black, use overlay
-            if (transitionType === "fade-to-black") {
+            else if (transitionType === "fade-to-black") {
               blackOverlay.style.transition = `opacity ${config.transitionDuration}ms cubic-bezier(0.4,0,0.2,1)`;
               blackOverlay.style.opacity = "1";
               setTimeout(() => {
@@ -612,18 +655,35 @@ template: >
 
         function hideMedia(el, transitionType) {
           return new Promise((resolve) => {
-            if (transitionType === "fade-to-black") {
+            if (transitionType === "crossfade") {
+              // For crossfade, the old video should fade out while the new one fades in
+              el.classList.remove("show");
+              // Get the computed transition duration from CSS
+              const computedStyle = getComputedStyle(document.documentElement);
+              const transitionDuration = parseFloat(computedStyle.getPropertyValue('--transition-duration')) || config.transitionDuration;
+              
+              setTimeout(() => {
+                if (container.contains(el)) {
+                  container.removeChild(el);
+                }
+                resolve();
+              }, transitionDuration);
+            } else if (transitionType === "fade-to-black") {
               blackOverlay.style.transition = `opacity ${config.transitionDuration}ms cubic-bezier(0.4,0,0.2,1)`;
               blackOverlay.style.opacity = "1";
               setTimeout(() => {
-                container.removeChild(el);
+                if (container.contains(el)) {
+                  container.removeChild(el);
+                }
                 blackOverlay.style.opacity = "0";
                 resolve();
               }, config.transitionDuration);
             } else {
               el.classList.remove("show");
               setTimeout(() => {
-                container.removeChild(el);
+                if (container.contains(el)) {
+                  container.removeChild(el);
+                }
                 resolve();
               }, config.transitionDuration);
             }
@@ -672,6 +732,7 @@ template: >
           if (cycleAbortController) cycleAbortController.abort();
           cycleAbortController = new AbortController();
           const signal = cycleAbortController.signal;
+          let previousElement = null;
           while (true) {
             if (signal.aborted) return;
             const idx = order[current % order.length];
@@ -696,9 +757,21 @@ template: >
             } else {
               transitionType = transitionSource;
             }
+            
             const el = await showMedia(idx, transitionType);
+            
+            // For crossfade, now fade out the previous element that's on top
+            if (transitionType === "crossfade" && previousElement) {
+              // Start fading out the previous element (which is on top)
+              hideMedia(previousElement, transitionType);
+            }
             // Use media.duration, then fallback to global default
             let duration = media.duration !== undefined ? media.duration : config.defaultDuration;
+            
+            // Ensure transition duration doesn't exceed media duration
+            const effectiveTransitionDuration = Math.min(config.transitionDuration, Math.floor(duration / 3));
+            // Update CSS variable for this transition
+            document.documentElement.style.setProperty('--transition-duration', `${effectiveTransitionDuration}ms`);
             if (config.showProgressBar) {
               if (isVideo(media.file)) {
                 if (duration === "playback") {
@@ -735,7 +808,16 @@ template: >
             }
             progressBar.style.transition = "none";
             progressBar.style.width = "0%";
-            await hideMedia(el, transitionType);
+            
+            // For non-crossfade transitions, hide the element normally
+            // For crossfade, the previous element was already hidden simultaneously
+            if (transitionType !== "crossfade") {
+              await hideMedia(el, transitionType);
+            }
+            
+            // Update previousElement for the next iteration
+            previousElement = el;
+            
             current = (current + 1) % order.length;
             currentTransition = (currentTransition + 1) % transitions.length;
             if (current === 0 && config.order === "shuffle") {
@@ -761,6 +843,9 @@ template: >
 
         // Start cycling after preloading images
         window.onload = async function () {
+          // Set CSS custom property for transition duration
+          document.documentElement.style.setProperty('--transition-duration', `${config.transitionDuration}ms`);
+          
           await preloadImages(config.mediaList);
           cycleMedia();
         };

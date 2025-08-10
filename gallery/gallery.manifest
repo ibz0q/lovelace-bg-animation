@@ -58,7 +58,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "ec709642c4eaacc84eb6574fd5e823c5147e814b",
+      "hash": "a510590311f7b732a2d216b78defc2c134398eac",
       "parameters": [
         {
           "name": "transition",
@@ -77,7 +77,7 @@
         },
         {
           "name": "transitionDuration",
-          "default": 1000,
+          "default": 4000,
           "description": "The duration of the transition effect in milliseconds.",
           "type": "number",
           "behavior": "environment"
@@ -114,6 +114,14 @@
           "default": 0.2,
           "description": "Opacity of the progress bar (0 to 1).",
           "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "backgroundColor",
+          "default": "#000",
+          "description": "Background color for the media container and loading states.",
+          "type": "string",
+          "helper": "color",
           "behavior": "environment"
         },
         {
