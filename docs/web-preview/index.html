@@ -1145,6 +1145,8 @@ body {
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sass.js@0.11.1/dist/sass.sync.min.js"></script>
     <script>
 class BackgroundGallery {
     constructor() {
@@ -1210,6 +1212,7 @@ class BackgroundGallery {
             
             const manifest = await response.json();
             this.packages = manifest.packages || [];
+            this.commonLibs = manifest.common || {};
             
             // Sort packages using the same logic as create-docs.js
             this.packages = this.sortPackages(this.packages);
@@ -1991,20 +1994,145 @@ class BackgroundGallery {
         document.getElementById('current-package-description').textContent = pkg.description || 'No description available';
     }
 
+    async getPackageYaml(pkg) {
+        try {
+            const packageUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${pkg.id}/package.yaml`;
+            const response = await fetch(packageUrl);
+            if (!response.ok) {
+                throw new Error('Package YAML not available');
+            }
+            const yamlText = await response.text();
+            return jsyaml.load(yamlText);
+        } catch (error) {
+            console.error('Error loading package YAML:', error);
+            return null;
+        }
+    }
+
+    async compileSass(scss) {
+        return new Promise((resolve, reject) => {
+            Sass.compile(scss, result => {
+                if (result.status === 0) {
+                    resolve(result.text);
+                } else {
+                    reject(new Error(result.message));
+                }
+            });
+        });
+    }
+
+    async processPackageYaml(packageYaml, pkg) {
+        if (!packageYaml) return null;
+
+        try {
+            let processedTemplate = packageYaml.template;
+            const baseUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${pkg.id}/`;
+            const commonPath = `https://ibz0q.github.io/lovelace-bg-animation/gallery/common/`;
+
+            // Handle base URL insertion if needed
+            if (packageYaml.helpers?.insert_baseurl) {
+                const baseTag = `<base href="${baseUrl}" target="_blank">`;
+                
+                if (processedTemplate.includes('<head>')) {
+                    processedTemplate = processedTemplate.replace(/(?<=<head>)/, `\n${baseTag}`);
+                } else if (processedTemplate.includes('<html>')) {
+                    processedTemplate = processedTemplate.replace(/(?<=<html>)/, `\n${baseTag}`);
+                }
+            }
+
+            // Process parameters if any
+            if (packageYaml.parameters) {
+                const paramRegex = /\{\{\s*parameter:\s*([\w\d_-]+)\s*\}\}/g;
+                processedTemplate = processedTemplate.replace(paramRegex, (match, paramName) => {
+                    const param = packageYaml.parameters.find(p => p.name === paramName);
+                    return param ? param.default : match;
+                });
+            }
+
+            // Process common library references
+            const commonRegex = /\{\{\s*common:\s*([^\s\}]+)\s*\}\}/g;
+            processedTemplate = processedTemplate.replace(commonRegex, (match, libId) => {
+                // Check if it's a URL
+                if (libId.startsWith('http://') || libId.startsWith('https://')) {
+                    return libId;
+                }
+                // Otherwise treat as a common library ID
+                const lib = this.commonLibs[libId];
+                if (!lib) return match;
+                return commonPath + lib.hash + '_' + lib.filename;
+            });
+
+            // Process environment variables
+            const envRegex = /\{\{\s*(environment|env):\s*([\w\d_-]+)\s*\}\}/g;
+            processedTemplate = processedTemplate.replace(envRegex, (match, type, key) => {
+                switch (key) {
+                    case 'rootPath':
+                        return 'https://ibz0q.github.io/lovelace-bg-animation';
+                    case 'basePath':
+                    case 'assetPath':
+                        return baseUrl;
+                    case 'commonPath':
+                        return commonPath;
+                    default:
+                        return match;
+                }
+            });
+
+            // Process metadata
+            const metaRegex = /\{\{\s*(metadata|meta):\s*([\w\d_-]+)\s*\}\}/g;
+            processedTemplate = processedTemplate.replace(metaRegex, (match, type, key) => {
+                return packageYaml.metadata?.[key] || match;
+            });
+
+            // Process compile sections if any
+            if (packageYaml.compile) {
+                this.showLoading('Compiling SCSS...');
+                const compiledSections = {};
+                
+                // Compile all SCSS sections first
+                for (const section of packageYaml.compile) {
+                    if (section.scss) {
+                        try {
+                            compiledSections[section.id] = await this.compileSass(section.scss);
+                        } catch (error) {
+                            console.error('SCSS compilation error:', error);
+                            compiledSections[section.id] = '/* SCSS compilation error */';
+                        }
+                    }
+                }
+
+                // Replace compile placeholders in template
+                const compileRegex = /\{\{\s*compile:\s*([\w\d_-]+)\s*\}\}/g;
+                processedTemplate = processedTemplate.replace(compileRegex, (match, compileId) => {
+                    return compiledSections[compileId] || match;
+                });
+            }
+
+            return processedTemplate;
+        } catch (error) {
+            console.error('Error processing package YAML:', error);
+            return null;
+        }
+    }
+
     async loadPackage(pkg) {
-        this.showLoading();
+        this.showLoading('Downloading package...');
         
         try {
-            const previewUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/${pkg.id}/preview.html`;
-            
-            // Test if the preview URL exists
-            const response = await fetch(previewUrl, { method: 'HEAD' });
-            if (!response.ok) {
-                throw new Error('Preview not available');
+            const packageYaml = await this.getPackageYaml(pkg);
+            if (!packageYaml) {
+                throw new Error('Failed to load package YAML');
+            }
+
+            this.showLoading('Processing package configuration...');
+            const processedTemplate = await this.processPackageYaml(packageYaml, pkg);
+            if (!processedTemplate) {
+                throw new Error('Failed to process package YAML');
             }
             
+            this.showLoading('Rendering background...');
             const iframe = document.getElementById('preview-iframe');
-            iframe.src = previewUrl;
+            iframe.srcdoc = processedTemplate;
             
             this.currentPackage = pkg;
             
@@ -2033,7 +2161,7 @@ class BackgroundGallery {
         } catch (error) {
             console.error('Error loading package:', error);
             this.hideLoading();
-            this.showError(`Failed to load ${pkg.name}. Preview may not be available.`);
+            this.showError(`Failed to load ${pkg.name}. Package may not be available.`);
         }
     }
 
@@ -2146,8 +2274,10 @@ class BackgroundGallery {
         return null;
     }
 
-    showLoading() {
+    showLoading(message = 'Loading background...') {
         const loadingOverlay = document.getElementById('loading-overlay');
+        const loadingText = loadingOverlay.querySelector('.loading-text');
+        loadingText.textContent = message;
         loadingOverlay.classList.add('visible');
     }
 
