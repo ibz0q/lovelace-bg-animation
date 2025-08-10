@@ -1047,7 +1047,7 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "0fb60a01bf5b9118e80df8cc263deb66b72f21a0",
+      "hash": "72fa717fa714d9fa0e7b957c16b1582313d4ed0d",
       "parameters": [
         {
           "name": "waveColor",
@@ -1409,6 +1409,18 @@
           "behavior": "environment"
         }
       ],
+      "tags": [
+        "interactive"
+      ]
+    },
+    {
+      "id": "animation.91.sliced-blobs",
+      "version": "v1",
+      "name": "Dimensional Slicing",
+      "description": "Dimensional blob slicing",
+      "author": "Ibz (Modified from Ksenia Kondrashova)",
+      "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
+      "hash": "b2e9b1d06d6d9708a5e245223e5b4450eb0185ec",
       "tags": [
         "interactive"
       ]
