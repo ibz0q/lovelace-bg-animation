@@ -47,8 +47,8 @@ body {
 
 /* Nav buttons (prev/next) */
 .nav-button {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -77,8 +77,8 @@ body {
 
 /* Menu button */
 .menu-button {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(15px);
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -103,6 +103,151 @@ body {
 .menu-button.visible {
     opacity: 1;
     transform: scale(1);
+}
+
+.config-panel-button {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    left: auto !important;
+}
+
+/* Tooltip */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 500px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    text-align: left;
+    border-radius: 10px;
+    padding: 16px;
+    position: absolute;
+    z-index: 10001;
+    bottom: 125%;
+    right: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Config Panel */
+.config-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 2000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.config-panel.open {
+    right: 0;
+}
+
+.config-panel-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.config-panel-title {
+    flex: 1;
+}
+
+.config-panel-title h3 {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.config-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
+.config-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    min-height: 0;
+}
+
+.config-panel-no-params {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 40px 20px;
+}
+
+.config-panel-no-params p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.config-panel-footer {
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.config-panel-footer .btn {
+    font-size: 11px;
+    padding: 8px 12px;
+}
+
+@media (max-width: 768px) {
+    .config-panel {
+        width: 100vw;
+        right: -100vw;
+    }
+    
+    .config-panel-footer {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 /* Sidebar */
@@ -534,13 +679,13 @@ body {
     }
     
     .nav-button {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
     
     .menu-button {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
     
     .nav-button.visible,
@@ -706,12 +851,195 @@ body {
     background: rgba(255, 255, 255, 0.5);
 }
 
+/* Old parameters modal CSS removed - using config panel instead */
+
+.status-spinner {
+    animation: spin 1s linear infinite;
+    color: #4CAF50;
+}
+
+.status-check {
+    color: #4CAF50;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.parameter-item {
+    margin-bottom: 24px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.parameter-item:last-child {
+    margin-bottom: 0;
+}
+
+.parameter-label {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.parameter-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.parameter-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.parameter-input:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.parameter-input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+.parameter-select {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+
+.parameter-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+}
+
+.parameter-textarea:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.parameter-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-primary {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.5);
+    color: rgba(76, 175, 80, 1);
+}
+
+.btn-primary:hover {
+    background: rgba(76, 175, 80, 0.3);
+    border-color: rgba(76, 175, 80, 0.7);
+}
+
+.btn-danger {
+    background: rgba(244, 67, 54, 0.2);
+    border-color: rgba(244, 67, 54, 0.5);
+    color: rgba(244, 67, 54, 1);
+}
+
+.btn-danger:hover {
+    background: rgba(244, 67, 54, 0.3);
+    border-color: rgba(244, 67, 54, 0.7);
+}
+
+.package-params-button {
+    background: rgba(156, 39, 176, 0.2);
+    border-color: rgba(156, 39, 176, 0.3);
+}
+
+.package-params-button:hover {
+    background: rgba(156, 39, 176, 0.3);
+    border-color: rgba(156, 39, 176, 0.4);
+}
+
+.color-picker-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.parameter-color-picker {
+    width: 60px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.parameter-color-picker:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.color-text-input {
+    flex: 1;
+    min-width: 200px;
+}
+
 /* Credits overlay */
 .credits-overlay {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 3000;
+    z-index: 1500;
     opacity: 0;
     visibility: hidden;
     transition: all 0.8s ease;
@@ -946,6 +1274,11 @@ body {
             </svg>
         </div>
         
+        <!-- Floating config panel button -->
+        <div id="config-panel-button" class="nav-button config-panel-button" style="display: none; font-size: 20px;">
+            ⚙️
+        </div>
+        
         <!-- Next button -->
         <div id="next-button" class="nav-button">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1070,6 +1403,74 @@ body {
         </div>
     </div>
 
+    <!-- Config Panel -->
+    <div id="config-panel" class="config-panel">
+        <div class="config-panel-header">
+            <div class="config-panel-title">
+                <h3 id="config-panel-package-name">Configure Parameters</h3>
+                <div class="config-status-indicator">
+                    <svg id="config-loading-spinner" class="status-spinner hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 11-6.219-8.56"/>
+                    </svg>
+                    <svg id="config-loaded-check" class="status-check hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    <span id="config-status-text"></span>
+                </div>
+            </div>
+            <button id="close-config-panel" class="close-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="config-panel-body" id="config-panel-body">
+            <div class="config-panel-no-params">
+                <p>No configurable parameters available for this background.</p>
+            </div>
+        </div>
+        <div class="config-panel-footer">
+            <button id="config-reset-parameters" class="btn btn-danger">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path>
+                    <path d="M21 3v5h-5"></path>
+                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path>
+                    <path d="M3 21v-5h5"></path>
+                </svg>
+                Reset
+            </button>
+            <button id="config-import-parameters" class="btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14,2 14,8 20,8"></polyline>
+                    <line x1="12" y1="18" x2="12" y2="12"></line>
+                    <polyline points="9,15 12,12 15,15"></polyline>
+                </svg>
+                Import
+            </button>
+            <button id="config-export-parameters" class="btn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14,2 14,8 20,8"></polyline>
+                    <line x1="12" y1="12" x2="12" y2="18"></line>
+                    <polyline points="15,15 12,18 9,15"></polyline>
+                </svg>
+                Export
+            </button>
+            <div class="tooltip">
+                <button id="config-copy-ha-config" class="btn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                    </svg>
+                    Copy HA
+                </button>
+                <span id="config-tooltip-text" class="tooltiptext"></span>
+            </div>
+        </div>
+    </div>
+
     <!-- Bottom Modal -->
     <div id="bottom-modal" class="bottom-modal">
         <div class="bottom-modal-header">
@@ -1134,6 +1535,8 @@ body {
         <div class="loading-text">Loading background...</div>
     </div>
 
+    <!-- Old parameters modal removed - using config panel instead -->
+
     <!-- Credits overlay -->
     <div id="credits-overlay" class="credits-overlay">
         <div class="credits-content">
@@ -1149,6 +1552,87 @@ body {
     <script src="https://cdn.jsdelivr.net/npm/sass.js@0.11.1/dist/sass.sync.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
     <script>
+// Security utility functions for XSS protection
+function sanitizeHtml(str) {
+    if (typeof str !== 'string') return str;
+    const temp = document.createElement('div');
+    temp.textContent = str;
+    return temp.innerHTML;
+}
+
+function sanitizeUrl(url) {
+    if (typeof url !== 'string') return '';
+    // Allow only http, https, and data URLs
+    const allowedProtocols = ['http:', 'https:', 'data:'];
+    try {
+        const parsed = new URL(url, window.location.origin);
+        if (allowedProtocols.includes(parsed.protocol)) {
+            return parsed.href;
+        }
+    } catch (e) {
+        console.warn('Invalid URL detected:', url);
+    }
+    return '';
+}
+
+function escapeHtml(str) {
+    if (typeof str !== 'string') return str;
+    const div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+function validateInput(input, type) {
+    if (input == null) return input;
+    
+    switch (type) {
+        case 'url':
+            return sanitizeUrl(input);
+        case 'html':
+            return sanitizeHtml(input);
+        case 'text':
+            return escapeHtml(input);
+        case 'number':
+            const num = parseFloat(input);
+            return isNaN(num) ? 0 : num;
+        case 'boolean':
+            return Boolean(input);
+        default:
+            return escapeHtml(String(input));
+    }
+}
+
+function convertToHexColor(color) {
+    if (!color || typeof color !== 'string') return '#000000';
+    
+    // If already hex, return it
+    if (color.startsWith('#')) {
+        return color.length === 7 ? color : '#000000';
+    }
+    
+    // Try to parse rgba/rgb/hsl values
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = color;
+    const computedColor = ctx.fillStyle;
+    
+    // If we get a valid hex color back, return it
+    if (computedColor.startsWith('#')) {
+        return computedColor;
+    }
+    
+    // Convert rgb(r,g,b) or rgba(r,g,b,a) to hex
+    const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*[\d.]+)?\)/);
+    if (rgbMatch) {
+        const r = parseInt(rgbMatch[1]).toString(16).padStart(2, '0');
+        const g = parseInt(rgbMatch[2]).toString(16).padStart(2, '0');
+        const b = parseInt(rgbMatch[3]).toString(16).padStart(2, '0');
+        return `#${r}${g}${b}`;
+    }
+    
+    return '#000000';
+}
+
 class BackgroundGallery {
     constructor() {
         this.packages = [];
@@ -1162,6 +1646,7 @@ class BackgroundGallery {
         this.currentListView = 'list'; // 'list' or 'tags'
         this.currentTag = null; // Currently selected tag
         this.tagGroups = new Map(); // Tag groups cache
+        this.packageParameters = {}; // Store custom parameters per package (session only)
         
         this.init();
     }
@@ -1278,6 +1763,16 @@ class BackgroundGallery {
             this.toggleSidebar();
         });
 
+        // Config panel button click
+        document.getElementById('config-panel-button').addEventListener('click', () => {
+            // Close any open menus first
+            this.closeSidebar();
+            this.closeBottomModal();
+            this.closeGridView();
+            
+            this.toggleConfigPanel();
+        });
+
         // Navigation button clicks
         document.getElementById('prev-button').addEventListener('click', () => {
             this.navigateToPrevious();
@@ -1302,12 +1797,21 @@ class BackgroundGallery {
             if (e.key === 'Escape') {
                 this.closeSidebar();
                 this.closeBottomModal();
+                this.closeConfigPanel();
             } else if (e.key === 'ArrowLeft') {
+                // Don't navigate if config panel is open
+                const configPanel = document.getElementById('config-panel');
+                if (!configPanel.classList.contains('open')) {
                 e.preventDefault();
                 this.navigateToPrevious();
+                }
             } else if (e.key === 'ArrowRight') {
+                // Don't navigate if config panel is open
+                const configPanel = document.getElementById('config-panel');
+                if (!configPanel.classList.contains('open')) {
                 e.preventDefault();
                 this.navigateToNext();
+                }
             }
         });
 
@@ -1429,16 +1933,49 @@ class BackgroundGallery {
                 this.selectPackage(hashPackage);
             }
         });
+
+        // Old modal elements removed - using config panel instead
+
+        // Config panel event listeners
+        document.getElementById('close-config-panel').addEventListener('click', () => {
+            this.closeConfigPanel();
+        });
+
+        document.getElementById('config-reset-parameters').addEventListener('click', () => {
+            this.resetParameters();
+        });
+
+        document.getElementById('config-export-parameters').addEventListener('click', () => {
+            this.exportParameters();
+        });
+
+        document.getElementById('config-import-parameters').addEventListener('click', () => {
+            this.importParameters();
+        });
+
+        document.getElementById('config-copy-ha-config').addEventListener('click', () => {
+            this.copyHomeAssistantConfig();
+        });
     }
 
     showMenuButton() {
         const menuButton = document.getElementById('menu-button');
+        const configButton = document.getElementById('config-panel-button');
         const prevButton = document.getElementById('prev-button');
         const nextButton = document.getElementById('next-button');
         
         menuButton.classList.add('visible');
         prevButton.classList.add('visible');
         nextButton.classList.add('visible');
+        
+        // Show config button only if current package has parameters
+        if (this.currentPackage && this.currentPackage.parameters && this.currentPackage.parameters.length > 0) {
+            configButton.style.display = 'block';
+            configButton.classList.add('visible');
+        } else {
+            configButton.style.display = 'none';
+            configButton.classList.remove('visible');
+        }
     }
 
     resetMouseTimeout() {
@@ -1454,8 +1991,14 @@ class BackgroundGallery {
             const bottomModal = document.getElementById('bottom-modal');
             
             // Only hide if no modals are open
-            if (!sidebar.classList.contains('open') && !bottomModal.classList.contains('open')) {
+            const configPanel = document.getElementById('config-panel');
+            const configButton = document.getElementById('config-panel-button');
+            
+            if (!sidebar.classList.contains('open') && 
+                !bottomModal.classList.contains('open') && 
+                !configPanel.classList.contains('open')) {
                 menuButton.classList.remove('visible');
+                configButton.classList.remove('visible');
                 prevButton.classList.remove('visible');
                 nextButton.classList.remove('visible');
             }
@@ -1925,6 +2468,11 @@ class BackgroundGallery {
                         </svg>
                         Source
                     </a>
+                    ${pkg.parameters && pkg.parameters.length > 0 ? `
+                    <button class="package-params-button package-copy-button" title="Configure Parameters" data-package-id="${pkg.id}" style="display: flex; align-items: center; gap: 4px;">
+                        <span style="font-size: 12px;">⚙️</span>
+                        Config
+                    </button>` : ''}
                     <button class="package-copy-button" title="Copy background ID for Home Assistant">
                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -1954,11 +2502,32 @@ class BackgroundGallery {
         });
 
         // Add copy button event listener
-        const copyButton = div.querySelector('.package-copy-button');
+        const copyButton = div.querySelector('.package-copy-button:not(.package-params-button)');
         if (copyButton) {
             copyButton.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.copyPackageId(pkg);
+            });
+        }
+
+        // Add parameters button event listener
+        const paramsButton = div.querySelector('.package-params-button');
+        if (paramsButton) {
+            paramsButton.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                
+                // Close the background selector menu
+                this.closeSidebar();
+                
+                // Change to this background first if it's not already current
+                if (!this.currentPackage || this.currentPackage.id !== pkg.id) {
+                    await this.selectPackage(pkg);
+                    // Wait a bit for the background to load
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+                
+                // Then open the config panel
+                this.openConfigPanel();
             });
         }
         
@@ -1967,6 +2536,11 @@ class BackgroundGallery {
 
 
     async selectPackage(pkg) {
+        // Close config panel if switching to a different background
+        if (this.currentPackage && this.currentPackage.id !== pkg.id) {
+            this.closeConfigPanel();
+        }
+        
         // Update active state
         document.querySelectorAll('.package-item').forEach(item => {
             item.classList.remove('active');
@@ -2023,6 +2597,9 @@ class BackgroundGallery {
     }
 
     async processPackageYaml(packageYaml, pkg) {
+        console.log(`[PROCESS DEBUG] Processing package: ${pkg.id}`);
+        console.log(`[PROCESS DEBUG] Current packageParameters:`, this.packageParameters);
+        
         if (!packageYaml) return null;
 
         try {
@@ -2054,13 +2631,28 @@ class BackgroundGallery {
 
             // Process parameters if any
             const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
-            processedTemplate = processedTemplate.replace(regex, function (match, type, key) {
+            processedTemplate = processedTemplate.replace(regex, (match, type, key) => {
                 key = key.trim();
                 switch (type) {
                     case 'parameters':
                     case 'parameter':
                     case 'param':
-                        return (packageYaml.parameters && packageYaml.parameters[key]) ? packageYaml.parameters[key] : packageYaml.parameters.find(item => item.name == key)?.default || match;
+                        // Check for custom parameters first, then package parameters, then defaults
+                        const customParams = this.packageParameters[pkg.id] || {};
+                        console.log(`[PARAM DEBUG] Processing parameter: ${key}`);
+                        console.log(`[PARAM DEBUG] Custom params for ${pkg.id}:`, customParams);
+                        console.log(`[PARAM DEBUG] Looking for key: "${key}"`);
+                        
+                        if (customParams[key] !== undefined) {
+                            console.log(`[PARAM DEBUG] Found custom value for ${key}:`, customParams[key]);
+                            // Sanitize parameter values to prevent XSS
+                            const sanitizedValue = validateInput(customParams[key], 'text');
+                            return sanitizedValue;
+                        }
+                        
+                        const defaultValue = (packageYaml.parameters && packageYaml.parameters[key]) ? packageYaml.parameters[key] : packageYaml.parameters.find(item => item.name == key)?.default || match;
+                        console.log(`[PARAM DEBUG] Using default value for ${key}:`, defaultValue);
+                        return defaultValue;
                     case 'metadata':
                     case 'meta':
                         return packageYaml.metadata?.[key] || match;
@@ -2070,7 +2662,9 @@ class BackgroundGallery {
                     case 'common':
                         try {
                             if (galleryRootManifest?.common && galleryRootManifest?.common[key]) {
-                                return environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename
+                                const commonUrl = environment["commonPath"] + galleryRootManifest?.common[key].hash + "_" + galleryRootManifest?.common[key].filename;
+                                // Validate URL for security
+                                return sanitizeUrl(commonUrl) || match;
                             } else {
                                 return match;
                             }
@@ -2292,21 +2886,25 @@ class BackgroundGallery {
         }
     }
 
-    updateUrlHash(packageId) {
-        // Update URL hash without triggering page reload
-        const newHash = `#${packageId}`;
-        if (window.location.hash !== newHash) {
-            history.replaceState(null, null, newHash);
-        }
-    }
+
 
     getPackageFromHash() {
         const hash = window.location.hash.slice(1); // Remove the # symbol
-        if (hash) {
-            return this.packages.find(pkg => pkg.id === hash);
-        }
-        return null;
+        if (!hash) return null;
+        
+        // Simple package ID lookup (no parameters for security)
+        const packageId = hash.split('?')[0]; // Ignore any parameters
+        return this.packages.find(pkg => pkg.id === packageId);
     }
+
+    updateUrlHash(packageId) {
+        // Simple URL update without parameters for security
+        if (window.location.hash !== `#${packageId}`) {
+            window.history.replaceState(null, null, `#${packageId}`);
+        }
+    }
+
+
 
     showLoading(message = 'Loading background...') {
         const loadingOverlay = document.getElementById('loading-overlay');
@@ -2397,9 +2995,468 @@ class BackgroundGallery {
             const selectedItems = document.querySelectorAll(`[data-package-id="${this.currentPackage.id}"]`);
             selectedItems.forEach(item => {
                 item.classList.add('selected');
+                
+                // Auto-scroll to selected item if not visible
+                if (item.offsetParent) { // Check if element is visible
+                    item.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest',
+                        inline: 'nearest'
+                    });
+                }
             });
         }
     }
+
+    convertToHexColor(color) {
+        return convertToHexColor(color);
+    }
+
+    showBackgroundLoading() {
+        // Show loading in config panel if open
+        this.showConfigLoading();
+    }
+
+    showBackgroundLoaded() {
+        // Update config panel indicators
+        const configSpinner = document.getElementById('config-loading-spinner');
+        const configCheck = document.getElementById('config-loaded-check');
+        const configText = document.getElementById('config-status-text');
+        
+        if (configSpinner && configCheck && configText) {
+            configSpinner.classList.add('hidden');
+            configCheck.classList.remove('hidden');
+            configText.textContent = 'Updated';
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                configCheck.classList.add('hidden');
+                configText.textContent = '';
+            }, 2000);
+        }
+    }
+
+    showConfigLoading() {
+        const spinner = document.getElementById('config-loading-spinner');
+        const check = document.getElementById('config-loaded-check');
+        const text = document.getElementById('config-status-text');
+        
+        if (spinner && check && text) {
+            spinner.classList.remove('hidden');
+            check.classList.add('hidden');
+            text.textContent = 'Updating...';
+        }
+    }
+
+    toggleConfigPanel() {
+        const configPanel = document.getElementById('config-panel');
+        
+        if (configPanel.classList.contains('open')) {
+            this.closeConfigPanel();
+        } else {
+            this.openConfigPanel();
+        }
+    }
+
+    async openConfigPanel() {
+        if (!this.currentPackage) return;
+
+        const configPanel = document.getElementById('config-panel');
+        const packageNameEl = document.getElementById('config-panel-package-name');
+        const configBody = document.getElementById('config-panel-body');
+
+        // Set package name
+        packageNameEl.textContent = this.currentPackage.name || this.currentPackage.id;
+
+        // Load parameters
+        if (this.currentPackage.parameters && this.currentPackage.parameters.length > 0) {
+            // Get package YAML to load parameters
+            const packageYaml = await this.getPackageYaml(this.currentPackage);
+            if (packageYaml && packageYaml.parameters) {
+                configBody.innerHTML = '';
+                
+                // Load saved parameters or use defaults
+                const savedParams = this.packageParameters[this.currentPackage.id] || {};
+
+                // Create parameter inputs
+                packageYaml.parameters.forEach(param => {
+                    const paramElement = this.createParameterInput(param, savedParams[param.name]);
+                    configBody.appendChild(paramElement);
+                });
+            }
+        } else {
+            // Show no parameters message
+            configBody.innerHTML = '<div class="config-panel-no-params"><p>No configurable parameters available for this background.</p></div>';
+        }
+
+        configPanel.classList.add('open');
+        
+        // Update the tooltip with current config
+        this.updateConfigTooltip();
+    }
+
+    closeConfigPanel() {
+        const configPanel = document.getElementById('config-panel');
+        configPanel.classList.remove('open');
+    }
+
+    updateConfigTooltip() {
+        if (!this.currentPackage) return;
+
+        const pkg = this.currentPackage;
+        const parameters = this.packageParameters[pkg.id] || {};
+        
+        // Check if there are any custom parameters
+        const hasCustomParams = Object.keys(parameters).length > 0;
+        
+        let configYaml = `      - id: ${pkg.id}`;
+
+        // Add parameters if any
+        if (hasCustomParams) {
+            configYaml += `\n        parameters:`;
+            Object.entries(parameters).forEach(([key, value]) => {
+                const valueStr = typeof value === 'string' ? `"${value}"` : 
+                                typeof value === 'object' ? JSON.stringify(value, null, 8).replace(/\n/g, '\n          ') : 
+                                value;
+                configYaml += `\n          ${key}: ${valueStr}`;
+            });
+        }
+
+        const tooltipText = document.getElementById('config-tooltip-text');
+        if (tooltipText) {
+            tooltipText.textContent = configYaml;
+        }
+    }
+
+    // Old modal methods removed - using config panel instead
+
+    createParameterInput(param, currentValue) {
+        const div = document.createElement('div');
+        div.className = 'parameter-item';
+        
+        let value = currentValue !== undefined ? currentValue : param.default;
+        // Sanitize the value to prevent XSS
+        if (typeof value === 'string') {
+            value = escapeHtml(value);
+        }
+        
+        let inputHtml = '';
+        const inputId = `param-${param.name}`;
+        
+        // Get actual type (handle arrays like ["string"] or simple strings like "boolean")
+        const actualType = Array.isArray(param.type) ? param.type[0] : param.type;
+        
+        if (actualType === 'boolean') {
+            inputHtml = `
+                <input type="checkbox" id="${inputId}" class="parameter-input" ${value ? 'checked' : ''}>
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+            `;
+        } else if (param.helper === 'color' || param.type === 'color') {
+            inputHtml = `
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+                <div class="color-picker-container">
+                    <input type="color" id="${inputId}" class="parameter-color-picker" value="${this.convertToHexColor(value)}">
+                    <input type="text" id="${inputId}-text" class="parameter-input color-text-input" value="${value || ''}" placeholder="Enter color (hex, rgb, rgba, etc.)">
+                </div>
+            `;
+        } else if (param.enum || param.options) {
+            const optionsList = param.enum || param.options;
+            const options = optionsList.map(option => 
+                `<option value="${option}" ${value === option ? 'selected' : ''}>${option}</option>`
+            ).join('');
+            inputHtml = `
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+                <select id="${inputId}" class="parameter-select">
+                    ${options}
+                </select>
+            `;
+        } else if (actualType === 'array' || (typeof param.default === 'object' && Array.isArray(param.default))) {
+            inputHtml = `
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+                <textarea id="${inputId}" class="parameter-textarea" placeholder="JSON array format">${JSON.stringify(value, null, 2)}</textarea>
+            `;
+        } else if (actualType === 'object' || (typeof param.default === 'object' && !Array.isArray(param.default))) {
+            inputHtml = `
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+                <textarea id="${inputId}" class="parameter-textarea" placeholder="JSON object format">${JSON.stringify(value, null, 2)}</textarea>
+            `;
+        } else {
+            // string, number, or other basic types
+            const inputType = actualType === 'number' ? 'number' : 'text';
+            inputHtml = `
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+                <input type="${inputType}" id="${inputId}" class="parameter-input" value="${value || ''}" ${actualType === 'number' ? 'step="any"' : ''}>
+            `;
+        }
+        
+        div.innerHTML = `
+            ${inputHtml}
+            <div class="parameter-description">${escapeHtml(param.description || '')}</div>
+        `;
+        
+        // Add real-time update event listener
+        if (param.helper === 'color' || param.type === 'color') {
+            // Handle color picker with both color input and text input
+            const colorInput = div.querySelector(`#${inputId}`);
+            const textInput = div.querySelector(`#${inputId}-text`);
+            
+            if (colorInput && textInput) {
+                const updateHandler = async (sourceInput) => {
+                    clearTimeout(this.parameterUpdateTimeout);
+                    this.parameterUpdateTimeout = setTimeout(async () => {
+                        await this.updateParameterRealTime(param.name, sourceInput);
+                    }, 500);
+                };
+                
+                // Color picker change updates text input
+                colorInput.addEventListener('change', () => {
+                    textInput.value = colorInput.value;
+                    updateHandler(textInput);
+                });
+                
+                // Text input change updates color picker (if valid hex)
+                textInput.addEventListener('input', () => {
+                    const hexColor = this.convertToHexColor(textInput.value);
+                    if (hexColor !== '#000000' || textInput.value.toLowerCase() === '#000000' || textInput.value.toLowerCase() === 'black') {
+                        colorInput.value = hexColor;
+                    }
+                    updateHandler(textInput);
+                });
+                
+                console.log(`[INPUT DEBUG] Added color picker event listeners for parameter: ${param.name}`);
+            }
+        } else {
+            const input = div.querySelector(`#${inputId}`);
+            if (input) {
+                const updateHandler = async () => {
+                    // Debounce rapid changes
+                    clearTimeout(this.parameterUpdateTimeout);
+                    this.parameterUpdateTimeout = setTimeout(async () => {
+                        await this.updateParameterRealTime(param.name, input);
+                    }, 500);
+                };
+                
+                if (input.type === 'checkbox') {
+                    input.addEventListener('change', updateHandler);
+                } else if (input.tagName === 'SELECT') {
+                    input.addEventListener('change', updateHandler);
+                } else {
+                    input.addEventListener('input', updateHandler);
+                }
+                
+                console.log(`[INPUT DEBUG] Added event listener for parameter: ${param.name}, input type: ${input.type || input.tagName}`);
+            }
+        }
+        
+        return div;
+    }
+
+    // Old applyParameters method removed - using real-time updates instead
+
+    async resetParameters() {
+        if (!this.currentPackage) return;
+
+        // Clear saved parameters
+        delete this.packageParameters[this.currentPackage.id];
+
+        // Reload background with defaults
+        await this.loadPackage(this.currentPackage);
+
+        // Reload the config panel with default values
+        this.closeConfigPanel();
+        setTimeout(() => {
+            this.openConfigPanel();
+        }, 100);
+    }
+
+    async exportParameters() {
+        if (!this.currentPackage) return;
+
+        const pkg = this.currentPackage;
+        const parameters = this.packageParameters[pkg.id] || {};
+        
+        const exportData = {
+            packageId: pkg.id,
+            packageName: pkg.name || pkg.id,
+            parameters: parameters,
+            exportedAt: new Date().toISOString()
+        };
+
+        try {
+            const jsonStr = JSON.stringify(exportData, null, 2);
+            await navigator.clipboard.writeText(jsonStr);
+            
+            // Show success feedback
+            const button = document.getElementById('config-export-parameters');
+            const originalContent = button.innerHTML;
+            button.innerHTML = `
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                Copied!
+            `;
+            
+            setTimeout(() => {
+                button.innerHTML = originalContent;
+            }, 1500);
+            
+        } catch (error) {
+            console.error('Failed to export parameters:', error);
+            this.showError('Failed to export parameters to clipboard');
+        }
+    }
+
+    async importParameters() {
+        if (!this.currentPackage) return;
+
+        try {
+            const jsonStr = prompt('Paste your exported parameters JSON:');
+            if (!jsonStr) return;
+
+            const importData = JSON.parse(jsonStr);
+            
+            // Validate the import data
+            if (!importData.packageId || !importData.parameters) {
+                throw new Error('Invalid import format. Missing packageId or parameters.');
+            }
+
+            // Check if this is for the current package
+            if (importData.packageId !== this.currentPackage.id) {
+                const confirmed = confirm(`This import is for "${importData.packageName}" but you're configuring "${this.currentPackage.name}". Continue anyway?`);
+                if (!confirmed) return;
+            }
+
+            // Apply the imported parameters
+            this.packageParameters[this.currentPackage.id] = importData.parameters;
+
+            // Reload the config panel with imported values
+            this.closeConfigPanel();
+            setTimeout(() => {
+                this.openConfigPanel();
+            }, 100);
+
+            // Update background
+            this.showConfigLoading();
+            await this.loadPackage(this.currentPackage);
+            this.showBackgroundLoaded();
+
+        } catch (error) {
+            console.error('Failed to import parameters:', error);
+            this.showError('Failed to import parameters. Please check the JSON format.');
+        }
+    }
+
+    async copyHomeAssistantConfig() {
+        if (!this.currentPackage) return;
+
+        const pkg = this.currentPackage;
+        const parameters = this.packageParameters[pkg.id] || {};
+        
+        // Check if there are any custom parameters
+        const hasCustomParams = Object.keys(parameters).length > 0;
+        
+        let configYaml = `      - id: ${pkg.id} # Background id
+        style: "min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;" # Custom iframe style
+        cache: true # Enable caching for this background
+        duration: false # Override global duration
+        redraw: 0 # Redraws the iframe - must be above 500 ms otherwise ignored${hasCustomParams ? `
+        parameters:` : ''}`;
+
+        // Add parameters if any
+        if (hasCustomParams) {
+            Object.entries(parameters).forEach(([key, value]) => {
+                const valueStr = typeof value === 'string' ? `"${value}"` : 
+                                typeof value === 'object' ? JSON.stringify(value, null, 8).replace(/\n/g, '\n          ') : 
+                                value;
+                configYaml += `\n          ${key}: ${valueStr}`;
+            });
+        }
+
+        try {
+            await navigator.clipboard.writeText(configYaml);
+            
+            // Show success feedback
+            const button = document.getElementById('config-copy-ha-config');
+            const originalContent = button.innerHTML;
+            button.innerHTML = `
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                Copied!
+            `;
+            
+            setTimeout(() => {
+                button.innerHTML = originalContent;
+            }, 1500);
+            
+        } catch (error) {
+            console.error('Failed to copy to clipboard:', error);
+            this.showError('Failed to copy configuration to clipboard');
+        }
+    }
+
+    async updateParameterRealTime(paramName, inputElement) {
+        console.log(`[REALTIME DEBUG] updateParameterRealTime called for: ${paramName}`);
+        console.log(`[REALTIME DEBUG] currentPackage:`, this.currentPackage);
+        
+        if (!this.currentPackage) return;
+
+        const packageYaml = await this.getPackageYaml(this.currentPackage);
+        if (!packageYaml || !packageYaml.parameters) return;
+
+        const param = packageYaml.parameters.find(p => p.name === paramName);
+        if (!param) return;
+
+        let value;
+        try {
+            // Get value based on input type
+            const actualType = Array.isArray(param.type) ? param.type[0] : param.type;
+            
+            if (actualType === 'boolean') {
+                value = inputElement.checked;
+            } else if (actualType === 'number') {
+                value = parseFloat(inputElement.value) || param.default;
+            } else if (actualType === 'array' || (typeof param.default === 'object' && Array.isArray(param.default))) {
+                value = JSON.parse(inputElement.value);
+                if (!Array.isArray(value)) {
+                    throw new Error('Must be an array');
+                }
+            } else if (actualType === 'object' || (typeof param.default === 'object' && !Array.isArray(param.default))) {
+                value = JSON.parse(inputElement.value);
+                if (typeof value !== 'object' || Array.isArray(value)) {
+                    throw new Error('Must be an object');
+                }
+            } else {
+                value = inputElement.value;
+            }
+
+            console.log(`[REALTIME DEBUG] Parameter ${paramName} new value:`, value);
+            console.log(`[REALTIME DEBUG] Parameter type:`, param.type);
+
+            // Update parameter
+            if (!this.packageParameters[this.currentPackage.id]) {
+                this.packageParameters[this.currentPackage.id] = {};
+            }
+            this.packageParameters[this.currentPackage.id][paramName] = value;
+            
+            console.log(`[REALTIME DEBUG] Updated packageParameters:`, this.packageParameters);
+
+            // Update background
+            console.log(`[REALTIME DEBUG] Reloading package: ${this.currentPackage.id}`);
+            this.showConfigLoading();
+            await this.loadPackage(this.currentPackage);
+            this.showBackgroundLoaded();
+            
+            // Update tooltip with new config
+            this.updateConfigTooltip();
+
+        } catch (error) {
+            console.warn(`[REALTIME DEBUG] Invalid value for parameter ${paramName}:`, error.message);
+            // Could add visual feedback here for invalid values
+        }
+    }
+
+
 }
 
 // Initialize the gallery when the page loads
