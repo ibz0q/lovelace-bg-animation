@@ -1996,13 +1996,29 @@ class BackgroundGallery {
 
     async getPackageYaml(pkg) {
         try {
+            // Check cache first
+            const cacheKey = `lovelace-bg-preview_package_${pkg.id}`;
+            const cached = sessionStorage.getItem(cacheKey);
+            if (cached) {
+                return JSON.parse(cached);
+            }
+
             const packageUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${pkg.id}/package.yaml`;
             const response = await fetch(packageUrl);
             if (!response.ok) {
                 throw new Error('Package YAML not available');
             }
             const yamlText = await response.text();
-            return jsyaml.load(yamlText);
+            const parsedYaml = jsyaml.load(yamlText);
+
+            // Cache the result
+            try {
+                sessionStorage.setItem(cacheKey, JSON.stringify(parsedYaml));
+            } catch (cacheError) {
+                console.warn('Failed to cache package YAML:', cacheError);
+            }
+
+            return parsedYaml;
         } catch (error) {
             console.error('Error loading package YAML:', error);
             return null;
@@ -2025,6 +2041,24 @@ class BackgroundGallery {
         if (!packageYaml) return null;
 
         try {
+            // Check cache first
+            const cacheKey = `lovelace-bg-preview_processed_${pkg.id}`;
+            const cached = sessionStorage.getItem(cacheKey);
+            if (cached) {
+                return cached;
+            }
+
+            // Apply package overrides if any
+            if (pkg.packageOverride) {
+                console.log('Applying package overrides for', pkg.id);
+                packageYaml = {
+                    ...packageYaml,
+                    ...Object.fromEntries(
+                        Object.entries(pkg.packageOverride).filter(([key]) => key !== 'metadata' && key !== 'template')
+                    )
+                };
+            }
+
             let processedTemplate = packageYaml.template;
             const baseUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${pkg.id}/`;
             const commonPath = `https://ibz0q.github.io/lovelace-bg-animation/gallery/common/`;
@@ -2106,6 +2140,13 @@ class BackgroundGallery {
                 processedTemplate = processedTemplate.replace(compileRegex, (match, compileId) => {
                     return compiledSections[compileId] || match;
                 });
+            }
+
+            // Cache the processed template
+            try {
+                sessionStorage.setItem(cacheKey, processedTemplate);
+            } catch (cacheError) {
+                console.warn('Failed to cache processed template:', cacheError);
             }
 
             return processedTemplate;
