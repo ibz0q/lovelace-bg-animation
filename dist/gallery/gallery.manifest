@@ -1412,6 +1412,18 @@
       "tags": [
         "interactive"
       ]
+    },
+    {
+      "id": "animation.91.sliced-blobs",
+      "version": "v1",
+      "name": "Dimensional Slicing",
+      "description": "Dimensional blob slicing",
+      "author": "Ibz (Modified from Ksenia Kondrashova)",
+      "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
+      "hash": "b2e9b1d06d6d9708a5e245223e5b4450eb0185ec",
+      "tags": [
+        "interactive"
+      ]
     }
   ],
   "common": {
