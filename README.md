@@ -26,6 +26,7 @@ Preview animations here: https://ibz0q.github.io/lovelace-bg-animation/ or [docs
  - Scott Weaver (2)
  - Kevin Levron (2)
  - Akimitsu Hamamuro (2)
+ - Ibz (Modified from Ksenia Kondrashova) (1)
  - AzazelN28 (1)
  - Liam Egan (1)
  - Lanny (1)
