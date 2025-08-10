@@ -41,6 +41,11 @@ jobs:
       - name: Generate Metadata
         run: node ./helpers/create-metadata.js
 
+      - name: Copy web preview to root
+        run: |
+          echo "Copying web preview app to root..."
+          cp docs/web-preview/index.html ./index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
@@ -62,11 +67,6 @@ jobs:
 
       - name: Generate Image Metadata
         run: node ./helpers/create-imagepreview.js
-
-      - name: Copy web preview to root
-        run: |
-          echo "Copying web preview app to root..."
-          cp docs/web-preview/index.html ./index.html
 
       - name: Delete node_modules
         run: |

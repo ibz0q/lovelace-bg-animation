@@ -6,7 +6,7 @@ const crypto = require('crypto');
 
 // Parse command line arguments
 const args = process.argv.slice(2);
-const shouldClearDirectory = args.includes('--clear-directory');
+const shouldClearDirectory = args.includes('--clean');
 
 process.chdir(__dirname);
 
