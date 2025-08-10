@@ -11,6 +11,7 @@ parameters:
     description: Time to cross the screen vertically
     default: 200
     type: string
+    helper: number(0-500)
 helpers:
   insert_baseurl: true
 template: >

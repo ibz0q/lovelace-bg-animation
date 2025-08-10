@@ -11,6 +11,7 @@ parameters:
     default: 0.5
     description: Animation movement speed
     type: number
+    helper: number(0.1-2)
     behavior: environment
   - name: blurIntensity
     default: 60
@@ -27,6 +28,7 @@ parameters:
     description: Target frames per second
     type: number
     behavior: environment
+    helper: number(10-100)
   - name: controlsVisible
     default: false
     description: Show controls by default
