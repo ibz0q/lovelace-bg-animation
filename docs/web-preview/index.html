@@ -935,6 +935,418 @@ body {
     font-size: 14px;
     outline: none;
     cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.parameter-select:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.parameter-select option {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+/* Range Input Container */
+.range-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.parameter-range {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.parameter-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.parameter-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.parameter-number-display {
+    width: 80px;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* RGBA Color Input */
+.rgba-color-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rgba-preview {
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rgba-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rgba-slider-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rgba-slider-group label {
+    width: 20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.rgba-slider {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.rgba-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.rgba-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: none;
+}
+
+.rgba-value {
+    width: 40px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+}
+
+/* Gradient Builder */
+.gradient-builder-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gradient-preview {
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.gradient-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gradient-angle-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gradient-angle-control label {
+    width: 40px;
+    font-size: 12px;
+}
+
+.gradient-stops {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gradient-stop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.gradient-color {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.gradient-position {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.gradient-position::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.gradient-position::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: none;
+}
+
+.gradient-position-val {
+    width: 35px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+}
+
+.add-gradient-stop {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s ease;
+}
+
+.add-gradient-stop:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.remove-gradient-stop {
+    background: rgba(255, 100, 100, 0.3);
+    border: 1px solid rgba(255, 100, 100, 0.5);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.remove-gradient-stop:hover {
+    background: rgba(255, 100, 100, 0.5);
+}
+
+/* Universal Color Picker */
+.universal-color-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.color-type-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-type-select {
+    width: 100%;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.color-type-select:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.color-type-select option {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+.color-input-area {
+    min-height: 60px;
+}
+
+/* RGB Color Input */
+.rgb-color-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rgb-preview {
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rgb-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rgb-slider-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rgb-slider-group label {
+    width: 20px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.rgb-slider {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.rgb-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+}
+
+.rgb-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    border: none;
+}
+
+.rgb-value {
+    width: 40px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+}
+
+/* Radial Gradient */
+.radial-gradient-input {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radial-gradient-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.radial-control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.radial-control-group label {
+    width: 60px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.radial-shape {
+    flex: 1;
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    outline: none;
+}
+
+.radial-shape option {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+.position-value {
+    width: 35px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+}
+
+.angle-value {
+    width: 35px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
 }
 
 .parameter-textarea {
@@ -3028,6 +3440,816 @@ class BackgroundGallery {
         }
     }
 
+    hasHelperType(param, type) {
+        if (!param.helper) return false;
+        return param.helper.includes(type);
+    }
+
+    parseHelperRange(helper) {
+        const match = helper.match(/number\(([^)]+)\)/);
+        if (!match) return null;
+        
+        const range = match[1];
+        const parts = range.split('-');
+        if (parts.length !== 2) return null;
+        
+        const min = parseFloat(parts[0]);
+        const max = parseFloat(parts[1]);
+        
+        // Determine step based on whether we have decimals
+        let step = 1;
+        if (range.includes('.')) {
+            step = 0.1;
+        }
+        
+        return { min, max, step };
+    }
+
+    detectDefaultColorType(value) {
+        if (!value) return 'solid';
+        
+        // Detect based on current value
+        if (value.startsWith('linear-gradient')) return 'linear-gradient';
+        if (value.startsWith('radial-gradient')) return 'radial-gradient';
+        if (value.startsWith('rgba(') || value.startsWith('hsla(')) return 'rgba';
+        if (value.startsWith('rgb(') || value.startsWith('hsl(')) return 'rgb';
+        
+        return 'solid'; // hex, named colors, etc.
+    }
+
+    createHelperInput(param, inputId, value) {
+        if (param.helper === 'color') {
+            return this.createUniversalColorInput(param, inputId, value);
+        }
+        
+        // Fallback for other helper types
+        return `
+            <label for="${inputId}" class="parameter-label">${param.name}</label>
+            <div class="color-picker-container">
+                <input type="color" id="${inputId}" class="parameter-color-picker" value="${this.convertToHexColor(value)}">
+                <input type="text" id="${inputId}-text" class="parameter-input color-text-input" value="${value || ''}" placeholder="Enter color (hex, rgb, etc.)">
+            </div>
+        `;
+    }
+
+    createNumberHelperInput(param, inputId, value) {
+        const range = this.parseHelperRange(param.helper);
+        
+        if (range) {
+            return `
+                <label for="${inputId}" class="parameter-label">${param.name}</label>
+                <div class="range-input-container">
+                    <input type="range" id="${inputId}" class="parameter-range" 
+                           min="${range.min}" max="${range.max}" step="${range.step}" 
+                           value="${value || param.default}">
+                    <input type="number" id="${inputId}-number" class="parameter-number-display" 
+                           min="${range.min}" max="${range.max}" step="${range.step}" 
+                           value="${value || param.default}">
+                </div>
+            `;
+        }
+        
+        // Fallback to regular number input
+        return `
+            <label for="${inputId}" class="parameter-label">${param.name}</label>
+            <input type="number" id="${inputId}" class="parameter-input" value="${value || ''}" step="any">
+        `;
+    }
+
+    createRGBAColorInput(param, inputId, value) {
+        // Parse existing RGBA value or use default
+        const rgba = this.parseRGBAValue(value || param.default);
+        
+        return `
+            <label for="${inputId}" class="parameter-label">${param.name}</label>
+            <div class="rgba-color-container">
+                <div class="rgba-preview" id="${inputId}-preview" style="background-color: ${value || param.default}"></div>
+                <div class="rgba-sliders">
+                    <div class="rgba-slider-group">
+                        <label>R</label>
+                        <input type="range" id="${inputId}-r" class="rgba-slider" min="0" max="255" value="${rgba.r}">
+                        <span class="rgba-value" id="${inputId}-r-val">${rgba.r}</span>
+                    </div>
+                    <div class="rgba-slider-group">
+                        <label>G</label>
+                        <input type="range" id="${inputId}-g" class="rgba-slider" min="0" max="255" value="${rgba.g}">
+                        <span class="rgba-value" id="${inputId}-g-val">${rgba.g}</span>
+                    </div>
+                    <div class="rgba-slider-group">
+                        <label>B</label>
+                        <input type="range" id="${inputId}-b" class="rgba-slider" min="0" max="255" value="${rgba.b}">
+                        <span class="rgba-value" id="${inputId}-b-val">${rgba.b}</span>
+                    </div>
+                    <div class="rgba-slider-group">
+                        <label>A</label>
+                        <input type="range" id="${inputId}-a" class="rgba-slider" min="0" max="1" step="0.01" value="${rgba.a}">
+                        <span class="rgba-value" id="${inputId}-a-val">${rgba.a}</span>
+                    </div>
+                </div>
+                <input type="hidden" id="${inputId}" class="parameter-input" value="${value || param.default}">
+            </div>
+        `;
+    }
+
+    createUniversalColorInput(param, inputId, value) {
+        const defaultType = this.detectDefaultColorType(value || param.default);
+        
+        return `
+            <label for="${inputId}" class="parameter-label">${param.name}</label>
+            <div class="universal-color-container">
+                <div class="color-type-selector">
+                    <select id="${inputId}-type" class="color-type-select">
+                        <option value="solid" ${defaultType === 'solid' ? 'selected' : ''}>Solid Color</option>
+                        <option value="rgb" ${defaultType === 'rgb' ? 'selected' : ''}>RGB</option>
+                        <option value="rgba" ${defaultType === 'rgba' ? 'selected' : ''}>RGBA</option>
+                        <option value="linear-gradient" ${defaultType === 'linear-gradient' ? 'selected' : ''}>Linear Gradient</option>
+                        <option value="radial-gradient" ${defaultType === 'radial-gradient' ? 'selected' : ''}>Radial Gradient</option>
+                    </select>
+                </div>
+                <div class="color-input-area" id="${inputId}-input-area">
+                    ${this.createColorInputForType(defaultType, inputId, value || param.default)}
+                </div>
+                <input type="hidden" id="${inputId}" class="parameter-input" value="${value || param.default}">
+            </div>
+        `;
+    }
+
+    createColorInputForType(type, inputId, value) {
+        switch (type) {
+            case 'solid':
+                return this.createSolidColorInput(inputId, value);
+            case 'rgb':
+                return this.createRGBColorInput(inputId, value);
+            case 'rgba':
+                return this.createRGBAColorInput(inputId, value);
+            case 'linear-gradient':
+                return this.createLinearGradientInput(inputId, value);
+            case 'radial-gradient':
+                return this.createRadialGradientInput(inputId, value);
+            default:
+                return this.createSolidColorInput(inputId, value);
+        }
+    }
+
+    createSolidColorInput(inputId, value) {
+        return `
+            <div class="solid-color-input">
+                <div class="color-picker-container">
+                    <input type="color" id="${inputId}-color" class="parameter-color-picker" value="${this.convertToHexColor(value)}">
+                    <input type="text" id="${inputId}-text" class="parameter-input color-text-input" value="${value || ''}" placeholder="Enter color (hex, rgb, etc.)">
+                </div>
+            </div>
+        `;
+    }
+
+    createRGBColorInput(inputId, value) {
+        const rgb = this.parseRGBValue(value);
+        return `
+            <div class="rgb-color-input">
+                <div class="rgb-preview" style="background-color: rgb(${rgb.r}, ${rgb.g}, ${rgb.b})"></div>
+                <div class="rgb-sliders">
+                    <div class="rgb-slider-group">
+                        <label>R</label>
+                        <input type="range" id="${inputId}-r" class="rgb-slider" min="0" max="255" value="${rgb.r}">
+                        <span class="rgb-value">${rgb.r}</span>
+                    </div>
+                    <div class="rgb-slider-group">
+                        <label>G</label>
+                        <input type="range" id="${inputId}-g" class="rgb-slider" min="0" max="255" value="${rgb.g}">
+                        <span class="rgb-value">${rgb.g}</span>
+                    </div>
+                    <div class="rgb-slider-group">
+                        <label>B</label>
+                        <input type="range" id="${inputId}-b" class="rgb-slider" min="0" max="255" value="${rgb.b}">
+                        <span class="rgb-value">${rgb.b}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    createRGBAColorInput(inputId, value) {
+        const rgba = this.parseRGBAValue(value);
+        return `
+            <div class="rgba-color-input">
+                <div class="rgba-preview" style="background-color: rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})"></div>
+                <div class="rgba-sliders">
+                    <div class="rgba-slider-group">
+                        <label>R</label>
+                        <input type="range" id="${inputId}-r" class="rgba-slider" min="0" max="255" value="${rgba.r}">
+                        <span class="rgba-value">${rgba.r}</span>
+                    </div>
+                    <div class="rgba-slider-group">
+                        <label>G</label>
+                        <input type="range" id="${inputId}-g" class="rgba-slider" min="0" max="255" value="${rgba.g}">
+                        <span class="rgba-value">${rgba.g}</span>
+                    </div>
+                    <div class="rgba-slider-group">
+                        <label>B</label>
+                        <input type="range" id="${inputId}-b" class="rgba-slider" min="0" max="255" value="${rgba.b}">
+                        <span class="rgba-value">${rgba.b}</span>
+                    </div>
+                    <div class="rgba-slider-group">
+                        <label>A</label>
+                        <input type="range" id="${inputId}-a" class="rgba-slider" min="0" max="1" step="0.01" value="${rgba.a}">
+                        <span class="rgba-value">${rgba.a}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    createLinearGradientInput(inputId, value) {
+        const gradientData = this.parseGradientValue(value, 'linear');
+        return `
+            <div class="linear-gradient-input">
+                <div class="gradient-preview" style="background: ${value}"></div>
+                <div class="gradient-controls">
+                    <div class="gradient-angle-control">
+                        <label>Angle</label>
+                        <input type="range" id="${inputId}-angle" class="parameter-range" min="0" max="360" value="${gradientData.angle}">
+                        <span class="angle-value">${gradientData.angle}°</span>
+                    </div>
+                    <div class="gradient-stops" id="${inputId}-stops">
+                        ${gradientData.stops.map((stop, index) => `
+                            <div class="gradient-stop">
+                                <input type="color" class="gradient-color" value="${stop.color}">
+                                <input type="range" class="gradient-position" min="0" max="100" value="${stop.position}">
+                                <span class="gradient-position-val">${stop.position}%</span>
+                                ${gradientData.stops.length > 2 ? '<button type="button" class="remove-gradient-stop">×</button>' : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button type="button" class="add-gradient-stop">+ Add Stop</button>
+                </div>
+            </div>
+        `;
+    }
+
+    createRadialGradientInput(inputId, value) {
+        const gradientData = this.parseGradientValue(value, 'radial');
+        return `
+            <div class="radial-gradient-input">
+                <div class="gradient-preview" style="background: ${value}"></div>
+                <div class="gradient-controls">
+                    <div class="radial-gradient-controls">
+                        <div class="radial-control-group">
+                            <label>Shape</label>
+                            <select class="radial-shape">
+                                <option value="circle" ${gradientData.shape === 'circle' ? 'selected' : ''}>Circle</option>
+                                <option value="ellipse" ${gradientData.shape === 'ellipse' ? 'selected' : ''}>Ellipse</option>
+                            </select>
+                        </div>
+                        <div class="radial-control-group">
+                            <label>Position X</label>
+                            <input type="range" id="${inputId}-x" class="parameter-range" min="0" max="100" value="${gradientData.x}">
+                            <span class="position-value">${gradientData.x}%</span>
+                        </div>
+                        <div class="radial-control-group">
+                            <label>Position Y</label>
+                            <input type="range" id="${inputId}-y" class="parameter-range" min="0" max="100" value="${gradientData.y}">
+                            <span class="position-value">${gradientData.y}%</span>
+                        </div>
+                    </div>
+                    <div class="gradient-stops" id="${inputId}-stops">
+                        ${gradientData.stops.map((stop, index) => `
+                            <div class="gradient-stop">
+                                <input type="color" class="gradient-color" value="${stop.color}">
+                                <input type="range" class="gradient-position" min="0" max="100" value="${stop.position}">
+                                <span class="gradient-position-val">${stop.position}%</span>
+                                ${gradientData.stops.length > 2 ? '<button type="button" class="remove-gradient-stop">×</button>' : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button type="button" class="add-gradient-stop">+ Add Stop</button>
+                </div>
+            </div>
+        `;
+    }
+
+    parseRGBValue(value) {
+        // Default RGB
+        let rgb = { r: 255, g: 255, b: 255 };
+        
+        if (!value) return rgb;
+        
+        // Parse rgb(r,g,b)
+        const rgbMatch = value.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (rgbMatch) {
+            rgb.r = parseInt(rgbMatch[1]);
+            rgb.g = parseInt(rgbMatch[2]);
+            rgb.b = parseInt(rgbMatch[3]);
+        }
+        
+        return rgb;
+    }
+
+    parseRGBAValue(value) {
+        // Default RGBA
+        let rgba = { r: 255, g: 255, b: 255, a: 1 };
+        
+        if (!value) return rgba;
+        
+        // Parse rgb(r,g,b) or rgba(r,g,b,a)
+        const rgbaMatch = value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        if (rgbaMatch) {
+            rgba.r = parseInt(rgbaMatch[1]);
+            rgba.g = parseInt(rgbaMatch[2]);
+            rgba.b = parseInt(rgbaMatch[3]);
+            rgba.a = rgbaMatch[4] ? parseFloat(rgbaMatch[4]) : 1;
+        }
+        
+        return rgba;
+    }
+
+    parseGradientValue(value, type) {
+        // Default gradient data
+        let gradientData = {
+            angle: 90,
+            shape: 'circle',
+            x: 50,
+            y: 50,
+            stops: [
+                { color: '#667eea', position: 0 },
+                { color: '#764ba2', position: 100 }
+            ]
+        };
+
+        if (!value || !value.includes('gradient')) return gradientData;
+
+        try {
+            if (type === 'linear') {
+                const angleMatch = value.match(/linear-gradient\((\d+)deg/);
+                if (angleMatch) {
+                    gradientData.angle = parseInt(angleMatch[1]);
+                }
+            } else if (type === 'radial') {
+                const shapeMatch = value.match(/radial-gradient\((circle|ellipse)/);
+                if (shapeMatch) {
+                    gradientData.shape = shapeMatch[1];
+                }
+                
+                const positionMatch = value.match(/at (\d+)% (\d+)%/);
+                if (positionMatch) {
+                    gradientData.x = parseInt(positionMatch[1]);
+                    gradientData.y = parseInt(positionMatch[2]);
+                }
+            }
+
+            // Parse color stops
+            const stopsPattern = /(#[a-fA-F0-9]{6}|#[a-fA-F0-9]{3}|rgb\([^)]+\)|rgba\([^)]+\))\s+(\d+)%/g;
+            const stops = [];
+            let match;
+            
+            while ((match = stopsPattern.exec(value)) !== null) {
+                stops.push({
+                    color: match[1],
+                    position: parseInt(match[2])
+                });
+            }
+            
+            if (stops.length >= 2) {
+                gradientData.stops = stops;
+            }
+        } catch (error) {
+            console.warn('Failed to parse gradient value:', error);
+        }
+
+        return gradientData;
+    }
+
+    setupHelperEventListeners(param, div, inputId) {
+        if (param.helper === 'color') {
+            this.setupUniversalColorEventListeners(param, div, inputId);
+        } else {
+            // Legacy color helper support
+            const colorType = this.parseColorHelper(param.helper || '');
+            
+            const updateHandler = async (sourceInput) => {
+                clearTimeout(this.parameterUpdateTimeout);
+                this.parameterUpdateTimeout = setTimeout(async () => {
+                    await this.updateParameterRealTime(param.name, sourceInput);
+                }, 300);
+            };
+
+            switch (colorType) {
+                case 'rgba':
+                    this.setupRGBAEventListeners(div, inputId, updateHandler);
+                    break;
+                case 'linear-gradient':
+                    this.setupGradientEventListeners(div, inputId, updateHandler);
+                    break;
+                case 'solid':
+                default:
+                    this.setupBasicColorEventListeners(div, inputId, updateHandler);
+                    break;
+            }
+        }
+    }
+
+    setupNumberHelperEventListeners(param, div, inputId) {
+        const rangeSlider = div.querySelector(`#${inputId}`);
+        const numberInput = div.querySelector(`#${inputId}-number`);
+        
+        if (rangeSlider && numberInput) {
+            const updateHandler = async () => {
+                clearTimeout(this.parameterUpdateTimeout);
+                this.parameterUpdateTimeout = setTimeout(async () => {
+                    await this.updateParameterRealTime(param.name, rangeSlider);
+                }, 150);
+            };
+
+            // Sync range slider with number input
+            rangeSlider.addEventListener('input', () => {
+                numberInput.value = rangeSlider.value;
+                updateHandler();
+            });
+
+            numberInput.addEventListener('input', () => {
+                rangeSlider.value = numberInput.value;
+                updateHandler();
+            });
+        }
+    }
+
+    setupUniversalColorEventListeners(param, div, inputId) {
+        const typeSelector = div.querySelector(`#${inputId}-type`);
+        const inputArea = div.querySelector(`#${inputId}-input-area`);
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        
+        const updateHandler = async () => {
+            clearTimeout(this.parameterUpdateTimeout);
+            this.parameterUpdateTimeout = setTimeout(async () => {
+                await this.updateParameterRealTime(param.name, hiddenInput);
+            }, 300);
+        };
+
+        // Handle color type changes
+        typeSelector.addEventListener('change', () => {
+            const newType = typeSelector.value;
+            const currentValue = hiddenInput.value;
+            
+            // Switch to new input type
+            inputArea.innerHTML = this.createColorInputForType(newType, inputId, currentValue);
+            
+            // Setup event listeners for the new input type
+            this.setupColorTypeEventListeners(newType, div, inputId, updateHandler);
+            
+            // Update value format if needed
+            this.convertColorValueToType(newType, hiddenInput, div, inputId);
+            updateHandler();
+        });
+
+        // Setup initial event listeners
+        const initialType = typeSelector.value;
+        this.setupColorTypeEventListeners(initialType, div, inputId, updateHandler);
+    }
+
+    setupColorTypeEventListeners(type, div, inputId, updateHandler) {
+        switch (type) {
+            case 'solid':
+                this.setupSolidColorEventListeners(div, inputId, updateHandler);
+                break;
+            case 'rgb':
+                this.setupRGBEventListeners(div, inputId, updateHandler);
+                break;
+            case 'rgba':
+                this.setupRGBAEventListeners(div, inputId, updateHandler);
+                break;
+            case 'linear-gradient':
+                this.setupLinearGradientEventListeners(div, inputId, updateHandler);
+                break;
+            case 'radial-gradient':
+                this.setupRadialGradientEventListeners(div, inputId, updateHandler);
+                break;
+        }
+    }
+
+    setupSolidColorEventListeners(div, inputId, updateHandler) {
+        const colorInput = div.querySelector(`#${inputId}-color`);
+        const textInput = div.querySelector(`#${inputId}-text`);
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        
+        if (colorInput && textInput) {
+            colorInput.addEventListener('change', () => {
+                textInput.value = colorInput.value;
+                hiddenInput.value = colorInput.value;
+                updateHandler();
+            });
+            
+            textInput.addEventListener('input', () => {
+                const hexColor = this.convertToHexColor(textInput.value);
+                if (hexColor !== '#000000' || textInput.value.toLowerCase() === '#000000' || textInput.value.toLowerCase() === 'black') {
+                    colorInput.value = hexColor;
+                }
+                hiddenInput.value = textInput.value;
+                updateHandler();
+            });
+        }
+    }
+
+    setupRGBEventListeners(div, inputId, updateHandler) {
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        const preview = div.querySelector('.rgb-preview');
+        const sliders = ['r', 'g', 'b'];
+
+        const updateRGB = () => {
+            const r = div.querySelector(`#${inputId}-r`).value;
+            const g = div.querySelector(`#${inputId}-g`).value;
+            const b = div.querySelector(`#${inputId}-b`).value;
+            
+            const rgbValue = `rgb(${r}, ${g}, ${b})`;
+            hiddenInput.value = rgbValue;
+            if (preview) preview.style.backgroundColor = rgbValue;
+            
+            // Update value displays
+            div.querySelectorAll('.rgb-value').forEach((span, index) => {
+                span.textContent = [r, g, b][index];
+            });
+            
+            updateHandler();
+        };
+
+        sliders.forEach(slider => {
+            const input = div.querySelector(`#${inputId}-${slider}`);
+            if (input) {
+                input.addEventListener('input', updateRGB);
+            }
+        });
+    }
+
+    convertColorValueToType(newType, hiddenInput, div, inputId) {
+        const currentValue = hiddenInput.value;
+        let newValue = currentValue;
+
+        // Convert current value to new type if needed
+        if (newType === 'solid' && !currentValue.startsWith('#')) {
+            newValue = this.convertToHexColor(currentValue);
+        } else if (newType === 'rgb' && !currentValue.startsWith('rgb(')) {
+            const rgba = this.parseRGBAValue(currentValue);
+            newValue = `rgb(${rgba.r}, ${rgba.g}, ${rgba.b})`;
+        } else if (newType === 'rgba' && !currentValue.startsWith('rgba(')) {
+            const rgba = this.parseRGBAValue(currentValue);
+            newValue = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+        } else if (newType === 'linear-gradient' && !currentValue.startsWith('linear-gradient')) {
+            newValue = 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)';
+        } else if (newType === 'radial-gradient' && !currentValue.startsWith('radial-gradient')) {
+            newValue = 'radial-gradient(circle at 50% 50%, #667eea 0%, #764ba2 100%)';
+        }
+
+        hiddenInput.value = newValue;
+    }
+
+    setupLinearGradientEventListeners(div, inputId, updateHandler) {
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        const preview = div.querySelector('.gradient-preview');
+        const angleSlider = div.querySelector(`#${inputId}-angle`);
+        const addButton = div.querySelector('.add-gradient-stop');
+
+        const updateGradient = () => {
+            const angle = angleSlider ? angleSlider.value : 90;
+            const stops = [];
+            
+            div.querySelectorAll('.gradient-stop').forEach(stop => {
+                const color = stop.querySelector('.gradient-color').value;
+                const position = stop.querySelector('.gradient-position').value;
+                stops.push(`${color} ${position}%`);
+                stop.querySelector('.gradient-position-val').textContent = `${position}%`;
+            });
+
+            const gradientValue = `linear-gradient(${angle}deg, ${stops.join(', ')})`;
+            hiddenInput.value = gradientValue;
+            if (preview) preview.style.background = gradientValue;
+            if (angleSlider) {
+                const angleVal = div.querySelector('.angle-value');
+                if (angleVal) angleVal.textContent = `${angle}°`;
+            }
+            
+            updateHandler();
+        };
+
+        // Angle slider
+        if (angleSlider) {
+            angleSlider.addEventListener('input', updateGradient);
+        }
+
+        // Event delegation for gradient stops
+        div.addEventListener('input', (e) => {
+            if (e.target.classList.contains('gradient-color') || e.target.classList.contains('gradient-position')) {
+                updateGradient();
+            }
+        });
+
+        div.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-gradient-stop')) {
+                e.target.closest('.gradient-stop').remove();
+                updateGradient();
+            }
+        });
+
+        // Add stop button
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                const stopsContainer = div.querySelector('.gradient-stops');
+                const newStop = document.createElement('div');
+                newStop.className = 'gradient-stop';
+                newStop.innerHTML = `
+                    <input type="color" class="gradient-color" value="#ffffff">
+                    <input type="range" class="gradient-position" min="0" max="100" value="50">
+                    <span class="gradient-position-val">50%</span>
+                    <button type="button" class="remove-gradient-stop">×</button>
+                `;
+                stopsContainer.appendChild(newStop);
+                updateGradient();
+            });
+        }
+    }
+
+    setupRadialGradientEventListeners(div, inputId, updateHandler) {
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        const preview = div.querySelector('.gradient-preview');
+        const shapeSelect = div.querySelector('.radial-shape');
+        const xSlider = div.querySelector(`#${inputId}-x`);
+        const ySlider = div.querySelector(`#${inputId}-y`);
+        const addButton = div.querySelector('.add-gradient-stop');
+
+        const updateRadialGradient = () => {
+            const shape = shapeSelect ? shapeSelect.value : 'circle';
+            const x = xSlider ? xSlider.value : 50;
+            const y = ySlider ? ySlider.value : 50;
+            const stops = [];
+            
+            div.querySelectorAll('.gradient-stop').forEach(stop => {
+                const color = stop.querySelector('.gradient-color').value;
+                const position = stop.querySelector('.gradient-position').value;
+                stops.push(`${color} ${position}%`);
+                stop.querySelector('.gradient-position-val').textContent = `${position}%`;
+            });
+
+            const gradientValue = `radial-gradient(${shape} at ${x}% ${y}%, ${stops.join(', ')})`;
+            hiddenInput.value = gradientValue;
+            if (preview) preview.style.background = gradientValue;
+            
+            // Update position value displays
+            div.querySelectorAll('.position-value').forEach((span, index) => {
+                span.textContent = `${[x, y][index]}%`;
+            });
+            
+            updateHandler();
+        };
+
+        // Shape and position controls
+        [shapeSelect, xSlider, ySlider].forEach(control => {
+            if (control) {
+                control.addEventListener('input', updateRadialGradient);
+            }
+        });
+
+        // Event delegation for gradient stops
+        div.addEventListener('input', (e) => {
+            if (e.target.classList.contains('gradient-color') || e.target.classList.contains('gradient-position')) {
+                updateRadialGradient();
+            }
+        });
+
+        div.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-gradient-stop')) {
+                e.target.closest('.gradient-stop').remove();
+                updateRadialGradient();
+            }
+        });
+
+        // Add stop button
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                const stopsContainer = div.querySelector('.gradient-stops');
+                const newStop = document.createElement('div');
+                newStop.className = 'gradient-stop';
+                newStop.innerHTML = `
+                    <input type="color" class="gradient-color" value="#ffffff">
+                    <input type="range" class="gradient-position" min="0" max="100" value="50">
+                    <span class="gradient-position-val">50%</span>
+                    <button type="button" class="remove-gradient-stop">×</button>
+                `;
+                stopsContainer.appendChild(newStop);
+                updateRadialGradient();
+            });
+        }
+    }
+
+    setupBasicColorEventListeners(div, inputId, updateHandler) {
+        const colorInput = div.querySelector(`#${inputId}`);
+        const textInput = div.querySelector(`#${inputId}-text`);
+        
+        if (colorInput && textInput) {
+            colorInput.addEventListener('change', () => {
+                textInput.value = colorInput.value;
+                updateHandler(textInput);
+            });
+            
+            textInput.addEventListener('input', () => {
+                const hexColor = this.convertToHexColor(textInput.value);
+                if (hexColor !== '#000000' || textInput.value.toLowerCase() === '#000000' || textInput.value.toLowerCase() === 'black') {
+                    colorInput.value = hexColor;
+                }
+                updateHandler(textInput);
+            });
+        }
+    }
+
+    setupRGBAEventListeners(div, inputId, updateHandler) {
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        const preview = div.querySelector(`#${inputId}-preview`);
+        const sliders = ['r', 'g', 'b', 'a'];
+
+        const updateRGBA = () => {
+            const r = div.querySelector(`#${inputId}-r`).value;
+            const g = div.querySelector(`#${inputId}-g`).value;
+            const b = div.querySelector(`#${inputId}-b`).value;
+            const a = div.querySelector(`#${inputId}-a`).value;
+            
+            const rgbaValue = `rgba(${r}, ${g}, ${b}, ${a})`;
+            hiddenInput.value = rgbaValue;
+            preview.style.backgroundColor = rgbaValue;
+            
+            // Update value displays
+            div.querySelector(`#${inputId}-r-val`).textContent = r;
+            div.querySelector(`#${inputId}-g-val`).textContent = g;
+            div.querySelector(`#${inputId}-b-val`).textContent = b;
+            div.querySelector(`#${inputId}-a-val`).textContent = a;
+            
+            updateHandler(hiddenInput);
+        };
+
+        sliders.forEach(slider => {
+            const input = div.querySelector(`#${inputId}-${slider}`);
+            if (input) {
+                input.addEventListener('input', updateRGBA);
+            }
+        });
+    }
+
+    setupGradientEventListeners(div, inputId, updateHandler) {
+        const hiddenInput = div.querySelector(`#${inputId}`);
+        const preview = div.querySelector(`#${inputId}-preview`);
+        const angleSlider = div.querySelector(`#${inputId}-angle`);
+        const angleVal = div.querySelector(`#${inputId}-angle-val`);
+        const addButton = div.querySelector(`#${inputId}-add`);
+
+        const updateGradient = () => {
+            const angle = angleSlider.value;
+            const stops = [];
+            
+            div.querySelectorAll('.gradient-stop').forEach(stop => {
+                const color = stop.querySelector('.gradient-color').value;
+                const position = stop.querySelector('.gradient-position').value;
+                stops.push(`${color} ${position}%`);
+                stop.querySelector('.gradient-position-val').textContent = `${position}%`;
+            });
+
+            const gradientValue = `linear-gradient(${angle}deg, ${stops.join(', ')})`;
+            hiddenInput.value = gradientValue;
+            preview.style.background = gradientValue;
+            angleVal.textContent = `${angle}°`;
+            
+            updateHandler(hiddenInput);
+        };
+
+        // Angle slider
+        angleSlider.addEventListener('input', updateGradient);
+
+        // Color and position changes for existing stops
+        div.addEventListener('input', (e) => {
+            if (e.target.classList.contains('gradient-color') || e.target.classList.contains('gradient-position')) {
+                updateGradient();
+            }
+        });
+
+        // Add stop button
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                const stopsContainer = div.querySelector(`#${inputId}-stops`);
+                const newStop = document.createElement('div');
+                newStop.className = 'gradient-stop';
+                newStop.innerHTML = `
+                    <input type="color" class="gradient-color" value="#ffffff">
+                    <input type="range" class="gradient-position" min="0" max="100" value="50">
+                    <span class="gradient-position-val">50%</span>
+                    <button type="button" class="remove-gradient-stop">×</button>
+                `;
+                stopsContainer.appendChild(newStop);
+                
+                // Add remove functionality
+                newStop.querySelector('.remove-gradient-stop').addEventListener('click', () => {
+                    newStop.remove();
+                    updateGradient();
+                });
+                
+                updateGradient();
+            });
+        }
+    }
+
     showBackgroundLoading() {
         // Show loading in config panel if open
         this.showConfigLoading();
@@ -3179,16 +4401,12 @@ class BackgroundGallery {
                 <input type="checkbox" id="${inputId}" class="parameter-input" ${value ? 'checked' : ''}>
                 <label for="${inputId}" class="parameter-label">${param.name}</label>
             `;
-        } else if (param.helper === 'color' || param.type === 'color') {
-            inputHtml = `
-                <label for="${inputId}" class="parameter-label">${param.name}</label>
-                <div class="color-picker-container">
-                    <input type="color" id="${inputId}" class="parameter-color-picker" value="${this.convertToHexColor(value)}">
-                    <input type="text" id="${inputId}-text" class="parameter-input color-text-input" value="${value || ''}" placeholder="Enter color (hex, rgb, rgba, etc.)">
-                </div>
-            `;
-        } else if (param.enum || param.options) {
-            const optionsList = param.enum || param.options;
+        } else if (param.helper === 'color' || param.type === 'color' || this.hasHelperType(param, 'color')) {
+            inputHtml = this.createHelperInput(param, inputId, value);
+        } else if (this.hasHelperType(param, 'number')) {
+            inputHtml = this.createNumberHelperInput(param, inputId, value);
+        } else if (param.enum) {
+            const optionsList = param.enum;
             const options = optionsList.map(option => 
                 `<option value="${option}" ${value === option ? 'selected' : ''}>${option}</option>`
             ).join('');
@@ -3225,36 +4443,10 @@ class BackgroundGallery {
         `;
         
         // Add real-time update event listener
-        if (param.helper === 'color' || param.type === 'color') {
-            // Handle color picker with both color input and text input
-            const colorInput = div.querySelector(`#${inputId}`);
-            const textInput = div.querySelector(`#${inputId}-text`);
-            
-            if (colorInput && textInput) {
-                const updateHandler = async (sourceInput) => {
-                    clearTimeout(this.parameterUpdateTimeout);
-                    this.parameterUpdateTimeout = setTimeout(async () => {
-                        await this.updateParameterRealTime(param.name, sourceInput);
-                    }, 500);
-                };
-                
-                // Color picker change updates text input
-                colorInput.addEventListener('change', () => {
-                    textInput.value = colorInput.value;
-                    updateHandler(textInput);
-                });
-                
-                // Text input change updates color picker (if valid hex)
-                textInput.addEventListener('input', () => {
-                    const hexColor = this.convertToHexColor(textInput.value);
-                    if (hexColor !== '#000000' || textInput.value.toLowerCase() === '#000000' || textInput.value.toLowerCase() === 'black') {
-                        colorInput.value = hexColor;
-                    }
-                    updateHandler(textInput);
-                });
-                
-                console.log(`[INPUT DEBUG] Added color picker event listeners for parameter: ${param.name}`);
-            }
+        if (param.helper === 'color' || param.type === 'color' || this.hasHelperType(param, 'color')) {
+            this.setupHelperEventListeners(param, div, inputId);
+        } else if (this.hasHelperType(param, 'number')) {
+            this.setupNumberHelperEventListeners(param, div, inputId);
         } else {
             const input = div.querySelector(`#${inputId}`);
             if (input) {

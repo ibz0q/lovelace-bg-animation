@@ -9,6 +9,7 @@ parameters:
     default: "0.5"
     description: The opacity of the background
     type: string
+    helper: number(0-1)
 helpers:
   insert_baseurl: true
 template: >

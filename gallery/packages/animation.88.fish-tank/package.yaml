@@ -52,6 +52,7 @@ parameters:
     default: "#000"
     description: Background color
     type: color
+    helper: color
   - name: backgroundImage
     default: oceanBackdrop.jpg
     description: Background image
