@@ -12,6 +12,7 @@ parameters:
     default: rgb(255,255,255)
     description: The color of the wave in RGB format
     type: string
+
 helpers:
   insert_baseurl: true
 template: >
@@ -37,11 +38,12 @@ template: >
 
         #container {
           position: absolute;
-          width: 100vw;
-          height: 100vh;
-          top: 0;
-          left: 0;
+          width: 100vmax;
+          height: 100vmax;
+          left: 50%;
+          top: 50%;
           background: linear-gradient(to bottom, #000, #111);
+          transform: translate3d(-50%, -40%, 0);
         }
 
         canvas {
@@ -148,6 +150,7 @@ template: >
               depthTest: false,
             }),
           );
+
 
           scene.add(ribbon);
 
