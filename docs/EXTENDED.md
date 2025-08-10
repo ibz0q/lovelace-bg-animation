@@ -1089,13 +1089,13 @@ Found these dependencies in (../gallery/packages/animation.4.colored-swipe/packa
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.2.shooting-stars/preview.html) - *Author: alphardex* - Offline support? **Yes**
 
-###  > animation.1.home-assistant-particles (Home Assistant Background - Clean particle background with configurable settings and light/dark mode)
+###  > animation.1.home-assistant-particles (Home Assistant Background - Clean particle background with configurable settings and customizable background)
 
 `- id: animation.1.home-assistant-particles`
 
 
 Supported params:
-- `darkMode` - Use dark mode by default (true for dark mode, false for light mode) (defaults: `true`)
+- `backgroundColor` - Background color or gradient (defaults: `linear-gradient(135deg, #111111 0%, #1c1c1c 100%)`)
 - `particleCount` - Number of particles (recommended range 20-100) (defaults: `50`)
 - `linkDistance` - Maximum distance for particle connections (pixels) (defaults: `100`)
 - `mouseDistance` - Distance for mouse interaction with particles (pixels) (defaults: `150`)
