@@ -57,7 +57,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "89a7c776309337ee0b14c085200c2a989ce5d2da",
+      "hash": "ec709642c4eaacc84eb6574fd5e823c5147e814b",
       "parameters": [
         {
           "name": "transition",
@@ -104,6 +104,7 @@
           "name": "progressBarColor",
           "default": "linear-gradient(90deg, #667eea, #764ba2)",
           "description": "CSS color or gradient for the progress bar.",
+          "helper": "color",
           "type": "string",
           "behavior": "environment"
         },
@@ -1029,13 +1030,14 @@
       "description": "Shift",
       "author": "tympanus",
       "source": "https://tympanus.net/Development/AmbientCanvasBackgrounds/index3.html",
-      "hash": "f3ee02c06769a7339df465453fa02fad1c69f76b",
+      "hash": "18d3252441a376ebb86ae834aad13569ba72f256",
       "parameters": [
         {
           "name": "opacity",
           "default": "0.5",
           "description": "The opacity of the background",
-          "type": "string"
+          "type": "string",
+          "helper": "number(0-1)"
         }
       ]
     },
@@ -1058,13 +1060,14 @@
       "description": "RetroArch Menu Ribbon",
       "author": "Boris Šehovac",
       "source": "https://codepen.io/bsehovac/pen/jdawXK",
-      "hash": "72fa717fa714d9fa0e7b957c16b1582313d4ed0d",
+      "hash": "3ffd45ad16ce5c6e8a564c25cfea9a9ffed54836",
       "parameters": [
         {
           "name": "waveColor",
           "default": "rgb(255,255,255)",
           "description": "The color of the wave in RGB format",
-          "type": "string"
+          "type": "string",
+          "helper": "color"
         }
       ]
     },
@@ -1096,13 +1099,14 @@
       "description": "Inspired by [Ben Matthews]",
       "author": "Dillon",
       "source": "https://codepen.io/Dillo/pen/qEWQgXW",
-      "hash": "0881eeda05890dd271cecaa409a3973d0d789c2f",
+      "hash": "767aaea98f108b8f04515556a3e633afe4da411a",
       "parameters": [
         {
           "name": "screen_duration",
           "description": "Time to cross the screen vertically",
           "default": 200,
-          "type": "string"
+          "type": "string",
+          "helper": "number(0-500)"
         }
       ],
       "tags": [
@@ -1273,7 +1277,7 @@
       "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
-      "hash": "2c39706edec7ce6dd617126d6fae159bdb47317c",
+      "hash": "f1a6e51f1dcc51ea6792a93d7aec3fe70786c070",
       "parameters": [
         {
           "name": "Presets",
@@ -1336,7 +1340,8 @@
           "name": "backgroundColor",
           "default": "#000",
           "description": "Background color",
-          "type": "color"
+          "type": "color",
+          "helper": "color"
         },
         {
           "name": "backgroundImage",
@@ -1368,13 +1373,14 @@
       "description": "Watch the aurora borealis dance across your screen.",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "09ffedaf1806aa752d8a0e5983042c83465b451f",
+      "hash": "c8c05fc5d71a2a035adeab617ab5097a74c7be78",
       "parameters": [
         {
           "name": "speed",
           "default": 0.5,
           "description": "Animation movement speed",
           "type": "number",
+          "helper": "number(0.1-2)",
           "behavior": "environment"
         },
         {
@@ -1396,7 +1402,8 @@
           "default": 60,
           "description": "Target frames per second",
           "type": "number",
-          "behavior": "environment"
+          "behavior": "environment",
+          "helper": "number(10-100)"
         },
         {
           "name": "controlsVisible",
