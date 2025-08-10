@@ -938,13 +938,13 @@
       "description": "I'm in",
       "author": "Jared Stanley",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "8032963e058fcacf91d281165f7d4ea1519428fc",
+      "hash": "9c2ac57e48719ae7ff742968ef4aa940cdeccd79",
       "parameters": [
         {
           "name": "textColor",
           "default": "rgba(22,222,82,0.6992)",
           "description": "The color of the dots",
-          "type": "string"
+          "type": "color"
         }
       ]
     },

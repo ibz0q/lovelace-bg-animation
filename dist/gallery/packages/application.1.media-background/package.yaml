@@ -22,13 +22,6 @@ parameters:
     type:
       - string
     behavior: environment
-    options:
-      - crossfade
-      - slide-left
-      - zoom-in
-      - fade-up
-      - fade-down
-      - fade-right
   - name: transitionDuration
     default: 1000
     description: The duration of the transition effect in milliseconds.
