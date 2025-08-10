@@ -1,17 +1,18 @@
 version: v1
 metadata:
   name: Home Assistant Background
-  description: Clean particle background with configurable settings and light/dark mode
+  description: Clean particle background with configurable settings and customizable background
   author: Home Assistant Team
   source: https://github.com/home-assistant/frontend
   tags:
     - interactive
     - particles
 parameters:
-  - name: darkMode
-    default: true
-    description: Use dark mode by default (true for dark mode, false for light mode)
-    type: boolean
+  - name: backgroundColor
+    default: "linear-gradient(135deg, #111111 0%, #1c1c1c 100%)"
+    description: Background color or gradient
+    type: string
+    helper: color
     behavior: environment
   - name: particleCount
     default: 50
@@ -54,29 +55,13 @@ template: >
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Dark mode (Home Assistant exact colors) */
-        .dark-mode {
-          --bg-start: #111111;
-          --bg-end: #1c1c1c;
-          --text-color: #e1e1e1;
-          --text-opacity: 0.8;
-        }
-
-        /* Light mode (Home Assistant exact colors) */
-        .light-mode {
-          --bg-start: #fafafa;
-          --bg-end: #e5e5e5;
-          --text-color: #212121;
-          --text-opacity: 0.9;
-        }
-
         #particles {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+          background: {{ backgroundColor }};
           transition: background 0.3s ease;
           z-index: -1;
         }
@@ -101,9 +86,9 @@ template: >
           return rect.height || container.clientHeight || window.innerHeight;
         }
 
-        // Configuration from environment variables (like media-background)
+        // Configuration from environment variables
         const config = {
-          darkMode: window.env?.darkMode ?? true, // Default to dark mode
+          backgroundColor: window.env?.backgroundColor ?? "linear-gradient(135deg, #111111 0%, #1c1c1c 100%)",
           particleCount: window.env?.particleCount ?? 50,
           linkDistance: window.env?.linkDistance ?? 100,
           mouseDistance: window.env?.mouseDistance ?? 150,
@@ -113,18 +98,11 @@ template: >
         // Home Assistant Primary Color (exact match)
         const DefaultPrimaryColor = "#009ac7";
 
-        // Mode management
-        let isDarkMode = config.darkMode;
-        
-        function applyMode() {
+        // Background management
+        function applyBackground() {
           const particlesDiv = document.getElementById('particles');
-          
           if (particlesDiv) {
-            if (isDarkMode) {
-              particlesDiv.className = 'dark-mode';
-            } else {
-              particlesDiv.className = 'light-mode';
-            }
+            particlesDiv.style.background = config.backgroundColor;
           }
         }
 
@@ -218,9 +196,9 @@ template: >
           drawConnections() {
             this.ctx.strokeStyle = DefaultPrimaryColor;
             
-            // Adjust opacity based on mode
-            const baseOpacity = isDarkMode ? 0.7 : 0.5;
-            const mouseOpacity = isDarkMode ? 1 : 0.8;
+            // Connection opacity settings
+            const baseOpacity = 0.7;
+            const mouseOpacity = 1;
             
             for (let i = 0; i < this.particles.length; i++) {
               for (let j = i + 1; j < this.particles.length; j++) {
@@ -322,11 +300,8 @@ template: >
           drawParticles() {
             this.ctx.fillStyle = DefaultPrimaryColor;
             
-            // Adjust particle opacity based on mode
-            const particleOpacityMultiplier = isDarkMode ? 1 : 0.8;
-            
             for (const particle of this.particles) {
-              this.ctx.globalAlpha = particle.opacity * particleOpacityMultiplier;
+              this.ctx.globalAlpha = particle.opacity;
               this.ctx.beginPath();
               this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
               this.ctx.fill();
@@ -359,8 +334,8 @@ template: >
         let particleSystem = null;
         
         document.addEventListener('DOMContentLoaded', () => {
-          // Apply initial mode
-          applyMode();
+          // Apply initial background
+          applyBackground();
           
           // Initialize particle system
           particleSystem = new HomeAssistantParticles('particles');

@@ -995,73 +995,7 @@ body {
     font-size: 12px;
 }
 
-/* RGBA Color Input */
-.rgba-color-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
 
-.rgba-preview {
-    width: 100%;
-    height: 40px;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.rgba-sliders {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.rgba-slider-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.rgba-slider-group label {
-    width: 20px;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-.rgba-slider {
-    flex: 1;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.rgba-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-}
-
-.rgba-slider::-moz-range-thumb {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    border: none;
-}
-
-.rgba-value {
-    width: 40px;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: right;
-}
 
 /* Gradient Builder */
 .gradient-builder-container {
@@ -3482,14 +3416,8 @@ class BackgroundGallery {
             return this.createUniversalColorInput(param, inputId, value);
         }
         
-        // Fallback for other helper types
-        return `
-            <label for="${inputId}" class="parameter-label">${param.name}</label>
-            <div class="color-picker-container">
-                <input type="color" id="${inputId}" class="parameter-color-picker" value="${this.convertToHexColor(value)}">
-                <input type="text" id="${inputId}-text" class="parameter-input color-text-input" value="${value || ''}" placeholder="Enter color (hex, rgb, etc.)">
-            </div>
-        `;
+        // No legacy support - all color helpers should use 'helper: color'
+        return null;
     }
 
     createNumberHelperInput(param, inputId, value) {
@@ -3516,40 +3444,7 @@ class BackgroundGallery {
         `;
     }
 
-    createRGBAColorInput(param, inputId, value) {
-        // Parse existing RGBA value or use default
-        const rgba = this.parseRGBAValue(value || param.default);
-        
-        return `
-            <label for="${inputId}" class="parameter-label">${param.name}</label>
-            <div class="rgba-color-container">
-                <div class="rgba-preview" id="${inputId}-preview" style="background-color: ${value || param.default}"></div>
-                <div class="rgba-sliders">
-                    <div class="rgba-slider-group">
-                        <label>R</label>
-                        <input type="range" id="${inputId}-r" class="rgba-slider" min="0" max="255" value="${rgba.r}">
-                        <span class="rgba-value" id="${inputId}-r-val">${rgba.r}</span>
-                    </div>
-                    <div class="rgba-slider-group">
-                        <label>G</label>
-                        <input type="range" id="${inputId}-g" class="rgba-slider" min="0" max="255" value="${rgba.g}">
-                        <span class="rgba-value" id="${inputId}-g-val">${rgba.g}</span>
-                    </div>
-                    <div class="rgba-slider-group">
-                        <label>B</label>
-                        <input type="range" id="${inputId}-b" class="rgba-slider" min="0" max="255" value="${rgba.b}">
-                        <span class="rgba-value" id="${inputId}-b-val">${rgba.b}</span>
-                    </div>
-                    <div class="rgba-slider-group">
-                        <label>A</label>
-                        <input type="range" id="${inputId}-a" class="rgba-slider" min="0" max="1" step="0.01" value="${rgba.a}">
-                        <span class="rgba-value" id="${inputId}-a-val">${rgba.a}</span>
-                    </div>
-                </div>
-                <input type="hidden" id="${inputId}" class="parameter-input" value="${value || param.default}">
-            </div>
-        `;
-    }
+
 
     createUniversalColorInput(param, inputId, value) {
         const defaultType = this.detectDefaultColorType(value || param.default);
@@ -3821,30 +3716,8 @@ class BackgroundGallery {
     setupHelperEventListeners(param, div, inputId) {
         if (param.helper === 'color') {
             this.setupUniversalColorEventListeners(param, div, inputId);
-        } else {
-            // Legacy color helper support
-            const colorType = this.parseColorHelper(param.helper || '');
-            
-            const updateHandler = async (sourceInput) => {
-                clearTimeout(this.parameterUpdateTimeout);
-                this.parameterUpdateTimeout = setTimeout(async () => {
-                    await this.updateParameterRealTime(param.name, sourceInput);
-                }, 300);
-            };
-
-            switch (colorType) {
-                case 'rgba':
-                    this.setupRGBAEventListeners(div, inputId, updateHandler);
-                    break;
-                case 'linear-gradient':
-                    this.setupGradientEventListeners(div, inputId, updateHandler);
-                    break;
-                case 'solid':
-                default:
-                    this.setupBasicColorEventListeners(div, inputId, updateHandler);
-                    break;
-            }
         }
+        // Legacy helper support removed - only 'helper: color' is supported
     }
 
     setupNumberHelperEventListeners(param, div, inputId) {
@@ -4137,118 +4010,11 @@ class BackgroundGallery {
         }
     }
 
-    setupBasicColorEventListeners(div, inputId, updateHandler) {
-        const colorInput = div.querySelector(`#${inputId}`);
-        const textInput = div.querySelector(`#${inputId}-text`);
-        
-        if (colorInput && textInput) {
-            colorInput.addEventListener('change', () => {
-                textInput.value = colorInput.value;
-                updateHandler(textInput);
-            });
-            
-            textInput.addEventListener('input', () => {
-                const hexColor = this.convertToHexColor(textInput.value);
-                if (hexColor !== '#000000' || textInput.value.toLowerCase() === '#000000' || textInput.value.toLowerCase() === 'black') {
-                    colorInput.value = hexColor;
-                }
-                updateHandler(textInput);
-            });
-        }
-    }
 
-    setupRGBAEventListeners(div, inputId, updateHandler) {
-        const hiddenInput = div.querySelector(`#${inputId}`);
-        const preview = div.querySelector(`#${inputId}-preview`);
-        const sliders = ['r', 'g', 'b', 'a'];
 
-        const updateRGBA = () => {
-            const r = div.querySelector(`#${inputId}-r`).value;
-            const g = div.querySelector(`#${inputId}-g`).value;
-            const b = div.querySelector(`#${inputId}-b`).value;
-            const a = div.querySelector(`#${inputId}-a`).value;
-            
-            const rgbaValue = `rgba(${r}, ${g}, ${b}, ${a})`;
-            hiddenInput.value = rgbaValue;
-            preview.style.backgroundColor = rgbaValue;
-            
-            // Update value displays
-            div.querySelector(`#${inputId}-r-val`).textContent = r;
-            div.querySelector(`#${inputId}-g-val`).textContent = g;
-            div.querySelector(`#${inputId}-b-val`).textContent = b;
-            div.querySelector(`#${inputId}-a-val`).textContent = a;
-            
-            updateHandler(hiddenInput);
-        };
 
-        sliders.forEach(slider => {
-            const input = div.querySelector(`#${inputId}-${slider}`);
-            if (input) {
-                input.addEventListener('input', updateRGBA);
-            }
-        });
-    }
 
-    setupGradientEventListeners(div, inputId, updateHandler) {
-        const hiddenInput = div.querySelector(`#${inputId}`);
-        const preview = div.querySelector(`#${inputId}-preview`);
-        const angleSlider = div.querySelector(`#${inputId}-angle`);
-        const angleVal = div.querySelector(`#${inputId}-angle-val`);
-        const addButton = div.querySelector(`#${inputId}-add`);
 
-        const updateGradient = () => {
-            const angle = angleSlider.value;
-            const stops = [];
-            
-            div.querySelectorAll('.gradient-stop').forEach(stop => {
-                const color = stop.querySelector('.gradient-color').value;
-                const position = stop.querySelector('.gradient-position').value;
-                stops.push(`${color} ${position}%`);
-                stop.querySelector('.gradient-position-val').textContent = `${position}%`;
-            });
-
-            const gradientValue = `linear-gradient(${angle}deg, ${stops.join(', ')})`;
-            hiddenInput.value = gradientValue;
-            preview.style.background = gradientValue;
-            angleVal.textContent = `${angle}°`;
-            
-            updateHandler(hiddenInput);
-        };
-
-        // Angle slider
-        angleSlider.addEventListener('input', updateGradient);
-
-        // Color and position changes for existing stops
-        div.addEventListener('input', (e) => {
-            if (e.target.classList.contains('gradient-color') || e.target.classList.contains('gradient-position')) {
-                updateGradient();
-            }
-        });
-
-        // Add stop button
-        if (addButton) {
-            addButton.addEventListener('click', () => {
-                const stopsContainer = div.querySelector(`#${inputId}-stops`);
-                const newStop = document.createElement('div');
-                newStop.className = 'gradient-stop';
-                newStop.innerHTML = `
-                    <input type="color" class="gradient-color" value="#ffffff">
-                    <input type="range" class="gradient-position" min="0" max="100" value="50">
-                    <span class="gradient-position-val">50%</span>
-                    <button type="button" class="remove-gradient-stop">×</button>
-                `;
-                stopsContainer.appendChild(newStop);
-                
-                // Add remove functionality
-                newStop.querySelector('.remove-gradient-stop').addEventListener('click', () => {
-                    newStop.remove();
-                    updateGradient();
-                });
-                
-                updateGradient();
-            });
-        }
-    }
 
     showBackgroundLoading() {
         // Show loading in config panel if open
