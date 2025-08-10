@@ -227,6 +227,7 @@ template: >
       uniform float u_ratio;
       uniform vec2 u_pointer_position;
       uniform float u_scroll_progress;
+      uniform vec3 u_random_color;
 
       vec2 rotate(vec2 uv, float th) {
           return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
