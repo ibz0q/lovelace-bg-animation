@@ -4,18 +4,34 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (83 total) - Newest first
+## All backgrounds (84 total) - Newest first
 
 
 
-###  > animation.91.sliced-blobs (Dimensional Slicing - Dimensional blob slicing)
+###  > animation.92.aurora-v2 (Icelandic Aurora - Watch the aurora borealis dance across your screen.)
+
+`- id: animation.92.aurora-v2`
+
+
+Supported params:
+- `speed` - Animation movement speed (defaults: `0.5`)
+- `blurIntensity` - Intensity of the blur effect (10-100) (defaults: `60`)
+- `colorIntensity` - Intensity of colors (0.3-1.0) (defaults: `0.7`)
+- `targetFPS` - Target frames per second (defaults: `60`)
+- `controlsVisible` - Show controls by default (defaults: `false`)
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.92.aurora-v2/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.92.aurora-v2/preview.html) - *Author: Ibz* - Offline support? **Yes**
+
+###  > animation.91.sliced-blobs (Dimensional Slicing - Dimensional blob slicing (Modified from Neuro by senia Kondrashova)
 
 `- id: animation.91.sliced-blobs`
 
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.91.sliced-blobs/screenshot.png)
-[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.91.sliced-blobs/preview.html) - *Author: Ibz (Modified from Ksenia Kondrashova)* - Offline support? **Yes**
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.91.sliced-blobs/preview.html) - *Author: Ibz* - Offline support? **Yes**
 
 ###  > animation.90.aurora (Icelandic Aurora - Watch the aurora borealis dance across your screen.)
 
@@ -622,6 +638,13 @@ Forked from [satchmorun](http://codepen.io/satchmorun/)'s Pen [Colorful Wanderer
 `- id: animation.27.tron`
 
 
+Supported params:
+- `turnRatio` - How much the lines turn (0.001-0.01) (defaults: `0.005`)
+- `lineColor` - Line color (defaults: `0, 255, 233`)
+- `speed` - Line moving speed (0.1-1.0) (defaults: `0.3`)
+- `lineWidth` - Width of the lines (1-10) (defaults: `5`)
+- `backgroundColor` - Background color (defaults: `rgb(0,0,0)`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.27.tron/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.27.tron/preview.html) - *Author: DanDog* - Offline support? **Yes**
@@ -691,6 +714,14 @@ Found these dependencies in (../gallery/packages/animation.24.trapped-gradient/p
 
 `- id: animation.23.ribbons-four`
 
+
+Supported params:
+- `walkingSpeed` - Movement speed of ribbons (0.05-0.5) (defaults: `0.1`)
+- `ribbonWidth` - Width of ribbons (50-400) (defaults: `200`)
+- `noiseScale` - Noise pattern scale (0.01-0.1) (defaults: `0.02`)
+- `noiseHeight` - Noise amplitude (50-400) (defaults: `200`)
+- `numRibbons` - Number of ribbons (1-10) (defaults: `5`)
+- `maxSteps` - Animation duration (5000-20000) (defaults: `12000`)
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.23.ribbons-four/screenshot.png)
@@ -796,6 +827,11 @@ Found these dependencies in (../gallery/packages/animation.20.manifold/package.y
 `- id: animation.19.trapped-particles`
 
 
+Supported params:
+- `maxDistance` - Maximum connection distance (100-500) (defaults: `300`)
+- `particleCount` - Number of particles (10-100) (defaults: `25`)
+- `particleSize` - Size of particles (2-15) (defaults: `5`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.19.trapped-particles/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.19.trapped-particles/preview.html) - *Author: Bas Groothedde* - Offline support? No
@@ -847,6 +883,14 @@ Found these dependencies in (../gallery/packages/animation.18.particle-cube/pack
 
 `- id: animation.17.ribbons`
 
+
+Supported params:
+- `walkingSpeed` - Movement speed of ribbons (0.1-1.0) (defaults: `0.5`)
+- `ribbonWidth` - Width of ribbons (50-400) (defaults: `200`)
+- `noiseScale` - Noise pattern scale (0.01-0.1) (defaults: `0.02`)
+- `noiseHeight` - Noise amplitude (50-400) (defaults: `200`)
+- `numRibbons` - Number of ribbons (1-10) (defaults: `5`)
+- `maxSteps` - Animation duration (1000-10000) (defaults: `5000`)
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.17.ribbons/screenshot.png)
@@ -987,6 +1031,12 @@ Found these dependencies in (../gallery/packages/animation.13.cyber-lights/packa
 `- id: animation.11.space`
 
 
+Supported params:
+- `particleCount` - Number of particles (100-1000) (defaults: `500`)
+- `particleSize` - Base size of particles (0.1-2.0) (defaults: `0.5`)
+- `defaultSpeed` - Normal movement speed (0.1-1.0) (defaults: `0.4`)
+- `boostSpeed` - Speed when mouse is pressed (100-500) (defaults: `300`)
+
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.11.space/screenshot.png)
 [Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.11.space/preview.html) - *Author: Akimitsu Hamamuro* - Offline support? **Yes**
@@ -1100,6 +1150,9 @@ Supported params:
 - `linkDistance` - Maximum distance for particle connections (pixels) (defaults: `100`)
 - `mouseDistance` - Distance for mouse interaction with particles (pixels) (defaults: `150`)
 - `particleSpeed` - Speed of particle movement (0.1-2.0) (defaults: `0.5`)
+- `particleSize` - Size of particles (1-5) (defaults: `2`)
+- `particleColor` - Color of particles (defaults: `#009ac7`)
+- `linkOpacity` - Opacity of particle connections (0.1-1.0) (defaults: `0.7`)
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.1.home-assistant-particles/screenshot.png)
