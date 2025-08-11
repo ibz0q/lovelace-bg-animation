@@ -1662,17 +1662,7 @@ body {
         0 0 8px rgba(0, 0, 0, 0.8);
 }
 
-.credits-interactive-icon {
-    font-size: 0.8rem;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-}
 
-.credits-interactive-icon.visible {
-    opacity: 1;
-    transform: scale(1);
-}
 
 .credits-author {
     color: white;
@@ -2119,7 +2109,6 @@ body {
     <div id="credits-overlay" class="credits-overlay">
         <div class="credits-content">
             <div class="credits-line">
-                <div class="credits-interactive-icon">🎮</div>
                 <div class="credits-name"></div>
                 <div class="credits-author"></div>
             </div>
@@ -3193,8 +3182,7 @@ class BackgroundGallery {
     }
 
     async processPackageYaml(packageYaml, pkg) {
-        console.log(`[PROCESS DEBUG] Processing package: ${pkg.id}`);
-        console.log(`[PROCESS DEBUG] Current packageParameters:`, this.packageParameters);
+        // Processing package: ${pkg.id}
         
         if (!packageYaml) return null;
 
@@ -3235,19 +3223,17 @@ class BackgroundGallery {
                     case 'param':
                         // Check for custom parameters first, then package parameters, then defaults
                         const customParams = this.packageParameters[pkg.id] || {};
-                        console.log(`[PARAM DEBUG] Processing parameter: ${key}`);
-                        console.log(`[PARAM DEBUG] Custom params for ${pkg.id}:`, customParams);
-                        console.log(`[PARAM DEBUG] Looking for key: "${key}"`);
+                                // Processing parameter: ${key}
                         
                         if (customParams[key] !== undefined) {
-                            console.log(`[PARAM DEBUG] Found custom value for ${key}:`, customParams[key]);
+                            // Found custom value for ${key}
                             // Sanitize parameter values to prevent XSS
                             const sanitizedValue = validateInput(customParams[key], 'text');
                             return sanitizedValue;
                         }
                         
                         const defaultValue = (packageYaml.parameters && packageYaml.parameters[key]) ? packageYaml.parameters[key] : packageYaml.parameters.find(item => item.name == key)?.default || match;
-                        console.log(`[PARAM DEBUG] Using default value for ${key}:`, defaultValue);
+                                                    // Using default value for ${key}
                         return defaultValue;
                     case 'metadata':
                     case 'meta':
@@ -3599,16 +3585,6 @@ class BackgroundGallery {
         // Set the content
         creditsName.textContent = packageData.name || packageData.id;
         creditsAuthor.textContent = ` • by ${packageData.author || 'Unknown Author'}`;
-        
-        // Show interactive icon if this package is interactive
-        const isInteractive = (packageData.tags && packageData.tags.includes('interactive')) || 
-                              (packageData.description || '').toLowerCase().includes('interactive');
-        
-        if (isInteractive) {
-            creditsInteractiveIcon.classList.add('visible');
-        } else {
-            creditsInteractiveIcon.classList.remove('visible');
-        }
         
         // Remove any existing visible class and force reflow to restart animation
         creditsOverlay.classList.remove('visible');
@@ -4435,6 +4411,8 @@ class BackgroundGallery {
         }
     }
 
+
+
     showConfigLoading() {
         const spinner = document.getElementById('config-loading-spinner');
         const check = document.getElementById('config-loaded-check');
@@ -4627,7 +4605,7 @@ class BackgroundGallery {
                     input.addEventListener('input', updateHandler);
                 }
                 
-                console.log(`[INPUT DEBUG] Added event listener for parameter: ${param.name}, input type: ${input.type || input.tagName}`);
+                // Added event listener for parameter: ${param.name}
             }
         }
         
@@ -4811,19 +4789,26 @@ class BackgroundGallery {
             throw new Error('Invalid import format. Missing packageId or parameters.');
         }
 
-        // Check if this is for the current package
-        if (importData.packageId !== this.currentPackage.id) {
-            const confirmed = confirm(`This import is for "${importData.packageName || importData.packageId}" but you're configuring "${this.currentPackage.name}". Continue anyway?`);
-            if (!confirmed) return;
+        // Importing parameters for package: ${importData.packageId}
+
+        // Check if we need to switch to a different background
+        if (importData.packageId !== this.currentPackage?.id) {
+            // Switching to different background: ${importData.packageId}
+            
+            // Find the package in our gallery
+            const targetPackage = this.packages.find(pkg => pkg.id === importData.packageId);
+            if (!targetPackage) {
+                throw new Error(`Background "${importData.packageId}" not found in gallery.`);
+            }
+
+            // Switch to the target background first
+            await this.selectPackage(targetPackage);
         }
 
-        console.log('[IMPORT DEBUG] Importing parameters:', importData.parameters);
-        console.log('[IMPORT DEBUG] Current package:', this.currentPackage.id);
-
         // Apply the imported parameters
-        this.packageParameters[this.currentPackage.id] = { ...importData.parameters };
+        this.packageParameters[importData.packageId] = { ...importData.parameters };
 
-        console.log('[IMPORT DEBUG] Updated packageParameters:', this.packageParameters[this.currentPackage.id]);
+        // Updated packageParameters for ${importData.packageId}
 
         // Reload the config panel with imported values
         this.closeConfigPanel();
@@ -4836,7 +4821,7 @@ class BackgroundGallery {
         await this.loadPackage(this.currentPackage);
         this.showBackgroundLoaded();
 
-        console.log('[IMPORT DEBUG] Import completed successfully');
+        // Import completed successfully
     }
 
     async copyHomeAssistantConfig() {
@@ -4889,8 +4874,7 @@ class BackgroundGallery {
     }
 
     async updateParameterRealTime(paramName, inputElement) {
-        console.log(`[REALTIME DEBUG] updateParameterRealTime called for: ${paramName}`);
-        console.log(`[REALTIME DEBUG] currentPackage:`, this.currentPackage);
+        // updateParameterRealTime called for: ${paramName}
         
         if (!this.currentPackage) return;
 
@@ -4939,8 +4923,7 @@ class BackgroundGallery {
                 value = inputElement.value;
             }
 
-            console.log(`[REALTIME DEBUG] Parameter ${paramName} new value:`, value);
-            console.log(`[REALTIME DEBUG] Parameter type:`, param.type);
+            // Parameter ${paramName} new value: ${value}
 
             // Update parameter
             if (!this.packageParameters[this.currentPackage.id]) {
@@ -4948,17 +4931,18 @@ class BackgroundGallery {
             }
             this.packageParameters[this.currentPackage.id][paramName] = value;
             
-            console.log(`[REALTIME DEBUG] Updated packageParameters:`, this.packageParameters);
+            // Updated packageParameters
 
             // Check if auto-reload is enabled
             const autoReloadCheckbox = document.getElementById('config-auto-reload');
             if (autoReloadCheckbox && autoReloadCheckbox.checked) {
                 // Update background
-                console.log(`[REALTIME DEBUG] Reloading package: ${this.currentPackage.id}`);
+                // Reloading package: ${this.currentPackage.id}
                 this.showConfigLoading();
                 await this.loadPackage(this.currentPackage);
                 this.showBackgroundLoaded();
             }
+            // If auto-reload is disabled, just update the parameters without reloading the background
             
             // Update tooltip with new config
             this.updateConfigTooltip();
@@ -4972,7 +4956,7 @@ class BackgroundGallery {
     async applyParameters() {
         if (!this.currentPackage) return;
 
-        console.log(`[APPLY DEBUG] Applying parameters for package: ${this.currentPackage.id}`);
+        // Applying parameters for package: ${this.currentPackage.id}
         this.showConfigLoading();
         
         try {

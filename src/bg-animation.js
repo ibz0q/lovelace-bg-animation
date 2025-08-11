@@ -127,31 +127,36 @@ async function processPackageManifest(packageConfig, packageManifest) {
       packageManifest.template__processed = packageManifest.template
 
       if (typeof window !== 'undefined') {
+        let content_inject = "";
         if (packageManifest?.helpers?.insert_baseurl == true) {
           isDebug ? console.log("processPackageManifest: Inserting baseurl") : null;
-          let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
+          content_inject += '<base href="' + environment["basePath"] + '" target="_blank">';
+        }
+        let environmentVars = {
+          "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
+          "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
+          "rootPath": lovelaceUI.pluginAssetPath + "/",
+          "assetPath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
+          "packageConfig": packageConfig
+        };
+        if (packageManifest.parameters) {
+          packageManifest.parameters.forEach(param => {
+            if (param.behavior === 'environment') {
+              if (!environmentVars[param.name]) {
+                environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
+              }
+            }
+          });
+        }
+        content_inject += '<script>window.env = ' + JSON.stringify(environmentVars) + ';console.log(1111)</script>';
+        if (content_inject !== "") {
           if (packageManifest.template.includes('<head>')) {
-            packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
+            packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${content_inject}`);
           } else if (packageManifest.template.includes('<html>')) {
-            packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
+            packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${content_inject}`);
           }
         }
       }
-
-      //if there are enviromentVars we're going to inject them into template__processed via a script tag into <head> (if its present)
-      if (packageManifest.parameters) {
-        packageManifest.parameters.forEach(param => {
-          if (param.behavior === 'environment') {
-            if (!environmentVars[param.name]) {
-              environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
-            }
-          }
-        });
-      }
-      // if there are enviromentVars we're going to add them to <head> liek we are doing with the baseurl  #             packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
-
-
-
       if (packageManifest.template) {
         const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
