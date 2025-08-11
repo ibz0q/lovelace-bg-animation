@@ -9,6 +9,19 @@ metadata:
     - particles
     - generative
     - noise
+parameters:
+  - name: maxDistance
+    type: number
+    default: 300
+    description: Maximum connection distance (100-500)
+  - name: particleCount
+    type: number
+    default: 25
+    description: Number of particles (10-100)
+  - name: particleSize
+    type: number
+    default: 5
+    description: Size of particles (2-15)
 template: >
   <canvas id="c"></canvas>
 
@@ -33,9 +46,9 @@ template: >
 
   <script>
     // Configure
-    var MAX_DISTANCE = 300,
-      PARTICLES = 25,
-      PARTICLE_SIZE = 5;
+    var MAX_DISTANCE = {{param:maxDistance}},
+      PARTICLES = {{param:particleCount}},
+      PARTICLE_SIZE = {{param:particleSize}};
 
     // No configure!
     Math.Tau = Math.PI * 2;

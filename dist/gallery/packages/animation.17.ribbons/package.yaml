@@ -4,6 +4,31 @@ metadata:
   description: So many layers of ribbons
   author: Ben Matthews
   source: https://codepen.io/tsuhre/pen/MNVYdq
+parameters:
+  - name: walkingSpeed
+    type: number
+    default: 0.5
+    description: Movement speed of ribbons (0.1-1.0)
+  - name: ribbonWidth
+    type: number
+    default: 200
+    description: Width of ribbons (50-400)
+  - name: noiseScale
+    type: number
+    default: 0.02
+    description: Noise pattern scale (0.01-0.1)
+  - name: noiseHeight
+    type: number
+    default: 200
+    description: Noise amplitude (50-400)
+  - name: numRibbons
+    type: number
+    default: 5
+    description: Number of ribbons (1-10)
+  - name: maxSteps
+    type: number
+    default: 5000
+    description: Animation duration (1000-10000)
 template: >
   <script
   src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
@@ -35,27 +60,27 @@ template: >
   <div id="controls"></div>
 
   <script>
-    let walkingSpeed = 0.5;
+    let walkingSpeed = {{param:walkingSpeed}};
     let noiseSpeed = 0.4 * walkingSpeed;
     let dirIncr = 0.01 * walkingSpeed;
 
     let changeChance = 0.05 * walkingSpeed;
     let angleChance = 0.01 * walkingSpeed;
 
-    let ribbonWidth = 200;
+    let ribbonWidth = {{param:ribbonWidth}};
 
     let angleIncr = 0.01 * walkingSpeed;
 
-    let noiseScale = 0.02;
-    let noiseHeight = 200;
+    let noiseScale = {{param:noiseScale}};
+    let noiseHeight = {{param:noiseHeight}};
 
     let hueShift = 0.001 * walkingSpeed;
 
     let steps = 0;
     let stepsPerFrame = 20;
-    let maxSteps = 5000;
+    let maxSteps = {{param:maxSteps}};
 
-    let numRibbons = 5;
+    let numRibbons = {{param:numRibbons}};
 
     class Walker {
       constructor(x, y, hue) {
