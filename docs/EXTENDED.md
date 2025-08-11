@@ -8,7 +8,7 @@ This file is generated through an Github Action, if any of the image previews do
 
 
 
-###  > animation.92.aurora-v2 (Icelandic Aurora - Watch the aurora borealis dance across your screen.)
+###  > animation.92.aurora-v2 (Icelandic Aurora v2 - Watch the aurora borealis dance across your screen. (Improved performance))
 
 `- id: animation.92.aurora-v2`
 
