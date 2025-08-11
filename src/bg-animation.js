@@ -127,36 +127,17 @@ async function processPackageManifest(packageConfig, packageManifest) {
       packageManifest.template__processed = packageManifest.template
 
       if (typeof window !== 'undefined') {
-        let content_inject = "";
         if (packageManifest?.helpers?.insert_baseurl == true) {
           isDebug ? console.log("processPackageManifest: Inserting baseurl") : null;
-          content_inject += '<base href="' + environment["basePath"] + '" target="_blank">';
-        }
-        let environmentVars = {
-          "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
-          "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
-          "rootPath": lovelaceUI.pluginAssetPath + "/",
-          "assetPath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
-          "packageConfig": packageConfig
-        };
-        if (packageManifest.parameters) {
-          packageManifest.parameters.forEach(param => {
-            if (param.behavior === 'environment') {
-              if (!environmentVars[param.name]) {
-                environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
-              }
-            }
-          });
-        }
-        content_inject += '<script>window.env = ' + JSON.stringify(environmentVars) + ';console.log(1111)</script>';
-        if (content_inject !== "") {
+          let insert_baseurl = '<base href="' + environment["basePath"] + '" target="_blank">';
           if (packageManifest.template.includes('<head>')) {
-            packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${content_inject}`);
+            packageManifest.template__processed = packageManifest.template.replace(/(?<=<head>)/, `\n${insert_baseurl}`);
           } else if (packageManifest.template.includes('<html>')) {
-            packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${content_inject}`);
+            packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
           }
         }
       }
+
       if (packageManifest.template) {
         const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
@@ -384,12 +365,32 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     const iframeElement = document.createElement('iframe');
     iframeElement.frameborder = "0";
     iframeElement.scrolling = "no";
-    iframeElement.srcdoc = "<html><body><style>body{background:black;}</style></body></html>";
     iframeElement.className = applicationIdentifiers.appNameShort;
+    iframeElement.srcdoc = packageManifest.template__processed;
     iframeElement.style.cssText = packageConfig.style;
     Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
     containerElement.replaceChildren(iframeElement);
-    iframeElement.srcdoc = packageManifest.template__processed;
+    let environmentVars = {
+      "lovelaceUI": lovelaceUI,
+      "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
+      "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
+      "rootPath": lovelaceUI.pluginAssetPath + "/",
+      "assetPath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
+      "packageManifest": packageManifest,
+      "packageConfig": packageConfig
+    };
+    if (packageManifest.parameters) {
+      packageManifest.parameters.forEach(param => {
+        if (param.behavior === 'environment') {
+          if (!environmentVars[param.name]) {
+            environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
+          }
+        }
+      });
+    }
+    if (iframeElement?.contentWindow) {
+      iframeElement.contentWindow["env"] = environmentVars;
+    }
     return iframeElement;
   };
 
