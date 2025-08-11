@@ -1854,7 +1854,7 @@
 <body>
     <!-- Main iframe container -->
     <div id="preview-container">
-        <iframe id="preview-iframe" src="" frameborder="0"></iframe>
+
     </div>
 
     <!-- Navigation controls -->
@@ -2260,8 +2260,8 @@
 
         class BackgroundGallery {
             // Global asset root URL - change this to point to your local server
-            static ASSET_ROOT_URL = 'https://ibz0q.github.io/lovelace-bg-animation';
-            // static ASSET_ROOT_URL = 'http://nginx//ll';
+            // static ASSET_ROOT_URL = 'https://ibz0q.github.io/lovelace-bg-animation';
+            static ASSET_ROOT_URL = 'http://nginx//ll';
 
             constructor() {
                 this.packages = [];
@@ -2269,7 +2269,7 @@
                 this.filteredPackages = [];
                 this.mouseTimeout = null;
                 this.creditsTimeout = null;
-                this.galleryManifestUrl = 'https://ibz0q.github.io/lovelace-bg-animation/gallery/gallery.manifest';
+                this.galleryManifestUrl = BackgroundGallery.ASSET_ROOT_URL + '/gallery/gallery.manifest';
                 this.viewedPackages = this.loadViewingHistory();
                 this.currentView = 'sidebar'; // 'sidebar', 'bottom', or 'grid'
                 this.currentListView = 'list'; // 'list' or 'tags'
@@ -3277,8 +3277,8 @@
                     }
 
                     let processedTemplate = packageYaml.template;
-                    const baseUrl = `https://ibz0q.github.io/lovelace-bg-animation/gallery/packages/${pkg.id}/`;
-                    const commonPath = `https://ibz0q.github.io/lovelace-bg-animation/gallery/common/`;
+                    const baseUrl = `${BackgroundGallery.ASSET_ROOT_URL}/gallery/packages/${pkg.id}/`;
+                    const commonPath = `${BackgroundGallery.ASSET_ROOT_URL}/gallery/common/`;
 
                     // Handle base URL insertion if needed
                     if (packageYaml.helpers?.insert_baseurl) {
@@ -3355,7 +3355,7 @@
                     processedTemplate = processedTemplate.replace(envRegex, (match, type, key) => {
                         switch (key) {
                             case 'rootPath':
-                                return 'https://ibz0q.github.io/lovelace-bg-animation';
+                                return BackgroundGallery.ASSET_ROOT_URL;
                             case 'basePath':
                             case 'assetPath':
                                 return baseUrl;
@@ -3419,21 +3419,19 @@
                     }
 
                     this.showLoading('Rendering background...');
-
-                    // Create a new iframe for each package (like bg-animation.js does)
                     const iframe = document.createElement('iframe');
+
                     iframe.frameborder = "0";
                     iframe.scrolling = "no";
                     iframe.style.cssText = 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;';
+                    iframe.srcdoc = processedTemplate;
 
-                    // Set up environment variables like bg-animation.js does
+                    this.iframeContainer.replaceChildren(iframe);
                     const packageConfig = {
                         id: pkg.id,
                         parameters: this.packageParameters[pkg.id] || {},
                         style: 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;'
                     };
-
-                    // Match bg-animation.js environment variables structure
                     let environmentVars = {
                         "basePath": `${BackgroundGallery.ASSET_ROOT_URL}/gallery/packages/${packageConfig.id}/`,
                         "commonPath": `${BackgroundGallery.ASSET_ROOT_URL}/gallery/common/`,
@@ -3442,8 +3440,6 @@
                         "packageManifest": packageYaml,
                         "packageConfig": packageConfig
                     };
-
-                    // Process environment behavior parameters
                     if (packageYaml.parameters) {
                         packageYaml.parameters.forEach(param => {
                             if (param.behavior === 'environment') {
@@ -3453,17 +3449,6 @@
                             }
                         });
                     }
-
-                    // Use blob instead of srcdoc (like bg-animation.js)
-                    const blob = new Blob([processedTemplate], { type: 'text/html' });
-                    const blobUrl = URL.createObjectURL(blob);
-                    iframe.src = blobUrl;
-
-                    // Clear the container and add the new iframe to DOM
-                    this.iframeContainer.innerHTML = '';
-                    this.iframeContainer.appendChild(iframe);
-
-                    // Set environment variables after iframe is in DOM
                     if (iframe.contentWindow) {
                         iframe.contentWindow["env"] = environmentVars;
                     }
