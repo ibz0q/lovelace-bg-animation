@@ -34,6 +34,21 @@ parameters:
     description: Speed of particle movement (0.1-2.0)
     type: number
     behavior: environment
+  - name: particleSize
+    default: 2
+    description: Size of particles (1-5)
+    type: number
+    behavior: environment
+  - name: particleColor
+    default: "#009ac7"
+    description: Color of particles
+    type: string
+    behavior: environment
+  - name: linkOpacity
+    default: 0.7
+    description: Opacity of particle connections (0.1-1.0)
+    type: number
+    behavior: environment
 template: >
   <!DOCTYPE html>
   <html lang="en">
@@ -92,7 +107,10 @@ template: >
           particleCount: window.env?.particleCount ?? 50,
           linkDistance: window.env?.linkDistance ?? 100,
           mouseDistance: window.env?.mouseDistance ?? 150,
-          particleSpeed: window.env?.particleSpeed ?? 0.5
+          particleSpeed: window.env?.particleSpeed ?? 0.5,
+          particleSize: window.env?.particleSize ?? 2,
+          particleColor: window.env?.particleColor ?? "#009ac7",
+          linkOpacity: window.env?.linkOpacity ?? 0.7
         };
 
         // Home Assistant Primary Color (exact match)

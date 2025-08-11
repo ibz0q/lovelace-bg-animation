@@ -6,6 +6,23 @@ metadata:
   source: https://codepen.io/akm2/pen/RwQXLdP
   tags:
     - interactive
+parameters:
+  - name: particleCount
+    type: number
+    default: 500
+    description: Number of particles (100-1000)
+  - name: particleSize
+    type: number
+    default: 0.5
+    description: Base size of particles (0.1-2.0)
+  - name: defaultSpeed
+    type: number
+    default: 0.4
+    description: Normal movement speed (0.1-1.0)
+  - name: boostSpeed
+    type: number
+    default: 300
+    description: Speed when mouse is pressed (100-500)
 template: |
   <style>
     * {
@@ -25,11 +42,11 @@ template: |
   <canvas id="c"></canvas>
 
   <script>
-    var PARTICLE_NUM = 500;
-    var PARTICLE_BASE_RADIUS = 0.5;
+    var PARTICLE_NUM = {{param:particleCount}};
+    var PARTICLE_BASE_RADIUS = {{param:particleSize}};
     var FL = 500;
-    var DEFAULT_SPEED = 0.4;
-    var BOOST_SPEED = 300;
+    var DEFAULT_SPEED = {{param:defaultSpeed}};
+    var BOOST_SPEED = {{param:boostSpeed}};
 
     var canvas;
     var canvasWidth, canvasHeight;

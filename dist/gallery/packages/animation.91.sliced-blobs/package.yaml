@@ -1,8 +1,8 @@
 version: v1
 metadata:
   name: Dimensional Slicing 
-  description: Dimensional blob slicing
-  author: Ibz (Modified from Ksenia Kondrashova)
+  description: Dimensional blob slicing (Modified from Neuro by senia Kondrashova
+  author: Ibz
   source: https://codepen.io/ksenia-k/pen/vYwgrWv
   tags:
     - interactive
