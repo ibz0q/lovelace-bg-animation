@@ -138,6 +138,20 @@ async function processPackageManifest(packageConfig, packageManifest) {
         }
       }
 
+      //if there are enviromentVars we're going to inject them into template__processed via a script tag into <head> (if its present)
+      if (packageManifest.parameters) {
+        packageManifest.parameters.forEach(param => {
+          if (param.behavior === 'environment') {
+            if (!environmentVars[param.name]) {
+              environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
+            }
+          }
+        });
+      }
+      // if there are enviromentVars we're going to add them to <head> liek we are doing with the baseurl  #             packageManifest.template__processed = packageManifest.template.replace(/(?<=<html>)/, `\n${insert_baseurl}`);
+
+
+
       if (packageManifest.template) {
         const regex = /\{\{\s*(compile|parameter|parameters|param|metadata|meta|environment|env|common):\s*([\s\S]*?)\s*\}\}/g;
         packageManifest.template__processed = packageManifest.template__processed.replace(regex, function (match, type, key) {
@@ -370,27 +384,6 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.style.cssText = packageConfig.style;
     Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
     containerElement.replaceChildren(iframeElement);
-    let environmentVars = {
-      "lovelaceUI": lovelaceUI,
-      "basePath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
-      "commonPath": lovelaceUI.pluginAssetPath + "/gallery/common/",
-      "rootPath": lovelaceUI.pluginAssetPath + "/",
-      "assetPath": lovelaceUI.pluginAssetPath + "/gallery/packages/" + packageConfig.id + "/",
-      "packageManifest": packageManifest,
-      "packageConfig": packageConfig
-    };
-    if (packageManifest.parameters) {
-      packageManifest.parameters.forEach(param => {
-        if (param.behavior === 'environment') {
-          if (!environmentVars[param.name]) {
-            environmentVars[param.name] = packageConfig.parameters?.[param.name] ?? param.default;
-          }
-        }
-      });
-    }
-    if (iframeElement?.contentWindow) {
-      iframeElement.contentWindow["env"] = environmentVars;
-    }
     iframeElement.srcdoc = packageManifest.template__processed;
     return iframeElement;
   };

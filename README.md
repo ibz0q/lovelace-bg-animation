@@ -188,7 +188,7 @@ PRs need to be attached to an issue that contains the following info:
  
 ## Why
 
-Lot's of pretty animations existed at the dawn of HTML5/Canvas/JS/CSS3/Flash and there's still cool artists doing this today. I wanted to curate old and new, use them on my Home Assistant tablet/dashboard, they look cool.
+Lot's of pretty animations existed at the dawn of HTML5/Canvas/JS/CSS3/Flash and there's artists still creating these thesetoday. I wanted to curate old and new, use them on my Home Assistant tablet/dashboard, they look cool.
 
 Unfortunately over time some older animations were lost to digital oblivion. I sometimes saved these locally and have tried to repair them to original to the best of my ability and credit the original artists, archive.org links provided if they are available - This is not always the case.
 
@@ -204,13 +204,11 @@ This project is compromised of the works of artists each with their own licensin
 
 - Extensibility
 
-  -  basic interaction by exposing an API/function. Play, stop, start, track change (Done, but not mature)
   -  Global postMessage listener (Considering) 
   -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
 
 - Security
 
-  - "Official bg packages" vs "Community packages" via YAML tagging
   - Provide a list of vetted libraries or CDNs
   - Provide a way to add libraries in a trusted manner (Done, docs incoming)
   - Add video background package  
