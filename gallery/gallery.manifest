@@ -859,6 +859,47 @@
       "hash": "d6f1ee2c95d23c4b5adf160a38ae806259e47b1a"
     },
     {
+      "id": "animation.27.tron",
+      "version": "v1",
+      "name": "Tron",
+      "description": "LightCycles in Tron",
+      "author": "DanDog",
+      "source": "https://codepen.io/timseverien/pen/rWdJZY",
+      "hash": "07c33572e32364e5856d4e86a5c8ba0575caa0c9",
+      "parameters": [
+        {
+          "name": "turnRatio",
+          "type": "number",
+          "default": 0.005,
+          "description": "How much the lines turn (0.001-0.01)"
+        },
+        {
+          "name": "lineColor",
+          "type": "string",
+          "default": "0, 255, 233",
+          "description": "Line color"
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": 0.3,
+          "description": "Line moving speed (0.1-1.0)"
+        },
+        {
+          "name": "lineWidth",
+          "type": "number",
+          "default": 5,
+          "description": "Width of the lines (1-10)"
+        },
+        {
+          "name": "backgroundColor",
+          "type": "string",
+          "default": "rgb(0,0,0)",
+          "description": "Background color"
+        }
+      ]
+    },
+    {
       "id": "animation.28.black-sand-flow-field-v2",
       "version": "v1",
       "name": "Black Sand Flow Field v2",
