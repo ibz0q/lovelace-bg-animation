@@ -1,7 +1,7 @@
 version: v1
 metadata:
-  name: Icelandic Aurora
-  description: Watch the aurora borealis dance across your screen.
+  name: Icelandic Aurora v2
+  description: Watch the aurora borealis dance across your screen. (Improved performance)
   author: Ibz
   source: https://github.com/ibz0q/lovelace-bg-animation
   tags:
