@@ -794,16 +794,22 @@ template: >
             }
             if (isVideo(media.file)) {
               if (duration === "playback") {
+                // For "playback" duration, wait for video to end naturally
                 await new Promise((res) => {
                   el.onended = res;
                 });
-                              } else {
-                  await new Promise((res) => {
-                    el.onended = res;
-                    setTimeout(res, duration || config.defaultDuration);
-                  });
-                }
+              } else {
+                // For fixed duration, use the timer but also handle early video end
+                await new Promise((res) => {
+                  const timeoutId = setTimeout(res, duration || config.defaultDuration);
+                  el.onended = () => {
+                    clearTimeout(timeoutId);
+                    res();
+                  };
+                });
+              }
             } else {
+              // For images, just use the timer
               await new Promise((res) => setTimeout(res, duration));
             }
             progressBar.style.transition = "none";

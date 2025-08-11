@@ -58,7 +58,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "a510590311f7b732a2d216b78defc2c134398eac",
+      "hash": "1243b05aa1682c41e09569a78aee790bf0d0e7d4",
       "parameters": [
         {
           "name": "transition",
