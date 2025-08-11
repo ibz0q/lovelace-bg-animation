@@ -51,7 +51,7 @@ parameters:
   - name: backgroundColor
     default: "#000"
     description: Background color
-    type: color
+    type: string
     helper: color
   - name: backgroundImage
     default: oceanBackdrop.jpg
