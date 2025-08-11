@@ -490,9 +490,6 @@ template: >
             },
           ],
         };
-
-        console.log(config);
-
         // Store original mediaList for filtering
         const originalMediaList = [...config.mediaList];
         let cycleAbortController = null;
