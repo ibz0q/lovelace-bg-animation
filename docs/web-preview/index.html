@@ -203,8 +203,8 @@ body {
     right: -400px;
     width: 400px;
     height: 100vh;
-    background: rgba(15, 15, 15, 0.3);
-    backdrop-filter: blur(5px);
+    background: rgba(15, 15, 15, 0.5);
+    backdrop-filter: blur(10px);
     border-left: 1px solid rgba(255, 255, 255, 0.15);
     z-index: 2000;
     transition: right 0.3s ease;
@@ -2202,7 +2202,8 @@ function convertToHexColor(color) {
 
 class BackgroundGallery {
     // Global asset root URL - change this to point to your local server
-    static ASSET_ROOT_URL = 'https://ibz0q.github.io/lovelace-bg-animation';
+    // static ASSET_ROOT_URL = 'https://ibz0q.github.io/lovelace-bg-animation';
+    static ASSET_ROOT_URL = 'http://nginx//ll';
     
     constructor() {
         this.packages = [];
@@ -2217,6 +2218,9 @@ class BackgroundGallery {
         this.currentTag = null; // Currently selected tag
         this.tagGroups = new Map(); // Tag groups cache
         this.packageParameters = {}; // Store custom parameters per package (session only)
+        
+        // Initialize iframe container
+        this.iframeContainer = document.getElementById('preview-container');
         
         this.init();
     }
@@ -3339,7 +3343,12 @@ class BackgroundGallery {
             }
             
             this.showLoading('Rendering background...');
-            const iframe = document.getElementById('preview-iframe');
+            
+            // Create a new iframe for each package (like bg-animation.js does)
+            const iframe = document.createElement('iframe');
+            iframe.frameborder = "0";
+            iframe.scrolling = "no";
+            iframe.style.cssText = 'min-width: 100vw; min-height: 100vh; border:0; overflow: hidden;';
             
                     // Set up environment variables like bg-animation.js does
         const packageConfig = {
@@ -3374,7 +3383,11 @@ class BackgroundGallery {
             const blobUrl = URL.createObjectURL(blob);
             iframe.src = blobUrl;
             
-            // Set environment variables after setting blob URL
+            // Clear the container and add the new iframe to DOM
+            this.iframeContainer.innerHTML = '';
+            this.iframeContainer.appendChild(iframe);
+            
+            // Set environment variables after iframe is in DOM
             if (iframe.contentWindow) {
                 iframe.contentWindow["env"] = environmentVars;
             }
