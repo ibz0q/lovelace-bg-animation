@@ -3371,21 +3371,14 @@ class BackgroundGallery {
                 });
             }
             
-            // Create a blank document first to ensure contentWindow is available
-            iframe.srcdoc = '<html><body><style>body{background:black;}</style></body></html>';
-
-            // Wait for the blank document to load
-            await new Promise(resolve => {
-                iframe.onload = resolve;
-            });
-
-            // Now we can safely set environment variables
+            // Use blob instead of srcdoc (like bg-animation.js)
+            const blob = new Blob([processedTemplate], { type: 'text/html' });
+            const blobUrl = URL.createObjectURL(blob);
+            iframe.src = blobUrl;
+            
+            // Set environment variables after setting blob URL
             if (iframe.contentWindow) {
                 iframe.contentWindow["env"] = environmentVars;
-                // Now load the actual content
-                iframe.srcdoc = processedTemplate;
-            } else {
-                console.error('Failed to access iframe contentWindow');
             }
             
             this.currentPackage = pkg;

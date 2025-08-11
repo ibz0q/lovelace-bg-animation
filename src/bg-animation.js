@@ -366,7 +366,12 @@ async function processBackgroundFrame(packageConfig, packageManifest) {
     iframeElement.frameborder = "0";
     iframeElement.scrolling = "no";
     iframeElement.className = applicationIdentifiers.appNameShort;
-    iframeElement.srcdoc = packageManifest.template__processed;
+    
+    //use blob instead of srcdoc  
+    const blob = new Blob([packageManifest.template__processed], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    iframeElement.src = blobUrl;
+
     iframeElement.style.cssText = packageConfig.style;
     Object.assign(iframeElement.style, { zIndex: zIndex++, opacity: '0', position: 'absolute', top: '0', left: '0', width: '100%', height: '100%', transition: rootPluginConfig.transition.enable ? `opacity ${rootPluginConfig.transition.duration}ms ease-in-out` : '' });
     containerElement.replaceChildren(iframeElement);
