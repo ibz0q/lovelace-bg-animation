@@ -7,7 +7,7 @@
       "description": "Clean particle background with configurable settings and customizable background",
       "author": "Home Assistant Team",
       "source": "https://github.com/home-assistant/frontend",
-      "hash": "6c75bf7b79073f6be28395e6727f5887fd872f85",
+      "hash": "ac1b8f31827824aaffd1b7cc0556c5a2f8c68a0f",
       "parameters": [
         {
           "name": "backgroundColor",
@@ -44,6 +44,27 @@
           "description": "Speed of particle movement (0.1-2.0)",
           "type": "number",
           "behavior": "environment"
+        },
+        {
+          "name": "particleSize",
+          "default": 2,
+          "description": "Size of particles (1-5)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "particleColor",
+          "default": "#009ac7",
+          "description": "Color of particles",
+          "type": "string",
+          "behavior": "environment"
+        },
+        {
+          "name": "linkOpacity",
+          "default": 0.7,
+          "description": "Opacity of particle connections (0.1-1.0)",
+          "type": "number",
+          "behavior": "environment"
         }
       ],
       "tags": [
@@ -58,7 +79,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "1243b05aa1682c41e09569a78aee790bf0d0e7d4",
+      "hash": "0305894e95cadcea9e32e8158181b0cecc6dce3b",
       "parameters": [
         {
           "name": "transition",
@@ -551,7 +572,33 @@
       "description": "The final frontier",
       "author": "Akimitsu Hamamuro",
       "source": "https://codepen.io/akm2/pen/RwQXLdP",
-      "hash": "35e64b6458ca9e4bbfd3a350d2218156c9162f7d",
+      "hash": "072300b0ae69ebd167a3e0e89e5c9d9e0479671f",
+      "parameters": [
+        {
+          "name": "particleCount",
+          "type": "number",
+          "default": 500,
+          "description": "Number of particles (100-1000)"
+        },
+        {
+          "name": "particleSize",
+          "type": "number",
+          "default": 0.5,
+          "description": "Base size of particles (0.1-2.0)"
+        },
+        {
+          "name": "defaultSpeed",
+          "type": "number",
+          "default": 0.4,
+          "description": "Normal movement speed (0.1-1.0)"
+        },
+        {
+          "name": "boostSpeed",
+          "type": "number",
+          "default": 300,
+          "description": "Speed when mouse is pressed (100-500)"
+        }
+      ],
       "tags": [
         "interactive"
       ]
@@ -608,7 +655,45 @@
       "description": "So many layers of ribbons",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-      "hash": "bd2e87a28962f48f3790b84f71ef34d0534b6eb4"
+      "hash": "0d2dd83e6d1192f88f98bd98d5ef192b302e688c",
+      "parameters": [
+        {
+          "name": "walkingSpeed",
+          "type": "number",
+          "default": 0.5,
+          "description": "Movement speed of ribbons (0.1-1.0)"
+        },
+        {
+          "name": "ribbonWidth",
+          "type": "number",
+          "default": 200,
+          "description": "Width of ribbons (50-400)"
+        },
+        {
+          "name": "noiseScale",
+          "type": "number",
+          "default": 0.02,
+          "description": "Noise pattern scale (0.01-0.1)"
+        },
+        {
+          "name": "noiseHeight",
+          "type": "number",
+          "default": 200,
+          "description": "Noise amplitude (50-400)"
+        },
+        {
+          "name": "numRibbons",
+          "type": "number",
+          "default": 5,
+          "description": "Number of ribbons (1-10)"
+        },
+        {
+          "name": "maxSteps",
+          "type": "number",
+          "default": 5000,
+          "description": "Animation duration (1000-10000)"
+        }
+      ]
     },
     {
       "id": "animation.18.particle-cube",
@@ -629,7 +714,27 @@
       "description": "Trapped particles with shocking connections",
       "author": "Bas Groothedde",
       "source": "https://codepen.io/ImagineProgramming/pen/MavMNO",
-      "hash": "6a5fa948bbbf714d854d7d90c41c9e84b8d37175",
+      "hash": "d0df1ef012629bca3d8dd10a67a9e650b0afa6c8",
+      "parameters": [
+        {
+          "name": "maxDistance",
+          "type": "number",
+          "default": 300,
+          "description": "Maximum connection distance (100-500)"
+        },
+        {
+          "name": "particleCount",
+          "type": "number",
+          "default": 25,
+          "description": "Number of particles (10-100)"
+        },
+        {
+          "name": "particleSize",
+          "type": "number",
+          "default": 5,
+          "description": "Size of particles (2-15)"
+        }
+      ],
       "tags": [
         "interactive",
         "particles",
@@ -683,7 +788,45 @@
       "description": "It looks like Windows Vista",
       "author": "Ben Matthews",
       "source": "https://codepen.io/tsuhre/pen/MNVYdq",
-      "hash": "1fae2b5fe4607777d23065cc1b14d48f81b3b9d7"
+      "hash": "6a599ec98414c55c79d79dd92f7f26167226f6e9",
+      "parameters": [
+        {
+          "name": "walkingSpeed",
+          "type": "number",
+          "default": 0.1,
+          "description": "Movement speed of ribbons (0.05-0.5)"
+        },
+        {
+          "name": "ribbonWidth",
+          "type": "number",
+          "default": 200,
+          "description": "Width of ribbons (50-400)"
+        },
+        {
+          "name": "noiseScale",
+          "type": "number",
+          "default": 0.02,
+          "description": "Noise pattern scale (0.01-0.1)"
+        },
+        {
+          "name": "noiseHeight",
+          "type": "number",
+          "default": 200,
+          "description": "Noise amplitude (50-400)"
+        },
+        {
+          "name": "numRibbons",
+          "type": "number",
+          "default": 5,
+          "description": "Number of ribbons (1-10)"
+        },
+        {
+          "name": "maxSteps",
+          "type": "number",
+          "default": 12000,
+          "description": "Animation duration (5000-20000)"
+        }
+      ]
     },
     {
       "id": "animation.24.trapped-gradient",
@@ -722,7 +865,39 @@
       "description": "LightCycles in Tron",
       "author": "DanDog",
       "source": "https://codepen.io/timseverien/pen/rWdJZY",
-      "hash": "9abe7f022fea763564a707daa07586b898ee88c7"
+      "hash": "07c33572e32364e5856d4e86a5c8ba0575caa0c9",
+      "parameters": [
+        {
+          "name": "turnRatio",
+          "type": "number",
+          "default": 0.005,
+          "description": "How much the lines turn (0.001-0.01)"
+        },
+        {
+          "name": "lineColor",
+          "type": "string",
+          "default": "0, 255, 233",
+          "description": "Line color"
+        },
+        {
+          "name": "speed",
+          "type": "number",
+          "default": 0.3,
+          "description": "Line moving speed (0.1-1.0)"
+        },
+        {
+          "name": "lineWidth",
+          "type": "number",
+          "default": 5,
+          "description": "Width of the lines (1-10)"
+        },
+        {
+          "name": "backgroundColor",
+          "type": "string",
+          "default": "rgb(0,0,0)",
+          "description": "Background color"
+        }
+      ]
     },
     {
       "id": "animation.28.black-sand-flow-field-v2",
@@ -959,13 +1134,13 @@
       "description": "I'm in",
       "author": "Jared Stanley",
       "source": "https://codepen.io/ykob/pen/YewoRz",
-      "hash": "9c2ac57e48719ae7ff742968ef4aa940cdeccd79",
+      "hash": "6cdf130df7730d789f0b210ad9792f41a5e3a8b8",
       "parameters": [
         {
           "name": "textColor",
           "default": "rgba(22,222,82,0.6992)",
           "description": "The color of the dots",
-          "type": "color"
+          "helper": "color"
         }
       ]
     },
@@ -1286,7 +1461,7 @@
       "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
-      "hash": "f1a6e51f1dcc51ea6792a93d7aec3fe70786c070",
+      "hash": "fcb69d7f92c71557bd551b061580f63e7a4b8790",
       "parameters": [
         {
           "name": "Presets",
@@ -1349,7 +1524,7 @@
           "name": "backgroundColor",
           "default": "#000",
           "description": "Background color",
-          "type": "color",
+          "type": "string",
           "helper": "color"
         },
         {
@@ -1444,10 +1619,61 @@
       "id": "animation.91.sliced-blobs",
       "version": "v1",
       "name": "Dimensional Slicing",
-      "description": "Dimensional blob slicing",
-      "author": "Ibz (Modified from Ksenia Kondrashova)",
+      "description": "Dimensional blob slicing (Modified from Neuro by senia Kondrashova",
+      "author": "Ibz",
       "source": "https://codepen.io/ksenia-k/pen/vYwgrWv",
-      "hash": "b2e9b1d06d6d9708a5e245223e5b4450eb0185ec",
+      "hash": "e6711d60f5c7ae98c3e6a24b7bb39434ba60f569",
+      "tags": [
+        "interactive"
+      ]
+    },
+    {
+      "id": "animation.92.aurora-v2",
+      "version": "v1",
+      "name": "Icelandic Aurora",
+      "description": "Watch the aurora borealis dance across your screen.",
+      "author": "Ibz",
+      "source": "https://github.com/ibz0q/lovelace-bg-animation",
+      "hash": "bf3667742250ec2f8d53092ead6142b1cfedbb5b",
+      "parameters": [
+        {
+          "name": "speed",
+          "default": 0.5,
+          "description": "Animation movement speed",
+          "type": "number",
+          "helper": "number(0.1-2)",
+          "behavior": "environment"
+        },
+        {
+          "name": "blurIntensity",
+          "default": 60,
+          "description": "Intensity of the blur effect (10-100)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "colorIntensity",
+          "default": 0.7,
+          "description": "Intensity of colors (0.3-1.0)",
+          "type": "number",
+          "behavior": "environment"
+        },
+        {
+          "name": "targetFPS",
+          "default": 60,
+          "description": "Target frames per second",
+          "type": "number",
+          "behavior": "environment",
+          "helper": "number(10-100)"
+        },
+        {
+          "name": "controlsVisible",
+          "default": false,
+          "description": "Show controls by default",
+          "type": "boolean",
+          "behavior": "environment"
+        }
+      ],
       "tags": [
         "interactive"
       ]

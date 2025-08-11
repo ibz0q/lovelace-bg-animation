@@ -12,7 +12,7 @@ parameters:
   - name: lineColor
     type: string
     default: "0, 255, 233"
-    description: Line color 
+    description: Line color
   - name: speed
     type: number
     default: 0.3
