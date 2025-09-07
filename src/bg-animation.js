@@ -241,10 +241,7 @@ function processBackgroundSchema(config) {
 }
 
 function initializeRuntimeVariables() {
-  if (!lovelaceUI?.lovelaceObject?.config["bg-animation"]) {
-    isDebug ? console.log("initializeRuntimeVariables: No bg-animation config found in lovelace configuration: ") : null;
-    return false;
-  }
+
 
   rootPluginConfig = lovelaceUI?.lovelaceObject?.config["bg-animation"]
   rootPluginConfig = {
@@ -327,6 +324,7 @@ function initializeLovelaceVariables() {
 function initializeBackgroundElements() {
   isDebug ? console.log("initializeBackgroundElements: Called") : null;
   if (lovelaceUI.groundElement.querySelector("#bg-animation-container")) {
+    isDebug ? console.log("initializeBackgroundElements: Removing existing element") : null;
     lovelaceUI.groundElement.querySelector("#bg-animation-container").remove();
   }
   lovelaceUI.bgRootElement = document.createElement("div");
