@@ -638,14 +638,7 @@ async function initializeObservers() {
             await initializeStagePlaylists();
           } else {
             isDebug ? console.log("initializeObservers: No background for this view, removing styles and stopping interval.") : null;
-            toggleLovelaceStyle(false);
-            if (window.__global_minterval) {
-              clearTimeout(window.__global_minterval);
-              playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } }
-            }
-            if (lovelaceUI?.bgRootElement) {
-              lovelaceUI?.bgRootElement.remove();
-            }
+            [lovelaceUI?.bgRootElement, lovelaceUI?.rootStyleElement].forEach(el => el?.remove());
           }
           if (removedNode === lovelaceUI.viewElement) {
             observer.disconnect();
