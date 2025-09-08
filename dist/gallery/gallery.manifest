@@ -865,7 +865,7 @@
       "description": "LightCycles in Tron",
       "author": "DanDog",
       "source": "https://codepen.io/timseverien/pen/rWdJZY",
-      "hash": "07c33572e32364e5856d4e86a5c8ba0575caa0c9",
+      "hash": "bf116a8f7ec7f9cbc10b5cc7c393688a07651dce",
       "parameters": [
         {
           "name": "turnRatio",
@@ -877,7 +877,8 @@
           "name": "lineColor",
           "type": "string",
           "default": "0, 255, 233",
-          "description": "Line color"
+          "description": "Line color",
+          "helper": "color"
         },
         {
           "name": "speed",
@@ -895,7 +896,8 @@
           "name": "backgroundColor",
           "type": "string",
           "default": "rgb(0,0,0)",
-          "description": "Background color"
+          "description": "Background color",
+          "helper": "color"
         }
       ]
     },
@@ -1461,7 +1463,7 @@
       "description": "Somethings fishy here! A fish tank animation with a variety of fish species and swimming speeds.",
       "author": "Scott Weaver",
       "source": "https://codepen.io/sweaver2112/pen/qBdZLMQ",
-      "hash": "fcb69d7f92c71557bd551b061580f63e7a4b8790",
+      "hash": "6e27e1fb6718e177c046943c93ed8ae4702bf3ba",
       "parameters": [
         {
           "name": "Presets",
