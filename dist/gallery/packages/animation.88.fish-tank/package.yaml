@@ -108,7 +108,6 @@ template: >
                 SwimSpeed: "{{ param: SwimSpeed }}",
                 FishSpecies: "{{ param: FishSpecies }}"
             };
-            var gui;
             const fishes = ["🐟 🐠 🐡", "🐡", "🐠", "🐟", "🐟 🐠 🦑 🐙"];
             var tank = document.getElementById("tank");
             var WINDOW_MIN;
@@ -121,20 +120,11 @@ template: >
             window.addEventListener("resize", () => {
                 initializeTank();
             });
-            tank.addEventListener("click", () => {
-                gui && (gui.closed ? gui.open() : gui.close());
-            });
-
 
             /*Fish functions*/
             function initializeTank() {
                 WINDOW_MIN = Math.min(tank.clientHeight, tank.clientWidth)
                 generateFishTank()
-                if (WINDOW_MIN <= MIN_THRESHOLD) {
-                    gui.close()
-                } else {
-                    gui.close()
-                }
             }
 
             function generateFishTank() {
@@ -237,104 +227,10 @@ template: >
                 return f
             }
 
-
-            function generateControls() {
-                myoptions = new Options();
-                gui = new dat.GUI();
-                gui.add(myoptions, "Presets", ["Ocean Mix", "Tropical Seas", "Schools", "Coral Reef", "Salmon Run", "Deep Water"]).onChange(setPreset);
-                gui.add(myoptions, "NumFishGroups").listen().onChange(setValue)
-                gui.add(myoptions, "SingleFishOnly").listen().onChange(setValue)
-                gui.add(myoptions, "MaxPerSchool").listen().onChange(setValue)
-                gui.add(myoptions, "PercentSchools").listen().onChange(setValue)
-                gui.add(myoptions, "ColorChanging").listen().onChange(setValue)
-                gui.add(myoptions, "SwimSpeed", ["Slow", "Moderate", "Fast"]).listen().onChange(setValue)
-                gui.add(myoptions, "FishSpecies", fishes).listen().onChange(setValue);
-            }
-
             function setValue() {
                 generateFishTank()
             }
 
-            function setPreset(value) {
-
-                myoptions.SwimSpeed = "Moderate"
-                switch (value) {
-                    case "Ocean Mix":
-                        myoptions.NumFishGroups = "20"
-                        myoptions.SingleFishOnly = false
-                        myoptions.MaxPerSchool = "7"
-                        myoptions.ColorChanging = true
-                        myoptions.PercentSchools = "25"
-                        myoptions.FishSpecies = "🐟 🐠 🐡"
-                        setGUI("FishSpecies", "🐟 🐠 🐡")
-                        setGUI("ColorChanging", true)
-                        setGUI("SingleFishOnly", false)
-                        break
-                    case "75 Lone Fish":
-                        myoptions.NumFishGroups = "75"
-                        myoptions.SingleFishOnly = true
-                        myoptions.ColorChanging = false
-                        myoptions.FishSpecies = "🐟 🐠 🐡"
-                        setGUI("FishSpecies", "🐟 🐠 🐡")
-                        setGUI("SingleFishOnly", true)
-                        setGUI("ColorChanging", false)
-                        break
-                    case "Tropical Seas":
-                        myoptions.NumFishGroups = "100"
-                        myoptions.SingleFishOnly = true
-                        myoptions.ColorChanging = true
-                        myoptions.SwimSpeed = "Slow"
-                        myoptions.FishSpecies = "🐠"
-                        setGUI("FishSpecies", "🐠")
-                        setGUI("SingleFishOnly", true)
-                        setGUI("ColorChanging", true)
-                        break
-                    case "Schools":
-                        myoptions.NumFishGroups = "10"
-                        myoptions.SingleFishOnly = false
-                        myoptions.MaxPerSchool = "10"
-                        myoptions.ColorChanging = false
-                        myoptions.PercentSchools = "100"
-                        myoptions.FishSpecies = "🐟 🐠 🐡"
-                        setGUI("FishSpecies", "🐟 🐠 🐡")
-                        setGUI("SingleFishOnly", false)
-                        setGUI("ColorChanging", false)
-                        break
-                    case "Coral Reef":
-                        myoptions.NumFishGroups = "100"
-                        myoptions.SingleFishOnly = false
-                        myoptions.MaxPerSchool = "24"
-                        myoptions.ColorChanging = true
-                        myoptions.PercentSchools = "25"
-                        myoptions.SwimSpeed = "Slow"
-                        myoptions.FishSpecies = "🐟 🐠 🐡"
-                        setGUI("FishSpecies", "🐟 🐠 🐡")
-                        setGUI("SingleFishOnly", false)
-                        setGUI("ColorChanging", true)
-                        break
-                    case "Salmon Run":
-                        myoptions.NumFishGroups = "100"
-                        myoptions.SingleFishOnly = true
-                        myoptions.ColorChanging = false
-                        myoptions.SwimSpeed = "Fast"
-                        myoptions.FishSpecies = "🐟"
-                        setGUI("FishSpecies", "🐟")
-                        setGUI("SingleFishOnly", true)
-                        setGUI("ColorChanging", false)
-                        break
-                    case "Deep Water":
-                        myoptions.NumFishGroups = "50"
-                        myoptions.SingleFishOnly = true
-                        myoptions.ColorChanging = false
-                        myoptions.FishSpecies = "🐟 🐠 🦑 🐙"
-                        setGUI("FishSpecies", "🐟 🐠 🦑 🐙")
-                        setGUI("SingleFishOnly", true)
-                        setGUI("ColorChanging", false)
-                        break
-                }
-                generateFishTank()
-            }
-            /*END GUI表示*/
 
             /*HELPERS*/
             function pick(arr) {
@@ -361,13 +257,6 @@ template: >
                     window.clearTimeout(timeouts[i])
                 }
                 timeouts = []
-            }
-
-            function setGUI(name, val) {
-                for (var i = 0; i < gui.__controllers.length; i++) {
-                    if (gui.__controllers[i].property == name)
-                        gui.__controllers[i].setValue(val);
-                }
             }
 
             function isSquid(letter) {

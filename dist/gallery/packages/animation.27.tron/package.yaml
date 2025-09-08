@@ -13,6 +13,7 @@ parameters:
     type: string
     default: "0, 255, 233"
     description: Line color
+    helper: color
   - name: speed
     type: number
     default: 0.3
@@ -25,6 +26,7 @@ parameters:
     type: string
     default: "rgb(0,0,0)"
     description: Background color
+    helper: color
 template: |
   <style>
     html,
