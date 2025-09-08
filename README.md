@@ -1,8 +1,6 @@
 # Lovelace Background Animations 
 
-Replace Home Assistant's background with an animation! 
-
-Preview animations here: https://ibz0q.github.io/lovelace-bg-animation/ or [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
+Replace Home Assistant's background with an animation! Preview all animations: https://ibz0q.github.io/lovelace-bg-animation/ or [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
 **Current Release: v1.1.5**
@@ -58,6 +56,7 @@ Preview animations here: https://ibz0q.github.io/lovelace-bg-animation/ or [docs
 
  - [Sjors Kaagman](https://github.com/SjorsMaster) (2)
 
+## Installation
 
 ### Install with HACS 
 
@@ -75,11 +74,11 @@ homeassistant\config\www\lovelace-background-animation\dist\bg-animation.min.js
 
 Go to Lovelace dashboard: Edit -> Manage Resources -> Add resource -> URL: /local/lovelace-bg-animation/dist/bg-animation.min.js -> Javascript Module and click Create.
 
---- 
 
-A config needs to be placed inside Lovelaces config file, you can do this inside the Lovelace UI > Edit mode > Raw Configuration Editor.
+## Get started 
+Add this YAML at the top of Lovelaces config file i.e. Lovelace UI > Edit dashboard > Raw Configuration Editor.
 
-### Starter configuration
+### Basic configuration
 
 ```yaml
 bg-animation:
@@ -97,7 +96,13 @@ bg-animation:
       - id: animation.53.stars
       - id: animation.50.sidelined
 ```
-### Configuration options (Advanced)
+
+e.g.
+
+![alt text](docs/get-started-conf.png)
+
+
+### All config options (Advanced)
 ` * = Optional `
 
 ```yaml
@@ -165,7 +170,7 @@ bg-animation:
           duration: 40000 
 ```
 
-There's also a card that let's you control bg's:
+There is also an optional card that let's you control bg's:
 
 ![alt text](docs/card.png)
 
