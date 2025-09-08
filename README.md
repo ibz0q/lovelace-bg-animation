@@ -200,21 +200,3 @@ Unfortunately over time some older animations were lost to digital oblivion. I s
 
 This project is compromised of the works of artists each with their own licensing, none of THIS projects license are imposed. Copyrights and original licenses are preserved respectively. The reason for this is a lot of the works are published online under MIT license, ie. <a href="https://blog.codepen.io/documentation/licensing/#:~:text=The%20gist%20of%20it%20is,it%20is%20subject%20to%20removal">Code Pen</a> which is permissive and expects an equally permissive license or some were created at a time when licensing wasn't really a thing on the web. In some cases works aren't as permissive, or unlicensed. For this reason, code solely belonging to this repo (bg-animation.js) uses CC BY-NC 4.0 Deed Attribution-NonCommercial 4.0 International which prevents commercial use and works themselves have licenses preserved. 
 
-## To do
-
-- UX
-
-  - Transparent Overlays
-
-- Extensibility
-
-  -  Global postMessage listener (Considering) 
-  -  Add ability for Iframe/package to interact with Lovelace Card (Considering)
-
-- Security
-
-  - Provide a list of vetted libraries or CDNs
-  - Provide a way to add libraries in a trusted manner (Done, docs incoming)
-  - Add video background package  
-  - Default gallery to use all, if nothing is specified. (Removed)
-
