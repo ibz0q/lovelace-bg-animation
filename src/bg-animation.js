@@ -241,8 +241,6 @@ function processBackgroundSchema(config) {
 }
 
 function initializeRuntimeVariables() {
-
-
   rootPluginConfig = lovelaceUI?.lovelaceObject?.config["bg-animation"]
   rootPluginConfig = {
     "gallery": {
@@ -267,13 +265,13 @@ function initializeRuntimeVariables() {
     "transparency": {
       "header": {
         "enable": rootPluginConfig.transparency?.header?.enable ?? true,
-        "style": rootPluginConfig.transparency?.header?.style ?? ".header {background: transparent !important;}",
+        "style": rootPluginConfig.transparency?.header?.style ?? ".header.bg-animation-style {background: transparent !important;}",
       },
       "sidebar": {
         "enable": rootPluginConfig.transparency?.sidebar?.enable ?? false,
         "style": rootPluginConfig.transparency?.sidebar?.style ?? "background: transparent !important;",
       },
-      "background": rootPluginConfig.transparency?.background ?? "#view > hui-view-background, #view > hui-view, #view {background: transparent !important;}",
+      "background": rootPluginConfig.transparency?.background ?? "#view > hui-view-background, #view > hui-view, #view.bg-animation-style {background: transparent !important;}",
     },
     "background": {
       "global": processBackgroundSchema(rootPluginConfig.background.global),
@@ -324,8 +322,8 @@ function initializeLovelaceVariables() {
 function initializeBackgroundElements() {
   isDebug ? console.log("initializeBackgroundElements: Called") : null;
   if (lovelaceUI.groundElement.querySelector("#bg-animation-container")) {
-    isDebug ? console.log("initializeBackgroundElements: Removing existing element") : null;
-    lovelaceUI.groundElement.querySelector("#bg-animation-container").remove();
+    isDebug ? console.log("initializeBackgroundElements: Elements already exist, skipping") : null;
+    return;
   }
   lovelaceUI.bgRootElement = document.createElement("div");
   lovelaceUI.bgRootElement.id = "bg-animation-container";
@@ -340,21 +338,23 @@ function initializeBackgroundElements() {
     lovelaceUI.bgRootElement.insertAdjacentHTML('beforeend', `<div id="bg-overlay" ${rootPluginConfig.overlay.style ? `style="${rootPluginConfig.overlay.style}"` : ''}></div>`);
   }
 }
-function changeDefaultLovelaceStyles() {
+function toggleLovelaceStyle(state) {
   lovelaceUI.rootStyleElement = lovelaceUI.huiRootElement.shadowRoot.querySelector("#bg-animation-styles-root");
   if (!lovelaceUI.rootStyleElement) {
     lovelaceUI.rootStyleElement = document.createElement("style");
     lovelaceUI.rootStyleElement.id = "bg-animation-styles-root";
     lovelaceUI.huiRootElement.shadowRoot.prepend(lovelaceUI.rootStyleElement);
   }
-  let cssText = rootPluginConfig.transparency.background;
-  if (rootPluginConfig.transparency.header.enable == true) {
-    cssText += rootPluginConfig.transparency.header.style;
+  lovelaceUI.rootStyleElement.innerHTML =
+    rootPluginConfig.transparency.background +
+    (rootPluginConfig.transparency.header.enable ? rootPluginConfig.transparency.header.style : '');
+  if (rootPluginConfig.transparency.sidebar.enable) {
+    lovelaceUI.sidebarElement?.style && (lovelaceUI.sidebarElement.style.cssText += rootPluginConfig.transparency.sidebar.style);
   }
-  if (rootPluginConfig.transparency.sidebar.enable == true) {
-    lovelaceUI.sidebarElement.style.cssText += rootPluginConfig.transparency.sidebar.style;
-  }
-  lovelaceUI.rootStyleElement.innerHTML = cssText;
+  ['headerElement', 'viewElement', 'sidebarElement'].forEach(key => {
+    const el = lovelaceUI[key];
+    el?.classList?.[state ? 'add' : 'remove']('bg-animation-style');
+  });
 }
 
 async function processBackgroundFrame(packageConfig, packageManifest) {
@@ -529,9 +529,9 @@ async function startPlaylistInterval(currentPlaylist) {
 
 }
 
-async function setupPlaylist() {
+async function initializeStagePlaylists() {
   viewPath = getCurrentViewPath();
-  isDebug ? console.log(`setupPlaylist: Current viewpath=${viewPath}`) : null;
+  isDebug ? console.log(`initializeStagePlaylists: Current viewpath=${viewPath}`) : null;
 
   if (rootPluginConfig.background.view[viewPath] || rootPluginConfig.background.global) {
     let currentPlaylist = sortArray(rootPluginConfig?.background?.view[viewPath] ? rootPluginConfig?.background?.view[viewPath] : rootPluginConfig?.background?.global, rootPluginConfig.sort);
@@ -539,50 +539,50 @@ async function setupPlaylist() {
     currentPlaylist = currentPlaylist.filter(track => {
       let trackExists = galleryRootManifest.packages.some(manifest => manifest.id === track.id);
       if (!trackExists) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} does not exist in the manifest and has been removed.`) : null;
+        isDebug ? console.log(`initializeStagePlaylists: ${track.id} does not exist in the manifest and has been removed.`) : null;
       }
 
       let deviceConditions = true;
       let userConditions = true;
 
       if (track.conditions?.exclude_devices && track.conditions?.include_devices) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported.`) : null;
+        isDebug ? console.log(`initializeStagePlaylists: ${track.id} has both excludeDevice and includeDevice conditions, this is not supported.`) : null;
       } else if (track.conditions?.include_devices || track.conditions?.exclude_devices) {
         const userAgent = navigator.userAgent;
         const deviceMatchesPatterns = deviceKey => rootPluginConfig?.conditions?.regex_device_map?.[deviceKey]?.some(pattern => new RegExp(pattern).test(userAgent));
 
         if (userAgent && track.conditions?.exclude_devices && track.conditions.exclude_devices.some(deviceMatchesPatterns)) {
-          isDebug ? console.log(`setupPlaylist: Exclude Device match`) : null;
+          isDebug ? console.log(`initializeStagePlaylists: Exclude Device match`) : null;
           deviceConditions = false;
         }
 
         if (userAgent && track.conditions?.include_devices && !track.conditions.include_devices.some(deviceMatchesPatterns)) {
-          isDebug ? console.log(`setupPlaylist: Include Device no match`) : null;
+          isDebug ? console.log(`initializeStagePlaylists: Include Device no match`) : null;
           deviceConditions = false;
         }
       }
 
       if (track.conditions?.exclude_users && track.conditions?.include_users) {
-        isDebug ? console.log(`setupPlaylist: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported.`) : null;
+        isDebug ? console.log(`initializeStagePlaylists: ${track.id} has both excludeUsers and includeUsers conditions, this is not supported.`) : null;
       } else if (track.conditions?.include_users || track.conditions?.exclude_users) {
         const userName = lovelaceUI.haMainElement?.host?.hass?.user?.name;
         if (userName) {
           if (track.conditions?.exclude_users?.includes(userName)) {
-            isDebug ? console.log(`setupPlaylist: ${track.id} excluded due to user condition.`) : null;
+            isDebug ? console.log(`initializeStagePlaylists: ${track.id} excluded due to user condition.`) : null;
             userConditions = false;
           }
           if (track.conditions?.include_users && !track.conditions.include_users.includes(userName)) {
-            isDebug ? console.log(`setupPlaylist: ${track.id} not included due to user condition.`) : null;
+            isDebug ? console.log(`initializeStagePlaylists: ${track.id} not included due to user condition.`) : null;
             userConditions = false;
           }
         }
       }
-      isDebug ? console.log(`setupPlaylist: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;
+      isDebug ? console.log(`initializeStagePlaylists: ${track.id} trackExists=${trackExists}, deviceConditions=${deviceConditions}, userConditions=${userConditions}`) : null;
       return trackExists && deviceConditions && userConditions;
     });
 
     if (currentPlaylist.length === 0) {
-      isDebug ? console.error("setupPlaylist: No valid tracks found after filtering, unable to continue.") : null;
+      isDebug ? console.error("initializeStagePlaylists: No valid tracks found after filtering, unable to continue.") : null;
       return;
     }
 
@@ -590,10 +590,12 @@ async function setupPlaylist() {
       clearTimeout(window.__global_minterval);
     }
 
+    toggleLovelaceStyle(true);
+    initializeBackgroundElements()
     startPlaylistInterval(currentPlaylist);
 
   } else {
-    isDebug ? console.error("setupPlaylist: setupPlaylist: No backgrounds found in the user config.") : null;
+    isDebug ? console.error("initializeStagePlaylists: initializeStagePlaylists: No backgrounds found in the user config.") : null;
   }
 }
 
@@ -630,9 +632,20 @@ async function initializeObservers() {
     for (let mutation of mutations) {
       if (mutation.removedNodes) {
         mutation.removedNodes.forEach(async (removedNode) => {
-          if (rootPluginConfig?.background?.view[getCurrentViewPath()] || (rootPluginConfig?.background?.view[viewPath] && rootPluginConfig?.background?.global)) {
-            await getGalleryRootManifest();
-            await setupPlaylist();
+          isDebug ? console.log("initializeObservers: viewElement mutation") : null;
+          if (rootPluginConfig?.background?.view[getCurrentViewPath()] || rootPluginConfig?.background?.global) {
+            isDebug ? console.log("initializeObservers: Background for this view or global exists, initializing.") : null;
+            await initializeStagePlaylists();
+          } else {
+            isDebug ? console.log("initializeObservers: No background for this view, removing styles and stopping interval.") : null;
+            toggleLovelaceStyle(false);
+            if (window.__global_minterval) {
+              clearTimeout(window.__global_minterval);
+              playlistIndexes = { "global": { "current": 0, "next": 0, "timeout": false }, "view": { "current": 0, "next": 0, "timeout": false } }
+            }
+            if (lovelaceUI?.bgRootElement) {
+              lovelaceUI?.bgRootElement.remove();
+            }
           }
           if (removedNode === lovelaceUI.viewElement) {
             observer.disconnect();
@@ -707,11 +720,9 @@ async function initialize() {
 
   if (initializeLovelaceVars == true && lovelaceUI.lovelaceObject.config["bg-animation"]) {
     initializeRuntimeVariables();
-    changeDefaultLovelaceStyles()
-    initializeBackgroundElements()
     await setPlaylistIndexes();
     await getGalleryRootManifest();
-    await setupPlaylist();
+    await initializeStagePlaylists();
   }
 };
 
