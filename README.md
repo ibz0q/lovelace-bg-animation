@@ -5,7 +5,7 @@ Replace Home Assistant's background with an animation!
 Preview animations here: https://ibz0q.github.io/lovelace-bg-animation/ or [docs/EXTENDED.md](https://github.com/ibz0q/lovelace-bg-animation/blob/main/docs/EXTENDED.md)
 
 
-**Current Release: v1.1.4**
+**Current Release: v1.1.5**
 
 <p align="center">
 
