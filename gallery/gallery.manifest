@@ -1630,11 +1630,11 @@
     {
       "id": "animation.92.aurora-v2",
       "version": "v1",
-      "name": "Icelandic Aurora",
-      "description": "Watch the aurora borealis dance across your screen.",
+      "name": "Icelandic Aurora v2",
+      "description": "Watch the aurora borealis dance across your screen. (Improved performance)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "bf3667742250ec2f8d53092ead6142b1cfedbb5b",
+      "hash": "d1f6dbe4f244fcc6304422cd2c64dfca58d9c5fb",
       "parameters": [
         {
           "name": "speed",
