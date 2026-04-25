@@ -3,7 +3,7 @@ metadata:
   name: Flow Gradient
   description: |
     Animated gradient blobs with Perlin flow field distortion, Voronoi displacement, Gaussian blur and film grain. Extracted from apollostudio.design.
-  author: Apollo Studio (extracted)
+  author: Apollo Studio
   tags:
     - gradient
     - webgl
