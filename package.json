@@ -19,8 +19,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "less": "^4.2.2",
-    "scss": "^0.2.4",
-    "yaml": "^2.7.0"
+    "less": "^4.6.4",
+    "scss": "^1.99.0",
+    "yaml": "^2.8.3"
   }
 }
