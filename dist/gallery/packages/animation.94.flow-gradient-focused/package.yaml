@@ -1,0 +1,587 @@
+version: v1
+metadata:
+  name: Flow Gradient (Focused)
+  description: |
+    Animated gradient orb concentrated in the top-right corner with Perlin flow field distortion, subtle Voronoi warping, Gaussian blur and film grain. Faithful recreation of apollostudio.design canvas effect.
+  author: Apollo Studio (extracted)
+  tags:
+    - gradient
+    - webgl
+    - animated
+    - abstract
+config:
+  - name: gradientColors
+    default:
+      - "#8BFFFF"
+      - "#D9FF43"
+      - "#EB73A0"
+      - "#320072"
+      - "#0156B9"
+    description: Array of gradient colors (2–8 colors).
+    type: array
+    behavior: environment
+  - name: gradientSpeed
+    default: 0.16
+    description: Speed of the gradient scroll animation.
+    type: number
+    behavior: environment
+  - name: blobColor1
+    default: "#4AAEFF"
+    description: Color of the first blob (ADD blend).
+    type: string
+    behavior: environment
+  - name: blobColor2
+    default: "#FF2EBE"
+    description: Color of the second blob (OVERLAY blend).
+    type: string
+    behavior: environment
+  - name: focusX
+    default: 0.72
+    description: Horizontal center of the effect (0 = left, 1 = right).
+    type: number
+    behavior: environment
+  - name: focusY
+    default: 0.38
+    description: Vertical center of the effect (0 = top, 1 = bottom).
+    type: number
+    behavior: environment
+  - name: focusRadius
+    default: 0.55
+    description: Spread radius of the effect (0 = tiny, 1 = full canvas).
+    type: number
+    behavior: environment
+  - name: flowSpeed
+    default: 0.25
+    description: Speed of the Perlin flow field animation.
+    type: number
+    behavior: environment
+  - name: flowStrength
+    default: 1.81
+    description: Strength of the flow field distortion.
+    type: number
+    behavior: environment
+  - name: blurAmount
+    default: 3.62
+    description: Gaussian blur radius.
+    type: number
+    behavior: environment
+  - name: voronoiStrength
+    default: 0.18
+    description: Voronoi displacement strength (keep low for subtle warping).
+    type: number
+    behavior: environment
+  - name: grainAmount
+    default: 0.36
+    description: Film grain intensity (0–1).
+    type: number
+    behavior: environment
+  - name: backgroundColor
+    default: "#0a0a14"
+    description: Background color shown outside the effect.
+    type: string
+    behavior: environment
+template: >
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 100%; height: 100%; overflow: hidden; }
+      canvas { display: block; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <script>
+    (function() {
+
+      // ── Config ──────────────────────────────────────────────────────────────
+      const cfg = {
+        gradientColors:  window.env?.gradientColors  || ["#8BFFFF","#D9FF43","#EB73A0","#320072","#0156B9"],
+        gradientSpeed:   window.env?.gradientSpeed   ?? 0.16,
+        blobColor1:      window.env?.blobColor1      || "#4AAEFF",
+        blobColor2:      window.env?.blobColor2      || "#FF2EBE",
+        focusX:          window.env?.focusX          ?? 0.72,
+        focusY:          window.env?.focusY          ?? 0.38,
+        focusRadius:     window.env?.focusRadius     ?? 0.55,
+        flowSpeed:       window.env?.flowSpeed       ?? 0.25,
+        flowStrength:    window.env?.flowStrength    ?? 1.81,
+        blurAmount:      window.env?.blurAmount      ?? 3.62,
+        voronoiStrength: window.env?.voronoiStrength ?? 0.18,
+        grainAmount:     window.env?.grainAmount     ?? 0.36,
+        backgroundColor: window.env?.backgroundColor || "#0a0a14",
+      };
+
+      function hexToVec3(hex) {
+        return [
+          parseInt(hex.slice(1,3),16)/255,
+          parseInt(hex.slice(3,5),16)/255,
+          parseInt(hex.slice(5,7),16)/255,
+        ];
+      }
+
+      // ── WebGL setup ─────────────────────────────────────────────────────────
+      const canvas = document.getElementById('c');
+      const gl = canvas.getContext('webgl2', { antialias: false, alpha: false });
+      if (!gl) {
+        const bg = hexToVec3(cfg.backgroundColor);
+        document.body.style.background = cfg.backgroundColor;
+        return;
+      }
+
+      let W, H;
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = Math.floor(canvas.clientWidth  * dpr);
+        H = Math.floor(canvas.clientHeight * dpr);
+        canvas.width  = W;
+        canvas.height = H;
+        rebuildFBOs();
+      }
+
+      // ── Shader helpers ──────────────────────────────────────────────────────
+      function compile(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS))
+          console.error(gl.getShaderInfoLog(s));
+        return s;
+      }
+      function link(vs, fs) {
+        const p = gl.createProgram();
+        gl.attachShader(p, compile(gl.VERTEX_SHADER, vs));
+        gl.attachShader(p, compile(gl.FRAGMENT_SHADER, fs));
+        gl.linkProgram(p);
+        if (!gl.getProgramParameter(p, gl.LINK_STATUS))
+          console.error(gl.getProgramInfoLog(p));
+        return p;
+      }
+      function ul(p, n) { return gl.getUniformLocation(p, n); }
+
+      const QUAD_VS = `#version 300 es
+        in vec2 aPos; out vec2 vUV;
+        void main(){ vUV=(aPos+1.)*.5; gl_Position=vec4(aPos,0,1); }
+      `;
+
+      const qBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, qBuf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+
+      function bindQuad(prog) {
+        gl.bindBuffer(gl.ARRAY_BUFFER, qBuf);
+        const loc = gl.getAttribLocation(prog, 'aPos');
+        gl.enableVertexAttribArray(loc);
+        gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      }
+
+      // ── FBOs ────────────────────────────────────────────────────────────────
+      let fbos = [];
+      function makeFBO(w, h) {
+        const tex = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA8,w,h,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+        const fb = gl.createFramebuffer();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+        gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tex,0);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+        return { fb, tex };
+      }
+      function rebuildFBOs() {
+        fbos.forEach(f=>{ gl.deleteFramebuffer(f.fb); gl.deleteTexture(f.tex); });
+        fbos = Array.from({length:4}, ()=>makeFBO(W,H));
+      }
+      function toFBO(fbo) {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, fbo ? fbo.fb : null);
+        gl.viewport(0, 0, W, H);
+      }
+      function bindTex(unit, tex) {
+        gl.activeTexture(gl.TEXTURE0+unit);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+      }
+      function draw4() { gl.drawArrays(gl.TRIANGLE_STRIP,0,4); }
+
+      // ── Programs ────────────────────────────────────────────────────────────
+
+      // 1. GRADIENT — radial vignette-masked animated linear gradient
+      //    Scrolls horizontally but is alpha-masked by a soft radial falloff
+      //    centred on (focusX, focusY) so colours only appear in that region.
+      const gradProg = link(QUAD_VS, `#version 300 es
+        precision highp float;
+        in vec2 vUV;
+        uniform float uTime;
+        uniform float uSpeed;
+        uniform int   uNumColors;
+        uniform vec3  uColors[8];
+        uniform vec2  uFocus;     // 0..1
+        uniform float uRadius;    // relative
+        uniform float uAspect;
+        uniform vec3  uBgColor;
+        out vec4 fragColor;
+
+        vec3 linear_srgb(vec3 c){ return pow(max(c,vec3(0.)),vec3(2.2)); }
+        vec3 srgb_linear(vec3 c){ return pow(max(c,vec3(0.)),vec3(1./2.2)); }
+        const mat3 C2L=mat3(0.4121656120,0.2118591070,0.0883097947,
+                            0.5362752080,0.6807189584,0.2818474174,
+                            0.0514575653,0.1074065790,0.6302613616);
+        const mat3 L2C=mat3( 4.0767245293,-1.2681437731,-0.0041119885,
+                            -3.3072168827, 2.6093323231,-0.7034763098,
+                             0.2307590544,-0.3411344290, 1.7068625689);
+        vec3 oklab_mix(vec3 a,vec3 b,float t){
+          vec3 la=pow(C2L*a,vec3(1./3.)),lb=pow(C2L*b,vec3(1./3.));
+          vec3 l=mix(la,lb,t); l*=1.+.025*t*(1.-t);
+          return L2C*(l*l*l);
+        }
+        vec3 gradColor(float p){
+          p=clamp(p,0.,1.);
+          for(int i=0;i<uNumColors-1;i++){
+            float a=float(i)/float(uNumColors-1);
+            float b=float(i+1)/float(uNumColors-1);
+            if(p<=b){
+              float t=(p-a)/(b-a);
+              return srgb_linear(oklab_mix(linear_srgb(uColors[i]),linear_srgb(uColors[i+1]),t));
+            }
+          }
+          return uColors[uNumColors-1];
+        }
+        float rand(vec2 c){return fract(sin(dot(c,vec2(12.9898,78.233)))*43758.5453);}
+
+        void main(){
+          // Animated scrolling gradient
+          float pos = vUV.x - (uTime*0.01*uSpeed + 0.22);
+          float cycle = floor(pos);
+          bool rev = int(cycle)%2==0;
+          float ap = rev ? 1.-fract(pos) : fract(pos);
+          vec3 grad = gradColor(ap);
+          grad += rand(gl_FragCoord.xy)*0.005;
+
+          // Soft radial mask — only show gradient near focus point
+          vec2 delta = (vUV - uFocus) * vec2(uAspect, 1.);
+          float dist  = length(delta);
+          float mask  = smoothstep(uRadius, uRadius*0.05, dist);
+          // Extra inner glow — brighter at centre
+          float glow  = smoothstep(uRadius*0.8, 0., dist) * 0.4;
+          mask = clamp(mask + glow, 0., 1.);
+
+          vec3 col = mix(uBgColor, grad, mask);
+          fragColor = vec4(col, 1.);
+        }
+      `);
+
+      // 2. BLOB — soft radial glow written into an RGBA layer
+      const blobProg = link(QUAD_VS, `#version 300 es
+        precision highp float;
+        in vec2 vUV;
+        uniform vec3  uColor;
+        uniform vec2  uCenter;
+        uniform float uRadius;
+        uniform float uAspect;
+        out vec4 fragColor;
+        void main(){
+          vec2 d = (vUV - uCenter)*vec2(uAspect,1.);
+          float dist = length(d)/uRadius;
+          float alpha = smoothstep(1., 0.05, dist);
+          // Soft inner glow
+          alpha = pow(alpha, 1.5);
+          fragColor = vec4(uColor*alpha, alpha);
+        }
+      `);
+
+      // 3. COMPOSITE — blend a layer onto a base
+      const compProg = link(QUAD_VS, `#version 300 es
+        precision highp float;
+        in vec2 vUV;
+        uniform sampler2D uBase;
+        uniform sampler2D uLayer;
+        uniform int uMode; // 1=ADD 2=OVERLAY
+        out vec4 fragColor;
+        vec3 overlayFn(vec3 s,vec3 d){
+          return vec3(
+            d.r<=.5?2.*s.r*d.r:1.-2.*(1.-d.r)*(1.-s.r),
+            d.g<=.5?2.*s.g*d.g:1.-2.*(1.-d.g)*(1.-s.g),
+            d.b<=.5?2.*s.b*d.b:1.-2.*(1.-d.b)*(1.-s.b));
+        }
+        void main(){
+          vec4 base  = texture(uBase,  vUV);
+          vec4 layer = texture(uLayer, vUV);
+          vec3 res;
+          if(uMode==1) res = base.rgb + layer.rgb*layer.a;
+          else         res = overlayFn(layer.rgb,base.rgb)*layer.a + base.rgb*(1.-layer.a);
+          fragColor = vec4(res, 1.);
+        }
+      `);
+
+      // 4. BLUR — separable Gaussian with radial focus falloff
+      const blurProg = link(QUAD_VS, `#version 300 es
+        precision highp float;
+        in vec2 vUV;
+        uniform sampler2D uTex;
+        uniform vec2  uDir;
+        uniform vec2  uFocus;
+        uniform float uAmount;
+        uniform float uAspect;
+        out vec4 fragColor;
+        float rand(vec2 s){return fract(sin(dot(s,vec2(12.9898,78.233)))*43758.5453);}
+        void main(){
+          // Blur is stronger away from the focus centre
+          vec2 d = (vUV - uFocus)*vec2(uAspect,1.);
+          float inner = length(d);
+          float outer = max(0.,1.-length(d));
+          float amount = uAmount * 6. * .001 * mix(inner,outer,.87);
+          vec4 col=vec4(0.); float wSum=0.;
+          for(int i=-18;i<=18;i++){
+            float x=float(i);
+            float w=exp(-x*x*0.015);
+            col += texture(uTex, vUV + uDir*x*amount)*w;
+            wSum += w;
+          }
+          col /= wSum;
+          col.rgb += (rand(gl_FragCoord.xy)-0.5)/255.;
+          fragColor = col;
+        }
+      `);
+
+      // 5. FLOW FIELD — Perlin noise UV warp, focused on a point
+      const flowProg = link(QUAD_VS, `#version 300 es
+        precision mediump float;
+        in vec2 vUV;
+        uniform sampler2D uTex;
+        uniform float uTime;
+        uniform float uStrength;
+        uniform vec2  uFocus;
+        uniform float uAspect;
+        out vec4 fragColor;
+
+        vec3 hash33(vec3 p){
+          p=fract(p*vec3(.1031,.11369,.13787));
+          p+=dot(p,p.yxz+19.19);
+          return -1.+2.*fract(vec3((p.x+p.y)*p.z,(p.x+p.z)*p.y,(p.y+p.z)*p.x));
+        }
+        float perlin(vec3 p){
+          vec3 pi=floor(p),pf=p-pi,w=pf*pf*(3.-2.*pf);
+          float n000=dot(pf-vec3(0,0,0),hash33(pi+vec3(0,0,0)));
+          float n100=dot(pf-vec3(1,0,0),hash33(pi+vec3(1,0,0)));
+          float n010=dot(pf-vec3(0,1,0),hash33(pi+vec3(0,1,0)));
+          float n110=dot(pf-vec3(1,1,0),hash33(pi+vec3(1,1,0)));
+          float n001=dot(pf-vec3(0,0,1),hash33(pi+vec3(0,0,1)));
+          float n101=dot(pf-vec3(1,0,1),hash33(pi+vec3(1,0,1)));
+          float n011=dot(pf-vec3(0,1,1),hash33(pi+vec3(0,1,1)));
+          float n111=dot(pf-vec3(1,1,1),hash33(pi+vec3(1,1,1)));
+          float nx00=mix(n000,n100,w.x),nx01=mix(n001,n101,w.x);
+          float nx10=mix(n010,n110,w.x),nx11=mix(n011,n111,w.x);
+          return mix(mix(nx00,nx10,w.y),mix(nx01,nx11,w.y),w.z);
+        }
+        vec2 flow(vec2 st){
+          float ar=uAspect;
+          float dist=max(0.,1.-distance(st*vec2(ar,1.),uFocus*vec2(ar,1.))*4.);
+          float amt=uStrength*0.01*dist;
+          if(amt<=0.) return st;
+          float sprd=0.39/((ar+1.)/2.);
+          for(float i=0.;i<16.;i++){
+            vec2 scaled=(st-.5)*vec2(ar,1.)+(1.-uFocus);
+            float p=perlin(vec3((scaled-.5)*(5.*sprd), uTime/60.))-0.5;
+            float ang=p*(360.*0.9)*3.14159/180.;
+            st+=vec2(cos(ang),sin(ang))*amt;
+            st=clamp(st,0.,1.);
+          }
+          return st;
+        }
+        void main(){
+          fragColor=texture(uTex,flow(vUV));
+        }
+      `);
+
+      // 6. VORONOI — fine-cell displacement (scale kept high for subtlety)
+      const voroProg = link(QUAD_VS, `#version 300 es
+        precision mediump float;
+        in vec2 vUV;
+        uniform sampler2D uTex;
+        uniform float uTime;
+        uniform float uStrength;
+        uniform vec2  uFocus;
+        uniform float uAspect;
+        out vec4 fragColor;
+        vec2 rand2(vec2 p){return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);}
+        mat2 rot(float a){return mat2(cos(a),-sin(a),sin(a),cos(a));}
+        void main(){
+          vec2 uv=vUV;
+          float ar=uAspect;
+          // Fine cells: large scale = many small cells = smooth warp
+          vec2 skew=mix(vec2(1.),vec2(1.,0.),.71);
+          vec2 st=(uv-vec2(.5))*vec2(ar,1.)*400.;
+          st=st*rot(0.75*6.28318)*skew;
+          vec2 i_st=floor(st),f_st=fract(st);
+          float mDist=15.; vec2 mPoint;
+          for(int j=-1;j<=1;j++) for(int i=-1;i<=1;i++){
+            vec2 nb=vec2(float(i),float(j));
+            vec2 pt=rand2(i_st+nb);
+            pt=.5+.5*sin(5.+uTime*.2+6.2831*pt);
+            float d=length(nb+pt-f_st);
+            if(d<mDist){mDist=d;mPoint=pt;}
+          }
+          // Displacement magnitude — attenuate away from focus
+          vec2 offset=(mPoint*0.2*uStrength*2.)-(uStrength*0.2);
+          float focusDist=max(0.,1.-distance(uv*vec2(ar,1.),uFocus*vec2(ar,1.))*3.);
+          fragColor=texture(uTex,uv+offset*focusDist);
+        }
+      `);
+
+      // 7. GRAIN — golden-ratio noise, overlay blend
+      const grainProg = link(QUAD_VS, `#version 300 es
+        precision mediump float;
+        in vec2 vUV;
+        uniform sampler2D uTex;
+        uniform float uTime;
+        uniform float uAmount;
+        uniform vec2  uResolution;
+        out vec4 fragColor;
+        const float PHI=1.61803398874989;
+        float gnoise(vec2 xy,float seed){return fract(tan(distance(xy*PHI,xy)*seed)*xy.x);}
+        vec3 overlay(vec3 s,vec3 d){
+          return vec3(
+            d.r<=.5?2.*s.r*d.r:1.-2.*(1.-d.r)*(1.-s.r),
+            d.g<=.5?2.*s.g*d.g:1.-2.*(1.-d.g)*(1.-s.g),
+            d.b<=.5?2.*s.b*d.b:1.-2.*(1.-d.b)*(1.-s.b));
+        }
+        void main(){
+          vec4 color=texture(uTex,vUV);
+          vec2 st=vUV*uResolution;
+          float delta=fract(floor(uTime)/20.);
+          vec3 grain=vec3(gnoise(st,delta+1.),gnoise(st,delta+2.),gnoise(st,delta+3.));
+          color.rgb=mix(color.rgb,overlay(grain,color.rgb),uAmount);
+          fragColor=color;
+        }
+      `);
+
+      [gradProg,blobProg,compProg,blurProg,flowProg,voroProg,grainProg].forEach(bindQuad);
+
+      // ── Render loop ─────────────────────────────────────────────────────────
+      const t0 = performance.now();
+
+      function frame() {
+        const uTime  = (performance.now()-t0)/1000;
+        const ar     = W/H;
+        const fX     = cfg.focusX;
+        const fY     = cfg.focusY;
+        const fR     = cfg.focusRadius;
+        const bgCol  = hexToVec3(cfg.backgroundColor);
+        const colors = cfg.gradientColors.slice(0,8).map(hexToVec3);
+        const nCol   = colors.length;
+        const flatC  = new Float32Array(colors.flat().concat(Array(24-colors.length*3).fill(0)));
+        const [fboA,fboB,fboC] = fbos;
+
+        // 1. Gradient → fboA (masked to focus region)
+        toFBO(fboA);
+        gl.useProgram(gradProg);
+        bindQuad(gradProg);
+        gl.uniform1f(ul(gradProg,'uTime'),    uTime*cfg.gradientSpeed*60);
+        gl.uniform1f(ul(gradProg,'uSpeed'),   cfg.gradientSpeed);
+        gl.uniform1i(ul(gradProg,'uNumColors'),nCol);
+        gl.uniform3fv(ul(gradProg,'uColors'), flatC);
+        gl.uniform2f(ul(gradProg,'uFocus'),   fX, fY);
+        gl.uniform1f(ul(gradProg,'uRadius'),  fR);
+        gl.uniform1f(ul(gradProg,'uAspect'),  ar);
+        gl.uniform3f(ul(gradProg,'uBgColor'), bgCol[0],bgCol[1],bgCol[2]);
+        draw4();
+
+        // 2. Blob1 → fboB then ADD composite onto fboA → fboC
+        toFBO(fboB);
+        gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.useProgram(blobProg); bindQuad(blobProg);
+        const b1=hexToVec3(cfg.blobColor1);
+        gl.uniform3f(ul(blobProg,'uColor'),  b1[0],b1[1],b1[2]);
+        gl.uniform2f(ul(blobProg,'uCenter'), fX+0.06, fY-0.12);
+        gl.uniform1f(ul(blobProg,'uRadius'), fR*0.7);
+        gl.uniform1f(ul(blobProg,'uAspect'), ar);
+        draw4();
+
+        toFBO(fboC);
+        gl.useProgram(compProg); bindQuad(compProg);
+        bindTex(0,fboA.tex); gl.uniform1i(ul(compProg,'uBase'),0);
+        bindTex(1,fboB.tex); gl.uniform1i(ul(compProg,'uLayer'),1);
+        gl.uniform1i(ul(compProg,'uMode'),1); // ADD
+        draw4();
+
+        // 3. Blob2 → fboB then OVERLAY composite onto fboC → fboA
+        toFBO(fboB);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.useProgram(blobProg); bindQuad(blobProg);
+        const b2=hexToVec3(cfg.blobColor2);
+        gl.uniform3f(ul(blobProg,'uColor'),  b2[0],b2[1],b2[2]);
+        gl.uniform2f(ul(blobProg,'uCenter'), fX-0.04, fY+0.22);
+        gl.uniform1f(ul(blobProg,'uRadius'), fR*0.65);
+        gl.uniform1f(ul(blobProg,'uAspect'), ar);
+        draw4();
+
+        toFBO(fboA);
+        gl.useProgram(compProg); bindQuad(compProg);
+        bindTex(0,fboC.tex); gl.uniform1i(ul(compProg,'uBase'),0);
+        bindTex(1,fboB.tex); gl.uniform1i(ul(compProg,'uLayer'),1);
+        gl.uniform1i(ul(compProg,'uMode'),2); // OVERLAY
+        draw4();
+
+        // 4. Gaussian blur H → fboB, then V → fboC
+        gl.useProgram(blurProg); bindQuad(blurProg);
+        gl.uniform2f(ul(blurProg,'uFocus'),  fX, fY);
+        gl.uniform1f(ul(blurProg,'uAmount'), cfg.blurAmount);
+        gl.uniform1f(ul(blurProg,'uAspect'), ar);
+
+        toFBO(fboB);
+        bindTex(0,fboA.tex); gl.uniform1i(ul(blurProg,'uTex'),0);
+        gl.uniform2f(ul(blurProg,'uDir'),1./W, 0.);
+        draw4();
+
+        toFBO(fboC);
+        bindTex(0,fboB.tex); gl.uniform1i(ul(blurProg,'uTex'),0);
+        gl.uniform2f(ul(blurProg,'uDir'),0., 1./H);
+        draw4();
+
+        // 5. Flow field → fboA
+        toFBO(fboA);
+        gl.useProgram(flowProg); bindQuad(flowProg);
+        bindTex(0,fboC.tex); gl.uniform1i(ul(flowProg,'uTex'),0);
+        gl.uniform1f(ul(flowProg,'uTime'),     uTime*cfg.flowSpeed*60);
+        gl.uniform1f(ul(flowProg,'uStrength'), cfg.flowStrength);
+        gl.uniform2f(ul(flowProg,'uFocus'),    fX, fY);
+        gl.uniform1f(ul(flowProg,'uAspect'),   ar);
+        draw4();
+
+        // 6. Voronoi ×2 → fboB → fboC
+        gl.useProgram(voroProg); bindQuad(voroProg);
+        gl.uniform1f(ul(voroProg,'uTime'),     uTime);
+        gl.uniform1f(ul(voroProg,'uStrength'), cfg.voronoiStrength);
+        gl.uniform2f(ul(voroProg,'uFocus'),    fX, fY);
+        gl.uniform1f(ul(voroProg,'uAspect'),   ar);
+
+        toFBO(fboB);
+        bindTex(0,fboA.tex); gl.uniform1i(ul(voroProg,'uTex'),0);
+        draw4();
+
+        toFBO(fboC);
+        bindTex(0,fboB.tex); gl.uniform1i(ul(voroProg,'uTex'),0);
+        draw4();
+
+        // 7. Grain → screen
+        toFBO(null);
+        gl.useProgram(grainProg); bindQuad(grainProg);
+        bindTex(0,fboC.tex); gl.uniform1i(ul(grainProg,'uTex'),0);
+        gl.uniform1f(ul(grainProg,'uTime'),   uTime);
+        gl.uniform1f(ul(grainProg,'uAmount'), cfg.grainAmount);
+        gl.uniform2f(ul(grainProg,'uResolution'),W,H);
+        draw4();
+
+        requestAnimationFrame(frame);
+      }
+
+      window.addEventListener('resize', resize);
+      resize();
+      requestAnimationFrame(frame);
+    })();
+    </script>
+  </body>
+  </html>

@@ -4,9 +4,29 @@
 
 This file is generated through an Github Action, if any of the image previews do not load. There is an issue with the action.  
 
-## All backgrounds (84 total) - Newest first
+## All backgrounds (86 total) - Newest first
 
 
+
+###  > animation.94.flow-gradient-focused (Flow Gradient (Focused) - Animated gradient orb concentrated in the top-right corner with Perlin flow field distortion, subtle Voronoi warping, Gaussian blur and film grain. Faithful recreation of apollostudio.design canvas effect.
+)
+
+`- id: animation.94.flow-gradient-focused`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.94.flow-gradient-focused/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.94.flow-gradient-focused/preview.html) - *Author: Apollo Studio (extracted)* - Offline support? **Yes**
+
+###  > animation.93.flow-gradient (Flow Gradient - Animated gradient blobs with Perlin flow field distortion, Voronoi displacement, Gaussian blur and film grain. Extracted from apollostudio.design.
+)
+
+`- id: animation.93.flow-gradient`
+
+
+
+![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.93.flow-gradient/screenshot.png)
+[Live Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/animation.93.flow-gradient/preview.html) - *Author: Apollo Studio (extracted)* - Offline support? **Yes**
 
 ###  > animation.92.aurora-v2 (Icelandic Aurora v2 - Watch the aurora borealis dance across your screen. (Improved performance))
 
