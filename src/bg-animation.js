@@ -638,6 +638,7 @@ async function initializeObservers() {
             await initializeStagePlaylists();
           } else {
             isDebug ? console.log("initializeObservers: No background for this view, removing styles and stopping interval.") : null;
+            toggleLovelaceStyle(false);
             [lovelaceUI?.bgRootElement, lovelaceUI?.rootStyleElement].forEach(el => el?.remove());
           }
           if (removedNode === lovelaceUI.viewElement) {
