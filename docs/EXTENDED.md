@@ -1237,6 +1237,7 @@ Supported params:
   - `transition`: `string` - Optional per-item transition override
   - `fit`: `string` - Per-item fitting mode override (options: `contain`, `cover`, `fill`, `scale-down`, `none`)
   - `playbackRate`: `number` - Playback speed multiplier for videos (videos only). 1.0 = normal speed, 0.5 = half speed, 2.0 = double speed, etc. Values between 0.1 and 16.0 are supported by most browsers.
+  - `loop`: `boolean` - Whether to loop the video (videos only). When true, the video loops until the duration expires instead of advancing when it ends.
 
 
 ![Image Preview](https://ibz0q.github.io/lovelace-bg-animation/gallery/metadata/application.1.media-background/screenshot.png)

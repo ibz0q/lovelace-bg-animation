@@ -79,7 +79,7 @@
       "description": "Media slideshow with various transition effects (Supports images and videos)",
       "author": "Ibz",
       "source": "https://github.com/ibz0q/lovelace-bg-animation",
-      "hash": "8b7332400fef2ce7384fef21ca7c56616df5c1a0",
+      "hash": "f82b31cf02c01fa7306e2a6f2f1d44f18f7ac903",
       "parameters": [
         {
           "name": "transition",
@@ -422,6 +422,10 @@
               "playbackRate": {
                 "type": "number",
                 "description": "Playback speed multiplier for videos (videos only). 1.0 = normal speed, 0.5 = half speed, 2.0 = double speed, etc. Values between 0.1 and 16.0 are supported by most browsers."
+              },
+              "loop": {
+                "type": "boolean",
+                "description": "Whether to loop the video (videos only). When true, the video loops until the duration expires instead of advancing when it ends."
               }
             }
           }
