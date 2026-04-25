@@ -261,6 +261,9 @@ parameters:
         playbackRate:
           type: number
           description: Playback speed multiplier for videos (videos only). 1.0 = normal speed, 0.5 = half speed, 2.0 = double speed, etc. Values between 0.1 and 16.0 are supported by most browsers.
+        loop:
+          type: boolean
+          description: Whether to loop the video (videos only). When true, the video loops until the duration expires instead of advancing when it ends.
 template: >
   <!DOCTYPE html>
 
@@ -536,7 +539,7 @@ template: >
           return src.match(/\.mp4$|\.webm$|\.ogg$/i);
         }
 
-        function createMediaElement(src, muted, preload, playbackRate) {
+        function createMediaElement(src, muted, preload, playbackRate, loop) {
           let el;
           if (isVideo(src)) {
             el = document.createElement("video");
@@ -544,7 +547,7 @@ template: >
             el.style.backgroundColor = config.backgroundColor;
             el.src = src;
             el.autoplay = true;
-            el.loop = false;
+            el.loop = loop === true;
             el.muted = muted !== undefined ? muted : true;
             el.playsInline = true;
             el.setAttribute("playsinline", "");
@@ -592,7 +595,8 @@ template: >
             const muted = media.muted !== undefined ? media.muted : true;
             const preload = media.preload !== undefined ? media.preload : "auto";
             const playbackRate = media.playbackRate !== undefined ? media.playbackRate : 1.0;
-            const el = createMediaElement(src, muted, preload, playbackRate);
+            const loop = media.loop === true;
+            const el = createMediaElement(src, muted, preload, playbackRate, loop);
             el.classList.add(transitionType);
             container.appendChild(el);
 
@@ -797,6 +801,9 @@ template: >
                 await new Promise((res) => {
                   el.onended = res;
                 });
+              } else if (loop) {
+                // Looping video: only the duration timer controls slide advance
+                await new Promise((res) => setTimeout(res, duration || config.defaultDuration));
               } else {
                 // For fixed duration, use the timer but also handle early video end
                 await new Promise((res) => {
