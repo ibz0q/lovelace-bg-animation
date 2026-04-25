@@ -265,7 +265,7 @@ function initializeRuntimeVariables() {
     "transparency": {
       "header": {
         "enable": rootPluginConfig.transparency?.header?.enable ?? true,
-        "style": rootPluginConfig.transparency?.header?.style ?? ".header.bg-animation-style {background: transparent !important;}",
+        "style": rootPluginConfig.transparency?.header?.style ?? ".header.bg-animation-style {background: transparent !important; --primary-background-color: transparent !important;}",
       },
       "sidebar": {
         "enable": rootPluginConfig.transparency?.sidebar?.enable ?? false,
