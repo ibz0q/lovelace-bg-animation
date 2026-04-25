@@ -1689,8 +1689,8 @@
       "version": "v1",
       "name": "Flow Gradient",
       "description": "Animated gradient blobs with Perlin flow field distortion, Voronoi displacement, Gaussian blur and film grain. Extracted from apollostudio.design.\n",
-      "author": "Apollo Studio (extracted)",
-      "hash": "5c203d4f294ffd10e9ecab78cdc5185164d57076",
+      "author": "Apollo Studio",
+      "hash": "33059fb2c91acb4e3836cd12cac58235430a01ca",
       "tags": [
         "gradient",
         "webgl",
@@ -1703,8 +1703,8 @@
       "version": "v1",
       "name": "Flow Gradient (Focused)",
       "description": "Animated gradient orb concentrated in the top-right corner with Perlin flow field distortion, subtle Voronoi warping, Gaussian blur and film grain. Faithful recreation of apollostudio.design canvas effect.\n",
-      "author": "Apollo Studio (extracted)",
-      "hash": "c3204a94e8df17d27458cec8d7449785bd53d9c1",
+      "author": "Apollo Studio",
+      "hash": "5d3f1aa25cdb9f94d951f8cb2faa4195c958cd69",
       "tags": [
         "gradient",
         "webgl",
