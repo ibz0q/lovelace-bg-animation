@@ -3,7 +3,7 @@ metadata:
   name: Flow Gradient (Focused)
   description: |
     Animated gradient orb concentrated in the top-right corner with Perlin flow field distortion, subtle Voronoi warping, Gaussian blur and film grain. Faithful recreation of apollostudio.design canvas effect.
-  author: Apollo Studio (extracted)
+  author: Apollo Studio
   tags:
     - gradient
     - webgl
