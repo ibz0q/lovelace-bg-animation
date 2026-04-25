@@ -789,7 +789,7 @@ template: >
                     el,
                   );
                 } else {
-                  animateProgressBar(duration, el);
+                  animateProgressBar(duration, loop ? null : el);
                 }
               } else {
                 animateProgressBar(duration);
